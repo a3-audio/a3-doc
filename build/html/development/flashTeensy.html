@@ -1,0 +1,140 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Flash Firmware to Teensy &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Mix Development" href="mic.html" />
+    <link rel="prev" title="A³ Pandemic Development" href="development.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Development"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="A³ Pandemic Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Flash Firmware to Teensy</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="flash-firmware-to-teensy">
+<h1>Flash Firmware to Teensy<a class="headerlink" href="#flash-firmware-to-teensy" title="Permalink to this headline">¶</a></h1>
+<p>https://docs.platformio.org/en/latest/core/installation.html#system-requirements</p>
+<section id="on-raspberry">
+<h2>On Raspberry<a class="headerlink" href="#on-raspberry" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">platformio</span></code></p>
+<p>Init penv:
+<code class="docutils literal notranslate"><span class="pre">virtualenv</span> <span class="pre">-p</span> <span class="pre">python3</span> <span class="pre">~/.platformio/penv</span></code></p>
+<p>Enter penv:
+<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.platformio/penv/bin/activate</span></code></p>
+</section>
+<section id="platformio">
+<h2>platformio<a class="headerlink" href="#platformio" title="Permalink to this headline">¶</a></h2>
+<p>Get board identifier:
+<code class="docutils literal notranslate"><span class="pre">pio</span> <span class="pre">boards</span> <span class="pre">teensy</span></code></p>
+<p>Initialize project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">pathToProject</span>
+<span class="n">cd</span> <span class="n">pathToProject</span>
+<span class="n">pio</span> <span class="n">project</span> <span class="n">init</span> <span class="o">--</span><span class="n">board</span> <span class="n">teensy41</span>
+</pre></div>
+</div>
+<p>Upload:
+<code class="docutils literal notranslate"><span class="pre">pio</span> <span class="pre">run</span> <span class="pre">--target</span> <span class="pre">upload</span></code></p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Flash Firmware to Teensy</a><ul>
+<li><a class="reference internal" href="#on-raspberry">On Raspberry</a></li>
+<li><a class="reference internal" href="#platformio">platformio</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="development.html"
+                        title="previous chapter">A³ Pandemic Development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mic.html"
+                        title="next chapter">A³ Mix Development</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/flashTeensy.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Development"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="A³ Pandemic Development"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Flash Firmware to Teensy</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

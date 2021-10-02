@@ -1,0 +1,247 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>OSC A³ Pandemic &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="A³ Motion Developement" href="moc.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Developement"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OSC A³ Pandemic</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="osc-a3-pandemic">
+<h1>OSC A³ Pandemic<a class="headerlink" href="#osc-a3-pandemic" title="Permalink to this headline">¶</a></h1>
+<p>All parameters are normalized to float [range 0-1]</p>
+<section id="a3-core">
+<h2>A³ Core<a class="headerlink" href="#a3-core" title="Permalink to this headline">¶</a></h2>
+<section id="server-server-py-modifies-and-routes-incoming-osc-to-daw">
+<h3>Server/server.py modifies and routes incoming osc to daw<a class="headerlink" href="#server-server-py-modifies-and-routes-incoming-osc-to-daw" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>SOURCE</p></th>
+<th class="text-align:left head"><p>DESTINATION (Reaper)</p></th>
+<th class="text-align:left head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>/mic/ch/1-4/gain</p></td>
+<td class="text-align:left"><p>/track/i/gain</p></td>
+<td class="text-align:left"><p>Channel i gain</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/ch/1-4/hi</p></td>
+<td class="text-align:left"><p>/track/i/fxeq/hishelf/gain</p></td>
+<td class="text-align:left"><p>Channel i hi</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/mic/ch/1-4/mid</p></td>
+<td class="text-align:left"><p>/track/i/fxeq/band/0/gain</p></td>
+<td class="text-align:left"><p>Channel i mid</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/ch/1-4/lo</p></td>
+<td class="text-align:left"><p>/track/i/fxeq/loshelf/gain</p></td>
+<td class="text-align:left"><p>Channel i low</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/mic/ch/1-4/volume</p></td>
+<td class="text-align:left"><p>/track/i/volume</p></td>
+<td class="text-align:left"><p>Channel i volume</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/ch/1-4/mode</p></td>
+<td class="text-align:left"><p>/track/i/mute</p></td>
+<td class="text-align:left"><p>Channel i mode (Stereo, 3D)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/mic/master/volume</p></td>
+<td class="text-align:left"><p>/track/i/volume</p></td>
+<td class="text-align:left"><p>Master volume</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/master/booth</p></td>
+<td class="text-align:left"><p>/track/i/volume</p></td>
+<td class="text-align:left"><p>Booth volume</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/mic/master/phMmix</p></td>
+<td class="text-align:left"><p>/track/i/volume</p></td>
+<td class="text-align:left"><p>Phones Mix</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/master/phVol</p></td>
+<td class="text-align:left"><p>/track/i/volume</p></td>
+<td class="text-align:left"><p>Phones volume</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/mic/ch/1-4/pfl</p></td>
+<td class="text-align:left"><p>/track/i/mute</p></td>
+<td class="text-align:left"><p>Channel i pfl</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/mic/ch/master/pfl</p></td>
+<td class="text-align:left"><p>/track/i/mute</p></td>
+<td class="text-align:left"><p>Master pfl</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/moc/ch/1-4/width</p></td>
+<td class="text-align:left"><p>/track/i/StereoEncoder/width</p></td>
+<td class="text-align:left"><p>Range -360 / 360</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/moc/ch/1-4/sides</p></td>
+<td class="text-align:left"><p>/track/i/sides</p></td>
+<td class="text-align:left"><p>Channel i sides</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>/moc/ui/azimuth</p></td>
+<td class="text-align:left"><p>[StereoEncoderPort]/azimuth</p></td>
+<td class="text-align:left"><p>Range -180 / 180</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>/moc/ui/elevation</p></td>
+<td class="text-align:left"><p>[StereoEncoderPort]/elevation</p></td>
+<td class="text-align:left"><p>Range -180 / 180</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="a3-mix">
+<h2>A³ Mix<a class="headerlink" href="#a3-mix" title="Permalink to this headline">¶</a></h2>
+<section id="potis-and-knobs-send">
+<h3>potis and knobs (send)<a class="headerlink" href="#potis-and-knobs-send" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>/mic/ch/1-4/pfl</p></li>
+<li><p>/mic/ch/1-4/gain</p></li>
+<li><p>/mic/ch/1-4/hi</p></li>
+<li><p>/mic/ch/1-4/mid</p></li>
+<li><p>/mic/ch/1-4/lo</p></li>
+<li><p>/mic/ch/1-4/volume</p></li>
+<li><p>/mic/ch/1-4/m1</p></li>
+<li><p>/mic/ch/1-4/m2</p></li>
+<li><p>/mic/ch/1-4/m3</p></li>
+<li><p>/mic/ch/master/pfl</p></li>
+<li><p>/mic/ch/master/volume</p></li>
+<li><p>/mic/ch/master/booth</p></li>
+<li><p>/mic/ch/master/phMix</p></li>
+<li><p>/mic/ch/master/phVol</p></li>
+</ul>
+</section>
+<section id="vu-meters-receive">
+<h3>vu-meters (receive)<a class="headerlink" href="#vu-meters-receive" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>/vu/rcv/01-04 &lt;&lt; input vu ff (peak/rms)</p></li>
+<li><p>/vu/rcv/05-12 &lt;&lt; output vu ff (peak/rms)</p></li>
+</ul>
+</section>
+</section>
+<section id="a3-motion">
+<h2>A³ Motion<a class="headerlink" href="#a3-motion" title="Permalink to this headline">¶</a></h2>
+<section id="potis-knobs-and-touch-xy-send">
+<h3>potis, knobs and touch-xy (send)<a class="headerlink" href="#potis-knobs-and-touch-xy-send" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>/moc/ch/1-4/motion/ xy [0-1]</p></li>
+<li><p>/moc/ch/1-4/width/ [0-1]</p></li>
+<li><p>/moc/ch/1-4/sides/ [0-1]</p></li>
+</ul>
+</section>
+<section id="bpm-receive">
+<h3>bpm (receive)<a class="headerlink" href="#bpm-receive" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>/moc/bpm</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OSC A³ Pandemic</a><ul>
+<li><a class="reference internal" href="#a3-core">A³ Core</a><ul>
+<li><a class="reference internal" href="#server-server-py-modifies-and-routes-incoming-osc-to-daw">Server/server.py modifies and routes incoming osc to daw</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a3-mix">A³ Mix</a><ul>
+<li><a class="reference internal" href="#potis-and-knobs-send">potis and knobs (send)</a></li>
+<li><a class="reference internal" href="#vu-meters-receive">vu-meters (receive)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a3-motion">A³ Motion</a><ul>
+<li><a class="reference internal" href="#potis-knobs-and-touch-xy-send">potis, knobs and touch-xy (send)</a></li>
+<li><a class="reference internal" href="#bpm-receive">bpm (receive)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moc.html"
+                        title="previous chapter">A³ Motion Developement</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/osc.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Developement"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">OSC A³ Pandemic</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

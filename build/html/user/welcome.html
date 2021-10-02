@@ -1,0 +1,238 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Pandemic &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Core usermanual" href="core.html" />
+    <link rel="prev" title="Indices and tables" href="../index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core usermanual"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Indices and tables"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Pandemic</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-pandemic">
+<h1>A³ Pandemic<a class="headerlink" href="#a3-pandemic" title="Permalink to this headline">¶</a></h1>
+<p>3D-Sound Dj-Setup with Live-Panning-Interface</p>
+<section id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
+<p>A³ Pandemic is designed as dj-setup with 4 stereo input-channels and a tape-in for multichannel input. It is scalable and capable to feed up to 128 speakers in multiple 3d-sound-spheres.</p>
+<p>It consists of three devices:</p>
+<section id="a3-core-the-sound-server">
+<h3>A³ Core (The Sound-server)<a class="headerlink" href="#a3-core-the-sound-server" title="Permalink to this headline">¶</a></h3>
+<p>A³ Core processes analog audio-signals, calculates 3d-sound-spheres and is remote-controlled by A³ Mix and A³ Motion (or any other osc-controller). A³ Core can handle a wide range of audio-hardware to fit environments like Dante, MADI or any class-compliant.</p>
+</section>
+<section id="a3-mix-the-dj-mixer">
+<h3>A³ Mix (The DJ-Mixer)<a class="headerlink" href="#a3-mix-the-dj-mixer" title="Permalink to this headline">¶</a></h3>
+<p>A³ Mix is a DJ-Mixer with 3-band-kill-eq, fx-section for hi- and lopass, 3d-toggle, multichannel vu-meter and 3d-prelisten on headphones.
+It has a „tape-in“ section for multichannel or stereo direct to mix bus.</p>
+</section>
+<section id="a3-motion-the-motion-sampler">
+<h3>A³ Motion (The Motion-Sampler)<a class="headerlink" href="#a3-motion-the-motion-sampler" title="Permalink to this headline">¶</a></h3>
+<p>A³ Motion records motion from touchscreen, stores them on sample-pads and plays them back as loop, one-shot or different mode. A³ Motion handles loop-length, it syncs to bpm-clock, spreads stereo-width and boosts side from mid/side processing.
+It is designed for dynamic live interaction with audio-panning in a 3d-sound-sphere while scratching tracks.</p>
+</section>
+</section>
+<section id="usecases">
+<h2>Usecases:<a class="headerlink" href="#usecases" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A³ Core encodes and decodes: You can preset your show with stereotracks and control-data. You can use <a class="reference external" href="https://github.com/drlight-code/osccontrol-light">osccontrol-light</a> vst-plugin to send osc-data from inside daw.</p></li>
+<li><p>A³ Core decodes: You can pre-encode your show and just send 3rd order b-format (acn, sn3d)</p></li>
+<li><p>A³ Core just routes: You get discrete channels for each speaker</p></li>
+<li><p>A³ Core simulates speaker-setup: You can play direct out from Dolby or Auro-3D decoder</p></li>
+<li><p>A³ Triple: You use A³ Mix and A³ Motion with dj-players to scratch your tracks while moving them.</p></li>
+</ul>
+</section>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Plug in your instruments vinyl, cd, daw ..</p></li>
+<li><p>Plug in your speaker</p></li>
+<li><p>Put speakers in regular circle around center</p></li>
+<li><p>Plug CAT-cable from A³ Mix and A³ Motion to A³ Core</p></li>
+<li><p>Plug-In your headphones</p></li>
+<li><p>Power on</p></li>
+</ul>
+</section>
+<section id="in-depth">
+<h2>In depth<a class="headerlink" href="#in-depth" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Asembly: [[assembly]]</p></li>
+<li><p>Configuration: [[configuration]]</p></li>
+<li><p>Development: [[development]]</p></li>
+</ul>
+</section>
+<section id="goal-for-this-project">
+<h2>Goal for this project<a class="headerlink" href="#goal-for-this-project" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>3d-sound everywhere</p></li>
+<li><p>Community</p></li>
+<li><p>Compatibility</p></li>
+<li><p>Easy to use</p></li>
+<li><p>Flexibility</p></li>
+<li><p>Open-Source</p></li>
+<li><p>Quality</p></li>
+<li><p>Rock-Solid-Stable in runtime and housing</p></li>
+<li><p>Scalable</p></li>
+</ul>
+</section>
+<section id="media">
+<h2>Media<a class="headerlink" href="#media" title="Permalink to this headline">¶</a></h2>
+<p>We put Media-files to <a class="reference external" href="https://tinycloud.lilbits.de/Media">Seafile</a></p>
+</section>
+<section id="buy">
+<h2>Buy<a class="headerlink" href="#buy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Get a custom-build set: 6410€ (without audio-hardware)</p></li>
+<li><p>Get it on Kickstarter: depends on community</p></li>
+<li><p>Build your own: ~1720€ (without audio-hardware)</p></li>
+<li><p>Buy audio-hardware: 750-35000€ (see [[parts]])</p></li>
+<li><p>Maintenance and Service Subscriptions: 100€ / Month</p></li>
+</ul>
+</section>
+<section id="rent">
+<h2>Rent<a class="headerlink" href="#rent" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Rent A³ Pandemic set 320-640€ per day (without speakers)</p></li>
+<li><p>Rent A³ Speakers set  320-60000€ per Event (without show)</p></li>
+<li><p>Rent A³ Show 20000-350000€</p></li>
+</ul>
+</section>
+<section id="git">
+<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
+<p>A³ Pandemic Mainrepo:
+https://github.com/ambisonics-audio-association/Ambijockey
+A³ Motion UI-repo:
+https://github.com/ambisonics-audio-association/MotionControllerUI</p>
+</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Help-desk</p></li>
+<li><p>Community</p></li>
+</ul>
+</section>
+<section id="contact">
+<h2>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="mailto:contact&#37;&#52;&#48;orbitalwaves&#46;net">contact<span>&#64;</span>orbitalwaves<span>&#46;</span>net</a></p></li>
+<li><p><a class="reference external" href="https://talk.lilbits.de/ambisonics">mattermost</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Pandemic</a><ul>
+<li><a class="reference internal" href="#design">Design</a><ul>
+<li><a class="reference internal" href="#a3-core-the-sound-server">A³ Core (The Sound-server)</a></li>
+<li><a class="reference internal" href="#a3-mix-the-dj-mixer">A³ Mix (The DJ-Mixer)</a></li>
+<li><a class="reference internal" href="#a3-motion-the-motion-sampler">A³ Motion (The Motion-Sampler)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usecases">Usecases:</a></li>
+<li><a class="reference internal" href="#quickstart">Quickstart</a></li>
+<li><a class="reference internal" href="#in-depth">In depth</a></li>
+<li><a class="reference internal" href="#goal-for-this-project">Goal for this project</a></li>
+<li><a class="reference internal" href="#media">Media</a></li>
+<li><a class="reference internal" href="#buy">Buy</a></li>
+<li><a class="reference internal" href="#rent">Rent</a></li>
+<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#support">Support</a></li>
+<li><a class="reference internal" href="#contact">Contact</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Indices and tables</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="core.html"
+                        title="next chapter">A³ Core usermanual</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user/welcome.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core usermanual"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Indices and tables"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Pandemic</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

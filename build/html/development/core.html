@@ -1,0 +1,230 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Core Development &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Pandemic Development" href="development.html" />
+    <link rel="prev" title="A³ Pandemic Parts" href="../assembly/parts.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="development.html" title="A³ Pandemic Development"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../assembly/parts.html" title="A³ Pandemic Parts"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Core Development</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-core-development">
+<h1>A³ Core Development<a class="headerlink" href="#a3-core-development" title="Permalink to this headline">¶</a></h1>
+<section id="backend">
+<h2>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h2>
+<p>A³ Core runs archlinux with a realtimekernel. It must be well tuned to get low latency and stable audiosignals.</p>
+<p>Connected to:</p>
+<ul class="simple">
+<li><p>A³ Mix (lan)</p></li>
+<li><p>A³ Motion (lan)</p></li>
+<li><p>Audiohardware (PCIe, usb)</p></li>
+<li><p>FOH-Setup-Page (webfrontend) &lt;- wip</p></li>
+</ul>
+<p>OSC communication:</p>
+<ul class="simple">
+<li><p>Send to internal audio-engine</p></li>
+<li><p>Send to any external target (light- or video-engine)</p></li>
+<li><p>Send vu-meters to A³ Mix</p></li>
+<li><p>Receive poti and buttonstates from A³ Mix and A³ Motion (or any other osc-controller)</p></li>
+<li><p>Receive ambisonic-encoder parameters from A³ Motion (or any other osc-controller)</p></li>
+</ul>
+<p>We use a python-script as “OSC-Router”. It is the core-place for routing OSC-Data from and to every controller. It should be easy to edit, even if you don’t know a lot about it. However, feel free to join our community channels if you need a helping hand or further resources.</p>
+<p>The script:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Server/server.py</span></code></p></li>
+</ul>
+</section>
+<section id="supercollider-vu-meter-scd">
+<h2>Supercollider VU-Meter.scd<a class="headerlink" href="#supercollider-vu-meter-scd" title="Permalink to this headline">¶</a></h2>
+<p>Acts as 12-Channel Jack client and sends vu-meter (peak and rms) via OSC to A³ Mix.</p>
+<p>The supercollider projectfile:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Server/supercollider/vu-meter.scd</span></code></p></li>
+</ul>
+</section>
+<section id="reaper-audioengine">
+<h2>Reaper Audioengine<a class="headerlink" href="#reaper-audioengine" title="Permalink to this headline">¶</a></h2>
+<p>A³ Core runs a jack2 audio-engine on top of alsa. Qjackctl may be used to patch virtual audio-cables from your hardware to Reaper and back out. Reaper acts as the mixer-backend which does the complex routing and user-interaction-tasks. It has a complex routing and bus-mapping described later. It processes the input-signal from audio-hardware and outputs calculated signals for headphones and speakers. The speaker must be placed in a most chubbiest spherical installation. Electronic corrections are possible for closer speakers.
+Jmess is used to store and restore jack-connections, aj-snapshot is used to store and restore alsa-connections.</p>
+<p>The audio-hardware could be any class-compliant or compatible Madi/Dante card. It is connected to A³ Core via PCIe or USB. Instruments, speakers, headphones and DJ-Gear are directly plugged into A³ Core’s audiohardware.</p>
+<p>Configure A³Core for your audio-hardware edit:
+<code class="docutils literal notranslate"><span class="pre">Server/config/.xinitrc</span></code></p>
+<p>The Reaper pojectfile:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Server/reaper/linux/reaper_ambijockey.RPP</span></code></p></li>
+</ul>
+<section id="reaper-bus-mapping">
+<h3>Reaper bus-mapping<a class="headerlink" href="#reaper-bus-mapping" title="Permalink to this headline">¶</a></h3>
+<p>Masterbus</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receives</span>    <span class="n">name</span>                
+<span class="o">--------------------------------</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>       <span class="n">phonesbus</span>           
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span>         <span class="n">monobus</span> <span class="p">(</span><span class="n">single</span><span class="p">)</span>    
+<span class="p">[</span><span class="mi">4</span><span class="p">]</span>         <span class="n">subbus</span>              
+<span class="p">[</span><span class="mi">5</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>      <span class="n">spare</span>               
+<span class="p">[</span><span class="mi">21</span><span class="o">-</span><span class="n">inf</span><span class="p">]</span>    <span class="n">monobus</span> <span class="p">(</span><span class="n">multi</span><span class="p">)</span>     
+<span class="p">[</span><span class="mi">21</span><span class="o">-</span><span class="n">inf</span><span class="p">]</span>    <span class="n">stereobus</span>           
+<span class="p">[</span><span class="mi">21</span><span class="o">-</span><span class="n">inf</span><span class="p">]</span>    <span class="n">decoderbus</span>          
+</pre></div>
+</div>
+<p>Phonesbus</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receives</span>    <span class="n">name</span>                
+<span class="o">--------------------------------</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>       <span class="n">monobus</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span>         
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>       <span class="n">stereobus</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span>       
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>       <span class="n">binauralbus</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span>     
+<span class="o">-</span>           <span class="n">dj1</span><span class="o">-</span><span class="n">pfl</span>
+<span class="o">-</span>           <span class="n">dj2</span><span class="o">-</span><span class="n">pfl</span>
+<span class="o">-</span>           <span class="n">dj3</span><span class="o">-</span><span class="n">pfl</span>
+<span class="o">-</span>           <span class="n">dj4</span><span class="o">-</span><span class="n">pfl</span>
+<span class="o">-</span>           <span class="n">mainmixbus</span>
+</pre></div>
+</div>
+<p>Reverbbus</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receives</span>    <span class="n">name</span>                
+<span class="o">--------------------------------</span>
+<span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>      <span class="n">reverb</span>              
+<span class="p">[</span><span class="mi">17</span><span class="o">-</span><span class="mi">32</span><span class="p">]</span>     <span class="n">reverb</span><span class="p">(</span><span class="n">ph</span><span class="p">)</span>          
+</pre></div>
+</div>
+<p>Channelbus</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receives</span>    <span class="n">name</span>                
+<span class="o">--------------------------------</span>
+<span class="o">-</span>           <span class="nb">input</span>
+<span class="o">-</span>           <span class="n">mid</span>
+<span class="o">-</span>           <span class="n">side</span>
+<span class="o">-</span>           <span class="n">m</span><span class="o">/</span><span class="n">s</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>         <span class="n">mono</span>                
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span>         <span class="n">subwoofer</span>           
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>       <span class="n">stereo</span>              
+<span class="p">[</span><span class="mi">5</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>      <span class="n">b</span><span class="o">-</span><span class="nb">format</span>            
+<span class="p">[</span><span class="mi">21</span><span class="p">]</span>        <span class="n">mono</span><span class="p">(</span><span class="n">preF</span><span class="p">)</span>          
+<span class="p">[</span><span class="mi">23</span><span class="p">,</span><span class="mi">24</span><span class="p">]</span>     <span class="n">stereo</span><span class="p">(</span><span class="n">preF</span><span class="p">)</span>        
+<span class="p">[</span><span class="mi">25</span><span class="o">-</span><span class="mi">40</span><span class="p">]</span>     <span class="n">b</span><span class="o">-</span><span class="nb">format</span><span class="p">(</span><span class="n">preF</span><span class="p">)</span>      
+</pre></div>
+</div>
+<p>Basechannels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">receives</span>    		<span class="n">name</span>                
+<span class="o">--------------------------------</span>
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">hw</span><span class="o">-</span><span class="ow">in</span><span class="p">)</span>     	<span class="nb">input</span>       
+<span class="p">([</span><span class="mi">1</span><span class="p">],</span>   <span class="nb">input</span><span class="p">)</span>     	<span class="n">mid</span>         
+<span class="p">([</span><span class="mi">2</span><span class="p">],</span>   <span class="nb">input</span><span class="p">)</span>     	<span class="n">side</span>        
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  <span class="n">mid</span><span class="p">,</span> <span class="n">side</span><span class="p">)</span> 	<span class="n">m</span><span class="o">/</span><span class="n">s</span>         
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>  <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>       	<span class="n">mono</span>        
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>       	<span class="n">sub</span>   
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>       	<span class="n">stereo</span>      
+<span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">m</span><span class="o">/</span><span class="n">s</span><span class="p">)</span>       	<span class="n">b</span><span class="o">-</span><span class="nb">format</span>    
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Core Development</a><ul>
+<li><a class="reference internal" href="#backend">Backend</a></li>
+<li><a class="reference internal" href="#supercollider-vu-meter-scd">Supercollider VU-Meter.scd</a></li>
+<li><a class="reference internal" href="#reaper-audioengine">Reaper Audioengine</a><ul>
+<li><a class="reference internal" href="#reaper-bus-mapping">Reaper bus-mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../assembly/parts.html"
+                        title="previous chapter">A³ Pandemic Parts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="development.html"
+                        title="next chapter">A³ Pandemic Development</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/core.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="development.html" title="A³ Pandemic Development"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../assembly/parts.html" title="A³ Pandemic Parts"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Core Development</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

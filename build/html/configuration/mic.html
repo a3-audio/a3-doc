@@ -1,0 +1,240 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Mix Configuration &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Motion Configuration" href="moc.html" />
+    <link rel="prev" title="A³ Core Configuration" href="core.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Mix Configuration</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-mix-configuration">
+<h1>A³ Mix Configuration<a class="headerlink" href="#a3-mix-configuration" title="Permalink to this headline">¶</a></h1>
+<section id="teensy">
+<h2>Teensy<a class="headerlink" href="#teensy" title="Permalink to this headline">¶</a></h2>
+<p>software/teensy/src/main.cpp &lt;&lt; [[flashTeensy]]</p>
+</section>
+<section id="raspberry-pi-3-model-b">
+<h2>Raspberry Pi 3 Model B<a class="headerlink" href="#raspberry-pi-3-model-b" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.raspberrypi.org/documentation/computers/getting-started.html">Install Raspbian</a></p>
+<ol class="simple">
+<li><p>put an empty file ‘ssh’ on Raspbian boot-partition, this enables ssh</p></li>
+<li><p>search for your Raspberry ip-address ie: nmap -sn 192.168.1.0/24</p></li>
+<li><p>ssh pi&#64;192.168.1.x (pass= raspberry)</p></li>
+</ol>
+<section id="root-operations-on-the-raspberry">
+<h3>Root operations on the Raspberry:<a class="headerlink" href="#root-operations-on-the-raspberry" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">update</span>
+<span class="n">apt</span> <span class="n">upgrade</span>
+
+<span class="n">useradd</span> <span class="o">-</span><span class="n">m</span> <span class="n">aaa</span>
+<span class="n">passwd</span> <span class="n">aaa</span>
+
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">dialout</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">users</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">tty</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">uucp</span> <span class="n">aaa</span>
+</pre></div>
+</div>
+<section id="install-depencies">
+<h4>Install depencies<a class="headerlink" href="#install-depencies" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">install</span> <span class="n">python</span> <span class="n">python</span><span class="o">-</span><span class="n">osc</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> <span class="n">git</span> <span class="n">python3</span><span class="o">-</span><span class="n">numpy</span>
+
+<span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">process</span> <span class="n">pyserial</span> <span class="n">python</span><span class="o">-</span><span class="n">osc</span> <span class="n">rpi_ws281x</span> <span class="n">adafruit</span><span class="o">-</span><span class="n">circuitpython</span><span class="o">-</span><span class="n">neopixel</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">reinstall</span> <span class="n">adafruit</span><span class="o">-</span><span class="n">blinka</span>
+
+<span class="n">apt</span> <span class="n">purge</span> <span class="n">bluez</span> <span class="n">pi</span><span class="o">-</span><span class="n">bluetooth</span>
+
+<span class="n">exit</span>
+
+<span class="n">ssh</span> <span class="n">aaa</span><span class="o">@</span><span class="mf">192.168.1</span><span class="o">.</span><span class="n">x</span>
+<span class="n">userdel</span> <span class="n">pi</span>
+
+</pre></div>
+</div>
+</section>
+<section id="clone-repository">
+<h4>Clone repository:<a class="headerlink" href="#clone-repository" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">aaa</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">ambisonics</span><span class="o">-</span><span class="n">audio</span><span class="o">-</span><span class="n">association</span><span class="o">/</span><span class="n">Ambijockey</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</section>
+<section id="copy-files-to-corresponding-system-folder">
+<h4>Copy files to corresponding system-folder:<a class="headerlink" href="#copy-files-to-corresponding-system-folder" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ControllerMixer/software/raspberry
+   └── config
+       └── etc
+           ├── dhcpcd.conf
+           └── systemd
+               └── system
+                   └── mic.service
+</pre></div>
+</div>
+</section>
+<section id="configure-the-raspberry">
+<h4>Configure the Raspberry:<a class="headerlink" href="#configure-the-raspberry" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raspi</span><span class="o">-</span><span class="n">config</span>
+	<span class="mi">3</span> <span class="n">Interface</span> <span class="n">Options</span> <span class="o">&gt;</span> <span class="n">P8</span> <span class="n">Remote</span> <span class="n">GPIO</span> <span class="o">&gt;</span> <span class="n">yes</span>
+
+<span class="n">nano</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span>
+	<span class="n">max_usb_current</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">nano</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">cmdline</span><span class="o">.</span><span class="n">txt</span>
+	<span class="n">logo</span><span class="o">.</span><span class="n">nologo</span> <span class="p">(</span><span class="n">to</span> <span class="n">the</span> <span class="n">end</span> <span class="n">of</span> <span class="n">line</span><span class="p">)</span>
+
+<span class="n">nano</span> <span class="o">.</span><span class="n">bashrc</span>
+	<span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">&quot;/home/aaa/.local/bin:$PATH&quot;</span>
+
+</pre></div>
+</div>
+</section>
+<section id="setup-service">
+<h4>Setup service:<a class="headerlink" href="#setup-service" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">start</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+  <span class="k">if</span> <span class="s1">&#39;systemctl enable mic.service&#39;</span> <span class="n">throws</span> <span class="n">an</span> <span class="n">error</span> <span class="s1">&#39;invalid argument&#39;</span>
+    <span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">wants</span>
+    <span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+</div>
+</section>
+<section id="setup-static-ip-address">
+<h4>Setup static ip-address<a class="headerlink" href="#setup-static-ip-address" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bck</span>
+<span class="n">touch</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">Edit</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
+  <span class="n">interface</span> <span class="n">eth0</span>
+  <span class="n">static</span> <span class="n">ip_address</span><span class="o">=</span><span class="mf">192.168.43.51</span><span class="o">/</span><span class="mi">24</span>
+  <span class="n">static</span> <span class="n">routers</span><span class="o">=</span><span class="mf">192.168.43.1</span>
+  <span class="n">static</span> <span class="n">domain_name_servers</span><span class="o">=</span><span class="mf">192.168.43.1</span> <span class="mf">8.8.8.8</span>
+</pre></div>
+</div>
+</section>
+<section id="not-sure-if-we-still-need-fix-for-raspberry-random-hold">
+<h4>Not sure if we still need “fix for Raspberry random hold”:<a class="headerlink" href="#not-sure-if-we-still-need-fix-for-raspberry-random-hold" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">conf</span>
+    <span class="n">vm</span><span class="o">.</span><span class="n">dirty_background_ratio</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">vm</span><span class="o">.</span><span class="n">dirty_ratio</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Mix Configuration</a><ul>
+<li><a class="reference internal" href="#teensy">Teensy</a></li>
+<li><a class="reference internal" href="#raspberry-pi-3-model-b">Raspberry Pi 3 Model B</a><ul>
+<li><a class="reference internal" href="#root-operations-on-the-raspberry">Root operations on the Raspberry:</a><ul>
+<li><a class="reference internal" href="#install-depencies">Install depencies</a></li>
+<li><a class="reference internal" href="#clone-repository">Clone repository:</a></li>
+<li><a class="reference internal" href="#copy-files-to-corresponding-system-folder">Copy files to corresponding system-folder:</a></li>
+<li><a class="reference internal" href="#configure-the-raspberry">Configure the Raspberry:</a></li>
+<li><a class="reference internal" href="#setup-service">Setup service:</a></li>
+<li><a class="reference internal" href="#setup-static-ip-address">Setup static ip-address</a></li>
+<li><a class="reference internal" href="#not-sure-if-we-still-need-fix-for-raspberry-random-hold">Not sure if we still need “fix for Raspberry random hold”:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="core.html"
+                        title="previous chapter">A³ Core Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moc.html"
+                        title="next chapter">A³ Motion Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/configuration/mic.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core Configuration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Mix Configuration</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

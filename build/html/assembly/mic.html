@@ -1,0 +1,183 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Mix Assembly &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Motion Assembly" href="moc.html" />
+    <link rel="prev" title="A³ Core Assembly" href="core.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Assembly"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core Assembly"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Mix Assembly</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-mix-assembly">
+<h1>A³ Mix Assembly<a class="headerlink" href="#a3-mix-assembly" title="Permalink to this headline">¶</a></h1>
+<section id="pcb">
+<h2>PCB<a class="headerlink" href="#pcb" title="Permalink to this headline">¶</a></h2>
+<p>A³ Mix Mainboard pcb is published as kicad project. It comes with ready to fabricate gerber-files. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">aaa</span><span class="o">/</span><span class="n">Ambijockey</span><span class="o">/</span><span class="n">hardware</span><span class="o">/</span><span class="n">mic</span><span class="o">/</span><span class="n">a3mix</span><span class="o">-</span><span class="n">mainboard</span><span class="o">-</span><span class="n">v0</span><span class="mf">.2</span>
+</pre></div>
+</div>
+<p>![[a3mix-schematic.jpg]]
+![[a3mix-pcb-design.jpg]]</p>
+</section>
+<section id="housing">
+<h2>Housing<a class="headerlink" href="#housing" title="Permalink to this headline">¶</a></h2>
+<p>A³ Mix housing isn’t ready yet …</p>
+</section>
+<section id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Raspberry Pi 3 Model B</p></li>
+<li><p>powered with PoE to 5V Adapter -&gt; downstep to 3v on Teensy</p></li>
+<li><p>Raspberry and Teensy are connected via usb</p></li>
+<li><p>Teensy 4.1</p>
+<ul>
+<li><p>4 multiplexer hc4051 (8ch each)
+function: audiochannel-control
+potis</p>
+<ul>
+<li><p>gain</p></li>
+<li><p>eq hi</p></li>
+<li><p>eq mid</p></li>
+<li><p>eq low</p></li>
+<li><p>volume</p></li>
+<li><p>mode-buttons</p>
+<ul>
+<li><p>3d on/off</p></li>
+<li><p>fx on/off</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>1 hc4051
+function: masterchannel-control
+potis</p>
+<ul>
+<li><p>master volume</p></li>
+<li><p>booth volume</p></li>
+<li><p>phones mix</p></li>
+<li><p>headphones volume</p></li>
+</ul>
+</li>
+<li><p>5 led-buttons for heapdphones prelisten function (pfl)</p></li>
+<li><p>1 NeoPixel-strip (ws2811) 9 leds input vu</p></li>
+<li><p>1 NeoPixel-strip (ws2811) for fx and 3d-section</p></li>
+<li><p>8x32 led-matrix for output-vu</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="early-versions">
+<h1>Early versions :<a class="headerlink" href="#early-versions" title="Permalink to this headline">¶</a></h1>
+<p>![[a3mix-prototype-v01.jpg]]
+![[a3mix-pcb-v01.jpg]]
+![[a3mix-pcb-front-v0.jpg]]
+![[a3mix-pcb-back-v0.jpg]]</p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Mix Assembly</a><ul>
+<li><a class="reference internal" href="#pcb">PCB</a></li>
+<li><a class="reference internal" href="#housing">Housing</a></li>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#early-versions">Early versions :</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="core.html"
+                        title="previous chapter">A³ Core Assembly</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moc.html"
+                        title="next chapter">A³ Motion Assembly</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/assembly/mic.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="moc.html" title="A³ Motion Assembly"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="A³ Core Assembly"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Mix Assembly</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

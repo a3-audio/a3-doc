@@ -1,0 +1,167 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Motion Developement &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OSC A³ Pandemic" href="osc.html" />
+    <link rel="prev" title="A³ Mix Development" href="mic.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="osc.html" title="OSC A³ Pandemic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Motion Developement</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-motion-developement">
+<h1>A³ Motion Developement<a class="headerlink" href="#a3-motion-developement" title="Permalink to this headline">¶</a></h1>
+<p>A³ Motion backend runs on ArchlinuxARM on a Raspberry Pi 3 Model B. As Microcontroller we’re using Teensy 4.1.</p>
+<section id="ui">
+<h2>UI<a class="headerlink" href="#ui" title="Permalink to this headline">¶</a></h2>
+<p>A³ Motion UI is the most potential and complex part to develop. It is in a different repository (see [[Ambijockey/doc/configuration/moc]]).</p>
+</section>
+<section id="raspberry">
+<h2>Raspberry<a class="headerlink" href="#raspberry" title="Permalink to this headline">¶</a></h2>
+<p>Connected to:</p>
+<ul class="simple">
+<li><p>A³ Core (LAN)</p></li>
+<li><p>Display (hdmi &amp; usb)</p></li>
+<li><p>Teensy (serial usb)</p></li>
+</ul>
+<p>OSC-communication:</p>
+<ul class="simple">
+<li><p>Send stereowidth</p></li>
+<li><p>Send stereosides boost</p></li>
+<li><p>Send azimuth/elevation</p></li>
+<li><p>Receive bpm</p></li>
+</ul>
+<p>Python- script:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Controller_Motion/software/MotionControllerUI/moc_ui.py</span></code></p></li>
+</ul>
+</section>
+<section id="teensy">
+<h2>Teensy<a class="headerlink" href="#teensy" title="Permalink to this headline">¶</a></h2>
+<p>Connected to:</p>
+<ul class="simple">
+<li><p>Mainboard</p>
+<ul>
+<li><p>Encoder (gpio)</p></li>
+<li><p>potis (ic: hc4051)</p></li>
+<li><p>neoPixel (gpio)</p></li>
+<li><p>Buttonmatrix (ic: SN74HCT245N)</p></li>
+</ul>
+</li>
+</ul>
+<p>Firmware:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Controller_Motion/software/teensy/src/main.cpp</span></code></p></li>
+</ul>
+</section>
+<section id="audio">
+<h2>Audio<a class="headerlink" href="#audio" title="Permalink to this headline">¶</a></h2>
+<p>A³ Mix, as a good DJ-Mixer, must have a headphone-plug somewhere. We installed a headphone-amp which is bus-powered by usb. It receives a linelevel analogsignal from the audiohardware. We put the headphone-plug to the front and 2 xlr-sockets to the back.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Motion Developement</a><ul>
+<li><a class="reference internal" href="#ui">UI</a></li>
+<li><a class="reference internal" href="#raspberry">Raspberry</a></li>
+<li><a class="reference internal" href="#teensy">Teensy</a></li>
+<li><a class="reference internal" href="#audio">Audio</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mic.html"
+                        title="previous chapter">A³ Mix Development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="osc.html"
+                        title="next chapter">OSC A³ Pandemic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/moc.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="osc.html" title="OSC A³ Pandemic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Development"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Motion Developement</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>

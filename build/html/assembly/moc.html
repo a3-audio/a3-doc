@@ -1,0 +1,156 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A³ Motion Assembly &#8212; A³ Pandemic 2021 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A³ Pandemic Parts" href="parts.html" />
+    <link rel="prev" title="A³ Mix Assembly" href="mic.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="parts.html" title="A³ Pandemic Parts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Assembly"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Motion Assembly</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="a3-motion-assembly">
+<h1>A³ Motion Assembly<a class="headerlink" href="#a3-motion-assembly" title="Permalink to this headline">¶</a></h1>
+<section id="pcb">
+<h2>PCB<a class="headerlink" href="#pcb" title="Permalink to this headline">¶</a></h2>
+<section id="mainboard">
+<h3>Mainboard<a class="headerlink" href="#mainboard" title="Permalink to this headline">¶</a></h3>
+<p>![[a3motion-schematic.jpg]]
+![[a3motion-pcb-design.jpg]]</p>
+</section>
+<section id="buttonmatrix">
+<h3>Buttonmatrix<a class="headerlink" href="#buttonmatrix" title="Permalink to this headline">¶</a></h3>
+<p>![[a3motion-buttons-schematic.jpg]]
+![[a3motion-buttons-pcb-design.jpg]]</p>
+</section>
+</section>
+<section id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>runs on a Raspberry Pi 3 Model B</p></li>
+<li><p>powered with PoE -&gt; downstep to 3v on Teensy</p></li>
+<li><p>sbc is connected via usb (/dev/ttyACM0) to</p></li>
+<li><p>teensy 4.1, it has</p>
+<ul>
+<li><p>1 multiplexer hc4051 (8ch)
+function: width and 3d-boost per channel</p></li>
+<li><p>2 hc4051
+function: Buttonmatrix</p></li>
+<li><p>1 NeoPixel-strip (ws2811 led-controller)</p>
+<ul>
+<li><p>16 x status leds buttonmatrix</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A³ Motion Assembly</a><ul>
+<li><a class="reference internal" href="#pcb">PCB</a><ul>
+<li><a class="reference internal" href="#mainboard">Mainboard</a></li>
+<li><a class="reference internal" href="#buttonmatrix">Buttonmatrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mic.html"
+                        title="previous chapter">A³ Mix Assembly</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="parts.html"
+                        title="next chapter">A³ Pandemic Parts</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/assembly/moc.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="parts.html" title="A³ Pandemic Parts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mic.html" title="A³ Mix Assembly"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">A³ Pandemic 2021 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">A³ Motion Assembly</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright © Copyright 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+  </body>
+</html>
