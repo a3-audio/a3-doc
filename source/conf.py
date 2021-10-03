@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Pandemic'
-copyright = '© Copyright 2021'
+copyright = 'Raphael Eismann'
 author = 'Raphael Eismann'
 
 # The full version, including alpha/beta/rc tags
