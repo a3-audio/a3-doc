@@ -10,7 +10,7 @@ A working prototype exists. We applied intensive stress tests by using 12V car-h
 
 ## Pictures of prototype
 ### A³ Mix
-![pix/v01/a3mix-prototype.jpg](pix/v01/a3mix-prototype.jpg)
+![test](_images/v01/a3mix-prototype.jpg)
 ### A³ Motion
 ![[a3motion-prototype.jpg]]
 ### A³ Core
