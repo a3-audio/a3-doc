@@ -1,6 +1,6 @@
 # A³ Pandemic Assembly
 ## Build your own
-- A³ Core: [[/assembly/core]]
+- A³ Core: [[assembly/core]]
 - A³ Mix: [[Ambijockey/doc/assembly/mic]]
 - A³ Motion: [[Ambijockey/doc/assembly/moc]]
 - Buy parts: [[parts]]
@@ -10,7 +10,7 @@ A working prototype exists. We applied intensive stress tests by using 12V car-h
 
 ## Pictures of prototype
 ### A³ Mix
-![[pix/a3mix-prototype.jpg]]
+![pix/v01/a3mix-prototype.jpg](pix/v01/a3mix-prototype.jpg)
 ### A³ Motion
 ![[a3motion-prototype.jpg]]
 ### A³ Core
@@ -20,3 +20,7 @@ A working prototype exists. We applied intensive stress tests by using 12V car-h
 ![[a3-openair.jpg]]
 ![[a3-handwagon-packed.jpg]]
 ![[a3-handwagon-finished.jpg]]
+
+.. image:: pix/v01/a3core-back-prototype.jpg
+   :scale: 50%
+   :class: no-scaled-link
