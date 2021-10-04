@@ -1,9 +1,9 @@
 # A³ Pandemic Assembly
 ## Build your own
-- A³ Core: [A³ Core](https://doc.orbitalwaves.net/assembly/core)
-- A³ Mix: [A³ Mic](https://doc.orbitalwaves.net/assembly/mic)
-- A³ Motion: [A³ Motion](https://doc.orbitalwaves.net/assembly/moc)
-- Buy parts: [Parts](https://doc.orbitalwaves.net/assembly/parts)
+- A³ Core: [A³ Core](https://doc.orbitalwaves.net/assembly/core.html)
+- A³ Mix: [A³ Mic](https://doc.orbitalwaves.net/assembly/mic.html)
+- A³ Motion: [A³ Motion](https://doc.orbitalwaves.net/assembly/moc.html)
+- Buy parts: [Parts](https://doc.orbitalwaves.net/assembly/parts.html)
 
 ## Hardware
 A working prototype exists. We applied intensive stress tests by using 12V car-hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.

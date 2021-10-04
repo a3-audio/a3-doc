@@ -44,4 +44,4 @@ Welcome
    assembly/mic
    assembly/moc
    assembly/parts
-   assembling/imaging   
+   assembly/imaging   

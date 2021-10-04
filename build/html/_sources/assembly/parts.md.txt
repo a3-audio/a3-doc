@@ -2,7 +2,7 @@
 
 ## A³ Motion
 ### Digikey (222,74 €)
-- http://www.digikey.de/short/9mp7fn0f
+- [Digikey A³ Motion basket](http://www.digikey.de/short/9mp7fn0f)
 
 1.	RPC2512JT33R0
 	1.	Stackpole Electronics Inc
@@ -129,11 +129,9 @@ Connectors and pcb-sockets
 - Mainboard 25 €
 - Buttonmatrix 25 €
 
------------------------------------------------------------------
-
 ## A³ Mix
 ## digikey (251,83 €)
-http://www.digikey.de/short/9hm90rmj
+- [Digikey A³ Mix basket](http://www.digikey.de/short/9hm90rmj)
 
 1. 3785	
 	1. Adafruit Industries LLC
@@ -248,8 +246,6 @@ microphonecable 0.5m
 
 ### Housing (~50 €)
 ### Mainboard (50 €)
-
------------------------------------------------------------------
 
 ## A³ Core (598,57 €)
 ### alternate pc-hardware

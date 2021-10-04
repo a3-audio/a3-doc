@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>A³ Mix Assembly &mdash; A³ Pandemic 2021 documentation</title>
+  <title>Imaging &mdash; A³ Pandemic 2021 documentation</title>
   
 
   
@@ -30,8 +30,7 @@
   <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="A³ Motion Assembly" href="moc.html" />
-    <link rel="prev" title="A³ Core Assembly" href="core.html" /> 
+    <link rel="prev" title="A³ Pandemic Parts" href="parts.html" /> 
 
 </head>
 
@@ -70,13 +69,13 @@
     
       <li><a href="../index.html">Docs</a></li>
         
-      <li>A³ Mix Assembly</li>
+      <li>Imaging</li>
     
     
       <li class="breadcrumbs-aside">
         
             
-            <a href="../_sources/assembly/mic.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/assembly/imaging.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -217,13 +216,13 @@
 <li class="toctree-l2"><a class="reference internal" href="core.html#tested-setups">Tested setups:</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">A³ Mix Assembly</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pcb">PCB</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#housing">Housing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hardware">Hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mic.html">A³ Mix Assembly</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mic.html#pcb">PCB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mic.html#housing">Housing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mic.html#hardware">Hardware</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#early-versions">Early versions :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mic.html#early-versions">Early versions :</a></li>
 <li class="toctree-l1"><a class="reference internal" href="moc.html">A³ Motion Assembly</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="moc.html#pcb">PCB</a></li>
 <li class="toctree-l2"><a class="reference internal" href="moc.html#hardware">Hardware</a></li>
@@ -238,6 +237,7 @@
 <li class="toctree-l2"><a class="reference internal" href="parts.html#small-audiohardware-752-90">small audiohardware (752,90 €)</a></li>
 </ul>
 </li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Imaging</a></li>
 </ul>
 
                             
@@ -248,71 +248,32 @@
                     <div class="document">
                         
                             
-  <section class="tex2jax_ignore mathjax_ignore" id="a3-mix-assembly">
-<h1>A³ Mix Assembly<a class="headerlink" href="#a3-mix-assembly" title="Permalink to this headline">¶</a></h1>
-<section id="pcb">
-<h2>PCB<a class="headerlink" href="#pcb" title="Permalink to this headline">¶</a></h2>
-<p>A³ Mix Mainboard pcb is published as kicad project. It comes with ready to fabricate gerber-files. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">aaa</span><span class="o">/</span><span class="n">Ambijockey</span><span class="o">/</span><span class="n">hardware</span><span class="o">/</span><span class="n">mic</span><span class="o">/</span><span class="n">a3mix</span><span class="o">-</span><span class="n">mainboard</span><span class="o">-</span><span class="n">v0</span><span class="mf">.2</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="imaging">
+<h1>Imaging<a class="headerlink" href="#imaging" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>lsblk
+mkdir /mnt/tmp
+sudo mount /dev/mmcblk0p2 /mnt/tmp/
+
+df
+	/dev/mmcblk0p2  15052456  2033968  12374740  15% /mnt/tmp
+
+sudo umount /mnt/tmp/
+e2fsck -f /dev/mmcblk0p2
+sudo resize2fs /dev/mmcblk0p2 4G
+
+wip ...
+
+hint:
+	
+ for part in /dev/loop0p*; do
+    mount $part /mnt
+    dd if=/dev/zero of=/mnt/filler conv=fsync bs=1M
+    rm /mnt/filler
+    umount /mnt
+ done
+
 </pre></div>
 </div>
-<p><img alt="a3mix-schematic" src="https://orbitalwaves.net/static/v01/a3mix-schematic.jpg" />
-![a3mix-pcb-design](https://orbitalwaves.net/static/v01/a3mix-pcb-design.jpg]]</p>
-</section>
-<section id="housing">
-<h2>Housing<a class="headerlink" href="#housing" title="Permalink to this headline">¶</a></h2>
-<p>A³ Mix housing isn’t ready yet …</p>
-</section>
-<section id="hardware">
-<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Raspberry Pi 3 Model B</p></li>
-<li><p>powered with PoE to 5V Adapter -&gt; downstep to 3v on Teensy</p></li>
-<li><p>Raspberry and Teensy are connected via usb</p></li>
-<li><p>Teensy 4.1</p>
-<ul>
-<li><p>4 multiplexer hc4051 (8ch each)
-function: audiochannel-control
-potis</p>
-<ul>
-<li><p>gain</p></li>
-<li><p>eq hi</p></li>
-<li><p>eq mid</p></li>
-<li><p>eq low</p></li>
-<li><p>volume</p></li>
-<li><p>mode-buttons</p>
-<ul>
-<li><p>3d on/off</p></li>
-<li><p>fx on/off</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>1 hc4051
-function: masterchannel-control
-potis</p>
-<ul>
-<li><p>master volume</p></li>
-<li><p>booth volume</p></li>
-<li><p>phones mix</p></li>
-<li><p>headphones volume</p></li>
-</ul>
-</li>
-<li><p>5 led-buttons for heapdphones prelisten function (pfl)</p></li>
-<li><p>1 NeoPixel-strip (ws2811) 9 leds input vu</p></li>
-<li><p>1 NeoPixel-strip (ws2811) for fx and 3d-section</p></li>
-<li><p>8x32 led-matrix for output-vu</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="early-versions">
-<h1>Early versions :<a class="headerlink" href="#early-versions" title="Permalink to this headline">¶</a></h1>
-<p>![[a3mix-prototype-v01.jpg]]
-![[a3mix-pcb-v01.jpg]]
-![[a3mix-pcb-front-v0.jpg]]
-![[a3mix-pcb-back-v0.jpg]]</p>
 </section>
 
 
