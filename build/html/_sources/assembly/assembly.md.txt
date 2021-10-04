@@ -10,7 +10,7 @@ A working prototype exists. We applied intensive stress tests by using 12V car-h
 
 ## Pictures of prototype
 ### A³ Mix
-![https://doc.orbitalwaves.net/source/v01/a3mix-prototype.jpg](https://doc.orbitalwaves.net/source/v01/a3mix-prototype.jpg)
+![https://doc.orbitalwaves.net/static/v01/a3mix-prototype.jpg](https://doc.orbitalwaves.net/static/v01/a3mix-prototype.jpg)
 ### A³ Motion
 ![[_images/v01/a3motion-prototype.jpg]]
 ### A³ Core
