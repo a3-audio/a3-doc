@@ -2,8 +2,8 @@
 
 ```
 cd into local repo
-source /bin/activate
-echo "make edits to source/*"
+source bin/activate
+make edits to source/
 make html
 deactivate
 eval `ssh-agent`

@@ -31,7 +31,7 @@ pip install numpy pyserial
 install rtapp (from aur)
 
 cd /home/aaa
-git clone https://github.com/ambisonics-audio-association/Ambijockey.git
+git clone git@github.com:ambisonics-audio-association/Ambijockey.git
 
 Download and activate reaper for Linux x86_64:
 https://www.reaper.fm/download.php
