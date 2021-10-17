@@ -1,4 +1,4 @@
-# A³ Pandemic Global Configuration
+# A³ Pandemic Configuration
 ## HowTo
 - [A³ Core Configuration](https://doc.orbitalwaves.net/configuration/core.html)
 - [A³ Mix Configuration](https://doc.orbitalwaves.net/configuration/mic.html)

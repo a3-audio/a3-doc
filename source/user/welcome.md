@@ -33,9 +33,9 @@ It is designed for dynamic live interaction with audio-panning in a 3d-sound-sph
 - Power on
 
 ## In depth
-- Asembly: [[assembly]]
-- Configuration: [[configuration]]
-- Development: [[development]]
+- Asembly: [assembly](https://doc.orbitalwaves.net/assembly/assembly.html)
+- Configuration: [configuration](https://doc.orbitalwaves.net/configuration/configuration.html)
+- Development: [development](https://doc.orbitalwaves.net/development/development.html)
 
 ## Goal for this project
 - 3d-sound everywhere
@@ -55,7 +55,7 @@ We put Media-files to [Seafile](https://tinycloud.lilbits.de/Media)
 - Get a custom-build set: 6410€ (without audio-hardware)
 - Get it on Kickstarter: depends on community
 - Build your own: ~1720€ (without audio-hardware)
-- Buy audio-hardware: 750-35000€ (see [[parts]])
+- Buy audio-hardware: starts from 750€ (see [parts](https://doc.orbitalwaves.net/assembly/parts.html))
 - Maintenance and Service Subscriptions: 100€ / Month
 
 ## Rent
@@ -66,6 +66,7 @@ We put Media-files to [Seafile](https://tinycloud.lilbits.de/Media)
 ## Git
 A³ Pandemic Mainrepo:
 https://github.com/ambisonics-audio-association/Ambijockey
+
 A³ Motion UI-repo:
 https://github.com/ambisonics-audio-association/MotionControllerUI
 
