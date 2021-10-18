@@ -25,3 +25,6 @@ hint:
 
 ```
 
+```
+ dd bs=4M if=/dev/mmcblk0 of=/home/ra/images/a3_mic_debian.img
+```

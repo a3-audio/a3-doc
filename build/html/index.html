@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome &mdash; A³ Pandemic 2021 documentation</title>
+  <title>Interact Live with 3d-Audio &mdash; A³ Pandemic 2021 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/css/theme.min.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A³ Pandemic" href="user/welcome.html" /> 
+    <link rel="next" title="A³ Core usermanual" href="user/core.html" /> 
 
 </head>
 
@@ -69,7 +69,7 @@
     
       <li><a href="#">Docs</a></li>
         
-      <li>Welcome</li>
+      <li>Interact Live with 3d-Audio</li>
     
     
       <li class="breadcrumbs-aside">
@@ -104,22 +104,8 @@
                         
                             
                             
-                                <p class="caption" role="heading"><span class="caption-text">User:</span></p>
+                                <p class="caption" role="heading"><span class="caption-text">Usermanual:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user/welcome.html">A³ Pandemic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#design">Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#usecases">Usecases:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#in-depth">In depth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#goal-for-this-project">Goal for this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#media">Media</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#buy">Buy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#rent">Rent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#git">Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user/welcome.html#contact">Contact</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="user/core.html">A³ Core usermanual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="user/core.html#audio-io-layout">audio io-layout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user/core.html#service">Service</a></li>
@@ -248,12 +234,127 @@
                     <div class="document">
                         
                             
-  <section id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">¶</a></h1>
+  <section id="interact-live-with-3d-audio">
+<h1>Interact Live with 3d-Audio<a class="headerlink" href="#interact-live-with-3d-audio" title="Permalink to this headline">¶</a></h1>
+<p>A³ Pandemic is a 3d-audio processor controlled by a 4-channel dj-mixer and a
+16-pad motion-sampler. It is designed to modulate positions of audio-events
+live, in a 3d sound-sphere.</p>
+<section id="a3-motion-the-motion-sampler">
+<h2>A³ Motion (The Motion-Sampler)<a class="headerlink" href="#a3-motion-the-motion-sampler" title="Permalink to this headline">¶</a></h2>
+<p>Works like a sampler, but instead audio it samples motion from
+it’s touchscreen.</p>
+<ul class="simple">
+<li><p>adjust loop-length</p></li>
+<li><p>store livemotion on sample-pads</p></li>
+<li><p>play/pause recorded motionpattern in different modes like loop or one-shot</p></li>
+<li><p>sync to bpm</p></li>
+<li><p>spread width of a stereo signal</p></li>
+<li><p>boost sides from mid/side processing</p></li>
+</ul>
+</section>
+<section id="a3-mix-the-dj-mixer">
+<h2>A³ Mix (The DJ-Mixer)<a class="headerlink" href="#a3-mix-the-dj-mixer" title="Permalink to this headline">¶</a></h2>
+<p>A³ Mix is a DJ-Mixer with 3-band-kill-eq, fx-section for hi- and lopass, 3d-toggle, multichannel vu-meter and 3d-prelisten on headphones.
+It has a „tape-in“ section for multichannel or stereo direct to mix bus.</p>
+</section>
+<section id="a3-core-the-sound-server">
+<h2>A³ Core (The Sound-server)<a class="headerlink" href="#a3-core-the-sound-server" title="Permalink to this headline">¶</a></h2>
+<p>A³ Core processes analog audio-signals, calculates 3d-sound-spheres and is remote-controlled by A³ Mix and A³ Motion (or any other osc-controller). A³ Core can handle a wide range of audio-hardware to fit environments like Dante, MADI or any class-compliant.</p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Soundsystem with at least 4 speakers placed around the venue.</p></li>
+<li><p>A venue smaller than 20m diameter. For bigger venues more spheres.</p></li>
+</ul>
+<p>with 4 stereo input-channels and a tape-in for multichannel input.</p>
+<p>It is scalable and capable to feed up to 128 speakers in multiple 3d-sound-spheres.</p>
+<p>It consists of three</p>
+</section>
+</section>
+<section id="usecases">
+<h1>Usecases:<a class="headerlink" href="#usecases" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>A³ Core encodes and decodes: You can preset your show with stereotracks and control-data. You can use [osccontrol-light](<a class="reference external" href="https://github.com/drlight-code/osccontrol-light">https://github.com/drlight-code/osccontrol-light</a>) vst-plugin to send osc-data from inside daw.</p></li>
+<li><p>A³ Core decodes: You can pre-encode your show and just send 3rd order b-format (acn, sn3d)</p></li>
+<li><p>A³ Core just routes: You get discrete channels for each speaker</p></li>
+<li><p>A³ Core simulates speaker-setup: You can play direct out from Dolby or Auro-3D decoder</p></li>
+<li><p>A³ Triple: You use A³ Mix and A³ Motion with dj-players to scratch your tracks while moving them.</p></li>
+</ul>
+</section>
+<section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Plug in your instruments vinyl, cd, daw ..</p></li>
+<li><p>Plug in your speaker</p></li>
+<li><p>Put speakers in regular circle around center</p></li>
+<li><p>Plug CAT-cable from A³ Mix and A³ Motion to A³ Core</p></li>
+<li><p>Plug-In your headphones</p></li>
+<li><p>Power on</p></li>
+</ul>
+</section>
+<section id="goal-for-this-project">
+<h1>Goal for this project<a class="headerlink" href="#goal-for-this-project" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>3d-sound everywhere</p></li>
+<li><p>Community</p></li>
+<li><p>Compatibility</p></li>
+<li><p>Easy to use</p></li>
+<li><p>Flexibility</p></li>
+<li><p>Open-Source</p></li>
+<li><p>Quality</p></li>
+<li><p>Rock-Solid-Stable in runtime and housing</p></li>
+<li><p>Scalable</p></li>
+</ul>
+</section>
+<section id="media">
+<h1>Media<a class="headerlink" href="#media" title="Permalink to this headline">¶</a></h1>
+<p>We put Media-files to [Seafile](<a class="reference external" href="https://tinycloud.lilbits.de/Media">https://tinycloud.lilbits.de/Media</a>)</p>
+</section>
+<section id="buy">
+<h1>Buy<a class="headerlink" href="#buy" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Get a custom-build set: 6410€ (without audio-hardware)</p></li>
+<li><p>Get it on Kickstarter: depends on community</p></li>
+<li><p>Build your own: ~1720€ (without audio-hardware)</p></li>
+<li><p>Buy audio-hardware: starts from 750€ (see [parts](<a class="reference external" href="https://doc.orbitalwaves.net/assembly/parts.html">https://doc.orbitalwaves.net/assembly/parts.html</a>))</p></li>
+<li><p>Maintenance and Service Subscriptions: 100€ / Month</p></li>
+</ul>
+</section>
+<section id="rent">
+<h1>Rent<a class="headerlink" href="#rent" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Rent A³ Pandemic set 320-640€ per day (without speakers)</p></li>
+<li><p>Rent A³ Speakers set  320-60000€ per Event (without show)</p></li>
+<li><p>Rent A³ Show 20000-350000€</p></li>
+</ul>
+</section>
+<section id="git">
+<h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>A³ Pandemic Mainrepo: <a class="reference external" href="https://github.com/ambisonics-audio-association/Ambijockey">https://github.com/ambisonics-audio-association/Ambijockey</a></p></li>
+<li><p>A³ Motion UI-repo: <a class="reference external" href="https://github.com/ambisonics-audio-association/MotionControllerUI">https://github.com/ambisonics-audio-association/MotionControllerUI</a></p></li>
+</ul>
+</section>
+<section id="support">
+<h1>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Help-desk</p></li>
+<li><p>Community</p></li>
+</ul>
+</section>
+<section id="contact">
+<h1>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>[<a class="reference external" href="mailto:contact&#37;&#52;&#48;orbitalwaves&#46;net">contact<span>&#64;</span>orbitalwaves<span>&#46;</span>net</a>](<a class="reference external" href="mailto:contact&#37;&#52;&#48;orbitalwaves&#46;net">mailto:contact<span>&#64;</span>orbitalwaves<span>&#46;</span>net</a>)</p></li>
+<li><p>[mattermost](<a class="reference external" href="https://talk.lilbits.de/ambisonics">https://talk.lilbits.de/ambisonics</a>)</p></li>
+</ul>
+</section>
+<section id="in-depth">
+<h1>In depth<a class="headerlink" href="#in-depth" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">User:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Usermanual:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user/welcome.html">A³ Pandemic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user/core.html">A³ Core usermanual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user/mic.html">A³ Mix usermanual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user/moc.html">A³ Motion usermanual</a></li>
