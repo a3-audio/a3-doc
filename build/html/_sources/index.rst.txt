@@ -36,13 +36,6 @@ Requirements
 - Soundsystem with at least 4 speakers placed around the venue.
 - A venue smaller than 20m diameter. For bigger venues more spheres.
 
-
-with 4 stereo input-channels and a tape-in for multichannel input. 
-
-It is scalable and capable to feed up to 128 speakers in multiple 3d-sound-spheres.
-
-It consists of three 
-
 *********
 Usecases:
 *********
