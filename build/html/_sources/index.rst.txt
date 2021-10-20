@@ -29,7 +29,7 @@ It has a „tape-in“ section for multichannel or stereo to direct (discrete, d
 
 A³ Core (The Sound-server)
 ##########################
-A³ Core processes analog audiosignals, calculates 3d sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other osc-controller). A³ Core can handle a wide range of audio-hardware to fit environments like Dante, MADI or any class-compliant.
+A³ Core processes analog audiosignals, calculates 3d sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other osc controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
 
 Requirements
 ############
