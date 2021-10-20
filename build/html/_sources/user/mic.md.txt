@@ -1,5 +1,5 @@
 # A³ Mix usermanual
-4-Channel DJ-Mixer-OSC-Controller with buttons for fx-engine and 3d-toggle. Builtin headphone-amp and jacks to feed (xlr) and receive (jack).
+4-Channel DJ Mixer (Controller) with 3d toggle button per channel and fx engine. 
 
 ## Connectivity
 - Rear: 2 XLR-Inputs for Headphone-signal from A³ Core
@@ -8,15 +8,17 @@
 
 ## Channelsection
 - Poti: Gain
-- Poti: Kill-EQ-Hi
-- Poti: Kill-EQ-Mid
-- Poti: Kill-EQ-Low
-- Button: Prelisten channel on headphone (pfl)
+- Poti: Eq hi
+- Poti: Eq mid
+- Poti: Eq low
+- Button: Cue (pfl)
 - Poti: Channel volume
+- Button: 3d toggle
+- Button: fx toggle
 
 ## Mastersection
 - Poti: Master Volume
-- Button: Prelisten on Headphones
+- Button: Cue (afl)
 - Poti: Booth
 - Poti: Headphone mix
 - Poti: Headphone volume
@@ -24,6 +26,5 @@
 ## Fx-section
 - Poti: Filter frequency
 - Poti: Filter resonance
-- Button: Fx toggle on/off
-- Button: Fx-mode toggle hipass/lopass
-- Button: 3d-toggle on/off
+- Button: Fx mode toggle (hi pass / lo pass)
+- Button: 3d toggle on/off

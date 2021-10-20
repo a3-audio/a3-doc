@@ -2,7 +2,7 @@
 Scalable "set and forget" soundprocessor
 
 ## audio io-layout
-It is free configurable but comes with a preset layout for your venue. Connect DJ-Gear Instruments or daw to the inputs. Connect speakers and A³ Mix headphones-jack to A³ Core outputs. Connect Headphones to A³ Mix. Power on.
+It is free configurable but comes with a preset layout for your venue. Connect DJ-Gear, Instruments, or daw to the inputs. Connect speakers and A³ Mix headphone-jack to A³ Core outputs. Connect Headphones to A³ Mix. Power on.
 
 ### inputs
 - 1-2 = Stereo 1
@@ -12,7 +12,7 @@ It is free configurable but comes with a preset layout for your venue. Connect D
 - 9-24 = Tape-In
 
 ### outputs
-- 1-2 = A³ Mix
+- 1-2 = A³ Mix headphones
 - 3 = Subwoofer
 - 4-n = Speaker
 

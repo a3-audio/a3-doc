@@ -1,5 +1,5 @@
 # A³ Motion usermanual
-A³ Motion is a Touch-Motion-Sampler for Audio-Live-Panning. It has a touchdisplay which lets you control audio-sources as balls in listening area. You can record and store motions on samplebanks. Map them on buttons to interact pause/play/one-shot in live-situations.
+A³ Motion is a Touch Motion Sampler for Audio Live Panning. It has a touchdisplay which lets you control audio sources as balls in listening area. You can record and store motions on samplebanks. Map them on buttons to interact pause/play/one-shot in live situations.
 
 ## OVERVIEW:
 ### HARDWARE LAYOUT
@@ -79,7 +79,7 @@ to control and see all information on one fingertip.
 |-----------------------------------------------------------|    
 | RCV:192.168.178.125:1234|SND:192.168.178.126:1232|BPM:128 | <- SYSTEMINFO
 |-----------------------------------------------------------|
-```
+
 TOUCHDISPLAY LEGEND:
 - INFOFIELD: COLORS - 4 channels, 4 infofield areas, 4 different colors
 - INFOFIELD: WIDTH - How wide your sources spread in the sphere (exept monomode)
@@ -95,7 +95,7 @@ TOUCHDISPLAY LEGEND:
 - SYSTEMVIEW: RCV - This device OSC input
 - SYSTEMVIEW: SND - This device OSC output
 - SYSTEMVIEW: BPM - Master BPM
-
+```
 
 ## Usage
 1. Push first encoder to enter recordmode for channel one

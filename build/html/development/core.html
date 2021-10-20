@@ -105,22 +105,8 @@
                         
                             
                             
-                                <p class="caption" role="heading"><span class="caption-text">User:</span></p>
+                                <p class="caption" role="heading"><span class="caption-text">Usermanual:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/welcome.html">A³ Pandemic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#design">Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#usecases">Usecases:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#in-depth">In depth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#goal-for-this-project">Goal for this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#media">Media</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#buy">Buy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#rent">Rent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#git">Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#contact">Contact</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../user/core.html">A³ Core usermanual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user/core.html#audio-io-layout">audio io-layout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/core.html#service">Service</a></li>
@@ -253,13 +239,13 @@
 <h1>A³ Core Development<a class="headerlink" href="#a3-core-development" title="Permalink to this headline">¶</a></h1>
 <section id="backend">
 <h2>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h2>
-<p>A³ Core runs archlinux with a realtimekernel. It must be well tuned to get low latency and stable audiosignals.</p>
+<p>A³ Core runs archlinux with a realtimekernel. It must be tuned for low latency and stable audio processing.</p>
 <p>Connected to:</p>
 <ul class="simple">
 <li><p>A³ Mix (lan)</p></li>
 <li><p>A³ Motion (lan)</p></li>
 <li><p>Audiohardware (PCIe, usb)</p></li>
-<li><p>FOH-Setup-Page (webfrontend) &lt;- wip</p></li>
+<li><p>FOH Setup Page (webfrontend) &lt;- wip</p></li>
 </ul>
 <p>OSC communication:</p>
 <ul class="simple">
@@ -285,9 +271,10 @@
 </section>
 <section id="reaper-audioengine">
 <h2>Reaper Audioengine<a class="headerlink" href="#reaper-audioengine" title="Permalink to this headline">¶</a></h2>
-<p>A³ Core runs a jack2 audio-engine on top of alsa. Qjackctl may be used to patch virtual audio-cables from your hardware to Reaper and back out. Reaper acts as the mixer-backend which does the complex routing and user-interaction-tasks. It has a complex routing and bus-mapping described later. It processes the input-signal from audio-hardware and outputs calculated signals for headphones and speakers. The speaker must be placed in a most chubbiest spherical installation. Electronic corrections are possible for closer speakers.
-Jmess is used to store and restore jack-connections, aj-snapshot is used to store and restore alsa-connections.</p>
-<p>The audio-hardware could be any class-compliant or compatible Madi/Dante card. It is connected to A³ Core via PCIe or USB. Instruments, speakers, headphones and DJ-Gear are directly plugged into A³ Core’s audiohardware.</p>
+<p>A³ Core runs a jack2 audio engine on top of alsa.
+Qjackctl may be used to patch virtual audio cables from your hardware to Reaper and back out. Reaper acts as the mixer backend which does the complex routing and user interaction tasks. It has a complex routing and bus mapping described later. It processes the input signal from audio hardware and outputs calculated signals for headphones and speakers. The speaker must be placed in a most chubbiest spherical installation. Electronic corrections are possible for closer speakers.
+Jmess is used to store and restore jack connections, aj-snapshot is used to store and restore alsa connections.</p>
+<p>The audio hardware could be any class compliant or compatible Madi/Dante card. It is connected to A³ Core via PCIe or USB. Instruments, speakers, headphones and DJ Gear are directly plugged into A³ Core’s audiohardware.</p>
 <p>Configure A³Core for your audio-hardware edit:
 <code class="docutils literal notranslate"><span class="pre">Server/config/.xinitrc</span></code></p>
 <p>The Reaper pojectfile:</p>

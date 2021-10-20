@@ -2,10 +2,12 @@
 ## PCB
 ### Mainboard
 ![a3motion-schematic](https://doc.orbitalwaves.net/static/v01/a3motion-schematic.jpg)
+
 ![a3motion-pcb-design](https://doc.orbitalwaves.net/static/v01/a3motion-pcb-design.jpg)
 
 ### Buttonmatrix
 ![a3motion-buttons-schematic](https://doc.orbitalwaves.net/static/v01/a3motion-buttons-schematic.jpg)
+
 ![a3motion-buttons-pcb-design](https://doc.orbitalwaves.net/static/v01/a3motion-buttons-pcb-design.jpg)
 
 ### Housing

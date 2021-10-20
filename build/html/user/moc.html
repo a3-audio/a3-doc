@@ -105,22 +105,8 @@
                         
                             
                             
-                                <p class="caption" role="heading"><span class="caption-text">User:</span></p>
+                                <p class="caption" role="heading"><span class="caption-text">Usermanual:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="welcome.html">A³ Pandemic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#design">Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#usecases">Usecases:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#in-depth">In depth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#goal-for-this-project">Goal for this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#media">Media</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#buy">Buy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#rent">Rent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#git">Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="welcome.html#contact">Contact</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="core.html">A³ Core usermanual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core.html#audio-io-layout">audio io-layout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core.html#service">Service</a></li>
@@ -251,7 +237,7 @@
                             
   <section class="tex2jax_ignore mathjax_ignore" id="a3-motion-usermanual">
 <h1>A³ Motion usermanual<a class="headerlink" href="#a3-motion-usermanual" title="Permalink to this headline">¶</a></h1>
-<p>A³ Motion is a Touch-Motion-Sampler for Audio-Live-Panning. It has a touchdisplay which lets you control audio-sources as balls in listening area. You can record and store motions on samplebanks. Map them on buttons to interact pause/play/one-shot in live-situations.</p>
+<p>A³ Motion is a Touch Motion Sampler for Audio Live Panning. It has a touchdisplay which lets you control audio sources as balls in listening area. You can record and store motions on samplebanks. Map them on buttons to interact pause/play/one-shot in live situations.</p>
 <section id="overview">
 <h2>OVERVIEW:<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <section id="hardware-layout">
@@ -331,23 +317,24 @@ to control and see all information on one fingertip.</p>
 |-----------------------------------------------------------|    
 | RCV:192.168.178.125:1234|SND:192.168.178.126:1232|BPM:128 | &lt;- SYSTEMINFO
 |-----------------------------------------------------------|
+
+TOUCHDISPLAY LEGEND:
+- INFOFIELD: COLORS - 4 channels, 4 infofield areas, 4 different colors
+- INFOFIELD: WIDTH - How wide your sources spread in the sphere (exept monomode)
+- INFOFIELD: SIDES - Boost the sideinformation of a stereotrack because this information is what does the impact in ambisonic - concider it as 3d-boost
+- INFOFIELD: BPM - Calculated BPM for each Track, cool to run musicious motionpatterns
+- INFOFIELD: BEAT - Map motionpatterns on estimated BPM
+- INFOFIELD: BARS - Lenght of motionsequence
+
+- EAGLEVIEW: SP - The speakerposition
+- EAGLEVIEW: CH - The channelposition (channels are colorcoded)
+- EAGLEVIEW: LR - The width of a stereosource
+
+- SYSTEMVIEW: RCV - This device OSC input
+- SYSTEMVIEW: SND - This device OSC output
+- SYSTEMVIEW: BPM - Master BPM
 </pre></div>
 </div>
-<p>TOUCHDISPLAY LEGEND:</p>
-<ul class="simple">
-<li><p>INFOFIELD: COLORS - 4 channels, 4 infofield areas, 4 different colors</p></li>
-<li><p>INFOFIELD: WIDTH - How wide your sources spread in the sphere (exept monomode)</p></li>
-<li><p>INFOFIELD: SIDES - Boost the sideinformation of a stereotrack because this information is what does the impact in ambisonic - concider it as 3d-boost</p></li>
-<li><p>INFOFIELD: BPM - Calculated BPM for each Track, cool to run musicious motionpatterns</p></li>
-<li><p>INFOFIELD: BEAT - Map motionpatterns on estimated BPM</p></li>
-<li><p>INFOFIELD: BARS - Lenght of motionsequence</p></li>
-<li><p>EAGLEVIEW: SP - The speakerposition</p></li>
-<li><p>EAGLEVIEW: CH - The channelposition (channels are colorcoded)</p></li>
-<li><p>EAGLEVIEW: LR - The width of a stereosource</p></li>
-<li><p>SYSTEMVIEW: RCV - This device OSC input</p></li>
-<li><p>SYSTEMVIEW: SND - This device OSC output</p></li>
-<li><p>SYSTEMVIEW: BPM - Master BPM</p></li>
-</ul>
 </section>
 </section>
 <section id="usage">

@@ -6,7 +6,7 @@
 - Buy parts: [Parts](https://doc.orbitalwaves.net/assembly/parts.html)
 
 ## Hardware
-A working prototype exists. We applied intensive stress tests by using 12V car-hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
+A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
 
 ## Pictures of prototype
 ### A³ Mix

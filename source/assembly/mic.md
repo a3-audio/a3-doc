@@ -1,6 +1,6 @@
 # A³ Mix Assembly
 ## PCB
-A³ Mix Mainboard pcb is published as kicad project. It comes with ready to fabricate gerber-files. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:
+A³ Mix Mainboard pcb is published as kicad project. It comes with ready to fabricate gerber files. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:
 ```
 /home/aaa/Ambijockey/hardware/mic/a3mix-mainboard-v0.2
 ```
@@ -39,7 +39,9 @@ A³ Mix housing isn't ready yet ...
     - 8x32 led-matrix for output-vu
 
 # Early versions :
-![[a3mix-prototype-v01.jpg]]
-![[a3mix-pcb-v01.jpg]]
-![[a3mix-pcb-front-v0.jpg]]
-![[a3mix-pcb-back-v0.jpg]]
+![a3mix-schematic](https://doc.orbitalwaves.net/static/v00/a3mix-schematic.jpg)
+
+![a3mix-prototype-v01](https://doc.orbitalwaves.net/static/v00/a3mix-prototype-v01.jpg)
+![a3mix-pcb-v01](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-v01.jpg)
+![a3mix-pcb-front-v0](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-front-v0.jpg)
+![a3mix-pcb-back-v0](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-back-v0.jpg)
