@@ -1,8 +1,9 @@
 # A³ Mix Configuration
 ## Teensy
-software/teensy/src/main.cpp << [[flashTeensy]]
+[Flash Teensy Firmware](https://doc.orbitalwaves.net/development/flashTeensy.html) ControlerMixer/software/teensy/src/main.cpp
 
-## Raspberry Pi 3 Model B
+## Raspberry Pi 4
+microSD card > 4GB
 
 ### ArchArm
 install aarch64:
@@ -47,7 +48,7 @@ cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
             └── system
                 └── mic.service
 ```
-#### Configure python
+#### Install python
 ```
 pip install pyserial python-osc wheel python-dev-tools 
 
@@ -57,22 +58,18 @@ pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rp
 
 ?? process
 ```
-#### Configure the Raspberry:
+#### Configure services
 ``` 
-nano /boot/config.txt
-	max_usb_current=1
-``` 
-#### Setup services:
-``` 
+?? nano /boot/config.txt
+??	max_usb_current=1
+
 systemctl enable dhcpcd.service
 systemctl start mic.service
 systemctl enable mic.service
   if 'systemctl enable mic.service' throws an error 'invalid argument'
     cd /etc/systemd/system/multi-user.target.wants
     ln -s /etc/systemd/system/mic.service
-``` 
-#### Setup static ip-address
-``` 
+
 Edit /etc/dhcpcd.conf
   interface eth0
   static ip_address=192.168.43.51/24

@@ -143,7 +143,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A³ Mix Configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#teensy">Teensy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#raspberry-pi-3-model-b">Raspberry Pi 3 Model B</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#raspberry-pi-4">Raspberry Pi 4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="moc.html">A³ Motion Configuration</a><ul>
@@ -239,10 +239,11 @@
 <h1>A³ Mix Configuration<a class="headerlink" href="#a3-mix-configuration" title="Permalink to this headline">¶</a></h1>
 <section id="teensy">
 <h2>Teensy<a class="headerlink" href="#teensy" title="Permalink to this headline">¶</a></h2>
-<p>software/teensy/src/main.cpp &lt;&lt; [[flashTeensy]]</p>
+<p><a class="reference external" href="https://doc.orbitalwaves.net/development/flashTeensy.html">Flash Teensy Firmware</a> ControlerMixer/software/teensy/src/main.cpp</p>
 </section>
-<section id="raspberry-pi-3-model-b">
-<h2>Raspberry Pi 3 Model B<a class="headerlink" href="#raspberry-pi-3-model-b" title="Permalink to this headline">¶</a></h2>
+<section id="raspberry-pi-4">
+<h2>Raspberry Pi 4<a class="headerlink" href="#raspberry-pi-4" title="Permalink to this headline">¶</a></h2>
+<p>microSD card &gt; 4GB</p>
 <section id="archarm">
 <h3>ArchArm<a class="headerlink" href="#archarm" title="Permalink to this headline">¶</a></h3>
 <p>install aarch64:
@@ -292,8 +293,8 @@ cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
 </pre></div>
 </div>
 </section>
-<section id="configure-python">
-<h4>Configure python<a class="headerlink" href="#configure-python" title="Permalink to this headline">¶</a></h4>
+<section id="install-python">
+<h4>Install python<a class="headerlink" href="#install-python" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pip install pyserial python-osc wheel python-dev-tools 
 
 CFLAGS=&quot;-fcommon&quot; pip install rpi.gpio
@@ -304,31 +305,23 @@ pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rp
 </pre></div>
 </div>
 </section>
-<section id="configure-the-raspberry">
-<h4>Configure the Raspberry:<a class="headerlink" href="#configure-the-raspberry" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span>
-	<span class="n">max_usb_current</span><span class="o">=</span><span class="mi">1</span>
-</pre></div>
-</div>
-</section>
-<section id="setup-services">
-<h4>Setup services:<a class="headerlink" href="#setup-services" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">dhcpcd</span><span class="o">.</span><span class="n">service</span>
-<span class="n">systemctl</span> <span class="n">start</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
-<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
-  <span class="k">if</span> <span class="s1">&#39;systemctl enable mic.service&#39;</span> <span class="n">throws</span> <span class="n">an</span> <span class="n">error</span> <span class="s1">&#39;invalid argument&#39;</span>
-    <span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">wants</span>
-    <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">mic</span><span class="o">.</span><span class="n">service</span>
-</pre></div>
-</div>
-</section>
-<section id="setup-static-ip-address">
-<h4>Setup static ip-address<a class="headerlink" href="#setup-static-ip-address" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Edit</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
-  <span class="n">interface</span> <span class="n">eth0</span>
-  <span class="n">static</span> <span class="n">ip_address</span><span class="o">=</span><span class="mf">192.168.43.51</span><span class="o">/</span><span class="mi">24</span>
-  <span class="n">static</span> <span class="n">routers</span><span class="o">=</span><span class="mf">192.168.43.1</span>
-  <span class="n">static</span> <span class="n">domain_name_servers</span><span class="o">=</span><span class="mf">192.168.43.1</span> <span class="mf">8.8.8.8</span>
+<section id="configure-services">
+<h4>Configure services<a class="headerlink" href="#configure-services" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>?? nano /boot/config.txt
+??	max_usb_current=1
+
+systemctl enable dhcpcd.service
+systemctl start mic.service
+systemctl enable mic.service
+  if &#39;systemctl enable mic.service&#39; throws an error &#39;invalid argument&#39;
+    cd /etc/systemd/system/multi-user.target.wants
+    ln -s /etc/systemd/system/mic.service
+
+Edit /etc/dhcpcd.conf
+  interface eth0
+  static ip_address=192.168.43.51/24
+  static routers=192.168.43.1
+  static domain_name_servers=192.168.43.1 8.8.8.8
 </pre></div>
 </div>
 </section>
@@ -391,8 +384,8 @@ pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rp
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h4>Configure the Raspberry:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<section id="configure-the-raspberry">
+<h4>Configure the Raspberry:<a class="headerlink" href="#configure-the-raspberry" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raspi</span><span class="o">-</span><span class="n">config</span>
 	<span class="mi">3</span> <span class="n">Interface</span> <span class="n">Options</span> <span class="o">&gt;</span> <span class="n">P8</span> <span class="n">Remote</span> <span class="n">GPIO</span> <span class="o">&gt;</span> <span class="n">yes</span>
 
@@ -418,8 +411,8 @@ pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rp
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h4>Setup static ip-address<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<section id="setup-static-ip-address">
+<h4>Setup static ip-address<a class="headerlink" href="#setup-static-ip-address" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bck</span>
 <span class="n">touch</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
 <span class="n">Edit</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
