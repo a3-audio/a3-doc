@@ -6,6 +6,8 @@ software/teensy/src/main.cpp << [[flashTeensy]]
 install aarch64:
 https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
 
+2. search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
+
 ### Root operations on raspberry
 ```
 useradd -m aaa

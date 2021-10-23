@@ -105,22 +105,8 @@
                         
                             
                             
-                                <p class="caption" role="heading"><span class="caption-text">User:</span></p>
+                                <p class="caption" role="heading"><span class="caption-text">Usermanual:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/welcome.html">A³ Pandemic</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#design">Design</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#usecases">Usecases:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#in-depth">In depth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#goal-for-this-project">Goal for this project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#media">Media</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#buy">Buy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#rent">Rent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#git">Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../user/welcome.html#contact">Contact</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../user/core.html">A³ Core usermanual</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../user/core.html#audio-io-layout">audio io-layout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../user/core.html#service">Service</a></li>
@@ -257,14 +243,106 @@
 </section>
 <section id="raspberry-pi-3-model-b">
 <h2>Raspberry Pi 3 Model B<a class="headerlink" href="#raspberry-pi-3-model-b" title="Permalink to this headline">¶</a></h2>
+<section id="archarm">
+<h3>ArchArm<a class="headerlink" href="#archarm" title="Permalink to this headline">¶</a></h3>
+<p>install aarch64:
+https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4</p>
+<ul class="simple">
+<li><p>Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24</p></li>
+<li><p>login as the default user alarm with the password alarm.</p></li>
+<li><p>The default root password is root.</p></li>
+</ul>
+<section id="root-operations-on-the-raspberry">
+<h4>Root operations on the Raspberry:<a class="headerlink" href="#root-operations-on-the-raspberry" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">Syu</span>
+
+<span class="n">useradd</span> <span class="o">-</span><span class="n">m</span> <span class="n">aaa</span>
+<span class="n">passwd</span> <span class="n">aaa</span>
+
+<span class="n">groupadd</span> <span class="n">dialout</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">dialout</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">users</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">tty</span> <span class="n">aaa</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">uucp</span> <span class="n">aaa</span>
+</pre></div>
+</div>
+</section>
+<section id="install-depencies">
+<h4>Install depencies<a class="headerlink" href="#install-depencies" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">python</span> <span class="n">python</span><span class="o">-</span><span class="n">osc</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> <span class="n">git</span> <span class="n">python</span><span class="o">-</span><span class="n">numpy</span> <span class="n">gcc</span> <span class="n">python</span><span class="o">-</span><span class="n">setuptools</span>
+
+<span class="n">exit</span>
+</pre></div>
+</div>
+</section>
+<section id="copy-files">
+<h4>Copy Files<a class="headerlink" href="#copy-files" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ssh aaa@192.168.1.x
+userdel pi
+
+git clone git@github.com:ambisonics-audio-association/Ambijockey.git
+
+cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
+    └── etc
+        ├── dhcpcd.conf
+        ├── pip.conf
+		└── systemd
+            └── system
+                └── mic.service
+</pre></div>
+</div>
+</section>
+<section id="configure-python">
+<h4>Configure python<a class="headerlink" href="#configure-python" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pip install pyserial python-osc wheel python-dev-tools 
+
+CFLAGS=&quot;-fcommon&quot; pip install rpi.gpio
+
+pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
+
+?? process
+</pre></div>
+</div>
+</section>
+<section id="configure-the-raspberry">
+<h4>Configure the Raspberry:<a class="headerlink" href="#configure-the-raspberry" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span>
+	<span class="n">max_usb_current</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="setup-services">
+<h4>Setup services:<a class="headerlink" href="#setup-services" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">dhcpcd</span><span class="o">.</span><span class="n">service</span>
+<span class="n">systemctl</span> <span class="n">start</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+  <span class="k">if</span> <span class="s1">&#39;systemctl enable mic.service&#39;</span> <span class="n">throws</span> <span class="n">an</span> <span class="n">error</span> <span class="s1">&#39;invalid argument&#39;</span>
+    <span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">multi</span><span class="o">-</span><span class="n">user</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">wants</span>
+    <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">mic</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+</div>
+</section>
+<section id="setup-static-ip-address">
+<h4>Setup static ip-address<a class="headerlink" href="#setup-static-ip-address" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Edit</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
+  <span class="n">interface</span> <span class="n">eth0</span>
+  <span class="n">static</span> <span class="n">ip_address</span><span class="o">=</span><span class="mf">192.168.43.51</span><span class="o">/</span><span class="mi">24</span>
+  <span class="n">static</span> <span class="n">routers</span><span class="o">=</span><span class="mf">192.168.43.1</span>
+  <span class="n">static</span> <span class="n">domain_name_servers</span><span class="o">=</span><span class="mf">192.168.43.1</span> <span class="mf">8.8.8.8</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="raspbian">
+<h3>Raspbian<a class="headerlink" href="#raspbian" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://www.raspberrypi.org/documentation/computers/getting-started.html">Install Raspbian</a></p>
 <ol class="simple">
 <li><p>put an empty file ‘ssh’ on Raspbian boot-partition, this enables ssh</p></li>
 <li><p>search for your Raspberry ip-address ie: nmap -sn 192.168.1.0/24</p></li>
 <li><p>ssh pi&#64;192.168.1.x (pass= raspberry)</p></li>
 </ol>
-<section id="root-operations-on-the-raspberry">
-<h3>Root operations on the Raspberry:<a class="headerlink" href="#root-operations-on-the-raspberry" title="Permalink to this headline">¶</a></h3>
+<section id="id1">
+<h4>Root operations on the Raspberry:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">update</span>
 <span class="n">apt</span> <span class="n">upgrade</span>
 
@@ -277,8 +355,9 @@
 <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">uucp</span> <span class="n">aaa</span>
 </pre></div>
 </div>
-<section id="install-depencies">
-<h4>Install depencies<a class="headerlink" href="#install-depencies" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id2">
+<h4>Install depencies<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span> <span class="n">install</span> <span class="n">python</span> <span class="n">python</span><span class="o">-</span><span class="n">osc</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> <span class="n">git</span> <span class="n">python3</span><span class="o">-</span><span class="n">numpy</span>
 
 <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span> <span class="n">process</span> <span class="n">pyserial</span> <span class="n">python</span><span class="o">-</span><span class="n">osc</span> <span class="n">rpi_ws281x</span> <span class="n">adafruit</span><span class="o">-</span><span class="n">circuitpython</span><span class="o">-</span><span class="n">neopixel</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">reinstall</span> <span class="n">adafruit</span><span class="o">-</span><span class="n">blinka</span>
@@ -312,8 +391,8 @@
 </pre></div>
 </div>
 </section>
-<section id="configure-the-raspberry">
-<h4>Configure the Raspberry:<a class="headerlink" href="#configure-the-raspberry" title="Permalink to this headline">¶</a></h4>
+<section id="id3">
+<h4>Configure the Raspberry:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raspi</span><span class="o">-</span><span class="n">config</span>
 	<span class="mi">3</span> <span class="n">Interface</span> <span class="n">Options</span> <span class="o">&gt;</span> <span class="n">P8</span> <span class="n">Remote</span> <span class="n">GPIO</span> <span class="o">&gt;</span> <span class="n">yes</span>
 
@@ -339,8 +418,8 @@
 </pre></div>
 </div>
 </section>
-<section id="setup-static-ip-address">
-<h4>Setup static ip-address<a class="headerlink" href="#setup-static-ip-address" title="Permalink to this headline">¶</a></h4>
+<section id="id4">
+<h4>Setup static ip-address<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bck</span>
 <span class="n">touch</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>
 <span class="n">Edit</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">dhcpcd</span><span class="o">.</span><span class="n">conf</span>

@@ -3,13 +3,91 @@
 software/teensy/src/main.cpp << [[flashTeensy]]
 
 ## Raspberry Pi 3 Model B
+
+### ArchArm
+install aarch64:
+https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
+
+- Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
+- login as the default user alarm with the password alarm.
+- The default root password is root.
+  
+#### Root operations on the Raspberry: 
+```
+pacman -Syu
+
+useradd -m aaa
+passwd aaa
+
+groupadd dialout
+usermod -aG dialout aaa
+usermod -aG users aaa
+usermod -aG tty aaa
+usermod -aG uucp aaa
+```
+
+#### Install depencies
+```
+pacman -S python python-osc python-pip git python-numpy gcc python-setuptools
+
+exit
+```
+#### Copy Files
+```
+ssh aaa@192.168.1.x
+userdel pi
+
+git clone git@github.com:ambisonics-audio-association/Ambijockey.git
+
+cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
+    └── etc
+        ├── dhcpcd.conf
+        ├── pip.conf
+		└── systemd
+            └── system
+                └── mic.service
+```
+#### Configure python
+```
+pip install pyserial python-osc wheel python-dev-tools 
+
+CFLAGS="-fcommon" pip install rpi.gpio
+
+pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
+
+?? process
+```
+#### Configure the Raspberry:
+``` 
+nano /boot/config.txt
+	max_usb_current=1
+``` 
+#### Setup services:
+``` 
+systemctl enable dhcpcd.service
+systemctl start mic.service
+systemctl enable mic.service
+  if 'systemctl enable mic.service' throws an error 'invalid argument'
+    cd /etc/systemd/system/multi-user.target.wants
+    ln -s /etc/systemd/system/mic.service
+``` 
+#### Setup static ip-address
+``` 
+Edit /etc/dhcpcd.conf
+  interface eth0
+  static ip_address=192.168.43.51/24
+  static routers=192.168.43.1
+  static domain_name_servers=192.168.43.1 8.8.8.8
+```
+
+### Raspbian
 [Install Raspbian](https://www.raspberrypi.org/documentation/computers/getting-started.html)
 
 1. put an empty file 'ssh' on Raspbian boot-partition, this enables ssh
 2. search for your Raspberry ip-address ie: nmap -sn 192.168.1.0/24
 3. ssh pi@192.168.1.x (pass= raspberry) 
 
-### Root operations on the Raspberry: 
+#### Root operations on the Raspberry: 
 ```
 apt update
 apt upgrade
