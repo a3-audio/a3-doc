@@ -1,6 +1,7 @@
 # A³ Mix Configuration
 ## Teensy
-[Flash Teensy Firmware](https://doc.orbitalwaves.net/development/flashTeensy.html) ControlerMixer/software/teensy/src/main.cpp
+- ControllerMixer/software/teensy/src/main.cpp
+- [Flash Teensy Firmware](https://doc.orbitalwaves.net/development/flashTeensy.html) 
 
 ## Raspberry Pi 4
 microSD card > 4GB
@@ -43,6 +44,7 @@ git clone git@github.com:ambisonics-audio-association/Ambijockey.git
 cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
     └── etc
         ├── dhcpcd.conf
+		├── modprobe.d/raspi-blacklist.conf
         ├── pip.conf
 		└── systemd
             └── system

@@ -71,7 +71,7 @@ Goal for this project
 *****
 Media
 *****
-We put Media-files to [Seafile](https://tinycloud.lilbits.de/Media)
+- [Seafile](https://tinycloud.lilbits.de/d/7475495ddee04d428073)
 
 ***
 Buy

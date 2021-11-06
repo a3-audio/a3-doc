@@ -42,6 +42,7 @@ git clone git@github.com:ambisonics-audio-association/MotionControllerUI.git
     │   │       └── moc.service
     │   └── X11
     │       └── Xwrapper.config
+	└── home/aaa/.xinitrc
 ```
 #### Install depencies:
 ``` 
