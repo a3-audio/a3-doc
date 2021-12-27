@@ -1,6 +1,6 @@
 # A³ Motion Configuration
 ## Teensy
-software/teensy/src/main.cpp << [[flashTeensy]]
+software/teensy/src/main.cpp << [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
 
 ## Raspberry Pi 3 Model B
 install aarch64:

@@ -4,14 +4,18 @@ https://docs.platformio.org/en/latest/core/installation.html#system-requirements
 
 ## On Raspberry
 ```
-pip install virtualenv platformio
+pip install virtualenv
 ```
 
 Init penv:
 ``` virtualenv -p python3 ~/.platformio/penv ```
 
 Enter penv:
-``` source ~/.platformio/penv/bin/activate ``` 
+``` 
+source ~/.platformio/penv/bin/activate
+pip install platformio
+
+``` 
 
 ## platformio
 Get board identifier:

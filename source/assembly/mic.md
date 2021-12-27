@@ -4,8 +4,8 @@ A³ Mix Mainboard pcb is published as kicad project. It comes with ready to fabr
 ```
 /home/aaa/Ambijockey/hardware/mic/a3mix-mainboard-v0.2
 ```
-![a3mix-schematic](https://doc.orbitalwaves.net/static/v01/a3mix-schematic.jpg)
-![a3mix-pcb-design](https://doc.orbitalwaves.net/static/v01/a3mix-pcb-design.jpg)
+![a3mix-schematic](https://doc.a3-audio.com/static/v01/a3mix-schematic.jpg)
+![a3mix-pcb-design](https://doc.a3-audio.com/static/v01/a3mix-pcb-design.jpg)
 
 ## Housing
 A³ Mix housing isn't ready yet ...
@@ -27,7 +27,7 @@ A³ Mix housing isn't ready yet ...
         - 3d on/off
         - fx on/off
     - 1 hc4051
-        function: masterchannel-control
+        function: masterchannel-controlorbitalwaves.net
         potis
         - master volume
         - booth volume
@@ -39,9 +39,9 @@ A³ Mix housing isn't ready yet ...
     - 8x32 led-matrix for output-vu
 
 # Early versions :
-![a3mix-schematic](https://doc.orbitalwaves.net/static/v00/a3mix-schematic.jpg)
+![a3mix-schematic](https://doc.a3-audio.com/static/v00/a3mix-schematic.jpg)
 
-![a3mix-prototype-v01](https://doc.orbitalwaves.net/static/v00/a3mix-prototype-v01.jpg)
-![a3mix-pcb-v01](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-v01.jpg)
-![a3mix-pcb-front-v0](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-front-v0.jpg)
-![a3mix-pcb-back-v0](https://doc.orbitalwaves.net/static/v00/a3mix-pcb-back-v0.jpg)
+![a3mix-prototype-v01](https://doc.a3-audio.com/static/v00/a3mix-prototype-v01.jpg)
+![a3mix-pcb-v01](https://doc.a3-audio.com/static/v00/a3mix-pcb-v01.jpg)
+![a3mix-pcb-front-v0](https://doc.a3-audio.com/static/v00/a3mix-pcb-front-v0.jpg)
+![a3mix-pcb-back-v0](https://doc.a3-audio.com/static/v00/a3mix-pcb-back-v0.jpg)

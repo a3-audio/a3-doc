@@ -1,7 +1,7 @@
 # A³ Mix Configuration
 ## Teensy
 - ControllerMixer/software/teensy/src/main.cpp
-- [Flash Teensy Firmware](https://doc.orbitalwaves.net/development/flashTeensy.html) 
+- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
 
 ## Raspberry Pi 4
 microSD card > 4GB

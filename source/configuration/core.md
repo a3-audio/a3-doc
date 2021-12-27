@@ -78,4 +78,9 @@ systemctl enable rtirq
 systemctl enable rtapp
 
 ```
+### Supercollider
+- open scide
+- execute ```Quarks.gui```
+- check ```NetLib```
+
 ### Reboot
