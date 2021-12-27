@@ -71,7 +71,7 @@ Goal for this project
 *****
 Media
 *****
-.. _a3-cloud: https://cloud.a3-audio.com/d/7475495ddee04d428073/
+- https://cloud.a3-audio.com/d/7475495ddee04d428073/
 
 ***
 Buy
@@ -79,7 +79,8 @@ Buy
 - Get a custom-build set: 6410€ (without audio-hardware)
 - Get it on Kickstarter: depends on community
 - Build your own: ~1720€ (without audio-hardware)
-- Buy audio-hardware: starts from 750€ (see [parts](https://doc.orbitalwaves.net/assembly/parts.html))
+- Buy audio-hardware: starts from 750€ 
+  - parts: https://doc.orbitalwaves.net/assembly/parts.html
 - Maintenance and Service Subscriptions: 100€ / Month
 
 ****
