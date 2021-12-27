@@ -6,7 +6,7 @@
 ***************************
 Interact Live with 3d-Audio
 ***************************
-A³ Pandemic is a 3d audio processor controlled by a 4-channel dj mixer and a 
+A³ is a 3d audio processor and two hardware interfaces,a 4-channel dj mixer and a 
 16-pad motion sampler. It is designed to modulate positions of audio events
 live, in a 3d sound-sphere.
 
@@ -76,25 +76,24 @@ Media
 ***
 Buy
 ***
-- Get a custom-build set: 6410€ (without audio-hardware)
-- Get it on Kickstarter: depends on community
+- Get a custom-build set: 6500€ (without audio-hardware)
+- Get it on Kickstarter: soon
 - Build your own: ~1720€ (without audio-hardware)
-- Buy audio-hardware: starts from 750€ 
--- parts: https://doc.orbitalwaves.net/assembly/parts.html
-- Maintenance and Service Subscriptions: 100€ / Month
+- Hardware: https://doc.a3-audio.com/assembly/parts.html
+- Maintenance and Service Subscriptions: soon
 
 ****
 Rent
 ****
-- Rent A³ Pandemic set 320-640€ per day (without speakers)
+- Rent A³ Set 320-640€ per day (without speakers)
 - Rent A³ Speakers set 320-60000€ per Event (without show)
 - Rent A³ Show 20000-350000€
 
 ***
 Git
 ***
-- A³ Pandemic Mainrepo: https://github.com/ambisonics-audio-association/Ambijockey
-- A³ Motion UI-repo: https://github.com/ambisonics-audio-association/MotionControllerUI
+- A³ Mainrepo: https://github.com/ambisonic-audio-adventures
+- A³ Motion Controller UI repo: https://github.com/ambisonic-audio-adventures/MotionControllerUI
 
 *******
 Support
@@ -105,7 +104,7 @@ Support
 *******
 Contact
 *******
-- [contact@orbitalwaves.net](mailto:contact@orbitalwaves.net)
+- [contact@a3-audio.com](mailto:a3-audio.com)
 - [mattermost](https://talk.lilbits.de/ambisonics)
 
 ********
