@@ -71,7 +71,7 @@ Goal for this project
 *****
 Media
 *****
-- https://cloud.a3-audio.com/d/7475495ddee04d428073/
+- `a3-cloud <https://cloud.a3-audio.com/d/7475495ddee04d428073/>`_
 
 ***
 Buy
@@ -79,7 +79,7 @@ Buy
 - Get a custom-build set: 6500€ (without audio-hardware)
 - Get it on Kickstarter: soon
 - Build your own: ~1720€ (without audio-hardware)
-- Hardware: https://doc.a3-audio.com/assembly/parts.html
+- Hardware: `a3-partlist <https://doc.a3-audio.com/assembly/parts.html>`_
 - Maintenance and Service Subscriptions: soon
 
 ****
@@ -92,8 +92,8 @@ Rent
 ***
 Git
 ***
-- A³ Mainrepo: https://github.com/ambisonic-audio-adventures
-- A³ Motion Controller UI repo: https://github.com/ambisonic-audio-adventures/MotionControllerUI
+- `A³ Mainrepo <https://github.com/ambisonic-audio-adventures>`_
+- `A³ Motion Controller UI repo <https://github.com/ambisonic-audio-adventures/MotionControllerUI>`_
 
 *******
 Support
@@ -104,8 +104,8 @@ Support
 *******
 Contact
 *******
-- [contact@a3-audio.com](mailto:a3-audio.com)
-- [mattermost](https://talk.lilbits.de/ambisonics)
+- `contact@a3-audio.com <mailto:a3-audio.com>`_
+- `mattermost <https://talk.lilbits.de/ambisonics>`_
 
 ********
 In depth
