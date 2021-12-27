@@ -71,7 +71,7 @@ Goal for this project
 *****
 Media
 *****
-.. _cloud.a3-audio.com: https://cloud.a3-audio.com/d/7475495ddee04d428073/
+.. _a3-cloud: https://cloud.a3-audio.com/d/7475495ddee04d428073/
 
 ***
 Buy
