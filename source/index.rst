@@ -80,7 +80,7 @@ Buy
 - Get it on Kickstarter: depends on community
 - Build your own: ~1720€ (without audio-hardware)
 - Buy audio-hardware: starts from 750€ 
-  - parts: https://doc.orbitalwaves.net/assembly/parts.html
+-- parts: https://doc.orbitalwaves.net/assembly/parts.html
 - Maintenance and Service Subscriptions: 100€ / Month
 
 ****
