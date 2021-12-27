@@ -71,8 +71,8 @@ Goal for this project
 *****
 Media
 *****
-- https://cloud.a3-audio.com/d/7475495ddee04d428073
-
+- cloud.a3-audio.com <https://cloud.a3-audio.com/d/7475495ddee04d428073>_
+`CNN <http://cnn.com>`_
 ***
 Buy
 ***
