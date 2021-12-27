@@ -39,7 +39,7 @@ Requirements
 *********
 Usecases:
 *********
-- A³ Core encodes and decodes: You preset your show with stereotracks and control data. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send osc data from inside daw.
+- A³ Core encodes and decodes: You preset your show with stereotracks and control data. You can use `osccontrol-light <https://github.com/drlight-code/osccontrol-light>`_ vst plugin to send osc data from inside daw.
 - A³ Core decodes: You can pre-encode your show and just send 3rd order b-format (acn, sn3d)
 - A³ Core just routes: You get discrete channels for each speaker
 - A³ Core simulates speakersetup: You can play direct out from Dolby or Auro-3D decoder
