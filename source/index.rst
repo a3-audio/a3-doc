@@ -71,7 +71,7 @@ Goal for this project
 *****
 Media
 *****
-.. _Seafile: https://cloud.a3-audio.com/d/7475495ddee04d428073
+- `Seafile https://cloud.a3-audio.com/d/7475495ddee04d428073`_
 
 ***
 Buy
