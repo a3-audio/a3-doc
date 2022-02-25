@@ -17,8 +17,6 @@ Connecting Diagram
 
 Items not listed under Introduction > Box Contents are sold separately.
 
-![[a3_systen_symbol_signalflow.png]]
-
 *******
 Contact
 *******

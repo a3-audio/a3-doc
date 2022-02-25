@@ -1,4 +1,4 @@
-# A³ Pandemic Parts
+# A³ Parts
 
 ## A³ Motion
 ### Digikey (222,74 €)
@@ -304,7 +304,7 @@ microphonecable 0.5m
 ### A³ Mix  420,83 €
 ### A³ Core 889.83 €
 
-### A³ Pandemic **1723.22 € incl. MwSt** 
+### A³ Setup **1723.22 € incl. MwSt** 
 
 ## small audiohardware (752,90 €)
 - https://www.thomann.de/intl/rme_hdspe_raydat.htm

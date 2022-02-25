@@ -1,4 +1,4 @@
-# OSC A³ Pandemic
+# A³ OSC messages
 All parameters are normalized to float [range 0-1] 
 
 ## A³ Core

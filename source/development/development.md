@@ -1,4 +1,4 @@
-# A³ Pandemic Development
+# A³ Development overview
 ## Software-Architecture
 A³ Core, A³ Mix, A³ Motion are connected via LAN to the same network.
 On each device runs a pythonscript which sends and receives OSC (Open Sound Control).

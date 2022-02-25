@@ -1,4 +1,4 @@
-# Flash Firmware to Teensy
+# A³ Flash Firmware to Teensy
 
 https://docs.platformio.org/en/latest/core/installation.html#system-requirements
 
