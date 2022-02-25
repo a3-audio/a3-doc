@@ -12,7 +12,7 @@ Custom build setup will be preset and configured by A³
 Connecting Diagram
 ******************
 .. image:: https://doc.a3-audio.com/static/user/a3_systen_symbol_signalflow.png
-  :width: 400
+  :width: 800
   :alt: Connecting Diagram
 
 Items not listed under Introduction > Box Contents are sold separately.

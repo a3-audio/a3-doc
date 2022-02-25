@@ -15,8 +15,7 @@
 - Safety & Warranty Manual
 
 ### TOP VIEW
-![[a3_systen_symbol_mix_numbered.png]]
-
+![A³ Mix numbered](https://doc.a3-audio.com/static/user/a3_systen_symbol_mix_numbered.png)
 [1] **TRIM CONTROL**
 - Adjust the level of audio signals input in each channel
 - [TRIM]: -inf dB to 0 dB
