@@ -11,14 +11,6 @@ Connecting Diagram
   :width: 800
   :alt: Connecting Diagram
 
-
-*******
-Contact
-*******
-- `a3-audio.com <https://stage.a3-audio.com>`_
-- `contact@a3-audio.com <mailto:a3-audio.com>`_
-- `mattermost <https://talk.lilbits.de/ambisonics>`_
-
 *********
 User docs
 *********
@@ -72,3 +64,11 @@ This docs are incomplete
    configuration/core
    development/core
    assembly/core
+
+*******
+Contact
+*******
+- `a3-audio.com <https://stage.a3-audio.com>`_
+- `contact@a3-audio.com <mailto:a3-audio.com>`_
+- `mattermost <https://talk.lilbits.de/ambisonics>`_
+
