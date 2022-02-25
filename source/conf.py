@@ -16,7 +16,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'A³'
+project = 'A³ Documentaion'
 copyright = 'A³ UG(haftungsbeschränkt'
 author = 'Raphael Eismann'
 
