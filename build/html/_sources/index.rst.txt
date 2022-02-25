@@ -32,7 +32,7 @@ User docs
 
 .. toctree::
    :maxdepth: 1
-   :caption: Usermanual:
+   :caption: A³ Usermanual:
 
    user/a3core
    user/a3mix
@@ -66,7 +66,7 @@ This docs are incomplete
    
 .. toctree::
    :maxdepth: 1
-   :caption: A³Motion
+   :caption: A³ Motion
    
    configuration/moc
    development/moc

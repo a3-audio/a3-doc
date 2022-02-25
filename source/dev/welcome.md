@@ -1,3 +1,6 @@
+# A³ Developer Manual
+This manual will never be complete or easy to use. 
+
 # Interact Live with 3d-Audio
 A³ is a 3d audio processor and two hardware interfaces,a 4-channel dj mixer and a 
 16-pad motion sampler. It is designed to modulate positions of audio events
