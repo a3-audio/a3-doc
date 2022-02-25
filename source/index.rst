@@ -11,6 +11,10 @@ Connecting Diagram
   :width: 800
   :alt: Connecting Diagram
 
+***********
+User Manual
+***********
+
 .. toctree::
    :maxdepth: 1
    :caption: A³ Usermanual
@@ -19,6 +23,9 @@ Connecting Diagram
    user/a3mix
    user/a3motion
 
+**********************
+Developer introduction
+**********************
 This docs are incomplete
 
 .. toctree::
