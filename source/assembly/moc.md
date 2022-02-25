@@ -35,3 +35,9 @@ Ambijockey/hardware/moc/housing
     - 1 NeoPixel-strip (ws2811 led-controller)
         - 16 x status leds buttonmatrix
   
+  ## Power Consumption
+- This device has a  estimated power consumption of
+	- raspberry pi 4b: 15W
+	- teensy4.1: 2.5W
+	- ws2811 40 LEDs: 11W
+	- SunFounder Raspberry Pi 4 Display Touchscreen 7 Inch: 3W

@@ -1,4 +1,4 @@
-# HowTo update doc.orbitalwaves.net content:
+# How to update doc.a3-audio.com content:
 
 ```
 cd into local repo
@@ -12,7 +12,7 @@ git add -A
 git commit -m "your edits"
 git push
 
-ssh -A orbitalwaves.net
-cd /usr/share/nginx/doc.orbitalwaves.net/public_html
+ssh -A to your server
+cd /usr/share/nginx/doc.a3-audio.com/public_html
 git pull
 ```

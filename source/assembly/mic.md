@@ -38,6 +38,14 @@ A³ Mix housing isn't ready yet ...
 	- 1 NeoPixel-strip (ws2811) for fx and 3d-section
     - 8x32 led-matrix for output-vu
 
+# Power Consumption
+- This device has a  estimated power consumption of
+	- raspberry pi 3b: 5W
+	- teensy4.1: 2.5W
+	- ws2811 40 LEDs: 12W
+	- max7219 128 LEDs: 4.5W
+
+
 # Early versions :
 ![a3mix-schematic](https://doc.a3-audio.com/static/v00/a3mix-schematic.jpg)
 

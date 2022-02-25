@@ -30,7 +30,7 @@ usermod -aG uucp aaa
 
 #### Install depencies
 ```
-pacman -S python python-osc python-pip git python-numpy gcc python-setuptools
+pacman -S python python-osc python-pip git python-numpy gcc python-setuptools libusb-compat
 
 exit
 ```
@@ -52,11 +52,11 @@ cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
 ```
 #### Install python
 ```
-pip install pyserial python-osc wheel python-dev-tools 
+sudo pip install pyserial python-osc wheel python-dev-tools platformio
 
-CFLAGS="-fcommon" pip install rpi.gpio
+CFLAGS="-fcommon" sudo pip install rpi.gpio
 
-pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
+sudo pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
 
 ?? process
 ```
@@ -77,6 +77,11 @@ Edit /etc/dhcpcd.conf
   static ip_address=192.168.43.51/24
   static routers=192.168.43.1
   static domain_name_servers=192.168.43.1 8.8.8.8
+```
+
+#### Install platformio
+```
+
 ```
 
 ### Raspbian

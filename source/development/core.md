@@ -101,3 +101,57 @@ receives    		name
 ([1,2], m/s)       	stereo      
 ([1,2], m/s)       	b-format    
 ```
+
+
+
+NEW
+
+Masterbus
+```
+receives    name                
+--------------------------------
+[1,2]       phonesbus           
+[3]         monobus (single)    
+[4]         subbus              
+[5-20]      spare               
+[21-inf]    monobus (multi)     
+[21-inf]    stereobus           
+[21-inf]    decoderbus          
+```
+Phonesbus
+```
+receives    name                
+--------------------------------
+[1,2]       monobus(ph)         
+[1,2]       stereobus(ph)       
+[1,2]       binauralbus(ph)     
+-           dj1-pfl
+-           dj2-pfl
+-           dj3-pfl
+-           dj4-pfl
+-           mainmixbus
+```
+Reverbbus
+```
+receives    name                
+--------------------------------
+[1-16]      reverb              
+[17-32]     reverb(ph)          
+```
+Channelbus
+```
+receives    name                
+--------------------------------
+[1,2]       stereo
+[3-18]      b-format            
+[19,20]     stereo (pfl)
+[21-36]     b-format (pfl)      
+```
+Basechannel
+```
+receives	from			name                
+-----------------------------------------
+[1,2]		hardware     	dj1-input
+[1,2]		dj1-input     	dj1-stereo
+[1,2]		dj1-input      	dj1-b-format
+```
