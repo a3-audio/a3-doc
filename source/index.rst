@@ -11,10 +11,6 @@ Connecting Diagram
   :width: 800
   :alt: Connecting Diagram
 
-*********
-User docs
-*********
-
 .. toctree::
    :maxdepth: 1
    :caption: A³ Usermanual
@@ -23,9 +19,6 @@ User docs
    user/a3mix
    user/a3motion
 
-**************
-Developer docs
-**************
 This docs are incomplete
 
 .. toctree::
@@ -33,37 +26,37 @@ This docs are incomplete
    :caption: A³ Developer introduction
 
    dev/welcome
+   assembly/assembly
    configuration/configuration
    development/development
-   assembly/assembly
-   assembly/parts
-   assembly/imaging   
    development/flashTeensy
+   assembly/imaging   
    development/osc
+   assembly/parts
 
 .. toctree::
    :maxdepth: 1
    :caption: A³ Mix
 
-   configuration/mic
    assembly/mic
+   configuration/mic
    development/mic
    
 .. toctree::
    :maxdepth: 1
    :caption: A³ Motion
    
+   assembly/moc
    configuration/moc
    development/moc
-   assembly/moc
 
 .. toctree::
    :maxdepth: 1
    :caption: A³ Core
    
+   assembly/core
    configuration/core
    development/core
-   assembly/core
 
 *******
 Contact
@@ -71,4 +64,3 @@ Contact
 - `a3-audio.com <https://stage.a3-audio.com>`_
 - `contact@a3-audio.com <mailto:a3-audio.com>`_
 - `mattermost <https://talk.lilbits.de/ambisonics>`_
-
