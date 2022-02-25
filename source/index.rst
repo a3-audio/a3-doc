@@ -30,7 +30,7 @@ This docs are incomplete
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer introduction
+   :caption: A³ Developer
 
    dev/welcome
    assembly/assembly
