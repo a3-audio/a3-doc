@@ -7,6 +7,7 @@
 A³ User Manual
 ***************************
 Custom build setup will be preset and configured by A³
+Items not listed under Introduction > Box Contents are sold separately.
 
 ******************
 Connecting Diagram
@@ -15,7 +16,6 @@ Connecting Diagram
   :width: 800
   :alt: Connecting Diagram
 
-Items not listed under Introduction > Box Contents are sold separately.
 
 *******
 Contact
