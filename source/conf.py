@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentaion'
-copyright = 'A³ UG(haftungsbeschränkt'
+copyright = 'A³ UG(haftungsbeschränkt) - '
 author = 'Raphael Eismann'
 
 # The full version, including alpha/beta/rc tags
