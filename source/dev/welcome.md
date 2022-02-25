@@ -1,4 +1,4 @@
-# A³ Developer Manual
+# A³ Welcome
 This manual will never be complete or easy to use. 
 
 ## Interact Live with 3d-Audio
