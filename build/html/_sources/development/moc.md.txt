@@ -4,6 +4,8 @@ A³ Motion backend runs on ArchlinuxARM on a Raspberry Pi 3 Model B. As Microcon
 ## UI
 A³ Motion UI is the most potential and complex part to develop. It is in a different repository (see [[Ambijockey/doc/configuration/moc]]).
 
+[Ambijockey/doc/configuration/moc](https://doc.a3-audio.com/Ambijockey/doc/configuration/moc.html) 
+
 ## Raspberry
 Connected to:
 - A³ Core (LAN)

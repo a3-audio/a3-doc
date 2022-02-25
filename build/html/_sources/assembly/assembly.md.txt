@@ -1,22 +1,22 @@
 # A³ Pandemic Assembly
 ## Build your own
-- A³ Core: [A³ Core](https://doc.orbitalwaves.net/assembly/core.html)
-- A³ Mix: [A³ Mic](https://doc.orbitalwaves.net/assembly/mic.html)
-- A³ Motion: [A³ Motion](https://doc.orbitalwaves.net/assembly/moc.html)
-- Buy parts: [Parts](https://doc.orbitalwaves.net/assembly/parts.html)
+- A³ Core: [A³ Core](https://doc.a3-audio.com/assembly/core.html)
+- A³ Mix: [A³ Mic](https://doc.a3-audio.com/assembly/mic.html)
+- A³ Motion: [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
+- Buy parts: [Parts](https://doc.a3-audio.com/assembly/parts.html)
 
 ## Hardware
 A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
 
 ## Pictures of prototype
 ### A³ Mix
-![a3mix-prototype](https://doc.orbitalwaves.net/static/v01/a3mix-prototype.jpg)
+![a3mix-prototype](https://doc.a3-audio.com/static/v01/a3mix-prototype.jpg)
 ### A³ Motion
-![a3motion-prototype](https://doc.orbitalwaves.net/static/v01/a3motion-prototype.jpg)
+![a3motion-prototype](https://doc.a3-audio.com/static/v01/a3motion-prototype.jpg)
 ### A³ Core
-![a3core-front-prototype](https://doc.orbitalwaves.net/static/v01/a3core-front-prototype.jpg)
-![a3core-back-prototype](https://doc.orbitalwaves.net/static/v01/a3core-back-prototype.jpg)
+![a3core-front-prototype](https://doc.a3-audio.com/static/v01/a3core-front-prototype.jpg)
+![a3core-back-prototype](https://doc.a3-audio.com/static/v01/a3core-back-prototype.jpg)
 ### A³ Stresstest
-![a3-openair](https://doc.orbitalwaves.net/static/v01/a3-openair.jpg)
-![a3-handwagon-packed](https://doc.orbitalwaves.net/static/v01/a3-handwagon-packed.jpg)
-![a3-handwagon-finished](https://doc.orbitalwaves.net/static/v01/a3-handwagon-finished.jpg)
+![a3-openair](https://doc.a3-audio.com/static/v01/a3-openair.jpg)
+![a3-handwagon-packed](https://doc.a3-audio.com/static/v01/a3-handwagon-packed.jpg)
+![a3-handwagon-finished](https://doc.a3-audio.com/static/v01/a3-handwagon-finished.jpg)

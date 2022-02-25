@@ -16,12 +16,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'A³ Pandemic'
-copyright = 'Orbital GbR'
+project = 'A³'
+copyright = 'A³ UG(haftungsbeschränkt'
 author = 'Raphael Eismann'
 
 # The full version, including alpha/beta/rc tags
-release = '2021'
+release = '2022'
 
 
 # -- General configuration ---------------------------------------------------

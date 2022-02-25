@@ -1,17 +1,17 @@
 # A³ Motion Assembly
 ## PCB
 ### Mainboard
-![a3motion-schematic](https://doc.orbitalwaves.net/static/v01/a3motion-schematic.jpg)
+![a3motion-schematic](https://doc.a3-audio.com/static/v01/a3motion-schematic.jpg)
 
-![a3motion-pcb-design](https://doc.orbitalwaves.net/static/v01/a3motion-pcb-design.jpg)
+![a3motion-pcb-design](https://doc.a3-audio.com/static/v01/a3motion-pcb-design.jpg)
 
 ### Buttonmatrix
-![a3motion-buttons-schematic](https://doc.orbitalwaves.net/static/v01/a3motion-buttons-schematic.jpg)
+![a3motion-buttons-schematic](https://doc.a3-audio.com/static/v01/a3motion-buttons-schematic.jpg)
 
-![a3motion-buttons-pcb-design](https://doc.orbitalwaves.net/static/v01/a3motion-buttons-pcb-design.jpg)
+![a3motion-buttons-pcb-design](https://doc.a3-audio.com/static/v01/a3motion-buttons-pcb-design.jpg)
 
 ### Housing
-![a3motion-housing](https://doc.orbitalwaves.net/static/v01/a3motion-housing.png)
+![a3motion-housing](https://doc.a3-audio.com/static/v01/a3motion-housing.png)
 
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
 
@@ -35,3 +35,9 @@ Ambijockey/hardware/moc/housing
     - 1 NeoPixel-strip (ws2811 led-controller)
         - 16 x status leds buttonmatrix
   
+  ## Power Consumption
+- This device has a  estimated power consumption of
+	- raspberry pi 4b: 15W
+	- teensy4.1: 2.5W
+	- ws2811 40 LEDs: 11W
+	- SunFounder Raspberry Pi 4 Display Touchscreen 7 Inch: 3W

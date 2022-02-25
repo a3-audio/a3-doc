@@ -4,11 +4,11 @@ A³ Core, A³ Mix, A³ Motion are connected via LAN to the same network.
 On each device runs a pythonscript which sends and receives OSC (Open Sound Control).
 
 ## HowTo
-- [A³ Core Development](https://doc.orbitalwaves.net/development/core.html)
-- [A³ Mix Development](https://doc.orbitalwaves.net/development/mic.html)
-- [A³ Motion Development](https://doc.orbitalwaves.net/development/moc.html)
-- [OSC](https://doc.orbitalwaves.net/development/osc.html)
-- [Flash Teensy](https://doc.orbitalwaves.net/development/flashTeensy.html)
+- [A³ Core Development](https://doc.a3-audio.com/development/core.html)
+- [A³ Mix Development](https://doc.a3-audio.com/development/mic.html)
+- [A³ Motion Development](https://doc.a3-audio.com/development/moc.html)
+- [OSC](https://doc.a3-audio.com/development/osc.html)
+- [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
 
 ## Next steps
 - Migrate audio-engine from Reaper to Supercollider
