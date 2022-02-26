@@ -2,10 +2,11 @@
 Welcome
 *******
 
-Thanks for your interest. The docs are split in two sections. The first section is the user doc where you will find an overview of basic functions and connections.
+Thanks for your interest in the A³ system.
 
-The second section is the development doc. You will find all ressources we have. This section is under heavy development and will never be completed.
-
+These docs are split in two sections:
+- The first section is the user doc, where you will find an overview of basic functions and connections.
+- The second section is the development doc. You will find all ressources we have. This section is under heavy development and will probably never be completed.
 
 - `User doc <https://doc.a3-audio.com/user/welcome.html>`_
 - `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_
@@ -33,8 +34,9 @@ It processes analog audiosignals, calculates 3D sound spheres and is remote cont
 
 - `A³ Core <https://doc.a3-audio.com/user/a3core.html>`_
 
+************
 Requirements
-############
+************
 - Soundsystem with at least 4 speakers placed around the venue.
 - A venue smaller than 20m diameter. For bigger venues more spheres.
 
