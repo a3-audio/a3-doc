@@ -1,4 +1,4 @@
-# A³ Welcome
+# A³ User Welcome
 Custom build setup will be preset and configured by A³ Audio
 
 ## Connection Diagram
