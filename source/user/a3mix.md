@@ -1,12 +1,10 @@
 # A³ Mix
-
-## Introduction
-
 ### Features:
 - Standalone OSC controller
 - Input vu meter per channel
 - Output vu meters
 - USB-A 2.0 slot for storage with presets (WIP)
+- It has a „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
 
 ### Box Contents
 - A³ Motion

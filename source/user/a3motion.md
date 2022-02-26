@@ -1,7 +1,4 @@
 # A³ Motion
-
-## Introduction
-
 ### Features:
 - Standalone OSC controller
 - 7" full-color capacitive multi-touch display
