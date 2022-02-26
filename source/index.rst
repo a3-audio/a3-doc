@@ -6,12 +6,9 @@ Thanks for your interest in the A³ system.
 
 These docs are split in two sections:
 
-- The first section is the user doc, where you will find an overview of basic functions and connections.
+- The first section is the `User doc <https://doc.a3-audio.com/user/welcome.html>`_, where you will find an overview of basic functions and connections.
 
-- The second section is the development doc. You will find all ressources we have. This section is under heavy development and will probably never be completed.
-
-- `User doc <https://doc.a3-audio.com/user/welcome.html>`_
-- `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_
+- The second section is the `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
 
 ************
 Introduction
