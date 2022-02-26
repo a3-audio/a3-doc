@@ -1,81 +1,112 @@
-.. test documentation master file, created by
-   sphinx-quickstart on Sat Oct  2 23:20:02 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-***************************
-A³ User Manual
-***************************
-Custom build setup will be preset and configured by A³
-
-******************
-Connecting Diagram
-******************
-.. image:: https://doc.a3-audio.com/static/user/a3_systen_symbol_signalflow.png
-  :width: 800
-  :alt: Connecting Diagram
-
-Items not listed under Introduction > Box Contents are sold separately.
-
-![[a3_systen_symbol_signalflow.png]]
-
 *******
-Contact
+Welcome
 *******
-- `a3-audio.com <https://stage.a3-audio.com>`_
-- `contact@a3-audio.com <mailto:a3-audio.com>`_
-- `mattermost <https://talk.lilbits.de/ambisonics>`_
 
-*********
-User docs
-*********
+Thanks for your interest in the A³ system.
+
+These docs are split in two sections:
+
+- The first section is the `User doc <https://doc.a3-audio.com/user/welcome.html>`_, where you will find an overview of basic functions and connections.
+
+- The second section is the `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
+
+************
+Introduction
+************
+The A³ system is a combination of three devices:
+
+A³ Motion (The Motion Sampler)
+##############################
+It is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
+
+- `A³ Motion <https://doc.a3-audio.com/user/a3motion.html>`_
+
+A³ Mix (The DJ Mixer)
+#####################
+It is a standalone OSC controller which behaves like a 4 channel DJ mixer.
+
+- `A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_
+
+A³ Core (The Sound Server)
+##########################
+It processes analog audiosignals, calculates 3D sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
+
+- `A³ Core <https://doc.a3-audio.com/user/a3core.html>`_
+
+************
+Requirements
+************
+- Soundsystem with at least 4 speakers placed around the venue.
+- A venue smaller than 20m diameter. For bigger venues more spheres.
+
+**********
+Quickstart
+**********
+- Plug in your instruments vinyl, cd, daw ..
+- Plug in your speakers
+- Put speakers in regular circle around center
+- Plug CAT cable from A³ Mix and A³ Motion to A³ Core
+- Plug in your headphones
+- Power on
+
+***********
+User Manual
+***********
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Usermanual:
+   :caption: A³ Usermanual
 
-   user/a3core
-   user/a3mix
+   user/userWelcome
    user/a3motion
+   user/a3mix
+   user/a3core
+   user/advanced
 
-**************
-Developer docs
-**************
-This docs are incomplete
+**********************
+Developer introduction
+**********************
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer introduction:
+   :caption: A³ Developer
 
-   dev/welcome
+   dev/devWelcome
+   assembly/assembly
    configuration/configuration
    development/development
-   assembly/assembly
-   assembly/parts
-   assembly/imaging   
    development/flashTeensy
+   assembly/imaging   
    development/osc
+   assembly/parts
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Mix:
+   :caption: A³ Mix
 
-   configuration/mic
    assembly/mic
+   configuration/mic
    development/mic
    
 .. toctree::
    :maxdepth: 1
    :caption: A³ Motion
    
+   assembly/moc
    configuration/moc
    development/moc
-   assembly/moc
 
 .. toctree::
    :maxdepth: 1
    :caption: A³ Core
    
+   assembly/core
    configuration/core
    development/core
-   assembly/core
+
+*******
+Contact
+*******
+- `a3-audio.com <https://a3-audio.com>`_
+- `contact@a3-audio.com <mailto:a3-audio.com>`_
+- `mattermost <https://talk.lilbits.de/ambisonics>`_

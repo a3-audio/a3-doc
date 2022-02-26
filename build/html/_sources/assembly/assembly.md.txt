@@ -1,4 +1,4 @@
-# A³ Pandemic Assembly
+# A³ Assembly overview
 ## Build your own
 - A³ Core: [A³ Core](https://doc.a3-audio.com/assembly/core.html)
 - A³ Mix: [A³ Mic](https://doc.a3-audio.com/assembly/mic.html)

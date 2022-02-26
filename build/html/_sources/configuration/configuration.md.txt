@@ -1,4 +1,4 @@
-# A³ Pandemic Configuration
+# A³ Configuration overview
 ## HowTo
 - [A³ Core Configuration](https://doc.a3-audio.com/configuration/core.html)
 - [A³ Mix Configuration](https://doc.a3-audio.com/configuration/mic.html)
