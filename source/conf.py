@@ -47,6 +47,7 @@ exclude_patterns = []
 #
 #html_theme = 'bizstyle'
 html_theme = 'karma_sphinx_theme'
+html_logo = "https://stage.a3-audio.com/pix/a3_logo-wed_dark.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -58,3 +59,5 @@ source_suffix = {
 #   '.txt': 'markdown',
     '.md': 'markdown',
 }
+
+
