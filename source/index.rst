@@ -56,7 +56,7 @@ User Manual
    :maxdepth: 1
    :caption: A³ Usermanual
 
-   user/welcome
+   user/userWelcome
    user/a3motion
    user/a3mix
    user/a3core
@@ -70,7 +70,7 @@ Developer introduction
    :maxdepth: 1
    :caption: A³ Developer
 
-   dev/welcome
+   dev/devWelcome
    assembly/assembly
    configuration/configuration
    development/development
