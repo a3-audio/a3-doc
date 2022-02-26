@@ -1,4 +1,4 @@
-# Advanced User doc
+# A³ Advanced User doc
 ## Different usecases
 - A³ Core encodes and decodes: You prepare audiotracks and control data. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send osc data from inside daw.
 - A³ Core decodes: You can pre-encode your show and just send 3rd order b-format (acn, sn3d)
