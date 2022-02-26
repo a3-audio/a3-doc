@@ -53,7 +53,7 @@ User Manual
 ***********
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 0
    :caption: A³ Usermanual
 
    user/welcome
