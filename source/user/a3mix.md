@@ -16,6 +16,7 @@
 
 ### TOP VIEW
 ![A³ Mix numbered](https://doc.a3-audio.com/static/user/a3_systen_symbol_mix_numbered.png)
+
 [1] **TRIM CONTROL**
 - Adjust the level of audio signals input in each channel
 - [TRIM]: -inf dB to 0 dB
@@ -91,5 +92,8 @@
 -  2x female XLR Sockets
 
 **NETWORK AND PoE**
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices does not exceed the maximum wattage of the switch.
-- This device has a  estimated power consumption of 24W max. It powers up as soon the PoE powersupply is connected
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
+- This device has a  estimated power consumption of 24W max. It powers up as soon as the PoE powersupply is connected.
+
+### Misc
+- Items not listed under Introduction > Box Contents are sold separately.

@@ -29,7 +29,7 @@ A³ Core processes analog audiosignals, calculates 3d sound spheres and is remot
 - A venue smaller than 20m diameter. For bigger venues more spheres.
 
 ## Usecases
-- A³ Core encodes and decodes: You preset your show with stereotracks and control data. You can use `osccontrol-light <https://github.com/drlight-code/osccontrol-light>`_ vst plugin to send osc data from inside daw.
+- A³ Core encodes and decodes: You preset your show with stereotracks and control data. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send osc data from inside daw.
 - A³ Core decodes: You can pre-encode your show and just send 3rd order b-format (acn, sn3d)
 - A³ Core just routes: You get discrete channels for each speaker
 - A³ Core simulates speakersetup: You can play direct out from Dolby or Auro-3D decoder
@@ -55,13 +55,13 @@ A³ Core processes analog audiosignals, calculates 3d sound spheres and is remot
 - Scalable
 
 ## Media
-- `a3-cloud <https://cloud.a3-audio.com/d/7475495ddee04d428073/>`_
+- [a3-cloud](https://cloud.a3-audio.com/d/7475495ddee04d428073)
 
 ## Buy
 - Get a custom-build set: 6500€ (without audio-hardware)
 - Get it on Kickstarter: soon
 - Build your own: ~1720€ (without audio-hardware)
-- Hardware: `a3-partlist <https://doc.a3-audio.com/assembly/parts.html>`_
+- Hardware: [a3-partlist](https://doc.a3-audio.com/assembly/parts.html)
 - Maintenance and Service Subscriptions: soon
 
 ## Rent
@@ -70,14 +70,14 @@ A³ Core processes analog audiosignals, calculates 3d sound spheres and is remot
 - Rent A³ Show 20000-350000€
 
 ## Git
-- `A³ Mainrepo <https://github.com/ambisonic-audio-adventures>`_
-- `A³ Motion Controller UI repo <https://github.com/ambisonic-audio-adventures/MotionControllerUI>`_
+- [A³ Mainrepo](https://github.com/ambisonic-audio-adventures)
+- [A³ Motion Controller UI repo](https://github.com/ambisonic-audio-adventures/MotionControllerUI)
 
 ## Support
 - Helpdesk
 - Community
 
 ## Contact
-- `contact@a3-audio.com <mailto:a3-audio.com>`_
-- `mattermost <https://talk.lilbits.de/ambisonics>`_
+- [contact@a3-audio.com](mailto:a3-audio.com)
+- [mattermost](https://talk.lilbits.de/ambisonics)
 

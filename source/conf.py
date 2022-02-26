@@ -17,11 +17,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ UG(haftungsbeschränkt)'
+copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'Raphael Eismann'
 
 # The full version, including alpha/beta/rc tags
-release = '2022'
+release = '2021-2022'
 
 
 # -- General configuration ---------------------------------------------------

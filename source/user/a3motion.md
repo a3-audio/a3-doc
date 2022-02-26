@@ -33,8 +33,8 @@
 
 ### BACKSIDE
 **NETWORK AND PoE**
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices does not exceed the maximum wattage of the switch.
-- This device has a  estimated power consumption of 31.5W max. It powers up as soon the PoE powersupply is connected
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
+- This device has a  estimated power consumption of 31.5W max. It powers up as soon as the PoE powersupply is connected.
 
 ### Operation
 - Set looplength with Function Encoder [4]
@@ -49,3 +49,5 @@
 - Press white buttons to switch motion on the next beat (related to 120bpm)
 - Width [2] and Reverb [3] will not be recorded
 
+### Misc
+- Items not listed under Introduction > Box Contents are sold separately.

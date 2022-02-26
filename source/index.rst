@@ -1,8 +1,7 @@
 ***************************
 A³ User Manual
 ***************************
-- Custom build setup will be preset and configured by A³
-- Items not listed under Introduction > Box Contents are sold separately.
+- Custom build setup will be preset and configured by A³ Audio
 
 ******************
 Connecting Diagram
@@ -19,9 +18,9 @@ User Manual
    :maxdepth: 1
    :caption: A³ Usermanual
 
-   user/a3core
-   user/a3mix
    user/a3motion
+   user/a3mix
+   user/a3core
 
 **********************
 Developer introduction
