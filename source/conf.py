@@ -47,7 +47,7 @@ exclude_patterns = []
 #
 #html_theme = 'bizstyle'
 html_theme = 'karma_sphinx_theme'
-html_logo = '_static/a3_logo-wed_dark.png'
+html_logo = 'a3_logo_dark.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

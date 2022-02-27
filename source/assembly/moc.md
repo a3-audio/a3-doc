@@ -1,17 +1,17 @@
 # A³ Motion Assembly
 ## PCB
 ### Mainboard
-![a3motion-schematic](https://doc.a3-audio.com/static/v01/a3motion-schematic.jpg)
+![a3motion-schematic](v01/a3motion-schematic.jpg)
 
-![a3motion-pcb-design](https://doc.a3-audio.com/static/v01/a3motion-pcb-design.jpg)
+![a3motion-pcb-design](v01/a3motion-pcb-design.jpg)
 
 ### Buttonmatrix
-![a3motion-buttons-schematic](https://doc.a3-audio.com/static/v01/a3motion-buttons-schematic.jpg)
+![a3motion-buttons-schematic](v01/a3motion-buttons-schematic.jpg)
 
-![a3motion-buttons-pcb-design](https://doc.a3-audio.com/static/v01/a3motion-buttons-pcb-design.jpg)
+![a3motion-buttons-pcb-design](v01/a3motion-buttons-pcb-design.jpg)
 
 ### Housing
-![a3motion-housing](https://doc.a3-audio.com/static/v01/a3motion-housing.png)
+![a3motion-housing](v01/a3motion-housing.png)
 
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
 

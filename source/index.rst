@@ -1,6 +1,6 @@
-*******
-Welcome
-*******
+************
+Introduction
+************
 
 Thanks for your interest in the A³ system.
 
@@ -10,28 +10,38 @@ These docs are split in two sections:
 
 - The second section is the `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
 
-************
-Introduction
-************
+**********
+What it is
+**********
 The A³ system is a combination of three devices:
 
 A³ Motion (The Motion Sampler)
 ##############################
-It is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
 
-- `A³ Motion <https://doc.a3-audio.com/user/a3motion.html>`_
+`A³ Motion <https://doc.a3-audio.com/user/a3motion.html>`_ is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
+
+.. image:: a3_system_symbol_moc.png
+   :height: 500px
+   :width: 500 px
+   :scale: 50 %
 
 A³ Mix (The DJ Mixer)
 #####################
-It is a standalone OSC controller which behaves like a 4 channel DJ mixer.
+`A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_ is a standalone OSC controller which behaves like a 4 channel DJ mixer.
 
-- `A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_
+.. image:: a3_system_symbol_mix.png
+   :height: 500px
+   :width: 500 px
+   :scale: 50 %
 
 A³ Core (The Sound Server)
 ##########################
-It processes analog audiosignals, calculates 3D sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
+`A³ Core <https://doc.a3-audio.com/user/a3core.html>`_  processes analog audiosignals, calculates 3D sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
 
-- `A³ Core <https://doc.a3-audio.com/user/a3core.html>`_
+.. image:: a3_system_symbol_core.png
+   :height: 500px
+   :width: 500 px
+   :scale: 50 %
 
 ************
 Requirements
@@ -71,7 +81,7 @@ Developer introduction
    :maxdepth: 1
    :caption: A³ Developer
 
-   dev/devWelcome
+   development/devWelcome
    assembly/assembly
    configuration/configuration
    development/development

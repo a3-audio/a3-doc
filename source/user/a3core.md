@@ -11,7 +11,7 @@
 - Safety & Warranty Manual
 
 ## Connecting Diagram
-![A³ Core numbered](https://doc.a3-audio.com/static/user/a3_systen_symbol_core_numbered.png)
+![A³ Core numbered](a3_systen_symbol_core_numbered.png)
 
 ### [1] POWER BUTTON
 - Push the button to turn the device on

@@ -10,13 +10,13 @@ A working prototype exists. We applied intensive stress tests by using 12V car h
 
 ## Pictures of prototype
 ### A³ Mix
-![a3mix-prototype](https://doc.a3-audio.com/static/v01/a3mix-prototype.jpg)
+![a3mix-prototype](v01/a3mix-prototype.jpg)
 ### A³ Motion
-![a3motion-prototype](https://doc.a3-audio.com/static/v01/a3motion-prototype.jpg)
+![a3motion-prototype](v01/a3motion-prototype.jpg)
 ### A³ Core
-![a3core-front-prototype](https://doc.a3-audio.com/static/v01/a3core-front-prototype.jpg)
-![a3core-back-prototype](https://doc.a3-audio.com/static/v01/a3core-back-prototype.jpg)
+![a3core-front-prototype](v01/a3core-front-prototype.jpg)
+![a3core-back-prototype](v01/a3core-back-prototype.jpg)
 ### A³ Stresstest
-![a3-openair](https://doc.a3-audio.com/static/v01/a3-openair.jpg)
-![a3-handwagon-packed](https://doc.a3-audio.com/static/v01/a3-handwagon-packed.jpg)
-![a3-handwagon-finished](https://doc.a3-audio.com/static/v01/a3-handwagon-finished.jpg)
+![a3-openair](v01/a3-openair.jpg)
+![a3-handwagon-packed](v01/a3-handwagon-packed.jpg)
+![a3-handwagon-finished](v01/a3-handwagon-finished.jpg)
