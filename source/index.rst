@@ -6,9 +6,9 @@ Thanks for your interest in the A³ system.
 
 These docs are split in two sections:
 
-- The first section is the `User doc <https://doc.a3-audio.com/user/welcome.html>`_, where you will find an overview of basic functions and connections.
+- The first section is the `User doc <https://doc.a3-audio.com/user/userWelcome.html>`_, where you will find an overview of basic functions and connections.
 
-- The second section is the `Developer doc <https://doc.a3-audio.com/development/welcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
+- The second section is the `Developer doc <https://doc.a3-audio.com/development/devWelcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
 
 **********
 What it is
@@ -59,13 +59,13 @@ Quickstart
 - Plug in your headphones
 - Power on
 
-***********
-User Manual
-***********
+**********
+Quicklinks
+**********
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Usermanual
+   :caption: A³ User doc
 
    user/userWelcome
    user/a3motion
@@ -73,13 +73,9 @@ User Manual
    user/a3core
    user/advanced
 
-**********************
-Developer introduction
-**********************
-
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer
+   :caption: A³ Developer doc
 
    development/devWelcome
    assembly/assembly
@@ -92,7 +88,13 @@ Developer introduction
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Mix
+
+   assembly/moc
+   configuration/moc
+   development/moc
+
+.. toctree::
+   :maxdepth: 1
 
    assembly/mic
    configuration/mic
@@ -100,16 +102,7 @@ Developer introduction
    
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Motion
-   
-   assembly/moc
-   configuration/moc
-   development/moc
 
-.. toctree::
-   :maxdepth: 1
-   :caption: A³ Core
-   
    assembly/core
    configuration/core
    development/core
