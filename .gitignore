@@ -1,1 +1,4 @@
 **/build
+Pipfile
+Pipfile.lock
+.DS_Store
