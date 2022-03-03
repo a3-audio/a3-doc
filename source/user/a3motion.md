@@ -47,4 +47,4 @@
 - Width [2] and Reverb [3] will not be recorded
 
 ## Misc
-- Items not listed under Introduction > Box Contents are sold separately.
+- Items not listed under Box Contents are sold separately.

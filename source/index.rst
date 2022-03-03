@@ -67,17 +67,17 @@ Quicklinks
    :maxdepth: 1
    :caption: A³ User doc
 
-   user/userWelcome
+   user/welcome-user
    user/a3motion
    user/a3mix
    user/a3core
-   user/advanced
+   user/advanced-user
 
 .. toctree::
    :maxdepth: 1
    :caption: A³ Developer doc
 
-   development/devWelcome
+   development/welcome-dev
    assembly/assembly
    configuration/configuration
    development/development
