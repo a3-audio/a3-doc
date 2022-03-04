@@ -31,6 +31,3 @@ Connected to:
 
 Firmware:
 - ```Controller_Motion/software/teensy/src/main.cpp```
-
-## Audio
-A³ Mix, as a good DJ-Mixer, must have a headphone-plug somewhere. We installed a headphone-amp which is bus-powered by usb. It receives a linelevel analogsignal from the audiohardware. We put the headphone-plug to the front and 2 xlr-sockets to the back.

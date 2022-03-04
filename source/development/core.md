@@ -156,4 +156,4 @@ receives	from			name
 [1,2]		dj1-input      	dj1-b-format
 ```
 
-![Signalflow](signalflow.png)
+![Signalflow](pics_development/signalflow.png)

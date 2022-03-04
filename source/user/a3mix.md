@@ -2,9 +2,9 @@
 ## Features:
 - Standalone OSC controller
 - Input vu meter per channel
-- Output vu meters
-- USB-A 2.0 slot for storage with presets (WIP)
-- It has a „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
+- 8 Output vu meters
+- WIP: USB-A 2.0 port to store presets
+- WIP: „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
 
 ## Box Contents
 - A³ Motion
@@ -13,7 +13,7 @@
 - Safety & Warranty Manual
 
 ## TOP VIEW
-![A³ Mix numbered](a3_systen_symbol_mix_numbered.png)
+![A³ Mix numbered](pics_user/a3_systen_symbol_mix_numbered.png)
 
 ### [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
@@ -94,4 +94,4 @@
 - This device has a  estimated power consumption of 24W max. It powers up as soon as the PoE powersupply is connected.
 
 ## Misc
-- Items not listed under Introduction > Box Contents are sold separately.
+- Items not listed under Box Contents are sold separately.
