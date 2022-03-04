@@ -13,7 +13,7 @@
 - Safety & Warranty Manual
 
 ## TOP VIEW
-![A³ Mix numbered](a3_systen_symbol_mix_numbered.png)
+![A³ Mix numbered](pics_user/a3_systen_symbol_mix_numbered.png)
 
 ### [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel

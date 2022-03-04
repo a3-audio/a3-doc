@@ -11,7 +11,7 @@
 - Safety & Warranty Manual
 
 ## Connecting Diagram
-![A³ Core numbered](a3_systen_symbol_core_numbered.png)
+![A³ Core numbered](pics_user/a3_systen_symbol_core_numbered.png)
 
 ### [1] POWER BUTTON
 - Push to turn the device on
