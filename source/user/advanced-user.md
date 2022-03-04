@@ -6,8 +6,17 @@
 - A³ Core layout: Virtual speakerlayout to fit Dolby or Auro-3D depencies.
 - A³ DJ-Setup: A³ Mix and A³ Motion
 
-## current state
-We give out our prototype for testruns and Partys we love. We can organize big pa systems. 
+## Media
+- [a3-cloud](https://cloud.a3-audio.com/d/7475495ddee04d428073)
 
-## current goal
-We will build 5 prototype sets v0.1 in order to give them out, getting named and famous. We will iterate the housing and collecting feedback from all of you. We want that everybody can build similair systems and we want to get your ideas into a System everybody loves… blabla ja
+## Buy
+- WIP: Get a custom-build set (without audio-hardware)
+- WIP: Get it on Kickstarter
+- Build your own: ~1720€ (without audio-hardware)
+- Hardware: [a3-partlist](https://doc.a3-audio.com/assembly/parts.html)
+- Maintenance and Service Subscriptions: soon
+
+## Rent
+- Rent A³ Set 320-640€ per day (without speakers)
+- Rent A³ Speakers set 320-60000€ per Event (without show)
+- Rent A³ Show 20000-350000€
