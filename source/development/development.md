@@ -1,4 +1,6 @@
 # A³ Development overview
+## 
+[A³Motion - configuration](https://doc.a3-audio.com/configuration/moc.html)
 
 ## Software-Architecture
 A³ Core, A³ Mix, A³ Motion are connected via LAN to the same network.

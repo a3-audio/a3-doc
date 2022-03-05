@@ -77,13 +77,9 @@ Quicklinks
    :maxdepth: 1
    :caption: A³ Developer
 
+   development/development
    assembly/assembly
    configuration/configuration
-   development/development
-   development/flashTeensy
-   assembly/imaging   
-   development/osc
-   assembly/parts
 
 .. toctree::
    :maxdepth: 1
@@ -105,6 +101,15 @@ Quicklinks
    assembly/core
    configuration/core
    development/core
+
+.. toctree::
+   :maxdepth: 1
+   :caption: A³ Ressources
+
+   development/flashTeensy
+   assembly/imaging   
+   development/osc
+   assembly/parts
 
 *******
 Contact
