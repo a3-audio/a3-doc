@@ -1,7 +1,9 @@
 # A³ OSC and serial communication
 ## A³ Core
+All parameters are normalized to float [range 0-1] 
 - ```server.py```
 - ```vu-meter.scd```
+- ```bpm.scd``` <- wip 
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | Destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
@@ -22,9 +24,8 @@
 | OSC | /moc/ch/{channel}/side  | OSC | /track/i/fx/i/fxparam/i/value | StereoEncoder | Channel i reverb send | potentiometer
 | audio | channel and master | OSC | /track/i/vu/value ff | A³ mix, A³ Motion | VU meter | supercollider
 
-All parameters are normalized to float [range 0-1] 
-
 ## A³ Mix
+All parameters are normalized to float [range 0-1] 
 - ```mic.py```
 - ```main.cpp```
 
@@ -55,14 +56,9 @@ All parameters are normalized to float [range 0-1]
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
-| serial | P:{channel}:P:{potentiometer},float | OSC | /moc/ch/{channel}/width/ | StereoEncoder | stereo width | potentiometer
-| serial | P:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/side | A³ Core | reverb send | potentiometer
-| serial | D:{channel}:A:{azimuth} | OSC | /StereoEncoder/azimuth | StereoEncoder | azimuth angle | touchscreen
-| serial | D:{channel}:E:{elevation} | OSC | /StereoEncoder/elevation | StereoEncoder | elevation angle | touchscreen
-| serial | Enc:{channel}:P:{potentiometer},float | python | | menu navigation | A³ Motion UI | encoder
-| serial | EB:{channel}:P:{potentiometer},float | python | | menu navigation | A³ Motion UI | encoder buttons
-
-### bpm (receive) <- wip
-- ```bpm.scd```
-- /moc/bpm
-- /mic/bpm
+| serial | P:{channel}:P:{potentiometer},float | OSC | /moc/ch/{channel}/width [f 0:1] | StereoEncoder OSC | stereo width | potentiometer
+| serial | P:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/side [f 0:1] | A³ Core OSC | reverb send | potentiometer
+| serial | D:{channel}:A:{azimuth} | OSC | /StereoEncoder/azimuth [i -180:180] | StereoEncoder OSC | azimuth angle | touchscreen
+| serial | D:{channel}:E:{elevation} | OSC | /StereoEncoder/elevation [i -180:180] | StereoEncoder OSC | elevation angle | touchscreen
+| serial | Enc:{channel}:P:{potentiometer},float | python | [f 0:1] | menu navigation | A³ Motion UI | encoder
+| serial | EB:{channel}:P:{potentiometer},float | python | [f 0:1] | menu navigation | A³ Motion UI | encoder buttons
