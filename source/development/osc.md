@@ -1,5 +1,5 @@
 # A³ OSC and serial communication
-## A³ Core  to REAPER
+## A³ Core
 - ```server.py```
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | Destination | Description | Interface
@@ -19,6 +19,7 @@
 | OSC | /mic/ch/{channel}/pfl  | OSC | /track/i/mute | reaper | Channel i pfl | button
 | OSC | /mic/ch/{channel}/mode  | OSC | /track/i/mute | reaper | Channel i mode (Stereo, 3D) |  button
 | OSC | /moc/ch/{channel}/side  | OSC | /track/i/fx/i/fxparam/i/value | StereoEncoder | Channel i reverb send | potentiometer
+| audio | channel and master | OSC | /track/i/vu/value ff | A³ mix, A³ Motion | VU meter | supercollider
 
 All parameters are normalized to float [range 0-1] 
 
