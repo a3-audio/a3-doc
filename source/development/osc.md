@@ -2,7 +2,7 @@
 All parameters are normalized to float [range 0-1] 
 
 ## A³ Core
-### Server/server.py modifies and routes incoming osc to daw
+### Server/server.py modifies and routes incoming OSC to daw
 
 | SOURCE | DESTINATION (Reaper) | Description |
 | :------| :------------------- | :---------- |

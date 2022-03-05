@@ -4,12 +4,11 @@
 - [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
 
 ## Raspberry Pi 4
-microSD card > 4GB
+- microSD card > 4GB
 
-### ArchArm
-install aarch64:
-https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
-
+##  Installation from scratch <-wip
+### Arch Linux Arm
+- https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 - Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
 - login as the default user alarm with the password alarm.
 - The default root password is root.
@@ -79,11 +78,8 @@ Edit /etc/dhcpcd.conf
   static domain_name_servers=192.168.43.1 8.8.8.8
 ```
 
-#### Install platformio
-```
-
-```
-
+## Early versions
+### 2020-2021
 ### Raspbian
 [Install Raspbian](https://www.raspberrypi.org/documentation/computers/getting-started.html)
 

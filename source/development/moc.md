@@ -1,12 +1,12 @@
 # A³ Motion Developement
-A³ Motion backend runs on ArchlinuxARM on a Raspberry Pi 3 Model B. As Microcontroller we're using Teensy 4.1. 
+A³ Motion backend runs on Arch Linux ARM on a Raspberry Pi 3 Model B. As Microcontroller we're using Teensy 4.1. 
 
 ## UI
 A³ Motion UI is the most potential and complex part to develop. It is in a different repository (see [A³Motion - configuration](https://doc.a3-audio.com/configuration/moc.html).
 
 [Ambijockey/doc/configuration/moc](https://doc.a3-audio.com/Ambijockey/doc/configuration/moc.html) 
 
-## Raspberry
+## OSC <> serial router (python)
 Connected to:
 - A³ Core (LAN)
 - Display (hdmi & usb)
@@ -21,7 +21,7 @@ OSC-communication:
 Python- script:
 - ```Controller_Motion/software/MotionControllerUI/moc_ui.py```
 
-## Teensy
+## pcb <> teensy <> serial (c++)
 Connected to:
 - Mainboard
 	- Encoder (gpio)

@@ -6,9 +6,9 @@ Thanks for your interest in the A³ system.
 
 These docs are split in two sections:
 
-- The first section is the `User doc <https://doc.a3-audio.com/user/userWelcome.html>`_, where you will find an overview of basic functions and connections.
+- The first section is the `User doc <https://doc.a3-audio.com/user/user.html>`_, where you will find an overview of basic functions and connections.
 
-- The second section is the `Developer doc <https://doc.a3-audio.com/development/devWelcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
+- The second section is the `Developer doc <https://doc.a3-audio.com/development/development.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
 
 **********
 What it is
@@ -65,9 +65,9 @@ Quicklinks
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ User doc
+   :caption: A³ User
 
-   user/welcome-user
+   user/user
    user/a3motion
    user/a3mix
    user/a3core
@@ -75,9 +75,8 @@ Quicklinks
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer doc
+   :caption: A³ Developer
 
-   development/welcome-dev
    assembly/assembly
    configuration/configuration
    development/development
