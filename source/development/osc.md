@@ -24,6 +24,7 @@
 All parameters are normalized to float [range 0-1] 
 
 ## A³ Mix
+- ```mic.py```
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
 | OSC | /vu/rcv/01-04 | serial | "VU"{track},peak,rms | teensy | input vu ff (peak/rms) | software
@@ -46,6 +47,7 @@ All parameters are normalized to float [range 0-1]
 | serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{channel}/fxmode | A³ Core | channel FX mode| button
 
 ## A³ Motion
+- ```moc.py```
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
 | serial | P:{channel}:P:{potentiometer},float | OSC | /moc/ch/{channel}/width/ | StereoEncoder | stereo width | potentiometer
