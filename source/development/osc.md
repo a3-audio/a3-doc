@@ -1,6 +1,7 @@
 # A³ OSC and serial communication
 ## A³ Core
 - ```server.py```
+- ```vu-meter.scd```
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | Destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
@@ -25,6 +26,7 @@ All parameters are normalized to float [range 0-1]
 
 ## A³ Mix
 - ```mic.py```
+- ```main.cpp```
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
@@ -49,6 +51,7 @@ All parameters are normalized to float [range 0-1]
 
 ## A³ Motion
 - ```moc.py```
+- ```main.cpp```
 
 | RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
 | :---| :--- | :--- | :--- | :--- | :--- | :---
@@ -60,5 +63,6 @@ All parameters are normalized to float [range 0-1]
 | serial | EB:{channel}:P:{potentiometer},float | python | | menu navigation | A³ Motion UI | encoder buttons
 
 ### bpm (receive) <- wip
+- ```bpm.scd```
 - /moc/bpm
 - /mic/bpm
