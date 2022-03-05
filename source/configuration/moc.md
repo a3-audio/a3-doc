@@ -3,6 +3,9 @@
 software/teensy/src/main.cpp << [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
 
 ## Raspberry Pi 3 Model B
+- microSD card > 4GB
+
+## Installation from scratch <-wip
 install aarch64:
 https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
 
@@ -70,3 +73,6 @@ nano /boot/config.txt
 display_rotate=1
 dtoverlay=pi3-disable-bt
 ```
+
+## Early versions
+### 2020-2021

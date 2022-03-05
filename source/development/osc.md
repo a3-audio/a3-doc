@@ -1,55 +1,59 @@
-# A³ OSC messages
+# A³ OSC and serial communication
+## A³ Core  to REAPER
+- ```server.py```
+
+| RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | Destination | Description | Interface
+| :---| :--- | :--- | :--- | :--- | :--- | :---
+| OSC | /mic/ch/{channel}/gain | OSC | /track/i/fx/i/fxparam/i/value | reaper | Channel i gain | potentiometer
+| OSC | /mic/ch/{channel}/hi  | OSC | /track/i/fxeq/hishelf/gain | reaper | Channel i hi | potentiometer
+| OSC | /mic/ch/{channel}/mid  | OSC | /track/i/fxeq/band/0/gain | reaper | Channel i mid | potentiometer
+| OSC | /mic/ch/{channel}/lo  | OSC | /track/i/fxeq/loshelf/gain | reaper | Channel i low | potentiometer
+| OSC | /mic/ch/{channel}/volume  | OSC | /track/i/volume | reaper | Channel i volume | potentiometer
+| OSC | /mic/master/volume  | OSC | /track/i/volume | reaper | Master volume | potentiometer
+| OSC | /mic/master/booth  | OSC | /track/i/volume | reaper | Booth volume | potentiometer
+| OSC | /mic/master/phMmix | OSC | /track/i/volume | reaper | Phones Mix | potentiometer
+| OSC | /mic/master/phVol  | OSC | /track/i/volume | reaper | Phones volume | potentiometer
+| OSC | /mic/ch/{channel}/fxparm/fxfreq  | OSC | /track/i/fx/i/fxparam/i/value | reaper | FX hipass and lopass frequency |  potentiometer
+| OSC | /mic/ch/{channel}/fxparm/fxres  | OSC | /track/i/fx/i/fxparam/i/value | reaper | FX Resonance | potentiometer
+| OSC | /mic/ch/{channel}/fxmode  | OSC | /track/i/fx/i/fxparam/i/value | reaper | Channel i mode (hipass, lopass) | button
+| OSC | /mic/ch/{channel}/pfl  | OSC | /track/i/mute | reaper | Channel i pfl | button
+| OSC | /mic/ch/{channel}/mode  | OSC | /track/i/mute | reaper | Channel i mode (Stereo, 3D) |  button
+| OSC | /moc/ch/{channel}/side  | OSC | /track/i/fx/i/fxparam/i/value | StereoEncoder | Channel i reverb send | potentiometer
+
 All parameters are normalized to float [range 0-1] 
 
-## A³ Core
-### Server/server.py modifies and routes incoming osc to daw
-
-| SOURCE | DESTINATION (Reaper) | Description |
-| :------| :------------------- | :---------- |
-| /mic/ch/1-4/gain | /track/i/gain | Channel i gain |       
-| /mic/ch/1-4/hi | /track/i/fxeq/hishelf/gain | Channel i hi |         
-| /mic/ch/1-4/mid | /track/i/fxeq/band/0/gain | Channel i mid |        
-| /mic/ch/1-4/lo | /track/i/fxeq/loshelf/gain | Channel i low |
-| /mic/ch/1-4/volume | /track/i/volume | Channel i volume |
-| /mic/ch/1-4/mode | /track/i/mute | Channel i mode (Stereo, 3D)
-| /mic/master/volume | /track/i/volume | Master volume |
-| /mic/master/booth | /track/i/volume | Booth volume |
-| /mic/master/phMmix | /track/i/volume | Phones Mix |
-| /mic/master/phVol | /track/i/volume | Phones volume |
-| /mic/ch/1-4/pfl | /track/i/mute | Channel i pfl |
-| /mic/ch/master/pfl | /track/i/mute | Master pfl |
-| /moc/ch/1-4/width | /track/i/StereoEncoder/width | Range -360 / 360 |
-| /moc/ch/1-4/sides | /track/i/sides | Channel i sides |
-| /moc/ui/azimuth | [StereoEncoderPort]/azimuth | Range -180 / 180 |
-| /moc/ui/elevation | [StereoEncoderPort]/elevation | Range -180 / 180 |
-
-
-## A³ Mix 
-### potis and knobs (send)
-- /mic/ch/1-4/pfl
-- /mic/ch/1-4/gain
-- /mic/ch/1-4/hi
-- /mic/ch/1-4/mid
-- /mic/ch/1-4/lo
-- /mic/ch/1-4/volume
-- /mic/ch/1-4/m1
-- /mic/ch/1-4/m2
-- /mic/ch/1-4/m3
-- /mic/ch/master/pfl
-- /mic/ch/master/volume
-- /mic/ch/master/booth
-- /mic/ch/master/phMix
-- /mic/ch/master/phVol
-
-### vu-meters (receive)
-- /vu/rcv/01-04 << input vu ff (peak/rms)
-- /vu/rcv/05-12 << output vu ff (peak/rms)
+## A³ Mix
+| RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
+| :---| :--- | :--- | :--- | :--- | :--- | :---
+| OSC | /vu/rcv/01-04 | serial | "VU"{track},peak,rms | teensy | input vu ff (peak/rms) | software
+| OSC | /vu/rcv/05-12 | serial | "VU"{track},peak,rms | teensy | output vu ff (peak/rms) | software
+| OSC | /mic/ch/{channel}/pflled | serial | "PFL"{track},bool | teensy | pre fader listen or cue | leds
+| serial | FX_MODE:{HIGH_PASS,LO_PASS} | OSC | /mic/channel/fxmode/{hipass,lopass} | A³ Core | FX Mode | buttons
+| serial | B{channel},bool | OSC | /mic/channel/{{channel}}/pfl/bool | A³ Core | pre fader listen or cue | buttons
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{{channel}}/gain | A³ Core | channel gain | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{{channel}}/hi | A³ Core | eq high | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{{channel}}/mid | A³ Core | eq mid | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{{channel}}/lo | A³ Core | eq low | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{{channel}}/volume | A³ Core | channel volume | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/volume | A³ Core | master volume | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/booth | A³ Core | booth volume | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/phMix | A³ Core | phones mix | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/phVol | A³ Core | phones volume | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/fxres | A³ Core | fx resonance | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/fxfreq | A³ Core | fx frequency | potentiometer
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{channel}/mode | A³ Core | channel 3D mode| button
+| serial | T:{channel}:P:{potentiometer},float | OSC | /mic/ch/{channel}/fxmode | A³ Core | channel FX mode| button
 
 ## A³ Motion
-### potis, knobs and touch-xy (send)
-- /moc/ch/1-4/motion/ xy [0-1]
-- /moc/ch/1-4/width/ [0-1]
-- /moc/ch/1-4/sides/ [0-1]
+| RECEIVE TYPE | RECEIVE DATA | SEND TYPE | SEND DATA | destination | Description | Interface
+| :---| :--- | :--- | :--- | :--- | :--- | :---
+| serial | P:{channel}:P:{potentiometer},float | OSC | /moc/ch/{channel}/width/ | StereoEncoder | stereo width | potentiometer
+| serial | P:{channel}:P:{potentiometer},float | OSC | /mic/ch/master/side | A³ Core | reverb send | potentiometer
+| serial | D:{channel}:A:{azimuth} | OSC | /StereoEncoder/azimuth | StereoEncoder | azimuth angle | touchscreen
+| serial | D:{channel}:E:{elevation} | OSC | /StereoEncoder/elevation | StereoEncoder | elevation angle | touchscreen
+| serial | Enc:{channel}:P:{potentiometer},float | python | | menu navigation | A³ Motion UI | encoder
+| serial | EB:{channel}:P:{potentiometer},float | python | | menu navigation | A³ Motion UI | encoder buttons
 
-### bpm (receive)
+### bpm (receive) <- wip
 - /moc/bpm
+- /mic/bpm
