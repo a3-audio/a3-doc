@@ -13,7 +13,7 @@ These docs are split in two sections:
 **********
 What it is
 **********
-The A³ system is a combination of three devices:
+The A³ system is made for 3D Audio live interaction. It is a combination of three devices:
 
 A³ Motion (The Motion Sampler)
 ##############################
