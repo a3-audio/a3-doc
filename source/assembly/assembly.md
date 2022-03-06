@@ -1,5 +1,5 @@
 # A³ Assembly overview
-## Build your own
+## Hardware layout
 - A³ Core: [A³ Core](https://doc.a3-audio.com/assembly/core.html)
 - A³ Mix: [A³ Mic](https://doc.a3-audio.com/assembly/mic.html)
 - A³ Motion: [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
@@ -10,7 +10,6 @@ A working prototype exists. We applied intensive stress tests by using 12V car h
 
 ## Current prototype
 ### A³ Mix v0.1
-![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
 ![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 ### A³ Motion
 ![a3motion-prototype](pics_assembly/v01/a3motion-prototype.jpg)
