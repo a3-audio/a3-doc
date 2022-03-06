@@ -9,9 +9,9 @@ These docs are split in two sections:
 - The first section is the `User doc <https://doc.a3-audio.com/user/user.html>`_, where you will find an overview of basic functions and connections.
 
 - The second section is the developer section wich is under heavy development and will probably never be completed. The developer section is splitted in three subsections:
-- `Developer <https://doc.a3-audio.com/development/developer.html>`_
-- `Assembly <https://doc.a3-audio.com/development/assembly.html>`_
-- `Configuration <https://doc.a3-audio.com/development/configuration.html>`_
+  - `Developer <https://doc.a3-audio.com/development/developer.html>`_
+  - `Assembly <https://doc.a3-audio.com/development/assembly.html>`_
+  - `Configuration <https://doc.a3-audio.com/development/configuration.html>`_
 
 **********
 What it is
