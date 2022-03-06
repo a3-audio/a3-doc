@@ -1,7 +1,7 @@
 # A³ Development overview
 ## Software-Architecture
 On each device runs a pythonscript which sends and receives OSC (Open Sound Control).
-See details in development section:
+See details in developer section:
 - [A³ Motion - configuration](https://doc.a3-audio.com/configuration/moc.html)
 - [A³ Mix - configuration](https://doc.a3-audio.com/configuration/mic.html)
 - [A³ Core - configuration](https://doc.a3-audio.com/configuration/core.html)

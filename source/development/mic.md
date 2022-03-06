@@ -10,5 +10,5 @@ This pythonscript sends and receives OSC and serial data, to and from raspberry 
 ## hardware <> serial (c++)
 Teensy 4.1 firmware is written in c++
 - ```aaa/Ambijockey/Controller_Mixer/software/teensy/mic/src/```
-- - [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
+- [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
 

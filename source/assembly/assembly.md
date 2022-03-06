@@ -9,7 +9,8 @@
 A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
 
 ## Current prototype
-### A³ Mix
+### A³ Mix v0.1
+![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
 ![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 ### A³ Motion
 ![a3motion-prototype](pics_assembly/v01/a3motion-prototype.jpg)
