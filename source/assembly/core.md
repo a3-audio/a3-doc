@@ -7,7 +7,7 @@
 - Behringer ADA8000
 - 44100Hz, 16bit, 2.8ms roundtrip latency
 
-### - RME HDSP9652 pci (up to 24 audio in/out)
+### - RME HDSP9652 pci (24 audio in/out)
 - i5 Quadcore 3.2Ghz
 - SSD
 - 8G Ram

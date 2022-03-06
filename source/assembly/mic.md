@@ -1,5 +1,5 @@
 # A³ Mix Assembly
-## Current version
+## v0.1 taped
 ![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
 
 ## Hardware
