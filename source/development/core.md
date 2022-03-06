@@ -32,24 +32,53 @@
 - VST plugins must be linux and reaper compatible
  ```a3-audio.RPP```
 
+### Reaper jack connections
+Input
+```
+[1/2] Stereo 1
+[3/4] Stereo 2
+[5/6] Stereo 3
+[7/8] Stereo 4
+```
+Output
+```
+[1/2]    Phones
+[3]      Subwoofer booth
+[4-8]    Speaker booth
+[9-12]   4x mono for input vu
+[13-20]  8x mono for output vu
+[21]     Subwoofer pa
+[22-inf] speaker pa
+```
+
 ### Reaper bus-mapping
-Masterbus
+Masterbus (reaper master)
 ```
 receives    name                
 --------------------------------
-[1,2]       phonesbus           
-[3]         monobus (single)    
-[4]         subbus              
-[5-20]      spare               
-[21-inf]    monobus (multi)     
-[21-inf]    stereobus           
-[21-inf]    decoderbus          
+[1,2]      phonesbus
+[3]        subbus
+[4-inf]    stereobus
+[4-inf]    decoderbus
 ```
-Phonesbus
+DJ masterbus
 ```
 receives    name                
 --------------------------------
-[1,2]       monobus(ph)         
+[3]        subbus
+[4-inf]    stereobus
+[4-inf]    decoderbus
+```
+Booth bus
+```
+[3]        subbus
+[4-inf]    stereobus
+[4-inf]    decoderbus
+```
+Phones masterbus
+```
+receives    name                
+--------------------------------
 [1,2]       stereobus(ph)       
 [1,2]       binauralbus(ph)     
 -           dj1-pfl
@@ -65,7 +94,7 @@ receives    name
 [1-16]      reverb              
 [17-32]     reverb(ph)          
 ```
-Channelbus
+DJ input bus
 ```
 receives    name                
 --------------------------------

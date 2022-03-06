@@ -1,5 +1,5 @@
 # A³ Assembly overview
-## Build your own
+## Hardware layout
 - A³ Core: [A³ Core](https://doc.a3-audio.com/assembly/core.html)
 - A³ Mix: [A³ Mic](https://doc.a3-audio.com/assembly/mic.html)
 - A³ Motion: [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
