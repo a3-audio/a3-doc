@@ -29,7 +29,7 @@ usermod -aG uucp aaa
 
 #### Install depencies
 ```
-pacman -S python python-osc python-pip git python-numpy gcc python-setuptools libusb-compat
+pacman -S python python-osc python-pip git python-numpy gcc python-setuptools libusb-compat libusb
 
 exit
 ```
