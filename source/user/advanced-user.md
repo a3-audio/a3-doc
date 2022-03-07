@@ -1,8 +1,4 @@
 # A³ Advanced User doc
-
-## Speaker setup
-The speaker must be placed in a most chubbiest spherical installation. Electronic corrections are possible for closer speakers.
-
 ## A³ Core Operation
 - A³ Core encode: Prepare stereo or mono audiotracks and OSC. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send OSC data from your daw.
 - A³ Core decode: Prepare your show in 3rd order b-format (acn, sn3d)
