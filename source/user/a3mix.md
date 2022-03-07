@@ -52,31 +52,33 @@
 ### [11] FILTER RESONANCE CONTROL
 - Change the "Q" or sharpness of the VCF filter
 
-### [12] FILTER TYPE SELECT
+### [12] FILTER TYPE SELECT HI-PASS
 - [HPF]: Allows signals above the cutoff frequency to pass
+
+### [13] FILTER TYPE SELECT LOW-PASS
 - [LPF]: Allows signals below the cutoff frequency to pass
 
-### [13] HEADPHONE LEVEL
+### [14] HEADPHONE LEVEL
 - Sets the level of the headphone output
 
-### [14] CUE/MIX CONTROL
+### [15] CUE/MIX CONTROL
 - Turn left (CUE) to hear the activated channel Cue.
 - If no channel Cue is activated the Mix output will be heared WIP
 - Turn right (Mix) to hear the Mix output
 - In the centre position the Cue signal and the main mix are summed together.
 
-### [15] BOOTH OUTPUT LEVEL
+### [16] BOOTH OUTPUT LEVEL
 - Sets the audio signal level for predefined monitor outputs
 - [BOOTH]: -inf dB to 0 dB
 
-### [16] MASTER OUTPUT LEVEL
+### [17] MASTER OUTPUT LEVEL
 - Sets the audio signal level for predefined public address outputs
 - [MASTER]: -inf dB to 0 dB
 
-### [17] DISPLAY <- wip
+### [18] DISPLAY <- wip
 - shows bpm for master and per input channel
 
-### [18] OUTPUT VU METER
+### [19] OUTPUT VU METER
 - Displays the audio level output from 8 predefined channels
 
 ## FRONT
