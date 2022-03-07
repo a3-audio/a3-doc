@@ -91,9 +91,9 @@ Quicklinks
    :maxdepth: 1
    :caption: A³ Developer
 
-   development/developer
    assembly/assembly
    configuration/configuration
+   development/developer
 
 .. toctree::
    :maxdepth: 1

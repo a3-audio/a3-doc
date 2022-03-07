@@ -21,4 +21,3 @@ moc_ui.py --serial_device /dev/ttyACM0 --server_ip "192.168.43.50" --server_port
 ## Teensy firmware
 Teensy 4.1 firmware is written in c++
 - ```Controller_Motion/software/teensy/src/main.cpp```
-- [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)

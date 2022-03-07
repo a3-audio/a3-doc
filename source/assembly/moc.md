@@ -70,11 +70,6 @@ SunFounder Raspberry Pi 4 Display Touchscreen 7 Inch | 3W
 ---|---
 Sum | 31.5W
 
-- raspberry pi 4b: 15W
-- teensy4.1: 2.5W
-- ws2811 40 LEDs: 11W
-- 
-
 ## Early versions
 ### 2020-2021
 #### A³ Motion v0.1

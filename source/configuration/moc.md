@@ -1,15 +1,17 @@
 # A³ Motion Configuration
-## Teensy
-software/teensy/src/main.cpp << [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
-
 ## Raspberry Pi 3 Model B
 - microSD card > 4GB
 
+## Teensy
+- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
+
 ## Installation from scratch <-wip
 install aarch64:
-https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
-
-2. search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
+- https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
+Find Raspberry PI ip-address:
+```
+nmap -sn 192.168.1.0/24
+```
 
 ### Root operations on raspberry
 ```
@@ -73,6 +75,3 @@ nano /boot/config.txt
 display_rotate=1
 dtoverlay=pi3-disable-bt
 ```
-
-## Early versions
-### 2020-2021

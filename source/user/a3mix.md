@@ -73,8 +73,8 @@
 - Sets the audio signal level for predefined public address outputs
 - [MASTER]: -inf dB to 0 dB
 
-### [17] DISPLAY
-- shows bpm per stereo track
+### [17] DISPLAY <- wip
+- shows bpm for master and per input channel
 
 ### [18] OUTPUT VU METER
 - Displays the audio level output from 8 predefined channels

@@ -105,7 +105,7 @@ receives    name
 ```
 Basechannels
 ```
-receives	from			name                
+receives    from            name                
 -----------------------------------------
 [1,2]		hardware     	dj1-input
 [1,2]		dj1-input     	dj1-stereo
