@@ -8,7 +8,7 @@ The speaker must be placed in a most chubbiest spherical installation. Electroni
 - A³ Core decode: Prepare your show in 3rd order b-format (acn, sn3d)
 - A³ Core through: Prepare discrete tracks for each speaker
 - A³ Core vSpeak: Virtual speakerlayout to fit Dolby, Auro-3D or any other standarized speaker setup
-- A³ DJ-Setup: Use A³ Mix and A³ Motion to get most fun out of A³ System
+- A³ DJ-Setup: Use A³ Core, A³ Mix and A³ Motion to get most fun out of it
 
 ## Media
 - [a3-cloud](https://cloud.a3-audio.com/d/7475495ddee04d428073)
