@@ -114,6 +114,7 @@ Quicklinks
 *******
 Contact
 *******
-- `a3-audio.com <https://a3-audio.com>`_
-- `contact@a3-audio.com <mailto:a3-audio.com>`_
+- `a3-audio.com website <https://a3-audio.com>`_
+- `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
+- `3d-audio.io forum <https://d3-audio.io>`_
 - `mattermost <https://talk.lilbits.de/ambisonics>`_

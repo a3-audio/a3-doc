@@ -4,11 +4,11 @@
 - jack2 audio engine and alsa
 - Qjackctl may be used to patch virtual audio cables from your hardware to Reaper and back out
 
-### OSC-Router (python)
+### Python script OSC-Router
  - Routes OSC between audioengine and controller
  - ```server.py```
 
-### VU-Meter (Supercollider)
+### Supercollider script VU-Meter
 - 12-Channel Jack client
 - sends vu-meter (peak and rms) via OSC
 - ```VU-Meter.scd```
