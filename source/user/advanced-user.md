@@ -4,8 +4,8 @@
 The speaker must be placed in a most chubbiest spherical installation. Electronic corrections are possible for closer speakers.
 
 ## A³ Core Operation
-- A³ Core encodes: Prepare stereo or mono audiotracks and OSC. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send OSC data from your daw.
-- A³ Core decodes: Prepare your show in 3rd order b-format (acn, sn3d)
+- A³ Core encode: Prepare stereo or mono audiotracks and OSC. You can use [osccontrol-light](https://github.com/drlight-code/osccontrol-light) vst plugin to send OSC data from your daw.
+- A³ Core decode: Prepare your show in 3rd order b-format (acn, sn3d)
 - A³ Core through: Prepare discrete tracks for each speaker
 - A³ Core vSpeak: Virtual speakerlayout to fit Dolby, Auro-3D or any other standarized speaker setup
 - A³ DJ-Setup: Use A³ Mix and A³ Motion to get most fun out of A³ System
