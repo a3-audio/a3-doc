@@ -33,7 +33,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+# templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -46,20 +46,17 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 #html_theme = 'bizstyle'
-html_theme = 'karma_sphinx_theme'
+#html_theme = 'karma_sphinx_theme'
+html_theme_path = ["karma_sphinx_theme"]
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
 
-html_theme_options = {
-    'navigation_depth': 2,
-    'includehidden': True,
-    'titles_only': True
-}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['_static', 'karma_sphinx_theme/static']
 
 source_suffix = {
     '.rst': 'restructuredtext',
