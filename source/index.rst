@@ -65,6 +65,14 @@ Quickstart
 - Plug in your headphones
 - Power on
 
+*******
+Contact
+*******
+- Website: `a3-audio.com <https://a3-audio.com>`_
+- E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
+- Forum: `3d-audio.io <https://d3-audio.io>`_
+- Mattermost: `mattermost <https://talk.lilbits.de/ambisonics>`_
+
 **********
 Quicklinks
 **********
@@ -117,10 +125,3 @@ Quicklinks
    development/osc
    assembly/parts
 
-*******
-Contact
-*******
-- `a3-audio.com website <https://a3-audio.com>`_
-- `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
-- `3d-audio.io forum <https://d3-audio.io>`_
-- `mattermost <https://talk.lilbits.de/ambisonics>`_
