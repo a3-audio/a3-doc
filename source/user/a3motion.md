@@ -46,5 +46,16 @@
 - Press white buttons to switch motion on the next beat (related to 120bpm)
 - Width [2] and Reverb [3] will not be recorded
 
+## A³ Motion Technical specification
+- PoE to USB 5V Adapter
+- Raspberry Pi 3 Model B
+- Teensy 4.1
+- A³ Buttonmatrix PCB v0.1
+- A³ Motion PCB V0.1
+- 8 potentimeter
+- 16 led buttons
+- 1x Cat extender socket
+- Bunch of cables
+
 ## Misc
 - Items not listed under Box Contents are sold separately.

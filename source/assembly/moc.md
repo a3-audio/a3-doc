@@ -1,18 +1,8 @@
 # A³ Motion Assembly
-### Hardware
-- PoE to USB 5V Adapter
-- Raspberry Pi 3 Model B
-- Teensy 4.1
-- A³ Motion PCB V0.1
-- 8 potentimeter
-- 16 led buttons (ws2811)
-- 1x Cat extender socket
-- Bunch of cables
-
-### PCB's
+## PCB's
 A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects.
 
-#### Mainboard PCB v0.1
+### A³ Motion PCB v0.1
 - Kicad project:
 ```
 Ambijockey/hardware/moc/Mainboard-pcb/
@@ -22,7 +12,7 @@ Ambijockey/hardware/moc/Mainboard-pcb/
 ![](pics_assembly/v01/a3motion-schematic.jpg)
 ![](pics_assembly/v01/a3motion-pcb-design.jpg)
 
-#### Buttonmatrix PCB v0.1
+### A³ Buttonmatrix PCB v0.1
 - Kicad project:
 ```
 Ambijockey/hardware/moc/Buttonmatrix-pcb/
@@ -33,7 +23,7 @@ Ambijockey/hardware/moc/Buttonmatrix-pcb/
 ![](pics_assembly/v01/a3motion-buttons-schematic.jpg)
 ![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
 
-### Housing v0.2
+## Housing v0.2
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
 - Blender project:
 ```
@@ -45,19 +35,7 @@ Ambijockey/hardware/moc/housing
 ```
 ![a3motion-housing](pics_assembly/v01/a3motion-housing.png)
 
-### Hardware
-- runs on a Raspberry Pi 3 Model B
-- powered with PoE -> downstep to 3v on Teensy
-- sbc is connected via usb (/dev/ttyACM0) to
-- teensy 4.1, it has
-    - 1 multiplexer hc4051 (8ch)
-        function: width and 3d-boost per channel
-    - 2 hc4051
-        function: Buttonmatrix
-    - 1 NeoPixel-strip (ws2811 led-controller)
-        - 16 x status leds buttonmatrix
-  
-### Estimated power consumption
+## Estimated power consumption
 Device | Watts
 ---|---
 Raspberry Pi 4b | 15W
