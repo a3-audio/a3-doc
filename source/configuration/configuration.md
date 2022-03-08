@@ -1,6 +1,7 @@
 # A³ Configuration overview
-It is based on Archlinux. Configuration can be tricky and this is not a complete guide.
-## Prerequisites on operating systems
+Configuration can be tricky and this doc must be seen as example only.
+
+## Device configuration
 - [A³ Core Configuration](https://doc.a3-audio.com/configuration/core.html)
 - [A³ Mix Configuration](https://doc.a3-audio.com/configuration/mic.html)
 - [A³ Motion Configuration](https://doc.a3-audio.com/configuration/moc.html)

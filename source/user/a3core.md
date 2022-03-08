@@ -4,13 +4,7 @@
 - Compatible to linux audiohardware (needed)
 - VNC remote desktop control
 
-## Box Contents
-- A³ Core
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## Connecting diagram front
+## Part Name and functions
 ![A³ Core numbered](pics_user/a3_systen_symbol_core_numbered.png)
 
 ### [1] POWER BUTTON
@@ -31,6 +25,12 @@
 
 ### POWER SOCKET
 - Connect power cable to 230V power socket
+
+## Box Contents
+- A³ Core
+- Network cable
+- Quickstart Guide
+- Safety & Warranty Manual
 
 ## Misc
 - Items not listed under Box Contents are sold separately.

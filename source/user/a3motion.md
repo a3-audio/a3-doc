@@ -4,13 +4,7 @@
 - 7" full-color capacitive multi-touch display
 - USB-A 2.0 slot for storage with presets (WIP)
 
-## Box Contents
-- A³ Motion
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## TOP VIEW
+## Part Name and functions
 ![A³ Motion numbered](pics_user/a3_systen_symbol_moc_numbered.png)
 
 ### [1] STEREO WIDTH SEPARATION
@@ -20,7 +14,7 @@
 - Adjust send level to Reverb. The current state will be displayed on top of touchdisplay (-inf dB to 0 dB)
 
 ### [3] DISPLAY
-- This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operation to learn how to use some basic functions.
+- This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions.
 
 ### [4] FUNCTION ENCODER
 - Use these touch-sensitive knobs to adjust various parameters and settings. The knobs can control one column of parameters at a time. The Highlight section on bottom of screen indicates the currently selected column. Press the Encoder button to change which column of parameters they currently control.
@@ -33,7 +27,7 @@
 - When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
 - This device has a  estimated power consumption of 31.5W max. It powers up as soon as the PoE powersupply is connected.
 
-## Operation
+## Operating Instructions
 - Set looplength with Function Encoder [4]
 - Press and hold down one pad [5] to record motion from touchscreen 
 	- The pad will flash green / red to indicate record mode
@@ -59,3 +53,9 @@
 
 ## Misc
 - Items not listed under Box Contents are sold separately.
+
+## Box Contents
+- A³ Motion
+- Network cable
+- Quickstart Guide
+- Safety & Warranty Manual

@@ -6,13 +6,7 @@
 - WIP: USB-A 2.0 port to store presets
 - WIP: „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
 
-## Box Contents
-- A³ Motion
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## TOP VIEW
+## Part Name and functions
 ![A³ Mix numbered](pics_user/a3_systen_symbol_mix_numbered.png)
 
 ### [1] TRIM CONTROL
@@ -94,6 +88,12 @@
 ### NETWORK AND PoE
 - When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
 - This device has a  estimated power consumption of 24W max. It powers up as soon as the PoE powersupply is connected.
+
+## Box Contents
+- A³ Motion
+- Network cable
+- Quickstart Guide
+- Safety & Warranty Manual
 
 ## Misc
 - Items not listed under Box Contents are sold separately.
