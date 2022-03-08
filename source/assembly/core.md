@@ -1,5 +1,5 @@
 # A³ Core Assembly
-### A³ Core v0.1
+## A³ Core v0.1
 ![a3core-front-prototype](pics_assembly/v01/a3core-front-prototype.jpg)
 ![a3core-back-prototype](pics_assembly/v01/a3core-back-prototype.jpg)
 

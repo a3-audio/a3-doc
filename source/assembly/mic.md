@@ -1,5 +1,5 @@
 # A³ Mix Assembly
-### A³ Mix v0.1
+## A³ Mix v0.1
 ![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 
 ### A³ Mix PCB v0.2
@@ -11,6 +11,7 @@ A³ Mix pcb is published as kicad project. You should find all information to as
 ![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
 ![a3mix-pcb-design](pics_assembly/v01/a3mix-pcb-design.jpg)
 
+### Multiplexer pin configuration
 #### Multiplexer 1-4 (hc4051)
 Function (potentiometer)| Pin
 ---|---
@@ -36,7 +37,7 @@ Function (buttons) | Pin
 FX TOGGLE | 0-3
 3D TOGGLE | 4-7
 
-#### Leds
+### Leds
 - 4 led-buttons for heapdphones prelisten function (pfl)
 - 4x9 NeoPixel for input vu (ws2811)
 - 10 NeoPixel for fx and 3d-section (ws2811)

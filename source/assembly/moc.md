@@ -1,5 +1,5 @@
 # A³ Motion Assembly
-#### A³ Motion v0.2
+## A³ Motion v0.2
 ![](pics_assembly/v02/a3motion-housing.JPG)
 
 ## PCB's
