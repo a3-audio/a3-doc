@@ -17,7 +17,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ Audio UG (haftungsbeschränkt)'
+copyright = 'A³ Audio - Bradaczek Eismann Schmitz Schulze GbR'
+#copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
 
 # The full version, including alpha/beta/rc tags
