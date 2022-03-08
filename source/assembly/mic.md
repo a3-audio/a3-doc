@@ -28,8 +28,8 @@ MASTER | 0
 BOOTH | 1
 PHONES MIX | 2
 PHONES VOLUME | 3
-FX FREQUENCY | 4
-FX RESONANCE | 5
+FX FREQUENCY | 7
+FX RESONANCE | 8
 
 #### Multiplexer 6 (hc4051)
 Function (buttons) | Pin
