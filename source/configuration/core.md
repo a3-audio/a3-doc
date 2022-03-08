@@ -1,6 +1,6 @@
 # A³ Core Configuration
 ## SSD
-- [Flash Device Images](https://doc.a3-audio.com/development/imaging.html)
+- [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - SSD > 64GB
 
 ## Audiohardware

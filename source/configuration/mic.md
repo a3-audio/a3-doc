@@ -3,14 +3,14 @@
 - [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
 ## Raspberry Pi 4
-- [Flash Device Images](https://doc.a3-audio.com/development/imaging.html)
+- [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - microSD card > 4GB
 
 ##  Install Raspberry PI from scratch <-wip
 ### Install Arch Linux Arm
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 
-### Find raspi ip
+### Find Raspberry PI's ip address
 ```
 nmap -sn 192.168.1.0/24
 ```

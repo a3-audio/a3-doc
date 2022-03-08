@@ -1,4 +1,9 @@
 # A³ OSC and serial communication
+## IP-Addresses
+- A³ Core 192.168.43.50
+- A³ Mix 192.168.43.51
+- A³ Motion 192.168.43.52
+
 ## A³ Core
 All parameters are normalized to float [range 0-1] 
 - ```server.py```
