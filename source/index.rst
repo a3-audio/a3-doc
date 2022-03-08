@@ -20,7 +20,8 @@ A³ Motion (The Motion Sampler)
 
 `A³ Motion <https://doc.a3-audio.com/user/a3motion.html>`_ is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
 
-.. image:: pics_landing/a3_system_symbol_moc.png
+.. image:: pics_landing/a3_system_symbol_motion.png
+   :target: https://doc\.a3-audio\.com/user/a3motion\.html
    :height: 500px
    :width: 500 px
    :scale: 50 %
@@ -40,6 +41,7 @@ A³ Core (The Sound Server)
 `A³ Core <https://doc.a3-audio.com/user/a3core.html>`_  processes analog audiosignals, calculates 3D audio spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
 
 .. image:: pics_landing/a3_system_symbol_core.png
+   :target: https://doc\.a3-audio\.com/user/a3core\.html
    :height: 500px
    :width: 500 px
    :scale: 50 %
