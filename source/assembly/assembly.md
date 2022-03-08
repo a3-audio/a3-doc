@@ -1,13 +1,12 @@
 # A³ Assembly overview
-## Hardware layout
+A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
+
+## A³ Devices
 - A³ Core: [A³ Core](https://doc.a3-audio.com/assembly/core.html)
 - A³ Mix: [A³ Mic](https://doc.a3-audio.com/assembly/mic.html)
 - A³ Motion: [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
 
-## Hardware
-A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
-
-## Current prototype
+## A³ System Current prototype
 ### A³ Mix v0.1 taped
 ![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
 ### A³ Motion v0.2
