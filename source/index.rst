@@ -17,7 +17,9 @@ Contact
 - Website: `a3-audio.com <https://a3-audio.com>`_
 - E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
 - Forum: `3d-audio.io <https://d3-audio.io>`_
-- Mattermost: `mattermost <https://talk.lilbits.de/ambisonics>`_
+
+- Mattermost: `A³ mattermost <https://talk.lilbits.de/ambisonics>`_
+- Media: `A³ Cloud <https://cloud.a3-audio.com/d/7475495ddee04d428073>`_
 
 *****
 Links

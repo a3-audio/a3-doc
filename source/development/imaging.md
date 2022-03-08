@@ -22,7 +22,7 @@ mmcblk0     179:0    0  59.6G  0 disk
 sudo dd BS=4M if=path/to/extracted/...img of=/dev/mmcblk0
 ```
 
-## Resize device images
+## Resize device images <- wip
 ```
 lsblk
 mkdir /mnt/tmp
