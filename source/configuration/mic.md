@@ -4,7 +4,7 @@ The firmware is located in the github repository
 - [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
 ## Raspberry Pi 4
-- [Flash image](https://doc.a3-audio.com/development/imaging.html)
+- [Flash Device Images](https://doc.a3-audio.com/development/imaging.html)
 - microSD card > 4GB
 
 ##  Install from scratch <-wip

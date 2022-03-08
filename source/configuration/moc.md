@@ -4,7 +4,7 @@
 
 ## Raspberry Pi 3 Model B
 - microSD card > 4GB
-- [Imaging](https://doc.a3-audio.com/development/imaging.html)
+- [Flash Device Images](https://doc.a3-audio.com/development/imaging.html)
 
 ## Installation from scratch <-wip
 install aarch64:
