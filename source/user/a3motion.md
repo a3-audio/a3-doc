@@ -22,10 +22,9 @@
 ### [5] MOTION SAMPLE PADS
 - Each channel has a column of four iluminated sample pads. See Operaton to use basic functions
 
-## BACKSIDE
-### NETWORK AND PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
-- This device has a  estimated power consumption of 31.5W max. It powers up as soon as the PoE powersupply is connected.
+## BACK
+### ETHERNET SOCKET
+- Connect ethernet cable to PoE switch here
 
 ## Operating Instructions
 - Set looplength with Function Encoder [4]
@@ -40,22 +39,23 @@
 - Press white buttons to switch motion on the next beat (related to 120bpm)
 - Width [2] and Reverb [3] will not be recorded
 
-## A³ Motion Technical specification
+## A³ Motion Specification
 - PoE to USB 5V Adapter
+- PoE cost 31.5W max
 - Raspberry Pi 3 Model B
 - Teensy 4.1
 - A³ Buttonmatrix PCB v0.1
 - A³ Motion PCB V0.1
-- 8 potentimeter
-- 16 led buttons
-- 1x Cat extender socket
-- Bunch of cables
-
-## Misc
-- Items not listed under Box Contents are sold separately.
 
 ## Box Contents
 - A³ Motion
 - Network cable
 - Quickstart Guide
 - Safety & Warranty Manual
+
+## NETWORK AND PoE
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
+- This device powers up as soon as the PoE powersupply is connected.
+
+## Misc
+- Items not listed under Box Contents are sold separately.

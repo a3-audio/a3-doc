@@ -1,4 +1,4 @@
-# A³ Core
+# A³ Core Operating Instructions
 ## Features:
 - A³ Core is a free configurable audio server
 - Compatible to linux audiohardware (needed)
@@ -25,6 +25,9 @@
 
 ### POWER SOCKET
 - Connect power cable to 230V power socket
+
+## Specification
+- The system will be custom build and configured by A³ to solve customer needs.
 
 ## Box Contents
 - A³ Core

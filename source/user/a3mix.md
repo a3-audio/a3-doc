@@ -3,7 +3,6 @@
 - Standalone OSC controller
 - Input vu meter per channel
 - 8 Output vu meters
-- WIP: USB-A 2.0 port to store presets
 - WIP: „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
 
 ## Part Name and functions
@@ -75,19 +74,26 @@
 ### [19] OUTPUT VU METER
 - Displays the audio level output from 8 predefined channels
 
-## FRONT
+## Front
 ### PHONES OUTPUT TERMINAL
 - Connect headphones here
 - 6.3mm stereo phone plug
 
-## BACK
+## Back
 ### PHONES INPUT TERMINAL
 - Connect predefined Cue outputs here
 -  2x female XLR Sockets
 
-### NETWORK AND PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
-- This device has a  estimated power consumption of 24W max. It powers up as soon as the PoE powersupply is connected.
+### ETHERNET SOCKET
+- Connect ethernet cable to PoE switch here
+
+## A³ Motion Specification
+- PoE to USB 5V Adapter
+- PoE cost 24W max
+- Raspberry Pi 3 Model B
+- Teensy 4.1
+- A³ Buttonmatrix PCB v0.1
+- A³ Motion PCB V0.1
 
 ## Box Contents
 - A³ Motion
@@ -95,5 +101,9 @@
 - Quickstart Guide
 - Safety & Warranty Manual
 
+## Network and PoE
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
+- This device powers up as soon as the PoE powersupply is connected.
+- 
 ## Misc
 - Items not listed under Box Contents are sold separately.
