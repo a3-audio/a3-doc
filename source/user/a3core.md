@@ -1,4 +1,4 @@
-# A³ Core Operating Instructions
+# A³ Core
 ## Features:
 - A³ Core is a free configurable audio server
 - Compatible to linux audiohardware (needed)

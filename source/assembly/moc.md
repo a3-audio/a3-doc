@@ -1,6 +1,6 @@
 # A³ Motion Assembly
 ## PCB's
-A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects.
+A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects
 
 ### A³ Motion PCB v0.1
 - Kicad project:

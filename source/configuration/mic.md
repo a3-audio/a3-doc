@@ -1,6 +1,6 @@
 # A³ Mix Configuration
 ## Teensy
-The firmware is located in the github repository.
+The firmware is located in the github repository
 - [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
 ## Raspberry Pi 4
@@ -11,8 +11,8 @@ The firmware is located in the github repository.
 ### Arch Linux Arm
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 - Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
-- login as the default user alarm with the password alarm.
-- The default root password is root.
+- login as the default user alarm with the password alarm
+- The default root password is root
   
 #### Root operations on the Raspberry: 
 ```

@@ -1,6 +1,6 @@
 # A³ Core Configuration
  ## Audiohardware
-The audio hardware could be any class compliant or compatible Madi/Dante card. It is connected to A³ Core via PCIe or USB. Instruments, speakers, headphones and DJ Gear are directly plugged into A³ Core's audiohardware.
+The audio hardware could be any class compliant or compatible Madi/Dante card. It is connected to A³ Core via PCIe or USB. Instruments, speakers, headphones and DJ Gear are directly plugged into A³ Core's audiohardware
 
 Setup audiohardware:
 ```Server/config/.xinitrc```

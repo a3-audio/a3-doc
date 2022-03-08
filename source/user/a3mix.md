@@ -3,7 +3,7 @@
 - Standalone OSC controller
 - Input vu meter per channel
 - 8 Output vu meters
-- WIP: „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
+- Tape-in section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus <- wip
 
 ## Part Name and functions
 ![A³ Mix numbered](pics_user/a3_systen_symbol_mix_numbered.png)
@@ -58,7 +58,7 @@
 - Turn left (CUE) to hear the activated channel Cue.
 - If no channel Cue is activated the Mix output will be heared WIP
 - Turn right (Mix) to hear the Mix output
-- In the centre position the Cue signal and the main mix are summed together.
+- In the centre position the Cue signal and the main mix are summed together
 
 ### [16] BOOTH OUTPUT LEVEL
 - Sets the audio signal level for predefined monitor outputs
@@ -95,15 +95,15 @@
 - A³ Buttonmatrix PCB v0.1
 - A³ Motion PCB V0.1
 
+## Network and PoE
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch
+- This device powers up as soon as the PoE powersupply is connected
+
 ## Box Contents
 - A³ Motion
 - Network cable
 - Quickstart Guide
 - Safety & Warranty Manual
 
-## Network and PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
-- This device powers up as soon as the PoE powersupply is connected.
-- 
 ## Misc
-- Items not listed under Box Contents are sold separately.
+- Items not listed under Box Contents are sold separately

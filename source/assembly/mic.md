@@ -62,8 +62,8 @@ Teensy 4.1 | 2.5W
 ---|---
 Sum | 25W
 
-#### Headphone
-2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphone amp is needed.
+#### Headphones
+2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphones amp is needed
 
 ### A³ Mix v0.2 Housing
 A³ Mix housing isn't ready yet ...

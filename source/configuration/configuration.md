@@ -1,5 +1,5 @@
 # A³ Configuration overview
-Configuration can be tricky and this doc must be seen as example only.
+Configuration can be tricky and this doc must be seen as example only
 
 ## Device configuration
 - [A³ Core Configuration](https://doc.a3-audio.com/configuration/core.html)
