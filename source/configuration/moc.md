@@ -3,15 +3,23 @@
 - [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
 
 ## Raspberry Pi 3 Model B
-- microSD card > 4GB
 - [Flash Device Images](https://doc.a3-audio.com/development/imaging.html)
+- microSD card > 4GB
 
-## Installation from scratch <-wip
-install aarch64:
+##  Install Raspberry PI from scratch <-wip
+### install aarch64
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
-Find Raspberry PI ip-address:
+
+### Find Raspberry PI ip-address
 ```
 nmap -sn 192.168.1.0/24
+```
+
+### Login
+```
+ssh alarm@found_ip_address
+password: alarm
+root password is "root"
 ```
 
 ### Root operations on raspberry
@@ -26,13 +34,15 @@ usermod -aG uucp aaa
 usermod -aG video aaa
 usermod -aG input aaa
 ```
-#### Clone repo:
+
+#### Clone repo
 ```
 cd /home/aaa
 git clone git@github.com:ambisonics-audio-association/Ambijockey.git
 cd Ambijockey/ControllerMotion/software/
 git clone git@github.com:ambisonics-audio-association/MotionControllerUI.git
 ``` 
+
 #### Copy files to corresponding system-folder:
 ```
  /home/aaa/ControllerMotion/software/raspberry
@@ -50,16 +60,19 @@ git clone git@github.com:ambisonics-audio-association/MotionControllerUI.git
     │       └── Xwrapper.config
 	└── home/aaa/.xinitrc
 ```
+
 #### Install depencies:
 ``` 
 pacman -S qt6-tools python-opengl qt6-svg git
 python-pyserial-asyncio (from aur)
 ``` 
+
 #### Enable services:
 ``` 
 sudo systemctl enable getty@tty2
 sudo systemctl enable moc
 ``` 
+
 #### Setup static ip-address:
 ``` 
 mv /etc/dhcpcd.conf /etc/dhcpcd.conf.bck
@@ -70,6 +83,7 @@ nano /etc/dhcpcd.conf
 	  static routers=192.168.43.1
 	  static domain_name_servers=192.168.43.1 8.8.8.8
 ``` 
+
 #### Edit the Raspberry config-file
 ```
 nano /boot/config.txt
