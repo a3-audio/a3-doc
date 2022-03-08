@@ -5,7 +5,7 @@
 - VNC remote desktop control
 
 ## Part Name and functions
-![A³ Core numbered](pics_user/a3_systen_symbol_core_numbered.png)
+![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
 ### [1] POWER BUTTON
 - Push to turn the device on
