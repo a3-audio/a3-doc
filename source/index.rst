@@ -30,7 +30,7 @@ A³ Mix (The DJ Mixer)
 `A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_ is a standalone OSC controller which behaves like a 4 channel DJ mixer.
 
 .. image:: pics_landing/a3_system_symbol_mix.png
-   :target: `A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_
+   :target: https://doc\.a3-audio\.com/user/a3mix\.html
    :height: 500px
    :width: 500 px
    :scale: 50 %
