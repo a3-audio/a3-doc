@@ -25,10 +25,7 @@ moc_ui.py --serial_device /dev/ttyACM0 --server_ip "192.168.43.50" --server_port
 ## Pictures
 ### Software Mocup
 ![](pics_development/a3motion-software-mockup_01.png)
-![](pics_development/a3motion-software-mockup.png)
 
-### Design sketches
-![](pics_development/a3motion-edit-mode-design.png)
-![](pics_development/a3moc_mockup-01.png)
+### Idea
 ![](pics_development/a3moc_mockup.png)
 
