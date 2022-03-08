@@ -10,7 +10,7 @@
 - Quickstart Guide
 - Safety & Warranty Manual
 
-## Connecting Diagram front
+## Connecting diagram front
 ![A³ Core numbered](pics_user/a3_systen_symbol_core_numbered.png)
 
 ### [1] POWER BUTTON
@@ -22,14 +22,14 @@
 ### [3] POWER LED
 - Indicates power status
 
+### [4] Fan and Filter
+- Clean it regular
+
 ## Connections back
-### [4] NETWORK SOCKET
+### NETWORK SOCKET
 - Connect ethernet cable to your network switch
 
-### [5] PC SOCKETS
-- Supplied by mainboard
-
-### [6] POWER SOCKET
+### POWER SOCKET
 - Connect power cable to 230V power socket
 
 ## Misc

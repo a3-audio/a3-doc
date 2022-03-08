@@ -123,5 +123,4 @@ Quicklinks
    development/flashTeensy
    development/imaging   
    development/osc
-   assembly/parts
 

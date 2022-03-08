@@ -1,16 +1,11 @@
 # A³ Motion Assembly
-## A³ Motion v0.2
-![](pics_assembly/v02/a3motion.JPG)
-![](pics_assembly/v02/a3motion-housing.JPG)
-
 ### Hardware
 - PoE to USB 5V Adapter
 - Raspberry Pi 3 Model B
 - Teensy 4.1
 - A³ Motion PCB V0.1
 - 8 potentimeter
-- 16 buttons
-- 16 NeoPixel (ws2811)
+- 16 led buttons (ws2811)
 - 1x Cat extender socket
 - Bunch of cables
 
@@ -22,6 +17,8 @@ A³ Motion pcbs are published as kicad projects. You should find all information
 ```
 Ambijockey/hardware/moc/Mainboard-pcb/
 ```
+![](pics_assembly/v01/a3motion-pcb-v01-front.jpg)
+![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
 ![](pics_assembly/v01/a3motion-schematic.jpg)
 ![](pics_assembly/v01/a3motion-pcb-design.jpg)
 
@@ -72,6 +69,8 @@ Sum | 31.5W
 
 ## Early versions
 ### 2020-2021
+#### A³ Motion v0.2
+![](pics_assembly/v02/a3motion-housing.JPG)
 #### A³ Motion v0.1
 ![](pics_assembly/v01/a3motion-prototype.jpg)
 ![](pics_assembly/v01/a3motion-wires.jpg)
@@ -81,4 +80,5 @@ Sum | 31.5W
 ![/a3motion-buttonmatrix-v01.jpg](pics_assembly/v00/a3motion-buttonmatrix-v01.jpg)
 #### Buttonmatrix v0.0
 ![a3motion-buttonmatrix-pcb-v01.jpg](pics_assembly/v00/a3motion-buttonmatrix-pcb-v01.jpg)
+#### A³ Motion v0.0
 ![a3system-early.jpg](pics_assembly/v00/a3system-early.jpg)

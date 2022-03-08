@@ -1,6 +1,28 @@
-# A³ Imaging
-Work in progress snippets to build and restore deviceimages
+# A³ Device Images
+## Download image
+- [device images](https://cloud.a3-audio.com/d/744da83d0f994de9bc76)
 
+## Unpack image on linux
+```
+tar -xf path/to/...img.tar.gz
+```
+
+## Flash SD-Card on linux
+- Find device name of sdcard, note that the name could be different on your system:
+```
+lsblk
+
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+mmcblk0     179:0    0  59.6G  0 disk
+```
+
+### Flash image
+- Make shure that you've identified the right sdcard. This command overwrites target partitions:
+```
+dd BS=4M if=path/to/extracted/...img of=/dev/mmcblk0
+```
+
+## Work in progress snippets to build and resize drive images
 ```
 lsblk
 mkdir /mnt/tmp

@@ -1,11 +1,12 @@
 # A³ Mix Configuration
 ## Raspberry Pi 4
+- [Flash image](https://doc.a3-audio.com/development/imaging.html)
 - microSD card > 4GB
 
 ## Teensy
-- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
+- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
-##  Installation from scratch <-wip
+##  Install from scratch <-wip
 ### Arch Linux Arm
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 - Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24

@@ -1,7 +1,4 @@
 # A³ Mix Assembly
-## A³ Mix v0.1 taped
-![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
-
 ## Hardware
 - PoE to USB 5V Adapter
 - Raspberry Pi 3 Model B
@@ -21,10 +18,9 @@ A³ Mix pcb is published as kicad project. You should find all information to as
 ```
 /home/aaa/Ambijockey/hardware/mic/a3mix-mainboard-v0.2
 ```
-
+![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
 ![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
 ![a3mix-pcb-design](pics_assembly/v01/a3mix-pcb-design.jpg)
-![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
 
 #### Multiplexer 1-4 (hc4051)
 Function (potentiometer)| Pin
@@ -83,7 +79,8 @@ A³ Mix housing isn't ready yet ...
 
 ## Early versions
 ### 2020-2021
-#### A³ Mix v0.1
+### A³ Mix v0.1
+![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 ![a3mix-prototype-v01](pics_assembly/v00/a3mix-prototype-v01.jpg)
 #### A³ Mix PCB v0.1
 ![a3mix-pcb-v01](pics_assembly/v00/a3mix-pcb-v01.jpg)
