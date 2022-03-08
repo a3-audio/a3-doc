@@ -6,7 +6,7 @@ A working prototype exists. We applied intensive stress tests by using 12V car h
 - [A³ Mix Assembly](https://doc.a3-audio.com/assembly/mic.html)
 - [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html)
 
-## A³ System Current prototype
+## Current prototype
 ### A³ Mix v0.1 taped
 ![a3mix-prototype-taped](pics_assembly/v01/a3mix-prototype-taped.jpg)
 ### A³ Motion v0.2
