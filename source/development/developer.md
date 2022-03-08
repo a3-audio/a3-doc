@@ -7,11 +7,11 @@ On each device runs a pythonscript which sends and receives OSC (Open Sound Cont
 - [A³ Core Development](https://doc.a3-audio.com/development/core.html)
 
 ## Ressources
+- [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
-- [Imaging](https://doc.a3-audio.com/development/imaging.html)
-- [OSC](https://doc.a3-audio.com/development/osc.html)
+- [OSC and serial communication](https://doc.a3-audio.com/development/osc.html)
 
 ## Github
-- [A³ Github Project](https://github.com/orgs/ambisonic-audio-adventures/projects/1)
-- [A³ Mainrepo](https://github.com/ambisonic-audio-adventures)
-- [A³ Motion Controller UI repo](https://github.com/ambisonic-audio-adventures/MotionControllerUI)
+- [A³ Project](https://github.com/orgs/ambisonic-audio-adventures/projects/1)
+- [A³ Main](https://github.com/ambisonic-audio-adventures)
+- [A³ Motion Controller UI](https://github.com/ambisonic-audio-adventures/MotionControllerUI)
