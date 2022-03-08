@@ -1,17 +1,6 @@
 # A³ Mix Assembly
-## Hardware
-- PoE to USB 5V Adapter
-- Raspberry Pi 3 Model B
-- Teensy 4.1
-- A³ Mix PCB V0.2 
-- 22 potentimeter
-- 14 buttons
-- 46 NeoPixel (ws2811)
-- 8x32 pixel matrix (max7219)
-- 6.3mm phones socket
-- 2x XLRw socket
-- 1x Cat extender socket
-- Bunch of cables
+### A³ Mix v0.1
+![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 
 ### A³ Mix PCB v0.2
 A³ Mix pcb is published as kicad project. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:
@@ -80,7 +69,6 @@ A³ Mix housing isn't ready yet ...
 ## Early versions
 ### 2020-2021
 ### A³ Mix v0.1
-![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 ![a3mix-prototype-v01](pics_assembly/v00/a3mix-prototype-v01.jpg)
 #### A³ Mix PCB v0.1
 ![a3mix-pcb-v01](pics_assembly/v00/a3mix-pcb-v01.jpg)

@@ -1,4 +1,7 @@
 # A³ Motion Assembly
+#### A³ Motion v0.2
+![](pics_assembly/v02/a3motion-housing.JPG)
+
 ## PCB's
 A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects
 
@@ -47,8 +50,6 @@ Sum | 31.5W
 
 ## Early versions
 ### 2020-2021
-#### A³ Motion v0.2
-![](pics_assembly/v02/a3motion-housing.JPG)
 #### A³ Motion v0.1
 ![](pics_assembly/v01/a3motion-prototype.jpg)
 ![](pics_assembly/v01/a3motion-wires.jpg)

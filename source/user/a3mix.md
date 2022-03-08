@@ -87,13 +87,12 @@
 ### ETHERNET SOCKET
 - Connect ethernet cable to PoE switch here
 
-## A³ Motion Specification
+## A³ Mix Specification
 - PoE to USB 5V Adapter
 - PoE cost 24W max
 - Raspberry Pi 3 Model B
 - Teensy 4.1
-- A³ Buttonmatrix PCB v0.1
-- A³ Motion PCB V0.1
+- A³ Mix PCB V0.2
 
 ## Network and PoE
 - When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch
