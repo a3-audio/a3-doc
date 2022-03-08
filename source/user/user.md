@@ -23,15 +23,15 @@ The A³ system is made for 3D audio live interaction. It is a combination of thr
 
 ![Connection Diagram](pics_user/a3_systen_symbol_signalflow.png)
 
-# Requirements
+## Requirements
 -   PA soundsystem with at least 4 speakers    
 -   All speaker must be placed in a most chubbiest spherical installation around listening area. Electronic corrections are possible for closer speakers    
 -   A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
 
-# Optional
+## Optional
 -   Booth soundsystem with at least 4 speakers placed around the DJ desk
 
-# Quickstart
+## Quickstart
 -   Plug in your instruments vinyl, cd, daw ..    
 -   Plug in your speakers    
 -   Put speakers in regular circle around center    
@@ -39,7 +39,7 @@ The A³ system is made for 3D audio live interaction. It is a combination of thr
 -   Plug in your headphones    
 -   Power on
 
-# Contact
+## Contact
 -   Website: [a3-audio.com](https://a3-audio.com)
 -   E-Mail: [contact@a3-audio.com](mailto:contact%40a3-audio.com)
 -   Forum: [3d-audio.io](https://d3-audio.io)
