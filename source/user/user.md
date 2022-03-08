@@ -24,23 +24,24 @@ The A³ system is made for 3D audio live interaction. It is a combination of thr
 ![Connection Diagram](pics_user/a3_systen_symbol_signalflow.png)
 
 ## Requirements
--   PA soundsystem with at least 4 speakers    
--   All speaker must be placed in a most chubbiest spherical installation around listening area. Electronic corrections are possible for closer speakers    
--   A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
+- PA soundsystem with at least 4 speakers    
+- All speaker must be placed in a most chubbiest spherical installation around listening area. Electronic corrections are possible for closer speakers    
+- A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
 
 ## Optional
--   Booth soundsystem with at least 4 speakers placed around the DJ desk
+- Booth soundsystem with at least 4 speakers placed around the DJ desk
 
 ## Quickstart
--   Plug in your instruments vinyl, cd, daw ..    
--   Plug in your speakers    
--   Put speakers in regular circle around center    
--   Plug CAT cable from A³ Mix and A³ Motion to A³ Core    
--   Plug in your headphones    
--   Power on
+- Plug in your instruments vinyl, cd, daw ..    
+- Plug in your speakers    
+- Put speakers in regular circle around center    
+- Plug CAT cable from A³ Mix and A³ Motion to A³ Core    
+- Plug in your headphones    
+- Power on
 
 ## Contact
--   Website: [a3-audio.com](https://a3-audio.com)
--   E-Mail: [contact@a3-audio.com](mailto:contact%40a3-audio.com)
--   Forum: [3d-audio.io](https://d3-audio.io)
--   Mattermost: [mattermost](https://talk.lilbits.de/ambisonics)
+- Website: [a3-audio.com](https://a3-audio.com)
+- E-Mail: [contact@a3-audio.com](mailto:contact%40a3-audio.com)
+- Forum: [3d-audio.io](https://d3-audio.io)
+- Mattermost: [mattermost](https://talk.lilbits.de/ambisonics)
+- Media: [a3-cloud](https://cloud.a3-audio.com/d/7475495ddee04d428073)
