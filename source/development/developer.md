@@ -2,9 +2,9 @@
 On each device runs a pythonscript which sends and receives OSC (Open Sound Control). We use c++ to write microcontroller firmware and supercollider for vu-meter.
 
 ## Devices
-- [A³ Motion - configuration](https://doc.a3-audio.com/configuration/moc.html)
-- [A³ Mix - configuration](https://doc.a3-audio.com/configuration/mic.html)
-- [A³ Core - configuration](https://doc.a3-audio.com/configuration/core.html)
+- [A³ Motion Development](https://doc.a3-audio.com/development/moc.html)
+- [A³ Mix Development](https://doc.a3-audio.com/development/mic.html)
+- [A³ Core Development](https://doc.a3-audio.com/development/core.html)
 
 ## Ressources
 - [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
