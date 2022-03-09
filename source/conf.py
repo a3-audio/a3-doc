@@ -18,6 +18,7 @@
 
 project = 'A³ Documentation'
 copyright = 'A³ Audio - Bradaczek Eismann Schmitz Schulze GbR'
+
 #copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
 
@@ -50,6 +51,7 @@ exclude_patterns = []
 html_theme = 'karma_sphinx_theme'
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
+#html_last_updated_fmt = '%b, %d, %Y'
 
 html_theme_options = {
     'navigation_depth': 2,
@@ -68,4 +70,9 @@ source_suffix = {
     '.md': 'markdown',
 }
 
+
+# Das sollte angeblich css override können
+# https://ofosos.org/2018/12/28/landing-page-template/
+# def setup(app):
+#     app.add_stylesheet('css/custom.css')
 

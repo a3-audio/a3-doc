@@ -72,3 +72,9 @@ Links
    development/imaging   
    development/osc
 
+.. toctree::
+   :maxdepth: 1
+   :caption: A³ Legal
+
+   Legal Notice <https://stage.a3-audio.com/legal-notice.html>
+   Privacy Policy <https://stage.a3-audio.com/privacy-policy.html>
