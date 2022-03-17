@@ -112,6 +112,17 @@ systemctl --user enable a3_vu_meter.service
 systemctl --user enable jack@your_soundcard.conf
 ```
 
+### VNC
+Execute ```a3core/./a3vnc.sh``` on your computer to connect to A³ Core. Make shure your in the same network listed in here: 
+- [OSC and serial communication](https://doc.a3-audio.com/development/osc.html)
+
+#### Info screen
+![](pics_configuration/a3_core_screen_info.png)
+#### Sequencer  screen
+![](pics_configuration/a3_core_screen_sequencer.png)
+#### Mixer screen
+![](pics_configuration/a3_core_screen_mixer.png)
+
 ### Supercollider
 - open scide
 - execute ```Quarks.gui```
