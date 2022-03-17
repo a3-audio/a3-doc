@@ -13,7 +13,7 @@ For low latency audio the [archlinux-rt](https://aur.archlinux.org/packages/linu
 [realtime]
 Server = https://pkgbuild.com/~dvzrv/repos/realtime/$arch
 ```
-Then update the system and kernel with ```pacman -Syu archlinux-rt```.
+Then update the system and kernel with ```pacman -Syu linux-rt```.
 
 ### Configure audioengine
 Follow the Professional audio guide: [Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
