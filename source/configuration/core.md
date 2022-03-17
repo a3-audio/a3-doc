@@ -93,8 +93,14 @@ https://github.com/jacktrip/jmess-jack
         └── .xinitrc
 ```
 
+### Enable system services
+```
+systemctl enable autologin@.service
+systemctl enable core.service
+```
+
 ## Non root operations on A³ Core
-### Enable services
+### Enable user services
 ```
 systemctl --user enable a3_jack_connections.service
 systemctl --user enable a3_osc_router.service
