@@ -61,9 +61,14 @@ https://github.com/jacktrip/jmess-jack
 ```
 ├── etc
 │   ├── dhcpcd.conf
+│   ├── rtapp
+│   │   └── rtapp.conf
+│   ├── rtirq.conf
 │   ├── systemd
 │   │   └── system
-│   │       └── core.service
+│   │       ├── autologin@.service
+│   │       ├── core.service
+│   │       └── override.conf
 │   └── X11
 │       ├── xorg.conf.d
 │       │   └── 10-headless.conf
@@ -86,7 +91,6 @@ https://github.com/jacktrip/jmess-jack
         │   ├── config
         │   └── passwd
         └── .xinitrc
-
 ```
 
 ## Non root operations on A³ Core
