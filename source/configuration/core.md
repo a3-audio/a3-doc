@@ -66,7 +66,6 @@ https://github.com/jacktrip/jmess-jack
 │   │       └── core.service
 │   └── X11
 │       ├── xorg.conf.d
-│       │   ├── 00-keyboard.conf
 │       │   └── 10-headless.conf
 │       └── Xwrapper.config
 └── home
@@ -75,8 +74,8 @@ https://github.com/jacktrip/jmess-jack
         │   ├── i3
         │   │   └── config
         │   ├── jack
-        │   │   ├── esi.conf
-        │   │   └── usbstreamer.conf
+        │   │   ├── esi_gigaport_ex.conf
+        │   │   └── minidsp_usbstreamer.conf
         │   └── systemd
         │       └── user
         │           ├── a3_jack_connections.service
@@ -86,7 +85,7 @@ https://github.com/jacktrip/jmess-jack
         ├── .vnc
         │   ├── config
         │   └── passwd
-        └── .xinitrc``
+        └── .xinitrc
 
 ```
 
