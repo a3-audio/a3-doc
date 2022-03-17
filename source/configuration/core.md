@@ -5,19 +5,18 @@
 
 ## Installation from scratch <-wip
 ### Install Archlinux
-[Installation guide](https://wiki.archlinux.org/title/Installation_guide)
+Follow the guide from archlinux: [Installation guide](https://wiki.archlinux.org/title/Installation_guide)
 
 ### Install realtimekernel
-[archlinux-rt](https://aur.archlinux.org/packages/linux-rt)
-
-/etc/pacman.conf
+For low latency audio the [archlinux-rt](https://aur.archlinux.org/packages/linux-rt) kernel is needed. Edit ```/etc/pacman.conf``` and add this section:
 ```
 [realtime]
 Server = https://pkgbuild.com/~dvzrv/repos/realtime/$arch
 ```
+Then update the system and kernel with ```pacman -Syu archlinux-rt```.
 
-Follow the Professional audio guide:
-[Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
+### Configure audioengine
+Follow the Professional audio guide: [Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
 
 ## Root operations on A³ Core
 ### Setup user
@@ -100,20 +99,18 @@ systemctl enable core.service
 ```
 
 ## Non root operations on A³ Core
+### Audiohardware
+You could find out the right settings for your soundcard with qjackctl. Copy a configuration file from our repo to the following path and fill in your settings:
+```/home/aaa/.config/jack/your_soundcard.conf```
+
 ### Enable user services
 ```
 systemctl --user enable a3_jack_connections.service
 systemctl --user enable a3_osc_router.service
 systemctl --user enable a3_reaper.service
 systemctl --user enable a3_vu_meter.service
-
+systemctl --user enable jack@your_soundcard.conf
 ```
-
-### Audiohardware
-You could find out the right settings with qjackctl. Copy a configuration file from our repo to the following path:
-```/home/aaa/.config/jack/your_soundcard.conf```
-Fill in your settings, save it and enable jack service:
-```systemctl --user enable jack@your_soundcard.conf```
 
 ### Supercollider
 - open scide
