@@ -3,15 +3,11 @@
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - SSD > 64GB
 
-## Audiohardware
-Setup audiohardware:
-```Server/config/.xinitrc```
-
 ## Installation from scratch <-wip
-Install Archlinux:
+### Install Archlinux
 [Installation guide](https://wiki.archlinux.org/title/Installation_guide)
 
-Install realtimekernel:
+### Install realtimekernel
 [archlinux-rt](https://aur.archlinux.org/packages/linux-rt)
 
 /etc/pacman.conf
@@ -32,7 +28,7 @@ usermod -aG realtime aaa
 usermod -aG users aaa
 usermod -aG audio aaa
 usermod -aG video aaa
-
+chmod a+rw /dev/ttyACM0
 ``` 
 ### Install depencies
 ```
@@ -47,8 +43,6 @@ alsa-tools
 
 pip install numpy pyserial
 
-install rtapp (from aur)
-
 cd /home/aaa
 git clone git@github.com:ambisonics-audio-association/Ambijockey.git
 
@@ -59,45 +53,59 @@ https://www.reaper.fm/download.php
 - ./install-reaper.sh 
 
 when prompt answer to install in /opt
+
+Install jmess (a program to save and restore jack audio connections)
+https://github.com/jacktrip/jmess-jack
 ```
 ### Copy files to corresponding system-folder:
 ```
-/home/aaa/Ambijockey/Server/config/
 ├── etc
 │   ├── dhcpcd.conf
-│   ├── rtapp
-│   │   └── rtapp.conf
-│   ├── rtirq.conf
-│   └── systemd
-│       └── system
-│           └── core.service
-├── home
-│   └── aaa
-│       ├── .config
-│       │   └── i3
-│       │       ├── config
-│       │       └── layout
-│       │           ├── workspace-10.json
-│       │           ├── workspace-7.json
-│       │           ├── workspace-8.json
-│       │           └── workspace-9.json
-│       └── .xinitrc
-├── usr
-│   └── bin
-│       └── aaa-connections.sh
-└── .xinitrc
-```
-### Configure:
-```
-chmod +x /usr/bin/aaa-connections.sh
-chmod +x /home/aaa/Ambijockey/Server/startup.sh
-chmod a+rw /dev/ttyACM0
-systemctl enable core
-systemctl enable rtirq
-systemctl enable rtapp
-systemctl enable sshd
+│   ├── systemd
+│   │   └── system
+│   │       └── core.service
+│   └── X11
+│       ├── xorg.conf.d
+│       │   ├── 00-keyboard.conf
+│       │   └── 10-headless.conf
+│       └── Xwrapper.config
+└── home
+    └── aaa
+        ├── .config
+        │   ├── i3
+        │   │   └── config
+        │   ├── jack
+        │   │   ├── esi.conf
+        │   │   └── usbstreamer.conf
+        │   └── systemd
+        │       └── user
+        │           ├── a3_jack_connections.service
+        │           ├── a3_osc_router.service
+        │           ├── a3_reaper.service
+        │           └── a3_vu_meter.service
+        ├── .vnc
+        │   ├── config
+        │   └── passwd
+        └── .xinitrc``
 
 ```
+
+## Non root operations on A³ Core
+### Enable services
+```
+systemctl --user enable a3_jack_connections.service
+systemctl --user enable a3_osc_router.service
+systemctl --user enable a3_reaper.service
+systemctl --user enable a3_vu_meter.service
+
+```
+
+### Audiohardware
+You could find out the right settings with qjackctl. Copy a configuration file from our repo to the following path:
+```/home/aaa/.config/jack/your_soundcard.conf```
+Fill in your settings, save it and enable jack service:
+```systemctl --user enable jack@your_soundcard.conf```
+
 ### Supercollider
 - open scide
 - execute ```Quarks.gui```
