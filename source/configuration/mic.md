@@ -1,17 +1,26 @@
 # A³ Mix Configuration
 ## Teensy
-- ControllerMixer/software/teensy/src/main.cpp
-- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
+- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
 ## Raspberry Pi 4
+- [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - microSD card > 4GB
 
-##  Installation from scratch <-wip
-### Arch Linux Arm
+##  Install Raspberry PI from scratch <-wip
+### Install Arch Linux Arm
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
-- Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
-- login as the default user alarm with the password alarm.
-- The default root password is root.
+
+### Find Raspberry PI's ip address
+```
+nmap -sn 192.168.1.0/24
+```
+
+### Login
+```
+ssh alarm@found_ip_address
+password: alarm
+root password is "root"
+```
   
 #### Root operations on the Raspberry: 
 ```
@@ -49,6 +58,7 @@ cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
             └── system
                 └── mic.service
 ```
+
 #### Install python
 ```
 sudo pip install pyserial python-osc wheel python-dev-tools platformio
@@ -59,6 +69,7 @@ sudo pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blin
 
 ?? process
 ```
+
 #### Configure services
 ``` 
 ?? nano /boot/config.txt

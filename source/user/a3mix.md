@@ -3,17 +3,10 @@
 - Standalone OSC controller
 - Input vu meter per channel
 - 8 Output vu meters
-- WIP: USB-A 2.0 port to store presets
-- WIP: „tape-in“ section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus.
+- Tape-in section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus <- wip
 
-## Box Contents
-- A³ Motion
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## TOP VIEW
-![A³ Mix numbered](pics_user/a3_systen_symbol_mix_numbered.png)
+## Part Name and functions
+![A³ Mix numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 ### [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
@@ -52,46 +45,64 @@
 ### [11] FILTER RESONANCE CONTROL
 - Change the "Q" or sharpness of the VCF filter
 
-### [12] HEADPHONE LEVEL
+### [12] FILTER TYPE SELECT HI-PASS
+- [HPF]: Allows signals above the cutoff frequency to pass
+
+### [13] FILTER TYPE SELECT LOW-PASS
+- [LPF]: Allows signals below the cutoff frequency to pass
+
+### [14] HEADPHONE LEVEL
 - Sets the level of the headphone output
 
-### [13] CUE/MIX CONTROL
+### [15] CUE/MIX CONTROL
 - Turn left (CUE) to hear the activated channel Cue.
 - If no channel Cue is activated the Mix output will be heared WIP
 - Turn right (Mix) to hear the Mix output
-- In the centre position the Cue signal and the main mix are summed together.
+- In the centre position the Cue signal and the main mix are summed together
 
-### [14] BOOTH OUTPUT LEVEL
+### [16] BOOTH OUTPUT LEVEL
 - Sets the audio signal level for predefined monitor outputs
 - [BOOTH]: -inf dB to 0 dB
 
-### [15] MASTER OUTPUT LEVEL
+### [17] MASTER OUTPUT LEVEL
 - Sets the audio signal level for predefined public address outputs
 - [MASTER]: -inf dB to 0 dB
 
-### [16] DISPLAY
-- shows bpm per stereo track
+### [18] DISPLAY <- wip
+- shows bpm for master and per input channel
 
-### [17] OUTPUT VU METER
+### [19] OUTPUT VU METER
 - Displays the audio level output from 8 predefined channels
 
-### [18] FILTER TYPE SELECT
-- [HPF]: Allows signals above the cutoff frequency to pass
-- [LPF]: Allows signals below the cutoff frequency to pass
-
-## FRONT
+## Front
 ### PHONES OUTPUT TERMINAL
 - Connect headphones here
 - 6.3mm stereo phone plug
 
-## BACK
+## Back
 ### PHONES INPUT TERMINAL
 - Connect predefined Cue outputs here
 -  2x female XLR Sockets
 
-### NETWORK AND PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch.
-- This device has a  estimated power consumption of 24W max. It powers up as soon as the PoE powersupply is connected.
+### ETHERNET SOCKET
+- Connect ethernet cable to PoE switch here
+
+## A³ Mix Specification
+- PoE to USB 5V Adapter
+- PoE cost 24W max
+- Raspberry Pi 3 Model B
+- Teensy 4.1
+- A³ Mix PCB V0.2
+
+## Network and PoE
+- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch
+- This device powers up as soon as the PoE powersupply is connected
+
+## Box Contents
+- A³ Motion
+- Network cable
+- Quickstart Guide
+- Safety & Warranty Manual
 
 ## Misc
-- Items not listed under Box Contents are sold separately.
+- Items not listed under Box Contents are sold separately
