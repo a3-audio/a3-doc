@@ -52,13 +52,11 @@ Reach it via vnc player ```vncviewer QualityLevel 2 192.168.43.50```
 [22-inf] speaker pa
 ```
 
-## Reaper (Mixer and Pluginhost) 
-- VST plugins must be linux and reaper compatible
+## Reaper (Mixer and Pluginhost) Node mapping
+- See project for newest information:
  ```a3-audio.RPP```
 
-### Reaper Node mapping <- total wip (better see the reaperprojekt directly)
-
-## Reaper Master
+### Reaper Master
 ```
 receives    name                
 --------------------------------
@@ -69,7 +67,6 @@ receives    name
 [22-inf]   speaker FOH
 ```
 
-
 #### DJ Master
 ```
 receives    name                
@@ -79,6 +76,27 @@ receives    name
 [4-inf]    decoderbus
 ```
 
+##### Stereo
+```
+receives    name                
+--------------------------------
+[1,2]       dj(1-4)-channelbus
+```
+
+##### Subwoofer
+```
+receives    name                
+--------------------------------
+[3]        dj(1-4)-channelbus
+```
+
+##### Decoder
+```
+receives    name                
+--------------------------------
+[4-19]        dj(1-4)-channelbus
+```
+
 #### Booth Master
 ```
 [3]        subbus_booth
@@ -86,28 +104,27 @@ receives    name
 [4-inf]    decoderbus_booth
 ```
 
-##### Subwoofer  Mix
+##### Stereo booth
+```
+receives    name                
+--------------------------------
+[1,2]       dj(1-4)-channelbus
+```
+
+##### Subwoofer booth
 ```
 receives    name                
 --------------------------------
 [3]        dj(1-4)-channelbus
 ```
 
-##### Stereo Mix
+##### Decoder booth
 ```
 receives    name                
 --------------------------------
-[3]        dj(1-4)-channelbus
+[4-19]        dj(1-4)-channelbus
 ```
 
-##### Decoder Mix
-```
-receives    name                
---------------------------------
-[3]        dj(1-4)-channelbus
-```
-
-## Phones section
 ### Phones Master
 ```
 receives    name                
@@ -116,7 +133,7 @@ receives    name
 [1,2]       binauralbus_phones
 ```
 
-### dj(1-4)-stereo phones
+#### dj(1-4)-stereo phones
 ```
 receives    name
 --------------------------------
@@ -124,7 +141,7 @@ receives    name
 [1,2]       mainmix-pfl
 ```
 
-### dj(1-4)-binaural phones (3D)
+#### dj(1-4)-binaural phones (3D)
 ```
 receives    name
 --------------------------------
@@ -132,7 +149,7 @@ receives    name
 [3-18]      mainmix-pfl
 ```
 
-### dj(1-4)-pfl (pre fader listen)
+#### dj(1-4)-pfl (pre fader listen)
 ```
 receives    name
 --------------------------------
@@ -140,7 +157,7 @@ receives    name
 [4-19]      dj(1-4)-channelbus[b-format]
 ```
 
-### Mainmix Phones
+#### Mainmix Phones
 ```
 receives    name
 --------------------------------
@@ -149,8 +166,8 @@ receives    name
 [3-18]      reverb
 ```
 
-## Input section
-### dj(1-4)-channelbus
+### Input section
+#### dj(1-4)-channelbus
 ```
 receives    name                
 --------------------------------
@@ -162,21 +179,21 @@ receives    name
 [22-37]     b-format (pfl)
 ```
 
-### dj(1-4)-bformat
+##### dj(1-4)-bformat
 ```
 receives    from                        
 ---------------------
 [1,2]		dj(1-4)-input
 ```
 
-### dj(1-4)-stereo
+##### dj(1-4)-stereo
 ```
 receives    from      
 ---------------------
 [1,2]		dj(1-4)-input 
 ```
 
-### dj(1-4)-Input
+##### dj(1-4)-Input
 ```
 receives    from      
 --------------------
@@ -194,7 +211,7 @@ receives    name
 [1-16]      reverb  
 ```
 
-### Reverb
+#### Reverb
 ```
 receives    name  
 ------------------------
