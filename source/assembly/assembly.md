@@ -18,4 +18,3 @@ A working prototype exists. We applied intensive stress tests by using 12V car h
 ![a3-handwagon-packed](pics_assembly/v01/a3-handwagon-packed.jpg)
 ![a3-openair](pics_assembly/v01/a3-openair.jpg)
 ![a3-handwagon-finished](pics_assembly/v01/a3-handwagon-finished.jpg)
-

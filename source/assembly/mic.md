@@ -3,6 +3,7 @@
 ![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
 
 ### A³ Mix PCB v0.2
+
 A³ Mix pcb is published as kicad project. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:
 ```
 /home/aaa/Ambijockey/hardware/mic/a3mix-mainboard-v0.2
@@ -69,7 +70,9 @@ A³ Mix housing isn't ready yet ...
 
 ## Early versions
 ### 2020-2021
+
 ### A³ Mix v0.1
+
 ![a3mix-prototype-v01](pics_assembly/v00/a3mix-prototype-v01.jpg)
 #### A³ Mix PCB v0.1
 ![a3mix-pcb-v01](pics_assembly/v00/a3mix-pcb-v01.jpg)

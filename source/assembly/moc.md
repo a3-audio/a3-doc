@@ -1,5 +1,7 @@
 # A³ Motion Assembly
+
 ## A³ Motion v0.2
+
 ![](pics_assembly/v02/a3motion-housing.JPG)
 
 ## PCB's
@@ -7,6 +9,7 @@ A³ Motion pcbs are published as kicad projects. You should find all information
 
 ### A³ Motion PCB v0.1
 - Kicad project:
+
 ```
 Ambijockey/hardware/moc/Mainboard-pcb/
 ```
@@ -17,6 +20,7 @@ Ambijockey/hardware/moc/Mainboard-pcb/
 
 ### A³ Buttonmatrix PCB v0.1
 - Kicad project:
+
 ```
 Ambijockey/hardware/moc/Buttonmatrix-pcb/
 ```
@@ -27,6 +31,7 @@ Ambijockey/hardware/moc/Buttonmatrix-pcb/
 ![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
 
 ## Housing v0.2
+
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
 - Blender project:
 ```

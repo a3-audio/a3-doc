@@ -10,7 +10,6 @@ These docs are split in two sections:
 
 - The second section is the developer section wich is under heavy development and will probably never be completed. The developer section is splitted into three subsections: `Developer <https://doc.a3-audio.com/development/developer.html>`_ (about code), `Assembly <https://doc.a3-audio.com/assembly/assembly.html>`_ (about hardware), and `Configuration <https://doc.a3-audio.com/configuration/configuration.html>`_ (about operation system).
 
-
 *******
 Contact
 *******
