@@ -21,6 +21,7 @@ Follow the Professional audio guide: [Professional audio guide](https://wiki.arc
 ## Root operations on A³ Core
 ### Setup user
 ``` 
+nano /etc/hostname
 user-add -m aaa
 groupadd realtime
 usermod -aG realtime aaa
@@ -28,6 +29,9 @@ usermod -aG users aaa
 usermod -aG audio aaa
 usermod -aG video aaa
 chmod a+rw /dev/ttyACM0
+passwd root
+useradd -m aaa
+passwd aaa
 ``` 
 ### Install depencies
 ```
