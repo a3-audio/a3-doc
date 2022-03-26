@@ -22,60 +22,92 @@ password: alarm
 root password is "root"
 ```
   
-#### Root operations on the Raspberry: 
+### Root operations on the Raspberry: 
+#### Setup user and hostname
 ```
-pacman -Syu
+nano /etc/hostname
 
 useradd -m aaa
 passwd aaa
 
 groupadd dialout
+
+groupadd gpio
+chown root.gpio /dev/gpiochip0
+chmod g+rw /dev/gpiochip0
+
+usermod -aG gpio aaa
 usermod -aG dialout aaa
 usermod -aG users aaa
 usermod -aG tty aaa
 usermod -aG uucp aaa
+
+
+passwd root
+passwd aaa
 ```
 
 #### Install depencies
 ```
-pacman -S python python-osc python-pip git python-numpy gcc python-setuptools libusb-compat libusb
+pacman-key --init
+pacman-key --populate archlinuxarm
+pacman -Syu 
+pacman -S python
+pacman -S python-pip
+pacman -S git
+pacman -S libusb
+pacman -S libusb-compat
+pacman -S vim
+pacman -S gcc
+pacman -S teensy_loader_cli
+pacman -S bash-completion
 
-exit
+pacman -S gpio-utils
 ```
 #### Copy Files
 ```
-ssh aaa@192.168.1.x
-userdel pi
-
-git clone git@github.com:ambisonics-audio-association/Ambijockey.git
-
-cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
-    └── etc
-        ├── dhcpcd.conf
-		├── modprobe.d/raspi-blacklist.conf
-        ├── pip.conf
-		└── systemd
-            └── system
-                └── mic.service
+Controller_Mixer/software/raspberry
+└── etc
+    ├── environment
+    ├── modprobe.d
+    │   └── raspi-blacklist.conf
+    ├── pip.conf
+    └── systemd
+        ├── network
+        │   └── eth.network
+        └── system
+            └── mic.service
 ```
 
+### As user aaa
 #### Install python
 ```
-sudo pip install pyserial python-osc wheel python-dev-tools platformio
+pip install numpy 
+pip install setuptools
+pip install python-osc
+pip install pyserial
+pip install wheel
+pip install python-dev-tools
+pip install platformio
+pip install board
 
-CFLAGS="-fcommon" sudo pip install rpi.gpio
-
-sudo pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
+CFLAGS="-fcommon" pip install rpi.gpio
+pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
 
 ?? process
 ```
 
+#### Clone repo
+```
+git clone git@github.com:ambisonics-audio-association/Ambijockey.git
+```
+
+### As user root
 #### Configure services
 ``` 
 ?? nano /boot/config.txt
 ??	max_usb_current=1
 
-systemctl enable dhcpcd.service
 systemctl start mic.service
 systemctl enable mic.service
   if 'systemctl enable mic.service' throws an error 'invalid argument'
