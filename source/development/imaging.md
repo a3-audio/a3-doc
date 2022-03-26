@@ -23,7 +23,7 @@ sudo losetup -f
 sudo losetup /dev/loop0 myimage.img
 sudo partprobe /dev/loop0
 ```
-- release loop device:
+Release loop device:
 ```
 sudo losetup -d /dev/loop0
 ```
@@ -53,7 +53,7 @@ tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 ```
 
 ## Flash image to SD-Card on linux
-- Make shure that you identified the right device. This command overwrites target partitions:
+- Make shure to identify the right device. This command overwrite targeting data:
 ```
 sudo dd BS=4M if=path/to/extracted/...img of=/dev/mmcblk0
 ```
