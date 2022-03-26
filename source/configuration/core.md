@@ -1,9 +1,12 @@
 # A³ Core Configuration
+## PC
+Since a wide range of archlinux compatible hardware is able to run A³ Core software, we describe our proved configurations in [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html).
+
 ## SSD
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - SSD > 64GB
 
-## Installation from scratch <-wip
+## From scratch <-wip
 ### Install Archlinux
 Follow the guide from archlinux: [Installation guide](https://wiki.archlinux.org/title/Installation_guide)
 

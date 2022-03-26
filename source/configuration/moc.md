@@ -6,8 +6,8 @@
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - microSD card > 4GB
 
-##  Install Raspberry PI from scratch <-wip
-### install aarch64
+##  From scratch <-wip
+### install AArch64
 - https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
 
 ### Find Raspberry PI's ip address
@@ -23,26 +23,24 @@ root password is "root"
 ```
 
 ### Root operations on raspberry
+#### User and hostname
 ```
 nano /etc/hostname
 
-pacman -Syu
+passwd root
+useradd -m aaa
+passwd aaa
 
 groupadd dialout
-
 usermod -aG dialout aaa
 usermod -aG users aaa
 usermod -aG tty aaa
 usermod -aG uucp aaa
 usermod -aG video aaa
 usermod -aG input aaa
-passwd root
-useradd -m aaa
-passwd aaa
 
-reboot and log in as aaa
-su
 userdel alarm
+rm -rf /home/alarm
 ```
 
 #### Install depencies:
@@ -66,6 +64,7 @@ pacman -S tree vim i3-wm dmenu sudo
 pacman -S teensy_loader_cli
 ``` 
 
+### User aaa operations
 #### Clone repo
 ```
 su aaa
@@ -81,7 +80,8 @@ cd Ambijockey/Controller_Motion/software/MotionControllerUI/
 python -m pip install -r requirements.txt
 ```
 
-#### Copy files to corresponding system-folder:
+### Root operations
+#### Copy files
 ```
 /ControllerMotion/software/raspberry
 
@@ -91,7 +91,6 @@ python -m pip install -r requirements.txt
 |-- etc
 |   |-- X11
 |   |   `-- Xwrapper.config
-|   |-- sudoers
 |   `-- systemd
 |       |-- getty@tty2.service.d
 |       |   `-- override.conf
@@ -109,18 +108,7 @@ python -m pip install -r requirements.txt
 
 #### Enable services:
 ``` 
-sudo systemctl enable getty@tty2
-sudo systemctl enable moc
+systemctl enable getty@tty2
+systemctl enable moc
 ``` 
-
-#### Setup static ip-address:
-``` 
-vim /etc/systemd/network/eth0.config
-``` 
-
-#### Edit the Raspberry config-file
-```
-nano /boot/config.txt
-display_rotate=1
-dtoverlay=pi3-disable-bt
 ```
