@@ -1,6 +1,6 @@
 # A³ Core Configuration
 ## PC
-Since a wide range of archlinux compatible hardware is able to run A³ Core software, we describe our proved configurations in [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html).
+Since a wide range of archlinux compatible audio hardware is able to run A³ Core software, we describe our proved configurations in [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html).
 
 ## SSD
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
@@ -27,6 +27,7 @@ Follow the Professional audio guide: [Professional audio guide](https://wiki.arc
 nano /etc/hostname
 user-add -m aaa
 groupadd realtime
+usermod -aG wheel aaa
 usermod -aG realtime aaa
 usermod -aG users aaa
 usermod -aG audio aaa
@@ -45,7 +46,7 @@ nano /etc/pacman.conf
 pacman -Syu
 
 pacman -S linuxrt realtime-privileges rtirq python3 python python-osc jack2 qjackctl aj-snapshot iempluginsuite supercollider git python-pip i3-wm i3lock i3status htop ttf-dejavu xterm dmenu alsa-firmware alsa-util
-alsa-tools
+alsa-tools sudo
 
 pip install numpy pyserial
 
