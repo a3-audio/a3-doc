@@ -33,6 +33,7 @@ passwd aaa
 
 groupadd dialout
 
+usermod -aG wheel aaa
 usermod -aG dialout aaa
 usermod -aG users aaa
 usermod -aG tty aaa
@@ -47,6 +48,7 @@ rm -rf /home/alarm
 pacman-key --init
 pacman-key --populate archlinuxarm
 pacman -Syu 
+pacman -S sudo
 pacman -S python
 pacman -S python-pip
 pacman -S git
@@ -93,7 +95,7 @@ Ambijockey/Controller_Mixer/software/raspberry
         ├── network
         │   └── eth.network
         └── system
-            └── mic.service
+            └── a3_mic.service
 ```
 
 #### Configure services as root

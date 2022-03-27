@@ -32,6 +32,7 @@ useradd -m aaa
 passwd aaa
 
 groupadd dialout
+usermod -aG wheel aaa
 usermod -aG dialout aaa
 usermod -aG users aaa
 usermod -aG tty aaa
@@ -48,6 +49,7 @@ rm -rf /home/alarm
 pacman-key --init
 pacman-key --populate archlinuxarm
 pacman -Syu
+pacman -S sudo
 pacman -S git
 pacman -S qt6-tools
 pacman -S python-opengl
@@ -91,6 +93,7 @@ python -m pip install -r requirements.txt
 |-- etc
 |   |-- X11
 |   |   `-- Xwrapper.config
+|   |-- sudoers
 |   `-- systemd
 |       |-- getty@tty2.service.d
 |       |   `-- override.conf
