@@ -29,7 +29,7 @@ release = '2021-2022'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-        'myst_parser'
+    'myst_parser',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -46,22 +46,22 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 #html_theme = 'bizstyle'
-#html_theme = 'karma_sphinx_theme'
-html_theme_path = ["karma_sphinx_theme"]
+html_theme_path = ["."]
+html_theme = 'karma_sphinx_theme'
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
-
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static', 'karma_sphinx_theme/static']
+html_static_path = [
+    '_static',
+    'karma_sphinx_theme/static',
+]
 
 source_suffix = {
     '.rst': 'restructuredtext',
 #   '.txt': 'markdown',
     '.md': 'markdown',
 }
-
-
