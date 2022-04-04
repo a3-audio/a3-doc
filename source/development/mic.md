@@ -1,28 +1,13 @@
 # A³ Mix Development
-## A³ Mix
-A³ Mix backend runs a Raspbian on a Raspberry Pi 4 Model B. As Microcontroller we're using the Teensy 4.1.
+## Backend
+- Arch Linux ARM on a Raspberry Pi 3 Model B. 
+- Microcontroller Teensy 4.1
 
-## Raspberry
-Connected to:
-- A³ Core (LAN)
-- Teensy (serial usb)
-- State-leds (neoPixel gpio)
-- Headphones-amp (usb)
+##  Python script
+This pythonscript sends and receives OSC and serial data, to and from raspberry (A³Mix) and A³ Core
+- ```mic.py```
 
-OSC communication:
-- Receive peak and rms
-- Send poti- and buttonstates 
+## Teensy firmware
+Teensy 4.1 firmware is written in c++
+```aaa/Ambijockey/Controller_Mixer/software/teensy/mic/src/```
 
-Python-script:
--  ```Controller_Mixer/software/python/mix.py```
-
-## Teensy
-Connected to:
-- Mainboard
-	- Potis (ic: hc4051)
-	- Buttons (direct)
-	- Fx- an modebuttons (ic: hc4051)
-	- Vu-meters (neoPixel)
-
-Firmware:
-- ```aaa/Ambijockey/Controller_Mixer/software/teensy/mic/src/```

@@ -1,36 +1,31 @@
 # A³ Motion Developement
-A³ Motion backend runs on ArchlinuxARM on a Raspberry Pi 3 Model B. As Microcontroller we're using Teensy 4.1. 
+## Backend
+A³ Motion backend runs Arch Linux ARM. To configure your own see the [A³ Motion Configuration](https://doc.a3-audio.com/configuration/moc.html) section
 
-## UI
-A³ Motion UI is the most potential and complex part to develop. It is in a different repository (see [A³Motion - configuration](https://doc.a3-audio.com/configuration/moc.html).
-
-[Ambijockey/doc/configuration/moc](https://doc.a3-audio.com/Ambijockey/doc/configuration/moc.html) 
-
-## Raspberry
-Connected to:
-- A³ Core (LAN)
-- Display (hdmi & usb)
-- Teensy (serial usb)
-
-OSC-communication:
-- Send stereowidth
-- Send stereosides boost
-- Send azimuth/elevation
-- Receive bpm
-
-Python- script:
-- ```Controller_Motion/software/MotionControllerUI/moc_ui.py```
-
-## Teensy
-Connected to:
-- Mainboard
-	- Encoder (gpio)
-	- potis (ic: hc4051)
-	- neoPixel (gpio)
-	- Buttonmatrix (ic: SN74HCT245N)
-
-Firmware:
+## Teensy firmware
+Teensy 4.1 firmware is written in c++
 - ```Controller_Motion/software/teensy/src/main.cpp```
 
-## Audio
-A³ Mix, as a good DJ-Mixer, must have a headphone-plug somewhere. We installed a headphone-amp which is bus-powered by usb. It receives a linelevel analogsignal from the audiohardware. We put the headphone-plug to the front and 2 xlr-sockets to the back.
+## A³ Motion Controller UI
+A³ Motion Controller UI is the most complex part to develop. It is in [A³Motion - Motion Controller UI repository](https://github.com/ambisonic-audio-adventures/MotionControllerUI)
+
+## Python script
+```Controller_Motion/software/MotionControllerUI/moc_ui.py```
+
+Motion controller UI is able to run in different modes:
+-  develop mode:
+```
+python moc_ui.py --develop
+```
+- device mode:
+```
+moc_ui.py --serial_device /dev/ttyACM0 --server_ip "192.168.43.50" --server_port 9000 --encoder_base_port 1337
+```
+
+## Pictures
+### Software Mocup
+![](pics_development/a3motion-software-mockup_01.png)
+
+### Idea
+![](pics_development/a3moc_mockup.png)
+

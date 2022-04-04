@@ -1,174 +1,121 @@
 # A³ Mix Configuration
 ## Teensy
-- ControllerMixer/software/teensy/src/main.cpp
-- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html) 
+- [Flash Teensy Firmware](https://doc.a3-audio.com/development/flashTeensy.html)
 
-## Raspberry Pi 4
-microSD card > 4GB
+## Raspberry Pi 3 Model B
+- [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
+- microSD card > 8GB
 
-### ArchArm
-install aarch64:
-https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
+##  From scratch <-wip
+### Install Arch Linux ARMv7
+- https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 
-- Search for your Raspberry ip-address: nmap -sn 192.168.1.0/24
-- login as the default user alarm with the password alarm.
-- The default root password is root.
-  
-#### Root operations on the Raspberry: 
+### Find Raspberry PI's ip address
 ```
-pacman -Syu
+nmap -sn 192.168.1.0/24
+```
 
+### Login
+```
+ssh alarm@found_ip_address
+password: alarm
+root password is "root"
+```
+  
+### Root operations
+#### Setup user and hostname
+```
+nano /etc/hostname
+
+passwd root
 useradd -m aaa
 passwd aaa
 
 groupadd dialout
+
+usermod -aG wheel aaa
 usermod -aG dialout aaa
 usermod -aG users aaa
 usermod -aG tty aaa
 usermod -aG uucp aaa
+
+userdel alarm
+rm -rf /home/alarm
 ```
 
 #### Install depencies
 ```
-pacman -S python python-osc python-pip git python-numpy gcc python-setuptools libusb-compat
-
-exit
+pacman-key --init
+pacman-key --populate archlinuxarm
+pacman -Syu 
+pacman -S sudo
+pacman -S python
+pacman -S python-pip
+pacman -S git
+pacman -S libusb
+pacman -S libusb-compat
+pacman -S vim
+pacman -S gcc
+pacman -S teensy_loader_cli
+pacman -S bash-completion
 ```
-#### Copy Files
-```
-ssh aaa@192.168.1.x
-userdel pi
 
+#### Install python virtualenv and modules in virtualenv as user aaa
+```
+pip install virtualenv
+virtualenv -p python3 ~/.a3python_env
+source ~/.a3python_env/bin/activate
+
+pip install wheel
+pip install numpy 
+pip install setuptools
+pip install python-osc
+pip install pyserial
+pip install python-dev-tools
+pip install platformio
+pip install board
+CFLAGS="-fcommon" pip install rpi.gpio
+pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x
+```
+
+#### Clone repo as user aaa
+```
 git clone git@github.com:ambisonics-audio-association/Ambijockey.git
-
-cp -r Ambijockey/Controller_Mixer/software/raspberry/config/* /
-    └── etc
-        ├── dhcpcd.conf
-		├── modprobe.d/raspi-blacklist.conf
-        ├── pip.conf
-		└── systemd
-            └── system
-                └── mic.service
 ```
-#### Install python
+
+#### Copy Files as root
 ```
-sudo pip install pyserial python-osc wheel python-dev-tools platformio
-
-CFLAGS="-fcommon" sudo pip install rpi.gpio
-
-sudo pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rpi_ws281x 
-
-?? process
+Ambijockey/Controller_Mixer/software/raspberry
+└── etc
+    ├── environment
+    ├── modprobe.d
+    │   └── raspi-blacklist.conf
+    ├── ?? pip.conf
+    └── systemd
+        ├── network
+        │   └── eth.network
+        └── system
+            └── a3_mic.service
 ```
-#### Configure services
+
+#### Configure services as root
 ``` 
+systemctl start mic.service
+systemctl enable mic.service
+```
+
+### Old
+```
+If 'systemctl enable mic' throws an error 'invalid argument'
+
+cd /etc/systemd/system/multi-user.target.wants
+ln -s /etc/systemd/system/mic.service
+
 ?? nano /boot/config.txt
 ??	max_usb_current=1
 
-systemctl enable dhcpcd.service
-systemctl start mic.service
-systemctl enable mic.service
-  if 'systemctl enable mic.service' throws an error 'invalid argument'
-    cd /etc/systemd/system/multi-user.target.wants
-    ln -s /etc/systemd/system/mic.service
-
-Edit /etc/dhcpcd.conf
-  interface eth0
-  static ip_address=192.168.43.51/24
-  static routers=192.168.43.1
-  static domain_name_servers=192.168.43.1 8.8.8.8
-```
-
-#### Install platformio
-```
-
-```
-
-### Raspbian
-[Install Raspbian](https://www.raspberrypi.org/documentation/computers/getting-started.html)
-
-1. put an empty file 'ssh' on Raspbian boot-partition, this enables ssh
-2. search for your Raspberry ip-address ie: nmap -sn 192.168.1.0/24
-3. ssh pi@192.168.1.x (pass= raspberry) 
-
-#### Root operations on the Raspberry: 
-```
-apt update
-apt upgrade
-
-useradd -m aaa
-passwd aaa
-
-usermod -aG dialout aaa
-usermod -aG users aaa
-usermod -aG tty aaa
-usermod -aG uucp aaa
-```
-#### Install depencies
-```
-apt install python python-osc python-pip git python3-numpy
-
-pip install numpy process pyserial python-osc rpi_ws281x adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka
-
-apt purge bluez pi-bluetooth
-
-exit
-
-ssh aaa@192.168.1.x
-userdel pi
-
-```
-#### Clone repository:
-```
-cd /home/aaa
-git clone git@github.com:ambisonics-audio-association/Ambijockey.git
-```
-#### Copy files to corresponding system-folder:
-```
-ControllerMixer/software/raspberry
-   └── config
-       └── etc
-           ├── dhcpcd.conf
-           └── systemd
-               └── system
-                   └── mic.service
-```
-#### Configure the Raspberry:
-``` 
-raspi-config
-	3 Interface Options > P8 Remote GPIO > yes
-
-nano /boot/config.txt
-	max_usb_current=1
-
-nano /boot/cmdline.txt
-	logo.nologo (to the end of line)
-
-nano .bashrc
-	export PATH="/home/aaa/.local/bin:$PATH"
-
-``` 
-#### Setup service:
-``` 
-systemctl start mic.service
-systemctl enable mic.service
-  if 'systemctl enable mic.service' throws an error 'invalid argument'
-    cd /etc/systemd/system/multi-user.target.wants
-    sudo ln -s /etc/systemd/system/mic.service
-``` 
-#### Setup static ip-address
-``` 
-mv /etc/dhcpcd.conf /etc/dhcpcd.conf.bck
-touch /etc/dhcpcd.conf
-Edit /etc/dhcpcd.conf
-  interface eth0
-  static ip_address=192.168.43.51/24
-  static routers=192.168.43.1
-  static domain_name_servers=192.168.43.1 8.8.8.8
-```
-#### Not sure if we still need "fix for Raspberry random hold":
-```
-nano /etc/sysctl.conf
-    vm.dirty_background_ratio = 5
-    vm.dirty_ratio = 10
+?? groupadd gpio
+?? chown root.gpio /dev/gpiomem
+?? chmod g+rw /dev/gpiomem
+?? usermod -aG gpio aaa
 ```

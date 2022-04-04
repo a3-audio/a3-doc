@@ -6,85 +6,41 @@ Thanks for your interest in the A³ system.
 
 These docs are split in two sections:
 
-- The first section is the `User doc <https://doc.a3-audio.com/user/userWelcome.html>`_, where you will find an overview of basic functions and connections.
+- The first section is the `User <https://doc.a3-audio.com/user/user.html>`_ section, where you will find an overview of basic functions and connections.
 
-- The second section is the `Developer doc <https://doc.a3-audio.com/development/devWelcome.html>`_, where you will find all ressources we have. This section is under heavy development and will probably never be completed.
+- The second section is the developer section wich is under heavy development and will probably never be completed. The developer section is splitted into three subsections: `Developer <https://doc.a3-audio.com/development/developer.html>`_ (about code), `Assembly <https://doc.a3-audio.com/assembly/assembly.html>`_ (about hardware), and `Configuration <https://doc.a3-audio.com/configuration/configuration.html>`_ (about operation system).
 
-**********
-What it is
-**********
-The A³ system is a combination of three devices:
+*******
+Contact
+*******
+- Website: `a3-audio.com <https://a3-audio.com>`_
+- E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
+- Forum: `3d-audio.io <https://d3-audio.io>`_
 
-A³ Motion (The Motion Sampler)
-##############################
+- Mattermost: `A³ Mattermost <https://talk.lilbits.de/ambisonics>`_
+- Media: `A³ Cloud <https://cloud.a3-audio.com/d/7475495ddee04d428073>`_
 
-`A³ Motion <https://doc.a3-audio.com/user/a3motion.html>`_ is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
-
-.. image:: a3_system_symbol_moc.png
-   :height: 500px
-   :width: 500 px
-   :scale: 50 %
-
-A³ Mix (The DJ Mixer)
-#####################
-`A³ Mix <https://doc.a3-audio.com/user/a3mix.html>`_ is a standalone OSC controller which behaves like a 4 channel DJ mixer.
-
-.. image:: a3_system_symbol_mix.png
-   :height: 500px
-   :width: 500 px
-   :scale: 50 %
-
-A³ Core (The Sound Server)
-##########################
-`A³ Core <https://doc.a3-audio.com/user/a3core.html>`_  processes analog audiosignals, calculates 3D sound spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
-
-.. image:: a3_system_symbol_core.png
-   :height: 500px
-   :width: 500 px
-   :scale: 50 %
-
-************
-Requirements
-************
-- Soundsystem with at least 4 speakers placed around the venue.
-- A venue smaller than 20m diameter. For bigger venues more spheres.
-
-**********
-Quickstart
-**********
-- Plug in your instruments vinyl, cd, daw ..
-- Plug in your speakers
-- Put speakers in regular circle around center
-- Plug CAT cable from A³ Mix and A³ Motion to A³ Core
-- Plug in your headphones
-- Power on
-
-**********
-Quicklinks
-**********
+*****
+Links
+*****
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ User doc
+   :caption: A³ User
 
-   user/userWelcome
+   user/user
    user/a3motion
    user/a3mix
    user/a3core
-   user/advanced
+   user/advanced-user
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer doc
+   :caption: A³ Developer
 
-   development/devWelcome
    assembly/assembly
    configuration/configuration
-   development/development
-   development/flashTeensy
-   assembly/imaging   
-   development/osc
-   assembly/parts
+   development/developer
 
 .. toctree::
    :maxdepth: 1
@@ -107,9 +63,17 @@ Quicklinks
    configuration/core
    development/core
 
-*******
-Contact
-*******
-- `a3-audio.com <https://a3-audio.com>`_
-- `contact@a3-audio.com <mailto:a3-audio.com>`_
-- `mattermost <https://talk.lilbits.de/ambisonics>`_
+.. toctree::
+   :maxdepth: 1
+   :caption: A³ Ressources
+
+   development/flashTeensy
+   development/imaging   
+   development/osc
+
+.. toctree::
+   :maxdepth: 1
+   :caption: A³ Legal
+
+   Legal Notice <https://stage.a3-audio.com/legal-notice.html>
+   Privacy Policy <https://stage.a3-audio.com/privacy-policy.html>

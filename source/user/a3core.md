@@ -1,20 +1,14 @@
 # A³ Core
 ## Features:
 - A³ Core is a free configurable audio server
-- Compatible to linux audiohardware
+- Compatible to linux audiohardware (needed)
 - VNC remote desktop control
 
-## Box Contents
-- A³ Core
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## Connecting Diagram
-![A³ Core numbered](a3_systen_symbol_core_numbered.png)
+## Part Name and functions
+![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
 ### [1] POWER BUTTON
-- Push the button to turn the device on
+- Push to turn the device on
 
 ### [2] RESET BUTTON
 - Push to reboot server (just in case)
@@ -22,14 +16,24 @@
 ### [3] POWER LED
 - Indicates power status
 
-### [4] NETWORK SOCKET
-- Connect cat cable to your network switch
+### [4] Fan and Filter
+- Clean it regular
 
-### [5] PC SOCKETS
-- Supplied by mainboard
+## Connections back
+### NETWORK SOCKET
+- Connect ethernet cable to your network switch
 
-### [6] POWER SOCKET
-- Connect powercable to 230V Powersocket
+### POWER SOCKET
+- Connect power cable to 230V power socket
+
+## Specification
+- The system will be custom build and configured by A³ to solve customer needs.
+
+## Box Contents
+- A³ Core
+- Network cable
+- Quickstart Guide
+- Safety & Warranty Manual
 
 ## Misc
-- Items not listed under Introduction > Box Contents are sold separately.
+- Items not listed under Box Contents are sold separately.

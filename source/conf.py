@@ -17,7 +17,9 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ Audio UG (haftungsbeschränkt)'
+copyright = 'A³ Audio - Bradaczek Eismann Schmitz Schulze GbR'
+
+#copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
 
 # The full version, including alpha/beta/rc tags
@@ -50,6 +52,7 @@ html_theme_path = ["."]
 html_theme = 'karma_sphinx_theme'
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
+#html_last_updated_fmt = '%b, %d, %Y'
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -65,3 +68,4 @@ source_suffix = {
 #   '.txt': 'markdown',
     '.md': 'markdown',
 }
+

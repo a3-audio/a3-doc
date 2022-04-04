@@ -1,55 +1,32 @@
-# A³ OSC messages
-All parameters are normalized to float [range 0-1] 
+# A³ OSC communication
+## IP-Addresses
+- A³ Core 192.168.43.50
+- A³ Mix 192.168.43.51
+- A³ Motion 192.168.43.52
 
 ## A³ Core
-### Server/server.py modifies and routes incoming osc to daw
 
-| SOURCE | DESTINATION (Reaper) | Description |
-| :------| :------------------- | :---------- |
-| /mic/ch/1-4/gain | /track/i/gain | Channel i gain |       
-| /mic/ch/1-4/hi | /track/i/fxeq/hishelf/gain | Channel i hi |         
-| /mic/ch/1-4/mid | /track/i/fxeq/band/0/gain | Channel i mid |        
-| /mic/ch/1-4/lo | /track/i/fxeq/loshelf/gain | Channel i low |
-| /mic/ch/1-4/volume | /track/i/volume | Channel i volume |
-| /mic/ch/1-4/mode | /track/i/mute | Channel i mode (Stereo, 3D)
-| /mic/master/volume | /track/i/volume | Master volume |
-| /mic/master/booth | /track/i/volume | Booth volume |
-| /mic/master/phMmix | /track/i/volume | Phones Mix |
-| /mic/master/phVol | /track/i/volume | Phones volume |
-| /mic/ch/1-4/pfl | /track/i/mute | Channel i pfl |
-| /mic/ch/master/pfl | /track/i/mute | Master pfl |
-| /moc/ch/1-4/width | /track/i/StereoEncoder/width | Range -360 / 360 |
-| /moc/ch/1-4/sides | /track/i/sides | Channel i sides |
-| /moc/ui/azimuth | [StereoEncoderPort]/azimuth | Range -180 / 180 |
-| /moc/ui/elevation | [StereoEncoderPort]/elevation | Range -180 / 180 |
-
-
-## A³ Mix 
-### potis and knobs (send)
-- /mic/ch/1-4/pfl
-- /mic/ch/1-4/gain
-- /mic/ch/1-4/hi
-- /mic/ch/1-4/mid
-- /mic/ch/1-4/lo
-- /mic/ch/1-4/volume
-- /mic/ch/1-4/m1
-- /mic/ch/1-4/m2
-- /mic/ch/1-4/m3
-- /mic/ch/master/pfl
-- /mic/ch/master/volume
-- /mic/ch/master/booth
-- /mic/ch/master/phMix
-- /mic/ch/master/phVol
-
-### vu-meters (receive)
-- /vu/rcv/01-04 << input vu ff (peak/rms)
-- /vu/rcv/05-12 << output vu ff (peak/rms)
-
-## A³ Motion
-### potis, knobs and touch-xy (send)
-- /moc/ch/1-4/motion/ xy [0-1]
-- /moc/ch/1-4/width/ [0-1]
-- /moc/ch/1-4/sides/ [0-1]
-
-### bpm (receive)
-- /moc/bpm
+| RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
+| :---| :--- | :--- | :--- | :---
+| - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter
+| - | /channel/pfl/led/[0-3] | bool | [0 or 1] | pfl status
+| - | /channel/fx/led/[0-3] | bool | [0 or 1] | fx status
+| - | /channel/3d/led/[0-3] | bool | [0 or 1] | 3d status
+| - | /fx/led | string | [high_pass, low_pass] | fx mode status
+| /channel/[0-3]/gain | - | float | [0-1] | Channel gain
+| /channel/[0-3]/eq/high | - | float | [0-1] | Channel eq high
+| /channel/[0-3]/eq/mid | - | float | [0-1] | Channel eq mid
+| /channel/[0-3]/eq/low | - | float | [0-1] | Channel eq low
+| /channel/[0-3]/volume | - | float | [0-1] | Channel volume
+| /channel/[0-3]/width | - | float | [0-1] | Channel width
+| /channel/[0-3]/reverb | - | float | [0-1] | Channel reverb
+| /channel/[0-3]/pfl | - | bool | [0 or 1] | Channel pfl
+| /channel/[0-3]/fx | - | bool | [0 or 1] | Channel fx
+| /channel/[0-3]/3d | - | bool | [0 or 1] | Channel 3d
+| /master/volume | - | float | [0-1] | Master volume
+| /master/booth | - | float | [0-1] | Booth volume
+| /master/phones_mix | - | float | [0-1] | Phones mix
+| /master/phones_volume | - | float | [0-1] | Phones volume
+| /fx/mode | - | string | [high_pass, low_pass] | Global fx mode
+| /fx/frequency | - | float | [0-1] | fx filter frequency
+| /fx/resonance | - | float | [0-1] | fx filter resonance
