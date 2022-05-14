@@ -25,7 +25,6 @@ The A³ system is made for 3D audio live interaction. It is a combination of thr
 
 ## Requirements
 - PA soundsystem with at least 4 speakers    
-- All speaker must be placed in a most chubbiest spherical installation around listening area. Electronic corrections are possible for closer speakers    
 - A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
 
 ## Optional

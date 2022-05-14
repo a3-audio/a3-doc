@@ -18,7 +18,6 @@ Contact
 - Forum: `3d-audio.io <https://d3-audio.io>`_
 
 - Mattermost: `A³ Mattermost <https://talk.lilbits.de/ambisonics>`_
-- Media: `A³ Cloud <https://cloud.a3-audio.com/d/7475495ddee04d428073>`_
 
 *****
 Links
@@ -32,7 +31,6 @@ Links
    user/a3motion
    user/a3mix
    user/a3core
-   user/advanced-user
 
 .. toctree::
    :maxdepth: 1
@@ -75,5 +73,5 @@ Links
    :maxdepth: 1
    :caption: A³ Legal
 
-   Legal Notice <https://stage.a3-audio.com/legal-notice.html>
-   Privacy Policy <https://stage.a3-audio.com/privacy-policy.html>
+   Legal Notice <https://a3-audio.com/legal-notice.html>
+   Privacy Policy <https://a3-audio.com/privacy-policy.html>
