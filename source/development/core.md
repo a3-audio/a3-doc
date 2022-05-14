@@ -34,6 +34,7 @@ Reach it via vnc player ```vncviewer QualityLevel 2 192.168.43.50```
 - [aj-snapshot](https://man.archlinux.org/man/aj-snapshot.1.en) can be used to store and restore alsa connections
 
 ## Audiobackend Signalflow
-```a3-audio.RPP```
+- ```a3-audio.RPP```
+
 ![](pics_development/audio_signalflow.drawio.png)
 
