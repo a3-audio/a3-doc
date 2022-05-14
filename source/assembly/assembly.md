@@ -15,6 +15,6 @@ A working prototype exists. We applied intensive stress tests by using 12V car h
 ![a3core-front-prototype](pics_assembly/v01/a3core-front-prototype.jpg)
 ![a3core-back-prototype](pics_assembly/v01/a3core-back-prototype.jpg)
 ## A³ Stresstests v0.1
-![a3-handwagon-packed](pics_assembly/v01/a3-handwagon-packed.jpg)
-![a3-openair](pics_assembly/v01/a3-openair.jpg)
 ![a3-handwagon-finished](pics_assembly/v01/a3-handwagon-finished.jpg)
+![a3-openair](pics_assembly/v01/a3-openair.jpg)
+![a3-handwagon-packed](pics_assembly/v01/a3-handwagon-packed.jpg)
