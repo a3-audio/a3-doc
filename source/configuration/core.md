@@ -21,6 +21,12 @@ Then update the system and kernel with ```pacman -Syu linux-rt```.
 ### Configure audioengine
 Follow the Professional audio guide: [Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
 
+### rtirq
+Type ```rtcards```  to find your sound card's irq. Edit /etc/rtirq.conf and place found irq name.
+http://www.audio-linux.com/html/realtime.html
+https://wiki.linuxaudio.org/wiki/lowlatency_deprecated
+
+
 ## Root operations on A³ Core
 ### Setup user
 ``` 
