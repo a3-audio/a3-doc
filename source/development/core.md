@@ -35,4 +35,4 @@ Reach it via vnc player ```vncviewer QualityLevel 2 192.168.43.50```
 
 ## Audiobackend Signalflow
 ![](pics_development/audio_signalflow.drawio.png)
-```
+
