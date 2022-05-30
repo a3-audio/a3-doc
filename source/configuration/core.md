@@ -145,7 +145,7 @@ install tigervnc and execute ```a3core/./a3vnc.sh``` on your computer to connect
 - [OSC and serial communication](https://doc.a3-audio.com/development/osc.html)
 
 #### Control screen
-![](pics_configuration/a3_core_screen_control.png)
+![](pics_configuration/a3_core_screen_interface.png)
 #### Sequencer  screen
 ![](pics_configuration/a3_core_screen_sequencer.png)
 #### Mixer screen
