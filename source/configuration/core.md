@@ -18,21 +18,19 @@ Server = https://pkgbuild.com/~dvzrv/repos/realtime/$arch
 ```
 Then update the system and kernel with ```pacman -Syu linux-rt```.
 
-### Configure audioengine
-Follow the Professional audio guide: [Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
-
-### rtirq
-Type ```rtcards```  to find your sound card's irq. Edit /etc/rtirq.conf and place found irq name.
-http://www.audio-linux.com/html/realtime.html
+Some information:
 https://wiki.linuxaudio.org/wiki/lowlatency_deprecated
 
+### Configure audioengine
+Follow the Professional audio guide: [Professional audio guide](https://wiki.archlinux.org/title/Professional_audio)
 
 ## Root operations on A³ Core
 ### Setup user
 ``` 
 nano /etc/hostname
 user-add -m aaa
-groupadd realtime
+groupadd realtime aaa
+usermod -aG aaa aaa
 usermod -aG wheel aaa
 usermod -aG realtime aaa
 usermod -aG users aaa
@@ -40,54 +38,56 @@ usermod -aG audio aaa
 usermod -aG video aaa
 chmod a+rw /dev/ttyACM0
 passwd root
-useradd -m aaa
 passwd aaa
 ``` 
 ### Install depencies
 ```
-nano /etc/pacman.conf
-	[realtime]
-	Server = https://pkgbuild.com/~dvzrv/repos/realtime/$arch
+pacman -Syu tree vim linux-rt realtime-privileges rtirq python3 python-osc jack2 qjackctl aj-snapshot iempluginsuite supercollider git python-pip i3-wm i3lock i3status htop ttf-dejavu xterm dmenu alsa-firmware alsa-utils alsa-tools sudo x11vnc xf86-video-dummy thunar tk feh xarchiver gvfs thunar-volman lxmusic gedit
 
-pacman -Syu
-
-pacman -S linuxrt realtime-privileges rtirq python3 python python-osc jack2 qjackctl aj-snapshot iempluginsuite supercollider git python-pip i3-wm i3lock i3status htop ttf-dejavu xterm dmenu alsa-firmware alsa-util
-alsa-tools sudo
-
-pip install numpy pyserial
+pip install numpy pysimplegui
 
 cd /home/aaa
-git clone git@github.com:ambisonics-audio-association/Ambijockey.git
+git clone git@github.com:a3-audio/a3-system.git
 
-Download and activate reaper for Linux x86_64:
-https://www.reaper.fm/download.php
+Install reaper:
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  yay -s reaper rtapp
 
-- tar -xf 
-- ./install-reaper.sh 
-
-when prompt answer to install in /opt
+- Make a copy of the reaper project and put it in your home (I us a folder named runtime_reaper but its not important). Reaper will load the last used project.
+- Edit reaper preferences and add vst path "/usr/lib/vst"
 
 Install jmess (a program to save and restore jack audio connections)
 https://github.com/jacktrip/jmess-jack
+
+Install TAL Filter
+https://tal-software.com/products/tal-filter
 ```
 ### Copy files to corresponding system-folder:
 ```
+.
 ├── etc
-│   ├── dhcpcd.conf
-│   ├── rtapp
-│   │   └── rtapp.conf
 │   ├── rtirq.conf
+│   ├── sudoers
 │   ├── systemd
+│   │   ├── network
+│   │   │   └── a3.network
 │   │   └── system
+│   │       ├── a3xinit.service
 │   │       ├── autologin@.service
-│   │       ├── core.service
-│   │       └── override.conf
+│   │       ├── getty@tty1.service
+│   │       ├── override.conf
+│   │       └── x11vnc.service.d
+│   │           └── override.conf
 │   └── X11
 │       ├── xorg.conf.d
 │       │   └── 10-headless.conf
 │       └── Xwrapper.config
 └── home
     └── aaa
+        ├── a3_reaper_runtime
+        │   └── a3_reaper.RPP
         ├── .config
         │   ├── i3
         │   │   └── config
@@ -96,21 +96,33 @@ https://github.com/jacktrip/jmess-jack
         │   │   └── minidsp_usbstreamer.conf
         │   └── systemd
         │       └── user
+        │           ├── a3_interface.service
         │           ├── a3_jack_connections.service
         │           ├── a3_osc_router.service
         │           ├── a3_reaper.service
         │           └── a3_vu_meter.service
+        ├── userpatches
+        │   ├── userpatch_bck.jmess
+        │   └── userpatch.jmess
         ├── .vnc
         │   ├── config
         │   └── passwd
-        └── .xinitrc
+        ├── .xinitrc
+        └── .Xresources
+
 ```
 
 ### Enable system services
 ```
-systemctl enable autologin@.service
-systemctl enable core.service
+systemctl enable autologin@
+systemctl enable getty@tty1.service
+systemctl enable a3xinit
+systemctl enable rtirq
 ```
+
+### rtapp / rtirq
+Type ```rtcards```  to find your sound card's irq. Edit /etc/rtirq.conf described here:
+http://www.audio-linux.com/html/realtime.html
 
 ## Non root operations on A³ Core
 ### Audiohardware
@@ -119,23 +131,27 @@ You could find out the right settings for your soundcard with qjackctl. Copy a c
 
 ### Enable user services
 ```
-systemctl --user enable a3_jack_connections.service
 systemctl --user enable a3_osc_router.service
+systemctl --user enable jack@your_soundcard
+
+Optional: To load audioengine in and fixed wires use this services:
+systemctl --user enable a3_jack_connections.service
 systemctl --user enable a3_reaper.service
 systemctl --user enable a3_vu_meter.service
-systemctl --user enable jack@your_soundcard.conf
 ```
 
-### VNC
-Execute ```a3core/./a3vnc.sh``` on your computer to connect to A³ Core. Make shure your in the same network listed in here: 
+### VNC Client
+install tigervnc and execute ```a3core/./a3vnc.sh``` on your computer to connect to A³ Core. Make shure your client is in the same network listed in here: 
 - [OSC and serial communication](https://doc.a3-audio.com/development/osc.html)
 
-#### Info screen
-![](pics_configuration/a3_core_screen_info.png)
+#### Control screen
+![](pics_configuration/a3_core_screen_interface.png)
 #### Sequencer  screen
 ![](pics_configuration/a3_core_screen_sequencer.png)
 #### Mixer screen
 ![](pics_configuration/a3_core_screen_mixer.png)
+#### Info screen
+![](pics_configuration/a3_core_screen_info.png)
 
 ### Supercollider
 - open scide
