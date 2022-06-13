@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ Audio UG (haftungsbeschränkt) i.G'
+copyright = 'A³ Audio UG (haftungsbeschränkt)'
 
 #copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
