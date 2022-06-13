@@ -105,13 +105,10 @@ python -m pip install -r requirements.txt
 |   `-- aaa
 |       `-- .xinitrc
 `-- moc_splash.png
-
-
 ```
 
 #### Enable services:
 ``` 
 systemctl enable getty@tty2
 systemctl enable moc
-``` 
 ```

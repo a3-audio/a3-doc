@@ -93,7 +93,7 @@ truncate -s64M file # no need to fill it with zeros, just make it sparse
 ```
 
 ```
- N1ete
+N1ete
 wenn du ein img hast dann würde ich das mounten mit losetup
 
 und dann würde ich das loop image mit fstrim auf das nötigste minimum shrinken

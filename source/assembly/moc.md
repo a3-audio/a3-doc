@@ -1,7 +1,5 @@
 # A³ Motion Assembly
-
 ## A³ Motion v0.2
-
 ![](pics_assembly/v02/a3motion-housing.JPG)
 
 ## PCB's
@@ -13,8 +11,8 @@ A³ Motion pcbs are published as kicad projects. You should find all information
 ```
 Ambijockey/hardware/moc/Mainboard-pcb/
 ```
-![](pics_assembly/v01/a3motion-pcb-v01-front.jpg)
 ![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
+![](pics_assembly/v01/a3motion-pcb-v01-front.jpg)
 ![](pics_assembly/v01/a3motion-schematic.jpg)
 ![](pics_assembly/v01/a3motion-pcb-design.jpg)
 
