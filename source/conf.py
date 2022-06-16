@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ Audio UG (haftungsbeschränkt)'
+copyright = 'A³ Audio UG (haftungsbeschränkt) License: CC-BY-SA-4.0'
 
 #copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
