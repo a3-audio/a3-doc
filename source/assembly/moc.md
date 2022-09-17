@@ -1,45 +1,49 @@
-# A³ Motion Assembly
-## A³ Motion v0.2
-![](a3motion_v02_assembled_01.jpg)
-
+# A³ Motion v0.2 Assembly
 ## PCB's
 A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects
 
-### A³ Motion PCB v0.1
-- Kicad project:
-
+### PCB v0.1
 ```
-Ambijockey/hardware/moc/Mainboard-pcb/
+Kicad project:
+a3-system/a3hardware/a3motion/a3motion_mainboard_pcb_v0.1/
 ```
-![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
-![](pics_assembly/v01/a3motion-pcb-v01-front.jpg)
 ![](pics_assembly/v01/a3motion-schematic.jpg)
 ![](pics_assembly/v01/a3motion-pcb-design.jpg)
 
-### A³ Buttonmatrix PCB v0.1
-- Kicad project:
+front | back
+---|---
+![](pics_assembly/v01/a3motion-pcb-v01-front.jpg) | ![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
 
+### A³ Buttonmatrix PCB v0.1
 ```
-Ambijockey/hardware/moc/Buttonmatrix-pcb/
+Kicad project:
+a3-system/a3hardware/a3motion/a3motion_buttonmatrix_pcb_v0.1/
 ```
-![](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg)
-![](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg)
-![](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
+
 ![](pics_assembly/v01/a3motion-buttons-schematic.jpg)
 ![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
 
-## Housing v0.2
+front | back | action
+---|---|---
+![](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
 
+## Housing v0.1
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
-- Blender project:
 ```
-Ambijockey/hardware/moc/housing
+Blender project:
+a3-system/a3hardware/a3motion/a3motion_housing_v0.1/
 ├── moc_housing_bottom.obj
 ├── moc_housing_bottom.stl
 ├── moc_housing_top.obj
 └── moc_main_pcb.stl
 ```
-![a3motion-housing](pics_assembly/v01/a3motion-housing.png)
+
+draft | print
+---|---
+![a3motion-housing](pics_assembly/v02/a3motion_v02_housing_01.jpg) | ![](pics_assembly/v02/a3motion_v02_housing_02.jpg)
+
+## A³ Assembled
+![](pics_assembly/v02/a3motion_v02_action.jpg)
 
 ## Estimated power consumption
 Device | Watts
@@ -50,17 +54,3 @@ Teensy 4.1 | 2.5W
 SunFounder Raspberry Pi 4 Display Touchscreen 7 Inch | 3W
 ---|---
 Sum | 31.5W
-
-## Early versions
-### 2020-2021
-#### A³ Motion v0.1
-![](pics_assembly/v01/a3motion-prototype.jpg)
-![](pics_assembly/v01/a3motion-wires.jpg)
-![](pics_assembly/v01/a3motion-wires-01.jpg)
-![a3motion-v01.jpg](pics_assembly/v00/a3motion-v01.jpg)
-#### Buttonmatrix v0.1
-![/a3motion-buttonmatrix-v01.jpg](pics_assembly/v00/a3motion-buttonmatrix-v01.jpg)
-#### Buttonmatrix v0.0
-![a3motion-buttonmatrix-pcb-v01.jpg](pics_assembly/v00/a3motion-buttonmatrix-pcb-v01.jpg)
-#### A³ Motion v0.0
-![a3system-early.jpg](pics_assembly/v00/a3system-early.jpg)
