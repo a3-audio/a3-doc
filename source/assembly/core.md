@@ -1,12 +1,11 @@
 # A³ Core v0.2 Assembly
-A powerful consumer pc with touchscreen on linux
+A powerful linux pc with touchscreen
 
 mix | config
 ---|---
 ![](pics_assembly/v02/a3core_v02_mix.jpg) | ![](pics_assembly/v02/a3core_v02_config.jpg)
 
-## Tested setups:
-### A³ Core v0.2
+## Specifications
 - AMD Ryzen™ 7 PRO 3700 @ 8x3.6GHz
 - digigram lx-dante
 - SSD
