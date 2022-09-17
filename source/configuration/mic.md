@@ -80,7 +80,8 @@ pip install adafruit-circuitpython-neopixel --force-reinstall adafruit-blinka rp
 
 #### Clone repo as user aaa
 ```
-git clone git@github.com:ambisonics-audio-association/Ambijockey.git
+cd /home/aaa
+git clone --recursive git@github.com:git@github.com:a3-audio/a3-system.git
 ```
 
 #### Copy Files as root
@@ -90,12 +91,13 @@ Ambijockey/Controller_Mixer/software/raspberry
     ├── environment
     ├── modprobe.d
     │   └── raspi-blacklist.conf
-    ├── ?? pip.conf
     └── systemd
         ├── network
         │   └── eth.network
         └── system
-            └── a3_mic.service
+            ├── a3_mic.service
+		    └── getty@tty2.service.d
+				└── override.conf
 ```
 
 #### Configure services as root

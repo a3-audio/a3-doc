@@ -1,12 +1,16 @@
 # A³ Core Configuration
 ## PC
-Since a wide range of archlinux compatible audio hardware is able to run A³ Core software, we describe our proved configurations in [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html).
+Since a wide range of archlinux compatible audio hardware is able to run A³ Core software, we describe tested configurations in [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html).
 
 ## SSD
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - SSD > 64GB
 
-## From scratch <-wip
+## From scratch v.0.2
+## Install debian
+...
+
+## From scratch v.0.1
 ### Install Archlinux
 Follow the guide from archlinux: [Installation guide](https://wiki.archlinux.org/title/Installation_guide)
 
@@ -47,7 +51,7 @@ pacman -Syu tree vim linux-rt realtime-privileges rtirq python3 python-osc jack2
 pip install numpy pysimplegui
 
 cd /home/aaa
-git clone git@github.com:a3-audio/a3-system.git
+git clone --recursive git@github.com:git@github.com:a3-audio/a3-system.git
 
 Install reaper:
   git clone https://aur.archlinux.org/yay.git
@@ -150,8 +154,6 @@ install tigervnc and execute ```a3core/./a3vnc.sh``` on your computer to connect
 ![](pics_configuration/a3_core_screen_sequencer.png)
 #### Mixer screen
 ![](pics_configuration/a3_core_screen_mixer.png)
-#### Info screen
-![](pics_configuration/a3_core_screen_info.png)
 
 ### Supercollider
 - open scide

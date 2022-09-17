@@ -66,14 +66,11 @@ pacman -S tree vim i3-wm dmenu sudo
 pacman -S teensy_loader_cli
 ``` 
 
-### User aaa operations
+### User "aaa" operations
 #### Clone repo
 ```
-su aaa
 cd /home/aaa
-git clone git@github.com:ambisonics-audio-association/Ambijockey.git
-cd Ambijockey/Controller_Motion/software/
-git clone git@github.com:ambisonics-audio-association/MotionControllerUI.git
+git clone --recursive git@github.com:git@github.com:a3-audio/a3-system.git
 ``` 
 
 #### Python
@@ -95,12 +92,12 @@ python -m pip install -r requirements.txt
 |   |   `-- Xwrapper.config
 |   |-- sudoers
 |   `-- systemd
-|       |-- getty@tty2.service.d
-|       |   `-- override.conf
 |       |-- network
 |       |   `-- eth0.network
 |       `-- system
 |           `-- moc.service
+|           |-- getty@tty2.service.d
+|           |   `-- override.conf
 |-- home
 |   `-- aaa
 |       `-- .xinitrc
