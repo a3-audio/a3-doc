@@ -1,17 +1,21 @@
 # A³ Mix Assembly
-## A³ Mix v0.1
-![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg)
-
-### A³ Mix PCB v0.2
-
+## PCB v.0.1
 A³ Mix pcb is published as kicad project. You should find all information to assemble peripherals in the circuit-diagram of kicad-project:
 ```
 /home/aaa/Ambijockey/hardware/mic/a3mix-mainboard-v0.2
 ```
-![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
 ![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
 ![a3mix-pcb-design](pics_assembly/v01/a3mix-pcb-design.jpg)
+![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
 
+## Housing v0.1
+We cut an old Behringer mixer
+
+before | after | taped
+---|---|---
+ ![a3mix_v00_housing.jpg](pics_assembly/v00/a3mix_v00_housing.jpg) | ![a3mix-prototype](pics_assembly/v01/a3mix-prototype.jpg) | ![a3mix-prototype-taped.jpg](pics_assembly/v01/a3mix-prototype-taped.jpg)
+
+## Specifications
 ### Multiplexer pin configuration
 #### Multiplexer 1-4 (hc4051)
 Function (potentiometer)| Pin
@@ -53,29 +57,22 @@ Teensy 4.1 | 2.5W
 ---|---
 Sum | 25W
 
-#### Headphones
+### Headphones
 2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphones amp is needed
 
-### A³ Mix v0.2 Housing
-A³ Mix housing isn't ready yet ...
-![a3mix housing draft](pics_assembly/v01/a3mix-housing-draft.jpg)
-
-#### A³ Mix v0.1 wires
+## A³ Mix v0.1 wires
 ![a3mix-inside-01.jpg](pics_assembly/v01/a3mix-inside-01.jpg)
 ![a3mix-inside-02.jpg](pics_assembly/v01/a3mix-inside-02.jpg)
 ![a3mix-inside-03.jpg](pics_assembly/v01/a3mix-inside-03.jpg)
 
-#### A³ Mix v0.1 FX Section
+## A³ Mix v0.1 FX Section
 ![a3mix FX Section](pics_assembly/v01/a3mix-fx-section.jpg)
 
-## Early versions
-### 2020-2021
-
+## Early versions (2020-2021)
 ### A³ Mix v0.1
-
 ![a3mix-prototype-v01](pics_assembly/v00/a3mix-prototype-v01.jpg)
-#### A³ Mix PCB v0.1
+### A³ Mix PCB v0.1
 ![a3mix-pcb-v01](pics_assembly/v00/a3mix-pcb-v01.jpg)
-#### A³ Mix PCB v0.0
+## A³ Mix PCB v0.0
 ![a3mix-pcb-front-v0](pics_assembly/v00/a3mix-pcb-front-v0.jpg)
 ![a3mix-pcb-back-v0](pics_assembly/v00/a3mix-pcb-back-v0.jpg)
