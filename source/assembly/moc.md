@@ -1,4 +1,5 @@
-# A³ Motion V02 Assembly
+# A³ Motion Assembly
+## V02
 old software in action | new Software and action buttons (early state)
 ---|---
 ![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3motion_v02_newSoftware.jpg) 

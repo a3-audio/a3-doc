@@ -1,5 +1,5 @@
-# A³ Mixer V02 Configuration
-
+# A³ Mixer Configuration
+## V02
 - RaspianOS
 - Raspberry Pi 3B
 - Teensy 4.1

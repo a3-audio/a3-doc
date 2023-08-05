@@ -1,4 +1,5 @@
-# A³ Mixer V02 Assembly
+# A³ Mixer Assembly
+## V02
 ![](pics_assembly/v02/a3mix_v02_displays.jpg)
 
 ## PCB V02
