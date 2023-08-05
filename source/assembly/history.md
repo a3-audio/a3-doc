@@ -1,12 +1,12 @@
-# A3 Audio
+# History
 Since 2018 we're working with 3d audio in live environments. Since its complex to use 3d audio software it also needs a total rework of the live perfoming setup for artists. At the beginning we always where in a situation that we, as system operators, must perform 3d panning for artists, which resolves in confusing when and which operations we have to do to fit the artist ideas - though it was kind of random. We decided to start our journey and build something an artist could use with almost no knowledge about what is behind.
 
-# The journey starts
+## The journey starts
 
 First Mocup
 ![](pics_assembly/history/re_202102-v00-a3-system-firstdraft.jpg)
 
-# A³ System - V01
+## A³ System - V01
 A³ System at Home
 ![](pics_assembly/history/re_202103-v01-a3-system.jpg)
 
@@ -38,7 +38,7 @@ The day after
 To get an idea of the layout
 ![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
 
-# Current states
+## Current states
 - [A³ System](https://doc.a3-audio.com/assembly/assembly.html)
 - [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
 - [A³ Mixer](https://doc.a3-audio.com/assembly/mic.html)
