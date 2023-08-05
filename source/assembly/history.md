@@ -4,38 +4,50 @@ Since 2018 we're working with 3d audio in live environments. Since its complex t
 ## The journey starts
 
 First Mocup
+
 ![](pics_assembly/history/re_202102-v00-a3-system-firstdraft.jpg)
 
 ## A³ System - V01
 A³ System at Home
+
 ![](pics_assembly/history/re_202103-v01-a3-system.jpg)
 
 A³ Core | A³ Mix | A³ Motion
 --- | --- | ---
 ![](pics_assembly/history/re_202109-v01-a3core-12v-front.jpg) ![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg) | ![](pics_assembly/history/re_202107-v01-a3mix-withfxengine.jpg) | ![](pics_assembly/history/re_202109-v01-a3motion.jpg)
 
-We put everything on a handwagon
-![](pics_assembly/history/re_202109-v01-a3-system-parkrave-packed.jpg)
 
-Bought some cheap speakers
+We bought some cheap speakers
+
 ![](pics_assembly/history/re_202106-v01-a3-system-Controloneonstands.jpg)
 
+Put everything on a handwagon
+
+![](pics_assembly/history/re_202109-v01-a3-system-parkrave-packed.jpg)
+
 And pulled it into a park
+
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-buildup.jpg)
 
 People came and loves it
+
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-ongoing.jpg)
 
 Police came and forced us to change the location
+
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-nextlocation.jpg)
 
 Another day
+
 ![](pics_assembly/history/re_202107-a3-system-wannseeravebynight.jpg)
 
+
 The day after
+
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-over.jpg)
 
 To get an idea of the layout
+
 ![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
 
 ## Current states
