@@ -10,7 +10,8 @@ True, at the moment we've just Minimum viable products and its not ready to sell
 ## Prototype v 0.2
 | A³ Mix | A³ Motion | A³ Core |
 | ----------- | ----------- | ----------- |
-| ![a3motion](pics_assembly/v02/a3mix_v02_assembled_02.jpg) | ![a3mix](pics_assembly/v02/a3motion_v02_action.jpg) | ![a3core](pics_assembly/v02/a3core_v02_logo.jpg) |
+| ![](pics_assembly/v02/a3mix_v02_displays.jpg) | ![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3core_v02_logo.jpg) |
 
 ## Github
-- [A³ Hardware](https://github.com/a3-audio/a3-hardware)
+- [A³ Hardware](https://github.com/a3-audio)
+
