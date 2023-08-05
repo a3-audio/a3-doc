@@ -1,5 +1,6 @@
 # A³ Assembly overview
-A working prototype exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday in a fieldtest. It works pretty well and meanwhile was a rocksolid and stable experience.
+Working prototypes exists. We applied intensive stress tests by using 12V car hifi with 15 inch centered Downfire subwoofer and 5 JBL Control One satellites on stands. We put everything on a hand-wagon and played at 40°C on a summerday. It works pretty well and it was a rocksolid and stable experience.
+True, at the moment we've just Minimum viable products and its not ready to sell yet.
 
 ## A³ Devices
 - [A³ Motion Assembly](https://doc.a3-audio.com/assembly/moc.html)
