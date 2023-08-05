@@ -1,7 +1,7 @@
 # Developer overview
 
 
-## A³ Devices
+## Devices
 - [A³ Motion Development](https://doc.a3-audio.com/development/moc.html)
 - [A³ Mix Development](https://doc.a3-audio.com/development/mic.html)
 - [A³ Core Development](https://doc.a3-audio.com/development/core.html)

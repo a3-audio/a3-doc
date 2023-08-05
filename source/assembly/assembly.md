@@ -1,11 +1,11 @@
 # Assembly overview
 
 
-## A³ Devices
+## Devices
 - [A³ Motion Assembly](https://doc.a3-audio.com/assembly/moc.html)
 - [A³ Mix Assembly](https://doc.a3-audio.com/assembly/mic.html)
 - [A³ Core Assembly](https://doc.a3-audio.com/assembly/core.html)
-- [A³ System Assembly History](https://doc.a3-audio.com/assembly/history.html)
+- [History (Assembly)](https://doc.a3-audio.com/assembly/history.html)
 
 ## Prototype v 0.2
 | A³ Mix | A³ Motion | A³ Core |
