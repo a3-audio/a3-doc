@@ -30,10 +30,8 @@ draft | print
 ![](pics_assembly/v02/a3mix_v02_wires_01.jpg) | ![](pics_assembly/v02/a3mix_v02_wires_02.jpg)
 
 ## Assembled
-silent | fire
----|---
-![](pics_assembly/v02/a3mix_v02_assembled_01.jpg) | ![](pics_assembly/v02/a3mix_v02_assembled_02.jpg)
 
+![](pics_assembly/v02/a3mix_v02_displays.jpg)
 ## Specifications
 ### Multiplexer pin configuration
 #### Multiplexer 1-4 (hc4051)
@@ -44,6 +42,7 @@ EQ HIGH | 1
 EQ MID | 2 
 EQ LOW | 3 
 VOLUME | 4
+FX SEND | 5
 
 #### Multiplexer 5 (hc4051)
 Function (potentiometer) | Pin
@@ -52,6 +51,7 @@ MASTER | 0
 BOOTH | 1
 PHONES MIX | 2
 PHONES VOLUME | 3
+TAP BUTTON | 4
 FX FREQUENCY | 7
 FX RESONANCE | 8
 
@@ -65,6 +65,10 @@ FX TOGGLE | 0-3
 - 4 led-buttons for heapdphones prelisten function (pfl)
 - 4x9 NeoPixel for input vu (ws2811)
 - 10 NeoPixel for fx and 3d-section (ws2811)
+- 1x 8x32 LED-Matrix max7219
+### Displays
+- 5x 0.96 inch OLED SSD1306 Display I2C 128 x 64
+- TCA9548A I2C IIC Multiplexer
 
 ### Estimated power consumption
 Device | Watts
@@ -73,5 +77,7 @@ Raspberry Pi 3 Model B | 5W
 Teensy 4.1 | 2.5W
 46 NeoPixel | 13W
 8x32 Leds max7219 | 4.5W
+5x 0.96 inch OLED Display | 0.2W
+
 ---|---
-Sum | 25W
+Sum | 25.2W
