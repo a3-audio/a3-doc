@@ -37,6 +37,7 @@ Links
    :caption: A³ Developer
 
    assembly/assembly
+   assembly/history
    configuration/configuration
    development/developer
 
