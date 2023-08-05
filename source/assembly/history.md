@@ -42,9 +42,7 @@ Wrapped
 ## A³ Motion
 
 ![](pics_assembly/history/re_202109-v01-a3motion.jpg)
-
 ## Rock it
-
 We bought some cheap speakers
 
 ![](pics_assembly/history/re_202106-v01-a3-system-Controloneonstands.jpg)

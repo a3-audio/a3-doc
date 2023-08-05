@@ -1,9 +1,22 @@
 # A³ Mixer Development
-## Backend
-- RaspianOS
-- Microcontroller Teensy 4.1
-##  Python script
-This pythonscript sends and receives OSC and serial data, to and from raspberry (A³Mix) and A³ Core
-- ```mic.py```
+## Python script 
+- Receives messages from teensy via USB-Serial
+	- Buttons
+	- Fader
+	- Encoder
+
+- sends OSC messages to A³ Core
+	- Buttons
+	- Fader
+	- Encoder
+
+- receives OSC messages from Core
+	- Input vu meters per channel
+	- Output vu meters for mastersection
+	- Status (3d, fx, cue)
+
+- Sends messages to teensy via USB-Serial
+	- LEDs
+	- Displays
 ## Teensy firmware
 Teensy 4.1 firmware is written in c++

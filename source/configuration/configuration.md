@@ -1,5 +1,4 @@
 # A³ Configuration overview
-Configuration can be tricky and this doc must be seen as example only
 
 
 ## A³ Devices

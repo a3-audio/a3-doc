@@ -1,9 +1,7 @@
 # A³ Mixer V02 Assembly
-
 ![](pics_assembly/v02/a3mix_v02_displays.jpg)
 
 ## PCB V02
-
 ![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
 
 ![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
@@ -17,7 +15,6 @@ draft | print
 
 ## Headphones
 2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphones amp is needed
-
 ## Buttons
 < | >
 ---|---

@@ -1,13 +1,10 @@
 # A³ Motion V02 Assembly
-
 old software in action | new Software and action buttons (early state)
 ---|---
 ![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3motion_v02_newSoftware.jpg) 
 
 ## PCB's
-
 ### Mainboard PCB V01
-
 front | back
 ---|---
 ![](pics_assembly/v01/a3motion-pcb-v01-front.jpg) | ![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
@@ -16,8 +13,7 @@ front | back
 
 ![](pics_assembly/v01/a3motion-pcb-design.jpg)
 
-### Buttonmatrix PCB V01
-
+### Buttonmatrix PCB V02 
 front | back | action
 ---|---|---
 ![](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
