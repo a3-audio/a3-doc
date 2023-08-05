@@ -37,7 +37,6 @@ Links
    :caption: A³ Developer
 
    assembly/assembly
-   assembly/history
    configuration/configuration
    development/developer
 
@@ -69,6 +68,7 @@ Links
    development/flashTeensy
    development/imaging   
    development/osc
+   assembly/history
 
 .. toctree::
    :maxdepth: 1
