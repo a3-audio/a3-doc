@@ -15,8 +15,6 @@ Contact
 *******
 - Website: `a3-audio.com <https://a3-audio.com>`_
 - E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
-- Forum: `3d-audio.io <https://d3-audio.io>`_
-
 - Mattermost: `A³ Mattermost <https://chat.a3-audio.com/signup_user_complete/?id=eefebwgf3jdypd5yx3xtukkbzy>`_
 
 *****
