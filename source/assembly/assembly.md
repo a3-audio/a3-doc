@@ -1,4 +1,4 @@
-# A³ Assembly overview
+# Assembly overview
 
 
 ## A³ Devices

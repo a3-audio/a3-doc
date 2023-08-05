@@ -23,7 +23,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ User
+   :caption: User Section
 
    user/user
    user/a3motion
@@ -32,7 +32,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer
+   :caption: Developer Section
 
    assembly/assembly
    configuration/configuration
@@ -61,7 +61,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Ressources
+   :caption: Ressources
 
    development/flashTeensy
    development/github
@@ -71,7 +71,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Legal
+   :caption: Legal
 
    Legal Notice <https://a3-audio.com/legal-notice.html>
    Privacy Policy <https://a3-audio.com/privacy-policy.html>

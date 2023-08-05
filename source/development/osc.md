@@ -1,4 +1,4 @@
-# A³ OSC communication
+# OSC communication
 ## IP-Addresses
 - A³ Core 192.168.43.50
 - A³ Mixer 192.168.43.51

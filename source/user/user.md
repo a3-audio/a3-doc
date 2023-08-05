@@ -1,4 +1,4 @@
-# A³ User Welcome
+# User Welcome
 ## A³ System
 - As you can see there are the three main devices A³ Core, A³ Motion and A³ Mix. They are connected via network cable to an ethernet switch which deliveres power over ethernet (PoE)
 - Your DJ-Decks and your speakers are connected to A³ Core's audiohardware

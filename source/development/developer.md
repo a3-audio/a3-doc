@@ -1,4 +1,4 @@
-# A³ Developer overview
+# Developer overview
 
 
 ## A³ Devices

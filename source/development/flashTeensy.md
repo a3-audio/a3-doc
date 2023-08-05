@@ -1,4 +1,4 @@
-# A³ Flash Firmware to Teensy
+# Teensy Firmware
 https://docs.platformio.org/en/latest/core/installation.html#system-requirements
 
 ## On Raspberry PI
