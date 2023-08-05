@@ -12,10 +12,32 @@ A³ System at Home
 
 ![](pics_assembly/history/re_202103-v01-a3-system.jpg)
 
-A³ Core | A³ Mix | A³ Motion
---- | --- | ---
-![](pics_assembly/history/re_202109-v01-a3core-12v-front.jpg) ![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg) | ![](pics_assembly/history/re_202107-v01-a3mix-withfxengine.jpg) | ![](pics_assembly/history/re_202109-v01-a3motion.jpg)
+## A³ Core
 
+Yes there is a 6ch car amplifier cramped in that case.
+
+![](pics_assembly/history/re_202109-v01-a3core-12v-front.jpg) 
+
+We put a poe switch and a miniDSP USBstreamer mini in the core case. 
+The Behringer thing is the headphone amp
+
+![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg)
+
+## A³ Mix
+
+Raw
+
+![](pics_assembly/history/re_202107-v01-a3mix-withfxengine.jpg)
+
+Wrapped
+
+![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
+
+## A³ Motion
+
+![](pics_assembly/history/re_202109-v01-a3motion.jpg)
+
+## Rock it
 
 We bought some cheap speakers
 
@@ -33,23 +55,20 @@ People came and loves it
 
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-ongoing.jpg)
 
-Police came and forced us to change the location
+Police came and forced us to change location
 
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-nextlocation.jpg)
 
-Another day
+Until night
 
 ![](pics_assembly/history/re_202107-a3-system-wannseeravebynight.jpg)
 
 
-The day after
+And to the day after
 
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-over.jpg)
 
-To get an idea of the layout
-
-![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
-
+In the end we still had power left from the batteries but no energy anymore. It was a lovely summer 2019.
 ## Current states
 - [A³ System](https://doc.a3-audio.com/assembly/assembly.html)
 - [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
