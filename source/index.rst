@@ -63,8 +63,11 @@ Links
    :maxdepth: 1
    :caption: Ressources
 
+   development/imaging
    development/github
+   assembly/history
    development/osc
+   development/flashTeensy
 
 .. toctree::
    :maxdepth: 1
