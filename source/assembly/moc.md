@@ -1,43 +1,38 @@
-# A³ Motion v0.2 Assembly
-## PCB's
-A³ Motion pcbs are published as kicad projects. You should find all information to assemble peripherals in the circuit-diagram of kicad-projects
+# A³ Motion V02 Assembly
 
-### PCB v0.1
-```
-Kicad project:
-a3-system/a3hardware/a3motion/a3motion_mainboard_pcb_v0.1/
-```
-![](pics_assembly/v01/a3motion-schematic.jpg)
-![](pics_assembly/v01/a3motion-pcb-design.jpg)
+old software in action | new Software and action buttons (early state)
+---|---
+![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3motion_v02_newSoftware.jpg) 
+
+## PCB's
+
+### Mainboard PCB V01
 
 front | back
 ---|---
 ![](pics_assembly/v01/a3motion-pcb-v01-front.jpg) | ![](pics_assembly/v01/a3motion-pcb-v01-back.jpg)
 
-### A³ Buttonmatrix PCB v0.1
-```
-Kicad project:
-a3-system/a3hardware/a3motion/a3motion_buttonmatrix_pcb_v0.1/
-```
+![](pics_assembly/v01/a3motion-schematic.jpg)
 
-![](pics_assembly/v01/a3motion-buttons-schematic.jpg)
-![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
+![](pics_assembly/v01/a3motion-pcb-design.jpg)
+
+### Buttonmatrix PCB V01
 
 front | back | action
 ---|---|---
 ![](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
 
-## Housing v0.2
+![](pics_assembly/v01/a3motion-buttons-schematic.jpg)
+
+![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
+
+## Housing V02
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).
 
 draft | print
 ---|---
 ![a3motion-housing](pics_assembly/v02/a3motion_v02_housing_01.jpg) | ![](pics_assembly/v02/a3motion_v02_housing_02.jpg)
 
-## A³ Assembled
-action | new Software and action buttons
----|---
-![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3motion_v02_newSoftware.jpg) 
 
 ## Estimated power consumption
 Device | Watts

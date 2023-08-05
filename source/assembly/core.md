@@ -1,4 +1,4 @@
-# A³ Core v0.2 Assembly
+# A³ Core v02 Assembly
 
 mix | config
 ---|---

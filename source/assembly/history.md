@@ -5,7 +5,9 @@ Since 2018 we're working with 3d audio in live environments. Since its complex t
 
 Get an idea
 
-![](pics_assembly/v00/a3mix-lose.jpg)
+A³ Mixer | A³ Motion
+--- | ---
+![](pics_assembly/v00/a3mix-lose.jpg) | ![](pics_assembly/history/re_a3moc_mockup.jpg)
 
 First Mocup
 

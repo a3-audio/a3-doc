@@ -1,7 +1,7 @@
 # A³ OSC communication
 ## IP-Addresses
 - A³ Core 192.168.43.50
-- A³ Mix 192.168.43.51
+- A³ Mixer 192.168.43.51
 - A³ Motion 192.168.43.52
 
 ## A³ Core

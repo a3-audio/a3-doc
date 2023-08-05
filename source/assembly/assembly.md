@@ -12,6 +12,3 @@ True, at the moment we've just Minimum viable products and its not ready to sell
 | ----------- | ----------- | ----------- |
 | ![](pics_assembly/v02/a3mix_v02_displays.jpg) | ![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3core_v02_logo.jpg) |
 
-## Github
-- [A³ Hardware](https://github.com/a3-audio)
-
