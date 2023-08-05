@@ -64,9 +64,10 @@ Links
    :caption: A³ Ressources
 
    development/flashTeensy
+   development/github
+   assembly/history
    development/imaging   
    development/osc
-   assembly/history
 
 .. toctree::
    :maxdepth: 1
