@@ -29,7 +29,7 @@ To setup patching and recording
 ## Reaper Audiobackend Signalflow
 - ```a3-audio.RPP```
 
-![](pics_development/audio_signalflow.drawio.png)
+![](pics_configuration/audio_signalflow.drawio.png)
 
 
 ## Screenshots
