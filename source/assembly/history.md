@@ -3,6 +3,10 @@ Since 2018 we're working with 3d audio in live environments. Since its complex t
 
 ## The journey starts
 
+Get an idea
+
+![](pics_assembly/v00/a3mix-lose.jpg)
+
 First Mocup
 
 ![](pics_assembly/history/re_202102-v00-a3-system-firstdraft.jpg)
@@ -23,11 +27,11 @@ The Behringer thing is the headphone amp
 
 ![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg)
 
-## A³ Mix
+## A³ Mix 
 
 Raw
 
-![](pics_assembly/history/re_202107-v01-a3mix-withfxengine.jpg)
+![](pics_assembly/v01/a3mix-prototype.jpg)
 
 Wrapped
 
