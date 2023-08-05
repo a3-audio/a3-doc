@@ -1,5 +1,4 @@
 # A³ Motion Configuration
-[A³ Moton Giithub](https://github.com/a3-audio/a3-motion)
 
 - RaspbianOS
 - Raspberry pi 4b

@@ -1,5 +1,5 @@
 # A³ Core Configuration
-[A³ Core Github](https://github.com/a3-audio/a3-core)
+
 ## OS
 - Debian with Linux realtime kernel
 - xfce window manager

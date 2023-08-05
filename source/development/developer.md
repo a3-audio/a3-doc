@@ -10,8 +10,3 @@
 - [Flash Device Image](https://doc.a3-audio.com/development/imaging.html)
 - [Flash Teensy](https://doc.a3-audio.com/development/flashTeensy.html)
 - [OSC and serial communication](https://doc.a3-audio.com/development/osc.html)
-
-## Github
-- [A3 Audio Project board](https://github.com/orgs/a3-audio/projects/4)
-- [A3 Audio](https://github.com/a3-audio)
-- [A3 Audio Motion Controller UI](https://github.com/a3-audio/a3-MotionControllerUI)
