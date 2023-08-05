@@ -24,47 +24,48 @@ Links
 .. toctree::
    :maxdepth: 1
    :caption: User Section
+
    user/user
    user/a3motion
    user/a3mix
    user/a3core
-
 .. toctree::
    :maxdepth: 1
    :caption: Developer Section
+
    assembly/assembly
    configuration/configuration
    development/developer
-
 .. toctree::
    :maxdepth: 1
+
    assembly/moc
    configuration/moc
    development/moc
-
 .. toctree::
    :maxdepth: 1
+
    assembly/mic
    configuration/mic
    development/mic
-   
 .. toctree::
    :maxdepth: 1
+
    assembly/core
    configuration/core
    development/core
-
 .. toctree::
    :maxdepth: 1
    :caption: Ressources
+
    development/imaging   
    development/github
    assembly/history
    development/osc
    development/flashTeensy
-
 .. toctree::
    :maxdepth: 1
    :caption: Legal
+
    Legal Notice <https://a3-audio.com/legal-notice.html>
    Privacy Policy <https://a3-audio.com/privacy-policy.html>
