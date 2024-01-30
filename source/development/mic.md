@@ -1,13 +1,22 @@
-# A³ Mix Development
-## Backend
-- Arch Linux ARM on a Raspberry Pi 3 Model B. 
-- Microcontroller Teensy 4.1
+# A³ Mixer Development
+## Python script 
+- Receives messages from teensy via USB-Serial
+	- Buttons
+	- Fader
+	- Encoder
 
-##  Python script
-This pythonscript sends and receives OSC and serial data, to and from raspberry (A³Mix) and A³ Core
-- ```mic.py```
+- sends OSC messages to A³ Core
+	- Buttons
+	- Fader
+	- Encoder
 
+- receives OSC messages from Core
+	- Input vu meters per channel
+	- Output vu meters for mastersection
+	- Status (3d, fx, cue)
+
+- Sends messages to teensy via USB-Serial
+	- LEDs
+	- Displays
 ## Teensy firmware
 Teensy 4.1 firmware is written in c++
-```aaa/Ambijockey/Controller_Mixer/software/teensy/mic/src/```
-

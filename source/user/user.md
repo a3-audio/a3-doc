@@ -1,6 +1,9 @@
-# A³ User Welcome
-Custom build setup will be preset and configured by A³ Audio.
-The A³ system is made for 3D audio live interaction. It is a combination of three devices:
+# User Welcome
+## A³ System
+- As you can see there are the three main devices A³ Core, A³ Motion and A³ Mix. They are connected via network cable to an ethernet switch which deliveres power over ethernet (PoE)
+- Your DJ-Decks and your speakers are connected to A³ Core's audiohardware
+
+![Connection Diagram](pics_user/a3-connecting-diagram.png)
 
 ## A³ Motion (The Motion Sampler)
 [A³ Motion](https://doc.a3-audio.com/user/a3motion.html) is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
@@ -17,19 +20,11 @@ The A³ system is made for 3D audio live interaction. It is a combination of thr
 
 ![](pics_user/a3-core-icon_light.png)
 
-## Connections
-- As you can see there are the three main devices A³ Core, A³ Motion and A³ Mix. They are connected via network cable to an ethernet switch which deliveres power over ethernet (PoE)
-- Your DJ-Decks and your speakers are connected to A³ Core's audiohardware
-
-![Connection Diagram](pics_user/a3-connecting-diagram.png)
-
 ## Requirements
 - PA soundsystem with at least 4 speakers    
 - A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
-
 ## Optional
 - Booth soundsystem with at least 4 speakers placed around the DJ desk
-
 ## Quickstart
 - Plug in your instruments vinyl, cd, daw ..    
 - Plug in your speakers    

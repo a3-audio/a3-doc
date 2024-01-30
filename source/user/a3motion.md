@@ -3,13 +3,11 @@
 - Standalone OSC controller
 - 7" full-color capacitive multi-touch display
 - USB-A 2.0 slot for storage with presets (WIP)
-
-## Part Name and functions
+## Part Names and functions
 ![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
 
 ### [1] STEREO WIDTH SEPARATION
 - Adjust Stereo Width separation of the two audio input channels. The current state will be displayed on top of touchdisplay (0° : 90°)
-
 ### [2] REVERB SEND
 - Adjust send level to Reverb. The current state will be displayed on top of touchdisplay (-inf dB to 0 dB)
 

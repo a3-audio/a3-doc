@@ -15,8 +15,6 @@ Contact
 *******
 - Website: `a3-audio.com <https://a3-audio.com>`_
 - E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
-- Forum: `3d-audio.io <https://d3-audio.io>`_
-
 - Mattermost: `A³ Mattermost <https://chat.a3-audio.com/signup_user_complete/?id=eefebwgf3jdypd5yx3xtukkbzy>`_
 
 *****
@@ -25,7 +23,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ User
+   :caption: User Section
 
    user/user
    user/a3motion
@@ -34,7 +32,7 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Developer
+   :caption: Developer Section
 
    assembly/assembly
    configuration/configuration
@@ -63,15 +61,17 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Ressources
+   :caption: Ressources
 
-   development/flashTeensy
-   development/imaging   
+   development/imaging
+   development/github
+   assembly/history
    development/osc
+   development/flashTeensy
 
 .. toctree::
    :maxdepth: 1
-   :caption: A³ Legal
+   :caption: Legal
 
    Legal Notice <https://a3-audio.com/legal-notice.html>
    Privacy Policy <https://a3-audio.com/privacy-policy.html>

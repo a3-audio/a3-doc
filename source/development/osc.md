@@ -1,11 +1,9 @@
-# A³ OSC communication
+# OSC communication
 ## IP-Addresses
 - A³ Core 192.168.43.50
-- A³ Mix 192.168.43.51
+- A³ Mixer 192.168.43.51
 - A³ Motion 192.168.43.52
-
 ## A³ Core
-
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
 | - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter
