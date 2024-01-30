@@ -9,14 +9,14 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9.7
       - name: Install dependencies
-        run: |
-          pip install sphinx<7 sphinx_karma_theme myst_parser
+        run: pip install sphinx==6.2.1 sphinx_karma_theme myst_parser
       - name: Sphinx build
-        run: |
-          sphinx-build doc _build
+        run: sphinx-build source _build
       - name: A3-System Documentation
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
