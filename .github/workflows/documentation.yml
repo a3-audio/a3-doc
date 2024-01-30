@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: '3.10'
       - name: Install dependencies
-        run: pip install sphinx==6.2.1 sphinx_karma_theme myst_parser
+        run: pip install sphinx==6.2.1 karma_sphinx_theme myst_parser
       - name: Sphinx build
         run: sphinx-build source _build
       - name: A3-System Documentation
