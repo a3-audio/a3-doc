@@ -16,13 +16,13 @@ jobs:
       - name: Install dependencies
         run: pip install sphinx==6.2.1 karma_sphinx_theme myst_parser
       - name: Sphinx build
-        run: sphinx-build docs _build
+        run: sphinx-build sphinx docs
       - name: A3-System Documentation
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: a3-doc-gh-page
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/
+          publish_dir: docs/
           force_orphan: true
 
