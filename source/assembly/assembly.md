@@ -10,5 +10,7 @@
 ## Prototype v 0.2
 | A³ Mix | A³ Motion | A³ Core |
 | ----------- | ----------- | ----------- |
-| ![](pics_assembly/v02/a3mix_v02_displays.jpg) | ![](pics_assembly/v02/a3motion_v02_action.jpg) | ![](pics_assembly/v02/a3core_v02_logo.jpg) |
+| ![](pics_assembly/v02/a3mix_v02_displays.jpg) 
+| ![](pics_assembly/v02/a3motion_v02_action.jpg)
+| ![](pics_assembly/v02/a3core_v02_logo.jpg) |
 
