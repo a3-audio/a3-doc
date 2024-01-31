@@ -23,6 +23,6 @@ jobs:
         with:
           publish_branch: a3-doc-gh-page
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/
+          publish_dir: _build
           force_orphan: true
 
