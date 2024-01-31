@@ -59,8 +59,8 @@ html_logo = 'a3_logo_dark-200px.png'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
-    '../_static',
-    '../karma_sphinx_theme/static',
+    'source/_static',
+    'source/karma_sphinx_theme/static',
 ]
 
 source_suffix = {
