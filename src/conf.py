@@ -17,13 +17,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'A³ Documentation'
-copyright = 'A³ Audio UG (haftungsbeschränkt). License: CC-BY-SA-4.0. https://github.com/a3-audio/a3-doc'
+copyright = 'License: CC-BY-SA-4.0. https://github.com/a3-audio/a3-doc'
 
 #copyright = 'A³ Audio UG (haftungsbeschränkt)'
 author = 'A³ Audio'
 
 # The full version, including alpha/beta/rc tags
-release = '2021-2022'
+release = '2021'
 
 # -- General configuration ---------------------------------------------------
 
