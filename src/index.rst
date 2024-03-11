@@ -15,7 +15,7 @@ Contact
 *******
 - Website: `a3-audio.com <https://a3-audio.com>`_
 - E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
-- Mattermost: `A³ Mattermost <https://chat.a3-audio.com>`_
+- Mattermost: `A³ Mattermost <https://chat.a3-audio.com/signup_user_complete/?id=1tc4amkbz7gpxp4suxmuf39myw>`_
 
 *****
 Links

@@ -1,7 +1,6 @@
 # A³ Core Assembly
 ## V02
-![](pics_assembly/v02/a3core_v02_mix.jpg) 
-
+![](pics_assembly/v02/a3core_v02_mix.jpg)
 ![](pics_assembly/v02/a3core_v02_config.jpg)
 
 ## Specifications
