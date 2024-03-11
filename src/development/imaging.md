@@ -1,7 +1,3 @@
-# Device Images
-## Download
-- [a3 Device Images - Download](https://cloud.a3-audio.com/d/744da83d0f994de9bc76)
-
 ## Extract
 ```
 tar -xf path/to/...img.tar.gz

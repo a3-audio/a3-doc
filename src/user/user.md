@@ -6,17 +6,17 @@
 ![Connection Diagram](pics_user/a3-connecting-diagram.png)
 
 ## A³ Motion (The Motion Sampler)
-[A³ Motion](https://doc.a3-audio.com/user/a3motion.html) is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
+[A³ Motion](https://a3-audio.com/a3-doc/user/a3motion.html) is a standalone OSC controller which works like a loopstation, but instead of audio it lets you sample and playback motion from a touchscreen.
 
 ![](pics_user/a3-motion-icon_light.png)
 
 ## A³ Mix (The DJ Mixer)
-[A³ Mix](https://doc.a3-audio.com/user/a3mix.html) is a standalone OSC controller which behaves like a 4 channel DJ mixer.
+[A³ Mix](https://a3-audio.com/a3-doc/user/a3mix.html) is a standalone OSC controller which behaves like a 4 channel DJ mixer.
 
 ![](pics_user/a3-mix-icon_light.png)
 
 ## A³ Core (The Sound Server)
-[A³ Core](https://doc.a3-audio.com/user/a3core.html) processes analog audiosignals, calculates 3D audio spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
+[A³ Core](https://a3-audio.com/a3-doc/user/a3core.html) processes analog audiosignals, calculates 3D audio spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
 
 ![](pics_user/a3-core-icon_light.png)
 

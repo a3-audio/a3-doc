@@ -1,4 +1,3 @@
-:orphan:
 # History (Assembly)
 Since 2018 we're working with 3d audio in live environments. Since its complex to use 3d audio software it also needs a total rework of the live perfoming setup for artists. At the beginning we always where in a situation that we, as system operators, must perform 3d panning for artists, which resolves in confusing when and which operations we have to do to fit the artist ideas - though it was kind of random. We decided to start our journey and build something an artist could use with almost no knowledge about what is behind.
 
@@ -74,8 +73,3 @@ And to the day after
 ![](pics_assembly/history/re_202109-v01-a3-system-parkrave-over.jpg)
 
 In the end we still had power left from the batteries but no energy anymore. It was a lovely summer 2019.
-## Current states
-- [A³ System](https://doc.a3-audio.com/assembly/assembly.html)
-- [A³ Motion](https://doc.a3-audio.com/assembly/moc.html)
-- [A³ Mixer](https://doc.a3-audio.com/assembly/mic.html)
-- [A³ Core](https://doc.a3-audio.com/assembly/core.html)

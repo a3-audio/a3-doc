@@ -1,5 +1,4 @@
 # A³ Motion Configuration
-
 ## V02
 - RaspbianOS
 - Raspberry pi 4b

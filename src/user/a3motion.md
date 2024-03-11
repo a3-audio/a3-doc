@@ -8,6 +8,7 @@
 
 ### [1] STEREO WIDTH SEPARATION
 - Adjust Stereo Width separation of the two audio input channels. The current state will be displayed on top of touchdisplay (0° : 90°)
+
 ### [2] REVERB SEND
 - Adjust send level to Reverb. The current state will be displayed on top of touchdisplay (-inf dB to 0 dB)
 
