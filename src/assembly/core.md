@@ -1,8 +1,8 @@
 # A³ Core Assembly
 ## V02
- | 
----|---
-![](pics_assembly/v02/a3core_v02_mix.jpg) | ![](pics_assembly/v02/a3core_v02_config.jpg)
+![](pics_assembly/v02/a3core_v02_mix.jpg) 
+
+![](pics_assembly/v02/a3core_v02_config.jpg)
 
 ## Specifications
 - A powerful linux pc (could be headless), based on debian, linux realtimekernel and jack audioserver
