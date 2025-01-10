@@ -13,8 +13,8 @@ These docs are split in two sections:
 *******
 Contact
 *******
-- Website: `a3-audio.com <https://a3-audio.com>`_
-- E-Mail: `contact@a3-audio.com <mailto:contact@a3-audio.com>`_
+- Website: `a3-audio.github.io <https://a3-audio.github.io>`_
+- E-Mail: `p5hcu1@systemli.org <mailto:p5hcu1@systemli.org>`_
 
 *****
 Links
@@ -72,5 +72,5 @@ Links
    :maxdepth: 1
    :caption: Legal
 
-   Legal Notice <https://a3-audio.com/legal-notice.html>
-   Privacy Policy <https://a3-audio.com/privacy-policy.html>
+   Legal Notice <https://a3-audio.github.io/legal-notice.html>
+   Privacy Policy <https://a3-audio.github.io/legal-notice.html>
