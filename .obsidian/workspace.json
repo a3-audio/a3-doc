@@ -13,10 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/assembly/core.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": true
-              }
+              },
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ]
@@ -39,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -54,7 +58,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -62,7 +68,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/assembly/core.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -93,7 +101,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
             }
           },
           {
@@ -102,10 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/assembly/core.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from README"
             }
           },
           {
@@ -116,7 +128,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -125,8 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/assembly/core.md"
-              }
+                "file": "README.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of README"
             }
           }
         ]
@@ -148,10 +164,6 @@
   },
   "active": "8fea72f64d11b2e9",
   "lastOpenFiles": [
-    "src/user/user.md",
-    "src/user/a3motion.md",
-    "src/user/a3mix.md",
-    "src/user/a3core.md",
     "src/development/osc.md",
     "src/development/moc.md",
     "src/development/mic.md",
@@ -160,14 +172,18 @@
     "src/development/flashTeensy.md",
     "src/development/developer.md",
     "src/development/core.md",
-    "src/configuration/core.md",
     "src/configuration/moc.md",
     "src/configuration/mic.md",
+    "src/configuration/core.md",
     "src/configuration/configuration.md",
-    "src/assembly/history.md",
-    "src/assembly/mic.md",
     "src/assembly/moc.md",
+    "src/assembly/mic.md",
+    "src/assembly/history.md",
     "src/assembly/core.md",
-    "src/assembly/assembly.md"
+    "src/assembly/assembly.md",
+    "src/user/user.md",
+    "src/user/a3motion.md",
+    "src/user/a3mix.md",
+    "src/user/a3core.md"
   ]
 }
