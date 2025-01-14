@@ -1,8 +1,8 @@
 # OSC communication
 ## IP-Addresses
-- A³ Core 192.168.43.50
-- A³ Mixer 192.168.43.51
-- A³ Motion 192.168.43.52
+- A³ Core 192.168.43.50:9000
+- A³ Mixer 192.168.43.51:7771
+- A³ Motion 192.168.43.52:8700
 ## A³ Core
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
@@ -16,11 +16,14 @@
 | /channel/[0-3]/eq/mid | - | float | [0-1] | Channel eq mid
 | /channel/[0-3]/eq/low | - | float | [0-1] | Channel eq low
 | /channel/[0-3]/volume | - | float | [0-1] | Channel volume
-| /channel/[0-3]/width | - | float | [0-1] | Channel width
 | /channel/[0-3]/reverb | - | float | [0-1] | Channel reverb
 | /channel/[0-3]/pfl | - | bool | [0 or 1] | Channel pfl
 | /channel/[0-3]/fx | - | bool | [0 or 1] | Channel fx
 | /channel/[0-3]/3d | - | bool | [0 or 1] | Channel 3d
+| /channel/[0-3]/azimuth | - | float | [-180-180] | ambisonic azimuth
+| /channel/[0-3]/elevation | - | float | [0-1] | ambisonic elevation
+| /channel/[0-3]/width | - | float | [0-1] | ambisonic stereo width
+| /channel/[0-3]/order | - | float | [0-1] | ambisonic order
 | /master/volume | - | float | [0-1] | Master volume
 | /master/booth | - | float | [0-1] | Booth volume
 | /master/phones_mix | - | float | [0-1] | Phones mix
