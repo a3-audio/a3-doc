@@ -82,11 +82,10 @@ Sum | 25.2W
 
 ![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
 
-### PCB V01
-The whole batch was broken 
+### V00 
 ![](pics_assembly/v00/a3mix-pcb-v01.jpg)
 
-## PCB V00
+## V00
 
 | Back | Front
 --- | ---
