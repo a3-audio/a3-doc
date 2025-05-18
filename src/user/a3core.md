@@ -4,7 +4,7 @@
 - Compatible to linux audiohardware (needed)
 - VNC remote desktop control
 ## Prototype Pictures
-- [# A³ Core Assembly](https://a3-audio.github.io/a3-doc/user/a3core.html)
+- [A³ Core Assembly](https://a3-audio.github.io/a3-doc/user/a3core.html)
 ## Part Name and functions
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
