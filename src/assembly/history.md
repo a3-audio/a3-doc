@@ -68,7 +68,7 @@ In the end we still had power left from the batteries but no energy anymore.
 
 | Back                       | Front                       |
 | -------------------------- | --------------------------- |
-| ![[a3mix-pcb-back-v0.jpg]] | ![[a3mix-pcb-front-v0.jpg]] |
+| ![](pics_assembly/history/v00/a3mix-pcb-back-v0.jpg) | ![](pics_assembly/history/v00/a3mix-pcb-front-v0.jpg)
 
 # 2018
 
