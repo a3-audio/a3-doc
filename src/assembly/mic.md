@@ -72,3 +72,25 @@ Teensy 4.1 | 2.5W
 5x 0.96 inch OLED Display | 0.2W
 ---|---
 Sum | 25.2W
+
+## V01
+![](pics_assembly/v01/a3mix-prototype.jpg)
+
+![](pics_assembly/v00/a3mix-prototype-v01.jpg)
+
+### Wrapped
+
+![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
+
+# 2020
+## A³ Mixer PCB V01
+The whole batch was broken 
+![](pics_assembly/v00/a3mix-pcb-v01.jpg)
+
+# 2019
+
+## A³ Mixer PCB V00
+
+| Back | Front
+--- | ---
+![](pics_assembly/v00/a3mix-pcb-back-v0.jpg) | ![](pics_assembly/v00/a3mix-pcb-front-v0.jpg)

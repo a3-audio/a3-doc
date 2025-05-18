@@ -40,3 +40,10 @@ Teensy 4.1 | 2.5W
 SunFounder Raspberry Pi 4 Display Touchscreen 7 Inch | 3W
 ---|---
 Sum | 31.5W
+
+## V01
+
+![](pics_assembly/history/re_202109-v01-a3motion.jpg)
+
+## V00
+![[a3motion-buttonmatrix-pcb-v01.jpg]]![[a3motion-buttonmatrix-v01.jpg]]

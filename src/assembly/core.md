@@ -1,10 +1,36 @@
 # A³ Core Assembly
+
+## Specifications
+- A³ Core runs Reaper, Supercollider and an osc-routing py-script
+- Audio Hardware (we tested: Focusrite, RME, Digigram, Motu)
+- Software:
+	- Reaper (Audio Backend)
+	- Supercollider (Audio to osc VU-Meters)
+	- Python Script (OSC I/O)
+- Operating System
+	- Any Linux (tested Debian)
+	- macOS
+
+## V03
+- Mac Mini i7 late 2018
+- Motu Ultralite AVB
+
 ## V02
+- AMD Threadripper (16 Cores)
+- Digigram LX Dante
+
 ![](pics_assembly/v02/a3core_v02_mix.jpg)
 ![](pics_assembly/v02/a3core_v02_config.jpg)
 
-## Specifications
-- A powerful linux pc (could be headless), based on debian, linux realtimekernel and jack audioserver
-- Different class compliant audio hardware could be installed (we tested: Focusrite, RME, Digigram)
-- We provide a reaper session for a3mix but a3core can run different audio backends (we tested: Reaper, Panoramix, IEM-Pluginsuite, puredata, supercollider, Bitwig Studio)
-- IO roundtrip latency are measured from 1.3ms to 2.8ms, depends on audio and pc hardware components 
+
+## V01
+- Intel i5 (4 Cores)
+- MiniDSP Streamer (USB <-> ADAT io)
+- Behringer ADA8000
+- Behringer U-Phoria (Audio interface used as headphone Amp)
+- JBL GTO6000 (6ch Car Hifi Amp)
+- TP-Link 5-Port PoE Switch
+
+![](pics_assembly/history/re_202109-v01-a3core-12v-front.jpg) 
+
+![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg)
