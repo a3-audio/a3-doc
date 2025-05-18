@@ -82,14 +82,11 @@ Sum | 25.2W
 
 ![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
 
-# 2020
-## A³ Mixer PCB V01
+### PCB V01
 The whole batch was broken 
 ![](pics_assembly/v00/a3mix-pcb-v01.jpg)
 
-# 2019
-
-## A³ Mixer PCB V00
+## PCB V00
 
 | Back | Front
 --- | ---
