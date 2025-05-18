@@ -4,7 +4,8 @@
 - Input vu meter per channel
 - 8 Output vu meters
 - Tape-in section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus <- wip
-
+## Prototype Pictures
+- [# A³ Mixer Assembly](https://a3-audio.github.io/a3-doc/assembly/mic.html)
 ## Part Name and functions
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
