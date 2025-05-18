@@ -1,7 +1,5 @@
 # Assembly overview
 
-## History
-Take a look at [History (Assembly)](https://a3-audio.github.io/a3-doc/assembly/history.html) for older pictures
 ## Devices
 - [A³ Motion Assembly](https://a3-audio.github.io/a3-doc/assembly/moc.html)
 - [A³ Mix Assembly](https://a3-audio.github.io/a3-doc/assembly/mic.html)
