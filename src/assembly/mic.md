@@ -16,11 +16,6 @@ draft | print
 
 ## Headphones
 2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphones amp is needed
-## Buttons
-< | >
----|---
-![](pics_assembly/v02/a3mix_v02_buttons_01.jpg) | ![](pics_assembly/v02/a3mix_v02_buttons_02.jpg)
-![](pics_assembly/v02/a3mix_v02_buttons_03.jpg) | ![](pics_assembly/v02/a3mix_v02_buttons_05.jpg)
 
 ## Assembly
 1 | 2
