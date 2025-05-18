@@ -64,7 +64,7 @@ In the end we still had power left from the batteries but no energy anymore.
 
 # 2020
 ## A³ Mixer PCB V01
-![[pics_assembly/v00/a3mix-pcb-v01.jpg]]
+![](pics_assembly/v00/a3mix-pcb-v01.jpg)
 
 # 2019
 
