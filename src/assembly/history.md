@@ -13,23 +13,19 @@ First Mocup
 
 ![](pics_assembly/history/re_202102-v00-a3-system-firstdraft.jpg)
 
-## A³ System - V01
-A³ System at Home
-
+## A³ System V01
 ![](pics_assembly/history/re_202103-v01-a3-system.jpg)
 
-## A³ Core
-
-Yes there is a 6ch car amplifier cramped in that case.
+## A³ Core V01
+A 6 channel car amplifier cramped in that case. MiniDSP Streamer and  Behringer ADA8000 as interface.
 
 ![](pics_assembly/history/re_202109-v01-a3core-12v-front.jpg) 
 
-We put a poe switch and a miniDSP USBstreamer mini in the core case. 
-The Behringer thing is the headphone amp
+We put a PoE switch and a miniDSP USBstreamer mini in the core case. The Behringer UMC Interface is just the headphone amp
 
 ![](pics_assembly/history/re_202109-v01-a3core-12v-back.jpg)
 
-## A³ Mix 
+## A³ Mix V01
 
 Raw
 
@@ -39,7 +35,7 @@ Wrapped
 
 ![](pics_assembly/history/re_202112-v01-a3mix-green.jpg)
 
-## A³ Motion
+## A³ Motion V01
 
 ![](pics_assembly/history/re_202109-v01-a3motion.jpg)
 ## Rock it
