@@ -4,7 +4,7 @@
 - 7" full-color capacitive multi-touch display
 
 ## Prototype Pictures
-- [# A³ Motion Assembly](https://a3-audio.github.io/a3-doc/assembly/moc.html)
+- [A³ Motion Assembly](https://a3-audio.github.io/a3-doc/assembly/moc.html)
 ## Part Names and functions
 ![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
 
