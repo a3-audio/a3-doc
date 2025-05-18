@@ -35,5 +35,5 @@
 - Quickstart Guide
 - Safety & Warranty Manual
 
-## Misc
-- Items not listed under Box Contents are sold separately.
+## Pictures
+- [A³ Mix](https://a3-audio.github.io/a3-doc/user/a3core.html)

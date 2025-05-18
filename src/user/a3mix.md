@@ -1,4 +1,4 @@
-# A³ Mix
+# A³ Mixer
 ## Features:
 - Standalone OSC controller
 - Input vu meter per channel
@@ -6,7 +6,7 @@
 - Tape-in section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus <- wip
 
 ## Part Name and functions
-![A³ Mix numbered](pics_user/a3-mix-icon_light_numbered.png)
+![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 ### [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
