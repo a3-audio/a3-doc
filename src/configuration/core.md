@@ -21,10 +21,9 @@ To setup patching and recording
 - FDNReverb
 - AllraDecoder must be configured to fit your speaker setup
 ## TAL-Filter-2 FX
-- [TAL-Filter-2](https://tal-software.com/products/tal-filter) VST plugin for hipass lopass resonance/filter FX
-## Jmess (jack audio wiring)
-- [Jmess](https://github.com/jacktrip/jmess-jack) is used to store and restore jack connections
-- [aj-snapshot](https://man.archlinux.org/man/aj-snapshot.1.en) can be used to store and restore alsa connections
+- [TAL-Filter-2](https://tal-software.com/products/tal-filter) Resonance Filter FX VST plugin
+## Airwindows SmoothEQ
+- [SmoothEQ](https://www.airwindows.com/smootheq) 3-Band EQ VST Plugin
 ## Reaper Audiobackend Signalflow
 - ```a3-audio.RPP```
 
