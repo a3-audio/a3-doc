@@ -46,4 +46,6 @@ Sum | 31.5W
 ![](pics_assembly/history/re_202109-v01-a3motion.jpg)
 
 ## V00
-![[a3motion-buttonmatrix-pcb-v01.jpg]]![[a3motion-buttonmatrix-v01.jpg]]
+![](pics_assembly/v00/a3motion-buttonmatrix-pcb-v01.jpg)
+
+![](pics_assembly/v00/a3motion-buttonmatrix-v01.jpg)
