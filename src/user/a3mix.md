@@ -9,6 +9,8 @@
 ## Part Name and functions
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
+
+### [0] Aux Send
 ### [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
 - [TRIM]: -inf dB to 0 dB

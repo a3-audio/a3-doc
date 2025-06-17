@@ -26,15 +26,5 @@
 
 ### POWER SOCKET
 - Connect power cable to 230V power socket
-
-## Specification
-- The system will be custom build and configured by A³ to solve customer needs.
-
-## Box Contents
-- A³ Core
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
 ## Pictures
 - [A³ Mix](https://a3-audio.github.io/a3-doc/user/a3core.html)

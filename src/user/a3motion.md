@@ -11,17 +11,26 @@
 ### [1] STEREO WIDTH SEPARATION
 - Adjust Stereo Width separation of the two audio input channels. The current state will be displayed on top of touchdisplay (0° : 90°)
 
-### [2] REVERB SEND
-- Adjust send level to Reverb. The current state will be displayed on top of touchdisplay (-inf dB to 0 dB)
+### [2] Ambisonic order
+- lets you set the spatial resolution of your sound scene.
 
 ### [3] DISPLAY
 - This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions
 
-### [4] FUNCTION ENCODER
-- Use these touch-sensitive knobs to adjust various parameters and settings. The knobs can control one column of parameters at a time. The Highlight section on bottom of screen indicates the currently selected column. Press the Encoder button to change which column of parameters they currently control
+### [4] Speed Encoder
+- Use these encoder to adjust length of trackpattern (bars)
 
 ### [5] MOTION SAMPLE PADS
 - Each channel has a column of four iluminated sample pads. See Operaton to use basic functions
+
+### [6] Record Button
++ Hold the Rec-Button and one of the 4 pads (per channel) to start record. Record runs from next Beat for one Bar setup by Speed Encoder. 
+
+### [7] Tempo Tap Button
+* Current Tempo is indicated by top indicator on the Display
+
+### [8] Set One Button
+* Set Tempo Clock Counter to first beat
 
 ## BACK
 ### ETHERNET SOCKET
