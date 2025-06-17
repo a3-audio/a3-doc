@@ -10,9 +10,9 @@
 ![a3mix-pcb-design](pics_assembly/v01/a3mix-pcb-design.jpg)
 
 ## Housing V02
-draft | print
----|---
-![](pics_assembly/v02/a3mix_v02_housing_01.jpg) | ![](pics_assembly/v02/a3mix_v02_housing_02.jpg)
+| draft                                           | print                                           |
+| ----------------------------------------------- | ----------------------------------------------- |
+| ![](pics_assembly/v02/a3mix_v02_housing_01.jpg) | ![](pics_assembly/v02/a3mix_v02_housing_02.jpg) |
 
 ## Headphones
 2 XLR sockets on the back are connected to a 6.3mm jack socket on the front. An external headphones amp is needed
