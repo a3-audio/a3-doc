@@ -21,15 +21,11 @@ Links
 *****
 
 .. toctree::
-   :maxdepth: 1
-
-   user/user
-
-.. toctree::
    :titlesonly:
    :maxdepth: 1
    :caption: User
 
+   user/user
    user/a3core
    user/a3motion
    user/a3mix

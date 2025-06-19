@@ -35,10 +35,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          #python-version: '3.10'
       - name: Install dependencies
         run: pip install sphinx==8.2.3 sphinx_rtd_theme myst_parser
-        #run: pip install sphinx==6.2.1 karma_sphinx_theme myst_parser
       - name: Sphinx build
         run: sphinx-build src doc
       - name: Setup Pages

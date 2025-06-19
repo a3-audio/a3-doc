@@ -49,7 +49,6 @@ exclude_patterns = []
 #
 html_theme_path = ["."]
 html_theme = 'sphinx_rtd_theme'
-#html_theme = 'karma_sphinx_theme'
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
 #html_last_updated_fmt = '%b, %d, %Y'
@@ -61,7 +60,6 @@ html_logo = 'a3_logo_dark-200px.png'
 html_static_path = [
     'source/_static',
     'source/sphinx_rtd_theme',
-    #'source/karma_sphinx_theme/static',
 ]
 
 source_suffix = {
