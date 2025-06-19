@@ -16,10 +16,6 @@ Contact
 - Website: `a3-audio.github.io <https://a3-audio.github.io>`_
 - E-Mail: `p5hcu1@systemli.org <mailto:p5hcu1@systemli.org>`_
 
-*****
-Links
-*****
-
 .. toctree::
    :titlesonly:
    :maxdepth: 1
