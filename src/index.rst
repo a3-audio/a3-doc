@@ -4,11 +4,9 @@ Introduction
 
 Thanks for your interest in the A³ system.
 
-These docs are split in two sections:
+The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions.
 
-- The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions and connections.
-
-- The second section is the developer section wich also contains pictures.
+The other sections containing pictures and explainations. 
 
 ******
 Videos
