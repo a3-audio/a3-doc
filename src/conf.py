@@ -69,3 +69,6 @@ source_suffix = {
     '.md': 'markdown',
 }
 
+html_theme_options = {
+    "collapse_navbar": False,        
+}
