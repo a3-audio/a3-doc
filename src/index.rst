@@ -24,6 +24,7 @@ Links
    :titlesonly:
    :maxdepth: 1
    :caption: User
+   :hidden:
 
    user/user
    user/a3core
@@ -35,6 +36,7 @@ Links
    :maxdepth: 1
    :caption: Assembly
    :glob:
+   :hidden:
 
    assembly/*
 
@@ -43,6 +45,7 @@ Links
    :maxdepth: 1
    :caption: configuration
    :glob:
+   :hidden:
 
    configuration/*
 
@@ -51,6 +54,7 @@ Links
    :maxdepth: 1
    :caption: development
    :glob:
+   :hidden:
 
    development/*
 
@@ -58,12 +62,14 @@ Links
    :titlesonly:
    :caption: Ressources
    :glob:
+   :hidden:
 
    ressources/*
 
 .. toctree::
    :titlesonly:
    :caption: Legal
+   :hidden:
 
    Legal Notice <https://a3-audio.github.io/legal-notice.html>
    Privacy Policy <https://a3-audio.github.io/legal-notice.html>
