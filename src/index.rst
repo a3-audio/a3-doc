@@ -22,54 +22,51 @@ Links
 
 .. toctree::
    :maxdepth: 1
-   :caption: User Section
 
    user/user
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :caption: User
+
+   user/a3core
    user/a3motion
    user/a3mix
-   user/a3core
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
-   :caption: Developer Section
+   :caption: Assembly
+   :glob:
 
-   assembly/assembly
-   configuration/configuration
-   development/developer
+   assembly/*
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
+   :caption: configuration
+   :glob:
 
-   assembly/moc
-   configuration/moc
-   development/moc
+   configuration/*
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
+   :caption: development
+   :glob:
 
-   assembly/mic
-   configuration/mic
-   development/mic
-   
-.. toctree::
-   :maxdepth: 1
-
-   assembly/core
-   configuration/core
-   development/core
+   development/*
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
    :caption: Ressources
+   :glob:
 
-   development/imaging
-   development/github
-   assembly/history
-   development/osc
-   development/flashTeensy
+   ressources/*
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
    :caption: Legal
 
    Legal Notice <https://a3-audio.github.io/legal-notice.html>

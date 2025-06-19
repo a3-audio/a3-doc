@@ -1,9 +1,6 @@
 # OSC communication
-## IP-Addresses
-- A³ Core 192.168.43.50:9000
-- A³ Mixer 192.168.43.51:7771
-- A³ Motion 192.168.43.52:8700
 ## A³ Core
+
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
 | - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter
@@ -31,3 +28,8 @@
 | /fx/mode | - | string | [high_pass, low_pass] | Global fx mode
 | /fx/frequency | - | float | [0-1] | fx filter frequency
 | /fx/resonance | - | float | [0-1] | fx filter resonance
+
+## IP and Port
+- A³ Core 192.168.43.50:9000
+- A³ Mixer 192.168.43.51:7771
+- A³ Motion 192.168.43.52:8700

@@ -47,9 +47,9 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'bizstyle'
 html_theme_path = ["."]
-html_theme = 'karma_sphinx_theme'
+html_theme = 'sphinx_rtd_theme'
+#html_theme = 'karma_sphinx_theme'
 html_favicon = 'favicon-32x32.png'
 html_logo = 'a3_logo_dark-200px.png'
 #html_last_updated_fmt = '%b, %d, %Y'
@@ -60,7 +60,8 @@ html_logo = 'a3_logo_dark-200px.png'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
     'source/_static',
-    'source/karma_sphinx_theme/static',
+    'source/sphinx_rtd_theme',
+    #'source/karma_sphinx_theme/static',
 ]
 
 source_suffix = {

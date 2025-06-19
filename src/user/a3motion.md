@@ -1,11 +1,8 @@
 # A³ Motion
-## Features:
+
 - Standalone OSC controller
 - 7" full-color capacitive multi-touch display
-
-## Prototype Pictures
-- [A³ Motion Assembly](https://a3-audio.github.io/a3-doc/assembly/moc.html)
-## Part Names and functions
+## Functions
 ![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
 
 ### [1] STEREO WIDTH SEPARATION
@@ -32,10 +29,6 @@
 ### [8] Set One Button
 * Set Tempo Clock Counter to first beat
 
-## BACK
-### ETHERNET SOCKET
-- Connect ethernet cable to PoE switch here
-
 ## Operating Instructions
 - Set looplength with Function Encoder [4]
 - Press and hold down one pad [5] to record motion from touchscreen 
@@ -49,23 +42,10 @@
 - Press white buttons to switch motion on the next beat (related to 120bpm)
 - Width [2] and Reverb [3] will not be recorded
 
-## A³ Motion Specification
+## Specs
 - PoE to USB 5V Adapter
 - PoE cost 31.5W max
 - Raspberry Pi 3 Model B
 - Teensy 4.1
 - A³ Buttonmatrix PCB v0.1
 - A³ Motion PCB V0.1
-
-## NETWORK AND PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch
-- This device powers up as soon as the PoE powersupply is connected
-
-## Box Contents
-- A³ Motion
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## Misc
-- Items not listed under Box Contents are sold separately

@@ -1,5 +1,5 @@
 # A³ Mixer
-## Features:
+## Features
 - Standalone OSC controller
 - Input vu meter per channel
 - 8 Output vu meters
@@ -96,16 +96,3 @@
 - Raspberry Pi 3 Model B
 - Teensy 4.1
 - A³ Mix PCB V0.2
-
-## Network and PoE
-- When a plan calls for multiple devices to be connected to one PoE/PoE+ switch, it’s necessary to ensure the total wattage required by the devices do not exceed the maximum wattage of the switch
-- This device powers up as soon as the PoE powersupply is connected
-
-## Box Contents
-- A³ Motion
-- Network cable
-- Quickstart Guide
-- Safety & Warranty Manual
-
-## Misc
-- Items not listed under Box Contents are sold separately

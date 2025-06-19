@@ -21,16 +21,3 @@
 [A³ Core](https://a3-audio.github.io/a3-doc/user/a3core.html) processes analog audiosignals, calculates 3D audio spheres and is remote controlled by A³ Mix and A³ Motion (or any other OSC controller). A³ Core can handle a wide range of audio hardware to fit environments like Dante, MADI or any class-compliant.
 
 ![](pics_user/a3-core-icon_light.png)
-
-## Requirements
-- PA soundsystem with at least 4 speakers    
-- A venue smaller than 18m diameter. For bigger venues more speaker spheres are required
-## Optional
-- Booth soundsystem with at least 4 speakers placed around the DJ desk
-## Quickstart
-- Plug in your instruments vinyl, cd, daw ..    
-- Plug in your speakers    
-- Put speakers in regular circle around center    
-- Plug CAT cable from A³ Mix and A³ Motion to A³ Core    
-- Plug in your headphones    
-- Power on

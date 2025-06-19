@@ -1,5 +1,5 @@
 # A³ Core
-## Features:
+## Features
 - A³ Core is a free configurable audio server
 - Compatible to linux audiohardware (needed)
 - VNC remote desktop control
