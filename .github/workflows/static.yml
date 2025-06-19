@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install sphinx==8.2.3 sphinx_rtd_theme myst_parser
+        run: pip install sphinx==8.2.3 sphinx_rtd_theme myst_parser sphinxcontrib-video
       - name: Sphinx build
         run: sphinx-build src doc
       - name: Setup Pages
