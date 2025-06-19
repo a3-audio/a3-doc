@@ -69,11 +69,6 @@ source_suffix = {
     '.md': 'markdown',
 }
 
-html_theme_options = {
-    "max_navbar_depth": 2,
-    "collapse_navbar": False,        
-}
-
-html_sidebars = {
-  "**": ["sidebar_main_nav_links.html", "sidebar_toc.html"]
+html_sidebars = { 
+    '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'],
 }
