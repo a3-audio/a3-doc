@@ -70,5 +70,6 @@ source_suffix = {
 }
 
 html_theme_options = {
-    "collapse_navbar": False,        
+    "max_navbar_depth": 2,
+    "collapse_navbar": True,        
 }
