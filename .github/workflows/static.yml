@@ -34,7 +34,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.10'
       - name: Install dependencies
         run: pip install sphinx==8.2.3 karma_sphinx_theme myst_parser
       - name: Sphinx build
