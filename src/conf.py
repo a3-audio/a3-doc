@@ -71,5 +71,9 @@ source_suffix = {
 
 html_theme_options = {
     "max_navbar_depth": 2,
-    "collapse_navbar": True,        
+    "collapse_navbar": False,        
+}
+
+html_sidebars = {
+  "**": ["sidebar_main_nav_links.html", "sidebar_toc.html"]
 }
