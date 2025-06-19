@@ -8,8 +8,7 @@ These docs are split in two sections:
 
 - The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions and connections.
 
-- The second section is the developer section wich is under heavy development and will probably never be completed. The developer section is splitted into three subsections: `Developer <https://a3-audio.github.io/a3-doc/development/developer.html>`_ (about code), `Assembly <https://a3-audio.github.io/a3-doc/assembly/assembly.html>`_ (about hardware), and `Configuration <https://a3-audio.github.io/a3-doc/configuration/configuration.html>`_ (about operation system).
-
+- The second section is the developer section wich also contains pictures.
 
 ******
 Videos
