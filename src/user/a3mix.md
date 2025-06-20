@@ -1,7 +1,6 @@
 # A³ Mixer
 
-https://github.com/a3-audio/a3-system
-
+- [A³ Mixer Repository](https://github.com/a3-audio/a3-system)
 - Standalone OSC controller
 - Input vu meter per channel
 - 8 Output vu meters

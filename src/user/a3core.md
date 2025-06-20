@@ -1,7 +1,6 @@
 # A³ Core
 
-https://github.com/a3-audio/a3-core
-
+- [A³ Core Repository](https://github.com/a3-audio/a3-core)
 - A³ Core is a free configurable audio server
 - Compatible to linux audiohardware (needed)
 - VNC remote desktop control

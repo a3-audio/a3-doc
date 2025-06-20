@@ -1,6 +1,8 @@
 # Welcome
 ## A³ System
-- A³ System  are the three devices A³ Core, A³ Motion and A³ Mixer. They are connected via network cable to an ethernet switch which deliveres power over ethernet (PoE)
+
+- [A³ System Repository](https://github.com/a3-audio/a3-system)
+- A³ System  are the three devices A³ Core, A³ Motion and A³ Mixer. They are connected via network to an ethernet switch which deliveres power over ethernet (PoE)
 - Your DJ-Decks, Heapdphones and speakers for Booth and Main are connected to A³ Core's audiohardware
 - Take a look at Assembly section for prototype pictures
 - Take a look at [History (Assembly)](https://a3-audio.github.io/a3-doc/ressources/history.html) for project impression pictures
