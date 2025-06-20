@@ -1,5 +1,7 @@
 # A³ Motion
 
+https://github.com/a3-audio/a3-motion
+
 - Standalone OSC controller
 - 7" full-color capacitive multi-touch display
 
