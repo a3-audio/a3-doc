@@ -60,6 +60,7 @@ html_logo = 'a3_logo_dark-200px.png'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = [
     'source/_static',
+    '_static',
     'source/sphinx_rtd_theme',
 ]
 
