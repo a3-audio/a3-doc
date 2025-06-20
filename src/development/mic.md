@@ -1,5 +1,5 @@
 # A³ Mixer Development
-## Python script 
+## Python script mic.py
 - Receives messages from teensy via USB-Serial
 	- Buttons
 	- Fader
@@ -18,5 +18,5 @@
 - Sends messages to teensy via USB-Serial
 	- LEDs
 	- Displays
-## Teensy firmware
+## Teensy firmware main.cpp
 Teensy 4.1 firmware is written in c++

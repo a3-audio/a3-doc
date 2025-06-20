@@ -2,7 +2,7 @@
 
 - Standalone OSC controller
 - 7" full-color capacitive multi-touch display
-## Functions
+
 ![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
 
 ### [1] STEREO WIDTH SEPARATION

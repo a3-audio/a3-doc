@@ -1,5 +1,5 @@
 # A³ Core Development
-## Python script
+## Python script core.py
 - Receive OSC from
 	- A³ Mixer
 	- A³ Motion
@@ -8,7 +8,7 @@
 	- A³ Mixer
 	- A³ Motion
 
-## Supercollider
+## Supercollider vu-meter.scd
 - Receive audio from reaper and system via jack audio server
 - Sends Peak and RMS VU-Meter as OSC messages to
 	- A³ Mixer

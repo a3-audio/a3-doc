@@ -1,5 +1,5 @@
 # A³ Core Configuration
-## OS
+
 - Debian with Linux realtime kernel
 - xfce window manager
 ## Python script OSC-Router

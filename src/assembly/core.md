@@ -1,6 +1,5 @@
 # A³ Core Assembly
 
-## Specifications
 - A³ Core runs Reaper, Supercollider and an osc-routing python script
 - Audio Hardware (we tested: Focusrite, RME, Digigram, Motu)
 - Software:
@@ -30,3 +29,4 @@
 - Behringer U-Phoria (Audio interface used as headphone Amp)
 - JBL GTO6000 (6ch Car Hifi Amp)
 - TP-Link 5-Port PoE Switch
+![[pics_assembly/v01/a3core-front-prototype.jpg]]![[pics_assembly/v01/a3core-back-prototype.jpg]]
