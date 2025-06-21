@@ -20,7 +20,7 @@ Contact
 *******
 - Website: `a3-audio.github.io <https://a3-audio.github.io>`_
 - E-Mail: `p5hcu1@systemli.org <mailto:p5hcu1@systemli.org>`_
-- Repositories: `https://github.com/a3-audio/a3-system <https://github.com/a3-audio/a3-system>`_
+- Repository: `https://github.com/a3-audio/a3-system <https://github.com/a3-audio/a3-system>`_
 
 .. toctree::
    :titlesonly:
