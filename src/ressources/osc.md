@@ -46,8 +46,22 @@ same handler, so the split is a convention, not a restriction.
 
 The index ranges above exist only in A³ Motion — senders do not carry that meaning. The
 `beat-analyzer`, for instance, simply emits `NUM_VU_CHANNELS` (default 12) meters, one per JACK
-input, so which physical signal ends up on which index is decided by the JACK patching alone.
-Changing that wiring changes what the UI shows, with nothing to warn you.
+input, in port order. Which physical signal ends up on which index is decided by the JACK patching
+alone, and changing that wiring changes what the UI shows with nothing to warn you.
+
+Note the base mismatch when patching: the analyzer's JACK ports are 1-based (`vu_1` … `vu_12`)
+while the OSC addresses are 0-based, so **`vu_N` arrives as `/vu/(N-1)`**. In the A³ setup the
+speakers therefore sit on ports `vu_6`..`vu_9`, not `vu_5`..`vu_8`:
+
+| JACK port | OSC address | Signal |
+| :--- | :--- | :--- |
+| vu_1 .. vu_4 | /vu/0 .. /vu/3 | Mixer channels 1-4 |
+| vu_5 | /vu/4 | Subwoofer |
+| vu_6 .. vu_9 | /vu/5 .. /vu/8 | Speakers 1-4 |
+| vu_10 .. vu_12 | /vu/9 .. /vu/11 | currently unused |
+
+Levels may still arrive on the unused indices if something is patched to those ports; that is not
+a sign they are being evaluated.
 
 ## IP and Port
 - A³ Core 192.168.43.50:9000
