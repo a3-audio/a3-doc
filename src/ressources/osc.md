@@ -31,10 +31,11 @@
 
 ## A³ Motion
 
-A³ Motion listens on two UDP ports (configurable in the UI's `config/config.json`,
-`oscReceiver`): the main port (default 7771) and a separate VU port (default 7772), so the
-high-rate VU stream does not share a socket with the beat clock. Both ports are served by the
-same handler, so the split is a convention, not a restriction.
+A³ Motion listens on three UDP ports (configurable in the UI's `config/config.json`,
+`oscReceiver`): the main port (default 7771), a separate VU port (default 7772), and an energy
+port (default 7777), so neither the high-rate VU stream nor the energy grid shares a socket with
+the beat clock. All three are served by the same handler, so the split is a convention, not a
+restriction.
 
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
@@ -42,6 +43,7 @@ same handler, so the split is a convention, not a restriction.
 | /vu/4 | - | float (peak), float (rms) | [0-1], [0-1] | Subwoofer — drives the sphere glow
 | /vu/[5-8] | - | float (peak), float (rms) | [0-1], [0-1] | Speakers 1-4 — drives the speaker spotlights
 | /vu/[9-11] | - | float (peak), float (rms) | [0-1], [0-1] | Received but unused — silently discarded
+| /EnergyVisualizer/RMS | - | 426 × float | [0-1] each | Energy arriving from each direction, one value per point of the IEM EnergyVisualizer's sphere — lights the sphere itself. Port 7777.
 | /beat | - | int (beat), int (bar), int (bpm) | [1-4], [-], [-] | External beat clock. Always updates the status bar readout; in EXT/PIO clock mode it also syncs playback tempo and phase. Float arguments are accepted and truncated to int.
 
 The index ranges above exist only in A³ Motion — senders do not carry that meaning. The
@@ -63,7 +65,24 @@ speakers therefore sit on ports `vu_6`..`vu_9`, not `vu_5`..`vu_8`:
 Levels may still arrive on the unused indices if something is patched to those ports; that is not
 a sign they are being evaluated.
 
+### /EnergyVisualizer/RMS
+
+Sent by the [IEM EnergyVisualizer](https://plugins.iem.at/docs/energyvisualizergrid/) from version
+1.0.0 on, once its "OSC send" is switched on in the lower left of the plug-in. One message carries
+**426 float32 arguments**, one per point of the plug-in's own sphere grid, in the plug-in's order —
+roughly 9 messages a second. Values are linear, not dB.
+
+Which direction each index stands for comes from the plug-in's coordinate file, mirrored in the
+A³ Motion UI as `resources/EnergyVisualizerGrid.json`. A message of any other length is discarded
+rather than partly applied, because a short one would leave the rest of the map holding energy that
+is no longer there.
+
+Unlike the VU meters, this carries **elevation** as well as azimuth: it is the ambisonic field
+itself rather than a per-loudspeaker level.
+
 ## IP and Port
 - A³ Core 192.168.43.50:9000
 - A³ Mixer 192.168.43.51:7771
 - A³ Motion 192.168.43.52:8700
+
+A³ Motion's receive ports: 7771 beat clock and control, 7772 VU, 7777 energy grid.
