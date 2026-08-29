@@ -6,28 +6,35 @@
 
 ![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
 
-### [1] STEREO WIDTH SEPARATION
+## [1] STEREO WIDTH SEPARATION
 - Adjust Stereo Width separation of the two audio input channels. The current state will be displayed on top of touchdisplay (0° : 90°)
 
-### [2] Ambisonic order
+## [2] Ambisonic order
 - lets you set the spatial resolution of your sound scene.
 
-### [3] DISPLAY
+## [3] DISPLAY
 - This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions
 
-### [4] Speed Encoder
+![The A³ Motion display in operation](pics_user/a3-motion-ui-display.png)
+
+The sphere is the room seen from above. Each channel is a coloured blob; drag one
+and its sound moves with it. The four dark shapes at the corners are the speakers,
+lit by what they are actually playing, and the field around the sphere shows where
+the energy in the room is coming from.
+
+## [4] Speed Encoder
 - Use these encoder to adjust length of trackpattern (bars)
 
-### [5] MOTION SAMPLE PADS
+## [5] MOTION SAMPLE PADS
 - Each channel has a column of four iluminated sample pads. See Operaton to use basic functions
 
-### [6] Record Button
+## [6] Record Button
 + Hold the Rec-Button and one of the 4 pads (per channel) to start record. Record runs from next Beat for one Bar setup by Speed Encoder. 
 
-### [7] Tempo Tap Button
+## [7] Tempo Tap Button
 * Current Tempo is indicated by top indicator on the Display
 
-### [8] Set One Button
+## [8] Set One Button
 * Set Tempo Clock Counter to first beat
 
 ## Operating Instructions

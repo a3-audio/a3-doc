@@ -7,14 +7,14 @@
 
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
-### [1] POWER BUTTON
+## [1] POWER BUTTON
 - Push to turn the device on
 
-### [2] RESET BUTTON
+## [2] RESET BUTTON
 - Push to reboot server (just in case)
 
-### [3] POWER LED
+## [3] POWER LED
 - Indicates power status
 
-### [4] Fan and Filter
+## [4] Fan and Filter
 - Clean it regular

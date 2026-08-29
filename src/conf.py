@@ -58,10 +58,10 @@ html_logo = 'a3_logo_dark-200px.png'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = [
-    'source/_static',
-    'source/sphinx_rtd_theme',
-]
+# Neither of these directories exists — they were left over from a layout this
+# project no longer has, and Sphinx warned about both on every build. An empty
+# list says the same thing without the noise.
+html_static_path = []
 
 source_suffix = {
     '.rst': 'restructuredtext',

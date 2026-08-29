@@ -9,71 +9,71 @@
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 
-### [0] Aux Send
-### [1] TRIM CONTROL
+## [0] Aux Send
+## [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
 - [TRIM]: -inf dB to 0 dB
 
-### [2] EQ HIGH
+## [2] EQ HIGH
 - [HIGH]: -inf dB to 0 dB (24 kHz)
 
-### [3] EQ MID
+## [3] EQ MID
 - [MID]: -inf dB to 0 dB (1 kHz)
 
-### [4] EQ LOW
+## [4] EQ LOW
 - [LOW]: -inf dB to 0 dB (20 Hz)
 
-### [5] INPUT VU METER
+## [5] INPUT VU METER
 - Displays the sound level of the respective channels before passing through the channel faders
 
-### [6] CUE BUTTON
+## [6] CUE BUTTON
 - Presses the [CUE] button(s) for the channel(s) you want to monitor
 
-### [7] CHANNEL FADER
+## [7] CHANNEL FADER
 - Adjust the level of audio signals output in each channel
 - [FADER]: -inf dB to o dB
 
-### [8] FILTER FX SWITCH
+## [8] FILTER FX SWITCH
 - Pressing the [FX] switch turns on the VCF filter for this channel
 - The indicator lights if filter FX is on.
 
-### [9]  3D SWITCH
+## [9]  3D SWITCH
 - Pressing the [3D] switch enables 3d encoding for this channel
 - The indicator lights if 3D is on
 
-### [10] FILTER FREQUENCY
+## [10] FILTER FREQUENCY
 - Sets the cut off frequency of the VCF filter
 
-### [11] FILTER RESONANCE CONTROL
+## [11] FILTER RESONANCE CONTROL
 - Change the "Q" or sharpness of the VCF filter
 
-### [12] FILTER TYPE SELECT HI-PASS
+## [12] FILTER TYPE SELECT HI-PASS
 - [HPF]: Allows signals above the cutoff frequency to pass
 
-### [13] FILTER TYPE SELECT LOW-PASS
+## [13] FILTER TYPE SELECT LOW-PASS
 - [LPF]: Allows signals below the cutoff frequency to pass
 
-### [14] HEADPHONE LEVEL
+## [14] HEADPHONE LEVEL
 - Sets the level of the headphone output
 
-### [15] CUE/MIX CONTROL
+## [15] CUE/MIX CONTROL
 - Turn left (CUE) to hear the activated channel Cue.
 - If no channel Cue is activated the Mix output will be heared WIP
 - Turn right (Mix) to hear the Mix output
 - In the centre position the Cue signal and the main mix are summed together
 
-### [16] BOOTH OUTPUT LEVEL
+## [16] BOOTH OUTPUT LEVEL
 - Sets the audio signal level for predefined monitor outputs
 - [BOOTH]: -inf dB to 0 dB
 
-### [17] MASTER OUTPUT LEVEL
+## [17] MASTER OUTPUT LEVEL
 - Sets the audio signal level for predefined public address outputs
 - [MASTER]: -inf dB to 0 dB
 
-### [18] DISPLAY <- wip
+## [18] DISPLAY <- wip
 - shows bpm for master and per input channel
 
-### [19] OUTPUT VU METER
+## [19] OUTPUT VU METER
 - Displays the audio level output from 8 predefined channels
 
 ## Front
