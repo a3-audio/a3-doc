@@ -17,10 +17,20 @@
 
 ![The A³ Motion display in operation](pics_user/a3-motion-ui-display.png)
 
-The sphere is the room seen from above. Each channel is a coloured blob; drag one
-and its sound moves with it. The four dark shapes at the corners are the speakers,
-lit by what they are actually playing, and the field around the sphere shows where
-the energy in the room is coming from.
+The screen has three bands. Along the top sits the status bar: the current tempo
+on the left, the beat grid in the middle — it fills as the bar runs — and the
+clock source on the right.
+
+The middle band is the room seen from above. Each channel is a coloured blob;
+drag one and its sound moves with it. The four dark shapes at the corners are
+the speakers, lit by what they are actually playing, and the field around the
+sphere shows where the energy in the room is coming from.
+
+The bottom band holds the settings of the selected clip, framed in that
+channel's colour: its shape, how it is mapped in elevation, how it moves in
+time — speed, direction, what happens at the end, and the fade that closes the
+loop — and its filter. The narrow strip on the right is global rather than
+per-channel and carries the recording mode.
 
 ## [4] Speed Encoder
 - Use these encoder to adjust length of trackpattern (bars)

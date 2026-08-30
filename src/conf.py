@@ -32,7 +32,6 @@ release = '2021'
 # ones.
 extensions = [
     'myst_parser',
-    'sphinxcontrib.video',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

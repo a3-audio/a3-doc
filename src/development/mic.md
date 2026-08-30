@@ -1,22 +1,31 @@
 # A³ Mixer Development
-## Python script mic.py
-- Receives messages from teensy via USB-Serial
+
+## Python script a3-mixer.py
+`software/scripts/a3-mixer.py` in the
+[a3-mixer](https://github.com/a3-audio/a3-mixer) repository.
+
+- Receives messages from the panel microcontroller via USB serial
 	- Buttons
 	- Fader
 	- Encoder
 
-- sends OSC messages to A³ Core
+- Sends OSC messages to A³ Core
 	- Buttons
 	- Fader
 	- Encoder
 
-- receives OSC messages from Core
+- Receives OSC messages from A³ Core
 	- Input vu meters per channel
-	- Output vu meters for mastersection
+	- Output vu meters for the master section
 	- Status (3d, fx, cue)
 
-- Sends messages to teensy via USB-Serial
+- Sends messages back to the microcontroller via USB serial
 	- LEDs
 	- Displays
-## Teensy firmware main.cpp
-Teensy 4.1 firmware is written in c++
+
+A second script, `a3-mixer-set-display/`, drives the channel displays.
+
+## Panel firmware
+Written in C++ as a PlatformIO project,
+[`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware).
+V02 runs on a Teensy 4.1; V03 moves to a Raspberry Pi Pico with Ethernet.

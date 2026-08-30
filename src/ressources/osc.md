@@ -81,8 +81,25 @@ Unlike the VU meters, this carries **elevation** as well as azimuth: it is the a
 itself rather than a per-loudspeaker level.
 
 ## IP and Port
-- A³ Core 192.168.43.50:9000
-- A³ Mixer 192.168.43.51:7771
-- A³ Motion 192.168.43.52:8700
 
-A³ Motion's receive ports: 7771 beat clock and control, 7772 VU, 7777 energy grid.
+Ports are configurable per device; these are the defaults that ship.
+
+| Component | Listens on | Sends to |
+| :--- | :--- | :--- |
+| A³ Core | 9000 | REAPER `127.0.0.1:9001`, IEM plugins `127.0.0.1:1337+n` |
+| A³ Mixer | 7771 | A³ Core `:9000` |
+| A³ Motion | 7771 control, 7772 VU, 7777 energy grid | A³ Core `:9000`, beat-analyzer `:7775` |
+| Beat-Analyzer | 7775, Pioneer Pro DJ Link 50000-50002 | A³ Core, A³ Motion, A³ Mixer |
+
+### Known inconsistencies
+
+Worth knowing before chasing a silent link. These are recorded rather than fixed
+because each needs a decision about which end is right:
+
+- `a3-core.py` addresses its peers by **hardcoded IP** (`192.168.43.54`, `.55`), and
+  `a3-mixer.py` does the same for the core (`192.168.43.50`). A system on a different
+  subnet has those links dead with nothing to indicate it.
+- `a3-core.py` sends to A³ Motion on port **8700**, while the A³ Motion UI listens on
+  **7771**.
+- `beat-analyzer` is configured to reach the mixer on **7773/7774**, while
+  `a3-mixer.py` listens on **7771**.

@@ -6,14 +6,7 @@ Thanks for your interest in the A³ system.
 
 The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions.
 
-The other sections containing pictures and explainations. 
-
-******
-Videos
-******
-
-.. video:: https://cloud.systemli.org/s/ZaDcmyxZPQZJs2Z/download/202206_A3-System_acidOperator_Revision.mp4
-   :width: 100%
+The other sections contain pictures and explanations of assembly, configuration and development.
 
 *******
 Contact
