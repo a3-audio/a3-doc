@@ -46,6 +46,16 @@ restriction.
 | /EnergyVisualizer/RMS | - | 426 × float | [0-1] each | Energy arriving from each direction, one value per point of the IEM EnergyVisualizer's sphere — lights the sphere itself. Port 7777.
 | /beat | - | int (beat), int (bar), int (bpm) | [1-4], [-], [-] | External beat clock. Always updates the status bar readout; in EXT/PIO clock mode it also syncs playback tempo and phase. Float arguments are accepted and truncated to int.
 
+```{note}
+Every address in this section is a **default**, not a fixed part of the protocol. A³ Motion reads
+them from the `oscAddresses` block of its `config/config.json`, and they can be edited on the
+device under Menu → Network. `{ch}` there stands for the channel number.
+
+Changing one changes only A³ Motion's side of the conversation — the peer has to be changed to
+match. A mismatch does not report itself: the message is sent correctly, to an address nobody is
+listening for.
+```
+
 The index ranges above exist only in A³ Motion — senders do not carry that meaning. The
 `beat-analyzer`, for instance, simply emits `NUM_VU_CHANNELS` (default 12) meters, one per JACK
 input, in port order. Which physical signal ends up on which index is decided by the JACK patching
