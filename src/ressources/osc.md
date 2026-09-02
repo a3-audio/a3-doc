@@ -52,6 +52,9 @@ Every address in this section is a **default**, not a fixed part of the protocol
 them from the `oscAddresses` block of its `config/config.json`, and they can be edited on the
 device under Menu → Network. `{ch}` there stands for the channel number.
 
+The block is grouped into `out` (to Core and IEM), `in` (VU and energy) and `beatclock`. The beat
+clock is neither: `beat` is *sent* in INT clock mode and *received* in EXT, one address either way.
+
 Changing one changes only A³ Motion's side of the conversation — the peer has to be changed to
 match. A mismatch does not report itself: the message is sent correctly, to an address nobody is
 listening for.
