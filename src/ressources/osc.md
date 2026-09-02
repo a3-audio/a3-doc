@@ -44,7 +44,7 @@ restriction.
 | /vu/[5-8] | - | float (peak), float (rms) | [0-1], [0-1] | Speakers 1-4 — drives the speaker spotlights
 | /vu/[9-11] | - | float (peak), float (rms) | [0-1], [0-1] | Received but unused — silently discarded
 | /EnergyVisualizer/RMS | - | 426 × float | [0-1] each | Energy arriving from each direction, one value per point of the IEM EnergyVisualizer's sphere — lights the sphere itself. Port 7777.
-| - | /channel/[0-3]/pot_3 | float | [0-1] | Third per-channel value, driven by the channel's pot ("3d"). **Core has no handler for it yet** — see below. |
+| - | /channel/[0-3]/3d | float | [0-1] | How far the channel is spread into the 3D field, from its pot. Core crossfades the channel's stereo and multi encoder on it. |
 | /beat | - | int (beat), int (bar), int (bpm) | [1-4], [-], [-] | External beat clock. Always updates the status bar readout; in EXT/PIO clock mode it also syncs playback tempo and phase. Float arguments are accepted and truncated to int.
 
 ```{note}
@@ -79,16 +79,15 @@ speakers therefore sit on ports `vu_6`..`vu_9`, not `vu_5`..`vu_8`:
 Levels may still arrive on the unused indices if something is patched to those ports; that is not
 a sign they are being evaluated.
 
-### /channel/[0-3]/pot_3
+### /channel/[0-3]/3d
 
-A third per-channel value beside `pot_1` and `pot_2`, sent whenever the channel's pot moves.
-A³ Motion sends it; **A³ Core does not yet act on it** — `osc_handler_channel` in `a3-core.py`
-handles `pot_1` and `pot_2` (REAPER FX 2, parameters 1 and 2 on the channel's stereo-encoder
-track) and stops there.
+A third per-channel value beside `pot_1` and `pot_2`, sent whenever the channel's potentiometer
+moves. In `a3-core.py` it crossfades the channel between its stereo encoder and its multi encoder
+(REAPER FX 1, parameters 1 and 15 on one, parameter 1 on the other).
 
-Deliberately **not** `/channel/[0-3]/3d`: Core dispatches on the last path element, and `3d` there
-is a *toggle* that fires on the value 1 and flips `toggle_3d`. A continuous value sent to that
-address would flip the state every time it passed 1.0 and do nothing the rest of the time.
+**This address used to be a toggle**, flipping `toggle_3d` on the value 1 and reporting an LED
+state back to A³ Mixer. That boolean now lives on `/channel/[0-3]/4d`. The Mixer button that sent
+it is gone in hardware v3.2, so nothing sends the boolean today.
 
 ### /EnergyVisualizer/RMS
 
