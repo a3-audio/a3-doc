@@ -413,7 +413,9 @@ because each needs a decision about which end is right:
 
 - `a3-core.py` addresses its peers by **hardcoded IP** (`192.168.43.54`, `.55`), and
   `a3-mixer.py` does the same for the core (`192.168.43.50`). A system on a different
-  subnet has those links dead with nothing to indicate it.
+  subnet has those links dead with nothing to indicate it. Core's two can at least
+  be pointed elsewhere without editing anything — `--mixer` and `--motion` — and a
+  department added with `--subscriber` never had the problem.
 - `a3-core.py` sends to A³ Motion on port **8700** by default, while the A³ Motion UI
   listens on **7771**. Since the window was built there is at least a way around it
   without editing the source: `a3-core.py --motion <host>:<port>`, which is what the
