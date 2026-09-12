@@ -10,6 +10,56 @@ decides what it means:
 | 9002 | REAPER's feedback | REAPER speaks `/track/*` and `/fx/*`, and `/fx/*` is what the Mixer's filter uses. One port for both would have Core reading REAPER's reports as commands and answering them — a loop on a rig that makes sound. |
 | 9080 | HTTP, not OSC — the [window](https://a3-audio.github.io/a3-doc/development/core.html) | A browser page, no OSC at all |
 
+### Everything goes to everyone
+
+**There is no list of recipients.** Every A³-shaped message Core produces goes
+to every subscriber, always — the A³ Mixer, A³ Motion, and whatever else is
+plugged in.
+
+That rule replaced a per-message device list on 2026-09-12, and the list is
+why. It named the A³ Mixer for as long as only the desk had a channel strip;
+A³ Motion grew one, the list stayed as it was, and **nothing failed** — a
+message nobody is told to send is an absence, not an error, and OSC over UDP
+has no way of reporting one. It was found three days later, as GAIN and VOL
+reading zero on a rig that was making sound.
+
+A new department is a command-line argument rather than a change to the
+source:
+
+```
+a3-core.py --subscriber light=192.168.43.60:7771 --subscriber video=10.0.0.9:7771
+```
+
+Repeatable. A subscriber that cannot be parsed stops Core from starting rather
+than being skipped — for the same reason as above.
+
+```{note}
+**The engine is not a subscriber.** REAPER, the IEM MultiEncoders and the
+DualDelay each speak their own vendor's language — `/track/…`,
+`/MultiEncoder/…`, `/DualDelay/…` — and each is addressed by the one handler
+that has something to say to it.
+
+**The lamps are broadcast too**, because a lamp shows a status and a status
+belongs to whoever shows one. `/channel/[0-3]/led/*` and `/fx/led` therefore
+reach every subscriber, alongside the flag itself on `/channel/[0-3]/pfl` —
+two vocabularies for one fact: a lamp is a light, a flag is a setting.
+
+Nothing is sent unless the status moved. A flag is announced only where it
+actually changed, and a value already passed on is dropped — five identical
+state messages produce one round of lamps, not five.
+```
+
+```{warning}
+**`/channel/[0-3]/led/pfl` changed meaning on 2026-09-12.** It used to carry
+the *opposite* of the lamp: Core sent "not pfl" and `a3-mixer.py` inverted it
+back, the two cancelled, and the desk was right while the wire said the
+reverse of its own name. That cost nothing while the desk was the only reader.
+
+Both inversions came out together, so what reaches the desk's LED is
+unchanged and the address now means **this lamp is lit**. Anything written
+against the old behaviour has to drop its own inversion as well.
+```
+
 ### Commands in, on port 9000
 
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
@@ -92,56 +142,6 @@ yet and the answer is the lamps alone. A value Core has never seen is left
 **out** rather than sent as zero — zero degrees is the front of the room, a
 real position, and answering it would move the sound while claiming to
 report where it already is.
-
-### Everything goes to everyone
-
-**There is no list of recipients.** Every A³-shaped message Core produces goes
-to every subscriber, always — the A³ Mixer, A³ Motion, and whatever else is
-plugged in.
-
-That rule replaced a per-message device list on 2026-09-12, and the list is
-why. It named the A³ Mixer for as long as only the desk had a channel strip;
-A³ Motion grew one, the list stayed as it was, and **nothing failed** — a
-message nobody is told to send is an absence, not an error, and OSC over UDP
-has no way of reporting one. It was found three days later, as GAIN and VOL
-reading zero on a rig that was making sound.
-
-A new department is a command-line argument rather than a change to the
-source:
-
-```
-a3-core.py --subscriber light=192.168.43.60:7771 --subscriber video=10.0.0.9:7771
-```
-
-Repeatable. A subscriber that cannot be parsed stops Core from starting rather
-than being skipped — for the same reason as above.
-
-```{note}
-**The engine is not a subscriber.** REAPER, the IEM MultiEncoders and the
-DualDelay each speak their own vendor's language — `/track/…`,
-`/MultiEncoder/…`, `/DualDelay/…` — and each is addressed by the one handler
-that has something to say to it.
-
-**The lamps are broadcast too**, because a lamp shows a status and a status
-belongs to whoever shows one. `/channel/[0-3]/led/*` and `/fx/led` therefore
-reach every subscriber, alongside the flag itself on `/channel/[0-3]/pfl` —
-two vocabularies for one fact: a lamp is a light, a flag is a setting.
-
-Nothing is sent unless the status moved. A flag is announced only where it
-actually changed, and a value already passed on is dropped — five identical
-state messages produce one round of lamps, not five.
-```
-
-```{warning}
-**`/channel/[0-3]/led/pfl` changed meaning on 2026-09-12.** It used to carry
-the *opposite* of the lamp: Core sent "not pfl" and `a3-mixer.py` inverted it
-back, the two cancelled, and the desk was right while the wire said the
-reverse of its own name. That cost nothing while the desk was the only reader.
-
-Both inversions came out together, so what reaches the desk's LED is
-unchanged and the address now means **this lamp is lit**. Anything written
-against the old behaviour has to drop its own inversion as well.
-```
 
 ### The way back: what REAPER reports
 
@@ -330,7 +330,10 @@ moves. In `a3-core.py` it crossfades the channel between its stereo encoder and 
 
 **This address used to be a toggle**, flipping `toggle_3d` on the value 1 and reporting an LED
 state back to A³ Mixer. That boolean now lives on `/channel/[0-3]/4d`. The Mixer button that sent
-it is gone in hardware v3.2, so nothing sends the boolean today.
+it is gone in hardware v3.2, so **no device sends the boolean today** — Core
+still understands it, still holds the flag, and still broadcasts its state and
+its lamp. A wire with a listener and no talker, which is exactly what the
+register was built to show.
 
 ### /EnergyVisualizer/RMS
 
