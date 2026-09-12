@@ -276,11 +276,16 @@ ph-mix, enc_fx, enc_main. It lives in Core's `layout.json` rather than in the
 source, so a send that moves in the REAPER project can be found by reading
 one file.
 
-**The price, named:** the desk has no 3D control any more. The 3D *switch*
-per channel went with hardware v3.2, and Core's boolean behind it
-(`/channel/[0-3]/4d`) was removed on 2026-09-12 — it had had a listener and no
-talker for as long as anybody could remember. The 3D blend is A³ Motion's pot,
-and only that.
+**The price, named:** the desk has no 3D control any more. The key is still on
+the panel — it was taken out of service in software rather than removed from
+the metal — and Core's boolean behind it (`/channel/[0-3]/4d`) was removed on
+2026-09-12, after having had a listener and no talker for as long as anybody
+could remember. The 3D blend is A³ Motion's pot, and only that.
+
+Taking the key out of service is a **guard**, not tidying: `3d` is the
+continuous blend now, so a momentary key sending `"1"` into it would drive the
+blend to the stop while the finger is down. What the key should do instead is
+an open question.
 
 ## A³ Motion
 
@@ -358,9 +363,13 @@ moves. In `a3-core.py` it crossfades the channel between its stereo encoder and 
 
 **This address used to be a toggle**, flipping a flag on the value 1 and
 reporting an LED state back to A³ Mixer. The boolean moved to
-`/channel/[0-3]/4d` when this address took the continuous value; the Mixer key
-that sent it went with hardware v3.2, and on 2026-09-12 so did the boolean
-itself. 3D per channel is this address, continuous, and nothing else.
+`/channel/[0-3]/4d` when this address took the continuous value, and on
+2026-09-12 the boolean went too. 3D per channel is this address, continuous,
+and nothing else.
+
+The Mixer's key for it is **still on the panel** and no longer sends anything:
+a momentary key putting `"1"` into a continuous blend drives it to the stop for
+as long as it is held.
 
 ### /EnergyVisualizer/RMS
 

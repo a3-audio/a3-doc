@@ -56,10 +56,14 @@ Motion's pot, and only that.
 - The indicator lights if 3D is on
 
 ```{warning}
-**Gone from hardware v3.2.** The switch is on the panel in the picture above
-and not on the current one, and as of 2026-09-12 neither is the message behind
-it — A³ Core no longer understands `/channel/[0-3]/4d` either. 3D per channel
-is set from A³ Motion, on its own pot, and it is a blend rather than a switch.
+**Out of service since 2026-09-12.** The switch is still on the panel and does
+nothing: A³ Core's `3d` became a continuous blend, so a momentary key sending
+into it would drive that blend to the stop for as long as it is held — the key
+is therefore disconnected in software rather than left to do that. Core no
+longer understands `/channel/[0-3]/4d` either.
+
+3D per channel is set from A³ Motion, on its own pot, and it is a blend rather
+than a switch. What this key should do instead has not been decided.
 ```
 
 ## [10] FILTER FREQUENCY
