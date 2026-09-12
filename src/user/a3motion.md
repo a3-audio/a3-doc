@@ -15,7 +15,7 @@
 ## [3] DISPLAY
 - This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions
 
-![The A³ Motion display in operation](pics_user/a3-motion-ui-display.png)
+![The A³ Motion display in operation](pics_user/a3-motion-ui-display-v03.png)
 
 The screen has three bands. Along the top sits the status bar: the current tempo
 on the left, the beat grid in the middle — it fills as the bar runs — and the

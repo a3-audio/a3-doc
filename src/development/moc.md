@@ -13,8 +13,8 @@ OSC to A³ Core.
 Built with `build.sh`; the test suite runs with `ctest` from `build/` and is
 currently around 1,100 cases.
 
-## Current  Version
-![](pics_development/a3motion_ui_new.png)
+## Current Version — V03
+![The A³ Motion UI as it stands, CLIP page](pics_development/a3motion_ui_v03.png)
 
 ## The software mixer
 
@@ -89,7 +89,14 @@ values were marked *primed* by a tick that had sent nothing at all, so the
 three of twelve values that happened to sit at 0.0 never reached Core. Priming
 now happens only on a tick that actually sent.
 
-## Older Version
+## Older Versions
+The sphere before the touch rework, when the hardware encoders still did the
+navigating:
+
+![](pics_development/a3motion_ui_new.png)
+
+And before that:
+
 ![](pics_development/a3motion_ui_old.png)
 
 ## Before
