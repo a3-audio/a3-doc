@@ -17,14 +17,27 @@
 
 ![The A³ Motion display in operation](pics_user/a3-motion-ui-display-v03.png)
 
-The screen has three bands. Along the top sits the status bar: the current tempo
-on the left, the beat grid in the middle — it fills as the bar runs — and the
-clock source on the right.
+The screen has three bands. Along the top sits the status bar, and it is
+deliberately almost empty: the current tempo on the left, the beat grid in the
+middle — it fills as the bar runs — and the MIX key on the right. It carried
+nine level meters for two days and they made the one band that is always in
+view the busiest thing on the screen.
 
 The middle band is the room seen from above. Each channel is a coloured blob;
 drag one and its sound moves with it. The four dark shapes at the corners are
 the speakers, lit by what they are actually playing, and the field around the
 sphere shows where the energy in the room is coming from.
+
+The four coloured cells at the left of the tab row are the channels. Each
+carries a **signal dot** in its top right corner: the channel's input level,
+in the same green / yellow / red the meters use, brighter the louder it is —
+and **gone entirely when the channel is silent.**
+
+![The four channel keys, three with signal and one without](pics_user/a3-motion-signal-dots.png)
+
+That is the question you actually have mid-set — *is this channel making
+sound, and roughly how hot* — asked where the answer belongs, on the channel
+itself. For reading a level properly, the MIX page has the full meters.
 
 The bottom band holds the settings of the selected clip, framed in that
 channel's colour: its shape, how it is mapped in elevation, how it moves in

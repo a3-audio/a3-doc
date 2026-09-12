@@ -37,6 +37,11 @@ they look like. In order:
   window was wrong about itself. All five gone. That is the return on having
   built the register at all.
 
+- **And the screen got quieter.** The status bar's nine level meters made the
+  one band that is always in view the busiest thing on it. The outputs were
+  already on the MIX page; the four channels' levels became a dot on each
+  channel's own key, which is where a hand looking for a channel looks.
+
 ![Core's window](../development/pics_development/a3core-window-traffic.png)
 
 ![The register, filtered to the A³ Mixer](../development/pics_development/a3core-window-register-mixer.png)

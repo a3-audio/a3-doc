@@ -120,6 +120,50 @@ values were marked *primed* by a tick that had sent nothing at all, so the
 three of twelve values that happened to sit at 0.0 never reached Core. Priming
 now happens only on a tick that actually sent.
 
+## The status bar and the signal dots
+
+The status bar carried nine VU meters for two days — four inputs left of the
+beat display, five outputs right of it — and most of `StatusBarLayout` was the
+negotiation over how much width they could take from the two readings. The
+maintainer's verdict on 2026-09-12: *"die vu-meter in der statusleiste sind
+too much. das machts unübersichtlich."*
+
+The five outputs needed no new home: the MIX page's master column has had the
+same five, full height, all along. The four inputs got a better one — a
+**dot on each channel's own face** in the bar below, which is where a hand
+looking for a channel already looks. The status bar had put four channels'
+levels somewhere that is not the four channels.
+
+```cpp
+struct VuDot
+{
+  bool visible = false;      // false below the meter's floor: silence is nothing
+  std::size_t band = vuGreenBand;
+  float alpha = 0.f;         // follows the level; the size stays put
+};
+```
+
+Three decisions worth knowing:
+
+- **It is a warning light, and the meter deliberately is not.** A meter's
+  bands are stretches of its track, so a bar filled into the red is green at
+  its foot and red only at its head — which is what lets it say *how far* over
+  you are. A dot has no length. That trade is made knowingly, and the full
+  meter did not go away; it moved.
+- **Silence is no dot at all**, not a dim one. "Quiet" and "none" are the two
+  states a hand needs told apart at a glance.
+- **It reads the rms, not the peak.** A peak is a transient; through a mark
+  with no length it would flicker at every drum hit and read as noise.
+
+The colour comes from `vuBandColour` — the meter's own rule, not a second copy
+— and a test insists the dot turns yellow exactly where the meter's fill
+does. Two instruments disagreeing about one signal is the failure that rule
+prevents.
+
+The repaint compares the drawn *dot* rather than the level behind it: an rms
+wobbles every frame and almost none of that wobble changes a band or a byte of
+alpha. This bar is on screen for the whole of a set.
+
 ## Older Versions
 The sphere before the touch rework, when the hardware encoders still did the
 navigating:
