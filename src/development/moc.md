@@ -45,9 +45,17 @@ mixerControlRestPosition (MixerControl control)
 }
 ```
 
-and the Q encoder, which comes to rest shut rather than half open. Everything
-else returns an empty optional and a double tap does nothing — a gain that
-snaps to a default in the middle of a set is a channel that jumps in the room.
+Everything else on the strip returns an empty optional and a double tap does
+nothing — a gain that snaps to a default in the middle of a set is a channel
+that jumps in the room.
+
+The channel-value strip on the right has its own table
+(`channelValueRestPosition`): `3d` and `freq` rest at twelve o'clock, `Q`
+rests **shut**. That last one was decided twice — it was moved to twelve
+o'clock so a double tap would leave the three knobs looking alike, and the
+maintainer moved it back on 2026-09-12. The value wins over the gesture: a
+filter that still resonates after being put back has not been put back, and
+the Airwindows Isolator3 at the far end rests its own Q at zero.
 
 ## Hearing where the sound is
 

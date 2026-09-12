@@ -170,8 +170,8 @@ restriction.
 | /channel/[0-3]/azimuth | /channel/[0-3]/azimuth | float | [-180-180] | Where the channel's sound is, in degrees. Sent while a blob moves; **received** since 2026-09-12, so Core can put the blob where the sound already is.
 | /channel/[0-3]/elevation | /channel/[0-3]/elevation | float | [-90-90] | The same, in elevation
 | /channel/[0-3]/3d | /channel/[0-3]/3d | float | [0-1] | How far the channel is spread into the 3D field, from its pot. Core crossfades the channel's stereo and multi encoder on it.
-| /channel/[0-3]/pot_1 | /channel/[0-3]/pot_1 | float | [0-1] | Filter frequency of the channel — the left encoder
-| /channel/[0-3]/pot_2 | /channel/[0-3]/pot_2 | float | [0-1] | Filter resonance of the channel — the right encoder
+| /channel/[0-3]/pot_1 | /channel/[0-3]/pot_1 | float | [0-1] | The channel's filter frequency — the `freq` row of the channel-value strip, and the left hardware encoder
+| /channel/[0-3]/pot_2 | /channel/[0-3]/pot_2 | float | [0-1] | The channel's filter resonance (`Q`), and the right hardware encoder
 | - | /channel/[0-3]/gain | float | [0-1] | Channel strip, MIX page
 | - | /channel/[0-3]/eq/high | float | [0-1] | Channel strip, MIX page
 | - | /channel/[0-3]/eq/mid | float | [0-1] | Channel strip, MIX page
@@ -255,15 +255,16 @@ tell the two apart and does not have to.
 
 ![The MIX page of the A³ Motion UI](../user/pics_user/a3-motion-ui-mix.png)
 
-Two of these controls have a **rest position**, reached by a double tap:
+A double tap puts a control back on its **rest position**, where it has one:
 
-| Control | Rests at | Why |
-| :--- | :--- | :--- |
-| SEND | 0 | An FX send you cannot get rid of in one gesture is an FX send you will not reach for |
-| Q (the right encoder) | 0 | A resonance at rest is a filter that only filters |
+| Control | Where | Rests at | Why |
+| :--- | :--- | :--- | :--- |
+| SEND | MIX page | 0 | An FX send you cannot get rid of in one gesture is an FX send you will not reach for |
+| 3d, freq | channel-value strip | 0.5 | Twelve o'clock — the middle of a 270° sweep, and one place to reach for rather than two |
+| Q | channel-value strip | 0 | A filter that still resonates after being put back has not been put back. The Airwindows Isolator3 at the far end rests its own Q at zero too. |
 
-A double tap on anything else does nothing: a gain that snaps to a default
-mid-set is a channel that jumps in the room.
+A double tap on a MIX pot other than SEND does nothing: a gain that snaps to
+a default mid-set is a channel that jumps in the room.
 
 ### Total recall at start-up
 

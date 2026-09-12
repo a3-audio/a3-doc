@@ -61,9 +61,12 @@ all four channels.
 
 **Double tap takes SEND back to zero.** It is the one control on the page you
 may want to get rid of in a single gesture, mid-transition, without looking.
-The **Q** encoder on the right-hand strip has the same rest position — closed
-— for the same reason. Nothing else responds to a double tap: a gain that
-snaps to a default in the middle of a set is a channel that jumps in the room.
+Nothing else on the MIX page responds to a double tap: a gain that snaps to a
+default in the middle of a set is a channel that jumps in the room.
+
+On the narrow strip to the right — `3d`, `freq` and `Q` per channel — a double
+tap works too: `3d` and `freq` go back to twelve o'clock, `Q` goes back to
+closed.
 
 ## When the device comes up
 
