@@ -9,7 +9,21 @@
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 
-## [0] Aux Send
+## [0] FX SEND
+- Sets how much of this channel reaches the FX bus, where the delay that
+  follows the beat sits
+- [SEND]: -inf dB to 0 dB
+
+```{note}
+Until 2026-09-12 this knob did something else entirely: it drove the **3D
+blend** — how far the channel was spread into the room — because it was the
+only continuous control the desk had for that. A³ Motion's per-channel pot
+took that job over, and the knob got its own name back.
+
+The price, named: the desk has no 3D control any more. The 3D blend is A³
+Motion's pot, and only that.
+```
+
 ## [1] TRIM CONTROL
 - Adjust the level of audio signals input in each channel
 - [TRIM]: -inf dB to 0 dB
@@ -40,6 +54,13 @@
 ## [9]  3D SWITCH
 - Pressing the [3D] switch enables 3d encoding for this channel
 - The indicator lights if 3D is on
+
+```{warning}
+**Gone from hardware v3.2.** The switch is on the panel in the picture above
+and not on the current one. A³ Core still understands the message
+(`/channel/[0-3]/4d`), but no device sends it today, and 3D per channel is set
+from A³ Motion.
+```
 
 ## [10] FILTER FREQUENCY
 - Sets the cut off frequency of the VCF filter

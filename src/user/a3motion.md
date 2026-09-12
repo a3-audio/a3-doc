@@ -32,6 +32,49 @@ time — speed, direction, what happens at the end, and the fade that closes the
 loop — and its filter. The narrow strip on the right is global rather than
 per-channel and carries the recording mode.
 
+## The tabs along the bottom
+
+The row of tabs picks what the bottom band shows. `CLIP` is the one described
+above; the others are:
+
+| Tab | What it is |
+| :--- | :--- |
+| REC | recording settings |
+| ACTION | what a pad does besides play |
+| PADS | the pads, reachable without the hardware |
+| MIX | a full channel strip — see below |
+| FILES | sets: saving and loading |
+
+### MIX
+
+A software mixer for the four channels, sending the same messages the A³
+Mixer sends. Anything you turn here, the desk sees too — and the other way
+round.
+
+![The MIX page](pics_user/a3-motion-ui-mix.png)
+
+Per channel: **GAIN**, the three EQ bands **HIGH / MID / LOW**, **VOL**, and
+**SEND** — how much of that channel goes to the FX bus, where the delay that
+follows the beat sits. Below them the **PFL** and **FX** buttons. A second
+page holds the master, booth and headphone levels and the one filter shared by
+all four channels.
+
+**Double tap takes SEND back to zero.** It is the one control on the page you
+may want to get rid of in a single gesture, mid-transition, without looking.
+The **Q** encoder on the right-hand strip has the same rest position — closed
+— for the same reason. Nothing else responds to a double tap: a gain that
+snaps to a default in the middle of a set is a channel that jumps in the room.
+
+## When the device comes up
+
+A³ Motion asks A³ Core where each sound already is, and adopts the answer
+before it says anything itself. So switching the device on, or restarting it
+mid-evening, does not move the room: the blobs appear where the sound
+actually is, and the pots stand where they stood.
+
+Loading a **set** is the other way round — that is an explicit act, and the
+set wins.
+
 ## [4] Speed Encoder
 - Use these encoder to adjust length of trackpattern (bars)
 
