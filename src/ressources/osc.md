@@ -23,6 +23,23 @@ message nobody is told to send is an absence, not an error, and OSC over UDP
 has no way of reporting one. It was found three days later, as GAIN and VOL
 reading zero on a rig that was making sound.
 
+```
+      what comes in                        what goes out
+
+   A³ Mixer                                   A³ Mixer
+   A³ Motion            ──▶   A³ Core   ──▶   A³ Motion
+   beat-analyzer             :9000 :9002      light    (--subscriber)
+   REAPER                                     video    (--subscriber)
+
+   One message in, the same message out to every subscriber:
+       /channel/*    /master/*    /fx/*    /state/recall
+
+   And, each in its own language, to exactly one:
+       /track/…            REAPER           :9001
+       /MultiEncoder/…     IEM encoders     :1337+n
+       /DualDelay/…        IEM DualDelay    :1340
+```
+
 A new department is a command-line argument rather than a change to the
 source:
 
