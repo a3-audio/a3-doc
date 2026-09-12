@@ -46,6 +46,28 @@ other mixer. A display showing a number the knob below it does not have is
 worse than one showing nothing. Tracked in
 `issues/a3-mixer-hoert-nur-leds-und-vu.md`.
 
+### Three addresses that went out and were never answered
+
+Found on 2026-09-12 by holding the OSC reference against A³ Core's generated
+register:
+
+- **`/channel/n/enc` and `/channel/n/encbtn`** — the channel's rotary encoder
+  and its push switch. No handler anywhere, and no decision behind them. The
+  script even remembered which encoder was used last, so something was
+  planned; nobody could say what. Removed.
+- **`/tap`** — went to A³ Core, on an address Core never subscribed to. The
+  handler was there, its `dispatcher.map` line was commented out, and so was
+  the `rtmidi` import it needed. The key kept sending and UDP had no way of
+  saying that nobody listened. It now goes **straight at the beat-analyzer**,
+  the same port and the same message A³ Motion's TAP key sends — press only,
+  and `int 1`, which the analyzer reads as the beat within the bar. A tap is
+  timing, and timing does not want a relay in the middle.
+
+The **3D key** went in the same round, for a different reason: it is not on
+the panel in hardware v3.2, so its entry described a key nobody has and its
+lamp a light that is not there. A³ Core's side of it (`/channel/n/4d`) went
+the same day.
+
 ### The pfl lamp was inverted twice
 
 `send_button_leds_data` had a branch of its own for `led_mode == 0` — pfl's —

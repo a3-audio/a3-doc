@@ -84,7 +84,6 @@ against the old behaviour has to drop its own inversion as well.
 | - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the SuperCollider backend, not by `a3-core.py`.
 | - | /channel/[0-3]/led/pfl | bool | [0 or 1] | Whether the pfl lamp is lit. **1 is lit** — see the warning below; it was the other way round until 2026-09-12.
 | - | /channel/[0-3]/led/fx | bool | [0 or 1] | Whether the fx lamp is lit
-| - | /channel/[0-3]/led/3d | bool | [0 or 1] | Whether the 3d lamp is lit
 | - | /fx/led | string | [high_pass, low_pass] | fx mode, as the word the desk's firmware reads
 | /channel/[0-3]/gain | /channel/[0-3]/gain | float | [0-1] | Channel gain. Sent back to **both** mixers when REAPER reports it — see *The way back* below.
 | /channel/[0-3]/eq/high | /channel/[0-3]/eq/high | float | [0-1] | Channel eq high, relayed back the same way
@@ -94,7 +93,6 @@ against the old behaviour has to drop its own inversion as well.
 | /channel/[0-3]/fx-send | - | float | [0-1] | How much of the channel reaches the FX bus. Since 2026-09-12 this is what it does again — see below.
 | /channel/[0-3]/pfl | /channel/[0-3]/pfl | string or float | "1"/"0" (edge) or 0/1 (state) | Channel pfl. A string is a momentary button's edge and toggles the flag; a number is the wanted state. Core **sends** the resulting state back on the same address, always as a number.
 | /channel/[0-3]/fx | /channel/[0-3]/fx | string or float | "1"/"0" (edge) or 0/1 (state) | Channel filter, same two spellings, and the state comes back the same way
-| /channel/[0-3]/4d | /channel/[0-3]/4d | string or float | "1"/"0" (edge) or 0/1 (state) | Channel 3D on/off. The toggle used to live on `3d`; no device sends it today, but Core broadcasts its state — see below.
 | /channel/[0-3]/3d | /channel/[0-3]/3d | float | [0-1] | How far the channel is spread into the 3D field. Core crossfades the channel's stereo and multi encoder on it, and replays it on a recall.
 | /channel/[0-3]/azimuth | /channel/[0-3]/azimuth | float | [-180-180] | ambisonic azimuth, in degrees. Clamped, and the **clamped** value is what a recall replays.
 | /channel/[0-3]/elevation | /channel/[0-3]/elevation | float | [-90-90] | ambisonic elevation, in degrees
@@ -119,22 +117,21 @@ unrecognised and dropped. They are left out of the table above rather than
 described as working, because a reference that lists an address nobody
 answers costs an evening to disprove.
 
-**And three go the other way — sent, never documented, never answered:**
+**And four went the other way — sent, never documented, never answered.** All
+four are gone as of 2026-09-12, found by holding this page against the
+generated register, which is what that register is for:
 
-| Address | Sent by | What happens |
+| Address | Was sent by | What became of it |
 | :--- | :--- | :--- |
-| `/channel/[0-3]/enc` | the A³ Mixer's rotary encoder (`a3-mixer.py`) | nothing; Core has no branch for it |
-| `/channel/[0-3]/encbtn` | the same encoder's push switch | nothing |
-| `/tap` | the A³ Mixer's tap key | nothing — Core's `dispatcher.map("/tap", …)` is commented out, and so is the `rtmidi` import its handler needs. A³ Motion's `/tap` is a different wire, goes to the beat-analyzer, and is answered |
-
-Found on 2026-09-12 by holding this page against the generated register, which
-is what that register is for. Tracked in
-`issues/a3-mixer-sendet-drei-adressen-die-niemand-beantwortet.md`.
+| `/channel/[0-3]/enc` | the A³ Mixer's rotary encoder | removed. Core never had a branch for it and nobody could say what it was meant to do |
+| `/channel/[0-3]/encbtn` | that encoder's push switch | removed |
+| `/tap` | the A³ Mixer's tap key | **rerouted.** It now goes where A³ Motion's TAP goes — straight at the beat-analyzer on port 7775, press only, `int 1`. Core's end is gone: the handler, its commented-out `dispatcher.map`, and the commented-out `rtmidi` import it needed. Re-enabling that one line would have raised a `NameError` in the OSC thread at the first keypress |
+| `/channel/[0-3]/4d` | nothing, since hardware v3.2 | **removed**, with the 3D key that used to send it, its flag, its lamp and its line in the state file. 3D per channel is A³ Motion's pot, on `/channel/[0-3]/3d` |
 ```
 
 ### The two spellings of a button
 
-The difference between a string and a number on `pfl`, `fx`, `4d` and
+The difference between a string and a number on `pfl`, `fx` and
 `/fx/mode` is not sloppiness — it is the difference between the devices. The
 A³ Mixer passes on the serial line of a momentary button, so it sends the
 **edge** `"1"` when the finger goes down and `"0"` when it comes off. A³
@@ -280,9 +277,10 @@ source, so a send that moves in the REAPER project can be found by reading
 one file.
 
 **The price, named:** the desk has no 3D control any more. The 3D *switch*
-per channel is gone in Mixer hardware v3.2 as well, and Core's boolean —
-`/channel/[0-3]/4d` — is today an address no device sends. The 3D blend is
-A³ Motion's pot, and only that.
+per channel went with hardware v3.2, and Core's boolean behind it
+(`/channel/[0-3]/4d`) was removed on 2026-09-12 — it had had a listener and no
+talker for as long as anybody could remember. The 3D blend is A³ Motion's pot,
+and only that.
 
 ## A³ Motion
 
@@ -358,12 +356,11 @@ A third per-channel value beside `pot_1` and `pot_2`, sent whenever the channel'
 moves. In `a3-core.py` it crossfades the channel between its stereo encoder and its multi encoder
 (REAPER FX 1, parameters 1 and 15 on one, parameter 1 on the other).
 
-**This address used to be a toggle**, flipping `toggle_3d` on the value 1 and reporting an LED
-state back to A³ Mixer. That boolean now lives on `/channel/[0-3]/4d`. The Mixer button that sent
-it is gone in hardware v3.2, so **no device sends the boolean today** — Core
-still understands it, still holds the flag, and still broadcasts its state and
-its lamp. A wire with a listener and no talker, which is exactly what the
-register was built to show.
+**This address used to be a toggle**, flipping a flag on the value 1 and
+reporting an LED state back to A³ Mixer. The boolean moved to
+`/channel/[0-3]/4d` when this address took the continuous value; the Mixer key
+that sent it went with hardware v3.2, and on 2026-09-12 so did the boolean
+itself. 3D per channel is this address, continuous, and nothing else.
 
 ### /EnergyVisualizer/RMS
 

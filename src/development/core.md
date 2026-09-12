@@ -32,6 +32,22 @@ because each of them was a number whose meaning was invisible at the call site:
 | `share/a3-core/curves.json` | the parameter curves |
 | `share/a3-core/osc-register.json` | the generated catalogue of every address the system can speak |
 
+### What the register got rid of
+
+Holding `web/a3-doc`'s reference against the register on 2026-09-12 turned up
+four addresses that were sent and never answered — two from a rotary encoder
+nobody could account for, the desk's tap key, and the 3D switch's boolean.
+All four are gone; the tap now goes where A³ Motion's goes.
+
+The same round surfaced a fault in the window itself: an address Core could
+not route before and can now kept its row in the **unknown** table, because
+that table survives a restart while what Core can route does not. Twenty-three
+of them, all reversible since that afternoon — the page called them
+unrecognised while Core was routing them. An instrument that reads wrong about
+itself is worse than none. The rule is now enforced where the pair comes back
+from disk: an address with an incoming row is not unrecognised. "Sent out, not
+understood back" still shows as both, because that pair is the truth.
+
 `layout.json` ships with the package, beside the REAPER project it has to
 agree with, and an update replaces it. That is deliberate: a track number that
 no longer matches the shipped project is worse than a lost local edit.

@@ -57,9 +57,9 @@ Motion's pot, and only that.
 
 ```{warning}
 **Gone from hardware v3.2.** The switch is on the panel in the picture above
-and not on the current one. A³ Core still understands the message
-(`/channel/[0-3]/4d`), but no device sends it today, and 3D per channel is set
-from A³ Motion.
+and not on the current one, and as of 2026-09-12 neither is the message behind
+it — A³ Core no longer understands `/channel/[0-3]/4d` either. 3D per channel
+is set from A³ Motion, on its own pot, and it is a blend rather than a switch.
 ```
 
 ## [10] FILTER FREQUENCY
@@ -73,6 +73,14 @@ from A³ Motion.
 
 ## [13] FILTER TYPE SELECT LOW-PASS
 - [LPF]: Allows signals below the cutoff frequency to pass
+
+## [13b] TAP
+- Taps the tempo, the same as A³ Motion's TAP key
+- Goes straight to the beat-analyzer, not through A³ Core — a tap is timing,
+  and timing does not want a relay in the middle
+- Until 2026-09-12 it went to A³ Core, which had never subscribed to it. The
+  key worked, the message left the desk, and nothing happened at the other
+  end
 
 ## [14] HEADPHONE LEVEL
 - Sets the level of the headphone output

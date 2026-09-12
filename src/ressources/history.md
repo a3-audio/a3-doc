@@ -32,6 +32,11 @@ they look like. In order:
   drove the 3D blend, because it was the only continuous control there was
   for it. A³ Motion's pot took that over; the knob got its own job back.
 
+- **And a clear-out.** Holding the reference against the register turned up
+  four addresses that were sent and never answered, and one more where the
+  window was wrong about itself. All five gone. That is the return on having
+  built the register at all.
+
 ![Core's window](../development/pics_development/a3core-window-traffic.png)
 
 ![The register, filtered to the A³ Mixer](../development/pics_development/a3core-window-register-mixer.png)
