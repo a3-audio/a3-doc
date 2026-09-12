@@ -19,11 +19,11 @@ decides what it means:
 | - | /channel/[0-3]/led/fx | bool | [0 or 1] | fx status
 | - | /channel/[0-3]/led/3d | bool | [0 or 1] | 3d status
 | - | /fx/led | string | [high_pass, low_pass] | fx mode status
-| /channel/[0-3]/gain | - | float | [0-1] | Channel gain
-| /channel/[0-3]/eq/high | - | float | [0-1] | Channel eq high
-| /channel/[0-3]/eq/mid | - | float | [0-1] | Channel eq mid
-| /channel/[0-3]/eq/low | - | float | [0-1] | Channel eq low
-| /channel/[0-3]/volume | - | float | [0-1] | Channel volume
+| /channel/[0-3]/gain | /channel/[0-3]/gain | float | [0-1] | Channel gain. Sent back to **both** mixers when REAPER reports it — see *The way back* below.
+| /channel/[0-3]/eq/high | /channel/[0-3]/eq/high | float | [0-1] | Channel eq high, relayed back the same way
+| /channel/[0-3]/eq/mid | /channel/[0-3]/eq/mid | float | [0-1] | Channel eq mid, relayed back the same way
+| /channel/[0-3]/eq/low | /channel/[0-3]/eq/low | float | [0-1] | Channel eq low, relayed back the same way
+| /channel/[0-3]/volume | /channel/[0-3]/volume | float | [0-1] | Channel volume, relayed back the same way
 | /channel/[0-3]/fx-send | - | float | [0-1] | How much of the channel reaches the FX bus. Since 2026-09-12 this is what it does again — see below.
 | /channel/[0-3]/pfl | - | string or float | "1"/"0" (edge) or 0/1 (state) | Channel pfl. A string is a momentary button's edge and toggles the flag; a number is the wanted state.
 | /channel/[0-3]/fx | - | string or float | "1"/"0" (edge) or 0/1 (state) | Channel filter, same two spellings
@@ -92,6 +92,47 @@ yet and the answer is the lamps alone. A value Core has never seen is left
 **out** rather than sent as zero — zero degrees is the front of the room, a
 real position, and answering it would move the sound while claiming to
 report where it already is.
+
+### The way back: what REAPER reports
+
+A hand on REAPER's own mixer has to reach the devices, or the room and the
+control surfaces disagree with nobody able to tell. So Core reads REAPER's
+feedback on port 9002, bends the value back through the curve it went out on,
+and relays it — **to both mixers**, since 2026-09-12.
+
+| REAPER reports | comes back as |
+| :--- | :--- |
+| `/track/{12,16,20,24}/fx/1/fxparam/1/value` | `/channel/[0-3]/gain` |
+| `/track/{12,16,20,24}/fx/2/fxparam/{1,2,3}/value` | `/channel/[0-3]/eq/{high,mid,low}` |
+| `/track/{9,13,17,21}/fx/1/fxparam/*` | `/channel/[0-3]/volume` |
+
+It went to the A³ Mixer alone until A³ Motion's channel strip had been in
+existence for three days without being told anything — GAIN and VOL reading
+zero on a rig that was making sound.
+
+```{warning}
+**Not everything may be relayed, and the rule is exact: can an action script
+drive it?**
+
+If it can — `3d`, `freq` and `Q` — REAPER holds the base value *plus* the
+running accent envelope while the device holds only the base. Writing the one
+into the other makes every accent's peak the new base, so the value ratchets
+up and never comes down. The two encoder pots were relayed for a few hours on
+2026-09-12 and had to be taken out again.
+
+If it cannot — gain, the EQ bands, volume — REAPER's value **is** the device's
+value and there is nothing to ratchet.
+
+`fx-send` is the one entry that is a decision rather than an impossibility: no
+action drives it, so it could be relayed as safely as the gain. It is left out
+because 0 is the right value for a send to come up on.
+```
+
+**What the desk does with it today: nothing.** `a3-mixer.py` subscribes to
+`/vu/*`, `/channel/*/led/*` and `/fx/led` and to nothing else, so these five
+arrive there and are dropped without a word. They are still sent — the desk is
+where those controls are, and its channel displays are the obvious ear — but
+nobody should read this table and conclude the desk is being kept up to date.
 
 ### /beat, and the delay that follows it
 
@@ -172,12 +213,12 @@ restriction.
 | /channel/[0-3]/3d | /channel/[0-3]/3d | float | [0-1] | How far the channel is spread into the 3D field, from its pot. Core crossfades the channel's stereo and multi encoder on it.
 | /channel/[0-3]/pot_1 | /channel/[0-3]/pot_1 | float | [0-1] | The channel's filter frequency — the `freq` row of the channel-value strip, and the left hardware encoder
 | /channel/[0-3]/pot_2 | /channel/[0-3]/pot_2 | float | [0-1] | The channel's filter resonance (`Q`), and the right hardware encoder
-| - | /channel/[0-3]/gain | float | [0-1] | Channel strip, MIX page
-| - | /channel/[0-3]/eq/high | float | [0-1] | Channel strip, MIX page
-| - | /channel/[0-3]/eq/mid | float | [0-1] | Channel strip, MIX page
-| - | /channel/[0-3]/eq/low | float | [0-1] | Channel strip, MIX page
-| - | /channel/[0-3]/volume | float | [0-1] | Channel strip, MIX page
-| - | /channel/[0-3]/fx-send | float | [0-1] | Channel strip, MIX page — new 2026-09-12
+| /channel/[0-3]/gain | /channel/[0-3]/gain | float | [0-1] | Channel strip, MIX page. **Received** since 2026-09-12: A³ Core relays what REAPER reports.
+| /channel/[0-3]/eq/high | /channel/[0-3]/eq/high | float | [0-1] | Channel strip, MIX page. Received as well.
+| /channel/[0-3]/eq/mid | /channel/[0-3]/eq/mid | float | [0-1] | Channel strip, MIX page. Received as well.
+| /channel/[0-3]/eq/low | /channel/[0-3]/eq/low | float | [0-1] | Channel strip, MIX page. Received as well.
+| /channel/[0-3]/volume | /channel/[0-3]/volume | float | [0-1] | Channel strip, MIX page. Received as well.
+| - | /channel/[0-3]/fx-send | float | [0-1] | Channel strip, MIX page — new 2026-09-12. Not relayed back; see below.
 | - | /channel/[0-3]/pfl | float | [0 or 1] | Channel strip, MIX page — the **state**, not an edge
 | - | /channel/[0-3]/fx | float | [0 or 1] | Channel strip, MIX page — the state
 | - | /master/volume, /master/booth, /master/phones_mix, /master/phones_volume, /master/return | float | [0-1] | Summing section, MIX page

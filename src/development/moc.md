@@ -30,6 +30,18 @@ not need to.
 delay sits — was added on 2026-09-12, when the desk's FX-send knob stopped
 driving the 3D blend and got its own job back.
 
+**The strip listens as well as speaks**, since the same day. A³ Core relays
+what REAPER reports for gain, the three bands and volume, and the strip adopts
+it — through `MixerState::setChannelFromPeer`, which sets a value *without*
+sending it. That distinction is the whole provision: set-and-send on the way
+back would be Core reports, Motion sets, Motion sends, Core reports, which is
+the echo loop rebuilt from this side where Core's own suppression cannot reach
+it.
+
+Before that the strip came up at its own defaults and stayed there — GAIN and
+VOL reading zero on a rig that was making sound, for the three days between
+the strip existing and anybody looking at it next to the desk.
+
 ### Rest positions
 
 A double tap puts a control back where it belongs, but only where "belongs"

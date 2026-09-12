@@ -53,6 +53,10 @@ round.
 
 ![The MIX page](pics_user/a3-motion-ui-mix.png)
 
+The knobs show what is actually set, not what this device last did: A³ Core
+passes on whatever REAPER reports, so a hand on the desk or in REAPER moves
+them here too, and a restart mid-evening brings them back as they stand.
+
 Per channel: **GAIN**, the three EQ bands **HIGH / MID / LOW**, **VOL**, and
 **SEND** — how much of that channel goes to the FX bus, where the delay that
 follows the beat sits. Below them the **PFL** and **FX** buttons. A second

@@ -56,6 +56,30 @@ The lamps and the blend survive a restart in Core's state file; the position
 does not, and a position Core has never seen is left **unsaid** rather than
 guessed at.
 
+### The way back
+
+REAPER's feedback arrives on port 9002 and is read backwards: the address says
+which channel and which control, and `invert()` undoes the curve the value
+went out on. `lib/a3_core_reverse.py` holds that second table, and
+`tools/tests/test_reverse_covers_forward.py` holds it against the forward
+path in `a3-core.py` — two tables that must agree drift, and here the drift is
+silent.
+
+Five per-channel controls come back: gain, the three EQ bands, volume. Since
+2026-09-12 each goes to **both** mixers rather than to the desk alone.
+
+**The rule for what may be relayed at all is exact: can an action script drive
+it?** If it can, REAPER holds base plus accent while the device holds base,
+and relaying that ratchets the value up — that is `3d`, `freq` and `Q`, and
+the last two were live for a few hours before being taken out. If it cannot,
+REAPER's value *is* the device's value and a relay is safe.
+
+The guard that should have caught the missing half was the one that hid it: it
+asserted `entry.to == "mixer"` under the name *"nothing reports back to Motion
+continuously"* — the pots' rule stated one size too large, outlawing the gain
+and the volume as well. It now names the three controls an action can reach,
+which is what the rule was always about.
+
 ### The tempo, on its way to the delay
 
 `lib/a3_core_tempo.py` sits between `/beat` and the DualDelay. A tempo has to
