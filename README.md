@@ -38,3 +38,11 @@ pip install -r requirements.txt
 
 ## Contact
 - E-Mail [p5hcu1@systemli.org](mailto:p5hcu1@systemli.org)
+## Where this fits
+
+A³ is seven repositories and one system. **The structure, the workflow and the
+versioning are described once, in the umbrella:**
+[a3-audio/a3-system](https://github.com/a3-audio/a3-system#repositories-and-versioning).
+
+The short of it: work happens on `main`, a version is an annotated tag, and
+the same tag name is set in every repository at once — `v03.0` is the first.
