@@ -14,6 +14,13 @@
 - Mac Mini i7 late 2018
 - Motu Ultralite AVB
 
+The machine these pages were written on is a different box running the same
+software: an **Intel NUC8i7HNK** (i7-8705G) on Debian with a realtime kernel.
+A³ Core is not tied to one computer — it is that install plus REAPER,
+SuperCollider and the OSC router, and it has run on a tower, a Mac and this.
+
+![A³ Core on an Intel NUC](pics_assembly/v03/a3core_v03_nuc.jpg)
+
 ## V02
 - AMD Threadripper (16 Cores)
 - Digigram LX Dante
