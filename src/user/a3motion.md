@@ -55,7 +55,14 @@ round.
 
 The knobs show what is actually set, not what this device last did: A³ Core
 passes on whatever REAPER reports, so a hand on the desk or in REAPER moves
-them here too, and a restart mid-evening brings them back as they stand.
+them here too, and a restart mid-evening brings them back as they stand. That
+holds for the whole mixer — the channel strips, the master column and the
+filter — and for the PFL and FX keys, which light to match what A³ Core has
+rather than what was last pressed here.
+
+Tapping **MIX** in the status bar opens the whole thing at once:
+
+![The mixer, showing the room as it actually stands](pics_user/a3-motion-ui-mixer-overlay.png)
 
 Per channel: **GAIN**, the three EQ bands **HIGH / MID / LOW**, **VOL**, and
 **SEND** — how much of that channel goes to the FX bus, where the delay that

@@ -56,17 +56,53 @@ The lamps and the blend survive a restart in Core's state file; the position
 does not, and a position Core has never seen is left **unsaid** rather than
 guessed at.
 
+### Everything goes to everyone
+
+There is no list of recipients anywhere in Core. Every A3-shaped message goes
+to every subscriber — `lib/a3_core_subscribers.py` says why at length, and the
+short version is that a per-message list is a list that goes stale silently.
+The one that existed named the desk for three days after A3 Motion grew the
+controls it named, and nothing failed, because a message nobody is told to
+send is an absence.
+
+A department is `--subscriber name=host:port`, repeatable, refused rather than
+skipped if it cannot be parsed.
+
+One thing is deliberately *not* broadcast, and it is not a recipient list in
+disguise but a statement about what kind of message it is: **the engine's own
+languages** — REAPER's `/track/…`, the MultiEncoders' `/MultiEncoder/…`, the
+DualDelay's `/DualDelay/…`. Each is addressed by the one handler that has
+something to say to it.
+
+The lamps were the second such case for half a day, on the grounds that a lamp
+is an instruction in the A³ Mixer firmware's convention rather than a fact.
+That was true and it was the wrong conclusion: **a lamp shows a status, and a
+status belongs to whoever shows one.** They are broadcast.
+
+Which made the inversion everybody's problem instead of nobody's. Core sent
+"not pfl" and `a3-mixer.py` inverted it back, the two cancelled, and
+`/channel/n/led/pfl` carried the opposite of its own name. Both came out on
+the same day, so what reaches the desk's LED is unchanged and the address
+means what it says.
+
+Nothing moves a lamp unless the status moved: a flag is announced only where
+it changed, and `broadcast()` drops a value already passed on.
+
 ### The way back
 
 REAPER's feedback arrives on port 9002 and is read backwards: the address says
-which channel and which control, and `invert()` undoes the curve the value
-went out on. `lib/a3_core_reverse.py` holds that second table, and
+which control, and `invert()` undoes the curve the value went out on. `lib/a3_core_reverse.py` holds that second table, and
 `tools/tests/test_reverse_covers_forward.py` holds it against the forward
 path in `a3-core.py` — two tables that must agree drift, and here the drift is
 silent.
 
-Five per-channel controls come back: gain, the three EQ bands, volume. Since
-2026-09-12 each goes to **both** mixers rather than to the desk alone.
+What comes back: the channel strip (gain, the three EQ bands, volume, the FX
+send), the whole master section, and the shared filter's frequency and
+resonance. The last of those is one control written to all four input tracks,
+which is why an entry carries a **scope**: it is reported on a channel's track
+and answered globally. A value already passed on is dropped — a gain plug-in
+holds its value across eight parameters, and without that one knob would
+become eight identical messages to everybody.
 
 **The rule for what may be relayed at all is exact: can an action script drive
 it?** If it can, REAPER holds base plus accent while the device holds base,

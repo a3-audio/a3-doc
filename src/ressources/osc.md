@@ -15,32 +15,32 @@ decides what it means:
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
 | - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the SuperCollider backend, not by `a3-core.py`.
-| - | /channel/[0-3]/led/pfl | bool | [0 or 1] | pfl status
-| - | /channel/[0-3]/led/fx | bool | [0 or 1] | fx status
-| - | /channel/[0-3]/led/3d | bool | [0 or 1] | 3d status
-| - | /fx/led | string | [high_pass, low_pass] | fx mode status
+| - | /channel/[0-3]/led/pfl | bool | [0 or 1] | Whether the pfl lamp is lit. **1 is lit** — see the warning below; it was the other way round until 2026-09-12.
+| - | /channel/[0-3]/led/fx | bool | [0 or 1] | Whether the fx lamp is lit
+| - | /channel/[0-3]/led/3d | bool | [0 or 1] | Whether the 3d lamp is lit
+| - | /fx/led | string | [high_pass, low_pass] | fx mode, as the word the desk's firmware reads
 | /channel/[0-3]/gain | /channel/[0-3]/gain | float | [0-1] | Channel gain. Sent back to **both** mixers when REAPER reports it — see *The way back* below.
 | /channel/[0-3]/eq/high | /channel/[0-3]/eq/high | float | [0-1] | Channel eq high, relayed back the same way
 | /channel/[0-3]/eq/mid | /channel/[0-3]/eq/mid | float | [0-1] | Channel eq mid, relayed back the same way
 | /channel/[0-3]/eq/low | /channel/[0-3]/eq/low | float | [0-1] | Channel eq low, relayed back the same way
 | /channel/[0-3]/volume | /channel/[0-3]/volume | float | [0-1] | Channel volume, relayed back the same way
 | /channel/[0-3]/fx-send | - | float | [0-1] | How much of the channel reaches the FX bus. Since 2026-09-12 this is what it does again — see below.
-| /channel/[0-3]/pfl | - | string or float | "1"/"0" (edge) or 0/1 (state) | Channel pfl. A string is a momentary button's edge and toggles the flag; a number is the wanted state.
-| /channel/[0-3]/fx | - | string or float | "1"/"0" (edge) or 0/1 (state) | Channel filter, same two spellings
-| /channel/[0-3]/4d | - | string or float | "1"/"0" (edge) or 0/1 (state) | Channel 3D on/off. The toggle used to live on `3d`; nothing sends this address today — see below.
+| /channel/[0-3]/pfl | /channel/[0-3]/pfl | string or float | "1"/"0" (edge) or 0/1 (state) | Channel pfl. A string is a momentary button's edge and toggles the flag; a number is the wanted state. Core **sends** the resulting state back on the same address, always as a number.
+| /channel/[0-3]/fx | /channel/[0-3]/fx | string or float | "1"/"0" (edge) or 0/1 (state) | Channel filter, same two spellings, and the state comes back the same way
+| /channel/[0-3]/4d | /channel/[0-3]/4d | string or float | "1"/"0" (edge) or 0/1 (state) | Channel 3D on/off. The toggle used to live on `3d`; no device sends it today, but Core broadcasts its state — see below.
 | /channel/[0-3]/3d | /channel/[0-3]/3d | float | [0-1] | How far the channel is spread into the 3D field. Core crossfades the channel's stereo and multi encoder on it, and replays it on a recall.
 | /channel/[0-3]/azimuth | /channel/[0-3]/azimuth | float | [-180-180] | ambisonic azimuth, in degrees. Clamped, and the **clamped** value is what a recall replays.
 | /channel/[0-3]/elevation | /channel/[0-3]/elevation | float | [-90-90] | ambisonic elevation, in degrees
 | /channel/[0-3]/pot_1 | - | float | [0-1] | First encoder pot of the channel, on the stereo encoder
 | /channel/[0-3]/pot_2 | - | float | [0-1] | Second encoder pot of the channel
-| /master/volume | - | float | [0-1] | Master volume
-| /master/booth | - | float | [0-1] | Booth volume
-| /master/phones_mix | - | float | [0-1] | Phones mix
-| /master/phones_volume | - | float | [0-1] | Phones volume
-| /master/return | - | float | [0-1] | Aux return level
-| /fx/mode | - | string or float | [high_pass, low_pass] or 0/1 | Global fx mode; as a number, 1 is high_pass
-| /fx/frequency | - | float | [0-1] | fx filter frequency
-| /fx/resonance | - | float | [0-1] | fx filter resonance
+| /master/volume | /master/volume | float | [0-1] | Master volume, relayed back from REAPER
+| /master/booth | /master/booth | float | [0-1] | Booth volume, relayed back
+| /master/phones_mix | /master/phones_mix | float | [0-1] | Phones mix, relayed back. The one value that goes out unbent, as a plain track volume.
+| /master/phones_volume | /master/phones_volume | float | [0-1] | Phones volume, relayed back
+| /master/return | /master/return | float | [0-1] | Aux return level, relayed back
+| /fx/mode | /fx/mode | string or float | [high_pass, low_pass] or 0/1 | Global fx mode; as a number, 1 is high_pass. Core **sends** it as a number; the word goes to the desk on `/fx/led`.
+| /fx/frequency | /fx/frequency | float | [0-1] | fx filter frequency, relayed back
+| /fx/resonance | /fx/resonance | float | [0-1] | fx filter resonance, relayed back
 | /state/recall | - | - | - | Ask Core to say its whole state again — see below
 | /beat | - | int (beat), int (bar), float (bpm) | [1-4], [-], [-] | The beat-analyzer's clock. Only the tempo is used here, and only to drive the delay on the FX bus.
 
@@ -93,22 +93,81 @@ yet and the answer is the lamps alone. A value Core has never seen is left
 real position, and answering it would move the sound while claiming to
 report where it already is.
 
+### Everything goes to everyone
+
+**There is no list of recipients.** Every A³-shaped message Core produces goes
+to every subscriber, always — the A³ Mixer, A³ Motion, and whatever else is
+plugged in.
+
+That rule replaced a per-message device list on 2026-09-12, and the list is
+why. It named the A³ Mixer for as long as only the desk had a channel strip;
+A³ Motion grew one, the list stayed as it was, and **nothing failed** — a
+message nobody is told to send is an absence, not an error, and OSC over UDP
+has no way of reporting one. It was found three days later, as GAIN and VOL
+reading zero on a rig that was making sound.
+
+A new department is a command-line argument rather than a change to the
+source:
+
+```
+a3-core.py --subscriber light=192.168.43.60:7771 --subscriber video=10.0.0.9:7771
+```
+
+Repeatable. A subscriber that cannot be parsed stops Core from starting rather
+than being skipped — for the same reason as above.
+
+```{note}
+**The engine is not a subscriber.** REAPER, the IEM MultiEncoders and the
+DualDelay each speak their own vendor's language — `/track/…`,
+`/MultiEncoder/…`, `/DualDelay/…` — and each is addressed by the one handler
+that has something to say to it.
+
+**The lamps are broadcast too**, because a lamp shows a status and a status
+belongs to whoever shows one. `/channel/[0-3]/led/*` and `/fx/led` therefore
+reach every subscriber, alongside the flag itself on `/channel/[0-3]/pfl` —
+two vocabularies for one fact: a lamp is a light, a flag is a setting.
+
+Nothing is sent unless the status moved. A flag is announced only where it
+actually changed, and a value already passed on is dropped — five identical
+state messages produce one round of lamps, not five.
+```
+
+```{warning}
+**`/channel/[0-3]/led/pfl` changed meaning on 2026-09-12.** It used to carry
+the *opposite* of the lamp: Core sent "not pfl" and `a3-mixer.py` inverted it
+back, the two cancelled, and the desk was right while the wire said the
+reverse of its own name. That cost nothing while the desk was the only reader.
+
+Both inversions came out together, so what reaches the desk's LED is
+unchanged and the address now means **this lamp is lit**. Anything written
+against the old behaviour has to drop its own inversion as well.
+```
+
 ### The way back: what REAPER reports
 
 A hand on REAPER's own mixer has to reach the devices, or the room and the
 control surfaces disagree with nobody able to tell. So Core reads REAPER's
 feedback on port 9002, bends the value back through the curve it went out on,
-and relays it — **to both mixers**, since 2026-09-12.
+and broadcasts it.
 
 | REAPER reports | comes back as |
 | :--- | :--- |
 | `/track/{12,16,20,24}/fx/1/fxparam/1/value` | `/channel/[0-3]/gain` |
 | `/track/{12,16,20,24}/fx/2/fxparam/{1,2,3}/value` | `/channel/[0-3]/eq/{high,mid,low}` |
 | `/track/{9,13,17,21}/fx/1/fxparam/*` | `/channel/[0-3]/volume` |
+| `/track/{9,13,17,21}/send/3/volume` | `/channel/[0-3]/fx-send` |
+| `/track/{12,16,20,24}/fx/3/fxparam/7/value` | `/fx/frequency` |
+| `/track/{12,16,20,24}/fx/3/fxparam/6/value` | `/fx/resonance` |
+| `/track/1/fx/1/fxparam/*` | `/master/volume` |
+| `/track/2/fx/1/fxparam/*` | `/master/booth` |
+| `/track/3/fx/2/fxparam/1/value` | `/master/phones_volume` |
+| `/track/8/volume` | `/master/phones_mix` |
+| `/track/25/fx/3/fxparam/*` | `/master/return` |
 
-It went to the A³ Mixer alone until A³ Motion's channel strip had been in
-existence for three days without being told anything — GAIN and VOL reading
-zero on a rig that was making sound.
+The filter is one control written to all four input tracks, so it is
+**reported on a channel's track and answered globally**. A value already
+passed on is dropped, which is what keeps one knob from becoming eight
+identical messages — a gain plug-in holds its value across eight parameters.
 
 ```{warning}
 **Not everything may be relayed, and the rule is exact: can an action script
@@ -123,16 +182,18 @@ up and never comes down. The two encoder pots were relayed for a few hours on
 If it cannot — gain, the EQ bands, volume — REAPER's value **is** the device's
 value and there is nothing to ratchet.
 
-`fx-send` is the one entry that is a decision rather than an impossibility: no
-action drives it, so it could be relayed as safely as the gain. It is left out
-because 0 is the right value for a send to come up on.
+`fx-send` was the one entry that was a decision rather than an impossibility,
+and the decision went the other way on 2026-09-12: no action drives it, so it
+is relayed as safely as the gain.
 ```
 
 **What the desk does with it today: nothing.** `a3-mixer.py` subscribes to
-`/vu/*`, `/channel/*/led/*` and `/fx/led` and to nothing else, so these five
-arrive there and are dropped without a word. They are still sent — the desk is
-where those controls are, and its channel displays are the obvious ear — but
-nobody should read this table and conclude the desk is being kept up to date.
+`/vu/*`, `/channel/*/led/*` and `/fx/led` and to nothing else, so all of this
+arrives there and is dropped without a word. It is still sent — the desk is
+where most of those controls are, and its channel displays are the obvious ear
+— but nobody should read this table and conclude the desk is being kept up to
+date. It is, as of 2026-09-12, the only device in the system that does not
+know its own state beyond its lamps.
 
 ### /beat, and the delay that follows it
 
@@ -218,11 +279,11 @@ restriction.
 | /channel/[0-3]/eq/mid | /channel/[0-3]/eq/mid | float | [0-1] | Channel strip, MIX page. Received as well.
 | /channel/[0-3]/eq/low | /channel/[0-3]/eq/low | float | [0-1] | Channel strip, MIX page. Received as well.
 | /channel/[0-3]/volume | /channel/[0-3]/volume | float | [0-1] | Channel strip, MIX page. Received as well.
-| - | /channel/[0-3]/fx-send | float | [0-1] | Channel strip, MIX page — new 2026-09-12. Not relayed back; see below.
-| - | /channel/[0-3]/pfl | float | [0 or 1] | Channel strip, MIX page — the **state**, not an edge
-| - | /channel/[0-3]/fx | float | [0 or 1] | Channel strip, MIX page — the state
-| - | /master/volume, /master/booth, /master/phones_mix, /master/phones_volume, /master/return | float | [0-1] | Summing section, MIX page
-| - | /fx/mode, /fx/frequency, /fx/resonance | float | [0-1] | The one filter shared by all four channels
+| /channel/[0-3]/fx-send | /channel/[0-3]/fx-send | float | [0-1] | Channel strip, MIX page — new 2026-09-12, and relayed back since the same evening.
+| /channel/[0-3]/pfl | /channel/[0-3]/pfl | float | [0 or 1] | Channel strip, MIX page — the **state**, not an edge, both ways
+| /channel/[0-3]/fx | /channel/[0-3]/fx | float | [0 or 1] | Channel strip, MIX page — the state, both ways
+| /master/* | /master/volume, /master/booth, /master/phones_mix, /master/phones_volume, /master/return | float | [0-1] | Summing section, MIX page. Received as well since 2026-09-12.
+| /fx/* | /fx/mode, /fx/frequency, /fx/resonance | float | [0-1] | The one filter shared by all four channels. Received as well; `/fx/mode` as a number, 1 for high pass.
 | - | /state/recall | - | - | Sent once at start-up: *tell me what is already sounding*
 | - | /StereoEncoder/azimuth, /StereoEncoder/elevation | float | [-180-180], [-90-90] | The alternative backend, straight into an IEM plug-in chain instead of into Core
 | /beat | /beat | int (beat), int (bar), int (bpm) | [1-4], [-], [-] | The beat clock — **sent** in INT mode, **received** in EXT and PIO. Always updates the status bar readout; received, it also syncs playback tempo and phase. Float arguments are accepted and truncated to int.

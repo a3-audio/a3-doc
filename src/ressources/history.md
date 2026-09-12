@@ -22,9 +22,12 @@ they look like. In order:
   IEM DualDelay on the FX bus, held still for a bar before each change,
   because a delay line rewritten on every beat is a delay line whose pitch
   wobbles.
-- **Both mixers hear REAPER.** The five values REAPER reports back per
-  channel went to the desk alone; A³ Motion's strip, three days old, came up
-  at its own defaults and stayed there. They now reach both.
+- **Everything goes to everyone.** The values REAPER reports back went to the
+  desk alone, by a list written per message — which named the desk for three
+  days after A³ Motion grew the same controls, without anything failing. The
+  list is gone: every A³ message reaches every subscriber, and a light or
+  video department is now a command-line argument. The master section, the
+  shared filter and the PFL and FX keys got a way back at all in the process.
 - **The FX send became the FX send again.** For years the desk's send knob
   drove the 3D blend, because it was the only continuous control there was
   for it. A³ Motion's pot took that over; the knob got its own job back.

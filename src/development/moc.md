@@ -30,9 +30,9 @@ not need to.
 delay sits — was added on 2026-09-12, when the desk's FX-send knob stopped
 driving the 3D blend and got its own job back.
 
-**The strip listens as well as speaks**, since the same day. A³ Core relays
-what REAPER reports for gain, the three bands and volume, and the strip adopts
-it — through `MixerState::setChannelFromPeer`, which sets a value *without*
+**The whole mixer listens as well as speaks**, since the same day. A³ Core
+relays what REAPER reports — the channel strip, the master section, the shared
+filter — and the pages adopt it — through `MixerState::setChannelFromPeer`, which sets a value *without*
 sending it. That distinction is the whole provision: set-and-send on the way
 back would be Core reports, Motion sets, Motion sends, Core reports, which is
 the echo loop rebuilt from this side where Core's own suppression cannot reach
@@ -41,6 +41,17 @@ it.
 Before that the strip came up at its own defaults and stayed there — GAIN and
 VOL reading zero on a rig that was making sound, for the three days between
 the strip existing and anybody looking at it next to the desk.
+
+Three tables, three ears: `onMixerChannelValue`, `onMasterValue`,
+`onFilterValue`, each carrying a slot that indexes the matching table in
+`OscAddresses`. The master and filter tables are walked **after** the channel
+ones, because `/master/volume` and `/channel/0/volume` are one word apart and
+crossing them would put the room's level on a channel fader with neither
+number looking wrong.
+
+`/fx/mode` arrives as a number, 1 for high pass — the spelling this device
+already sends on that address. The word the desk's LED reads travels
+`/fx/led` and never reaches this handler.
 
 ### Rest positions
 
