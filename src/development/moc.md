@@ -61,6 +61,14 @@ Everything else on the strip returns an empty optional and a double tap does
 nothing — a gain that snaps to a default in the middle of a set is a channel
 that jumps in the room.
 
+**The same table decides where a control starts.** Where it belongs when
+nothing has said otherwise is one question, and MixerState's constructor asks
+`mixerControlRestPosition` rather than keeping a second opinion — which it did
+until 2026-09-12, with SEND coming up half open while its rest position said
+shut. Gain and volume are the deliberate exception in the other direction:
+they start at zero and have no rest position, because zero is the right place
+for them to begin and the wrong place to sit two fingertips from all evening.
+
 The channel-value strip on the right has its own table
 (`channelValueRestPosition`): `3d` and `freq` rest at twelve o'clock, `Q`
 rests **shut**. That last one was decided twice — it was moved to twelve

@@ -300,7 +300,7 @@ A double tap puts a control back on its **rest position**, where it has one:
 
 | Control | Where | Rests at | Why |
 | :--- | :--- | :--- | :--- |
-| SEND | MIX page | 0 | An FX send you cannot get rid of in one gesture is an FX send you will not reach for |
+| SEND | MIX page | 0 | An FX send you cannot get rid of in one gesture is an FX send you will not reach for. It also **starts** there: nothing relays it back, so what the knob shows is all there is, and a knob showing half while meaning nothing is worse than one showing nothing. |
 | 3d, freq | channel-value strip | 0.5 | Twelve o'clock — the middle of a 270° sweep, and one place to reach for rather than two |
 | Q | channel-value strip | 0 | A filter that still resonates after being put back has not been put back. The Airwindows Isolator3 at the far end rests its own Q at zero too. |
 

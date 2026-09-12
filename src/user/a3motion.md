@@ -63,8 +63,10 @@ follows the beat sits. Below them the **PFL** and **FX** buttons. A second
 page holds the master, booth and headphone levels and the one filter shared by
 all four channels.
 
-**Double tap takes SEND back to zero.** It is the one control on the page you
-may want to get rid of in a single gesture, mid-transition, without looking.
+**SEND comes up shut, and a double tap takes it back there.** It is the one
+control on the page you may want to get rid of in a single gesture,
+mid-transition, without looking — and the one whose starting position can be
+right rather than guessed.
 Nothing else on the MIX page responds to a double tap: a gain that snaps to a
 default in the middle of a set is a channel that jumps in the room.
 
