@@ -112,11 +112,24 @@ against the old behaviour has to drop its own inversion as well.
 | /beat | - | int (beat), int (bar), float (bpm) | [1-4], [-], [-] | The beat-analyzer's clock. Only the tempo is used here, and only to drive the delay on the FX bus.
 
 ```{note}
-`/channel/[0-3]/reverb`, `/channel/[0-3]/width` and `/channel/[0-3]/order`
-were listed here for years and **have no handler in `a3-core.py`**. A value
-sent to one of them is counted as unrecognised and dropped. They are left out
-of the table above rather than described as working, because a reference that
-lists an address nobody answers costs an evening to disprove.
+**Three addresses were listed here for years and have no handler in
+`a3-core.py`:** `/channel/[0-3]/reverb`, `/channel/[0-3]/width` and
+`/channel/[0-3]/order`. A value sent to one of them is counted as
+unrecognised and dropped. They are left out of the table above rather than
+described as working, because a reference that lists an address nobody
+answers costs an evening to disprove.
+
+**And three go the other way — sent, never documented, never answered:**
+
+| Address | Sent by | What happens |
+| :--- | :--- | :--- |
+| `/channel/[0-3]/enc` | the A³ Mixer's rotary encoder (`a3-mixer.py`) | nothing; Core has no branch for it |
+| `/channel/[0-3]/encbtn` | the same encoder's push switch | nothing |
+| `/tap` | the A³ Mixer's tap key | nothing — Core's `dispatcher.map("/tap", …)` is commented out, and so is the `rtmidi` import its handler needs. A³ Motion's `/tap` is a different wire, goes to the beat-analyzer, and is answered |
+
+Found on 2026-09-12 by holding this page against the generated register, which
+is what that register is for. Tracked in
+`issues/a3-mixer-sendet-drei-adressen-die-niemand-beantwortet.md`.
 ```
 
 ### The two spellings of a button
