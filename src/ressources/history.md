@@ -11,7 +11,7 @@ they look like. In order:
 - **A³ Core got a window.** `http://<core>:9080`, one row per OSC address,
   showing what has actually gone over the wire. OSC over UDP cannot report
   that nobody was listening; this is how that stops costing evenings.
-- **The window became a register.** A generated catalogue of all 519
+- **The window became a register.** A generated catalogue of all 520
   addresses the system can speak, read out of the six sources that define
   them and held against the traffic — so a dead wire can be seen rather than
   deduced.

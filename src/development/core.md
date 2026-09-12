@@ -101,7 +101,7 @@ happen to be in its bank window.
 So the other half: `tools/osc_register.py` reads the six sources that define
 addresses — Core's `layout.json`, `a3-motion-ui`'s `OscAddresses.hh`,
 `a3-mixer.py`, the `a3-core.ReaperOSC` surface, `a3-core.py` itself and the
-beat-analyzer — and writes `share/a3-core/osc-register.json`: 519 entries,
+beat-analyzer — and writes `share/a3-core/osc-register.json`: 520 entries,
 each with its device, direction, and the file and line it came from. A test
 regenerates it and compares, so it cannot drift unnoticed; run somewhere the
 other repositories are missing, that test **skips and says so** rather than

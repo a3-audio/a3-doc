@@ -334,7 +334,7 @@ them —
 | `a3-core.py` | the addresses Core builds itself, `/MultiEncoder/*` included |
 | `beat-analyzer` | `/beat`, `/tap`, `/clockmode`, `/vu/*` |
 
-— 519 entries, each with the device that speaks it, the direction, and the
+— 520 entries, each with the device that speaks it, the direction, and the
 file and line it was read from. Core's window holds that catalogue against the
 traffic it has actually seen, so it can say the one thing a message log never
 could: **an address that exists and has never arrived is a dead wire.**
