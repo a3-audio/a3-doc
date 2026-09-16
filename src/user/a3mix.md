@@ -96,7 +96,13 @@ left the desk, and nothing happened at the other end.
 
 ## A³ Mix Specification
 
+Shipping revision, V02:
+
 - PoE, 24 W max
-- Raspberry Pi Pico with Ethernet (W5500-EVB-Pico-PoE) — see
-  `hardware/mainboard/` in the repository
-- A³ Mix PCB V0.3
+- Raspberry Pi 3B and Teensy 4.1
+- A³ Mixer Mainboard PCB V02
+
+**V03 is in development** and replaces that pair with a single Raspberry Pi
+Pico with Ethernet (WIZnet W5500-EVB-Pico), plus USB-C, 45 mm faders and a
+6.3 mm front jack. See
+[Configuration](https://a3-audio.github.io/a3-doc/configuration/mic.html).

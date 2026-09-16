@@ -1,10 +1,17 @@
 # A³ Core Configuration
 
-- Debian with Linux realtime kernel
-- xfce window manager
-## Python script OSC-Router
- - Routes OSC between audioengine and controller
- - `home/aaa/.local/bin/a3-core.py`, started by a `systemd --user` service
+| Part | What it is |
+| :--- | :--- |
+| OS | Debian with a Linux realtime kernel |
+| Window manager | xfce |
+| Audio backend | REAPER |
+| VU metering | SuperCollider |
+| OSC router | `~/.local/bin/a3-core.py`, started by a `systemd --user` service |
+
+## The OSC router
+
+A Python script that routes OSC between the audio engine and the controllers.
+It is the only part of Core that knows which device is which.
 
 ### How it is started
 

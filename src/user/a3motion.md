@@ -378,8 +378,14 @@ a downbeat gives you.
 
 ## Specs
 
+Current revision, V03:
+
 - PoE, 31.5 W max
-- ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) for the panel's buttons, encoders and
-  pots
+- Raspberry Pi 4B running the touchscreen UI
+- ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) for the panel's buttons, encoders,
+  pots and LEDs, over a binary poll-frame protocol on USB serial
 - 7" capacitive multi-touch display
-- A³ Buttonmatrix PCB
+- A³ Motion Buttonmatrix PCB V03, A³ Motion Mainboard PCB V03
+
+Earlier revisions are listed under
+[Configuration](https://a3-audio.github.io/a3-doc/configuration/moc.html).

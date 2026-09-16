@@ -1,18 +1,18 @@
 # A³ Motion Configuration
 
-## V03
-- Raspberry Pi 4B running the touchscreen UI
-- ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) for buttons, encoders, pots and LEDs
-- A³ Motion Buttonmatrix PCB V03
-- A³ Motion Mainboard PCB V03
-
-The panel talks to the UI over a binary poll-frame protocol on USB serial; the
+Two computers in one box: a Pi runs the touchscreen UI, and a microcontroller
+reads the panel. They talk over a binary poll-frame protocol on USB serial; the
 firmware is a PlatformIO/Arduino project in
 [`firmware/`](https://github.com/a3-audio/a3-motion/tree/main/firmware).
 
-## V02
-- RaspbianOS
-- Raspberry pi 4b
-- teensy 4.1
-- A³ Motion Buttonmatrix PCB V02
-- A³ Motion Mainboard PCB V02
+| Part | V03 (current) | V02 |
+| :--- | :--- | :--- |
+| UI computer | Raspberry Pi 4B | Raspberry Pi 4B, RaspbianOS |
+| Panel controller | ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) | Teensy 4.1 |
+| Buttonmatrix PCB | V03 | V02 |
+| Mainboard PCB | V03 | V02 |
+
+The UI itself is [a3-motion-ui](https://github.com/a3-audio/a3-motion-ui), a
+JUCE/C++ application. It builds and runs **standalone**, with the full
+interface and no panel attached — that is the default, not a degraded mode, and
+it is how the interface can be tried without the hardware in the room.
