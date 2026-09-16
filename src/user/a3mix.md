@@ -1,18 +1,35 @@
 # A³ Mixer
 
 - [A³ Mixer Repository](https://github.com/a3-audio/a3-system)
-- Standalone OSC controller
-- Input vu meter per channel
-- 8 Output vu meters
-- Tape-in section for multichannel or stereo to direct (discrete, decoder, stereomap) mixbus <- wip
+- Standalone OSC controller, four channels
+- Input VU meter per channel, eight output VU meters
+
+A³ Mixer is a DJ mixer that makes no sound: every control sends OSC to A³
+Core, and Core does the audio. That is why the same values appear on A³
+Motion's MIX page and move when you turn them here — there is one state and
+every device is told all of it.
 
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
+The numbers below refer to that picture.
 
-## [0] FX SEND
-- Sets how much of this channel reaches the FX bus, where the delay that
-  follows the beat sits
-- [SEND]: -inf dB to 0 dB
+## The channel strip
+
+Four identical strips, top to bottom in the order a signal passes through
+them.
+
+| № | Control | What it does | Range |
+| :--- | :--- | :--- | :--- |
+| 0 | **FX SEND** | how much of this channel reaches the FX bus, where the delay that follows the beat sits | −inf … 0 dB |
+| 1 | **TRIM** | the level of the signal coming in | −inf … 0 dB |
+| 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
+| 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
+| 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
+| 5 | **INPUT VU** | the level *before* the fader |  |
+| 6 | **CUE** | sends this channel to the headphones |  |
+| 7 | **FADER** | the level going out | −inf … 0 dB |
+| 8 | **FX** | switches this channel's VCF filter on. Lit while it is on |  |
+| 9 | **3D** | out of service — see below |  |
 
 ```{note}
 Until 2026-09-12 this knob did something else entirely: it drove the **3D
@@ -23,37 +40,6 @@ took that job over, and the knob got its own name back.
 The price, named: the desk has no 3D control any more. The 3D blend is A³
 Motion's pot, and only that.
 ```
-
-## [1] TRIM CONTROL
-- Adjust the level of audio signals input in each channel
-- [TRIM]: -inf dB to 0 dB
-
-## [2] EQ HIGH
-- [HIGH]: -inf dB to 0 dB (24 kHz)
-
-## [3] EQ MID
-- [MID]: -inf dB to 0 dB (1 kHz)
-
-## [4] EQ LOW
-- [LOW]: -inf dB to 0 dB (20 Hz)
-
-## [5] INPUT VU METER
-- Displays the sound level of the respective channels before passing through the channel faders
-
-## [6] CUE BUTTON
-- Presses the [CUE] button(s) for the channel(s) you want to monitor
-
-## [7] CHANNEL FADER
-- Adjust the level of audio signals output in each channel
-- [FADER]: -inf dB to o dB
-
-## [8] FILTER FX SWITCH
-- Pressing the [FX] switch turns on the VCF filter for this channel
-- The indicator lights if filter FX is on.
-
-## [9]  3D SWITCH
-- Pressing the [3D] switch enables 3d encoding for this channel
-- The indicator lights if 3D is on
 
 ```{warning}
 **Out of service since 2026-09-12.** The switch is still on the panel and does
@@ -66,63 +52,50 @@ longer understands `/channel/[0-3]/4d` either.
 than a switch. What this key should do instead has not been decided.
 ```
 
-## [10] FILTER FREQUENCY
-- Sets the cut off frequency of the VCF filter
+## The filter section
 
-## [11] FILTER RESONANCE CONTROL
-- Change the "Q" or sharpness of the VCF filter
+One filter, shared by all four channels; the **FX** key on a strip decides
+which channels go through it.
 
-## [12] FILTER TYPE SELECT HI-PASS
-- [HPF]: Allows signals above the cutoff frequency to pass
+| № | Control | What it does |
+| :--- | :--- | :--- |
+| 10 | **FREQUENCY** | the cutoff |
+| 11 | **RESONANCE** | the Q, or sharpness, at the cutoff |
+| 12 | **HPF** | high-pass: lets what is above the cutoff through |
+| 13 | **LPF** | low-pass: lets what is below the cutoff through |
 
-## [13] FILTER TYPE SELECT LOW-PASS
-- [LPF]: Allows signals below the cutoff frequency to pass
+## Tempo
 
-## [13b] TAP
-- Taps the tempo, the same as A³ Motion's TAP key
-- Goes straight to the beat-analyzer, not through A³ Core — a tap is timing,
-  and timing does not want a relay in the middle
-- Until 2026-09-12 it went to A³ Core, which had never subscribed to it. The
-  key worked, the message left the desk, and nothing happened at the other
-  end
+| № | Control | What it does |
+| :--- | :--- | :--- |
+| 13b | **TAP** | taps the tempo, the same as A³ Motion's TAP key |
 
-## [14] HEADPHONE LEVEL
-- Sets the level of the headphone output
+It goes **straight to the beat-analyzer**, not through A³ Core: a tap is
+timing, and timing does not want a relay in the middle. Until 2026-09-12 it
+went to Core, which had never subscribed to it — the key worked, the message
+left the desk, and nothing happened at the other end.
 
-## [15] CUE/MIX CONTROL
-- Turn left (CUE) to hear the activated channel Cue.
-- If no channel Cue is activated the Mix output will be heared WIP
-- Turn right (Mix) to hear the Mix output
-- In the centre position the Cue signal and the main mix are summed together
+## Monitoring and outputs
 
-## [16] BOOTH OUTPUT LEVEL
-- Sets the audio signal level for predefined monitor outputs
-- [BOOTH]: -inf dB to 0 dB
+| № | Control | What it does | Range |
+| :--- | :--- | :--- | :--- |
+| 14 | **HEADPHONE LEVEL** | the headphone output |  |
+| 15 | **CUE/MIX** | left is cue only, right is the main mix, the centre sums both |  |
+| 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
+| 17 | **MASTER** | the public address outputs | −inf … 0 dB |
+| 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
+| 19 | **OUTPUT VU** | the level of the eight output channels |  |
 
-## [17] MASTER OUTPUT LEVEL
-- Sets the audio signal level for predefined public address outputs
-- [MASTER]: -inf dB to 0 dB
+## Connectors
 
-## [18] DISPLAY <- wip
-- shows bpm for master and per input channel
-
-## [19] OUTPUT VU METER
-- Displays the audio level output from 8 predefined channels
-
-## Front
-### PHONES OUTPUT TERMINAL
-- Connect headphones here
-- 6.3mm stereo phone plug
-
-## Back
-### PHONES INPUT TERMINAL
-- Connect predefined Cue outputs here
--  2x female XLR Sockets
-
-### ETHERNET SOCKET
-- Connect ethernet cable to PoE switch here
+| Where | Socket | For |
+| :--- | :--- | :--- |
+| Front | **PHONES OUT** | headphones, 6.3 mm stereo jack |
+| Back | **PHONES IN** | the cue outputs coming back, 2× female XLR |
+| Back | **ETHERNET** | the PoE switch — power and every message, on one cable |
 
 ## A³ Mix Specification
+
 - PoE, 24 W max
 - Raspberry Pi Pico with Ethernet (W5500-EVB-Pico-PoE) — see
   `hardware/mainboard/` in the repository

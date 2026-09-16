@@ -1,23 +1,44 @@
 # A³ Core
 
 - [A³ Core Repository](https://github.com/a3-audio/a3-core)
-- A³ Core is a free configurable audio server
-- Compatible to linux audiohardware (needed)
-- VNC remote desktop control
+- A freely configurable audio server
+- Runs on Linux audio hardware; VNC remote desktop control
+
+A³ Core is where the sound actually is. It takes the analog signals in,
+computes the 3D/ambisonics field, and sends it back out — and it does all of
+that under remote control: **it has no interface of its own.** A³ Mixer and A³
+Motion tell it what to do over OSC, and so can anything else that speaks the
+same addresses.
+
+It also runs the **Beat-Analyzer**, which produces the tempo the whole system
+follows and the VU meters the other two devices show.
 
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
-## [1] POWER BUTTON
-- Push to turn the device on
+The numbers below refer to that picture.
 
-## [2] RESET BUTTON
-- Push to reboot server (just in case)
+## The front panel
 
-## [3] POWER LED
-- Indicates power status
+Four things, and none of them is a control for the audio — that is all
+remote.
 
-## [4] Fan and Filter
-- Clean it regular
+| № | Element | What it does |
+| :--- | :--- | :--- |
+| 1 | **POWER** | switches the device on |
+| 2 | **RESET** | reboots the server, just in case |
+| 3 | **POWER LED** | says whether it is on |
+| 4 | **Fan and filter** | clean it regularly |
+
+## Clock sources
+
+The tempo the system runs on can come from three places, chosen on A³
+Motion's clock key:
+
+| Mode | Where the tempo comes from |
+| :--- | :--- |
+| **a3motion** | relayed from A³ Motion's tap key |
+| **intern** | the Beat-Analyzer's own FFT/onset detection |
+| **pioneer** | the master beat from Pioneer Pro DJ Link |
 
 ## The window
 
