@@ -13,7 +13,7 @@ set is which clip sits in which slot.
 Playback follows a beat clock, so a figure that takes four bars keeps taking
 four bars when the tempo changes.
 
-![A³ Motion numbered](pics_user/a3-motion-icon_light_numbered.png)
+![A³ Motion](pics_user/a3-motion-icon_light.png)
 
 ## The panel
 
