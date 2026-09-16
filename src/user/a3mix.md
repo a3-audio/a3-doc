@@ -123,8 +123,7 @@ than a switch. What this key should do instead has not been decided.
 - Connect ethernet cable to PoE switch here
 
 ## A³ Mix Specification
-- PoE to USB 5V Adapter
-- PoE cost 24W max
-- Raspberry Pi 3 Model B
-- Teensy 4.1
-- A³ Mix PCB V0.2
+- PoE, 24 W max
+- Raspberry Pi Pico with Ethernet (W5500-EVB-Pico-PoE) — see
+  `hardware/mainboard/` in the repository
+- A³ Mix PCB V0.3
