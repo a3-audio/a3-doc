@@ -48,10 +48,22 @@ middle — it fills as the bar runs — and the MIX key on the right. It carried
 nine level meters for two days and they made the one band that is always in
 view the busiest thing on the screen.
 
-The middle band is the room seen from above. Each channel is a coloured blob;
-drag one and its sound moves with it. The four dark shapes at the corners are
-the speakers, lit by what they are actually playing, and the field around the
-sphere shows where the energy in the room is coming from.
+The middle band is the room seen from straight above, with you — the listener —
+in the middle at ear height. Each channel is a coloured blob sitting where its
+sound is; it swells and throws sparks with that channel's input level, and
+dragging it moves the sound. A playing clip draws its trajectory as a braid of
+three strands of plasma with the blob travelling inside it. What runs behind
+the sphere is drawn darker than what runs in front of it.
+
+At the four corners stand the speakers, each a tower of three tops over four
+subs, on a dark floor below your feet. Lightning comes out of the tops and
+flickers across the floor towards the middle: thicker, and more of it, on the
+speaker that is playing loudest, and none at all when the room is silent. The
+subs throw ball lightning with the bass. The field around the sphere shows
+where the energy in the room is coming from.
+
+The small ball in the top right corner is the view. Drag on it to tilt and
+turn the room; a double tap on it takes the view back to straight above.
 
 The four coloured cells at the left of the tab row are the channels. Each
 carries a **signal dot** in its top right corner: the channel's input level,
