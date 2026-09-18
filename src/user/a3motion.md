@@ -208,8 +208,20 @@ that on its own colour:
 | Mode | What it destroys |
 | :--- | :--- |
 | **Touch** | mends the corner you touch and leaves the rest |
-| **Latch** | holds on after the finger goes |
+| **Latch** | holds on after the finger goes: the rest of that pass is written with the position your finger left, and the figure that was there is gone |
 | **Write** | clears the pass whether you touched it or not |
+
+**Recording runs round and round inside the take's length**, so what a pass
+writes, it writes over the pass before it. That is what makes mending a corner
+possible in Touch — and it is why **Latch is not the mode for drawing a
+figure**: lift your finger half way through and the second half of the take
+becomes the one place you left it. The hold stops at the end of that pass and
+writes nothing in the next one, so it cannot eat the whole take, but the pass
+it was in is spent. Draw in **Touch** and the take keeps what you drew.
+
+A take is always the **last pass you finished**: stop half way through one and
+that half is dropped rather than joined to what stood there before, which
+would show as a jump mid-figure.
 
 ## PADS
 
