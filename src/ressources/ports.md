@@ -21,51 +21,43 @@ Raspberry Pi that becomes the Pi's address; nothing else changes.
 
 ## The list
 
-One row per service: where it sends, and where its return arrives. A send is
-an address and port on the far end; a return is a port this service holds
-open.
+Per service: where it sends, and where its return arrives. A send is an
+address and port on the far end; a return is a port this service holds open.
 
-```{list-table}
-:header-rows: 1
-:widths: 14 46 40
+```text
+A³ MIXER
+  send    192.168.8.10:9000   Core           gain, EQ, volume, PFL, FX, 3D toggle
+          192.168.8.10:7775   beat-analyzer  /tap
+  return  7772                               VU and lamp state
 
-* - Service
-  - Send
-  - Return
+A³ MOTION
+  send    127.0.0.1:9000      Core           positions, clip settings, /state/recall
+          127.0.0.1:7775      beat-analyzer  /tap, /beat, /clockmode
+  return  7771                               relayed state, recall answer, /beat
+          7772                               /vu/0..11
+          7777                               /EnergyVisualizer/RMS
 
-* - **A³ Mixer**
-  - - `192.168.8.10:9000` — Core: gain, EQ, volume, PFL, FX, 3D toggle
-    - `192.168.8.10:7775` — beat-analyzer: `/tap`
-  - - `7772` — VU and lamp state, from Core and the analyzer
+A³ CORE
+  send    127.0.0.1:9001      REAPER         everything that becomes audio
+          127.0.0.1:7771      A³ Motion      relayed state, recall answer
+          192.168.8.11:7772   A³ Mixer       VU and lamp state
+  return  9000                               commands from Mixer, Motion, analyzer
+          9002                               REAPER feedback
 
-* - **A³ Motion**
-  - - `127.0.0.1:9000` — Core: positions, clip settings, `/state/recall`
-    - `127.0.0.1:7775` — beat-analyzer: `/tap`, `/beat`, `/clockmode`
-  - - `7771` — relayed channel state, the recall answer, `/beat`
-    - `7772` — `/vu/0..11`
-    - `7777` — `/EnergyVisualizer/RMS`
+REAPER
+  send    127.0.0.1:9002      A³ Core        what a fader or a plugin did
+          127.0.0.1:7777      A³ Motion      /EnergyVisualizer/RMS   (IEM plugin)
+  return  9001                               from Core
+          1337-1340                          its own OSC devices
 
-* - **A³ Core**
-  - - `127.0.0.1:9001` — REAPER: everything that becomes audio
-    - `127.0.0.1:7771` — A³ Motion: relayed state, the recall answer
-    - `192.168.8.11:7772` — A³ Mixer: VU and lamp state
-  - - `9000` — commands from Mixer, Motion, analyzer
-    - `9002` — REAPER's feedback
-
-* - **REAPER**
-  - - `127.0.0.1:9002` — Core: what a fader or plugin actually did
-    - `127.0.0.1:7777` — A³ Motion: `/EnergyVisualizer/RMS`, from the IEM plugin
-  - - `9001` — from Core
-    - `1337–1340` — its own OSC devices
-
-* - **beat-analyzer**
-  - - `127.0.0.1:7771` — A³ Motion: `/beat`
-    - `127.0.0.1:7772` — A³ Motion: `/vu/0..11`
-    - `192.168.8.11:7772` — A³ Mixer: `/vu/0..11`
-    - `192.168.43.96:9000` — radla: `/beat`
-    - `192.168.43.96:9001` — radla: `/vu/0..11`
-  - - `7775` — `/beat`, `/tap`, `/clockmode`
-    - `50000–50002` — Pioneer Pro DJ Link
+BEAT-ANALYZER
+  send    127.0.0.1:7771      A³ Motion      /beat
+          127.0.0.1:7772      A³ Motion      /vu/0..11
+          192.168.8.11:7772   A³ Mixer       /vu/0..11
+          192.168.43.96:9000  radla          /beat
+          192.168.43.96:9001  radla          /vu/0..11
+  return  7775                               /beat, /tap, /clockmode
+          50000-50002                        Pioneer Pro DJ Link
 ```
 
 Three of these are worth reading twice.
