@@ -1,4 +1,8 @@
 # OSC communication
+
+Every port on every device, in one table, is in [Ports and
+endpoints](ports.md). This page is about what the messages *mean*.
+
 ## A³ Core
 
 A³ Core listens on **three** UDP ports, and which one a message arrives at
