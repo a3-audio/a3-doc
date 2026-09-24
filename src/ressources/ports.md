@@ -21,17 +21,52 @@ Raspberry Pi that becomes the Pi's address; nothing else changes.
 
 ## The list
 
-One row per service: where it sends, and where its return arrives. Read a
-send as *address:port on the far end*, a return as *the port this service
-holds open*.
+One row per service: where it sends, and where its return arrives. A send is
+an address and port on the far end; a return is a port this service holds
+open.
 
-| Service | Send | Return |
-| :--- | :--- | :--- |
-| **A³ Mixer** | Core `192.168.8.10:9000` — gain, EQ, volume, PFL, FX, 3D toggle<br>beat-analyzer `192.168.8.10:7775` — `/tap` | `:7772` — VU and lamp state, from Core and the analyzer |
-| **A³ Motion** | Core `127.0.0.1:9000` — positions, clip settings, `/state/recall`<br>beat-analyzer `127.0.0.1:7775` — `/tap`, `/beat`, `/clockmode` | `:7771` — relayed channel state, the recall answer, `/beat`<br>`:7772` — `/vu/0..11`<br>`:7777` — `/EnergyVisualizer/RMS` |
-| **A³ Core** | REAPER `127.0.0.1:9001` — everything that becomes audio<br>A³ Motion `127.0.0.1:7771` — relayed state, recall answer<br>A³ Mixer `192.168.8.11:7772` — VU and lamp state | `:9000` — commands from Mixer, Motion, analyzer<br>`:9002` — REAPER's feedback |
-| **REAPER** | Core `127.0.0.1:9002` — what a fader or plugin actually did<br>A³ Motion `127.0.0.1:7777` — `/EnergyVisualizer/RMS`, from the IEM plugin | `:9001` — from Core<br>`:1337–1340` — its own OSC devices |
-| **beat-analyzer** | A³ Motion `127.0.0.1:7771` — `/beat`<br>A³ Motion `127.0.0.1:7772` — `/vu/0..11`<br>A³ Mixer `192.168.8.11:7772` — `/vu/0..11`<br>`radla` `192.168.43.96:9000` — `/beat`<br>`radla` `192.168.43.96:9001` — `/vu/0..11` | `:7775` — `/beat`, `/tap`, `/clockmode`<br>`:50000–50002` — Pioneer Pro DJ Link |
+```{list-table}
+:header-rows: 1
+:widths: 14 46 40
+
+* - Service
+  - Send
+  - Return
+
+* - **A³ Mixer**
+  - - `192.168.8.10:9000` — Core: gain, EQ, volume, PFL, FX, 3D toggle
+    - `192.168.8.10:7775` — beat-analyzer: `/tap`
+  - - `7772` — VU and lamp state, from Core and the analyzer
+
+* - **A³ Motion**
+  - - `127.0.0.1:9000` — Core: positions, clip settings, `/state/recall`
+    - `127.0.0.1:7775` — beat-analyzer: `/tap`, `/beat`, `/clockmode`
+  - - `7771` — relayed channel state, the recall answer, `/beat`
+    - `7772` — `/vu/0..11`
+    - `7777` — `/EnergyVisualizer/RMS`
+
+* - **A³ Core**
+  - - `127.0.0.1:9001` — REAPER: everything that becomes audio
+    - `127.0.0.1:7771` — A³ Motion: relayed state, the recall answer
+    - `192.168.8.11:7772` — A³ Mixer: VU and lamp state
+  - - `9000` — commands from Mixer, Motion, analyzer
+    - `9002` — REAPER's feedback
+
+* - **REAPER**
+  - - `127.0.0.1:9002` — Core: what a fader or plugin actually did
+    - `127.0.0.1:7777` — A³ Motion: `/EnergyVisualizer/RMS`, from the IEM plugin
+  - - `9001` — from Core
+    - `1337–1340` — its own OSC devices
+
+* - **beat-analyzer**
+  - - `127.0.0.1:7771` — A³ Motion: `/beat`
+    - `127.0.0.1:7772` — A³ Motion: `/vu/0..11`
+    - `192.168.8.11:7772` — A³ Mixer: `/vu/0..11`
+    - `192.168.43.96:9000` — radla: `/beat`
+    - `192.168.43.96:9001` — radla: `/vu/0..11`
+  - - `7775` — `/beat`, `/tap`, `/clockmode`
+    - `50000–50002` — Pioneer Pro DJ Link
+```
 
 Three of these are worth reading twice.
 
@@ -45,7 +80,7 @@ the same port as commands would have Core answering its own reports — a loop
 on a rig that is making sound.
 
 **`radla` is off this subnet.** `192.168.43.96`, reached through the gateway
-at `192.168.8.1`, and it answers. A live target, not a leftover — worth saying
+at `192.168.8.1`, and it answers — a live target, not a leftover. Worth saying
 because the two other `192.168.43.x` addresses that used to sit in the
 analyzer's config (`.55` for the Mixer, `.54` for Motion) are dead and were
 wrong. What `radla` does with what it receives is not documented here.
