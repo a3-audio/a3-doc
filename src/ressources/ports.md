@@ -19,7 +19,33 @@ A³ Motion's UI currently runs **on the Core machine**, which is why Core and
 the beat-analyzer address it as `127.0.0.1`. On a rig where it runs on its own
 Raspberry Pi that becomes the Pi's address; nothing else changes.
 
-## At a glance
+## Every OSC path
+
+One row per direction of travel. This is the whole of it — if a message moves
+between two processes on this system, it is here.
+
+| # | From | To | Port | Carrying |
+| ---: | :--- | :--- | ---: | :--- |
+| 1 | A³ Mixer | A³ Core | 9000 | gain, EQ, volume, PFL, FX, the 3D toggle |
+| 2 | A³ Mixer | beat-analyzer | 7775 | `/tap` |
+| 3 | A³ Motion | A³ Core | 9000 | positions, clip settings, `/state/recall` |
+| 4 | A³ Motion | beat-analyzer | 7775 | `/tap`, `/beat`, `/clockmode` |
+| 5 | A³ Core | REAPER | 9001 | everything that becomes audio |
+| 6 | A³ Core | A³ Motion | 7771 | relayed channel state, the recall answer |
+| 7 | A³ Core | A³ Mixer | 7772 | VU and lamp state |
+| 8 | REAPER | A³ Core | 9002 | what a fader or a plugin actually did |
+| 9 | REAPER (IEM EnergyVisualizer) | A³ Motion | 7777 | `/EnergyVisualizer/RMS`, 426 floats a frame |
+| 10 | beat-analyzer | A³ Motion | 7771 | `/beat` |
+| 11 | beat-analyzer | A³ Motion | 7772 | `/vu/0..11` |
+| 12 | beat-analyzer | A³ Mixer | 7772 | `/vu/0..11` |
+| 13 | Pioneer Pro DJ Link | beat-analyzer | 50000–50002 | keep-alive, beat packets, status |
+
+Row 9 is the one that surprises people: the energy sphere does **not** come
+through Core. It is a VST3 plugin inside the REAPER project sending straight
+at A³ Motion, which is why it survives things that stop Core and why Core's
+register marks it `aside`.
+
+## Ports, by listener
 
 | Port | Listener |
 | ---: | :--- |
