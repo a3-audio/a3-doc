@@ -1,4 +1,4 @@
-# A³ Audio
+# A³ Documentation
 Interact live with 3D Audio
 
 ## System
