@@ -39,6 +39,15 @@ between two processes on this system, it is here.
 | 11 | beat-analyzer | A³ Motion | 7772 | `/vu/0..11` |
 | 12 | beat-analyzer | A³ Mixer | 7772 | `/vu/0..11` |
 | 13 | Pioneer Pro DJ Link | beat-analyzer | 50000–50002 | keep-alive, beat packets, status |
+| 14 | beat-analyzer | `radla` — `192.168.43.96` | 9000 | `/beat` |
+| 15 | beat-analyzer | `radla` — `192.168.43.96` | 9001 | `/vu/0..11` |
+
+Rows 14 and 15 leave the rig's own subnet. `radla` is a peer on
+`192.168.43.0/24`, reached through the gateway at `192.168.8.1`, and it
+answers — it is a live target, not a leftover, which is worth saying because
+the two other `192.168.43.x` addresses that used to sit in the analyzer's
+config (`.55` for the Mixer, `.54` for Motion) are dead and were wrong. What
+`radla` does with `/beat` and `/vu` is not documented here.
 
 Row 9 is the one that surprises people: the energy sphere does **not** come
 through Core. It is a VST3 plugin inside the REAPER project sending straight
