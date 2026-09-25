@@ -43,6 +43,10 @@ On `main` since `v03.0`, not tagged yet.
 **Controls**
 
 - The transport shows what it is doing, and blinks while it waits for the beat.
+- Play/Pause on a running clip stops it on the next downbeat, and at once with Shift, the
+  way a start works. It used to wait for the end of the lap, which with a long playback
+  length could be half a minute and felt like a key that did nothing. Stop is still the
+  way out that does not wait.
 - Pads: a scene column, feedback on press and on a running action, marks readable on every
   channel colour, and the settings pad opens the clip.
 - Menu values change in a mask, and nothing else edits while it is open.
