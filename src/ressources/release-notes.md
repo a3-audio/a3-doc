@@ -50,6 +50,9 @@ On `main` since `v03.0`, not tagged yet.
 - Pads: a scene column, feedback on press and on a running action, marks readable on every
   channel colour, and the settings pad opens the clip.
 - Menu values change in a mask, and nothing else edits while it is open.
+- The main menu is see-through again: the sphere shows through its panel, as it did before
+  it turned solid. It has its own skin value for that (`menuPanelOpacity`, under Panels);
+  the skin editor and the colour picker stay solid.
 - The MIX page: the filter and master pots have a way back to their centre.
 - The colour picker is JUCE's own colour field.
 - A CLEAN key switches to a clean skin and back.
