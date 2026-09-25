@@ -19,6 +19,31 @@ A³ Motion's UI currently runs **on the Core machine**, which is why Core and
 the beat-analyzer address it as `127.0.0.1`. On a rig where it runs on its own
 Raspberry Pi that becomes the Pi's address; nothing else changes.
 
+## Cabling
+
+The router has one free port, so the A³ Mixer hangs on the Core machine's
+**second socket**, and the Core **bridges** its two sockets into one segment
+(since 2026-09-25):
+
+```text
+router 192.168.8.1 ──── eno1 ┐
+                             ├─ br0  A³ Core 192.168.8.10
+A³ Mixer 192.168.8.11 ─ enp5s0 ┘
+```
+
+- The address lives on `br0`, not on either socket. `networkctl` shows `br0`
+  as *routable* and both sockets as *enslaved*.
+- Spanning tree is on, so the bridge forwards about **thirty seconds** after
+  boot, not at once.
+- **The Core sits in the path.** With the Core machine off, the A³ Mixer has
+  no network.
+- The a3-core package writes this: its install asks for the second socket
+  (`a3-core/bridge-with`, empty for no bridge) and for the address. See the
+  a3-core README.
+
+Measured on the rig after a cold boot (2026-09-25): the mixer answers in
+0.7 ms, the router in 0.5 ms.
+
 ## The list
 
 Per service: where it sends, and where its return arrives. A send is an
