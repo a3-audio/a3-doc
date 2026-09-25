@@ -21,6 +21,14 @@ On `main` since `v03.0`, not tagged yet.
   changes.
 - In developer mode, Save may write over the factory clips.
 - New recordings no longer come back with a second clip (`… 2`) after a restart.
+- **A take waits for SAVE or DISCARD.** It is no longer written to disk the moment it ends:
+  it keeps playing, marked with a red dot on its pad, while REC reads SAVE (a tick) and ACT
+  reads DISCARD (a cross, tapped twice). Anything that replaces it -- a new take, a shape, a
+  set, a restart -- drops it. A set only ever names what is on disk.
+- Fast strokes no longer come back from the file in pieces: a step counts as a jump only
+  when it is far larger than the movement around it.
+- The touch screen no longer freezes for seconds after a long take: a take's path data is
+  read in one pass.
 
 **Sets and files**
 
@@ -29,6 +37,8 @@ On `main` since `v03.0`, not tagged yet.
 - A set carries the four speed keys; loading it brings them back. Sets written before this
   leave the keys alone. The mixer is deliberately not part of a set.
 - The browser keeps your place, keeps the row you chose, and a set is loaded with a key.
+- A clip chosen for a slot -- in the clip field or from FILES -- is saved in the set at once,
+  not only the next time something else saved it.
 
 **Controls**
 
@@ -49,6 +59,9 @@ On `main` since `v03.0`, not tagged yet.
 **The sphere**
 
 - Rendered twice as fine and drawn back down, so edges no longer step.
+- No lag while recording: the line of a take being played in is drawn from what the hand
+  moved to, the take underneath is drawn once, and the listener figure is worked out only
+  when the view turns.
 - The trajectory, the braid and the speaker bolts are drawn in the shader. A speaker's level
   is how thick its bolts run, and a silent room throws none.
 - The far side of a trajectory goes behind the sphere again, and the floor no longer cuts
@@ -76,6 +89,11 @@ On `main` since `v03.0`, not tagged yet.
 - New tools: `--install`, and a report of what the machine runs that the repository does
   not carry.
 - The macOS tree and the MIDI clock are gone.
+- The package installs on the network the ports page states (`192.168.8.10`), and takes the
+  interface away from the DHCP setup that raced it. Core sends to the Mixer and to Motion at
+  their documented addresses by default.
+- The dummy screen for a Core without a monitor is asked for during the install (default
+  no) instead of being installed on every machine, where it left a monitor black.
 
 ### A³ Mixer (`a3-mixer`)
 
