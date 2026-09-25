@@ -84,8 +84,19 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Core (`a3-core`)
 
-- **Total recall:** Core writes the evening down and plays it back on the next start, and
-  starts before REAPER so it hears REAPER announce itself.
+- **Total recall:** Core writes the evening down and plays it back on the next start. At
+  start it asks REAPER to report everything, so the order the services start in no longer
+  matters, and it plays the evening back only once REAPER has finished reporting —
+  earlier, REAPER's own report could overwrite it. A value set at the desk or on Motion is
+  written down even while REAPER is silent.
+- The OSC window has a key that asks REAPER to report everything again.
+- **No more lag from Core:** one loop reads each OSC port. It used to start a thread per
+  message, and under load those piled up until the mixer and Motion stopped reaching
+  REAPER. Core also no longer shares its processor core with Motion's screen.
+- REAPER is told only the OSC addresses Core uses, which shortens its report at start from
+  23 to 14 seconds.
+- An update no longer reinstalls REAPER and its plugins under a running REAPER (which
+  crashed it); they are installed only when missing.
 - What one mixer sets, every other screen shows.
 - The OSC window shows data rates per device and overall, and both tables sort by any
   column. Messages that arrive and find no receiver are written down.
