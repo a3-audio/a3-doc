@@ -26,9 +26,9 @@ The router has one free port, so the A³ Mixer hangs on the Core machine's
 (since 2026-09-25):
 
 ```text
-router 192.168.8.1 ──── eno1 ┐
-                             ├─ br0  A³ Core 192.168.8.10
-A³ Mixer 192.168.8.11 ─ enp5s0 ┘
+router 192.168.8.1 ───── eno1   ┐
+                                ├─ br0  A³ Core 192.168.8.10
+A³ Mixer 192.168.8.11 ── enp5s0 ┘
 ```
 
 - The address lives on `br0`, not on either socket. `networkctl` shows `br0`
