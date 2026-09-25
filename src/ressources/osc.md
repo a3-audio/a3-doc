@@ -167,9 +167,11 @@ What comes back, in this order:
 3. **The continuous values** — what REAPER last reported. Core relays these
    rather than holding an opinion of its own.
 
-**A cold Core answers short.** REAPER reports on change and does not know
-Core went away, so right after Core's own restart there is nothing relayed
-yet and the answer is the lamps alone. A value Core has never seen is left
+**A cold Core asks.** REAPER reports on change and does not know Core went
+away, so at its own start Core asks REAPER to report everything (action
+41743 — the same request is a key in Core's window) and plays the evening
+back once REAPER has finished. Until that report arrives, a recall answers
+with less. A value Core has never seen is left
 **out** rather than sent as zero — zero degrees is the front of the room, a
 real position, and answering it would move the sound while claiming to
 report where it already is.
@@ -478,11 +480,11 @@ them —
 | Core's `layout.json` | Core's own templates |
 | `a3-motion-ui/.../OscAddresses.hh` | what A³ Motion speaks and hears |
 | `a3-mixer/software/scripts/a3-mixer.py` | the desk's pot and button tables |
-| `a3-core.ReaperOSC` | everything REAPER understands |
+| `a3-core.ReaperOSC` | what REAPER is told to take and report — exactly the patterns Core uses |
 | `a3-core.py` | the addresses Core builds itself, `/MultiEncoder/*` included |
 | `beat-analyzer` | `/beat`, `/tap`, `/clockmode`, `/vu/*` |
 
-— 520 entries, each with the device that speaks it, the direction, and the
+— 115 entries at the time of writing, each with the device that speaks it, the direction, and the
 file and line it was read from. Core's window holds that catalogue against the
 traffic it has actually seen, so it can say the one thing a message log never
 could: **an address that exists and has never arrived is a dead wire.**
