@@ -94,6 +94,17 @@ On `main` since `v03.0`, not tagged yet.
   their documented addresses by default.
 - The dummy screen for a Core without a monitor is asked for during the install (default
   no) instead of being installed on every machine, where it left a monitor black.
+- **Both network sockets can be bridged.** The install asks which second socket to bridge
+  with the first (pre-filled with the other wired one); with it, both become one segment,
+  `br0`, which carries Core's address, with spanning tree on. Router in one socket, mixer
+  in the other, all on `192.168.8.0/24`. It takes effect at the next boot, and answering
+  with nothing takes the bridge away again. Core then sits between router and mixer: with
+  Core off, the mixer has no network.
+- The install asks for the address, gateway and DNS every time, pre-filled with what is
+  stored. An answer still on the retired `192.168.43.x` network is replaced by the
+  documented default before it is offered.
+- Package updates reach the rigs: the package version is the last tag plus the commits
+  since it (`03.0+71`, say) instead of a fixed `1.0.0` that apt never saw change.
 
 ### A³ Mixer (`a3-mixer`)
 
