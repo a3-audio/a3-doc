@@ -54,6 +54,10 @@ On `main` since `v03.0`, not tagged yet.
   it turned solid. It has its own skin value for that (`menuPanelOpacity`, under Panels);
   the skin editor and the colour picker stay solid.
 - The MIX page: the filter and master pots have a way back to their centre.
+- The CLIP knobs show their blue arcs again: where a modulation is carrying `rot`, `reach`,
+  `sqzX` and `sqzY` right now. They had gone missing when the knobs were rebuilt, and an arc
+  below the knob's setting now runs down from the pointer instead of up from the start of
+  the scale.
 - The colour picker is JUCE's own colour field.
 - A CLEAN key switches to a clean skin and back.
 - Every action script names every parameter it takes, with its range.
