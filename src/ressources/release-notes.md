@@ -144,6 +144,13 @@ On `main` since `v03.0`, not tagged yet.
 ### A³ Motion controller (`a3-motion`)
 
 - The `v03.2` hardware branch is merged into `main`.
+- **The key LEDs stay within what USB can supply.** The 44 LEDs under the keys run on the
+  controller's USB power, and nothing limited them: full white on every key would draw far more
+  than a USB 2.0 port gives, and the result is the controller dropping out, not dim keys. The
+  firmware now dims all keys together, and only when their estimated draw goes over a budget
+  set just above the brightest picture the app shows in normal use — so playing is never
+  dimmed. A³ Motion keeps the same estimate and says in its log if a skin or colour rule would
+  go over it. The firmware has host tests now (`pio test -e native`).
 
 ### Beat analyzer (`beat-analyzer`)
 
