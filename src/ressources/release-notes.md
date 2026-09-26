@@ -73,6 +73,10 @@ On `main` since `v03.0`, not tagged yet.
   is how thick its bolts run, and a silent room throws none.
 - The far side of a trajectory goes behind the sphere again, and the floor no longer cuts
   the blobs in half.
+- **No lag with several clips playing.** The glow, cord and braid of every playing trajectory
+  are painted on the graphics card; they were drawn by the processor every frame, which with
+  four clips running held the picture at about 8 frames a second. Now about 40, and the touch
+  screen answers at once. The picture itself is unchanged.
 
 **Start-up and build**
 
