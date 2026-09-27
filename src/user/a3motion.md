@@ -7,8 +7,9 @@
 A³ Motion records and plays back **movement trajectories**: where each of the
 four channels sits in the room, and how it travels through it. It makes no
 sound of its own — it sends positions to A³ Core over OSC, and Core moves the
-sound. A clip is one figure together with every value it is played with, and a
-set is which clip sits in which slot.
+sound. A clip is one figure together with every value it is played with. Each
+channel holds **one clip** and **six action buttons**, and a set is which clip
+and which six actions each channel has.
 
 Playback follows a beat clock, so a figure that takes four bars keeps taking
 four bars when the tempo changes.
@@ -25,7 +26,7 @@ means something different depending on the page is a knob you have to look at.
 | Upper encoder, per channel | **freq** — that channel's filter frequency |
 | Lower encoder, per channel | **Q** — that channel's filter resonance |
 | Potentiometer, per channel | **3d** — crossfades the channel between its stereo and its multichannel encoder in A³ Core |
-| Pads, four per channel | Play\|Pause, Stop, Action, Settings for that channel's slot |
+| Pads, eight per channel | Play\|Pause and PAGE, then the six action buttons A1–A6 (see PADS below) |
 | Function keys, six | TAP, clock, REC, recmode, MENU, SHIFT |
 | Touchscreen | everything else |
 
@@ -40,7 +41,7 @@ That trade was made knowingly.
 ## [3] DISPLAY
 - This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions
 
-![The A³ Motion display in operation](pics_user/a3-motion-ui-display-v03.png)
+![The A³ Motion display in operation, the set "Peak" playing](pics_user/a3-motion-ui-display-one-clip.png)
 
 The screen has three bands. Along the top sits the status bar, and it is
 deliberately almost empty: the current tempo on the left, the beat grid in the
@@ -81,23 +82,30 @@ channel's colour: its shape, how it is mapped in elevation, how it moves in
 time — speed, direction, what happens at the end, and the fade that closes the
 loop — and its filter. The narrow strip on the right is global rather than
 per-channel and carries the recording mode.
-## The tab row
+## The channel row and the tabs
 
-The tabs pick what the bottom band shows. The four coloured cells to their
-left are the channels; tapping one selects the clip the settings describe.
+Between the sphere and the bar runs the **channel row**: one field per channel,
+in its colour, with its level, its 3D, FREQ and Q pots, and a bar that the
+clip's progress fills from the left. The **clip's name** stands in that bar.
+Which channel it is, the colour already says.
+
+![The channel row: four channels, each with its clip's name](pics_user/a3-motion-ui-channel-row.png)
+
+A touch on a field selects that channel: the bar below then describes its
+clip.
 
 | Tab | What it is |
 | :--- | :--- |
-| **CLIP** | the selected clip's settings — shape, elevation, motion |
-| **REC** | the same three sections, with the Shape card turned over to record a take |
-| **ACTION** | what the Action pad fires besides playing |
-| **PADS** | the panel's pads on screen, reachable without the hardware |
-| **MIX** | a full channel strip for all four channels |
-| **FILES** | the library: clips, shapes, actions and sets |
+| **CLIP** | the clip: which one, its shape, direction, end and lengths |
+| **MOTION** | how the figure moves while it plays |
+| **ACTION** | the channel's six action buttons and how each one plays |
+| **CHMIX** | the channel's strip of the mixer |
+| **REC** | making a take |
 
-Beside the tabs sit the two **slot keys**. They are keys rather than a
-heading: a heading saying which clip you are looking at and a control changing
-it want the same place.
+At the top of the global strip, to the right, stand **FILES**, **MIXER** and
+**PADS**. Each opens over the sphere, and only one of them at a time.
+
+![How to play and pause a clip](pics_user/howto-play-pause.gif)
 
 ## CLIP — the settings of one clip
 
@@ -166,21 +174,57 @@ the ellipse belongs to the figure and travels with it.
 
 ### The accent
 
-Not a movement: it rises while the **ACT pad is held**, stays up as long as it
-is held, and falls when you let go. The hold is the finger, which is why there
-is no sustain control — on a pad, how long a thing lasts is a gesture.
-
-| Control | What it does |
-| :--- | :--- |
-| `atk` | how long it takes to rise, in bars |
-| `dec` | how long it takes to fall |
-| `max` | the ceiling it rises towards. A ceiling set *under* the floor leaves the floor alone |
-| `act` | **1shot** or **Hold** — what the Action key does |
+Not a movement: it rises while an **action button is held**, stays up as long
+as it is held, and falls when you let go. The hold is the finger, which is why
+there is no sustain control — on a pad, how long a thing lasts is a gesture.
+How an accent rises and falls belongs to each action button; see ACTION
+below.
 
 What it drives is the channel's **3d**, and only upwards: the knob shows the
 floor you set, and the arc from there to where the accent has taken it is
 filled in. When the decay runs out, the clip does what its `end` says — and
 only on that edge, once.
+
+## ACTION — six buttons per channel
+
+Each channel has **six action buttons**, A1 to A6, on the panel and on this
+page. An action is a short script that changes the clip for as long as its
+accent lasts: it throws the figure wide, lifts it overhead, pulls it under the
+floor, stops it. When the accent has fallen, the clip is itself again.
+
+![The ACTION page](pics_user/a3-motion-ui-action.png)
+
+Left to right:
+
+| Part | What it does |
+| :--- | :--- |
+| **A1–A6** | three rows of two, as the pads stand on the panel. Each shows its number and the name of its action. **Pressing one fires it**, exactly as its pad does, and makes it the chosen one |
+| the list | the scripts in `pattern/actions`. A tap puts that script on the **chosen** button; "no action" at the top clears it |
+| **EDIT** | opens the chosen button's script in FILES › ACTIONS, beside the list there |
+| mode | **1shot** or **Hold** for the chosen button: fire and let go, or hold the clip for as long as the finger is down |
+| **Audio** | the chosen button's accent: attack, decay and ceiling for the 3d, the filter's cutoff and its resonance |
+
+A field is in the channel's colour when it carries an action and grey when it
+does not; the chosen one has the thick outline; and a field turns **white while
+its action runs** — the same as its pad. A button with nothing on it does
+nothing at all.
+
+The first encoder (top left) steps through A1…A6.
+
+**What a button remembers.** The script's own accent values are read when it is
+put on the button; from then on they are that button's, and the knobs change
+them for that button only. The set remembers what you changed. A script is
+worked out at the moment you press, against the clip as it is then: an action
+that halves the reach halves the reach the clip has *now*. The dice in a random
+action are thrown when it is put on the button and kept, so every press lands in
+the same place — put it on again to throw again.
+
+**Two actions at once:** the last one pressed wins, and when it has fallen the
+clip is back to itself, not to the first action.
+
+![How to fire an action](pics_user/howto-fire-an-action.gif)
+
+![How to put another action on a button](pics_user/howto-assign-an-action.gif)
 
 ## REC — making a take
 
@@ -188,7 +232,7 @@ Record is a **toggle wherever it is pressed**: the panel key, the bar's key,
 the tab.
 
 1. Choose a length — eight keys, from a quarter bar to 32.
-2. Press REC, or hold the panel's REC and press a slot's Play\|Pause pad.
+2. Press REC, or hold the panel's REC and press a channel's Play\|Pause pad.
 3. Drag the blob across the sphere. The trajectory appears as you play it in.
 4. The pass ends when the length is reached.
 
@@ -219,29 +263,42 @@ would show as a jump mid-figure.
 
 ## PADS
 
-The panel's pads on screen, because a plain build has no panel and without
-pads such a build cannot start a single clip. Channels across, slots down, and
-where they meet one clip with its four pads: **play beside stop on top, action
-beside settings below**.
+Eight pads per channel, in two columns of four — the same on the panel and on
+the PADS page, which puts the panel on screen for a build without one:
 
-Nothing is decided here: a press goes out as the same `(channel, pad)` the
-hardware sends, and a pad's colour comes in already worked out by the one loop
-that also writes the panel's LEDs — so empty, idle, armed and running look on
-screen exactly as they look on the hardware.
+| | left | right |
+| :--- | :--- | :--- |
+| row 1 | **Play\|Pause** | **PAGE** |
+| row 2 | **A1** | **A2** |
+| row 3 | **A3** | **A4** |
+| row 4 | **A5** | **A6** |
+
+![The PADS page](pics_user/a3-motion-ui-pads.png)
+
+- **PAGE** on another channel selects that channel. On the channel the screen
+  shows, it steps through CLIP → MOTION → ACTION → CHMIX → REC; with SHIFT,
+  backwards. It also closes whatever lies over the sphere.
+- The block at the left fires one pad on **all four channels**: Play all, Stop
+  all (in PAGE's place), and each action on every channel that has one.
+- There is no Stop pad: **SHIFT + Play\|Pause** stops at once. STOP stays on
+  the screen.
+
+What the pads show:
+
+- Play\|Pause follows the clip: green while it plays, blinking while it waits
+  for the downbeat.
+- An action pad is dim when it carries an action and dark when it does not, and
+  **white while its action runs**.
+- PAGE is lit on the channel the screen shows.
 
 **When a pad takes effect:**
 
 | Pad | When |
 | :--- | :--- |
-| Play\|Pause | the **next beat**, starting and stopping alike |
-| Stop | **now** |
-| Action | **now** |
-| Shift + Action | now, in preview, for as long as it is held |
-
-The bar is the take's unit, but it is the wrong unit for a press: a bar is up
-to a metre's worth of beats away, and a clip that starts that long after the
-finger reads as a button that did not work. Stop is the way out of something
-going wrong, and a way out that waits for the music is not one.
+| Play\|Pause | the **next downbeat**, starting and stopping alike |
+| SHIFT + Play\|Pause | **now** |
+| an action | **now** |
+| SHIFT + an action | now, in preview, for as long as it is held |
 
 ### MIX
 
@@ -291,34 +348,84 @@ set wins.
 
 ## FILES — the library
 
-Two tabs, **CLIPS** and **SVG**, and they are two different things: choosing a
-clip fills the slot with a figure *and* its values; choosing a shape swaps only
-the figure and leaves the values where your hand put them.
+Four tabs — **SETS**, **CLIPS**, **SVG** and **ACTIONS** — in a 2×2 block on
+the left, the list under them, and the file itself on the right, in an editor.
 
-A **clip file is the SVG**. There is no separate settings file — the trajectory
-and every value the clip settings hold live in one file, which is why the
-browser's library list *is* the list of clips. A **set** is the layer above:
-which clip sits in which of the eight slots, plus what belongs to the device
-rather than to a clip.
+![FILES, with the set "Peak" shown](pics_user/a3-motion-ui-files-sets.png)
 
-Five keys, the same words on every tab:
+- **A tap on a row only shows it.** Nothing on the device changes.
+- **Load** puts it on the device: a set on all four channels, a clip or a shape
+  on the shown channel, an action on the chosen action button.
+- **from clip** / **from set** writes what is on the device now as text into the
+  editor, to be saved as a new file.
+- The editor edits every kind of file. **Save** writes it back, **Save as**
+  writes a copy. A set or a shape that would not load again cannot be saved.
 
-| Key | What it does |
-| :--- | :--- |
-| **Filter** | steps `All → User → System` and wears the state it is in, not the one the next press would bring |
-| **Rename** | typed into the row itself. Enter or "Keep" settles it, Escape drops it |
-| **Save** | writes what is on show back over the file it came from |
-| **Save as** | writes it to a new one, and opens that row for typing |
-| **Delete** | asks twice — the key says "Delete", then "Sure?" |
-
-**Save and Save as are two keys rather than one and a modifier**: which of the
-two you meant is the whole question, and a modifier makes it something you find
-out afterwards.
+A **clip** is a figure together with every value it is played with; choosing a
+**shape** swaps only the figure and leaves the values where your hand put them.
+A **set** is the layer above: which clip and which six actions each channel has,
+plus what belongs to the device rather than to a clip.
 
 **Deleting deliberately does less.** A set's file goes and what is loaded stays
 loaded; a clip's files go and the sets that named it are left alone. Everything
-playing goes on playing — the pattern is in memory, and a file going is not a
-reason to stop the room.
+playing goes on playing.
+
+![How to load a set](pics_user/howto-load-a-set.gif)
+
+## Sets and moods
+
+The ten shipped sets are laid out on the **mood meter**: energy from calm to
+driving, and pleasantness from dark to open. What makes a movement read one way
+or the other is well studied:
+
+- **Speed carries energy.** Faster turns and tempo-locked cycles read as more
+  energetic; long, slow cycles as calm.
+- **Height carries lift.** Up and overhead reads as open and bright, low and under
+  the floor as heavy and dark.
+- **Coming closer raises the tension.** Sound that approaches is heard as more
+  arousing than sound that recedes, above all when it is already dark.
+- **Smooth or angular.** Circles, roses and Lissajous figures read as pleasant;
+  corners, zigzags and sudden jumps as tense.
+
+| Set | Mood | Clips (channels 1–4) |
+| :--- | :--- | :--- |
+| Opening | calm, arriving | Breath, Halo, Tide, Slow Turn |
+| Ambient | floating | Halo, Breath, Dome, Ebb |
+| Dub | deep, spacious | Cellar, Seesaw, Tide, Equator |
+| Breakdown | suspended | Standstill, Dome, Ebb, Equator |
+| Ascent | building | Tide, Carousel, Halo, Surge |
+| Rollers | groovy | Carousel, Double Time, Seesaw, Equator |
+| Peak | euphoric | Surge, Whirlwind, Carousel, Double Time |
+| Techno | driving, dark | Counter, Flutter, Backspin, Half Time |
+| Drop | impact | Whirlwind, Flutter, Backspin, Seesaw |
+| Dice | playful, anywhere | Dice, Backspin, Seesaw, Flutter |
+
+**The six buttons are laid out the same way in every set**, so the hands learn
+one panel rather than ten: the **left column adds** energy and openness, the
+**right column takes it away**; the top row is gentle, the middle strong, the
+bottom the extreme move or the stop.
+
+| Set | A1 / A2 | A3 / A4 | A5 / A6 |
+| :--- | :--- | :--- | :--- |
+| Opening | Rise / Ring | Bloom / Shrink | Sweep / Halt |
+| Ambient | Bloom / Half | Rise / Sink | Resonate / Stitch |
+| Dub | Sweep / Sink | Rock / Ground | Resonate / Rewind |
+| Breakdown | Rise / Shrink | Sweep / Flatten | Quarter / Halt |
+| Ascent | Rise / Ring | Twice / Half | Bloom / Halt |
+| Rollers | Twice / Half | Rock / Ring | Whirl / Unwind |
+| Peak | Bloom / Ring | Throw / Unwind | Whirl / Halt |
+| Techno | Punch / Half | Throw / Ground | Slam / Flatten |
+| Drop | Slam / Sink | Stab / Squash | Whirl / Halt |
+| Dice | Scatter / Stitch | Rewind / Quarter | Whirl / Halt |
+
+Every shipped action script carries a `Mood:` line under its title that says
+which way it moves the room.
+
+The research this rests on: Russell's circumplex model of affect and the Mood
+Meter built on it; studies of approaching and receding sound (Tajadura-Jiménez
+et al., *Embodied auditory perception*, 2010); the mapping of pitch and height;
+and Stockhausen's work with rotating sound, which found that movement past about
+sixteen rotations a second stops being heard as movement at all.
 
 ## The global strip
 
@@ -390,9 +497,10 @@ mid-evening, does not move the room: the blobs appear where the sound actually
 is, and the pots stand where they stood.
 
 Loading a **set** is the other way round — that is an explicit act, and the set
-wins. What was running runs again, from the top, on the next **downbeat**:
-eight clips starting together is the whole point of a set, and together is what
-a downbeat gives you.
+wins. Loading a set stops what was running; what the set says was running
+starts again, from the top, on the next **downbeat** — four clips starting
+together is the whole point of a set, and together is what a downbeat gives
+you. Play all on the PADS page starts all four.
 
 ## Specs
 
