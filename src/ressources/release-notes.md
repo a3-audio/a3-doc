@@ -13,6 +13,41 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Motion (`a3-motion-ui`)
 
+**One clip per channel, six actions**
+
+- **Each channel holds one clip and six action buttons**, A1–A6, instead of two slots with
+  one action each. The panel's eight pads per channel are Play|Pause and PAGE, then A1–A6 in
+  two columns. The Stop and Settings pads are gone: SHIFT + Play|Pause stops at once, and
+  STOP stays on the screen.
+- **PAGE** selects its channel, or on the shown channel steps CLIP → MOTION → ACTION → CHMIX
+  → REC (SHIFT: backwards).
+- **The ACTION page** shows the six buttons in the panel's arrangement, the list to assign
+  from, EDIT and the mode, and the Audio card of the chosen button. Pressing a field fires it
+  and chooses it; the first encoder steps through them. A field turns white while its action
+  runs, as its pad does.
+- **How an action plays belongs to its button**: attack, decay and ceiling of the three
+  envelopes, and 1shot or Hold, are read from the script when it is assigned and kept per
+  button in the set. The clip file's own envelope values are no longer used.
+- A script is worked out **at the press, against the clip as it is then**. Before, a button
+  kept the clip it was assigned on, and after a new clip or a turned knob a press threw the
+  channel back to the old values for the length of the accent. The dice of a random action are
+  thrown when it is assigned, so every press lands in the same place.
+- A second action while the first is still sounding takes over; afterwards the clip comes back
+  to itself, not to the first action.
+- An action button with nothing on it does nothing, and its pad is dark.
+- The PADS page is 2×4 per channel, with a block that fires a pad on all four channels: Play
+  all, Stop all, and each action.
+- The channel row shows the clip's name instead of a slot number.
+- Sets store the six actions per channel. **Sets from before are copied once to
+  `pattern/backup-two-slots/`** on the first start, then read with slot 1 as the clip and the
+  two slot actions as A1 and A2.
+- **The shipped sets are moods.** The ten sets are placed on the mood meter (energy ×
+  pleasantness), each with one clip and six actions per channel, laid out the same way in
+  every set: the left column adds energy and openness, the right takes it away. Every shipped
+  action names its mood. Cellar now sits low and turns slowly, and Standstill stands still.
+- Loading a set makes it the current one on disk at once; a restart straight after a Load came
+  back with the set before.
+
 **Recording and clips**
 
 - A take is as long as the clip on show.
