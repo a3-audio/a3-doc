@@ -60,14 +60,28 @@ On `main` since `v03.0`, not tagged yet.
 
 **Controls**
 
-- **New layout of the bar.** Tabs CLIP · MOTION · ACTION · FILES · CHMIX · MAINMIX · REC ·
-  PADS.
-  - CLIP holds the clip picker over the shape, `dir` and `end`, and the four lengths.
-  - MOTION holds all twelve Motion and Elevation knobs.
-  - REC holds the shape, recmode, fade, bias and the take's length.
+- **New layout of the bar.**
+  - **The channel row:** across the whole width, between the sphere and the bar, one field per
+    channel in its colour. Each field shows the channel's VU, its 3D, FREQ and Q pots, and a bar
+    its clip's progress fills from the left, with the slot number at its start. A touch anywhere
+    on the field selects the clip, and a second tap on the shown field flips its slot. Touching
+    a pot selects the channel without flipping. The playhead marks in the tick indicator and
+    the signal dot moved into these bars.
+  - **Tabs:** CLIP · MOTION · ACTION · CHMIX · REC. FILES, MAINMIX and PADS stand at the top
+    of the global strip, over the elevation picture and the 2×2 transport.
+  - **CLIP:** one area of eight equal fields, in the encoders' 4×2 arrangement: clip, dir and
+    two lengths over the shape, end and two lengths.
+  - **MOTION:** one area, rows as the encoders turn them: spin swell strX strY / rot reach
+    sqzX sqzY / sway clip-top / elv clip-bottom.
+  - **REC:** eight equal fields like CLIP, with recmode over fade|bias instead of dir over end.
+  - **CHMIX:** GAIN HIGH MID LOW over SEND 3D FREQ Q.
   - MAINMIX shows the big mixer like a tab.
-  - The global strip carries the elevation picture, the four channel faces and a 2×2
-    transport laid out like the pads.
+- **The panel's encoders turn the field they stand under** on CLIP, MOTION, REC and CHMIX. A
+  press switches between the two things under an encoder: MOTION's rows, and REC's fade and
+  bias. A press on a length chooses it. With Shift, and on ACTION, FILES, MAINMIX and PADS,
+  each column turns its channel's FREQ and Q as before; 3D stays on the analog pots.
+- **The section locks are gone.** A loaded clip lands every value it carries and the figure it
+  names.
 - **Direction and end are two choices.** `dir` is Fwd, Rev, Bnce or Rnd and `end` is Loop,
   Stop or Paus, in any combination: Bnce + Stop goes out and back once. Old clips with an end
   of bounce or random play as before.
@@ -110,6 +124,16 @@ On `main` since `v03.0`, not tagged yet.
 
 **The sphere**
 
+- **What is drawn:** on the sphere and in the elevation picture alike, every playing clip, plus
+  the selected clip as a preview even when it is not playing, drawn over the others. The
+  elevation picture shows every playing clip, each in its channel's colour.
+- **Previews are visible again.** Since the lines moved to the GPU, a preview (the selected
+  clip, the Shift+ACT listen) was drawn in software less than a pixel wide. It goes through the
+  GPU like a playing line now.
+- **Shapes made of dots show their dots** (Cross, Corner, Bounce) on the sphere, in the
+  elevation picture and in the shape field. They had vanished: the sphere drew their dots about
+  a pixel wide, a turned knob replaced them with an empty line, and the shape field's picture
+  measured them as a single point.
 - Rendered twice as fine and drawn back down, so edges no longer step.
 - No lag while recording: the line of a take being played in is drawn from what the hand
   moved to, the take underneath is drawn once, and the listener figure is worked out only

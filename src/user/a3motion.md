@@ -101,12 +101,6 @@ it want the same place.
 
 ## CLIP — the settings of one clip
 
-Three cards, each with a **lock** at the right end of its title row. A locked
-section is one nothing writes over — step through clips with Elevation held
-and every figure arrives in the room you are already in. The lock belongs to
-the device, not to the clip: it is a stance you take while playing and drop
-again, so it travels in neither the clip file nor the set.
-
 A **double tap on a knob** puts it back to the middle of its range. Only
 knobs — a list has no middle.
 
