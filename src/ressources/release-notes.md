@@ -15,7 +15,25 @@ On `main` since `v03.0`, not tagged yet.
 
 **Recording and clips**
 
-- A take is as long as the clip on show; the separate REC tab is gone.
+- A take is as long as the clip on show.
+- **● arms, ▶ starts.** ● puts the shown slot in REC PAUSE: the bar jumps to the REC page and
+  the clip keeps playing while length, recmode, fade and bias are set. ▶ starts the take on
+  the next downbeat; ● or ■ while armed takes it back and writes nothing. The panel's REC +
+  Play|Pause pad still starts a take directly.
+- **Pots are recorded.** The twelve Motion and Elevation knobs (rot, spin, reach, swell,
+  sqzX, strX, sqzY, strY, clip-bot, clip-top, sway, elv) are written in a take by the same
+  recmode as the path: TOUCH while a hand is on the knob, LATCH to the end of that lap, WRITE
+  the whole pass. A finger counts from the touch to the lift, an encoder step for 400 ms.
+  While the take writes a knob, its arc and pointer are the REC key's red. On playback the
+  recorded knob turns by itself with a small red dot beside it; a hand on it wins, and picks
+  it up where it stands. SAVE keeps the lanes in the clip file (`"lanes"`); clips without
+  any are unchanged.
+- **A take overdubs the slot's clip.** It starts from that clip's settings, path and knob
+  lanes, so TOUCH and LATCH change only what is touched -- turning pots alone over an old
+  figure is a take. WRITE still replaces everything; a take on an empty slot starts empty.
+- A double tap on a knob with a recorded lane clears that lane and keeps the value; on a knob
+  without one it still resets to the middle. A cleared lane marks the clip as changed, and
+  FILES-Save writes it.
 - A take is the last lap that was finished, and a hand held still is no longer read as a fold.
 - Save writes back to the clip a slot came from, and the list marks a clip that has unsaved
   changes.
@@ -42,6 +60,25 @@ On `main` since `v03.0`, not tagged yet.
 
 **Controls**
 
+- **New layout of the bar.** Tabs CLIP · MOTION · ACTION · FILES · CHMIX · MAINMIX · REC ·
+  PADS.
+  - CLIP holds the clip picker over the shape, `dir` and `end`, and the four lengths.
+  - MOTION holds all twelve Motion and Elevation knobs.
+  - REC holds the shape, recmode, fade, bias and the take's length.
+  - MAINMIX shows the big mixer like a tab.
+  - The global strip carries the elevation picture, the four channel faces and a 2×2
+    transport laid out like the pads.
+- **Direction and end are two choices.** `dir` is Fwd, Rev, Bnce or Rnd and `end` is Loop,
+  Stop or Paus, in any combination: Bnce + Stop goes out and back once. Old clips with an end
+  of bounce or random play as before.
+- The elevation line is a knob, `elv`, left of `sway`; the picture takes no touch any more.
+- Tapping the elevation picture puts the sphere in camera mode. A finger turns the view,
+  from overhead to the horizon and never from below. Two fingers or the wheel zoom, and a
+  double tap resets. The view survives a restart.
+- The status bar: CLOCK · BPM · the last action · the beat display (touch it to tap) ·
+  CLEAN · KEYS · MENU. KEYS is coloured while the on-screen keyboard is up.
+- The mixers: 3D, FREQ and Q per channel on CHMIX and in the big mixer; FX FREQ and FX RES
+  sit under RET.
 - The transport shows what it is doing, and blinks while it waits for the beat.
 - Play/Pause on a running clip stops it on the next downbeat, and at once with Shift, the
   way a start works. It used to wait for the end of the lap, which with a long playback
@@ -65,6 +102,10 @@ On `main` since `v03.0`, not tagged yet.
 **Clock**
 
 - In EXT and PIO the clock sits on the beats it is sent.
+- **EXT follows smoothly.** Half or double the tempo counts as the same tempo; a real change
+  needs four beats in agreement (an octave jump sixteen) and glides in. The phase is pulled
+  in small steps, and a stray beat is ignored, so the motion no longer stutters on a
+  doubtful beat.
 - A beat trace, to measure where the time goes between a beat arriving and a clip moving.
 
 **The sphere**
@@ -158,6 +199,8 @@ On `main` since `v03.0`, not tagged yet.
   period. The octave lock moved from the tempo range to the clock: one octave, or no lock.
 - The mixer's VU goes to port 7772 (was 7771).
 - The example `.env` follows the rig's network.
+- The octave choice has hysteresis: near the edge of the tempo range the clock no longer flips
+  between a tempo and its double.
 
 ### Documentation (`a3-doc`)
 
