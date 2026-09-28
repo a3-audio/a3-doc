@@ -16,176 +16,282 @@ four bars when the tempo changes.
 
 ![A³ Motion](pics_user/a3-motion-icon_light.png)
 
+<!-- The screenshots and GIFs on this page are to be (re)made in the skin
+quiet-indigo-2. The recording plan is kept outside this repository. -->
+
+## Find a window
+
+Every window has a key with its name on it. This table says where the key is.
+
+| Window | What it is for | How you get there | How you get back |
+| :--- | :--- | :--- | :--- |
+| **Main screen** | the room, the four channels, the shown clip | always there | — |
+| **CLIP** | which clip, which figure, direction, end, lengths | tab in the bar | another tab |
+| **MOTION** | how the figure moves and where it sits in height | tab in the bar | another tab |
+| **ACTION** | the six action buttons of the shown channel | tab in the bar | another tab |
+| **CHMIX** | the shown channel's mixer strip | tab in the bar | another tab |
+| **REC** | setting up and making a take | tab in the bar, or ● | another tab |
+| **FILES** | sets, clips, shapes and actions on disk | FILES key, top of the global strip | FILES again, any tab, or MENU |
+| **MIXER** | all four mixer strips and the master | MIXER key, top of the global strip | MIXER again, any tab, or MENU |
+| **PADS** | the panel's pads on screen | PADS key, top of the global strip | PADS again, any tab, or MENU |
+| **Menu** | skins, network, LEDs, folders | MENU, right end of the status bar | MENU (one level back), or ✕ |
+| **Keyboard** | typing names and values | KEYS, status bar; opens by itself when you type a name | KEYS again |
+
 ## The panel
 
-Every control has one job and keeps it whatever is on screen. A knob that
-means something different depending on the page is a knob you have to look at.
+The hardware beside the screen. Each channel has a column: two encoders, a
+potentiometer and eight pads.
 
 | Control | What it does |
 | :--- | :--- |
-| Upper encoder, per channel | **freq** — that channel's filter frequency |
-| Lower encoder, per channel | **Q** — that channel's filter resonance |
+| Encoders, two per channel | turn the field of the page that stands above them — see below |
+| SHIFT + encoder | upper: that channel's **freq**, lower: that channel's **Q**, whatever page is shown |
 | Potentiometer, per channel | **3d** — crossfades the channel between its stereo and its multichannel encoder in A³ Core |
-| Pads, eight per channel | Play\|Pause and PAGE, then the six action buttons A1–A6 (see PADS below) |
+| Pads, eight per channel | Play\|Pause and PAGE, then the six action buttons A1–A6 (see PADS) |
 | Function keys, six | TAP, clock, REC, recmode, MENU, SHIFT |
 | Touchscreen | everything else |
 
-Pressing an encoder does nothing. The six function keys sit as a **vertical
-column at each end of the panel**, mirrored so either hand reaches them; a key
-is down while either side is down.
+**The eight encoders stand four by two, and so do the fields of CLIP, MOTION,
+REC and CHMIX.** Without SHIFT an encoder turns the field above it:
 
-**The touchscreen is not optional.** Since the touch rework the encoders no
-longer navigate anything, so with the screen out the device cannot be driven.
-That trade was made knowingly.
+| Page | Upper row of encoders | Lower row of encoders | A press on an encoder |
+| :--- | :--- | :--- | :--- |
+| CLIP | clip, direction, two lengths | shape, end, two lengths | on a length: plays at that length |
+| MOTION | spin, swell, strX, strY | sway, clip-top, tswp, rswp | swaps to the other knob of the field: rot, reach, sqzX, sqzY / elv, clip-bot, tilt, roll |
+| REC | clip, rec mode, two lengths | shape, fade, two lengths | on fade: swaps to bias |
+| CHMIX | GAIN, HIGH, MID, LOW | SEND, PFL, FX, VOL | on PFL or FX: switches it |
+| ACTION | first: steps the chosen button A1…A6; the other three: freq | Q | nothing |
 
-## [3] DISPLAY
-- This full-color multi-touch display shows information relevant to A³Motion’s current operation. Touch the display (and use the hardware controls) to control the A3Motion interface. See Operating Instrucions to learn how to use some basic functions
+Where an encoder has two knobs to choose from, the bar marks the one it is on.
+The choice is remembered.
 
-![The A³ Motion display in operation, the set "Peak" playing](pics_user/a3-motion-ui-display-one-clip.png)
+The six function keys sit as a **vertical column at each end of the panel**,
+mirrored so either hand reaches them; a key is down while either side is down.
+`clock` and `recmode` step their value on a press, as their screen twins do.
+**SHIFT is only on the panel** — the SHIFT gestures below need it.
 
-The screen has three bands. Along the top sits the status bar, and it is
-deliberately almost empty: the current tempo on the left, the beat grid in the
-middle — it fills as the bar runs — and the MIX key on the right. It carried
-nine level meters for two days and they made the one band that is always in
-view the busiest thing on the screen.
+**The touchscreen is not optional.** Menus, lists and the bar are driven by
+touch; with the screen out the device cannot be operated. That trade was made
+knowingly.
 
-The middle band is the room seen from straight above, with you — the listener —
-in the middle at ear height. Each channel is a coloured blob sitting where its
-sound is; it swells and throws sparks with that channel's input level, and
-dragging it moves the sound. A playing clip draws its trajectory as a braid of
-three strands of plasma with the blob travelling inside it. What runs behind
-the sphere is drawn darker than what runs in front of it.
+## The main screen
 
-At the four corners stand the speakers, each a tower of three tops over four
-subs, on a dark floor below your feet. Lightning comes out of the tops and
-flickers across the floor towards the middle: thicker, and more of it, on the
-speaker that is playing loudest, and none at all when the room is silent. The
-subs throw ball lightning with the bass. The field around the sphere shows
-where the energy in the room is coming from.
+![The main screen: status bar, sphere, channel row, bar and global strip](pics_user/a3-motion-ui-display-one-clip.png)
 
-The small ball in the top right corner is the view. Drag on it to tilt and
-turn the room; a double tap on it takes the view back to straight above.
+Top to bottom:
 
-The four coloured cells at the left of the tab row are the channels. Each
-carries a **signal dot** in its top right corner: the channel's input level,
-in the same green / yellow / red the meters use, brighter the louder it is —
-and **gone entirely when the channel is silent.**
+1. the **status bar** — clock, tempo, what was last done, the beat, CLEAN, KEYS, MENU;
+2. the **sphere** — the room seen from above;
+3. the **channel row** — one field per channel;
+4. the **bar** — five tabs and the page they open, on the left three quarters;
+5. the **global strip** — FILES, MIXER, PADS, the elevation picture and the
+   transport, on the right quarter.
 
-![The four channel keys, three with signal and one without](pics_user/a3-motion-signal-dots.png)
+FILES, MIXER, PADS and the menu open **over the sphere**. The channel row, the
+bar and the global strip stay in view under them.
 
-That is the question you actually have mid-set — *is this channel making
-sound, and roughly how hot* — asked where the answer belongs, on the channel
-itself. For reading a level properly, the MIX page has the full meters.
+### Status bar
 
-The bottom band holds the settings of the selected clip, framed in that
-channel's colour: its shape, how it is mapped in elevation, how it moves in
-time — speed, direction, what happens at the end, and the fade that closes the
-loop — and its filter. The narrow strip on the right is global rather than
-per-channel and carries the recording mode.
-## The channel row and the tabs
+| Part | What it does |
+| :--- | :--- |
+| **clock key** (INT / EXT / PIO) | tap to step INT → EXT → PIO. Written in the mode's colour. See Clock modes |
+| **BPM** | the tempo, in the clock's colour. Read only |
+| **readout** | what was last done, e.g. `-- REC ARMED`, `-- FILES ON`, `CH2 ACTION` |
+| **beat display** | four cells, one per beat, filling as the bar runs. **Tap it to tap the tempo** — in INT it sets the tempo; in every mode it sends `/tap` |
+| **CLEAN** | switches to the clean skin — thin lines, plain blobs, effects off — and back to the skin you had. Greyed out when the device has no clean skin |
+| **KEYS** | shows or hides the on-screen keyboard |
+| **MENU** | opens the menu; see The menu |
 
-Between the sphere and the bar runs the **channel row**: one field per channel,
-in its colour, with its level, its 3D, FREQ and Q pots, and a bar that the
-clip's progress fills from the left. The **clip's name** stands in that bar.
-Which channel it is, the colour already says.
+<!-- GIF: howto-statusbar-clock.gif | region: status bar 0,0,768,36 | steps: tap clock key x3 (INT→EXT→PIO→INT), 1.5 s apart | "Tap the clock key" / "INT, EXT, PIO: whose tempo" -->
+
+<!-- GIF: howto-statusbar-tap.gif | region: status bar 0,0,768,36 | steps: clock on INT; tap the beat display 8x at ~120 BPM | "Tap the beat display" / "In INT it sets the tempo" -->
+
+<!-- GIF: howto-statusbar-clean.gif | region: status bar and sphere 0,0,768,626 | steps: tap CLEAN, wait 3 s, tap CLEAN | "CLEAN: lines and blobs only" / "Tap again for your skin" -->
+
+<!-- GIF: howto-statusbar-keys.gif | region: full screen 0,0,768,1024 | steps: tap KEYS, wait 2 s, tap KEYS | "KEYS shows the keyboard" / "KEYS again hides it" -->
+
+### The sphere
+
+The room seen from straight above, with you — the listener — in the middle at
+ear height. Each channel is a coloured blob sitting where its sound is; it
+swells and throws sparks with that channel's input level. A playing clip draws
+its trajectory as a braid of plasma with the blob travelling inside it. What
+runs behind the sphere is drawn darker than what runs in front of it.
+
+At the four corners stand the speakers, each a tower of tops over subs.
+Lightning comes out of the tops towards the middle: thicker, and more of it,
+on the speaker that is playing loudest, and none at all when the room is
+silent. The subs throw ball lightning with the bass.
+
+| Gesture | What it does |
+| :--- | :--- |
+| drag a blob | moves that channel's sound. The blob jumps under the finger. A playing clip keeps running and takes the blob back when you let go |
+| several fingers | each takes its own blob |
+| during a take | the first finger writes the take, wherever it lands — see REC |
+
+**Camera mode** turns the view instead. Tap the **elevation picture** in the
+global strip (the small sphere with the camera mark) to switch it on or off;
+its field lights while it is on.
+
+| Gesture, in camera mode | What it does |
+| :--- | :--- |
+| drag up / down | leans the view from straight above down to the horizon |
+| drag left / right | walks the view round the room |
+| pinch with two fingers, or the mouse wheel | zooms |
+| double tap | back to straight above, unzoomed |
+
+In camera mode no finger takes a blob. The view is kept over a restart.
+
+<!-- GIF: howto-sphere-drag-blob.gif | region: sphere 0,36,768,590 | steps: clips stopped; drag channel 1's blob from its spot in an arc to the opposite side, 2 s, release | "Drag a blob" / "The sound goes where it goes" -->
+
+<!-- GIF: howto-sphere-camera-mode.gif | region: full screen 0,0,768,1024 | steps: tap elevation picture (671,800); drag on sphere (384,300)→(384,450); drag (250,330)→(520,330); double tap (384,330); tap elevation picture | "Tap the small sphere: camera" / "Drag to lean and turn the view" / "Double tap: straight above again" -->
+
+<!-- GIF: howto-sphere-zoom.gif | region: sphere 0,36,768,590 | steps: camera mode on; mouse wheel up 5 notches (xdotool click 4), then down 5 (click 5); double tap | "Camera mode: pinch to zoom" / "Double tap resets the zoom" -->
+
+### The channel row
+
+Between the sphere and the bar: one field per channel, in its colour. Left to
+right in each field:
+
+| Part | What it does |
+| :--- | :--- |
+| meter | the channel's input level. Read only |
+| **3D**, **FREQ**, **Q** | the channel's 3d, filter frequency and filter resonance. Drag to turn |
+| progress bar | fills from the left as the clip runs; the **clip's name** stands in it |
+
+A **tap on a field selects that channel**: the bar and the global strip then
+describe its clip. Reaching for one of its knobs selects it too. The selected
+field is filled and framed thicker.
+
+A **double tap** on 3D or FREQ puts it back to twelve o'clock, on Q back to
+closed — but only on a device without the panel attached; on the panel the
+knob's own position decides.
 
 ![The channel row: four channels, each with its clip's name](pics_user/a3-motion-ui-channel-row.png)
 
-A touch on a field selects that channel: the bar below then describes its
-clip.
+<!-- GIF: howto-channelrow-select.gif | region: channel row and bar 0,626,768,398 | steps: tap face 2 (285,648), 1.5 s; tap face 3 (475,648), 1.5 s; tap face 1 (95,648) | "Tap a channel" / "The bar shows its clip" -->
 
-| Tab | What it is |
+<!-- GIF: howto-channelrow-pots.gif | region: channel row 0,610,768,80 | steps: drag FREQ of ch1 (63,641) up 60 px, down 30 px; drag 3D of ch2 (222,641) up 40 px | "Drag 3D, FREQ or Q" / "The channel is selected too" -->
+
+### The bar
+
+Five tabs, left to right: **CLIP MOTION ACTION CHMIX REC**. A tab shows its
+page in the bar; the lit tab is the page you are on. All five describe the
+clip of the **selected channel**, framed in its colour. A tab also closes
+FILES, MIXER or PADS if one of them is open.
+
+A **double tap on a knob** in the bar puts it back to its rest: most knobs to
+the middle, the sweeps and spin to off, `elv` to the middle of what the clips
+leave. On a knob that plays a recorded lane, the double tap clears the lane
+instead (see REC). Fields that step on a tap have no rest.
+
+<!-- GIF: howto-bar-tabs.gif | region: bar 0,672,578,352 | steps: tap MOTION (175,700), ACTION (287,700), CHMIX (400,700), REC (512,700), CLIP (62,700), 1.2 s each | "Five tabs, one clip" / "CLIP MOTION ACTION CHMIX REC" -->
+
+### The global strip
+
+The right quarter of the bar, the same on every page.
+
+| Part | What it does |
 | :--- | :--- |
-| **CLIP** | the clip: which one, its shape, direction, end and lengths |
-| **MOTION** | how the figure moves while it plays |
-| **ACTION** | the channel's six action buttons and how each one plays |
-| **CHMIX** | the channel's strip of the mixer |
-| **REC** | making a take |
+| **FILES**, **MIXER**, **PADS** | each lays its window over the sphere; tap again to take it away. Only one at a time: another key swaps it |
+| elevation picture | a small sphere from the side with the channels' positions. Tap it for camera mode |
+| **▶ / ❚❚** | the shown clip's Play\|Pause: starts or pauses on the **next downbeat**, and blinks while it waits. Shows ❚❚ while the clip runs |
+| **■** | stops the shown clip **now**, and flashes. During a take it ends the take |
+| **A** | fires the shown channel's **chosen action button** (see ACTION) for as long as you hold it |
+| **●** | arms a take on the shown clip and opens REC; see REC |
 
-At the top of the global strip, to the right, stand **FILES**, **MIXER** and
-**PADS**. Each opens over the sphere, and only one of them at a time.
+After a take, **●** turns into **SAVE** (a tick) and **A** into **DISCARD** (a
+cross) until you decide.
+
+<!-- GIF: howto-transport-play-pause.gif | region: channel row and global strip 578,626,190,398 (or bar 0,626,768,398) | steps: tap ▶ (630,915), wait for the downbeat, 3 s; tap ❚❚ (630,915), wait 3 s | "▶ starts on the next downbeat" / "It blinks while it waits" / "❚❚ pauses on the downbeat" | re-record: replaces howto-play-pause.gif -->
+
+<!-- GIF: howto-transport-stop.gif | region: bar 0,626,768,398 | steps: clip playing; tap ■ (712,915) | "■ stops now" / "Next start is from the top" -->
+
+<!-- GIF: howto-transport-act.gif | region: full screen 0,0,768,1024 | steps: clip playing; hold A (630,978) 2 s; release | "Hold A: the chosen action" / "Let go: the clip comes back" -->
 
 ![How to play and pause a clip](pics_user/howto-play-pause.gif)
 
-## CLIP — the settings of one clip
+## CLIP
 
-A **double tap on a knob** puts it back to the middle of its range. Only
-knobs — a list has no middle.
+The clip of the selected channel. Eight fields, four by two, the same way the
+encoders stand.
 
-### Shape — which figure, and how fast
-
-| Control | What it does |
+| Field | What it does |
 | :--- | :--- |
-| picture | the figure the sound traces. Scroll it with a thumb to step through the shapes; **swapping the figure keeps the values** |
-| clip field | which settings preset is loaded. Its own list, scrolled separately — one scroller over both could quietly apply somebody's preset while you were choosing a shape |
-| drift dot | warning-coloured, in the clip field: the values have been turned since they were loaded and something is waiting to be written |
-| four speed keys | tap to play at that speed. **Drag a key to give that key another speed**, out of the whole range, applied straight away. The key keeps it, so a speed the four do not yet name is reached once and found again next time |
-| `dir` | **Fwd** or **Rev** — which way the figure is travelled |
-| `end` | what happens when a pass runs out: **Loop**, **Stop**, **Paus**, **Bnce**, **Rnd** |
+| **CLIP** | which clip — the preset of values — is loaded. **Drag it with a thumb** to step through the clips. A warning-coloured **drift dot** says the values have been turned since it was loaded and something is waiting to be written. `--` is a figure with no clip behind it |
+| **SVG** | the figure the sound traces, with its name. **Drag it** to step through the shapes; **swapping the figure keeps the values** |
+| **DIRECTION** | tap to step **Fwd → Rev → Bnce → Rnd**: forwards, backwards, there and back, or from a random point each lap |
+| **END-ACTION** | tap to step **Loop → Stop → Paus**: what happens when the travel is over |
+| **LENGTH** × 4 | how long one pass takes, in beats. **Tap** a key to play at that length. **Drag** a key to give it another length, out of the whole range, applied straight away. The key keeps it |
+
+The clip field and the picture are two separate lists on purpose: one scroller
+over both could quietly apply somebody's preset while you were choosing a shape.
+
+**A length key is a ratio to the recording**, and names what it gives this
+clip: the same key reads 4 on a four-beat take and 8 on an eight-beat one. The
+lit key is the one the clip plays at. The four keys belong to the device and
+are saved in the set.
 
 **Stop and Paus are two different things.** Stop returns to the beginning of
 the take, whichever way it was running, so the next start is visibly a start.
-Paus stands still wherever the playhead landed.
+Paus stands still wherever the playhead landed. Any direction goes with any end.
 
-### Elevation — how the flat figure is wrapped onto the sphere
+<!-- GIF: howto-clip-choose-clip.gif | region: bar 0,672,578,352 | steps: drag CLIP field (81,800) up 40 px in 3 steps, pause 1 s each | "Drag CLIP: another preset" / "The figure's values change" -->
 
-The recorded figure is a flat disc. Elevation decides how that disc is laid
-over the room: the radius becomes the angular distance from a base direction,
-and the disc's angle becomes the bearing around it. The figure is a cap
-centred on the base and grows out of it in every direction.
+<!-- GIF: howto-clip-choose-shape.gif | region: sphere and bar 0,36,768,988 | steps: clip playing; drag SVG field (81,945) up 40 px in 3 steps | "Drag SVG: another figure" / "The values stay" -->
 
-| Control | What it does |
-| :--- | :--- |
-| the graphic | drag the chord to set the **base** — the direction the figure is centred on |
-| `reach` | how far down the sphere the figure's outer edge lands |
-| `sway` | sweeps the base up and down, in bars off the tempo clock. The stretch it covers is filled in on the graphic |
-| `clip-top` | a ceiling: a point pushed past it keeps its bearing and gives up only its height, so a figure reaching into the ceiling travels *around* it rather than heaping on one spot |
-| `clip-bot` | the same for the floor |
-| `pole` | mirrors the figure to the southern hemisphere |
-| `flat` | ignores elevation and holds the figure at one height |
+<!-- GIF: howto-clip-direction.gif | region: sphere and bar 0,36,768,988 | steps: clip playing; tap DIRECTION (218,800) x3, 2 s apart | "Tap DIRECTION" / "Fwd, Rev, Bnce, Rnd" -->
 
-### Motion — what is done to the figure while it plays
+<!-- GIF: howto-clip-end-action.gif | region: bar 0,672,578,352 | steps: tap END-ACTION (218,945) x3, 1.5 s apart | "Tap END-ACTION" / "Loop, Stop, Paus" -->
 
-Five rows, and each is a standing value next to the movement that works on
-it. Everything that moves on its own is counted in **bars off the tempo
-clock**, never in seconds, so a cycle comes back to where it started on a bar
-line instead of drifting through the loop underneath it.
+<!-- GIF: howto-clip-length-tap.gif | region: sphere and bar 0,36,768,988 | steps: clip playing; tap LENGTH (356,800), 3 s; tap LENGTH (494,945), 3 s | "Tap a LENGTH" / "The clip plays at it now" -->
 
-| Pair | Standing value | Its movement |
+<!-- GIF: howto-clip-length-drag.gif | region: bar 0,672,578,352 | steps: drag LENGTH (494,800) up 36 px (3 steps), release | "Drag a LENGTH key" / "The key keeps the new length" -->
+
+## MOTION
+
+What is done to the figure while it plays, and where it sits in height. Eight
+fields, four by two; each holds **two knobs**: on the left the movement, on the
+right the standing value it moves.
+
+| Field | Left knob (the movement) | Right knob (the standing value) |
 | :--- | :--- | :--- |
-| 1 | `rot` — turn the whole figure around the vertical axis | `spin` — keep turning, signed for direction |
-| 2 | `reach` — see Elevation | `swell` — sweep the reach out and back |
-| 3 | `sqzX` — squeeze front-to-back | `strX` — sweep that squeeze |
-| 4 | `sqzY` — squeeze left-to-right | `strY` — sweep that squeeze |
-| 5 | `fade` — how long the take's closing move lasts | `bias` — what happens to what a take never wrote |
+| **ROTATION** | `spin` — keeps turning the figure, signed for direction | `rot` — turns the whole figure around the vertical axis |
+| **REACH** | `swell` — sweeps the reach out and back | `reach` — how far down the sphere the figure's outer edge lands |
+| **SQUEEZE X** | `strX` — sweeps the squeeze | `sqzX` — squeezes front-to-back |
+| **SQUEEZE Y** | `strY` — sweeps the squeeze | `sqzY` — squeezes left-to-right |
+| **ELEVATION** | `sway` — sweeps the base up and down | `elv` — the **base**: the height the figure is centred on |
+| **ELEVATION CLIP** | `clip-top` — a ceiling | `clip-bot` — a floor |
+| **TILT** | `tswp` — sweeps the tilt | `tilt` — leans the figure's plane forward or back |
+| **ROLL** | `rswp` — sweeps the roll | `roll` — leans the figure's plane to the side |
 
-**`rot` is a closed ring**, the only control in the bar that is: a rotation
-comes round to itself, so a scale with two ends and a dead zone between them
-would read as an amount rather than as a position. Its pointer says where your
-hand left it; the blue says where the spin is holding it now.
+Drag a knob to turn it. Everything that moves on its own is counted in **bars
+off the tempo clock**, never in seconds, so a cycle comes back to where it
+started on a bar line. A knob that is being moved shows the movement as a
+**blue arc**; its pointer stays where your hand left it.
 
-**A spin that is not running turns nothing.** Turned off, it stands still at
-whatever angle it stopped at rather than counting on invisibly.
+**How the figure sits on the sphere.** The recorded figure is a flat disc,
+wrapped over the room as a cap centred on the base (`elv`). A point pushed past
+`clip-top` or `clip-bot` keeps its bearing and gives up only its height, so a
+figure reaching into the ceiling travels *around* it.
 
-The two squeezes are bipolar with their middle at zero and multiply their axis
-by 2^value — half at one end, double at the other, and the middle of the
-travel is the take as recorded. **The squeeze happens before the turn**, so
-the ellipse belongs to the figure and travels with it.
+**`rot` is a closed ring**, the only one: a rotation comes round to itself.
+**A spin that is not running turns nothing** — turned off, it stands still at
+whatever angle it stopped at.
 
-### The accent
+The squeezes are bipolar with their middle at zero and multiply their axis by
+2^value — half at one end, double at the other. **The squeeze happens before
+the turn**, so the ellipse belongs to the figure and travels with it.
 
-Not a movement: it rises while an **action button is held**, stays up as long
-as it is held, and falls when you let go. The hold is the finger, which is why
-there is no sustain control — on a pad, how long a thing lasts is a gesture.
-How an accent rises and falls belongs to each action button; see ACTION
-below.
+<!-- GIF: howto-motion-knob.gif | region: sphere and bar 0,36,768,988 | steps: MOTION tab; drag rot (right knob of ROTATION) up 60 px; double tap it | "Drag a knob: the figure turns" / "Double tap: back to rest" -->
 
-What it drives is the channel's **3d**, and only upwards: the knob shows the
-floor you set, and the arc from there to where the accent has taken it is
-filled in. When the decay runs out, the clip does what its `end` says — and
-only on that edge, once.
+<!-- GIF: howto-motion-sweep.gif | region: sphere and bar 0,36,768,988 | steps: drag spin (left knob of ROTATION) up 2 steps; wait 4 s; double tap spin | "The left knob moves it" / "The blue arc shows where" / "Double tap: sweep off" -->
 
-## ACTION — six buttons per channel
+<!-- GIF: howto-motion-elevation.gif | region: sphere and bar 0,36,768,988 | steps: drag elv (right knob of ELEVATION) down 40 px; drag clip-top (left knob of ELEVATION CLIP) up 30 px | "elv: how high it sits" / "clip-top: a ceiling" -->
+
+<!-- GIF: howto-motion-tilt-roll.gif | region: sphere and bar 0,36,768,988 | steps: camera mode on, lean view 45°; drag tilt up 40 px; drag roll up 40 px; double tap both | "tilt and roll lean the plane" / "Double tap: flat again" -->
+
+## ACTION
 
 Each channel has **six action buttons**, A1 to A6, on the panel and on this
 page. An action is a short script that changes the clip for as long as its
@@ -198,18 +304,28 @@ Left to right:
 
 | Part | What it does |
 | :--- | :--- |
-| **A1–A6** | three rows of two, as the pads stand on the panel. Each shows its number and the name of its action. **Pressing one fires it**, exactly as its pad does, and makes it the chosen one |
-| the list | the scripts in `pattern/actions`. A tap puts that script on the **chosen** button; "no action" at the top clears it |
-| **EDIT** | opens the chosen button's script in FILES › ACTIONS, beside the list there |
-| mode | **1shot** or **Hold** for the chosen button: fire and let go, or hold the clip for as long as the finger is down |
-| **Audio** | the chosen button's accent: attack, decay and ceiling for the 3d, the filter's cutoff and its resonance |
+| **A1–A6** | three rows of two, as the pads stand on the panel. Each shows its number and the name of its action. **Pressing one fires it**, exactly as its pad does, and makes it the **chosen** one |
+| the list | the action scripts. A tap puts that script on the chosen button; **no action** at the top clears it |
+| **EDIT** | opens the chosen button's script in FILES › ACTIONS |
+| mode | **1shot** or **Hold** for the chosen button: fire and let go, or hold the clip for as long as the finger is down. Tap to switch |
+| **Audio** | the chosen button's accent: `atk`, `dec` and `max` for **3d**, for **freq** and for **q** |
 
 A field is in the channel's colour when it carries an action and grey when it
 does not; the chosen one has the thick outline; and a field turns **white while
 its action runs** — the same as its pad. A button with nothing on it does
-nothing at all.
+nothing at all. The global strip's **A** fires the chosen button.
 
-The first encoder (top left) steps through A1…A6.
+**The accent** rises while an action button is held, stays up as long as it is
+held, and falls when you let go — `atk` is how long it takes to rise, `dec` how
+long to fall, in bars. The hold is the finger, which is why there is no sustain
+control. The **3d** row raises the channel's 3d from where you set it towards
+`max`: the knob in the channel row shows the floor you set, and the arc from
+there to where the accent has taken it is filled in. The **freq** and **q**
+rows do the same for the filter's cutoff and resonance; a `max` of 0 switches
+that row off. When the decay runs out, the clip does what its END-ACTION says —
+and only on that edge, once.
+
+<!-- TODO (maintainer): do the freq and q accents only ever raise the filter, like the 3d one, or can they lower it? The code says only "0 is off". -->
 
 **What a button remembers.** The script's own accent values are read when it is
 put on the button; from then on they are that button's, and the knobs change
@@ -222,26 +338,81 @@ the same place — put it on again to throw again.
 **Two actions at once:** the last one pressed wins, and when it has fallen the
 clip is back to itself, not to the first action.
 
+<!-- GIF: howto-action-fire.gif | region: sphere and bar 0,36,768,988 | steps: clip playing; hold A1 (48,760) 2 s; hold A6 (124,950) 2 s | "Press A1: the action fires" / "The field turns white" / "Let go: the clip comes back" | re-record: replaces howto-fire-an-action.gif -->
+
+<!-- GIF: howto-action-assign.gif | region: bar 0,672,578,352 | steps: tap A2 (124,760); tap list row 3 (225,831); tap A2 again | "Choose a button" / "Tap a script in the list" / "The button carries it" | re-record: replaces howto-assign-an-action.gif -->
+
+<!-- GIF: howto-action-clear.gif | region: bar 0,672,578,352 | steps: tap A5 (48,950); scroll list to top; tap "no action" | "Tap 'no action'" / "The button is empty" -->
+
+<!-- GIF: howto-action-mode.gif | region: bar 0,672,578,352 | steps: tap A3 (48,855); tap mode (320,793) x2 | "Tap the mode" / "1shot or Hold" -->
+
+<!-- GIF: howto-action-audio.gif | region: channel row and bar 0,626,768,398 | steps: tap A1; drag 3d max (530,785) up 40 px; hold A1 1.5 s | "max: how far the 3d rises" / "Watch the 3D knob's arc" -->
+
+<!-- GIF: howto-action-edit.gif | region: full screen 0,0,768,1024 | steps: tap A1; tap EDIT (320,750); wait 2 s; tap FILES (612,700) | "EDIT opens the script" / "in FILES › ACTIONS" -->
+
 ![How to fire an action](pics_user/howto-fire-an-action.gif)
 
 ![How to put another action on a button](pics_user/howto-assign-an-action.gif)
 
-## REC — making a take
+## CHMIX
 
-Record is a **toggle wherever it is pressed**: the panel key, the bar's key,
-the tab.
+The shown channel's strip of the mixer, in the bar — the same controls as that
+channel's strip in MIXER, laid out four by two like the encoders.
 
-1. Choose a length — eight keys, from a quarter bar to 32.
-2. Press REC, or hold the panel's REC and press a channel's Play\|Pause pad.
-3. Drag the blob across the sphere. The trajectory appears as you play it in.
-4. The pass ends when the length is reached.
+| Control | What it does |
+| :--- | :--- |
+| **GAIN** | input gain. Double tap: full |
+| **HIGH**, **MID**, **LOW** | the three EQ bands. Double tap: flat |
+| **SEND** | how much of the channel goes to the FX bus, where the delay that follows the beat sits. Double tap: none |
+| **PFL** | the channel on the headphones (cue). Tap to switch |
+| **FX** | puts the channel through the shared filter (FX FREQ, FX RES, FX MODE in MIXER). Tap to switch |
+| meter, on the right | the channel's level, and its **VOL fader**: the handle is the volume. Drag anywhere on the meter to move it, one to one from where it stood. Double tap: full volume |
 
-Only the Shape card turns over for this — you are still looking at the
-elevation and the motion the take will get. `fade` closes the join where the
-take meets itself.
+Everything here goes out as the same messages the A³ Mixer sends, and shows
+what is actually set rather than what this device last did — see MIXER.
 
-The **rec mode** says how much of an old take a pass destroys, and it carries
-that on its own colour:
+<!-- GIF: howto-chmix-knobs.gif | region: bar 0,672,578,352 | steps: CHMIX tab (400,700); drag HIGH up 30 px; double tap HIGH; drag SEND up 40 px; double tap SEND | "Drag to turn" / "Double tap: EQ flat, SEND off" -->
+
+<!-- GIF: howto-chmix-pfl-fx.gif | region: bar 0,672,578,352 | steps: tap PFL; tap FX; tap both again | "PFL and FX switch on a tap" -->
+
+<!-- GIF: howto-chmix-volume.gif | region: bar 0,672,578,352 | steps: drag the meter from its middle down 60 px, back up 30 px | "The meter is the VOL fader" / "Drag it anywhere" -->
+
+## REC
+
+Making a take: a new recording of a figure, on the shown channel's clip.
+
+| Field | What it does |
+| :--- | :--- |
+| **CLIP**, **SVG** | as on CLIP |
+| **RECMODE** | tap to step **Touch → Latch → Write**; see below |
+| **LENGTH** × 4 | as on CLIP. **The lit key is how long the take will be** |
+| **GAP-CONNECTOR** | two knobs: `fade` — how long the take's closing move lasts, which closes the join where the take meets itself; `bias` — where a gap the take never wrote leads |
+
+**Making a take, on the screen:**
+
+1. Select the channel in the channel row.
+2. Tap **●**. The take is **armed**: REC opens, ● and ▶ light, and the clip
+   keeps playing. **■** or **●** again takes the arming back.
+3. Choose the length, the rec mode, fade and bias.
+4. Tap **▶**. The take starts on the **next downbeat**.
+5. Drag on the sphere — the first finger down writes the position, wherever it
+   lands. The trajectory appears as you play it in. Turn MOTION knobs and they
+   are recorded too (below).
+6. Tap **●** (or **■**) to end the take.
+7. **SAVE** (where ● was) writes it — the shape, and a clip with every value it
+   has now. **DISCARD** (where A was) asks twice and puts back what the channel
+   held before.
+
+A take waits, playing and marked unsaved, until you choose. It is dropped only
+when something replaces it: a new take, a shape or set loaded, a restart.
+
+**On the panel:** hold **REC** and press a channel's **Play\|Pause** pad — the
+take starts at once, without arming. REC pressed while a take runs ends it.
+REC pressed alone otherwise does nothing.
+
+**Recording runs round and round inside the take's length**, so what a pass
+writes, it writes over the pass before it. The **rec mode** says how much of
+an old take a pass destroys, and it carries that on its own colour:
 
 | Mode | What it destroys |
 | :--- | :--- |
@@ -249,22 +420,160 @@ that on its own colour:
 | **Latch** | holds on after the finger goes: the rest of that pass is written with the position your finger left, and the figure that was there is gone |
 | **Write** | clears the pass whether you touched it or not |
 
-**Recording runs round and round inside the take's length**, so what a pass
-writes, it writes over the pass before it. That is what makes mending a corner
-possible in Touch — and it is why **Latch is not the mode for drawing a
-figure**: lift your finger half way through and the second half of the take
-becomes the one place you left it. The hold stops at the end of that pass and
-writes nothing in the next one, so it cannot eat the whole take, but the pass
-it was in is spent. Draw in **Touch** and the take keeps what you drew.
+**Latch is not the mode for drawing a figure**: lift your finger half way
+through and the second half of the take becomes the one place you left it.
+Draw in **Touch** and the take keeps what you drew. A take is always the **last
+pass you finished**: stop half way through one and that half is dropped.
 
-A take is always the **last pass you finished**: stop half way through one and
-that half is dropped rather than joined to what stood there before, which
-would show as a jump mid-figure.
+**Knobs are recorded too.** During a take, a MOTION knob you turn is written
+into a **lane** by the same rec mode, drawn in red while it writes. On
+playback the lane turns the knob; a hand on the knob wins while it holds. A
+double tap on a knob with a lane clears that lane and leaves the others.
+
+<!-- GIF: howto-rec-arm.gif | region: bar 0,672,768,352 | steps: CLIP tab; tap ● (712,978); 2 s; tap ■ (712,915) | "● arms the take" / "REC opens, the clip plays on" / "■ takes it back" -->
+
+<!-- GIF: howto-rec-setup.gif | region: bar 0,672,578,352 | steps: on REC: tap RECMODE (218,800) x2; tap LENGTH (356,800); drag fade (left half of GAP-CONNECTOR) up 20 px | "Set the rec mode" / "The lit LENGTH is the take" -->
+
+<!-- GIF: howto-rec-take.gif | region: full screen 0,0,768,1024 | steps: tap ● (712,978); tap ▶ (630,915); after the downbeat drag a circle on the sphere for one pass; tap ● | "● then ▶: on the downbeat" / "Draw on the sphere" / "● ends the take" -->
+
+<!-- GIF: howto-rec-save.gif | region: bar 0,672,768,352 | steps: after a take: tap SAVE (712,978) | "SAVE keeps the take" -->
+
+<!-- GIF: howto-rec-discard.gif | region: bar 0,672,768,352 | steps: after a take: tap DISCARD (630,978); tap it again | "DISCARD asks twice" / "The old clip comes back" -->
+
+<!-- GIF: howto-rec-knob-lane.gif | region: sphere and bar 0,36,768,988 | steps: MOTION tab; arm and start a take; drag rot up and down for one pass; end take; wait one pass; double tap rot | "Knobs turned in a take" / "play back as a lane" / "Double tap clears the lane" -->
+
+## FILES
+
+The library: what is on disk. Tap **FILES** in the global strip; it lies over
+the sphere until you tap FILES again, a tab, or MENU.
+
+![FILES, with the set "Peak" shown](pics_user/a3-motion-ui-files-sets.png)
+
+On the left, top to bottom: the four tabs **SETS**, **CLIPS**, **SVG** and
+**ACTIONS**, two by two; **from set** / **from clip**; the filter; the list;
+then the keys. On the right, the **editor** with the chosen file as text.
+
+| Tab | What the list holds |
+| :--- | :--- |
+| **SETS** | which clip and which six actions each channel has, plus the channels' 3d/freq/Q and the length keys |
+| **CLIPS** | clips: a figure with every value it is played with |
+| **SVG** | the shapes — figures only |
+| **ACTIONS** | the action scripts |
+
+**A tap on a row only shows it** in the editor. Nothing on the device changes.
+Drag the list to scroll it. When FILES opens, the list points at what the
+shown channel holds; on CLIPS that clip's row carries the drift dot when its
+values have been turned.
+
+| Key | What it does |
+| :--- | :--- |
+| **Load** | puts the chosen row on the device: a set on all four channels, a clip or a shape on the shown channel, an action on the chosen action button |
+| filter: **All** / **User** / **System** | tap to narrow the list to your own files or the shipped ones. It says what it shows now |
+| **Rename** | opens the row for typing, with the keyboard. **Keep** (the same key) or Enter settles it; Escape or leaving drops it. A name already taken is refused. Renaming a clip carries it across every set that names it |
+| **Delete** | says **Sure?**; the second press deletes. Anything else you do puts it back to sleep |
+| **from set** / **from clip** | writes what is on the device now into the editor as text, unsaved — to be kept with Save as |
+| **Cancel** | puts the file's own text back |
+| **Save** | writes the editor's text over the file, and every channel using a clip, shape or action takes it up at once. A set is only written; loading it stays Load's |
+| **Save as** | writes a copy into your own files, named after the original ("Bloom 2") |
+
+The editor edits every kind of file: sets and clips as JSON, shapes as SVG,
+actions as scripts. **Unsaved text holds the list and the tabs**: a row tap,
+Rename, Delete or another tab says `-- SAVE OR CANCEL` and flashes the two
+keys. A set or a shape that would not load again cannot be saved; a script with
+an error can, and the error stands under the editor. **Shipped files cannot be
+written over** — Save stays dark on them; Save as is the way out (see Developer
+Mode in the menu).
+
+**Deleting deliberately does less.** A set's file goes and what is loaded stays
+loaded; a clip's files go and the sets that named it are left alone. Everything
+playing goes on playing.
+
+Loading a **set** stops what was running; what the set says was running starts
+again, from the top, on the next **downbeat**.
+
+<!-- GIF: howto-files-open-close.gif | region: full screen 0,0,768,1024 | steps: tap FILES (612,700); 2 s; tap FILES (612,700) | "FILES lies over the sphere" / "Tap FILES again to close" -->
+
+<!-- GIF: howto-files-tabs.gif | region: files 0,36,768,590 | steps: tap SETS (34,59), CLIPS (95,59), SVG (34,100), ACTIONS (95,100), 1.2 s each; drag list up 100 px | "Four tabs, four lists" / "Drag the list to scroll" -->
+
+<!-- GIF: howto-files-load-set.gif | region: full screen 0,0,768,1024 | steps: tap SETS; tap row "Opening"; tap Load (106,560); wait for the downbeat | "Tap a set: it is only shown" / "Load puts it on the device" / "It starts on the downbeat" | re-record: replaces howto-load-a-set.gif -->
+
+<!-- GIF: howto-files-load-clip.gif | region: full screen 0,0,768,1024 | steps: tap face 2; tap CLIPS; tap a row; tap Load | "Choose the channel first" / "Load puts the clip on it" -->
+
+<!-- GIF: howto-files-load-shape.gif | region: full screen 0,0,768,1024 | steps: tap SVG; tap a row; tap Load | "SVG: Load swaps the figure" / "The values stay" -->
+
+<!-- GIF: howto-files-load-action.gif | region: full screen 0,0,768,1024 | steps: ACTION tab, tap A4; FILES; tap ACTIONS; tap a row; tap Load | "Load on ACTIONS" / "goes on the chosen button" -->
+
+<!-- GIF: howto-files-filter.gif | region: files 0,36,768,590 | steps: tap CLIPS; tap filter (65,182) x3 | "All, User, System" -->
+
+<!-- GIF: howto-files-rename.gif | region: full screen 0,0,768,1024 | steps: tap a user row; tap Rename (26,560); type "Test" with xdotool type; tap Keep | "Rename: type in the row" / "Keep settles it" -->
+
+<!-- GIF: howto-files-delete.gif | region: files 0,36,768,590 | steps: tap a user row; tap Delete (65,560); tap Delete again | "Delete asks: Sure?" / "Press again to delete" -->
+
+<!-- GIF: howto-files-from-clip.gif | region: files 0,36,768,590 | steps: tap CLIPS; tap from clip (65,141); tap Save as (106,601) | "from clip: the device as text" / "Save as keeps it as a new file" -->
+
+<!-- GIF: howto-files-edit-save.gif | region: files 0,36,768,590 | steps: tap ACTIONS; tap a user row; tap in editor, type a change; tap another row (refused); tap Save (65,601) | "Type in the editor" / "Unsaved text holds the list" / "Save or Cancel" -->
+
+![How to load a set](pics_user/howto-load-a-set.gif)
+
+## MIXER
+
+A software mixer for the four channels, sending the same messages the A³
+Mixer sends. Anything you turn here, the desk sees too — and the other way
+round. Tap **MIXER** in the global strip; it lies over the sphere until you tap
+MIXER again, a tab, or MENU.
+
+<!-- Screenshot to be re-shot in quiet-indigo-2: the MIXER overlay. The old
+a3-motion-ui-mixer-overlay.png shows a VOL knob, an MST knob and a filter row
+that are gone. -->
+
+The knobs show what is actually set, not what this device last did: A³ Core
+passes on whatever REAPER reports, so a hand on the desk or in REAPER moves
+them here too, and a restart mid-evening brings them back as they stand. That
+holds for the PFL and FX keys as well.
+
+**Four channel strips**, each with its meter on the left and, down the strip:
+
+| Control | What it does |
+| :--- | :--- |
+| meter | the channel's level and its **VOL fader** — drag anywhere on it, one to one. Double tap: full volume |
+| **GAIN** | input gain. Double tap: full |
+| **HIGH**, **MID**, **LOW** | the EQ. Double tap: flat |
+| **SEND** | to the FX bus. **SEND comes up shut, and a double tap takes it back there** |
+| **PFL**, **FX** | cue, and the channel through the shared filter. Tap to switch |
+
+**The master column**, on the right:
+
+| Control | What it does |
+| :--- | :--- |
+| the column | the **master fader** — drag it, one to one. No double tap: full on the master is the one gesture that makes the whole room loud at once |
+| output meters, at its foot | the subwoofer and the four speakers. Read only |
+| **BTH** | booth level |
+| **MIX** | headphone blend between cue and master. Double tap: the middle |
+| **PHN** | headphone level |
+| **RET** | the FX bus's return level. Double tap: none |
+| **FX FREQ**, **FX RES** | the one filter shared by all four channels. Double tap: FREQ to the middle, RES to none |
+| **FX MODE** | tap to switch the filter between **HPF** and **LPF** |
+
+3D, FREQ and Q are not in the mixer: they stand in the channel row.
+
+<!-- GIF: howto-mixer-open-close.gif | region: full screen 0,0,768,1024 | steps: tap MIXER (671,700); 2 s; tap MIXER | "MIXER lies over the sphere" / "Tap MIXER again to close" -->
+
+<!-- GIF: howto-mixer-channel.gif | region: mixer 0,36,768,590 | steps: drag ch1 GAIN up 30 px; drag ch1 MID down 20 px; double tap MID; double tap SEND | "Drag to turn" / "Double tap: EQ flat, SEND off" -->
+
+<!-- GIF: howto-mixer-volume.gif | region: mixer 0,36,768,590 | steps: drag ch2 meter from its middle down 80 px, up 40 px | "The meter is the fader" / "Drag it anywhere" -->
+
+<!-- GIF: howto-mixer-pfl-fx.gif | region: mixer 0,36,768,590 | steps: tap ch1 PFL; tap ch3 FX; tap both again | "PFL and FX: tap to switch" -->
+
+<!-- GIF: howto-mixer-master.gif | region: mixer 0,36,768,590 | steps: drag the master column down 40 px, back up; drag PHN up 20 px | "The master column is the fader" / "BTH, MIX, PHN, RET beside it" -->
+
+<!-- GIF: howto-mixer-filter.gif | region: mixer 0,36,768,590 | steps: tap FX MODE x2; drag FX FREQ up 40 px; double tap FX FREQ | "FX MODE: HPF or LPF" / "One filter for all four" -->
 
 ## PADS
 
 Eight pads per channel, in two columns of four — the same on the panel and on
-the PADS page, which puts the panel on screen for a build without one:
+the PADS window, which puts the panel on screen for a build without one. Tap
+**PADS** in the global strip; it lies over the sphere until you tap PADS again,
+a tab, or MENU.
 
 | | left | right |
 | :--- | :--- | :--- |
@@ -273,20 +582,25 @@ the PADS page, which puts the panel on screen for a build without one:
 | row 3 | **A3** | **A4** |
 | row 4 | **A5** | **A6** |
 
-![The PADS page](pics_user/a3-motion-ui-pads.png)
+![The PADS window](pics_user/a3-motion-ui-pads.png)
 
+- **Play\|Pause** starts or pauses the clip on the **next downbeat**.
+  **SHIFT + Play\|Pause** does it now — which is also how a running clip is
+  stopped from the panel: there is no Stop pad.
 - **PAGE** on another channel selects that channel. On the channel the screen
   shows, it steps through CLIP → MOTION → ACTION → CHMIX → REC; with SHIFT,
-  backwards. It also closes whatever lies over the sphere.
-- The block at the left fires one pad on **all four channels**: Play all, Stop
-  all (in PAGE's place), and each action on every channel that has one.
-- There is no Stop pad: **SHIFT + Play\|Pause** stops at once. STOP stays on
-  the screen.
+  backwards. It also closes FILES, MIXER or PADS.
+- **A1–A6** fire that channel's action buttons, now.
+- Pressing Play\|Pause or an action selects that channel in the bar, so what
+  you read is what you just touched.
+- The grey **block at the left** fires one pad on **all four channels**: Play
+  all (starts only the clips that stand still), **Stop all** in PAGE's place,
+  and each action on every channel that has one. Screen only.
 
 What the pads show:
 
-- Play\|Pause follows the clip: green while it plays, blinking while it waits
-  for the downbeat.
+- Play\|Pause shows ▶ or ❚❚ and follows the clip: lit while it plays, blinking
+  while it waits for the downbeat.
 - An action pad is dim when it carries an action and dark when it does not, and
   **white while its action runs**.
 - PAGE is lit on the channel the screen shows.
@@ -295,82 +609,155 @@ What the pads show:
 
 | Pad | When |
 | :--- | :--- |
-| Play\|Pause | the **next downbeat**, starting and stopping alike |
+| Play\|Pause | the **next downbeat**, starting and pausing alike |
 | SHIFT + Play\|Pause | **now** |
 | an action | **now** |
 | SHIFT + an action | now, in preview, for as long as it is held |
 
-### MIX
+<!-- GIF: howto-pads-open-close.gif | region: full screen 0,0,768,1024 | steps: tap PADS (730,700); 2 s; tap PADS | "PADS: the panel on screen" / "Tap PADS again to close" -->
 
-A software mixer for the four channels, sending the same messages the A³
-Mixer sends. Anything you turn here, the desk sees too — and the other way
-round.
+<!-- GIF: howto-pads-play-pause.gif | region: pads 0,36,768,590 | steps: tap ch2 Play|Pause (344,110); wait for the downbeat; tap it again | "Play|Pause waits for the one" / "It blinks while it waits" -->
 
-![The MIX page](pics_user/a3-motion-ui-mix.png)
+<!-- GIF: howto-pads-page.gif | region: full screen 0,0,768,1024 | steps: tap ch3 PAGE (572,110); tap ch3 PAGE again | "PAGE on a channel selects it" / "and closes PADS" -->
 
-The knobs show what is actually set, not what this device last did: A³ Core
-passes on whatever REAPER reports, so a hand on the desk or in REAPER moves
-them here too, and a restart mid-evening brings them back as they stand. That
-holds for the whole mixer — the channel strips, the master column and the
-filter — and for the PFL and FX keys, which light to match what A³ Core has
-rather than what was last pressed here.
+<!-- GIF: howto-pads-action.gif | region: pads 0,36,768,590 | steps: hold ch1 A1 (192,255) 1.5 s; hold ch4 A6 (724,547) 1.5 s | "An action pad fires now" / "White while it runs" -->
 
-Tapping **MIX** in the status bar opens the whole thing at once:
+<!-- GIF: howto-pads-scene.gif | region: pads 0,36,768,590 | steps: tap Play all (40,110); wait for the downbeat, 3 s; tap Stop all (115,110) | "The grey block: all four" / "Play all, Stop all" -->
 
-![The mixer, showing the room as it actually stands](pics_user/a3-motion-ui-mixer-overlay.png)
+## The menu
 
-Per channel: **GAIN**, the three EQ bands **HIGH / MID / LOW**, **VOL**, and
-**SEND** — how much of that channel goes to the FX bus, where the delay that
-follows the beat sits. Below them the **PFL** and **FX** buttons. A second
-page holds the master, booth and headphone levels and the one filter shared by
-all four channels.
+Opened with **MENU** at the right end of the status bar, or MENU on the panel.
+It lies over the sphere.
 
-**SEND comes up shut, and a double tap takes it back there.** It is the one
-control on the page you may want to get rid of in a single gesture,
-mid-transition, without looking — and the one whose starting position can be
-right rather than guessed.
-Nothing else on the MIX page responds to a double tap: a gain that snaps to a
-default in the middle of a set is a channel that jumps in the room.
+| Page | What it holds |
+| :--- | :--- |
+| **Skin** | which skin is loaded — a list; the skin previews as you browse it |
+| **Skin Editor** | every value the loaded skin holds, grouped by what it is |
+| **Network** | the OSC hosts, ports and addresses |
+| **Button LEDs** | the colours of the panel's keys |
+| **Pattern Folder** | where clips, shapes, actions and sets are read from |
+| **Sphere in Menu** | **on**: the sphere keeps drawing behind the menu; **off**: it stops while the menu is open |
+| **Developer Mode** | **on** lets Save write over shipped files. Leave it off on a gig |
 
-On the narrow strip to the right — `3d`, `freq` and `Q` per channel — a double
-tap works too: `3d` and `freq` go back to twelve o'clock, `Q` goes back to
-closed.
+**On every menu page a value changes in a mask and nowhere else:**
+
+| Gesture | What it does |
+| :--- | :--- |
+| drag the list, or the empty strips left and right of it | scrolls, the way a phone does |
+| tap a row | selects it |
+| double tap a row, or Enter | opens it: a page, a list of its values, a typing mask, or the colour picker |
+| in a list of values | tap or Enter chooses; Escape or back leaves without choosing |
+| in a typing mask | type with the keyboard; Enter keeps; Escape, back or ✕ undo. A skin number also has **− / +** keys that step it while you watch |
+
+Two fingers scroll as one.
+
+**Getting out:** the **‹** (back) and **✕** (close) keys in the top right, and
+MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
+however deep. Escape does not quit the app — on a device standing in a booth
+with a keyboard plugged into it, that would be one stray key from ending the
+set.
+
+<!-- GIF: howto-menu-open-close.gif | region: full screen 0,0,768,1024 | steps: tap MENU (742,17); double tap Skin Editor; tap back; tap MENU | "MENU opens the menu" / "Back or MENU: one level" / "✕ closes all of it" -->
+
+<!-- GIF: howto-menu-scroll-select.gif | region: menu 0,36,768,590 | steps: menu open; drag left strip up 100 px; tap a row; double tap it | "Drag to scroll" / "Tap selects, double tap opens" -->
+
+### Skin
+
+Double tap **Skin**: the rows give way to the list of skins. Browsing
+previews each one on the sphere; a tap or Enter chooses, back puts the running
+one back.
+
+<!-- GIF: howto-menu-skin.gif | region: full screen 0,0,768,1024 | steps: double tap Skin; tap 3 skins down the list, 1.5 s each; tap back | "Browse: the skin previews" / "Back keeps the old one" -->
+
+### Skin Editor
+
+Every value of the loaded skin, under headings — surfaces, text, states,
+channels, sphere, type, touch, then the effects. At the top five action rows:
+**» Save**, **» Save as new**, **» Rename**, **» Delete** (asks "sure?") and
+**» Reset** (every value back to the shipped default, keeping the name). They
+fire only on a double tap or Enter.
+
+- A number opens the typing mask with − / + to step it live.
+- A colour opens the **colour picker**: drag on the picking surface (hue,
+  saturation, lightness); the change is live; **done** closes it.
+- **Leaving the editor saves the skin.**
+
+<!-- GIF: howto-menu-skin-editor-value.gif | region: full screen 0,0,768,1024 | steps: double tap Skin Editor; scroll to a sphere value; double tap it; tap + x3; tap Enter | "Double tap a value" / "− and + step it live" -->
+
+<!-- GIF: howto-menu-skin-editor-colour.gif | region: menu 0,36,768,590 | steps: in Skin Editor double tap a colour row; drag across the picking surface; tap done | "A colour opens the picker" / "done closes it" -->
+
+<!-- GIF: howto-menu-skin-editor-rows.gif | region: menu 0,36,768,590 | steps: double tap » Save as new; type a name; Enter | "» Save as new: a copy" / "Name it and press Enter" -->
+
+### Network, Button LEDs, Pattern Folder
+
+Each shows only its own part of the device's configuration, as rows: Network
+the OSC sender, receiver and addresses; Button LEDs the key colours; Pattern
+Folder the folder the library is read from. Double tap a row to type a new
+value, or to pick a colour. The page is written back when you leave it.
+
+A changed OSC address changes only *this* side: the other device has to listen
+for, or send, the same one. A typo does not fail loudly — the device sends to
+an address nobody listens to.
+
+<!-- GIF: howto-menu-network.gif | region: menu 0,36,768,590 | steps: double tap Network; scroll the rows; double tap a port; Escape | "Network: hosts, ports, addresses" / "Double tap to type, Esc undoes" -->
+
+<!-- GIF: howto-menu-button-leds.gif | region: menu 0,36,768,590 | steps: double tap Button LEDs; double tap a colour; drag; tap done | "Button LEDs: the key colours" -->
+
+<!-- GIF: howto-menu-pattern-folder.gif | region: menu 0,36,768,590 | steps: double tap Pattern Folder; double tap the row; Escape | "Where the library is read from" -->
+
+### Sphere in Menu, Developer Mode
+
+Double tap the row, tap **on** or **off**.
+
+<!-- GIF: howto-menu-sphere-in-menu.gif | region: full screen 0,0,768,1024 | steps: double tap Sphere in Menu; tap off; 2 s; double tap; tap on | "off: the sphere rests" / "while the menu is open" -->
+
+<!-- GIF: howto-menu-developer-mode.gif | region: full screen 0,0,768,1024 | steps: FILES › ACTIONS, shipped row, type one character in the editor: Save dark; Cancel; MENU, double tap Developer Mode, tap on; repeat: Save lit; Cancel; set Developer Mode off | "Developer Mode on:" / "shipped files can be saved" -->
+
+## The on-screen keyboard
+
+The device's keyboard is the system's own (Onboard), docked at the bottom.
+**KEYS** in the status bar shows or hides it, always. It also comes up by
+itself when there is something to type — a Rename in FILES, a touch in the
+FILES editor, a name in the Skin Editor — and goes again when that is done.
+
+## Opening and closing, in one place
+
+| Window | Opens with | Closes with |
+| :--- | :--- | :--- |
+| FILES, MIXER, PADS | their key in the global strip | the same key; another of the three swaps it; any tab; MENU; PAGE on the panel |
+| the menu and its pages | MENU | back or MENU (one level), ✕ (all levels) |
+| a list of values, a typing mask, the colour picker | double tap or Enter on a row | back, MENU or Escape (without keeping); Enter, a tap on a value or **done** (keeping) |
+| the keyboard | KEYS, or typing a name | KEYS |
+
+Only one of FILES, MIXER and PADS is open at a time. Closing FILES ends a
+rename without keeping it and puts an armed Delete back to sleep; text typed
+in the editor stays, marked unsaved.
+
+## Clock modes
+
+| Mode | Where the tempo comes from |
+| :--- | :--- |
+| **INT** | this device. The beat display (or TAP on the panel) sets it, and `/beat` goes out |
+| **EXT** | an incoming `/beat` over OSC — the beat-analyzer |
+| **PIO** | Pioneer Pro DJ Link |
+
+The clock key in the status bar and `clock` on the panel both step it. Clock
+mode is deliberately **not** in the menu: a setting in two places is a setting
+whose location you have to remember. It is also not saved in a set — it
+depends on what is plugged into the switch at the venue. The rec mode is not
+saved in a set either.
 
 ## When the device comes up
 
 A³ Motion asks A³ Core where each sound already is, and adopts the answer
 before it says anything itself. So switching the device on, or restarting it
-mid-evening, does not move the room: the blobs appear where the sound
-actually is, and the pots stand where they stood.
+mid-evening, does not move the room: the blobs appear where the sound actually
+is, and the pots stand where they stood.
 
-Loading a **set** is the other way round — that is an explicit act, and the
-set wins.
-
-## FILES — the library
-
-Four tabs — **SETS**, **CLIPS**, **SVG** and **ACTIONS** — in a 2×2 block on
-the left, the list under them, and the file itself on the right, in an editor.
-
-![FILES, with the set "Peak" shown](pics_user/a3-motion-ui-files-sets.png)
-
-- **A tap on a row only shows it.** Nothing on the device changes.
-- **Load** puts it on the device: a set on all four channels, a clip or a shape
-  on the shown channel, an action on the chosen action button.
-- **from clip** / **from set** writes what is on the device now as text into the
-  editor, to be saved as a new file.
-- The editor edits every kind of file. **Save** writes it back, **Save as**
-  writes a copy. A set or a shape that would not load again cannot be saved.
-
-A **clip** is a figure together with every value it is played with; choosing a
-**shape** swaps only the figure and leaves the values where your hand put them.
-A **set** is the layer above: which clip and which six actions each channel has,
-plus what belongs to the device rather than to a clip.
-
-**Deleting deliberately does less.** A set's file goes and what is loaded stays
-loaded; a clip's files go and the sets that named it are left alone. Everything
-playing goes on playing.
-
-![How to load a set](pics_user/howto-load-a-set.gif)
+Loading a **set** is the other way round — that is an explicit act, and the set
+wins. Loading a set stops what was running; what the set says was running
+starts again, from the top, on the next **downbeat** — four clips starting
+together is the whole point of a set. Play all on PADS starts all four.
 
 ## Sets and moods
 
@@ -526,87 +913,12 @@ The research this rests on:
   movement stops being heard as movement at all;
 - dub and dance-music production practice.
 
-## The global strip
-
-To the right of the clip settings, on every page, because these belong to the
-device rather than to the clip.
-
-| Control | What it does |
-| :--- | :--- |
-| the 4×3 grid | **3d**, **freq**, **Q** per channel, in the channel's colour. Drag a cell |
-| **recmode** | steps Touch → Latch → Write, coloured by how much it destroys |
-| **clock** | steps INT → EXT → PIO, and writes the mode in that mode's colour |
-| **MENU** | opens the settings, one level at a time |
-| **REC** | starts a take on the clip the bar is showing, and ends a running one |
-| **TAP** | tap the tempo. Breathes with the beat |
-| **SHIFT** | held, not latched — Shift+Action previews for as long as it is down |
-
-The rec mode and clock keys **never light**: they carry a value, the value is
-written on them, and a wash that comes and goes says the same thing again in
-grey.
-
-**The status bar shows the tempo and nothing else**, in the clock's colour.
-Which clock it is comes from the clock key, under your hand; a third place
-saying it was a third place to keep in step.
-
-### Clock modes
-
-| Mode | Where the tempo comes from |
-| :--- | :--- |
-| **INT** | this device. The tap key sets it, and `/beat` goes out |
-| **EXT** | an incoming `/beat` over OSC — the beat-analyzer |
-| **PIO** | Pioneer Pro DJ Link |
-
-Clock mode is deliberately **not** in the menu: a setting in two places is a
-setting whose location you have to remember. It is also not saved in a set —
-it depends on what is plugged into the switch at the venue.
-
-## The menu
-
-Opened with MENU. The strips left and right of the panel are drag zones, not
-margins: dragging in the **left** one walks the list, dragging in the **right**
-one arms a row and changes its value. That is the encoder's two levels laid out
-as two *places* rather than as a press that switches between them.
-
-The list scrolls the way it does on a phone — a drag moves the page in your
-finger's direction — and a row is chosen by touching it.
-
-| Page | What it holds |
-| :--- | :--- |
-| **Skin** | which skin is loaded |
-| **Skin Editor** | every value a skin holds, grouped by what it is |
-| **Network** | the OSC hosts, ports and addresses |
-| **Button LEDs** | the panel's key colours |
-| **Pattern Folder** | where clips and sets are read from |
-| **Sphere in Menu** | whether the sphere keeps drawing behind the menu |
-
-**A double tap on any row calls up the keyboard**, so a value finer than a
-drag can reach is typed. Two-finger scrolling and the arrow keys both walk the
-list.
-
-Getting out: **back** closes one level, **close** gets you out of all of it at
-once, however deep. Escape does not quit — on a device standing in a booth
-with a keyboard plugged into it, that is one stray key from ending the set.
-
-## When the device comes up
-
-A³ Motion asks A³ Core where each sound already is, and adopts the answer
-before it says anything itself. So switching the device on, or restarting it
-mid-evening, does not move the room: the blobs appear where the sound actually
-is, and the pots stand where they stood.
-
-Loading a **set** is the other way round — that is an explicit act, and the set
-wins. Loading a set stops what was running; what the set says was running
-starts again, from the top, on the next **downbeat** — four clips starting
-together is the whole point of a set, and together is what a downbeat gives
-you. Play all on the PADS page starts all four.
-
 ## Specs
 
 Current revision, V03:
 
 - PoE, 31.5 W max
-- Raspberry Pi 4B running the touchscreen UI
+- Raspberry Pi 5 running the touchscreen UI
 - ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) for the panel's buttons, encoders,
   pots and LEDs, over a binary poll-frame protocol on USB serial
 - 7" capacitive multi-touch display
