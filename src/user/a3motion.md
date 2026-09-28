@@ -616,7 +616,7 @@ What the pads show:
 
 <!-- GIF: howto-pads-open-close.gif | region: full screen 0,0,768,1024 | steps: tap PADS (730,700); 2 s; tap PADS | "PADS: the panel on screen" / "Tap PADS again to close" -->
 
-<!-- GIF: howto-pads-play-pause.gif | region: pads 0,36,768,590 | steps: tap ch2 Play|Pause (344,110); wait for the downbeat; tap it again | "Play|Pause waits for the one" / "It blinks while it waits" -->
+<!-- GIF: howto-pads-play-pause.gif | region: pads 0,36,768,590 | steps: tap ch2 Play/Pause (344,110); wait for the downbeat; tap it again | "Play/Pause waits for the one" / "It blinks while it waits" -->
 
 <!-- GIF: howto-pads-page.gif | region: full screen 0,0,768,1024 | steps: tap ch3 PAGE (572,110); tap ch3 PAGE again | "PAGE on a channel selects it" / "and closes PADS" -->
 
