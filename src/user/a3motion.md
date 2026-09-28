@@ -374,58 +374,157 @@ playing goes on playing.
 
 ## Sets and moods
 
-The ten shipped sets are laid out on the **mood meter**: energy from calm to
-driving, and pleasantness from dark to open. What makes a movement read one way
-or the other is well studied:
+The library ships **50 shapes, 50 clips, 50 actions and 10 sets**, all laid out on the **mood
+meter**: energy, from calm to driving, against pleasantness, from dark to open. What makes a
+movement read one way or the other is well studied:
 
-- **Speed carries energy.** Faster turns and tempo-locked cycles read as more
-  energetic; long, slow cycles as calm.
-- **Height carries lift.** Up and overhead reads as open and bright, low and under
-  the floor as heavy and dark.
-- **Coming closer raises the tension.** Sound that approaches is heard as more
-  arousing than sound that recedes, above all when it is already dark.
-- **Smooth or angular.** Circles, roses and Lissajous figures read as pleasant;
-  corners, zigzags and sudden jumps as tense.
+- **Speed carries energy.** Faster turns and tempo-locked cycles read as more energetic; long,
+  slow cycles as calm.
+- **Height carries lift.** Up and overhead reads as open and bright, low and under the floor as
+  heavy and dark.
+- **Coming closer raises the tension.** Sound that approaches is heard as more arousing than
+  sound that recedes, above all when it is already dark.
+- **Smooth or angular.** Circles, roses and Lissajous figures read as pleasant; corners, zigzags
+  and sudden jumps as tense.
 
-| Set | Mood | Clips (channels 1–4) |
-| :--- | :--- | :--- |
-| Opening | calm, arriving | Breath, Halo, Tide, Slow Turn |
-| Ambient | floating | Halo, Breath, Dome, Ebb |
-| Dub | deep, spacious | Cellar, Seesaw, Tide, Equator |
-| Breakdown | suspended | Standstill, Dome, Ebb, Equator |
-| Ascent | building | Tide, Carousel, Halo, Surge |
-| Rollers | groovy | Carousel, Double Time, Seesaw, Equator |
-| Peak | euphoric | Surge, Whirlwind, Carousel, Double Time |
-| Techno | driving, dark | Counter, Flutter, Backspin, Half Time |
-| Drop | impact | Whirlwind, Flutter, Backspin, Seesaw |
-| Dice | playful, anywhere | Dice, Backspin, Seesaw, Flutter |
+And the vocabulary the shapes and actions are made from:
 
-**The six buttons are laid out the same way in every set**, so the hands learn
-one panel rather than ten: the **left column adds** energy and openness, the
-**right column takes it away**; the top row is gentle, the middle strong, the
-bottom the extreme move or the stop.
+- **Smalley's motion typology.** Rising and falling, oscillation, rotation around a centre,
+  flying out from it or into it, dilation and contraction, vortex.
+- **Rhythm cells.**
+  - The tresillo (3+3+2), the cell that EDM builds its tension on before a drop.
+  - The son clave 3-2.
 
-| Set | A1 / A2 | A3 / A4 | A5 / A6 |
-| :--- | :--- | :--- | :--- |
-| Opening | Rise / Ring | Bloom / Shrink | Sweep / Halt |
-| Ambient | Bloom / Half | Rise / Sink | Resonate / Stitch |
-| Dub | Sweep / Sink | Rock / Ground | Resonate / Rewind |
-| Breakdown | Rise / Shrink | Sweep / Flatten | Quarter / Halt |
-| Ascent | Rise / Ring | Twice / Half | Bloom / Halt |
-| Rollers | Twice / Half | Rock / Ring | Whirl / Unwind |
-| Peak | Bloom / Ring | Throw / Unwind | Whirl / Halt |
-| Techno | Punch / Half | Throw / Ground | Slam / Flatten |
-| Drop | Slam / Sink | Stab / Squash | Whirl / Halt |
-| Dice | Scatter / Stitch | Rewind / Quarter | Whirl / Halt |
+  A position that jumps on their sixteenths grooves in space.
+- **Dub.** The desk as instrument: throws into the delay, repeats that fall away, filter
+  sweeps, reversed tape.
+- **Build-up, drop, breakdown.** The build widens, rises and opens the filter; the drop releases
+  it all at once; the breakdown strips it back.
 
-Every shipped action script carries a `Mood:` line under its title that says
-which way it moves the room.
+### The ten sets
 
-The research this rests on: Russell's circumplex model of affect and the Mood
-Meter built on it; studies of approaching and receding sound (Tajadura-Jiménez
-et al., *Embodied auditory perception*, 2010); the mapping of pitch and height;
-and Stockhausen's work with rotating sound, which found that movement past about
-sixteen rotations a second stops being heard as movement at all.
+| Set | Clips (channels 1–4) | A1 / A2 | A3 / A4 | A5 / A6 |
+| :--- | :--- | :--- | :--- | :--- |
+| Opening | Sunrise, Aurora, Float, Horizon | Lift / Breathe | Widen / Narrow | Bloom / Freeze |
+| Ambient | Canopy, Blossom, Lullaby, Fog | Rise / Settle | Spiral Out / Recede | Resonate / Stitch |
+| Dub | Echo Chamber, Sub Pressure, Tunnel, Call and Response | Sweep / Echo Throw | Rock / Submerge | Ping Pong / Tape Stop |
+| Breakdown | Monolith, Undertow, Lurk, Standstill | Loom / Freeze | Sweep / Recede | Riser / Reset |
+| Ascent | Hands Up, Euphoria, Groove Wheel, Surge | Lift / Settle | Riser / Narrow | Impact / Halt |
+| Rollers | Clave, Tresillo Drive, Carousel, Call and Response | Accelerate / Decelerate | Rock / Settle | Spin Up / Mirror |
+| Peak | Anthem, Festival, Euphoria, Whirlwind | Flare / Ring | Throw / Unwind | Whirl / Reset |
+| Techno | Warehouse, Pressure, Strobe, Counter | Punch / Narrow | Stutter / Ground | Slam / Freeze |
+| Drop | Maelstrom, Siren, Warehouse, Backspin | Impact / Sink | Stab / Squash | Whirl / Tape Stop |
+| Dice | Random Walk, Scan, Dice, Seesaw | Scatter / Stitch | Tilt Up / Mirror | Twice / Halt |
+
+**The six buttons are laid out the same way in every set**, so the hands learn one panel rather
+than ten:
+
+- the **left column adds** energy and openness, the **right column takes it away**;
+- the top row is gentle, the middle strong, the bottom the extreme move or the stop.
+
+### Shapes (50)
+
+![All fifty shapes; the rhythm figures are points, numbered in the order they are jumped to](pics_user/a3-motion-shapes-50.png)
+
+The newest eleven:
+
+- **Rhythm:**
+  - **Tresillo** (3+3+2) and **Clave 3-2**, which jump on those sixteenths;
+  - **Ping Pong**: left and right, a beat each.
+- **Motion:**
+  - **Riser** opens out of the middle, and **Collapse** closes into it;
+  - **Vortex** turns faster as it tightens;
+  - **Pulse** breathes four times round.
+- **Dub:** **Echo**, whose throws halve.
+- **Character:** **Astroid** (tense tips), **Trefoil** (flowing) and **Drift** (an organic
+  wander).
+
+### Clips (50), by mood
+
+| Quadrant | Clip (shape) |
+| :--- | :--- |
+| Q1 euphoric (energy up, open) | Anthem (Rose 5-Petal), Hands Up (Riser), Festival (Lissajous 3-4), Euphoria (Trefoil), Groove Wheel (Clover), Sunrise (Rose 7-Petal), Call and Response (Ping Pong), Surge (Star), Carousel (Epicycloid 7-3), Double Time (Heart), Whirlwind (Epicycloid 3-1) |
+| Q2 driving (energy up, tense) | Tresillo Drive (Tresillo), Clave (Clave 3-2), Warehouse (Square), Strobe (Corner), Pressure (Astroid), Maelstrom (Vortex), Siren (Pendulum), Backspin (Lissajous 5-4), Flutter (Corner), Counter (Cross), Seesaw (Zigzag) |
+| Q3 deep (energy down, dark) | Undertow (Collapse), Echo Chamber (Echo), Sub Pressure (Circle), Fog (Drift), Tunnel (Helix), Lurk (Wave), Monolith (Diamond), Cellar (Orbit), Standstill (Arc), Ebb (Wave), Half Time (Triangle) |
+| Q4 calm (energy down, open) | Aurora (Lissajous 1-2), Float (Pulse), Horizon (Infinity), Blossom (Petal), Lullaby (Figure 8), Canopy (Hypo 8-3), Breath (Ellipse), Halo (Circle), Dome (Epicycloid 7-3), Tide (Triangle), Slow Turn (Star), Equator (Orbit) |
+| Neutral and utility | Default (—), Pinpoint (Heart), Dice (Orbit), Scan (Arc), Random Walk (Random) |
+
+### Actions (50)
+
+**More** — energy and openness up (the left column in the shipped sets):
+
+| Action | Mood |
+| :--- | :--- |
+| Accelerate | energy up, same figure (Q1/Q2). |
+| Bloom | opens out and lifts; calm to euphoric (Q4 -> Q1). |
+| Flare | bright, sudden; euphoric (Q1). |
+| Impact | the release after a build; the impact (Q2 -> Q1). |
+| Lift | lifts gently; calm to bright (Q4 -> Q1). |
+| Loom | approaches; arousal and tension rise (Q2). |
+| Overhead | snaps up and bright; pleasant, high energy (Q1). |
+| Ping Pong | call and response; playful (Q1). |
+| Punch | depth hits, nothing moves; driving (Q2). |
+| Resonate | resonance creeps up; slow tension (Q3 -> Q2). |
+| Rise | lifts overhead; pleasant, building (Q4 -> Q1). |
+| Riser | builds over four bars; the tension before the drop (Q2 -> Q1). |
+| Rock | the figure swings up and down; groove (Q1). |
+| Scatter | a surprise, somewhere else each time; playful. |
+| Slam | the extreme push, an impact; high energy, tense (Q2). |
+| Spin Up | a carousel; euphoric motion (Q1). |
+| Spiral Out | flies outwards; Smalley's centrifugence (Q1). |
+| Stab | a short, tight hit; tense (Q2). |
+| Stutter | nervous, tense; a stutter edit in space (Q2). |
+| Sweep | the filter builds, nothing moves; tension that lifts. |
+| Throw | a hard push out; high energy (Q1/Q2). |
+| Tilt Up | the room tips towards you (Q1/Q2). |
+| Twice | more of whatever the clip is doing; energy up. |
+| Whirl | the extreme spin, once; euphoric or chaotic (Q1/Q2). |
+| Widen | opens the room; enveloping (Q1). |
+
+**Less** — calmer, darker, stiller (the right column):
+
+| Action | Mood |
+| :--- | :--- |
+| Breathe | slow breathing; calm (Q4). |
+| Decelerate | energy down, same figure (Q4/Q3). |
+| Dive | a heavy fall; dark (Q3). |
+| Echo Throw | a repeat that trails away; dub (Q3). |
+| Flatten | the height is pinned; calmer, focused. |
+| Freeze | time stops; suspended (Q3/Q4). |
+| Ground | settles at the far pole; weight (Q3). |
+| Half | less of whatever the clip is doing; energy down. |
+| Halt | everything stops; the reset. |
+| Mirror | a reflective turn; the same thing, reconsidered. |
+| Narrow | closes the room; focused (Q3/Q4). |
+| Quarter | a slow quarter shift; suspended (Q3). |
+| Recede | recedes; arousal falls (Q4/Q3). |
+| Reset | strips it back; the breakdown (Q4). |
+| Rewind | runs backwards and bounces out; a dub trick, uneasy. |
+| Ring | settles at ear height; steady, grounded (Q4). |
+| Settle | calmer, same character (Q4). |
+| Shrink | pulls in to a point overhead; intimate, suspended (Q3/Q4). |
+| Sink | goes under the floor; dark, heavy (Q3). |
+| Squash | pressed flat, springs back; pressure (Q2/Q3). |
+| Stitch | the holes glide shut; smooth, calm (Q4). |
+| Submerge | under water; dark and muffled (Q3). |
+| Tape Stop | runs out of power; the end of a phrase (Q3). |
+| Unwind | the same turn, the other way and slower; release. |
+
+**Template**: Action — every parameter at the clip's value, to copy from.
+
+Every action script carries a `Mood:` line under its title that says which way it moves the room,
+and a comment that says why.
+
+The research this rests on:
+
+- Russell's circumplex model of affect, and the Mood Meter built on it;
+- studies of approaching and receding sound (Tajadura-Jiménez et al., *Embodied auditory
+  perception*, 2010);
+- the mapping of pitch and height;
+- Denis Smalley's *Spectromorphology* (1997);
+- Stockhausen's work with rotating sound, which found that past about sixteen rotations a second,
+  movement stops being heard as movement at all;
+- dub and dance-music production practice.
 
 ## The global strip
 

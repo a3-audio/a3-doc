@@ -41,10 +41,23 @@ On `main` since `v03.0`, not tagged yet.
 - Sets store the six actions per channel. **Sets from before are copied once to
   `pattern/backup-two-slots/`** on the first start, then read with slot 1 as the clip and the
   two slot actions as A1 and A2.
-- **The shipped sets are moods.** The ten sets are placed on the mood meter (energy ×
-  pleasantness), each with one clip and six actions per channel, laid out the same way in
-  every set: the left column adds energy and openness, the right takes it away. Every shipped
-  action names its mood. Cellar now sits low and turns slowly, and Standstill stands still.
+- **The library: 50 shapes, 50 clips, 50 actions, 10 sets**, laid out on the mood meter (energy
+  × pleasantness).
+  - **Eleven new shapes** from rhythm and electroacoustic motion:
+    - Tresillo and Clave 3-2, which jump on their sixteenths;
+    - Ping Pong, Riser, Collapse, Vortex, Pulse and Echo;
+    - Astroid, Trefoil and Drift.
+  - **29 new clips**, named for what they do in a set (Anthem, Hands Up, Tresillo Drive,
+    Warehouse, Echo Chamber, Undertow, Aurora, Canopy, …).
+  - **24 new actions**:
+    - Riser and Impact for the build and the drop;
+    - Loom and Recede for approach and retreat;
+    - Echo Throw and Tape Stop from dub;
+    - Lift, Widen, Stutter, Freeze, Breathe, and more.
+  - Every action names its mood.
+  - The ten sets are rebuilt from the whole library, one mood each. The six buttons are laid out
+    the same way in every set: the left column adds energy and openness, the right takes it away.
+  - Cellar now sits low and turns slowly, and Standstill stands still.
 - Loading a set makes it the current one on disk at once; a restart straight after a Load came
   back with the set before.
 
