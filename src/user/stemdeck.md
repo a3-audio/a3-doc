@@ -19,6 +19,9 @@ CDJs in the booth: its master deck's beat goes out on Pro DJ Link, the
 [beat-analyzer](beat-analyzer.md) follows it, and A³ Motion follows the
 beat-analyzer.
 
+A track you only have as a stereo file, StemDeck
+[splits into stems](#stemdeck-stem-creator) itself.
+
 - [StemDeck repository](https://github.com/rafjagger/stemdeck) — not under the
   `a3-audio` organisation, but carried by the a3-system repository along with
   the rest
@@ -162,6 +165,88 @@ To load a set:
 | Play / pause | `D` | `L` |
 | Cue (hold to preview) | `S` | `K` |
 | Mute stem 1–4 | `1` `2` `3` `4` | `7` `8` `9` `0` |
+
+(stemdeck-stem-creator)=
+
+## Making stems from a stereo track
+
+Only have the finished mix? StemDeck splits it into four stems itself —
+drums, bass, other, vocals — and files the result in the library as a set.
+
+<!-- IMAGE: the library bar with the "Stems erstellen…" button, and the strip below it showing a running job, e.g. "Stems: Title  42 %  +2 wartend" -->
+
+### Starting
+
+- Drop stereo files, or a whole folder, onto the library, or
+- press **Stems erstellen…** in the library bar.
+
+FLAC, WAV, MP3, AIFF, OGG, M4A and Opus work.
+
+StemDeck asks once for **Artist** and **Album**, filled in from the folders
+the files lie in (`…/Artist/Album/track.flac`). Correct them if they are
+wrong and press **Erstellen**. Drop files from several folders at once and
+there is no question: each file keeps the artist and album of its own
+folder.
+
+### What you get
+
+Each track becomes a set in the library folder:
+
+```text
+stems/
+└── Artist/
+    └── Album/
+        ├── Title - 1.drums.wav
+        ├── Title - 2.bass.wav
+        ├── Title - 3.other.wav
+        ├── Title - 4.vocals.wav
+        └── originals/
+            └── Title.flac
+```
+
+- Stem N lands on bus N: drums on 1, bass on 2, other on 3, vocals on 4.
+- `originals/` holds a **copy** of the file you dropped. The library does not
+  look in there, so the original never turns up as a set.
+- The stems are 24-bit WAV at 44.1 kHz — which, as WAV, also makes them the
+  quick kind to jump and loop in.
+- If the album already has a track of that name, the new one is called
+  `Title (2)`.
+- When a set is done, the library scans again and selects it.
+
+### While it works
+
+The splitting is done by [Demucs](https://github.com/adefossez/demucs) and
+takes a few minutes per track. It runs in the background, one track at a
+time; the others queue up.
+
+**Live audio comes first.** The separation keeps to one CPU core at the
+lowest priority, and it **pauses while a deck plays**. So queue up a
+crate before the gig, not during the peak-time set — while you play, it
+waits for you.
+
+The strip under the library bar shows the track, its progress, whether it
+is paused (`pausiert, ein Deck spielt`) and how many tracks wait
+(`+2 wartend`). If a track fails, the strip says why, until you add the next
+one; the rest of the queue carries on.
+
+**Abbrechen** in the strip stops the running track and leaves nothing
+behind — no half set in the album.
+
+(stemdeck-stem-creator-setup)=
+
+### Setting it up, once
+
+The separator is not part of StemDeck; it is set up once per machine and
+takes about 1 GB. In the StemDeck checkout:
+
+```sh
+sudo apt install ffmpeg python3-venv
+tools/setup-separator.sh
+```
+
+The script installs Demucs and the CPU build of PyTorch into
+`~/.local/share/StemDeck/separator` and downloads the model. Without it, a
+job fails straight away and the strip says `separator not installed`.
 
 (stemdeck-audio)=
 
@@ -332,6 +417,8 @@ file that changes is analysed again; to analyse everything anew, delete
 | Symptom | What to do |
 | :--- | :--- |
 | A set is missing from the library | It needs exactly four files with one name and different endings. **Neu scannen** after adding files |
+| The stem strip says `separator not installed` | Run the one-time setup: [Setting it up, once](#stemdeck-stem-creator-setup) |
+| Making stems has stopped moving | A deck is playing — the separation waits until both decks stop |
 | Nothing to hear | The ports are never connected automatically. Patch them in qjackctl |
 | The top bar says `JACK-Server wurde beendet` | JACK went away under StemDeck. Restart StemDeck once JACK is back |
 | A stem on AUX does not move | The aux ports have to reach one of the channels A³ Motion moves, and that channel's **3d** has to be up |
