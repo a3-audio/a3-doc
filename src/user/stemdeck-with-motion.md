@@ -101,22 +101,42 @@ controls.
 ten channels and its patchbay wires them into REAPER inputs 11–20.
 
 **On the StemDeck machine**, send the ten outputs to the Core over the
-network:
+network. StemDeck's repository ships two systemd user services for this,
+under `.config/systemd/user/`:
 
-1. Run `zita-j2n` for 10 channels, pointed at the Core's address and the port
-   zita-n2j listens on (65100 in the a3-core package).
-2. Patch StemDeck's outputs into `zita-j2n`'s inputs **in order**:
+- `zita-j2n.service` sends StemDeck's 10 channels to the Core, UDP port
+  65100 — the port the a3-core package's zita-n2j listens on;
+- `zita-n2j.service` receives 2 channels back from the Core on UDP port
+  55100, where the a3-core package's zita-j2n sends REAPER's recording bus.
+
+Both come back by themselves 2 s after they drop out: zita ends on some
+changes to the audio graph, and the units restart it with no limit on how
+often.
+
+1. Check the Core's address in `zita-j2n.service` (the `ExecStart` line) and
+   correct it if your Core sits elsewhere.
+2. Install and start both units, from the StemDeck checkout:
+
+   ```sh
+   cp .config/systemd/user/zita-*.service ~/.config/systemd/user/
+   systemctl --user daemon-reload
+   systemctl --user enable --now zita-j2n zita-n2j
+   ```
+
+   Run the same lines again to update them after a StemDeck update.
+3. Patch StemDeck's outputs into `zita-j2n`'s inputs **in order**:
    `deck1_L` → 1, `deck1_R` → 2, … `aux_R` → 10. StemDeck
-   [never connects anything by itself](#stemdeck-audio), so this is on you —
-   once, in qjackctl or any patchbay, and saved.
-3. Settle the StemDeck machine's sample rate **before** StemDeck and
-   zita-j2n start. StemDeck takes the rate it finds and asks for nothing, on
-   purpose: changing a running graph throws zita-j2n out.
+   [never connects anything by itself](#stemdeck-audio), and neither do the
+   zita units, so this is on you — once, in qjackctl or any patchbay, and
+   saved. The two channels arriving at `zita-n2j` are patched by hand the
+   same way, wherever you want them.
+4. Settle the StemDeck machine's sample rate **before** StemDeck starts.
+   StemDeck takes the rate it finds and asks for nothing, on purpose: changing
+   a running graph throws zita out — it comes back after 2 s, but the stems
+   drop out meanwhile.
 
 **StemDeck on the Core machine itself?** Then skip the network: patch its ten
 outputs straight to REAPER's `in11` … `in20`, in the same order.
-
-<!-- QUESTION (maintainer): the page describes the Core side as the a3-core package ships it (zita-n2j, --chan 1-10; patchbay out_1..10 -> REAPER in11..in20; REAPER template: pairs 1-2/3-4/5-6/7-8 to 1-input..4-input, 9-10 to Return). The sender side — how zita-j2n is started on the StemDeck machine and whether its inputs are patched deck1_L..aux_R in order — is not in any repository. Is that how the rig runs it, and should StemDeck ship a j2n helper? -->
 
 ### 2. The clock: StemDeck as master
 
@@ -194,4 +214,4 @@ motion. It's a small thing; the room will think you rehearsed it.
 | A stem plays but doesn't move | Its channel's **3d** is down, or its clip isn't playing. Or the stem is on **AUX**: then it is on the Return track, not on a channel |
 | A³ Motion doesn't follow StemDeck's tempo | Wait for the deck's BPM; is the deck playing and the top bar saying `PIO master`? Is A³ Motion on **PIO**? Is the Core in the same network as StemDeck? |
 | The movements start one beat off the bar | StemDeck counts the bar from the first beat of the track's beat grid. Set the downbeat with the jog |
-| The stems stop after a change in the audio settings | Changing the sample rate or buffer of a running graph throws zita-j2n out. Restart it, and set the rate before starting next time |
+| The stems stop after a change in the audio settings | Changing the sample rate or buffer of a running graph throws zita-j2n out; its unit restarts it within about 2 s. If the stems stay away, check `systemctl --user status zita-j2n` on the StemDeck machine, and set the rate before starting next time |
