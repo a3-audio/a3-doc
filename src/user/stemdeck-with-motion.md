@@ -55,10 +55,18 @@ and a first set to try it with.
 
 ## Which stem goes where
 
-StemDeck's ten outputs travel to A³ Core over the network as ten audio
-channels (zita-j2n on the StemDeck side, zita-n2j on the Core). A³ Core's
-patchbay wires the ten network channels into REAPER's inputs 11–20, and the
-REAPER project spreads them over the four channels:
+StemDeck plays into REAPER's inputs 11–22 on A³ Core, one of two ways:
+
+- **StemDeck on the Core** — the usual case, where it runs full screen on
+  the Core's workspace 4. A³ Core's patchbay connects its twelve outputs
+  straight to REAPER's `in11` … `in22`.
+- **StemDeck on another machine** — its first ten outputs travel over the
+  network as ten audio channels (zita-j2n on the StemDeck side, zita-n2j on
+  the Core), and the patchbay wires them into REAPER's `in11` … `in20`.
+
+Either way the REAPER project spreads them over the four channels the same
+way (the whole routing is pictured on the
+[A³ Core configuration page](../configuration/core.md)):
 
 | StemDeck output | Network channels | REAPER inputs | Arrives on | In a set made by StemDeck |
 | :--- | :---: | :---: | :--- | :--- |
@@ -66,7 +74,8 @@ REAPER project spreads them over the four channels:
 | `deck2_L`, `deck2_R` (bus 2) | 3–4 | 13–14 | **channel 2** | bass |
 | `deck3_L`, `deck3_R` (bus 3) | 5–6 | 15–16 | **channel 3** | other |
 | `deck4_L`, `deck4_R` (bus 4) | 7–8 | 17–18 | **channel 4** | vocals |
-| `aux_L`, `aux_R` | 9–10 | 19–20 | the **Return** track, set by the **RET** pot | every stem switched to **AUX** |
+| `aux_L`, `aux_R` | 9–10 | 19–20 | the **Return** track, set by the **RET** pot | every stem switched to **A** (AUX) |
+| `phones_L`, `phones_R` | – | 21–22 | nothing: the REAPER project does not use them | every stem on **P**, every deck on PHONES |
 
 From there a stem is just another source on its channel: it goes through
 that channel's strip — gain, EQ and fader on the A³ Mixer, 3d, freq and Q on
@@ -82,10 +91,12 @@ A few things follow from that:
   on the buses in the order its endings sort — see
   [Stem sets](#stemdeck-stem-sets). Which part lands on which channel is
   whatever that order says.
-- **AUX takes a stem off its channel.** Switch a stem to AUX in StemDeck's
-  mixer and it leaves its bus — and so its A³ channel and its movement — and
-  goes to the Return track instead, whose level is the RET pot (on A³
-  Motion's MIXER, and the desk's FX return).
+- **A stem plays on every bus that is lit.** Each stem in StemDeck's mixer
+  has six switches, **1 2 3 / 4 A P**. Light **A** (AUX) and switch its own
+  number off, and the stem leaves its A³ channel and its movement for the
+  Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
+  desk's FX return). Light two numbers and it plays on two channels, moving
+  with both.
 
 (stemdeck-with-motion-setup)=
 
@@ -97,8 +108,14 @@ controls.
 
 ### 1. The audio: StemDeck into A³ Core
 
-**On A³ Core** there is nothing to do: the a3-core package runs zita-n2j for
-ten channels and its patchbay wires them into REAPER inputs 11–20.
+**StemDeck on the Core machine itself?** Then there is nothing to wire: the
+a3-core package's patchbay connects its twelve outputs to REAPER's `in11` …
+`in22`, and the user service keeps it running on workspace 4 (see
+[Always running on the Core](#stemdeck-on-the-core)). Go on with the clock.
+
+**On A³ Core**, for a StemDeck on another machine, there is nothing to do
+either: the a3-core package runs zita-n2j for ten channels and its patchbay
+wires them into REAPER inputs 11–20.
 
 **On the StemDeck machine**, send the ten outputs to the Core over the
 network. StemDeck's repository ships two systemd user services for this,
@@ -135,8 +152,6 @@ often.
    a running graph throws zita out — it comes back after 2 s, but the stems
    drop out meanwhile.
 
-**StemDeck on the Core machine itself?** Then skip the network: patch its ten
-outputs straight to REAPER's `in11` … `in20`, in the same order.
 
 ### 2. The clock: StemDeck as master
 
@@ -209,9 +224,9 @@ motion. It's a small thing; the room will think you rehearsed it.
 
 | Symptom | What to do |
 | :--- | :--- |
-| A³ Motion's channel meters stay still while StemDeck plays | The stems don't reach the Core. Check StemDeck's outputs are patched into zita-j2n, and that zita-j2n reaches the Core |
+| A³ Motion's channel meters stay still while StemDeck plays | The stems don't reach REAPER. On the Core: are StemDeck's outputs connected to REAPER `in11` …? (qjackctl's patchbay). On another machine: are they patched into zita-j2n, and does zita-j2n reach the Core? |
 | Drums show up on the vocal channel | The outputs are patched out of order on the StemDeck side. `deck1_L` goes to input 1, `aux_R` to input 10 |
-| A stem plays but doesn't move | Its channel's **3d** is down, or its clip isn't playing. Or the stem is on **AUX**: then it is on the Return track, not on a channel |
+| A stem plays but doesn't move | Its channel's **3d** is down, or its clip isn't playing. Or the stem is only on **A** (AUX): then it is on the Return track, not on a channel |
 | A³ Motion doesn't follow StemDeck's tempo | Wait for the deck's BPM; is the deck playing and the top bar saying `PIO master`? Is A³ Motion on **PIO**? Is the Core in the same network as StemDeck? |
-| The movements start one beat off the bar | StemDeck counts the bar from the first beat of the track's beat grid. Set the downbeat with the jog |
+| The movements start one beat off the bar | StemDeck counts the bar from the first beat of the track's beat grid. Set CUE on the real first beat of a bar and press **GRID**, then **SNAP** |
 | The stems stop after a change in the audio settings | Changing the sample rate or buffer of a running graph throws zita-j2n out; its unit restarts it within about 2 s. If the stems stay away, check `systemctl --user status zita-j2n` on the StemDeck machine, and set the rate before starting next time |
