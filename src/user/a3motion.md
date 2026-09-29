@@ -1280,8 +1280,10 @@ this page need one of the two.
 | **EXT** | the beat analyser, listening to the music |
 | **PIO** | Pioneer Pro DJ Link: the tempo master on the link |
 
-**Which one?** PIO when you play CDJs on a link; INT and tap for vinyl or a
-lone laptop; EXT when the beat analyser is fed the music.
+**Which one?** PIO when you play CDJs on a link, or [StemDeck](stemdeck.md)
+as master; INT and tap for vinyl or a lone laptop; EXT when the beat analyser
+is fed the music. What each one needs on the other end is on the
+[Beat Analyzer](beat-analyzer.md) page.
 
 In EXT and PIO, A³ Motion counts on by itself between beats and pulls itself
 gently onto each beat that arrives. If the beats stop coming, it carries on at

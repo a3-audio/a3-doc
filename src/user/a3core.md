@@ -10,8 +10,8 @@ that under remote control: **it has no interface of its own.** A³ Mixer and A³
 Motion tell it what to do over OSC, and so can anything else that speaks the
 same addresses.
 
-It also runs the **Beat-Analyzer**, which produces the tempo the whole system
-follows and the VU meters the other two devices show.
+It also runs the [**Beat Analyzer**](beat-analyzer.md), which produces the
+tempo the whole system follows and the VU meters the other two devices show.
 
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
@@ -34,11 +34,13 @@ remote.
 The tempo the system runs on can come from three places, chosen on A³
 Motion's clock key:
 
-| Mode | Where the tempo comes from |
-| :--- | :--- |
-| **a3motion** | relayed from A³ Motion's tap key |
-| **intern** | the Beat-Analyzer's own FFT/onset detection |
-| **pioneer** | the master beat from Pioneer Pro DJ Link |
+| Motion reads | Mode | Where the tempo comes from |
+| :--- | :--- | :--- |
+| **INT** | **a3motion** | A³ Motion's own tempo, tapped on Motion and relayed by the Beat Analyzer |
+| **EXT** | **intern** | the Beat Analyzer's own FFT/onset detection |
+| **PIO** | **pioneer** | the master beat from Pioneer Pro DJ Link — a CDJ, or [StemDeck](stemdeck.md) as master |
+
+What each mode needs is on the [Beat Analyzer](beat-analyzer.md) page.
 
 ## The window
 

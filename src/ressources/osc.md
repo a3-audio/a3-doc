@@ -326,7 +326,7 @@ restriction.
 | - | /state/recall | - | - | Sent once at start-up: *tell me what is already sounding*
 | - | /StereoEncoder/azimuth, /StereoEncoder/elevation | float | [-180-180], [-90-90] | The alternative backend, straight into an IEM plug-in chain instead of into Core
 | /beat | /beat | int (beat), int (bar), int (bpm) | [1-4], [-], [-] | The beat clock — **sent** in INT mode, **received** in EXT and PIO. Always updates the status bar readout; received, it also syncs playback tempo and phase. Float arguments are accepted and truncated to int.
-| - | /tap | - | - | Tap tempo, to the beat-analyzer
+| - | /tap | int | 1 | Tap tempo, to the beat-analyzer
 | - | /clockmode | int | [0-2] | 0 a3motion, 1 intern, 2 pioneer
 
 ```{note}
@@ -335,7 +335,7 @@ them from the `oscAddresses` block of its `config/config.json`, and they can be 
 device under Menu → Network. `{ch}` there stands for the channel number.
 
 The block is grouped into `out` (to Core and IEM), `in` (VU and energy) and `beatclock`. The beat
-clock is neither: `beat` is *sent* in INT clock mode and *received* in EXT, one address either way.
+clock is neither: `beat` is *sent* in INT clock mode and *received* in EXT and PIO, one address either way.
 
 Changing one changes only A³ Motion's side of the conversation — the peer has to be changed to
 match. A mismatch does not report itself: the message is sent correctly, to an address nobody is
@@ -439,6 +439,26 @@ messages slipped past the echo filter — enough. It was taken out again on
 rather than arriving forever.
 ```
 
+(osc-beat-analyzer)=
+
+## beat-analyzer
+
+The beat clock and the meters. It listens on **one** OSC port, 7775 by
+default (`OSC_PORT_A3MOTION` in its `.env`), and on the three Pro DJ Link
+ports, 50000–50002, which carry no OSC at all. What it sends goes to every
+target named in its `.env`; see
+{ref}`Beat Analyzer <beat-analyzer-config>`.
+
+| RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
+| :---| :--- | :--- | :--- | :---
+| /beat | /beat | int (beat), int (bar), float (bpm) | [1-4], [-], [-] | The beat clock. **Sent** in every clock mode, to every target — in mode 0 except the target named `motion`. **Received** on 7775 and relayed only in mode 0; ints and floats are both accepted, and a beat outside 1–4 is dropped. In mode 2 the bar is always 0.
+| - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | One meter per JACK input `vu_1` … `vu_12`, as one bundle, 25 times a second. Sent to a target's `OSC_VU_*` port where one is set, else to its `OSC_HOST_*` port
+| /clockmode | - | int or float | [0-2] | 0 a3motion, 1 intern, 2 pioneer. Clamped to 0–2. Not stored: it starts in 1 every time
+| /tap | - | int or float, optional | [1-4] | Tap tempo, counted only in mode 1. The number is logged and otherwise unused — a tap always sets the beat to 1
+
+The clock modes, and which A³ Motion clock key sends which, are explained on
+the {ref}`Beat Analyzer <beat-analyzer-modes>` page.
+
 ## IP and Port
 
 Ports are configurable per device; these are the defaults that ship.
@@ -446,27 +466,29 @@ Ports are configurable per device; these are the defaults that ship.
 | Component | Listens on | Sends to |
 | :--- | :--- | :--- |
 | A³ Core | 9000 commands, 9002 REAPER feedback, 9080 HTTP (the window) | REAPER `127.0.0.1:9001`, IEM MultiEncoder `127.0.0.1:1337+n`, IEM DualDelay `127.0.0.1:1340`, A³ Mixer, A³ Motion |
-| A³ Mixer | 7771 | A³ Core `:9000` |
+| A³ Mixer | 7772 | A³ Core `:9000`, beat-analyzer `:7775` |
 | A³ Motion | 7771 control, 7772 VU, 7777 energy grid | A³ Core `:9000`, beat-analyzer `:7775` |
 | Beat-Analyzer | 7775, Pioneer Pro DJ Link 50000-50002 | A³ Core, A³ Motion, A³ Mixer |
 | IEM DualDelay | 1340 — **only once opened by hand in the plug-in** | – |
 
 ### Known inconsistencies
 
-Worth knowing before chasing a silent link. These are recorded rather than fixed
-because each needs a decision about which end is right:
+Worth knowing before chasing a silent link.
 
-- `a3-core.py` addresses its peers by **hardcoded IP** (`192.168.43.54`, `.55`), and
-  `a3-mixer.py` does the same for the core (`192.168.43.50`). A system on a different
-  subnet has those links dead with nothing to indicate it. Core's two can at least
-  be pointed elsewhere without editing anything — `--mixer` and `--motion` — and a
-  department added with `--subscriber` never had the problem.
-- `a3-core.py` sends to A³ Motion on port **8700** by default, while the A³ Motion UI
-  listens on **7771**. Since the window was built there is at least a way around it
-  without editing the source: `a3-core.py --motion <host>:<port>`, which is what the
-  development machine runs.
-- `beat-analyzer` is configured to reach the mixer on **7773/7774**, while
-  `a3-mixer.py` listens on **7771**.
+- **The addresses are in the source.** `a3-core.py` defaults to the Mixer on
+  `192.168.8.11:7772` and to Motion on `127.0.0.1:7771`, and `a3-mixer.py`
+  reaches Core and the beat-analyzer on `192.168.8.10` — the values on the
+  [ports page](ports.md). Core's can be pointed elsewhere without editing
+  anything (`--mixer`, `--motion`, `--subscriber`); the Mixer's cannot yet, so
+  a rig on another subnet has the desk talking to nobody, with nothing to say
+  so.
+- **The beat-analyzer's targets are in its `.env`,** which is not in any
+  repository — only the template `.env.example` is. A target that is wrong
+  there fails the same silent way.
+
+Until 2026-09-29 this list also named Core sending to Motion on port 8700 and
+the beat-analyzer reaching the Mixer on 7773/7774. Both are gone: Core's
+defaults and the beat-analyzer's template now match the ports page.
 
 ## The register: which addresses exist at all
 

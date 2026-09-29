@@ -25,6 +25,8 @@ Contact
    user/a3core
    user/a3motion
    user/a3mix
+   user/beat-analyzer
+   user/stemdeck
 
 .. toctree::
    :titlesonly:

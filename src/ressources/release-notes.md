@@ -284,8 +284,21 @@ On `main` since `v03.0`, not tagged yet.
 - The octave choice has hysteresis: near the edge of the tempo range the clock no longer flips
   between a tempo and its double.
 
+### StemDeck (`stemdeck`)
+
+- **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
+  own output bus, any of them switchable to aux — is carried by the a3-system repository as a
+  submodule since 2026-09-29, and versioned with the rest.
+
 ### Documentation (`a3-doc`)
 
+- **A page for the beat analyzer:** what it does in the system, its three clock modes and
+  which of A³ Motion's clock keys selects which, what each mode needs, its `.env`, the
+  meters and troubleshooting.
+- **A page for StemDeck:** stem sets, the screen, the audio outputs, and building and
+  starting it.
+- The OSC reference has a section for the beat-analyzer's own messages, lists the A³ Mixer on
+  its VU port 7772, and no longer lists address mismatches that have been fixed.
 - The user section explains every control on A³ Motion where a performer looks for it; the
   Mixer, the Core and the welcome page follow the same shape, with current pictures.
 - The OSC reference lists every path, with send and receive per device, and one page lists

@@ -17,6 +17,13 @@ audio cables.
 Your decks, headphones and the booth and main speakers connect to A³ Core's
 audio hardware. The other two devices carry no audio at all.
 
+Two programs belong to the system as well:
+
+| Program | What it is | What it does |
+| :--- | :--- | :--- |
+| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | runs on the A³ Core machine. Sends the beat every device follows and the level meters every device shows |
+| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems each, every stem on its own output — so one part of a track can move through the room while the rest stays put. Can be the tempo master when there are no CDJs |
+
 ![Connection Diagram](pics_user/a3-connecting-diagram.png)
 
 ## One state, told to everyone
@@ -36,10 +43,12 @@ naming it when the Core starts. See
 
 ## The beat
 
-A³ Core also runs the **Beat-Analyzer**: it listens to the music and produces
+A³ Core also runs the [**Beat Analyzer**](beat-analyzer.md): it produces
 the tempo the whole system follows, together with the VU meters the other two
-devices show. Its clock can come from its own analysis, from A³ Motion's tap
-key, or from a Pioneer Pro DJ Link master — chosen on A³ Motion's clock key.
+devices show. Its clock can come from A³ Motion's own tempo, from listening to
+the music, or from a Pioneer Pro DJ Link master — a CDJ, or
+[StemDeck](stemdeck.md) when there are no CDJs — chosen on A³ Motion's clock
+key.
 
 Everything that moves on its own is counted in **bars**, off that clock. A
 figure that takes four bars keeps taking four bars when the tempo changes.
@@ -48,7 +57,7 @@ figure that takes four bars keeps taking four bars when the tempo changes.
 
 | Section | What is in it |
 | :--- | :--- |
-| **User** | the three devices, control by control — start here |
+| **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
 | **Assembly** | prototype pictures and how the boxes go together |
 | **Configuration** | the files each device reads at startup |
 | **Development** | building and hacking on the software |
