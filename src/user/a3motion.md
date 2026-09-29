@@ -23,7 +23,9 @@ four bars when the tempo changes.
 
 ![A³ Motion](pics_user/a3-motion-icon_light.png)
 
-<!-- GIF: howto-hero-sphere.gif | region: sphere 0,36,768,590 | steps: a set playing on all four channels; no interaction, 5 to 6 s | "Four channels, one room" | bonus, not counted in round 1 -->
+<!-- GIF: howto-hero-sphere.gif | region: 0,36,768,624 | recorded 2026-09-29, 5.8 s | steps: A set playing on all four channels; no interaction. | "Four channels, one room" | bonus -->
+
+![A set playing on all four channels; no interaction.](pics_user/howto-hero-sphere.gif)
 
 <!-- The screenshots and GIFs on this page are to be (re)made in the skin
 quiet-indigo-2. The recording plan is kept outside this repository. -->
@@ -112,11 +114,13 @@ still until you press Play; a set saved while playing starts again on the
 next downbeat.
 ```
 
-<!-- GIF: howto-files-load-set.gif | region: 0,36,768,636 (overlay plus the channel row, where the names change) | steps: FILES; SETS; tap Warmup; Load; wait for the downbeat | "Tap a set: it only shows" / "Load: all four channels" / "They start on the downbeat" | round 1, no. 1; a shipped set loads standing still, so the last caption needs a set saved while playing, or Play all after Load; re-record replaces howto-load-a-set.gif -->
+<!-- GIF: howto-files-load-set.gif | region: 0,36,768,664 | recorded 2026-09-29, 9.5 s | steps: In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped. | "FILES › SETS" / "Tap a set: it only shows" / "Load: all four channels take it" / "Stopped, ready for your ▶" | a shipped set loads stopped, so it ends on "ready for your ▶"; replaced howto-load-a-set.gif -->
 
-![How to load a set](pics_user/howto-load-a-set.gif)
+![In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped.](pics_user/howto-files-load-set.gif)
 
-<!-- GIF: howto-files-load-clip.gif | region: full screen 0,0,768,1024 | steps: tap face 2; FILES; CLIPS; tap a row; Load | "Choose the channel first" / "Load puts the clip on it" | round 2 -->
+<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
+
+![Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip.](pics_user/howto-files-load-clip.gif)
 
 (motion-howto-play)=
 
@@ -140,11 +144,13 @@ is; it doesn't jump anywhere.
 
 <!-- QUESTION (maintainer): the key is called Play|Pause and shows ❚❚, but in the code a "pause" is a stop: every start begins at position 0 (MotionEngine::startPlaying), so ❚❚, SHIFT + Play|Pause and ■ all end in the same state and differ only in timing. The page describes it that way. Is that the intent (and the label stays), or should ❚❚ resume where it stopped? -->
 
-<!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 (the progress bar shows the start) | steps: tap ▶; wait for the downbeat; 2 s; tap ❚❚ | "▶ waits for the next downbeat" / "Blinking means waiting, not broken" / "❚❚ lands on the downbeat too" | round 1, no. 2; re-record replaces howto-play-pause.gif -->
+<!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.8 s | steps: Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat. | "Clip stopped" / "▶ blinks: waiting for the downbeat" / "On the one: it plays" / "❚❚ waits for the downbeat too" / "Paused, right on the one" | replaced howto-play-pause.gif -->
 
-![How to play and pause a clip](pics_user/howto-play-pause.gif)
+![Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat.](pics_user/howto-transport-play-pause.gif)
 
-<!-- GIF: howto-transport-stop.gif | region: 0,626,768,398 | steps: clip playing; tap ■; tap ▶ | "■ stops now, no waiting" / "Next ▶ starts from the top" | round 1, no. 21 -->
+<!-- GIF: howto-transport-stop.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.0 s | steps: With the clip playing tap ■: it stops at once. Tap ▶: it starts from the top on the downbeat. | "Channel 1 plays" / "■ stops now, no waiting" / "Next ▶ starts from the top" -->
+
+![With the clip playing tap ■: it stops at once. Tap ▶: it starts from the top on the downbeat.](pics_user/howto-transport-stop.gif)
 
 <!-- GIF: howto-pads-scene.gif | region: 0,36,768,590 | steps: PADS; Play all; downbeat; 2 s; Stop all | "The grey block plays all four" / "Play all: in on the downbeat" / "Stop all: all four, right now" | round 1, no. 7 -->
 
@@ -177,11 +183,17 @@ to lean the view towards the horizon (down brings it back), drag sideways to
 walk round, and double tap to go back to straight above. In camera mode no
 finger can move a sound.
 
-<!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,590 | steps: clip playing; drag ch1 blob in an arc; hold 2 s; release | "Drag a blob: the sound follows" / "Let go: the clip takes it back" | round 1, no. 3; record with the clip playing -->
+<!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back. | "Channel 1 plays its clip" / "Drag a blob: the sound follows" / "Let go: the clip takes it back" | the drag path goes round the other blobs, which a dragged blob pushes aside -->
 
-<!-- GIF: howto-sphere-camera-mode.gif | region: 0,36,768,988 | steps: tap the elevation picture; drag down; drag sideways; double tap | "Small sphere: camera mode" / "Drag to lean and turn the view" / "Double tap: back to above" | round 1, no. 22 -->
+![With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back.](pics_user/howto-sphere-drag-blob.gif)
 
-<!-- GIF: howto-sphere-zoom.gif | region: sphere 0,36,768,590 | steps: camera mode on; mouse wheel up 5 notches (xdotool click 4), then down 5 (click 5); double tap | "Camera mode: zoom in and out" / "Double tap resets the zoom" | round 2; the wheel leaves no finger ring, so the caption must not say pinch -->
+<!-- GIF: howto-sphere-camera-mode.gif | region: 0,36,768,988 | recorded 2026-09-29, 10.2 s | steps: Tap the small sphere, drag up, drag sideways, double tap, tap the small sphere again: camera on, lean, turn, reset, off. | "Tap the small sphere: camera" / "Drag up: lean to the horizon" / "Drag sideways: walk round" / "Double tap: straight above" / "Small sphere again: camera off" | from straight above only a drag UP leans the view; a drag down does nothing -->
+
+![Tap the small sphere, drag up, drag sideways, double tap, tap the small sphere again: camera on, lean, turn, reset, off.](pics_user/howto-sphere-camera-mode.gif)
+
+<!-- GIF: howto-sphere-zoom.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In camera mode turn the mouse wheel in and out, then double tap: back to normal. | "Camera mode on" / "Mouse wheel (or pinch): zoom in" / "...and out" / "Double tap: back to normal" | mouse wheel (xdotool click 4/5), so no finger ring on the zoom -->
+
+![In camera mode turn the mouse wheel in and out, then double tap: back to normal.](pics_user/howto-sphere-zoom.gif)
 
 (motion-howto-clip)=
 
@@ -203,15 +215,25 @@ On the **CLIP** tab, for the selected channel:
 CLIP and SVG are separate on purpose, so browsing shapes never sneaks someone
 else's preset onto your channel mid-set.
 
-<!-- GIF: howto-clip-length-tap.gif | region: 0,36,768,988 | steps: playing; tap a long LENGTH, 3 s; tap a short one, 3 s | "Tap a LENGTH to play at it" / "Fewer beats, faster laps" | round 1, no. 8 -->
+<!-- GIF: howto-clip-length-tap.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.5 s | steps: With the clip playing at LENGTH 16, tap LENGTH 2, then LENGTH 1: the laps get faster. | "LENGTH 16: a lap every four bars" / "Tap 2: the same lap in two beats" / "Tap 1: fewer beats, faster laps" -->
 
-<!-- GIF: howto-clip-choose-shape.gif | region: 0,36,768,988 | steps: playing; drag SVG up 3 steps | "Drag SVG: a new shape" / "Your values stay put" | round 1, no. 9 -->
+![With the clip playing at LENGTH 16, tap LENGTH 2, then LENGTH 1: the laps get faster.](pics_user/howto-clip-length-tap.gif)
 
-<!-- GIF: howto-clip-choose-clip.gif | region: 0,36,768,988 (the effect is on the sphere) | steps: playing; drag CLIP up 3 steps | "Drag CLIP: a whole new preset" / "New shape, new values" | round 1, no. 10 -->
+<!-- GIF: howto-clip-choose-shape.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.0 s | steps: With the clip playing, drag the SVG field up three steps: the shape changes, speed and values stay. | "The SVG field: the shape" / "Drag it: a new shape each step" / "Speed and values stay put" -->
 
-<!-- GIF: howto-clip-direction.gif | region: 0,36,768,988 | steps: playing; tap DIRECTION x3, 2 s apart | "Tap DIRECTION to step it" / "Bnce: there and back again" | round 1, no. 15 -->
+![With the clip playing, drag the SVG field up three steps: the shape changes, speed and values stay.](pics_user/howto-clip-choose-shape.gif)
 
-<!-- GIF: howto-clip-length-drag.gif | region: bar 0,672,578,352 | steps: drag LENGTH (494,800) up 36 px (3 steps), release | "Drag a LENGTH key" / "The key keeps the new length" | round 2 -->
+<!-- GIF: howto-clip-choose-clip.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.0 s | steps: With the clip playing, drag the CLIP field up three steps: each step is a new preset with its own shape and speed. | "The CLIP field: a whole preset" / "Drag it: new shape, new values" / "Each clip brings its own speed" -->
+
+![With the clip playing, drag the CLIP field up three steps: each step is a new preset with its own shape and speed.](pics_user/howto-clip-choose-clip.gif)
+
+<!-- GIF: howto-clip-direction.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With the clip playing, tap DIRECTION three times: Rev, Bnce, Rnd. | "DIRECTION: Fwd" / "Tap: Rev runs it backwards" / "Bnce: there and back again" / "Rnd: a random start each pass" -->
+
+![With the clip playing, tap DIRECTION three times: Rev, Bnce, Rnd.](pics_user/howto-clip-direction.gif)
+
+<!-- GIF: howto-clip-length-drag.gif | region: 0,672,578,352 | recorded 2026-09-29, 8.4 s | steps: Drag a LENGTH key up: 4 becomes 8, then 16, and the key keeps it. | "A LENGTH key reads 4" / "Drag it up: 8, then 16" / "The key keeps its new length" -->
+
+![Drag a LENGTH key up: 4 becomes 8, then 16, and the key keeps it.](pics_user/howto-clip-length-drag.gif)
 
 <!-- GIF: howto-clip-stop-vs-paus.gif | region: sphere and bar 0,36,768,988 | steps: short LENGTH; END-ACTION on Stop, let a pass run out; then Paus, let a pass run out | "Stop: back to the start" / "Paus: stays where it ends" | round 2; replaces howto-clip-end-action.gif -->
 
@@ -237,11 +259,17 @@ where it started on a bar line.
 
 <!-- QUESTION (maintainer): in the recording (2026-09-29) clip-top dragged 40-60 px after elv changed nothing visible, and a double tap on elv left the shape at the bottom rather than at ear level (its rest is "the middle of the clip band", ClipKnobs.hh elevationKnobSpec). Is that the intended rest, and what does clip-top need to show its ceiling? Needs a look at the device. -->
 
-<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | steps: MOTION; drag rot; drag spin 2 steps; wait 3 s; double tap spin | "rot turns the shape" / "spin keeps it turning" / "Double tap: spin off" | round 1, no. 11; replaces howto-motion-knob.gif and howto-motion-sweep.gif -->
+<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" -->
 
-<!-- GIF: howto-motion-elevation.gif | region: 0,36,768,988 | steps: drag elv down; drag clip-top up | "elv: how high the shape sits" / "clip-top: a ceiling it goes round" | round 1, no. 24 -->
+![On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops.](pics_user/howto-motion-rotation.gif)
 
-<!-- GIF: howto-motion-tilt-roll.gif | region: sphere and bar 0,36,768,988 | steps: camera mode on, lean view 45°; drag tilt up 40 px; drag roll up 40 px; double tap both | "tilt and roll lean the plane" / "Double tap: flat again" | round 2 -->
+<!-- GIF: howto-motion-elevation.gif | region: 0,36,768,988 | recorded 2026-09-29, 6.1 s | steps: On MOTION drag elv up: the small sphere and the sphere show the shape rising. | "The small sphere shows the height" / "Drag elv: the shape rises" | elv only: clip-top showed nothing visible and is missing (see the QUESTION under How to shape the movement) -->
+
+![On MOTION drag elv up: the small sphere and the sphere show the shape rising.](pics_user/howto-motion-elevation.gif)
+
+<!-- GIF: howto-motion-tilt-roll.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With the camera leant, drag tilt up, drag roll up, double tap both: the shape's plane leans and comes back flat. | "Camera leant, MOTION tab" / "tilt leans the plane forward" / "roll leans it sideways" / "Double tap both: flat again" -->
+
+![With the camera leant, drag tilt up, drag roll up, double tap both: the shape's plane leans and comes back flat.](pics_user/howto-motion-tilt-roll.gif)
 
 (motion-howto-action)=
 
@@ -272,19 +300,29 @@ first: **EDIT**, change something in the text in FILES (a comment will do —
 as**. The copy goes onto the button you came from.
 ```
 
-<!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | steps: clip playing; ACTION; tap A1; hold A (global strip) 2 s; release | "Tap A1 to choose it" / "Hold A: the action takes over" / "Let go: the clip is itself again" | round 1, no. 4; fired with the global strip's A, since the fields only choose (2026-09-28); replaces howto-fire-an-action.gif -->
+<!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With channel 1 playing, open ACTION, tap A1, hold A in the global strip: the action moves the clip; let go and the clip comes back. | "Channel 1 plays its clip" / "ACTION: tap A1 to choose it" / "Hold A: Move Spin takes over" / "Let go: the clip is itself again" -->
 
-<!-- GIF: howto-action-assign.gif | region: 0,672,578,352 | steps: tap A2; tap list row 3; scroll to top; tap no action | "Tap a button to choose it" / "Tap a script: now it's on it" / "\"no action\" at the top clears it" | round 1, no. 12; re-record replaces howto-assign-an-action.gif -->
+![With channel 1 playing, open ACTION, tap A1, hold A in the global strip: the action moves the clip; let go and the clip comes back.](pics_user/howto-action-fire.gif)
 
-![How to put another action on a button](pics_user/howto-assign-an-action.gif)
+<!-- GIF: howto-action-assign.gif | region: 0,672,578,352 | recorded 2026-09-29, 9.9 s | steps: Tap A2, tap a script in the list: A2 carries it. Drag the list back to the top and tap "no action": A2 is empty again. | "Six buttons, one list" / "Tap a button to choose it" / "Tap a script: now it's on it" / "Drag the list back to the top" / ""no action" clears the button" | the list glides on after a drag, so pick the row from a still frame; replaced howto-assign-an-action.gif -->
 
-<!-- GIF: howto-action-audio.gif | region: 0,626,768,398 | steps: tap A1; drag 3d max up; hold A (global strip, 630,978) 1.5 s | "max: how far the 3d accent goes" / "Hold A and watch the 3D arc" | round 1, no. 16 -->
+![Tap A2, tap a script in the list: A2 carries it. Drag the list back to the top and tap "no action": A2 is empty again.](pics_user/howto-action-assign.gif)
 
-<!-- GIF: howto-action-writes-script.gif | region: 0,36,768,988 | steps: tap A1; MOTION tab of the card; turn spin; EDIT; the ~spin line shows the value | "Turn a value on the card" / "EDIT: the script says the same" / "Every set using it hears it too" | round 1, no. 25 -->
+<!-- GIF: howto-action-audio.gif | region: 0,626,578,398 | recorded 2026-09-29, 9.8 s | steps: Tap A3, drag the 3d max knob up, hold A: the arc on the channel's 3D pot fills in and falls back when you let go. | "AUDIO: the button's accent" / "Choose A3" / "max: how far the 3d accent goes" / "Hold A: the 3D arc fills in" / "Let go: the accent falls" | recorded with A3 (Width Breathe, Hold): with A1 (Lift Overhead, 1shot) no arc showed; the arc is faint on a ~12 px pot -->
 
-<!-- GIF: howto-action-then.gif | region: bar 0,672,578,352 | steps: tap A1; tap then (370,858) x3 | "then: what fires next" / "A1 then A3" | round 2 -->
+![Tap A3, drag the 3d max knob up, hold A: the arc on the channel's 3D pot fills in and falls back when you let go.](pics_user/howto-action-audio.gif)
 
-<!-- GIF: howto-action-mode.gif | region: bar 0,672,578,352 | steps: tap A3; tap mode x2; fire once in 1shot, then in Hold | "1shot: fire and forget" / "Hold: as long as you hold" | round 2; only worth it if it shows the difference -->
+<!-- GIF: howto-action-writes-script.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: Tap A1, open the card's MOTION tab, turn spin, tap EDIT: FILES shows the script with ~spin = 4. | "ACTION, the card's MOTION tab" / "Choose A1" / "Turn spin on the card" / "EDIT: the script says ~spin = 4" / "Every set using it hears it too" -->
+
+![Tap A1, open the card's MOTION tab, turn spin, tap EDIT: FILES shows the script with ~spin = 4.](pics_user/howto-action-writes-script.gif)
+
+<!-- GIF: howto-action-then.gif | region: 0,672,578,352 | recorded 2026-09-29, 9.0 s | steps: Tap A1, tap the then key three times: then A1, then A2, then A3. | "then: what fires next" / "Choose A1" / "Tap then: A1, round again" / "Tap again: A2" / "A1, then A3" -->
+
+![Tap A1, tap the then key three times: then A1, then A2, then A3.](pics_user/howto-action-then.gif)
+
+<!-- GIF: howto-action-mode.gif | region: 0,672,768,352 | recorded 2026-09-29, 10.2 s | steps: Tap A3, tap the mode key: 1shot, a short A runs it through. Tap the mode again: Hold, the action ends when A is released. | "Under EDIT: the mode" / "Choose A3" / "Tap: 1shot, the badge says 1" / "A quick A: it runs its course" / "Tap again: Hold, badge H" / "Hold: over when you let go" -->
+
+![Tap A3, tap the mode key: 1shot, a short A runs it through. Tap the mode again: Hold, the action ends when A is released.](pics_user/howto-action-mode.gif)
 
 (motion-howto-take)=
 
@@ -316,11 +354,17 @@ or a set loaded, a restart.
 That skips arming; the take starts on the next downbeat. Press REC again to
 end it.
 
-<!-- GIF: howto-rec-take.gif | region: 0,36,768,988 | steps: LENGTH 4 lit, Touch; ●; ▶; after the downbeat draw one lap; ● | "● arms, ▶ starts on the downbeat" / "Draw one full lap on the sphere" / "● ends the take" | round 1, no. 5; LENGTH 4 keeps it under 10 s at 124 BPM; replaces howto-rec-arm.gif -->
+<!-- GIF: howto-rec-take.gif | region: 0,36,768,988 | recorded 2026-09-29, 10.2 s | steps: With the clip playing tap ●, tap ▶, draw circles on the sphere from the downbeat, tap ●: the last full lap is the take. | "Channel 1 plays" / "● arms the take" / "▶ starts it on the downbeat" / "Draw on the sphere, lap after lap" / "● ends it: the last full lap stays" -->
 
-<!-- GIF: howto-rec-save-discard.gif | region: 0,626,768,398 | steps: after a take: tap DISCARD once (asks); tap SAVE | "DISCARD asks twice, on purpose" / "Changed your mind? SAVE keeps it" | round 1, no. 6; replaces howto-rec-save.gif and howto-rec-discard.gif -->
+![With the clip playing tap ●, tap ▶, draw circles on the sphere from the downbeat, tap ●: the last full lap is the take.](pics_user/howto-rec-take.gif)
 
-<!-- GIF: howto-rec-setup.gif | region: bar 0,672,578,352 | steps: on REC: tap a LENGTH key; watch it light | "The lit LENGTH is the take length" | round 2; rec mode and fade split off (fade can't be seen on screen) -->
+<!-- GIF: howto-rec-save-discard.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.0 s | steps: After a take tap DISCARD once (it asks), then tap SAVE: the take is kept. | "The take waits: ✕ DISCARD, ✓ SAVE" / "DISCARD asks twice, on purpose" / "Changed your mind? SAVE keeps it" -->
+
+![After a take tap DISCARD once (it asks), then tap SAVE: the take is kept.](pics_user/howto-rec-save-discard.gif)
+
+<!-- GIF: howto-rec-setup.gif | region: 0,672,578,352 | recorded 2026-09-29, 7.0 s | steps: On REC tap LENGTH 4, then LENGTH 2: the lit key is the take's length. | "The lit LENGTH is the take length" / "Tap 4: a take of four beats" / "Tap 2: two beats, quick laps" -->
+
+![On REC tap LENGTH 4, then LENGTH 2: the lit key is the take's length.](pics_user/howto-rec-setup.gif)
 
 (motion-howto-lanes)=
 
@@ -335,7 +379,9 @@ in red while it writes, with the same rec mode as the shape. On playback the
 lane turns the knob by itself; your hand on the knob wins while it holds.
 Double tap a knob to clear its lane; the other lanes stay.
 
-<!-- GIF: howto-rec-knob-lane.gif | region: sphere and bar 0,36,768,988 | steps: MOTION tab; arm and start a take; drag rot up and down for one pass; end take; wait one pass; double tap rot | "Knobs turned in a take" / "come back as a lane" / "Double tap clears the lane" | round 2 -->
+<!-- GIF: howto-rec-knob-lane.gif | region: 0,36,768,988 | recorded 2026-09-29, 10.2 s | steps: On MOTION tap ●, tap MOTION again, tap ▶, turn rot during the take, tap ●: rot plays back as a lane. Double tap rot: the lane is cleared. | "MOTION, channel 2" / "● arms: REC opens" / "Back to MOTION, then ▶" / "Turn rot while the take runs" / "● ends it: rot plays a lane" / "Double tap rot: lane cleared" | ● switches the bar to REC, so MOTION is tapped again before ▶; the take is left unsaved -->
+
+![On MOTION tap ●, tap MOTION again, tap ▶, turn rot during the take, tap ●: rot plays back as a lane. Double tap rot: the lane is cleared.](pics_user/howto-rec-knob-lane.gif)
 
 (motion-howto-save)=
 
@@ -357,15 +403,23 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 <!-- QUESTION (maintainer): Save as names a copy after the file the editor shows (copyBaseFor(_panelFile)); with no file shown it falls back to "Action" on every tab, so SETS › from set › Save as straight after opening SETS wrote a set called "Action" (recorded 2026-09-29). Should a set copy be named after the loaded set instead? -->
 
-<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | steps: (knob turned beforehand) CLIP tab with the drift dot; FILES; CLIPS; from clip; Save as | "The dot: this clip has changed" / "CLIPS › from clip, then Save as" / "Your tweak, kept as a new clip" | round 1, no. 14; replaces howto-files-from-clip.gif -->
+<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
 
-<!-- GIF: howto-files-save-set.gif | region: 0,36,768,590 | steps: FILES; SETS; from set; Save as | "SETS › from set: your set as text" / "Save as: keep it for the gig" | round 1, no. 13 -->
+![The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip.](pics_user/howto-files-keep-tweak.gif)
+
+<!-- GIF: howto-files-save-set.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own. | "FILES › SETS" / "from set: the device as text" / "Save as: kept as your own set" | no row shown before from set, so the copy was named "Action" -->
+
+![In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own.](pics_user/howto-files-save-set.gif)
 
 <!-- GIF: howto-keyboard-rename.gif | region: full screen 0,0,768,1024 | steps: FILES; Rename; type a name on the keyboard; ENTER | "Rename: the keyboard comes up" / "ENTER keeps the name" | round 2 (reserve); replaces howto-files-rename.gif and howto-statusbar-keys.gif -->
 
-<!-- GIF: howto-files-delete.gif | region: files 0,36,768,590 | steps: tap a user row; tap Delete (65,560); tap Delete again | "Delete asks: Sure?" / "Press again to delete" | round 2 -->
+<!-- GIF: howto-files-delete.gif | region: 0,36,768,620 | recorded 2026-09-29, 8.4 s | steps: In FILES › CLIPS tap one of your own clips, tap Delete (it asks Sure?), tap Delete again: the row is gone. | "Your own clips can go" / "Tap the row" / "Delete asks: Sure?" / "Press again: gone" -->
 
-<!-- GIF: howto-files-edit-save.gif | region: files 0,36,768,590 | steps: tap ACTIONS; tap a user row; tap in editor, type a change; tap another row (refused); tap Save (65,601) | "Type in the editor" / "Unsaved text holds the list" / "Save or Cancel" | round 3 -->
+![In FILES › CLIPS tap one of your own clips, tap Delete (it asks Sure?), tap Delete again: the row is gone.](pics_user/howto-files-delete.gif)
+
+<!-- GIF: howto-files-edit-save.gif | region: 0,0,768,1024 | recorded 2026-09-29, 10.2 s | steps: In FILES › ACTIONS tap your own copy, type in the editor, tap another row (refused), tap Save. | "FILES › ACTIONS, your own copy" / "Tap in the editor and type" / "Another row? Save or Cancel first" / "Save: written, keyboard gone" | full screen: Onboard comes up and the UI shrinks into the upper part while typing -->
+
+![In FILES › ACTIONS tap your own copy, type in the editor, tap another row (refused), tap Save.](pics_user/howto-files-edit-save.gif)
 
 (motion-howto-mix)=
 
@@ -386,13 +440,21 @@ Mixer has no motor faders, though: turn something on the screen and the
 hardware control stays where it is. The next time you touch it, the level
 jumps to wherever the hardware control sits.
 
-<!-- GIF: howto-chmix-volume.gif | region: 0,672,578,352 | steps: CHMIX; drag the meter from its middle down, then up | "The meter is the VOL fader" / "Grab it anywhere, it won't jump" | round 1, no. 17; replaces howto-mixer-volume.gif -->
+<!-- GIF: howto-chmix-volume.gif | region: 0,672,578,352 | recorded 2026-09-29, 9.9 s | steps: On CHMIX drag the handle on the meter down and up, then double tap the meter: full volume. | "The meter is the VOL fader" / "Drag the handle, one to one" / "Double tap: full volume" -->
 
-<!-- GIF: howto-chmix-knobs.gif | region: bar 0,672,578,352 | steps: CHMIX tab (400,700); drag HIGH up 30 px; double tap HIGH; drag SEND up 40 px; double tap SEND | "Drag to turn" / "Double tap: EQ flat, SEND off" | round 2; one "double tap resets" GIF for CHMIX and MIXER -->
+![On CHMIX drag the handle on the meter down and up, then double tap the meter: full volume.](pics_user/howto-chmix-volume.gif)
 
-<!-- GIF: howto-mixer-master.gif | region: mixer 0,36,768,590 | steps: drag the master column down 40 px, back up; drag PHN up 20 px | "The master column is the fader" / "BTH, MIX, PHN, RET beside it" | round 2 -->
+<!-- GIF: howto-chmix-knobs.gif | region: 0,700,390,320 | recorded 2026-09-29, 9.8 s | steps: On CHMIX drag HIGH up, double tap it: flat. Drag SEND up, double tap it: off. | "CHMIX: drag a knob to turn it" / "HIGH up" / "Double tap: EQ flat" / "SEND up" / "Double tap: SEND off" -->
 
-<!-- GIF: howto-mixer-filter.gif | region: mixer 0,36,768,590 | steps: tap FX MODE x2; drag FX FREQ up 40 px; double tap FX FREQ | "FX MODE: HPF or LPF" / "One filter for all four" | round 2 -->
+![On CHMIX drag HIGH up, double tap it: flat. Drag SEND up, double tap it: off.](pics_user/howto-chmix-knobs.gif)
+
+<!-- GIF: howto-mixer-master.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.5 s | steps: In MIXER drag the master handle down and back up, then drag PHN up. | "The master column, far right" / "Drag its handle: master volume" / "PHN beside it: the headphones" -->
+
+![In MIXER drag the master handle down and back up, then drag PHN up.](pics_user/howto-mixer-master.gif)
+
+<!-- GIF: howto-mixer-filter.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.5 s | steps: In MIXER tap FX MODE twice (HPF, LPF), drag FX FREQ up, double tap it: back to the middle. | "One filter for all four" / "FX MODE: HPF or LPF" / "FX FREQ: where it cuts" / "Double tap: FREQ to the middle" -->
+
+![In MIXER tap FX MODE twice (HPF, LPF), drag FX FREQ up, double tap it: back to the middle.](pics_user/howto-mixer-filter.gif)
 
 (motion-howto-tempo)=
 
@@ -412,7 +474,9 @@ tapped since. Tap it in again.
 
 <!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
 
-<!-- GIF: howto-statusbar-tap.gif | region: 0,0,560,36 at --width 560 | steps: clock key to INT; tap the beat display 8x at ~120 BPM | "Clock on INT" / "Tap the beat display in time" / "The BPM follows your taps" | round 1, no. 18; absorbs howto-statusbar-clock.gif -->
+<!-- GIF: howto-statusbar-tap.gif | region: 0,0,560,36 | recorded 2026-09-29, 9.5 s | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
+
+![Tap the clock key to INT, tap the beat display eight times: the BPM follows.](pics_user/howto-statusbar-tap.gif)
 
 (motion-howto-look)=
 
@@ -437,11 +501,17 @@ tapped since. Tap it in again.
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 
-<!-- GIF: howto-menu-skin.gif | region: full screen 0,0,768,1024 | steps: double tap Skin; tap 3 skins down the list, 1.5 s each; tap back | "Browse skins: live preview" / "Back keeps the one you had" | round 2 (first reserve) -->
+<!-- GIF: howto-menu-skin.gif | region: 0,0,768,1024 | recorded 2026-09-29, 10.0 s | steps: In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays. | "MENU › Skin: double tap" / "Browse: each skin previews" / "Back: the old one stays" | arrow keys (xdotool key Down x3, Escape), so no finger ring on the browse; a tap would choose and save a skin -->
 
-<!-- GIF: howto-menu-skin-editor-value.gif | region: full screen 0,0,768,1024 | steps: double tap Skin Editor; scroll to a sphere value; double tap it; tap + x3; tap Enter | "Double tap a value" / "− and + step it live" | round 2 -->
+![In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays.](pics_user/howto-menu-skin.gif)
 
-<!-- GIF: howto-menu-skin-editor-colour.gif | region: menu 0,36,768,590 | steps: in Skin Editor double tap a colour row; drag across the picking surface; tap done | "A colour opens the picker" / "done closes it" | round 3 -->
+<!-- GIF: howto-menu-skin-editor-value.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.9 s | steps: In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back. | "Skin Editor: double tap a value" / "+ steps it: 0.55, 0.605, 0.665" / "Esc: back to 0.500, nothing kept" | the edit box covers the sphere, so only the number shows the step; Escape, not Enter, keeps the sandbox skin as it was -->
+
+![In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back.](pics_user/howto-menu-skin-editor-value.gif)
+
+<!-- GIF: howto-menu-skin-editor-colour.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done. | "Double tap a colour: the picker" / "Drag: channel 1 recolours live" / "The hue strip for another hue" / "done keeps it" | Escape does not close the picker, only done; opening the editor on "default" switches the skin to "custom" -->
+
+![In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done.](pics_user/howto-menu-skin-editor-colour.gif)
 
 ### How to type on the device
 
@@ -463,7 +533,9 @@ listen on the same one. A typo doesn't fail loudly: A³ Motion just sends to
 an address nobody listens to.
 ```
 
-<!-- IMAGE: a screenshot of MENU › Network with its rows, in quiet-indigo-2 (replaces the dropped howto-menu-network.gif) -->
+<!-- GIF: howto-menu-network.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back. | "MENU › Network" / "Hosts, ports, OSC addresses" / "Drag down to the ports" / "Double tap a port to type" / "Esc: the old port is back" | Escape at the end, so the sandbox config stays as it was -->
+
+![In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back.](pics_user/howto-menu-network.gif)
 
 (motion-panic)=
 
@@ -574,7 +646,9 @@ sphere, and the channel row, the bar and the global strip stay in view under
 it. Closing FILES ends a rename without keeping it and cancels an armed
 Delete; text typed in the editor stays, marked unsaved.
 
-<!-- GIF: howto-overlays.gif | region: 0,36,768,690 | steps: FILES; MIXER; PADS; tap CLIP tab | "FILES, MIXER, PADS: over the sphere" / "One at a time; a tab closes it" | round 1, no. 20; replaces howto-files-open-close.gif, howto-mixer-open-close.gif and howto-pads-open-close.gif -->
+<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-09-29, 9.5 s | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" | shows the PADS page before feat/pads-panel; re-record when that lands -->
+
+![Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes.](pics_user/howto-overlays.gif)
 
 ### The main screen
 
@@ -659,9 +733,13 @@ panel, the pot's own position decides.
 
 ![The channel row: four channels, each with its clip's name](pics_user/a3-motion-ui-channel-row.png)
 
-<!-- GIF: howto-channelrow-select.gif | region: 0,626,768,398 | steps: tap face 2, 1.5 s; face 3, 1.5 s; face 1 | "Tap a channel to work on it" / "The bar follows the channel" | round 1, no. 19 -->
+<!-- GIF: howto-channelrow-select.gif | region: 0,626,768,398 | recorded 2026-09-29, 8.4 s | steps: Tap channel 2, channel 3, then channel 1 in the channel row: the bar follows the channel and takes its colour. | "Tap a channel to work on it" / "Channel 2: the bar turns blue" / "Channel 3: its clip, its keys" / "Channel 1: back where you were" -->
 
-<!-- GIF: howto-channelrow-pots.gif | region: channel row 0,610,768,80 | steps: drag FREQ of ch1 (63,641) up 60 px, down 30 px; drag 3D of ch2 (222,641) up 40 px | "Drag 3D, FREQ or Q" / "The channel is selected too" | round 3; region too thin, mostly for builds without a panel -->
+![Tap channel 2, channel 3, then channel 1 in the channel row: the bar follows the channel and takes its colour.](pics_user/howto-channelrow-select.gif)
+
+<!-- GIF: howto-channelrow-pots.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.5 s | steps: Drag channel 1's FREQ pot up and down, then drag channel 2's 3D pot: channel 2 becomes selected. | "3D, FREQ, Q: right in the row" / "Drag FREQ up, then down" / "3D on channel 2: now selected" -->
+
+![Drag channel 1's FREQ pot up and down, then drag channel 2's 3D pot: channel 2 becomes selected.](pics_user/howto-channelrow-pots.gif)
 
 #### The bar
 
@@ -1062,7 +1140,9 @@ MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
 however deep. **Escape never quits the app.** In a booth, one elbow on a
 keyboard shouldn't end your set.
 
-<!-- GIF: howto-menu-navigate.gif | region: full screen 0,0,768,1024 | steps: tap MENU (742,17); drag left strip up 100 px; tap a row; double tap Skin Editor; tap back; tap ✕ | "Drag to scroll, double tap opens" / "Back: one level, ✕: all of it" | round 2; replaces howto-menu-open-close.gif and howto-menu-scroll-select.gif -->
+<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-29, 9.8 s | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
+
+![Tap MENU, tap Network, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
 
 #### Skin
 
@@ -1402,7 +1482,9 @@ panel rather than ten:
 *More* moves the room towards energy and openness, *less* towards calm and
 weight. Every action script says which it is on its `Mood:` line.
 
-<!-- GIF: howto-library-load-set.gif | region: full screen 0,0,768,1024 | steps: tap FILES (612,700); tap SETS (34,59); tap row "Warmup"; tap Load (106,560); wait for the downbeat, 3 s; tap FILES (612,700) | "SETS: one set per phase" / "Load: four clips, six buttons" / "It starts on the downbeat" | a shipped set loads standing still, so the last caption needs Play all after Load; same recording as howto-files-load-set.gif -->
+<!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
+
+![With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped.](pics_user/howto-library-load-set.gif)
 
 #### Across a night
 
@@ -1605,7 +1687,9 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 **README** in the ACTIONS list is not an action but the scripting manual.
 Firing it changes nothing.
 
-<!-- GIF: howto-library-assign-cue.gif | region: bar 0,672,578,352 | steps: ACTION tab (287,700); tap A6 (124,950); scroll list to "Cue Dub Echo"; tap it | "Put a Cue on a button" / "Cue Dub Echo: the dub escape" -->
+<!-- GIF: howto-library-assign-cue.gif | region: 0,672,578,352 | recorded 2026-09-29, 7.5 s | steps: On channel 2's ACTION page tap A6, then tap Cue Dub Echo in the list: A6 carries it. | "Channel 2, ACTION" / "Tap A6: the list shows its script" / "Tap Cue Dub Echo: A6 carries it" | A6 set to Cue Drop Impact beforehand, so Cue Dub Echo sits right below it without scrolling -->
+
+![On channel 2's ACTION page tap A6, then tap Cue Dub Echo in the list: A6 carries it.](pics_user/howto-library-assign-cue.gif)
 
 ### The research behind it
 
