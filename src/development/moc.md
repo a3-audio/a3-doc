@@ -14,7 +14,7 @@ Built with `build.sh`; the test suite runs with `ctest` from `build/` and is
 currently around 1,100 cases.
 
 ## Current Version — V03
-![The A³ Motion UI as it stands, CLIP page](pics_development/a3motion_ui_v03.png)
+![The A³ Motion UI as it stands on 2026-09-30, ACTION page open](../user/pics_user/a3-motion-ui-display-one-clip.png)
 
 ## The software mixer
 
