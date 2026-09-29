@@ -1,9 +1,3 @@
-<!-- STATUS: the parts on SYNC: PIO (following the CDJs) and MASTER (StemDeck as
-the Pro DJ Link tempo master) describe StemDeck's branch feat/pio-clock, which
-is not merged into StemDeck's main yet. StemDeck's main has the decks, the
-mixer, the library, the audio output and SYNC between the two decks, but no
-Pro DJ Link at all. This page and that branch are meant to be merged together. -->
-
 # StemDeck
 
 (stemdeck-at-a-glance)=
@@ -52,6 +46,30 @@ does not show up.
 StemDeck reads WAV, AIFF, FLAC and Ogg Vorbis. WAV and AIFF are read straight
 from disk as they are needed, which makes jumping and looping instant: for a
 set you will loop, prefer those.
+
+### Artist, album, set
+
+Sort your stems into folders by artist and album — the library reads its
+columns from them:
+
+```text
+stems/
+├── Burial/
+│   └── Untrue/
+│       ├── Archangel - 01.wav … Archangel - 04.wav
+│       └── Etched Headplate - Drums.flac … Etched Headplate - Vox.flac
+└── Aphex Twin/
+    └── Drukqs/
+        └── CD1/
+            └── Avril 14th - 1.wav … Avril 14th - 4.wav
+```
+
+The first folder under the library folder is the **artist**, the second the
+**album**. Deeper folders are added to the album (`Drukqs / CD1`) — handy for
+a double album. A set lying straight in the library folder has neither, one
+level down only an artist. Inside a folder the rule above holds: four files
+with the same beginning are one set, their endings sorted naturally
+(`1 2 3 10`, `01 … 04`) or alphabetically.
 
 The library looks through its folder and every folder below it. It starts in
 `stems/`, next to where StemDeck was started, and remembers the last folder
@@ -120,8 +138,11 @@ for buses 1–4 and AUX.
 
 <!-- IMAGE: the library with a few sets listed, BPM column filled, the search box and the "Laden in A / Laden in B" buttons -->
 
-One row per set: name, BPM (once analysed), the stem names, length and
-folder. Click a column header to sort; the search box filters as you type.
+One row per set: **Artist | Album | Set | BPM | Stems | Länge** — artist and
+album from the folders, BPM once analysed. It starts sorted artist → album →
+set; click a header to sort by that column (artist and album keep their sets
+together and in order). The search box finds sets by name, artist or album as
+you type.
 
 To load a set:
 
