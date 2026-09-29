@@ -24,6 +24,13 @@ Two programs belong to the system as well:
 | [**Beat Analyzer**](beat-analyzer.md) | the beat clock | runs on the A³ Core machine. Sends the beat every device follows and the level meters every device shows |
 | [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems each, every stem on its own output — so one part of a track can move through the room while the rest stays put. Can be the tempo master when there are no CDJs |
 
+```{tip}
+**StemDeck × A³ Motion.** Put StemDeck's four stems on A³ Motion's four
+channels and let the drums, the bass, the synths and the vocal each travel the
+room on their own path — in time with the track, because StemDeck is the
+clock. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
+```
+
 ![Connection Diagram](pics_user/a3-connecting-diagram.png)
 
 ## One state, told to everyone

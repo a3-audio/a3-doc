@@ -22,6 +22,13 @@ beat-analyzer.
 A track you only have as a stereo file, StemDeck
 [splits into stems](#stemdeck-stem-creator) itself.
 
+```{tip}
+**StemDeck is at its best with A³ Motion.** Each of its four stems arrives on
+its own A³ channel, so the drums, the bass, the synths and the vocal can each
+travel the room on their own path, in time with StemDeck's own beat. How to
+wire it and a first set: [StemDeck × A³ Motion](stemdeck-with-motion.md).
+```
+
 - [StemDeck repository](https://github.com/rafjagger/stemdeck) — not under the
   `a3-audio` organisation, but carried by the a3-system repository along with
   the rest
@@ -268,10 +275,10 @@ position, not the decks.
 
 - **Nothing is connected automatically.** Patch the ports yourself, in
   qjackctl or any other patchbay.
-- **Aux is how a stem gets a movement.** In A³ Core a sound is moved by
-  arriving on one of the four channels A³ Motion moves. Patch `aux_L` and
-  `aux_R` there, switch a stem to AUX, and that channel's clip on A³ Motion
-  flies it round the room — while the rest of the track stays where it is.
+- **In the A³ setup each bus is an A³ channel.** Bus N arrives on A³ Core's
+  channel N, the channel A³ Motion moves as channel N; aux arrives on Core's
+  Return track. The whole map, and how to wire it, is on
+  [StemDeck × A³ Motion](#stemdeck-with-motion-map).
 - StemDeck **never starts a JACK server**. It uses the one that is running,
   or PipeWire's JACK interface; with neither, it falls back to a plain audio
   device (ALSA), chosen with **Audio-Einstellungen**. With fewer than ten
@@ -285,7 +292,7 @@ position, not the decks.
   pw-metadata -n settings 0 clock.force-rate 44100
   ```
 
-<!-- QUESTION (maintainer): which Core inputs should StemDeck's buses and aux land on in the A³ setup? Core's patchbay (a3-patchbay.xml) has no StemDeck socket yet, so the page only says "one of the four channels A³ Motion moves". -->
+<!-- NOTE: the bus-to-channel map follows a3-core's package: zita-n2j --chan 1-10, the patchbay's zita_stemplayer socket (out_1..10 -> REAPER in11..in20) and the REAPER template (network pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return). This answers the earlier question which Core inputs StemDeck lands on. -->
 
 (stemdeck-sync)=
 
@@ -421,7 +428,7 @@ file that changes is analysed again; to analyse everything anew, delete
 | Making stems has stopped moving | A deck is playing — the separation waits until both decks stop |
 | Nothing to hear | The ports are never connected automatically. Patch them in qjackctl |
 | The top bar says `JACK-Server wurde beendet` | JACK went away under StemDeck. Restart StemDeck once JACK is back |
-| A stem on AUX does not move | The aux ports have to reach one of the channels A³ Motion moves, and that channel's **3d** has to be up |
+| A stem does not move | Its A³ channel's **3d** has to be up and its clip playing. A stem on **AUX** is on Core's Return track, not on a channel — switch AUX off. See [StemDeck × A³ Motion](#stemdeck-with-motion-troubleshooting) |
 | MASTER is on, but A³ Motion does not follow | Wait for the deck's BPM: nothing goes out before its analysis is done. Is the deck playing? Is A³ Motion on **PIO**? |
 | The downbeat on A³ Motion is on the wrong beat | StemDeck counts the bar from the grid's first beat. Move the track with the jog |
 | SYNC: PIO says **no master** | The status packets don't reach StemDeck. It follows the player chosen in the box beside the readout instead |
