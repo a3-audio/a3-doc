@@ -19,7 +19,9 @@ four bars when the tempo changes.
 <!-- The screenshots and GIFs on this page are to be (re)made in the skin
 quiet-indigo-2. The recording plan is kept outside this repository. -->
 
-## Find a window
+## Reference: the screen
+
+### Find a window
 
 Every window has a key with its name on it. This table says where the key is.
 
@@ -37,45 +39,20 @@ Every window has a key with its name on it. This table says where the key is.
 | **Menu** | skins, network, LEDs, folders | MENU, right end of the status bar | MENU (one level back), or ✕ |
 | **Keyboard** | typing names and values | KEYS, status bar; opens by itself when you type a name | KEYS again |
 
-## The panel
+### Opening and closing, in one place
 
-The hardware beside the screen. Each channel has a column: two encoders, a
-potentiometer and eight pads.
+| Window | Opens with | Closes with |
+| :--- | :--- | :--- |
+| FILES, MIXER, PADS | their key in the global strip | the same key; another of the three swaps it; any tab; MENU; PAGE on the panel |
+| the menu and its pages | MENU | back or MENU (one level), ✕ (all levels) |
+| a list of values, a typing mask, the colour picker | double tap or Enter on a row | back, MENU or Escape (without keeping); Enter, a tap on a value or **done** (keeping) |
+| the keyboard | KEYS, or typing a name | KEYS |
 
-| Control | What it does |
-| :--- | :--- |
-| Encoders, two per channel | turn the field of the page that stands above them — see below |
-| SHIFT + encoder | upper: that channel's **freq**, lower: that channel's **Q**, whatever page is shown |
-| Potentiometer, per channel | **3d** — crossfades the channel between its stereo and its multichannel encoder in A³ Core |
-| Pads, eight per channel | Play\|Pause and PAGE, then the six action buttons A1–A6 (see PADS) |
-| Function keys, six | TAP, clock, REC, recmode, MENU, SHIFT |
-| Touchscreen | everything else |
+Only one of FILES, MIXER and PADS is open at a time. Closing FILES ends a
+rename without keeping it and puts an armed Delete back to sleep; text typed
+in the editor stays, marked unsaved.
 
-**The eight encoders stand four by two, and so do the fields of CLIP, MOTION,
-REC and CHMIX.** Without SHIFT an encoder turns the field above it:
-
-| Page | Upper row of encoders | Lower row of encoders | A press on an encoder |
-| :--- | :--- | :--- | :--- |
-| CLIP | clip, direction, two lengths | shape, end, two lengths | on a length: plays at that length |
-| MOTION | spin, swell, strX, strY | sway, clip-top, tswp, rswp | swaps to the other knob of the field: rot, reach, sqzX, sqzY / elv, clip-bot, tilt, roll |
-| REC | clip, rec mode, two lengths | shape, fade, two lengths | on fade: swaps to bias |
-| CHMIX | GAIN, HIGH, MID, LOW | SEND, PFL, FX, VOL | on PFL or FX: switches it |
-| ACTION | A1–A6, the list, the key ring, AUDIO/MOTION | the four values of the card's marked row | list: assigns; key ring: presses; lower row: marks the next row — see ACTION |
-
-Where an encoder has two knobs to choose from, the bar marks the one it is on.
-The choice is remembered.
-
-The six function keys sit as a **vertical column at each end of the panel**,
-mirrored so either hand reaches them; a key is down while either side is down.
-`clock` and `recmode` step their value on a press, as their screen twins do.
-**SHIFT is on the panel and on the PADS window** — the SHIFT gestures below
-need one of the two.
-
-**The touchscreen is not optional.** Menus, lists and the bar are driven by
-touch; with the screen out the device cannot be operated. That trade was made
-knowingly.
-
-## The main screen
+### The main screen
 
 ![The main screen: status bar, sphere, channel row, bar and global strip](pics_user/a3-motion-ui-display-one-clip.png)
 
@@ -91,7 +68,7 @@ Top to bottom:
 FILES, MIXER, PADS and the menu open **over the sphere**. The channel row, the
 bar and the global strip stay in view under them.
 
-### Status bar
+#### Status bar
 
 | Part | What it does |
 | :--- | :--- |
@@ -111,7 +88,7 @@ bar and the global strip stay in view under them.
 
 <!-- GIF: howto-statusbar-keys.gif | region: full screen 0,0,768,1024 | steps: tap KEYS, wait 2 s, tap KEYS | "KEYS shows the keyboard" / "KEYS again hides it" -->
 
-### The sphere
+#### The sphere
 
 The room seen from straight above, with you — the listener — in the middle at
 ear height. Each channel is a coloured blob sitting where its sound is; it
@@ -149,7 +126,7 @@ In camera mode no finger takes a blob. The view is kept over a restart.
 
 <!-- GIF: howto-sphere-zoom.gif | region: sphere 0,36,768,590 | steps: camera mode on; mouse wheel up 5 notches (xdotool click 4), then down 5 (click 5); double tap | "Camera mode: pinch to zoom" / "Double tap resets the zoom" -->
 
-### The channel row
+#### The channel row
 
 Between the sphere and the bar: one field per channel, in its colour. Left to
 right in each field:
@@ -174,7 +151,7 @@ knob's own position decides.
 
 <!-- GIF: howto-channelrow-pots.gif | region: channel row 0,610,768,80 | steps: drag FREQ of ch1 (63,641) up 60 px, down 30 px; drag 3D of ch2 (222,641) up 40 px | "Drag 3D, FREQ or Q" / "The channel is selected too" -->
 
-### The bar
+#### The bar
 
 Five tabs, left to right: **CLIP MOTION ACTION CHMIX REC**. A tab shows its
 page in the bar; the lit tab is the page you are on. All five describe the
@@ -188,7 +165,7 @@ instead (see REC). Fields that step on a tap have no rest.
 
 <!-- GIF: howto-bar-tabs.gif | region: bar 0,672,578,352 | steps: tap MOTION (175,700), ACTION (287,700), CHMIX (400,700), REC (512,700), CLIP (62,700), 1.2 s each | "Five tabs, one clip" / "CLIP MOTION ACTION CHMIX REC" -->
 
-### The global strip
+#### The global strip
 
 The right quarter of the bar, the same on every page.
 
@@ -212,7 +189,7 @@ cross) until you decide.
 
 ![How to play and pause a clip](pics_user/howto-play-pause.gif)
 
-## CLIP
+### CLIP
 
 The clip of the selected channel. Eight fields, four by two, the same way the
 encoders stand.
@@ -249,7 +226,7 @@ Paus stands still wherever the playhead landed. Any direction goes with any end.
 
 <!-- GIF: howto-clip-length-drag.gif | region: bar 0,672,578,352 | steps: drag LENGTH (494,800) up 36 px (3 steps), release | "Drag a LENGTH key" / "The key keeps the new length" -->
 
-## MOTION
+### MOTION
 
 What is done to the figure while it plays, and where it sits in height. Eight
 fields, four by two; each holds **two knobs**: on the left the movement, on the
@@ -292,7 +269,7 @@ the turn**, so the ellipse belongs to the figure and travels with it.
 
 <!-- GIF: howto-motion-tilt-roll.gif | region: sphere and bar 0,36,768,988 | steps: camera mode on, lean view 45°; drag tilt up 40 px; drag roll up 40 px; double tap both | "tilt and roll lean the plane" / "Double tap: flat again" -->
 
-## ACTION
+### ACTION
 
 Each channel has **six action buttons**, A1 to A6, on the panel and on this
 page. An action is a short script that changes the clip for as long as its
@@ -400,7 +377,7 @@ SHIFT every encoder is its channel's freq or Q, as on every page.
 
 ![How to put another action on a button](pics_user/howto-assign-an-action.gif)
 
-## CHMIX
+### CHMIX
 
 The shown channel's strip of the mixer, in the bar — the same controls as that
 channel's strip in MIXER, laid out four by two like the encoders.
@@ -423,7 +400,7 @@ what is actually set rather than what this device last did — see MIXER.
 
 <!-- GIF: howto-chmix-volume.gif | region: bar 0,672,578,352 | steps: drag the meter from its middle down 60 px, back up 30 px | "The meter is the VOL fader" / "Drag it anywhere" -->
 
-## REC
+### REC
 
 Making a take: a new recording of a figure, on the shown channel's clip.
 
@@ -488,7 +465,7 @@ double tap on a knob with a lane clears that lane and leaves the others.
 
 <!-- GIF: howto-rec-knob-lane.gif | region: sphere and bar 0,36,768,988 | steps: MOTION tab; arm and start a take; drag rot up and down for one pass; end take; wait one pass; double tap rot | "Knobs turned in a take" / "play back as a lane" / "Double tap clears the lane" -->
 
-## FILES
+### FILES
 
 The library: what is on disk. Tap **FILES** in the global strip; it lies over
 the sphere until you tap FILES again, a tab, or MENU.
@@ -561,7 +538,7 @@ again, from the top, on the next **downbeat**.
 
 ![How to load a set](pics_user/howto-load-a-set.gif)
 
-## MIXER
+### MIXER
 
 A software mixer for the four channels, sending the same messages the A³
 Mixer sends. Anything you turn here, the desk sees too — and the other way
@@ -614,7 +591,7 @@ holds for the PFL and FX keys as well.
 
 <!-- GIF: howto-mixer-filter.gif | region: mixer 0,36,768,590 | steps: tap FX MODE x2; drag FX FREQ up 40 px; double tap FX FREQ | "FX MODE: HPF or LPF" / "One filter for all four" -->
 
-## PADS
+### PADS
 
 Eight pads per channel, in two columns of four — the same on the panel and on
 the PADS window, which puts the panel on screen for a build without one. Tap
@@ -688,7 +665,7 @@ What the pads show:
 
 <!-- GIF: howto-pads-scene.gif | region: pads 0,36,768,590 | steps: tap Play all (40,110); wait for the downbeat, 3 s; tap Stop all (115,110) | "The grey block: all four" / "Play all, Stop all" -->
 
-## The menu
+### The menu
 
 Opened with **MENU** at the right end of the status bar, or MENU on the panel.
 It lies over the sphere.
@@ -725,7 +702,7 @@ set.
 
 <!-- GIF: howto-menu-scroll-select.gif | region: menu 0,36,768,590 | steps: menu open; drag left strip up 100 px; tap a row; double tap it | "Drag to scroll" / "Tap selects, double tap opens" -->
 
-### Skin
+#### Skin
 
 Double tap **Skin**: the rows give way to the list of skins. Browsing
 previews each one on the sphere; a tap or Enter chooses, back puts the running
@@ -733,7 +710,7 @@ one back.
 
 <!-- GIF: howto-menu-skin.gif | region: full screen 0,0,768,1024 | steps: double tap Skin; tap 3 skins down the list, 1.5 s each; tap back | "Browse: the skin previews" / "Back keeps the old one" -->
 
-### Skin Editor
+#### Skin Editor
 
 Every value of the loaded skin, under headings — surfaces, text, states,
 channels, sphere, type, touch, then the effects. At the top five action rows:
@@ -752,7 +729,7 @@ fire only on a double tap or Enter.
 
 <!-- GIF: howto-menu-skin-editor-rows.gif | region: menu 0,36,768,590 | steps: double tap » Save as new; type a name; Enter | "» Save as new: a copy" / "Name it and press Enter" -->
 
-### Network, Button LEDs, Pattern Folder
+#### Network, Button LEDs, Pattern Folder
 
 Each shows only its own part of the device's configuration, as rows: Network
 the OSC sender, receiver and addresses; Button LEDs the key colours; Pattern
@@ -769,7 +746,7 @@ an address nobody listens to.
 
 <!-- GIF: howto-menu-pattern-folder.gif | region: menu 0,36,768,590 | steps: double tap Pattern Folder; double tap the row; Escape | "Where the library is read from" -->
 
-### Sphere in Menu, Developer Mode
+#### Sphere in Menu, Developer Mode
 
 Double tap the row, tap **on** or **off**.
 
@@ -777,7 +754,7 @@ Double tap the row, tap **on** or **off**.
 
 <!-- GIF: howto-menu-developer-mode.gif | region: full screen 0,0,768,1024 | steps: FILES › ACTIONS, shipped row, type one character in the editor: Save dark; Cancel; MENU, double tap Developer Mode, tap on; repeat: Save lit; Cancel; set Developer Mode off | "Developer Mode on:" / "shipped files can be saved" -->
 
-## The on-screen keyboard
+### The on-screen keyboard
 
 The device has its own keyboard. It takes the **bar's place** — where CLIP,
 MOTION, ACTION, CHMIX and REC stand — so the sphere, the channel row, the tabs
@@ -818,20 +795,43 @@ Pads, pots, TAP, clock, REC, recmode and MENU do what they always do.
 
 <!-- GIF: howto-keyboard-rename.gif | region: full screen 0,0,768,1024 | steps: FILES; Rename; type a name on the keyboard; ENTER | "Rename: the keyboard comes up" / "ENTER keeps it" -->
 
-## Opening and closing, in one place
+## Reference: the panel
 
-| Window | Opens with | Closes with |
-| :--- | :--- | :--- |
-| FILES, MIXER, PADS | their key in the global strip | the same key; another of the three swaps it; any tab; MENU; PAGE on the panel |
-| the menu and its pages | MENU | back or MENU (one level), ✕ (all levels) |
-| a list of values, a typing mask, the colour picker | double tap or Enter on a row | back, MENU or Escape (without keeping); Enter, a tap on a value or **done** (keeping) |
-| the keyboard | KEYS, or typing a name | KEYS |
+The hardware beside the screen. Each channel has a column: two encoders, a
+potentiometer and eight pads.
 
-Only one of FILES, MIXER and PADS is open at a time. Closing FILES ends a
-rename without keeping it and puts an armed Delete back to sleep; text typed
-in the editor stays, marked unsaved.
+| Control | What it does |
+| :--- | :--- |
+| Encoders, two per channel | turn the field of the page that stands above them — see below |
+| SHIFT + encoder | upper: that channel's **freq**, lower: that channel's **Q**, whatever page is shown |
+| Potentiometer, per channel | **3d** — crossfades the channel between its stereo and its multichannel encoder in A³ Core |
+| Pads, eight per channel | Play\|Pause and PAGE, then the six action buttons A1–A6 (see PADS) |
+| Function keys, six | TAP, clock, REC, recmode, MENU, SHIFT |
+| Touchscreen | everything else |
 
-## Clock modes
+**The eight encoders stand four by two, and so do the fields of CLIP, MOTION,
+REC and CHMIX.** Without SHIFT an encoder turns the field above it:
+
+| Page | Upper row of encoders | Lower row of encoders | A press on an encoder |
+| :--- | :--- | :--- | :--- |
+| CLIP | clip, direction, two lengths | shape, end, two lengths | on a length: plays at that length |
+| MOTION | spin, swell, strX, strY | sway, clip-top, tswp, rswp | swaps to the other knob of the field: rot, reach, sqzX, sqzY / elv, clip-bot, tilt, roll |
+| REC | clip, rec mode, two lengths | shape, fade, two lengths | on fade: swaps to bias |
+| CHMIX | GAIN, HIGH, MID, LOW | SEND, PFL, FX, VOL | on PFL or FX: switches it |
+| ACTION | A1–A6, the list, the key ring, AUDIO/MOTION | the four values of the card's marked row | list: assigns; key ring: presses; lower row: marks the next row — see ACTION |
+
+Where an encoder has two knobs to choose from, the bar marks the one it is on.
+The choice is remembered.
+
+The six function keys sit as a **vertical column at each end of the panel**,
+mirrored so either hand reaches them; a key is down while either side is down.
+`clock` and `recmode` step their value on a press, as their screen twins do.
+**SHIFT is on the panel and on the PADS window** — the SHIFT gestures below
+need one of the two.
+
+## How it thinks
+
+### Clock modes
 
 | Mode | Where the tempo comes from |
 | :--- | :--- |
@@ -845,7 +845,7 @@ whose location you have to remember. It is also not saved in a set — it
 depends on what is plugged into the switch at the venue. The rec mode is not
 saved in a set either.
 
-## When the device comes up
+### When the device comes up
 
 A³ Motion asks A³ Core where each sound already is, and adopts the answer
 before it says anything itself. So switching the device on, or restarting it
@@ -857,7 +857,15 @@ wins. Loading a set stops what was running; what the set says was running
 starts again, from the top, on the next **downbeat** — four clips starting
 together is the whole point of a set. Play all on PADS starts all four.
 
-## Sets and moods
+### The touchscreen
+
+**The touchscreen is not optional.** Menus, lists and the bar are driven by
+touch; with the screen out the device cannot be operated. That trade was made
+knowingly.
+
+## The library
+
+### Sets and moods
 
 The library ships **50 shapes, 50 clips, 50 actions and 10 sets**, laid out along
 **the arc of a night**: from the first half-empty hour, through the build and the
@@ -914,7 +922,7 @@ And the vocabulary the shapes and actions are made from:
 - **Build-up, drop, breakdown.** The build widens, rises and opens the filter; the drop releases
   it all at once; the breakdown strips it back.
 
-### The ten sets
+#### The ten sets
 
 One set per phase. Each loads the phase's first four clips onto channels 1–4;
 the fifth clip of the phase is the **spare**, for a Cue or for loading by hand
@@ -950,7 +958,7 @@ weight. Every action script says which it is on its `Mood:` line.
 
 <!-- GIF: howto-library-load-set.gif | region: full screen 0,0,768,1024 | steps: tap FILES (612,700); tap SETS (34,59); tap row "Warmup"; tap Load (106,560); wait for the downbeat, 3 s; tap FILES (612,700) | "SETS: one set per phase" / "Load: four clips, six buttons" / "It starts on the downbeat" -->
 
-### Across a night
+#### Across a night
 
 The A6 Cues chain the sets into the arc of a night:
 
@@ -987,7 +995,7 @@ one; for all four clips of the next phase, **Load the next set** in FILES.
 
 <!-- GIF: howto-library-cue-shift.gif | region: pads 0,36,768,590 | steps: set "Warmup" playing; hold SHIFT; tap ch2 A6; release SHIFT | "SHIFT + Cue: at once" -->
 
-### Shapes (50)
+#### Shapes (50)
 
 <!-- IMAGE: pics_user/a3-motion-shapes-50.png still shows the library before v2 (Random, Lissajous 3-5, Hypo 8-3 ...). Regenerate it from pattern/system/*.svg, then put it back here: ![All fifty shapes; the rhythm figures are points, numbered in the order they are jumped to](pics_user/a3-motion-shapes-50.png) -->
 
@@ -1019,7 +1027,7 @@ on the sixteenths of its rhythm:
 - **Gallop:** the sixteenth gallop, x.xx on every beat, over three points.
 - **Echo:** throws that halve, like a delay's repeats.
 
-### Clips (50), by phase
+#### Clips (50), by phase
 
 A clip is a shape plus everything it is played with: speed, height, width,
 spin, the accent. Five per phase, named `<Phase> <Name>`; the first four are
@@ -1045,7 +1053,7 @@ Some shapes turn up in several phases — Orbit Circle is a calm *Halo* in the
 warm-up, a heavy *Sub* in Deep and a *Still* at closing time. The shape is the
 figure; the clip decides whether it floats overhead or rumbles under the floor.
 
-### Actions (50)
+#### Actions (50)
 
 An action changes the clip for as long as its accent lasts, then the clip comes
 back to itself (see ACTION). The prefix says what it changes:
