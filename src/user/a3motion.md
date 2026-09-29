@@ -68,7 +68,8 @@ The choice is remembered.
 The six function keys sit as a **vertical column at each end of the panel**,
 mirrored so either hand reaches them; a key is down while either side is down.
 `clock` and `recmode` step their value on a press, as their screen twins do.
-**SHIFT is only on the panel** — the SHIFT gestures below need it.
+**SHIFT is on the panel and on the PADS window** — the SHIFT gestures below
+need one of the two.
 
 **The touchscreen is not optional.** Menus, lists and the bar are driven by
 touch; with the screen out the device cannot be operated. That trade was made
@@ -627,6 +628,22 @@ a tab, or MENU.
 | row 3 | **A3** | **A4** |
 | row 4 | **A5** | **A6** |
 
+The window is laid out **as the panel stands**: square pads on a grid of six
+rows, the channels' pads in the bottom four. The top two rows above them stay
+empty — the panel has its pots there.
+
+**The function keys are on it too**, as on the panel:
+
+- **right**, top to bottom: **TAP**, **clock**, **REC**, **recmode**, **MENU**,
+  **SHIFT**;
+- **left**, above the grey block: **TAP** and **clock**.
+
+A key on the screen is the panel's key: down while the finger is on it, up
+when it lets go. **SHIFT or REC held on the screen** changes what a pad does,
+exactly as on the panel, and a key counts as down while either the panel or the
+screen holds it. A key's face lights while it is active — SHIFT held, a take
+running, the menu open, TAP pressed or on the beat.
+
 ![The PADS window](pics_user/a3-motion-ui-pads.png)
 
 - **Play\|Pause** starts or pauses the clip on the **next downbeat**.
@@ -760,10 +777,44 @@ Double tap the row, tap **on** or **off**.
 
 ## The on-screen keyboard
 
-The device's keyboard is the system's own (Onboard), docked at the bottom.
-**KEYS** in the status bar shows or hides it, always. It also comes up by
-itself when there is something to type — a Rename in FILES, a touch in the
-FILES editor, a name in the Skin Editor — and goes again when that is done.
+The device has its own keyboard. It takes the **bar's place** — where CLIP,
+MOTION, ACTION, CHMIX and REC stand — so the sphere, the channel row, the tabs
+and the global strip stay in view, and every field you type into lies over the
+sphere, never under the keys.
+
+- **KEYS** in the status bar shows or hides it; its icon follows.
+- It comes up by itself when there is something to type — a Rename in FILES
+  (every tab, sets too), a touch in the FILES editor, a name or a value in the
+  Skin Editor and the menu — and goes again when that is done.
+- **HIDE** puts it away and leaves the field open.
+
+**QWERTZ**, with ä ö ü and ß where a German hand looks for them. Four rows of
+twelve, standing on the bar's eight fields — each field holds two rows of three
+keys, so every key stands above exactly one encoder:
+
+| Row | Letters | Symbols (**123**) |
+| :--- | :--- | :--- |
+| 1 | q w e · r t z · u i o · p ü **DEL** | 1 2 3 · 4 5 6 · 7 8 9 · 0 . **DEL** |
+| 2 | a s d · f g h · j k l · ö ä **ENTER** | - / " · : ; = · ~ \ ' · , + **ENTER** |
+| 3 | **SHIFT** y x · c v b · n m ß · . - _ | ( ) { · } [ ] · < > * · _ \| ! |
+| 4 | **123** ◀ ▶ · **SPACE** · **ESC** **HIDE** | the same, with **ABC** for 123 |
+
+The symbols page holds what scripts, clips and sets are written with.
+
+- **SHIFT** once: the next letter is a capital. Twice: caps lock. A third
+  time: off. The panel's SHIFT held while you tap a key also gives a capital.
+- **DEL** and the arrows act at once and repeat while held. Every other key
+  types when you **let go** — slide off a wrong key and nothing is typed.
+- **ENTER** keeps what you typed and closes, in a name; in the FILES editor it
+  is a new line, and **ESC** or **HIDE** put the keyboard away. **ESC** in a
+  name, and Back or Close in the Skin Editor, undo it.
+
+**From the panel:** an encoder walks the six keys of the field above it — the
+upper encoder rows 1–2, the lower rows 3–4; the first detent only shows the
+ring. A **press** types the ringed key. SHIFT + encoder stays freq and Q.
+Pads, pots, TAP, clock, REC, recmode and MENU do what they always do.
+
+<!-- GIF: howto-keyboard-rename.gif | region: full screen 0,0,768,1024 | steps: FILES; Rename; type a name on the keyboard; ENTER | "Rename: the keyboard comes up" / "ENTER keeps it" -->
 
 ## Opening and closing, in one place
 
