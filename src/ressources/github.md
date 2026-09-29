@@ -16,7 +16,12 @@
 
 - [beat-analyzer](https://github.com/rafjagger/beat-analyzer) — the beat clock
   and the VU meters. Runs on the Core, on the same JACK graph. Not under the
-  `a3-audio` organisation, but part of the same system
+  `a3-audio` organisation, but part of the same system. See
+  [Beat Analyzer](../user/beat-analyzer.md)
+- [stemdeck](https://github.com/rafjagger/stemdeck) — the stem player: two
+  decks of four stems, each stem on its own output, and a Pro DJ Link tempo
+  master when there are no CDJs. Also outside the organisation, and carried by
+  a3-system as a submodule. See [StemDeck](../user/stemdeck.md)
 - [osccontrol-light](https://github.com/drlight-code/osccontrol-light) — an
   audio plugin that speaks OSC
 
