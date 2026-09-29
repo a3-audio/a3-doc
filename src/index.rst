@@ -27,6 +27,7 @@ Contact
    user/a3mix
    user/beat-analyzer
    user/stemdeck
+   user/stemdeck-with-motion
 
 .. toctree::
    :titlesonly:
