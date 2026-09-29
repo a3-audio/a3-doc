@@ -154,20 +154,28 @@ is; it doesn't jump anywhere.
 
 ### How to move a sound by hand
 
-1. Put a finger on a channel's blob on the sphere and drag. The sound goes
-   where your finger goes. **A drag is live and doesn't wait for the beat**:
-   the room hears every centimetre.
+1. Put a finger **on** a channel's blob on the sphere and drag. The finger has
+   to land on the blob (or right beside it): a drag that starts on empty
+   sphere moves nothing. The sound goes where your finger goes. **A drag is
+   live and doesn't wait for the beat**: the room hears every centimetre.
 2. Let go. A playing clip takes the sound back onto its shape; a stopped one
    leaves it where you let go.
 
 Two fingers take two blobs. The top of the sphere is the front of the room.
 
+**Steer round the other blobs.** A dragged blob pushes every blob it comes
+close to out of its way, and their sound moves with them. Drag straight
+through a crowd and you carry the others along.
+
+<!-- QUESTION (maintainer): MotionComponent::disoccludeBlobs pushes every blob near a held one aside and writes the new position to the engine (setChannel3DPosition), so the pushed channels move in the room too. In the recording one drag gathered three other blobs and carried them. Is moving the other channels' sound intended, or should the push be screen-only? -->
+
 <!-- QUESTION (maintainer): which way is "front" in a venue? The osc reference says 0° azimuth is the front of the room; the page now says the top of the sphere is the front. A DJ needs to know where that is before dragging: the booth side, the stage, or wherever Core was set up? -->
 
 To look at the room from another angle **without moving anything**, use
-camera mode: tap the small sphere in the global strip, drag on the sphere to
-lean and turn the view, and double tap to go back to straight above. In camera
-mode no finger can move a sound.
+camera mode: tap the small sphere in the global strip, drag up on the sphere
+to lean the view towards the horizon (down brings it back), drag sideways to
+walk round, and double tap to go back to straight above. In camera mode no
+finger can move a sound.
 
 <!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,590 | steps: clip playing; drag ch1 blob in an arc; hold 2 s; release | "Drag a blob: the sound follows" / "Let go: the clip takes it back" | round 1, no. 3; record with the clip playing -->
 
@@ -227,6 +235,8 @@ value, the left knob moves it** in time with the bars.
 Whatever moves on its own counts in bars, never seconds, so it comes back to
 where it started on a bar line.
 
+<!-- QUESTION (maintainer): in the recording (2026-09-29) clip-top dragged 40-60 px after elv changed nothing visible, and a double tap on elv left the shape at the bottom rather than at ear level (its rest is "the middle of the clip band", ClipKnobs.hh elevationKnobSpec). Is that the intended rest, and what does clip-top need to show its ceiling? Needs a look at the device. -->
+
 <!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | steps: MOTION; drag rot; drag spin 2 steps; wait 3 s; double tap spin | "rot turns the shape" / "spin keeps it turning" / "Double tap: spin off" | round 1, no. 11; replaces howto-motion-knob.gif and howto-motion-sweep.gif -->
 
 <!-- GIF: howto-motion-elevation.gif | region: 0,36,768,988 | steps: drag elv down; drag clip-top up | "elv: how high the shape sits" / "clip-top: a ceiling it goes round" | round 1, no. 24 -->
@@ -257,7 +267,9 @@ where it started on a bar line.
 **Turning a value on ACTION changes the action everywhere.** What you set
 there is saved into the action's script — for every channel and every set
 that uses that action, shipped sets included. To experiment, make a copy
-first: **EDIT**, then **Save as** in FILES, and put the copy on the button.
+first: **EDIT**, change something in the text in FILES (a comment will do —
+**Save as** stays dark until the text differs from the file), then **Save
+as**. The copy goes onto the button you came from.
 ```
 
 <!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | steps: clip playing; ACTION; tap A1; hold A (global strip) 2 s; release | "Tap A1 to choose it" / "Hold A: the action takes over" / "Let go: the clip is itself again" | round 1, no. 4; fired with the global strip's A, since the fields only choose (2026-09-28); replaces howto-fire-an-action.gif -->
@@ -291,7 +303,7 @@ first: **EDIT**, then **Save as** in FILES, and put the copy on the button.
    pass**: stop halfway through one and that half is dropped.
 7. Tap **SAVE** (where ● was) to keep it: the shape, and a clip with every
    value it has now. **DISCARD** (where A was) asks twice, then puts back what
-   the channel held before.
+   the channel held before — stopped. Press Play to hear it again.
 
 **A take is live**: the room hears what you draw. To practise without the
 room, turn the channel's 3d down first.
@@ -314,6 +326,10 @@ end it.
 
 ### How to record knob moves
 
+● opens REC, and the knobs are on MOTION: after ●, tap **MOTION** again,
+then ▶. (On REC the same spot is the CLIP field, and a drag there steps
+through clips mid-take.)
+
 During a take, turn any knob on MOTION. It is written into a **lane**, drawn
 in red while it writes, with the same rec mode as the shape. On playback the
 lane turns the knob by itself; your hand on the knob wins while it holds.
@@ -328,14 +344,18 @@ Double tap a knob to clear its lane; the other lanes stay.
 - **Keep a clip you changed.** A warning-coloured **drift dot** on the CLIP
   field means its values have been turned since it was loaded. Open FILES ›
   **CLIPS**, tap **from clip**, then **Save as**. Your copy lands in your own
-  files, named after the original ("Warmup Halo 2").
+  files, named after the original ("Warmup Halo 2"). The channel keeps playing
+  the original, drift dot and all: **Load** the copy to play it.
 - **Keep tonight's set.** FILES › **SETS**, tap **from set**, then
-  **Save as**.
+  **Save as**. The copy is named after the row the editor showed; with no row
+  shown it is called "Action". Give it a name (below).
 - **Give it a name.** Tap the row, tap **Rename**, type, and tap **Keep** (or
   ENTER).
 - **Clear out the library.** Tap the row, tap **Delete**, and tap it again
   when it asks **Sure?**. Delete removes the file, not the music: whatever is
   loaded keeps playing.
+
+<!-- QUESTION (maintainer): Save as names a copy after the file the editor shows (copyBaseFor(_panelFile)); with no file shown it falls back to "Action" on every tab, so SETS › from set › Save as straight after opening SETS wrote a set called "Action" (recorded 2026-09-29). Should a set copy be named after the loaded set instead? -->
 
 <!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | steps: (knob turned beforehand) CLIP tab with the drift dot; FILES; CLIPS; from clip; Save as | "The dot: this clip has changed" / "CLIPS › from clip, then Save as" / "Your tweak, kept as a new clip" | round 1, no. 14; replaces howto-files-from-clip.gif -->
 
@@ -354,8 +374,10 @@ Double tap a knob to clear its lane; the other lanes stay.
 - **One channel:** select it and open the **CHMIX** tab — its gain, EQ,
   send, PFL, FX and volume.
 - **All four and the master:** tap **MIXER** in the global strip.
-- **Volume:** the meter *is* the VOL fader. Grab it anywhere and drag; it
-  moves one to one from where it stood, so it never jumps.
+- **Volume:** the meter *is* the VOL fader, and the handle on it is the fader
+  cap. Grab the **handle** and drag, one to one. A drag that starts anywhere
+  else on the meter does nothing, so a finger landing low on a loud channel
+  can't pull it down.
 - **Back to a default:** double tap a knob (EQ flat, SEND off, volume full).
   The master fader has no double tap, on purpose.
 
@@ -384,6 +406,12 @@ jumps to wherever the hardware control sits.
 In EXT and PIO the tempo comes from outside, and your taps are passed on to
 the beat analyser.
 
+**Stepping the clock key all the way round loses your taps.** Back on INT,
+the tempo is the one INT had the first time you left it, not the one you
+tapped since. Tap it in again.
+
+<!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
+
 <!-- GIF: howto-statusbar-tap.gif | region: 0,0,560,36 at --width 560 | steps: clock key to INT; tap the beat display 8x at ~120 BPM | "Clock on INT" / "Tap the beat display in time" / "The BPM follows your taps" | round 1, no. 18; absorbs howto-statusbar-clock.gif -->
 
 (motion-howto-look)=
@@ -392,10 +420,20 @@ the beat analyser.
 
 - **Calm the screen down:** tap **CLEAN** in the status bar. Thin lines,
   plain blobs, no effects: easier to read in a dark booth, and lighter on the
-  machine. Tap again for your skin.
-- **Another skin:** MENU › **Skin**. Each skin previews on the sphere as you
-  browse; tap one to keep it, or go back to keep the one you had.
-- **Your own colours and sizes:** MENU › **Skin Editor**.
+  machine. Tap again for your skin. The shipped default skin *is* the clean
+  look, so on it CLEAN changes nothing you can see; it matters once you have
+  chosen a richer skin.
+- **Another skin:** MENU, then double tap **Skin**. Browse with the arrow keys
+  ↑ ↓: each skin previews on the sphere, ENTER keeps it, and Escape or back
+  keeps the one you had. **A tap on a skin chooses it at once** and keeps it,
+  no preview — dragging the list only scrolls it.
+- **Your own colours and sizes:** MENU › **Skin Editor**. Opening it on the
+  shipped default skin makes a copy called **custom** as you leave, even if you
+  changed nothing, and switches to it.
+
+<!-- QUESTION (maintainer): CLEAN on the shipped default: clean.json and default.json are byte-identical since 648628d, so the key lights and nothing else changes (howto-statusbar-clean.gif could not be recorded). Intended, or should one of the two differ? -->
+
+<!-- QUESTION (maintainer): closing the Skin Editor always saves (closeSkinEditor → saveEditedSkin), and on "default" that means writing custom.json and switching to "custom" (skinNameToWriteTo) even when nothing was changed -- recorded 2026-09-29, a look was enough. Should an unchanged editor leave the skin alone? -->
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 
@@ -416,8 +454,8 @@ bar shows or hides it by hand.
 
 ### How to point the device at another Core
 
-MENU › **Network**. Double tap a row, type the new host, port or address, and
-press ENTER. The page is saved when you leave it.
+MENU, then tap **Network** (one tap opens it). Double tap a row, type the new
+host, port or address, and press ENTER. The page is saved when you leave it.
 
 ```{warning}
 **An address only changes on this side.** The other device has to send or
@@ -441,7 +479,7 @@ an address nobody listens to.
 | all four to stand still, now | PADS › **Stop all** (the grey block). Screen only: on the panel, SHIFT + Play\|Pause on each channel |
 | a channel back to plain stereo | turn its **3d** pot down. The track stays in the mix, just no longer in the room |
 | a chain of actions to end | press Play\|Pause, ■ or another action pad on that channel |
-| a take gone wrong to go away | **■** ends it, **DISCARD** twice puts back what was there |
+| a take gone wrong to go away | **■** ends it, **DISCARD** twice puts back what was there, stopped |
 
 After a stop the sound stays where it was; it doesn't jump home. And
 restarting the device doesn't move the room either: it asks A³ Core where
@@ -485,6 +523,8 @@ its edit box), and pressing Escape on a keyboard (it never quits the app).
 | Symptom | What to do |
 | :--- | :--- |
 | The blob moves, the sound doesn't | Turn **3d** up. At 0 the channel is plain stereo |
+| A drag on the sphere moves nothing | Start the drag on the blob itself. Or camera mode is on: tap the small sphere to switch it off |
+| A drag on a meter moves nothing | Grab the handle, not the meter |
 | The channel meters don't move and the speakers throw no lightning | Nothing is coming back from A³ Core. Check the network cable and that Core is running |
 | ▶ blinks for a moment before it starts | That's the wait for the next downbeat, up to a bar. Press again to call the start off |
 | The clips run off the beat, or the BPM is wrong | Check the clock key. INT: tap the tempo. EXT or PIO: check the source; if its beats stop, A³ Motion carries on at the last tempo it had |
@@ -525,7 +565,8 @@ Every window opens from a key with its name on it. Here's where each key lives.
 | **MIXER** | all four mixer strips and the master | MIXER, top of the global strip | the same as FILES |
 | **PADS** | the panel's pads on the screen | PADS, top of the global strip | the same as FILES |
 | **Menu** and its pages | skins, network, LEDs, folders | MENU, right end of the status bar, or MENU on the panel | ‹ (back) or MENU: one level; ✕: all of it |
-| a list of values, an edit box, the colour picker | changing one menu value | double tap or ENTER on a menu row | ENTER, a tap on a value, or **done** (keeps it); back, MENU or Escape (drops it) |
+| a list of values, an edit box | changing one menu value | double tap or ENTER on a menu row | ENTER or a tap on a value (keeps it); back, MENU or Escape (drops it) |
+| the colour picker | changing one colour in the Skin Editor | double tap a colour row | **done**, back or MENU. The colour stays either way: it is changed as you drag. Escape does nothing here |
 | **Keyboard** | typing names and values | KEYS, status bar; comes up by itself when there is something to type | KEYS again, or HIDE |
 
 Only one of FILES, MIXER and PADS is open at a time; each opens on top of the
@@ -579,7 +620,7 @@ Nothing is coming back from Core; see [Troubleshooting](#motion-troubleshooting)
 
 | Gesture | What it does |
 | :--- | :--- |
-| drag a blob | moves that channel's sound, live. The blob jumps under the finger. A playing clip keeps running and takes the blob back when you let go |
+| drag a blob | moves that channel's sound, live. Start the drag **on the blob**: then it jumps under the finger. A drag that starts on empty sphere moves nothing. A playing clip keeps running and takes the blob back when you let go. Other blobs in the way are pushed aside, and their sound moves with them |
 | several fingers | each takes its own blob |
 | during a take | the first finger writes the take, wherever it lands; see [REC](#motion-rec) |
 
@@ -589,7 +630,8 @@ its field lights while it is on.
 
 | Gesture, in camera mode | What it does |
 | :--- | :--- |
-| drag up / down | leans the view from straight above down to the horizon |
+| drag up | leans the view from straight above down towards the horizon |
+| drag down | leans it back up. From straight above there is nowhere higher to go, so a drag down does nothing |
 | drag left / right | walks the view round the room |
 | pinch with two fingers, or the mouse wheel | zooms |
 | double tap | back to straight above, unzoomed |
@@ -669,8 +711,9 @@ the encoders.
 **The LENGTH keys scale the clip's own length.** The number on a key is what
 it gives this clip: the same key reads 4 on a four-beat shape and 8 on an
 eight-beat one, and can read a fraction such as 3/8 on a short one. The lit
-key is the one the clip plays at. The four keys belong to the device and are
-saved in the set.
+key is the one the clip plays at; when none is lit, the clip plays at a length
+none of the four holds, until you tap one. The four keys belong to the device
+and are saved in the set.
 
 **Stop and Paus (pause) are two different ends.** Stop goes back to the
 beginning of the shape, whichever way it was running, so the next start is
@@ -750,9 +793,11 @@ channel's colour**: the action sets it. **Two taps** on a MOTION value, or on
 **What you set here is saved into the action — for everyone.** The script
 file itself changes, a shipped one too. Every button on every channel that
 carries the same action plays the change, and so does every set that names
-it. To keep the original, make a copy first: **EDIT**, then **Save as** in
-FILES.
+it. To keep the original, make a copy first: **EDIT**, change something in
+the text (a comment will do), then **Save as** in FILES.
 ```
+
+<!-- QUESTION (maintainer): Save as is lit only while the editor holds unsaved text (scriptKeysFor: saveAs = unsaved), so an unchanged file can't be copied as it is -- the page now tells the DJ to change a comment first. Should Save as copy an unchanged file? -->
 
 <!-- QUESTION (maintainer): FILES protects shipped files (Save stays dark unless Developer Mode is on, shippedFileMayBeOverwritten), but ACTION writes a turned value into the script in place, shipped or not (decided 2026-09-29, "always in place"). So a DJ with Developer Mode off can change a factory action by turning a knob, but can't save the same change typed in FILES. The page describes both as they are. Which one should give way? -->
 
@@ -788,7 +833,7 @@ encoders.
 | **SEND** | how much of the channel goes to the FX bus, where the delay that follows the beat sits. Double tap: none |
 | **PFL** | the channel on the headphones (cue). Tap to switch |
 | **FX** | puts the channel through the shared filter (FX FREQ, FX RES, FX MODE in MIXER). Tap to switch |
-| meter, on the right | the channel's level, and its **VOL fader**: the handle is the volume. Drag anywhere on the meter to move it, one to one from where it stood. Double tap: full volume |
+| meter, on the right | the channel's level, and its **VOL fader**: the handle is the volume. **Grab the handle** and drag, one to one; a drag that starts elsewhere on the meter does nothing. Double tap the meter: full volume |
 
 (motion-rec)=
 
@@ -842,7 +887,7 @@ its values have been turned.
 | **from set** / **from clip** | writes what is on the device now into the editor as text, unsaved, for Save as to keep |
 | **Cancel** | puts the file's own text back |
 | **Save** | writes the editor's text over the file, and every channel using that clip, shape or action picks it up at once. A set is only written; loading it stays Load's job |
-| **Save as** | writes a copy into your own files, named after the original ("Lift Up 2") |
+| **Save as** | writes a copy into your own files, named after the file the editor shows ("Lift Up 2"); with no file shown, "Action". Lit only while the editor holds unsaved text — after **from set** / **from clip**, or once you have typed. The copy is not loaded: Load it to play it; a copy of an action made after EDIT goes onto that button |
 
 **Unsaved text holds the list and the tabs**: a row tap, Rename, Delete or
 another tab says `-- SAVE OR CANCEL` and flashes the two keys. A set or a shape
@@ -880,7 +925,7 @@ touch on it takes over from wherever it sits.
 
 | Control | What it does |
 | :--- | :--- |
-| meter | the channel's level and its **VOL fader**: drag anywhere on it, one to one. Double tap: full volume |
+| meter | the channel's level and its **VOL fader**: grab the handle and drag, one to one; elsewhere on the meter a drag does nothing. Double tap: full volume |
 | **GAIN** | input gain. Double tap: full |
 | **HIGH**, **MID**, **LOW** | the EQ. Double tap: flat |
 | **SEND** | to the FX bus. **SEND comes up shut, and a double tap takes it back there** |
@@ -890,7 +935,7 @@ touch on it takes over from wherever it sits.
 
 | Control | What it does |
 | :--- | :--- |
-| the column | the **master fader**: drag it, one to one. No double tap: full on the master is the one gesture that makes the whole room loud at once |
+| the column | the **master fader**: grab its handle and drag, one to one. No double tap: full on the master is the one gesture that makes the whole room loud at once |
 | output meters, at its foot | the subwoofer and the four speakers. Read only |
 | **BTH** | booth level |
 | **MIX** | headphone blend between cue and master. Double tap: the middle |
@@ -982,7 +1027,7 @@ It opens on top of the sphere. **Nothing in the menu is needed to play.**
 
 | Page | What it holds |
 | :--- | :--- |
-| **Skin** | which skin is loaded, as a list; the skin previews as you browse it |
+| **Skin** | which skin is loaded, as a list; the skin previews as you browse it with the arrow keys |
 | **Skin Editor** | every value the loaded skin holds, grouped by what it is |
 | **Network** | the OSC hosts, ports and addresses |
 | **Button LEDs** | the colours of the panel's keys |
@@ -1001,12 +1046,16 @@ it:
 | Gesture | What it does |
 | :--- | :--- |
 | drag the list, or the empty strips left and right of it | scrolls, the way a phone does |
-| tap a row | selects it |
-| double tap a row, or ENTER | opens it: a page, a list of its values, an edit box, or the colour picker |
-| in a list of values | tap or ENTER chooses; Escape or back leaves without choosing |
+| tap a row that leads to a page (Skin Editor, Network, Button LEDs, Pattern Folder) | opens that page, at once |
+| tap any other row | selects it |
+| double tap a row, or ENTER | opens it: a list of its values (Skin, Sphere in Menu, Developer Mode), an edit box, or the colour picker |
+| in a list of values | tap or ENTER chooses, and a tap chooses at once; Escape or back leaves without choosing |
 | in an edit box | type with the keyboard; ENTER keeps; Escape, back or ✕ undo. A skin number also has **− / +** keys that step it while you watch |
 
-Two fingers scroll as one.
+Two fingers scroll as one. Inside a page — the Skin Editor, Network and the
+others — a tap selects a row and a double tap opens it, as above. **Mind the
+double tap on the main menu's page rows:** the first tap has already opened
+the page, and the second lands on whatever row is under your finger there.
 
 **Getting out:** the **‹** (back) and **✕** (close) keys in the top right, and
 MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
@@ -1017,9 +1066,13 @@ keyboard shouldn't end your set.
 
 #### Skin
 
-Double tap **Skin**: the rows give way to the list of skins. Browsing
-previews each one on the sphere; a tap or ENTER chooses, back puts the running
-one back.
+Double tap **Skin**: the rows give way to the list of skins. The arrow keys
+↑ ↓ walk the list and preview each skin on the sphere; ENTER keeps the one
+you are on, Escape or back puts the running one back. **A tap on a skin
+chooses it straight away**, with no preview, and writes it into the device's
+settings. Dragging the list only scrolls it.
+
+<!-- QUESTION (maintainer): the preview is reachable only by the arrow keys (GlobalSettingsComponent::keyPressed → onPickerBrowsed); a drag scrolls without previewing, a tap applies and writes config.json (applySkin), and the panel's encoders don't reach the menu at all (handleEncoderTurn has no menu case, although previewSkin's comment speaks of "the encoder"). So on the device without a keyboard there is no way to look at a skin before it is chosen. Intended? -->
 
 #### Skin Editor
 
@@ -1029,10 +1082,18 @@ channels, sphere, type, touch, then the effects. At the top, five action rows:
 **» Reset** (every value back to the shipped default, keeping the name). They
 fire only on a double tap or ENTER.
 
-- A number opens the edit box with − / + to step it live.
+- A number opens the edit box with − / + to step it live, by a tenth of its
+  value each press (whole numbers by one). Escape puts the number back.
 - A colour opens the **colour picker**: drag on the picking surface (hue,
-  saturation, lightness); the change is live; **done** closes it.
-- **Leaving the editor saves the skin.**
+  saturation, lightness); the change is live; **done** closes it. There is no
+  undo in the picker: whatever you dragged to is kept, and Escape doesn't
+  close it. The picker counts channels from zero, so channel 1's colour is
+  labelled `channels.0`.
+- **Leaving the editor saves the skin**, changed or not. On the shipped
+  default skin it saves a copy called **custom** and switches to it, so the
+  default itself is never written over.
+
+<!-- QUESTION (maintainer): the colour picker has no undo (closeColourPicker keeps what applyPickedColour already wrote into the document) and no Escape, while the edit box undoes the whole document on Escape (_documentBeforeMask). Should the picker undo on back/Escape like the edit box? -->
 
 #### Network, Button LEDs, Pattern Folder
 
