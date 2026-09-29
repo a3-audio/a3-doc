@@ -106,7 +106,7 @@ against the old behaviour has to drop its own inversion as well.
 | /master/booth | /master/booth | float | [0-1] | Booth volume, relayed back
 | /master/phones_mix | /master/phones_mix | float | [0-1] | Phones mix, relayed back. The one value that goes out unbent, as a plain track volume.
 | /master/phones_volume | /master/phones_volume | float | [0-1] | Phones volume, relayed back
-| /master/return | /master/return | float | [0-1] | Aux return level, relayed back
+| /master/return | /master/return | float | [0-1] | FX return level (the desk's FX-return pot), relayed back. Since 2026-09-29 it drives the PurestGain on REAPER track 28 "Return"; full travel is 0 dB.
 | /fx/mode | /fx/mode | string or float | [high_pass, low_pass] or 0/1 | Global fx mode; as a number, 1 is high_pass. Core **sends** it as a number; the word goes to the desk on `/fx/led`.
 | /fx/frequency | /fx/frequency | float | [0-1] | fx filter frequency, relayed back
 | /fx/resonance | /fx/resonance | float | [0-1] | fx filter resonance, relayed back
@@ -195,7 +195,7 @@ and broadcasts it.
 | `/track/2/fx/1/fxparam/*` | `/master/booth` |
 | `/track/3/fx/2/fxparam/1/value` | `/master/phones_volume` |
 | `/track/8/volume` | `/master/phones_mix` |
-| `/track/25/fx/3/fxparam/*` | `/master/return` |
+| `/track/28/fx/1/fxparam/1/value` | `/master/return` |
 
 The filter is one control written to all four input tracks, so it is
 **reported on a channel's track and answered globally**. A value already
