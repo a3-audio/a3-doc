@@ -67,8 +67,8 @@ music playing on at least one mixer channel.
 3. **Load a set.** Tap **FILES** (top of the global strip), then **SETS**, tap
    *Warmup* and tap **Load**. All four channels now have a clip and six
    actions. Tap **FILES** again to close it.
-4. **Turn 3d up** on the channel your track is on: the pot at the top of that
-   channel's column on the panel, or **3D** in its field in the channel row.
+4. **Turn 3d up** on the channel your track is on: that channel's pot on the
+   panel (above its pads), or **3D** in its field in the channel row.
    **At 3d = 0 you hear no movement.** The channel stays in plain stereo,
    whatever its blob does on the screen.
 5. **Press Play.** Press that channel's **Play\|Pause** pad (top left of its
@@ -99,17 +99,20 @@ every control.
    channel first.
 3. Tap a row. **A tap only shows it** in the editor on the right; nothing on
    the device changes yet.
-4. Tap **Load**. A set goes onto all four channels and starts on the next
-   downbeat; a clip goes onto the selected channel.
+4. Tap **Load**. A set goes onto all four channels, a clip onto the selected
+   channel. The shipped sets load standing still: start them with Play\|Pause
+   or PADS › **Play all**. A set you saved while clips were playing starts
+   those clips again, together, on the next downbeat.
 5. Tap **FILES** again (or any tab) to close it.
 
 ```{warning}
-**Loading a set mid-set** stops all four clips, jumps every channel's 3d, freq
-and Q to the set's values — the room hears it — and starts the set's clips
-together on the next downbeat.
+**Loading a set mid-set** stops all four clips and jumps every channel's 3d,
+freq and Q to the set's values — the room hears it. A shipped set then stands
+still until you press Play; a set saved while playing starts again on the
+next downbeat.
 ```
 
-<!-- GIF: howto-files-load-set.gif | region: 0,36,768,636 (overlay plus the channel row, where the names change) | steps: FILES; SETS; tap Warmup; Load; wait for the downbeat | "Tap a set: it only shows" / "Load: all four channels" / "They start on the downbeat" | round 1, no. 1; re-record replaces howto-load-a-set.gif -->
+<!-- GIF: howto-files-load-set.gif | region: 0,36,768,636 (overlay plus the channel row, where the names change) | steps: FILES; SETS; tap Warmup; Load; wait for the downbeat | "Tap a set: it only shows" / "Load: all four channels" / "They start on the downbeat" | round 1, no. 1; a shipped set loads standing still, so the last caption needs a set saved while playing, or Play all after Load; re-record replaces howto-load-a-set.gif -->
 
 ![How to load a set](pics_user/howto-load-a-set.gif)
 
@@ -450,9 +453,9 @@ every sound is before it says anything itself.
 
 These are fine in soundcheck and loud in front of a crowd:
 
-- **Loading a set** stops all four clips, jumps each channel's **3d, freq and
-  Q** to the set's values, and starts the set's clips together on the next
-  downbeat.
+- **Loading a set** stops all four clips and jumps each channel's **3d, freq
+  and Q** to the set's values. A shipped set then stands still until you press
+  Play.
 - **Turning values on ACTION** rewrites that action for every channel and
   every set that uses it. See the warning in
   [How to fire and assign actions](#motion-howto-action).
@@ -488,6 +491,7 @@ its edit box), and pressing Escape on a keyboard (it never quits the app).
 | An action pad does nothing | The button is empty: grey on ACTION, dark on PADS. Put an action on it |
 | An action plays differently from yesterday | Someone turned its values on ACTION, and that is saved in the script. Open it with **EDIT** to see what it says now |
 | You tapped a set or a clip in FILES and nothing changed | A tap only shows it. **Load** puts it on the device |
+| You loaded a set and nothing moves | The shipped sets load standing still. Press Play\|Pause, or PADS › **Play all** |
 | **Save** is dark | It's a shipped file. Use **Save as** |
 | FILES won't change row and says `-- SAVE OR CANCEL` | The editor has unsaved text. Save it or Cancel it |
 | Your drawn shape parks in one spot halfway through the take | The rec mode is **Latch**. Draw in **Touch** |
@@ -964,7 +968,7 @@ What the pads show:
 | SHIFT + an action pad | now, as a preview only the screen sees, for as long as it is held |
 | a Cue | its clip is loaded now and starts on the **next downbeat** |
 | SHIFT + a Cue | loaded and started **now** |
-| Load a set | all four stop now and start together on the **next downbeat** |
+| Load a set | all four stop **now**; what the set says was playing starts together on the **next downbeat** (a shipped set: nothing) |
 | a drag on the sphere | **now**, all the way |
 
 <!-- GIF: howto-pads-page.gif | region: full screen 0,0,768,1024 | steps: tap ch3 PAGE (572,110); tap ch3 PAGE again | "PAGE on a channel selects it" / "PAGE again closes PADS" | round 2 -->
@@ -1160,8 +1164,9 @@ is, and the pots are where they were.
 Loading a **set** is the other way round. That is a deliberate act, so the set
 wins: it stops what was running, sets each channel's 3d, freq and Q, and
 starts what the set says was running again, from the top, on the next
-**downbeat**. Four clips starting together is the whole point of a set. Play
-all on PADS starts all four.
+**downbeat**. Four clips starting together is the whole point of a set. The
+shipped sets say nothing was running, so they load standing still; Play all on
+PADS starts all four.
 
 (motion-shape-on-sphere)=
 
@@ -1336,7 +1341,7 @@ panel rather than ten:
 *More* moves the room towards energy and openness, *less* towards calm and
 weight. Every action script says which it is on its `Mood:` line.
 
-<!-- GIF: howto-library-load-set.gif | region: full screen 0,0,768,1024 | steps: tap FILES (612,700); tap SETS (34,59); tap row "Warmup"; tap Load (106,560); wait for the downbeat, 3 s; tap FILES (612,700) | "SETS: one set per phase" / "Load: four clips, six buttons" / "It starts on the downbeat" -->
+<!-- GIF: howto-library-load-set.gif | region: full screen 0,0,768,1024 | steps: tap FILES (612,700); tap SETS (34,59); tap row "Warmup"; tap Load (106,560); wait for the downbeat, 3 s; tap FILES (612,700) | "SETS: one set per phase" / "Load: four clips, six buttons" / "It starts on the downbeat" | a shipped set loads standing still, so the last caption needs Play all after Load; same recording as howto-files-load-set.gif -->
 
 #### Across a night
 
