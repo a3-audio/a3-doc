@@ -60,7 +60,7 @@ REC and CHMIX.** Without SHIFT an encoder turns the field above it:
 | MOTION | spin, swell, strX, strY | sway, clip-top, tswp, rswp | swaps to the other knob of the field: rot, reach, sqzX, sqzY / elv, clip-bot, tilt, roll |
 | REC | clip, rec mode, two lengths | shape, fade, two lengths | on fade: swaps to bias |
 | CHMIX | GAIN, HIGH, MID, LOW | SEND, PFL, FX, VOL | on PFL or FX: switches it |
-| ACTION | first: steps the chosen button A1…A6; the other three: freq | Q | nothing |
+| ACTION | A1–A6, the list, the key ring, AUDIO/MOTION | the four values of the card's marked row | list: assigns; key ring: presses; lower row: marks the next row — see ACTION |
 
 Where an encoder has two knobs to choose from, the bar marks the one it is on.
 The choice is remembered.
@@ -304,16 +304,20 @@ Left to right:
 
 | Part | What it does |
 | :--- | :--- |
-| **A1–A6** | three rows of two, as the pads stand on the panel. Each shows its number and the name of its action. **Pressing one fires it**, exactly as its pad does, and makes it the **chosen** one |
+| **A1–A6** | three rows of two, as the pads stand on the panel. Each shows its number, the name of its action and a badge, **1** (one-shot) or **H** (Hold). **A tap chooses the button** — everything right of it then shows and edits that one. It does not fire: the pads fire, on the panel and on the PADS page |
 | the list | the action scripts. A tap puts that script on the chosen button; **no action** at the top clears it |
 | **EDIT** | opens the chosen button's script in FILES › ACTIONS |
-| mode | **1shot** or **Hold** for the chosen button: fire and let go, or hold the clip for as long as the finger is down. Tap to switch |
-| **Audio** | the chosen button's accent: `atk`, `dec` and `max` for **3d**, for **freq** and for **q** |
+| **Hold** / **1shot** | the chosen button's mode: fire and let go, or hold the clip for as long as the finger is down. Tap to switch |
+| **then** | what fires when this button's accent is over: another button of the channel (`then A3`), or nothing (`then --`). A tap steps it, two taps clear it |
+| **AUDIO \| MOTION** | two tabs on top of the card. **AUDIO**: the accent — `atk`, `dec` and `max` for **3d**, for **freq** and for **q**. **MOTION**: what the button puts on the clip — every knob of the MOTION page and CLIP's speed, direction and end |
 
 A field is in the channel's colour when it carries an action and grey when it
 does not; the chosen one has the thick outline; and a field turns **white while
 its action runs** — the same as its pad. A button with nothing on it does
-nothing at all. The global strip's **A** fires the chosen button.
+nothing at all. The global strip's **A** fires the chosen button. **Pressing an
+action pad** — on the panel or on the PADS page — fires it and brings up this
+page with that button chosen; not with SHIFT, and not while a take is armed or
+recording.
 
 **The accent** rises while an action button is held, stays up as long as it is
 held, and falls when you let go — `atk` is how long it takes to rise, `dec` how
@@ -327,30 +331,71 @@ and only on that edge, once.
 
 <!-- TODO (maintainer): do the freq and q accents only ever raise the filter, like the 3d one, or can they lower it? The code says only "0 is off". -->
 
-**What a button remembers.** The script's own accent values are read when it is
-put on the button; from then on they are that button's, and the knobs change
-them for that button only. The set remembers what you changed. A script is
-worked out at the moment you press, against the clip as it is then: an action
-that halves the reach halves the reach the clip has *now*. The dice in a random
-action are thrown when it is put on the button and kept, so every press lands in
-the same place — put it on again to throw again.
+**The MOTION tab** shows each value as it will land. **Grey**: the script
+leaves it to the clip — the clip's own value is shown as a hint. **In the
+channel's colour**: the script sets it.
+
+**What you set here is written into the script** — what you see is what you
+get. Every knob, the mode, **then** and every MOTION value changes exactly one
+line of the chosen button's script (`~spin = 3;`, `~envelopeMax = 0.5;`,
+`~then = 3;`); your comments and every other line stay as you wrote them. A
+line that was commented out is switched on, a missing one is added, a random
+value (`rrand`) becomes the number you turned to. **Two taps** on a MOTION
+value, or on **then**, comment the line out again: back to the clip's own value,
+or nothing after.
+
+- **In place, for everyone.** The script file itself changes — a shipped one
+  too. Every button on every channel that carries the same script plays the
+  change, and so does every set that names it. To keep the original, make a
+  copy first: EDIT, then **Save as** in FILES.
+- **The editor follows.** If FILES shows the same script, its text changes
+  with the knob — also while you are typing in it; what you typed stays.
+- **Written when the hand stops**, about a third of a second after the last
+  turn, and before a set is loaded or FILES saves, renames or deletes.
+- **The set only names the scripts.** What a button does is in its script.
+  Sets saved before 2026-09-29 load without the values that were turned per
+  button then, and without their **then** chains.
+
+A script is worked out at the moment you press, against the clip as it is then:
+an action that halves the reach halves the reach the clip has *now*. The dice
+in a random action are thrown when it is put on the button and kept, so every
+press lands in the same place — put it on again to throw again.
+
+**Then — chains.** When a button's accent is over, the button its **then**
+names fires, as a one-shot (no finger holds it). Chains may loop; another
+action press, Play|Pause or Stop on the channel ends one.
 
 **Two actions at once:** the last one pressed wins, and when it has fallen the
 clip is back to itself, not to the first action.
 
-<!-- GIF: howto-action-fire.gif | region: sphere and bar 0,36,768,988 | steps: clip playing; hold A1 (48,760) 2 s; hold A6 (124,950) 2 s | "Press A1: the action fires" / "The field turns white" / "Let go: the clip comes back" | re-record: replaces howto-fire-an-action.gif -->
+**On the panel** the four upper encoders stand under the page's columns:
+
+| Encoder | Turn | Press |
+| :--- | :--- | :--- |
+| 1 | chooses A1–A6 | – |
+| 2 | walks a highlight through the list — the button does not change yet | puts the highlighted script on the chosen button |
+| 3 | moves a ring over EDIT, the mode and **then** | does what a tap on the ringed key does |
+| 4 | switches AUDIO ↔ MOTION | the same |
+| 5–8 | turn the marked row of the card, left to right (AUDIO: atk, dec, max) | mark the next row |
+
+The ring and the row's outline appear once the encoder has been used. With
+SHIFT every encoder is its channel's freq or Q, as on every page.
+
+<!-- GIF: howto-action-fire.gif | region: full screen 0,0,768,1024 | steps: clip playing; open PADS; hold the channel's A1 pad 2 s; ACTION comes up with A1 chosen | "Press the A1 pad: the action fires" / "ACTION shows it, the field turns white" / "Let go: the clip comes back" | re-record since 2026-09-28: the fields only choose, the pads fire; replaces howto-fire-an-action.gif -->
+
+<!-- GIF: howto-action-writes-script.gif | region: full screen 0,0,768,1024 | steps: tap A1; tap MOTION tab; turn spin; tap EDIT; the ~spin line shows the value | "Turn a value" / "EDIT: the script says the same" -->
+
+<!-- GIF: howto-action-then.gif | region: bar 0,672,578,352 | steps: tap A1; tap then (370,858) x3 | "then: what fires next" / "A1 then A3" -->
 
 <!-- GIF: howto-action-assign.gif | region: bar 0,672,578,352 | steps: tap A2 (124,760); tap list row 3 (225,831); tap A2 again | "Choose a button" / "Tap a script in the list" / "The button carries it" | re-record: replaces howto-assign-an-action.gif -->
 
 <!-- GIF: howto-action-clear.gif | region: bar 0,672,578,352 | steps: tap A5 (48,950); scroll list to top; tap "no action" | "Tap 'no action'" / "The button is empty" -->
 
-<!-- GIF: howto-action-mode.gif | region: bar 0,672,578,352 | steps: tap A3 (48,855); tap mode (320,793) x2 | "Tap the mode" / "1shot or Hold" -->
+<!-- GIF: howto-action-mode.gif | region: bar 0,672,578,352 | steps: tap A3 (48,855); tap mode (370,815) x2 | "Tap the mode" / "1shot or Hold, and the badge" -->
 
 <!-- GIF: howto-action-audio.gif | region: channel row and bar 0,626,768,398 | steps: tap A1; drag 3d max (530,785) up 40 px; hold A1 1.5 s | "max: how far the 3d rises" / "Watch the 3D knob's arc" -->
 
 <!-- GIF: howto-action-edit.gif | region: full screen 0,0,768,1024 | steps: tap A1; tap EDIT (320,750); wait 2 s; tap FILES (612,700) | "EDIT opens the script" / "in FILES › ACTIONS" -->
-
-![How to fire an action](pics_user/howto-fire-an-action.gif)
 
 ![How to put another action on a button](pics_user/howto-assign-an-action.gif)
 

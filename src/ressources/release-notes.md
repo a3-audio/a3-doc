@@ -21,13 +21,23 @@ On `main` since `v03.0`, not tagged yet.
   STOP stays on the screen.
 - **PAGE** selects its channel, or on the shown channel steps CLIP → MOTION → ACTION → CHMIX
   → REC (SHIFT: backwards).
-- **The ACTION page** shows the six buttons in the panel's arrangement, the list to assign
-  from, EDIT and the mode, and the Audio card of the chosen button. Pressing a field fires it
-  and chooses it; the first encoder steps through them. A field turns white while its action
+- **The ACTION page** shows the six buttons in the panel's arrangement, each with a **1/H**
+  badge for its mode, the list to assign from, and the keys EDIT, Hold/1shot and **then**; the
+  card has two tabs, **AUDIO** (the accent) and **MOTION** (what the button puts on the clip).
+  A field only **chooses** its button; the pads fire, on the panel and the PADS page, and a
+  pad press brings up ACTION with that button chosen. A field turns white while its action
   runs, as its pad does.
-- **How an action plays belongs to its button**: attack, decay and ceiling of the three
-  envelopes, and 1shot or Hold, are read from the script when it is assigned and kept per
-  button in the set. The clip file's own envelope values are no longer used.
+- **Encoders on ACTION:** 1 chooses A1–A6, 2 walks the list (a press assigns), 3 rings
+  EDIT/mode/then (a press presses), 4 switches AUDIO/MOTION, 5–8 turn the card's marked row (a
+  press marks the next).
+- **What ACTION sets is written into the script** — what you see is what you get. Every knob,
+  the mode, **then** and every MOTION value changes one line of the button's script, in place
+  (shipped scripts too); comments and the other lines stay. Every button and set using that
+  script plays the change. The clip file's own envelope values are no longer used.
+- **Then:** `~then = N;` in a script names the button (1–6) that fires when this one's accent
+  is over; chains may loop, another press, Play|Pause or Stop ends one.
+- **A set only names its scripts.** Sets saved before 2026-09-29 load without the values that
+  were turned per button, and **without their then chains** — set those again on ACTION.
 - A script is worked out **at the press, against the clip as it is then**. Before, a button
   kept the clip it was assigned on, and after a new clip or a turned knob a press threw the
   channel back to the old values for the length of the accent. The dice of a random action are
