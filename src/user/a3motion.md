@@ -135,9 +135,9 @@ next downbeat.
   **Play\|Pause** on the panel.
 - **Call off a start that is still waiting:** press Play\|Pause again while
   it blinks.
-- **Start or stop all four:** open **PADS** and use the grey block on the
-  left: **Play all** starts every clip that is standing still, **Stop all**
-  stops all four at once.
+- **Start all four:** open **PADS** and tap **Play all** in the scene column
+  on the left: it starts every clip that is standing still. To stop all four,
+  stop each channel (■, or SHIFT + Play\|Pause); there is no Stop all.
 
 Every start begins at the top of the shape. A stop leaves the sound where it
 is; it doesn't jump anywhere.
@@ -152,7 +152,7 @@ is; it doesn't jump anywhere.
 
 ![With the clip playing tap ■: it stops at once. Tap ▶: it starts from the top on the downbeat.](pics_user/howto-transport-stop.gif)
 
-<!-- GIF: howto-pads-scene.gif | region: 0,36,768,590 | steps: PADS; Play all; downbeat; 2 s; Stop all | "The grey block plays all four" / "Play all: in on the downbeat" / "Stop all: all four, right now" | round 1, no. 7 -->
+<!-- GIF: howto-pads-scene.gif | region: 0,36,768,590 | steps: PADS; Play all; downbeat; 2 s | "The scene column plays all four" / "Play all: in on the downbeat" | round 1, no. 7; Stop all is gone since 2026-09-30 -->
 
 <!-- GIF: howto-pads-shift-now.gif | region: pads 0,36,768,590 | steps: clip playing; hold SHIFT on PADS; tap the channel's Play|Pause | "SHIFT + Play|Pause: stop now" | blocked: needs two pointers, xdotool has one -->
 
@@ -548,7 +548,7 @@ an address nobody listens to.
 | You want | Do this |
 | :--- | :--- |
 | one channel to stand still, now | select it and tap **■**; on the panel, hold **SHIFT** and press its **Play\|Pause** |
-| all four to stand still, now | PADS › **Stop all** (the grey block). Screen only: on the panel, SHIFT + Play\|Pause on each channel |
+| all four to stand still, now | on the panel, SHIFT + Play\|Pause on each channel; on the screen, select each channel and tap **■**. There is no Stop all |
 | a channel back to plain stereo | turn its **3d** pot down. The track stays in the mix, just no longer in the room |
 | a chain of actions to end | press Play\|Pause, ■ or another action pad on that channel |
 | a take gone wrong to go away | **■** ends it, **DISCARD** twice puts back what was there, stopped |
@@ -1048,15 +1048,15 @@ PADS again, a tab, or MENU.
 | row 3 | **A3** | **A4** |
 | row 4 | **A5** | **A6** |
 
-The window is laid out **as the panel is**: square pads on a grid of six rows,
-the channels' pads in the bottom four. The top two rows stay empty, where the
-panel has its pots.
+The window is **the panel, key for key**: 44 square keys on the panel's grid
+of ten columns and six rows, each where its button is on the device.
 
-**The function keys are on it too**, as on the panel:
-
+- **the four channels** in the middle, two columns of four each, in the bottom
+  four rows. The top two rows stay empty, where the panel has its pots;
 - **right**, top to bottom: **TAP**, **clock**, **REC**, **recmode**, **MENU**,
   **SHIFT**;
-- **left**, above the grey block: **TAP** and **clock**.
+- **left**, top to bottom: **TAP** and **clock**, then the **scene column**
+  (▶ A A A): **Play all**, **A1**, **A3** and **A5** on every channel.
 
 A key on the screen is the panel's key: down while the finger is on it, up
 when it lets go. **SHIFT or REC held on the screen** changes what a pad does,
@@ -1075,10 +1075,12 @@ running, the menu open, TAP pressed or on the beat.
 - **A1–A6** fire that channel's action buttons, now.
 - Pressing Play\|Pause or an action selects that channel in the bar, so what
   you read is what you just touched.
-- The grey **block at the left** fires one pad on **all four channels**: Play
-  all (starts only the clips that are standing still), **Stop all** in PAGE's
-  place, and each action on every channel that has one. Screen only; the panel
-  has no grey block.
+- The **scene column** on the left fires one pad on **all four channels**:
+  **Play all** starts only the clips that are standing still; **A1**, **A3**
+  and **A5** fire that action on every channel that has one. It is screen
+  only: on the panel, the left column's lower four buttons are REC, recmode,
+  MENU and SHIFT. There is no Stop all and no A2, A4 or A6 across channels any
+  more.
 
 What the pads show:
 
@@ -1200,7 +1202,7 @@ Double tap the row, tap **on** or **off**.
 
 (motion-keyboard)=
 
-### The on-screen keyboard
+### The keyboard
 
 The device has its own keyboard. It takes the **bar's place** — where CLIP,
 MOTION, ACTION, CHMIX and REC are — so the sphere, the channel row, the tabs
@@ -1213,34 +1215,61 @@ of the sphere, never under the keys.
   Skin Editor and the menu — and goes again when that is done.
 - **HIDE** puts it away and leaves the field open.
 
-**QWERTZ**, with ä ö ü and ß where a German hand looks for them. Four rows of
-twelve, sitting on the bar's eight fields — each field holds two rows of three
-keys, so every key sits above exactly one encoder:
+**The keyboard is the panel.** Its 44 keys stand on the same grid as the
+panel's 44 buttons and the [PADS](#motion-pads) window — ten columns, six
+rows — so every key on the screen is the button in the same place on the
+device. The letters are **QWERTY**:
 
-| Row | Letters | Symbols (**123**) |
-| :--- | :--- | :--- |
-| 1 | q w e · r t z · u i o · p ü **DEL** | 1 2 3 · 4 5 6 · 7 8 9 · 0 . **DEL** |
-| 2 | a s d · f g h · j k l · ö ä **ENTER** | - / " · : ; = · ~ \ ' · , + **ENTER** |
-| 3 | **SHIFT** y x · c v b · n m ß · . - _ | ( ) { · } [ ] · < > * · _ \| ! |
-| 4 | **123** ◀ ▶ · **SPACE** · **ESC** **HIDE** | the same, with **ABC** for 123 |
+| Row | col 0 | cols 1–8 | col 9 |
+| :--- | :--- | :--- | :--- |
+| 0 | **ESC** | — | **DEL** |
+| 1 | **123** | — | **ENTER** |
+| 2 | q | w e r t y u i o | p |
+| 3 | a | s d f g h j k l | - |
+| 4 | z | x c v b n m , . | / |
+| 5 | **SHIFT** | ◀ ▶ **SPACE** (four wide) ' " | **HIDE** |
 
-The symbols page holds what scripts, clips and sets are written with.
+**123** swaps rows 2–4 for what scripts, clips and sets are written with, and
+reads **ABC** there to come back:
+
+| Row | Symbols (**123**) |
+| :--- | :--- |
+| 2 | 1 2 3 4 5 6 7 8 9 0 |
+| 3 | - / : ; ( ) = + _ * |
+| 4 | { } [ ] < > \ \| ! ~ |
+
+There are no umlauts and no ß.
 
 ![The keyboard in the bar's place](pics_user/a3-motion-ui-keyboard.png)
 
 - **SHIFT** once: the next letter is a capital. Twice: caps lock. A third
-  time: off. The panel's SHIFT held while you tap a key also gives a capital.
-- **DEL** and the arrows act at once and repeat while held. Every other key
-  types when you **let go**: slide off a wrong key and nothing is typed.
+  time: off.
+- On the screen a key types when you **let go**: slide off a wrong key and
+  nothing is typed. **DEL** and the arrows act at once and repeat while held.
 - **ENTER** keeps what you typed and closes, in a name; in the FILES editor it
   is a new line, and **ESC** or **HIDE** put the keyboard away. **ESC** in a
   name, and Back or Close in the Skin Editor, undo it.
 
-**From the panel:** an encoder walks the six keys of the field above it — the
-upper encoder row the keyboard's rows 1–2, the lower row its rows 3–4; the
-first detent only shows the ring. A **press** types the ringed key. SHIFT +
-encoder stays freq and Q. Pads, pots, TAP, clock, REC, recmode and MENU do what
-they always do.
+**From the panel: while the keyboard is up, the whole panel types.** Each of
+the 44 buttons is the key drawn in its place — the pads are the letters; on
+the left TAP is ESC and SHIFT is SHIFT, on the right TAP is DEL and SHIFT is
+HIDE — and it types **as you press** it; DEL
+and the arrows repeat while held. The pads and key LEDs show the keyboard: the
+letters dim, the other keys in the skin's accent colour.
+
+- **No clip fires and no key does its own job** while you type: no pad
+  starts or stops anything, TAP taps no tempo, REC, MENU and SHIFT do nothing
+  else. Clips that are running go on.
+- **HIDE or ESC gives the panel back.** A key you pressed while typing is
+  released to the keyboard too, so letting go of ESC never taps a tempo. A pad
+  you were already holding when the keyboard came up lets go as usual.
+- **Encoder 1** (channel 1, upper) moves the text cursor. The other encoders,
+  SHIFT + encoder (freq and Q), the pots and the faders keep their jobs: the
+  mix stays under your hands.
+
+This reverses the earlier rule that the pads keep playing while you type:
+open the keyboard only when you mean to type, and put it away with HIDE or
+ESC before the next clip has to start.
 
 (motion-reference-panel)=
 
@@ -1277,6 +1306,10 @@ mirrored so either hand reaches them; a key is down while either side is down.
 **clock** and **recmode** step their value on a press, as their screen twins
 do. **SHIFT is on the panel and on the PADS window**: the SHIFT gestures on
 this page need one of the two.
+
+**While the keyboard is up, the panel is the keyboard:** every button types,
+no pad fires and no function key does its own job; encoder 1 moves the text
+cursor. HIDE or ESC gives the panel back. See [The keyboard](#motion-keyboard).
 
 (motion-how-it-thinks)=
 
@@ -1516,9 +1549,9 @@ The A6 Cues chain the sets into the arc of a night:
 
 **A Cue works on its own channel.** A6 on channel 2 puts the next phase's clip on
 channel 2 and nowhere else, so you can walk the room into the next phase one
-channel at a time. The grey block on PADS fires A6 on all four channels at once
-— which gives you the same clip four times over. That is a choice, and a loud
-one; for all four clips of the next phase, **Load the next set** in FILES.
+channel at a time. PADS' scene column fires only A1, A3 and A5 across the
+channels, so no key cues the same clip onto all four at once; for all four
+clips of the next phase, **Load the next set** in FILES.
 
 **How a Cue plays:**
 
