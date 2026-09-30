@@ -511,7 +511,7 @@ tapped since. Tap it in again.
 
 ![In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back.](pics_user/howto-menu-skin-editor-value.gif)
 
-<!-- GIF: howto-menu-skin-editor-colour.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done. | "Double tap a colour: the picker" / "Drag: channel 1 recolours live" / "The hue strip for another hue" / "done keeps it" | Escape does not close the picker, only done; opening the editor on "default" switches the skin to "custom" -->
+<!-- GIF: howto-menu-skin-editor-colour.gif | region: 0,36,768,624 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: In the Skin Editor (All values and skin actions) double tap channel 1's colour, drag across the picker and the hue strip, tap done. | "Double tap a colour: the picker" / "Drag: channel 1 recolours live" / "The hue strip for another hue" / "done keeps it" | Escape does not close the picker, only done; recorded on quiet-indigo-2, whose name the editor keeps (the sandbox's copy of the skin) -->
 
 ![In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done.](pics_user/howto-menu-skin-editor-colour.gif)
 
