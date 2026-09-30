@@ -42,6 +42,30 @@ Motion's clock key:
 
 What each mode needs is on the [Beat Analyzer](beat-analyzer.md) page.
 
+(core-workspaces)=
+
+## The screen and its workspaces
+
+The Core's portrait screen (768 × 1024, touch) shows one thing at a time.
+Each program has its own workspace, named for what is on it:
+
+| Workspace | What is on it |
+| :--- | :--- |
+| **MOTION** (1) | [A³ Motion](a3motion.md)'s touch screen |
+| **STEMDECK** (2) | [StemDeck](stemdeck.md), always running |
+| **REAPER** (3) | the audio engine |
+| **QJACKCTL** (4) | the JACK patching |
+| **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
+
+**Between the two touch screens**, use the key at the far right of their top
+bars: STEMDECK in A³ Motion, MOTION in StemDeck. It sits at the same spot in
+both, so the key under your finger stays put. The **▾** beside it lists every
+workspace that has a window on it.
+
+**On REAPER, QJACKCTL and SCARLETT** a bar at the top of the screen shows the
+workspaces by name — tap MOTION or STEMDECK there to get back to playing. The
+bar is hidden on the two touch screens, which fill the whole screen.
+
 ## The window
 
 A³ Core has no interface of its own — but it does have a window. Point a
