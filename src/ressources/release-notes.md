@@ -118,6 +118,12 @@ On `main` since `v03.0`, not tagged yet.
 
 **Controls**
 
+- **The workspace switch**, at the right end of the status bar: **STEMDECK** goes to StemDeck
+  on the Core's screen, **▾** lists the rig's workspaces as i3 reports them (those with a
+  window on them), the current one highlighted; a tap beside the list closes it. It stands
+  exactly where StemDeck's MOTION key stands, so the key under the finger stays put, and it
+  is drawn in StemDeck's look rather than the skin's. CLEAN, KEYS and MENU now stand before it.
+
 - **New layout of the bar.**
   - **The channel row:** across the whole width, between the sphere and the bar, one field per
     channel in its colour. Each field shows the channel's VU, its 3D, FREQ and Q pots, and a bar
@@ -254,6 +260,14 @@ On `main` since `v03.0`, not tagged yet.
   documented default before it is offered.
 - Package updates reach the rigs: the package version is the last tag plus the commits
   since it (`03.0+71`, say) instead of a fixed `1.0.0` that apt never saw change.
+- **Named workspaces:** `1:MOTION`, `2:STEMDECK`, `3:REAPER`, `4:QJACKCTL`, `5:SCARLETT`, and
+  every program's window is moved to its own by an i3 rule. StemDeck's main window fills its
+  workspace without a border (i3's full screen ended with every dialog it opened); its other
+  windows float.
+- **An i3bar at the top** on workspace 3 and up, the way back from REAPER, QjackCtl and the
+  Scarlett mixer, with the workspace names shown without numbers. It is hidden on the two
+  touch screens; `a3-bar-per-workspace.service` switches it.
+- The package also depends on `x11-utils`, `x11-xserver-utils` and `i3status`.
 
 ### A³ Mixer (`a3-mixer`)
 
@@ -289,6 +303,12 @@ On `main` since `v03.0`, not tagged yet.
 - **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
   own output bus, any of them switchable to aux — is carried by the a3-system repository as a
   submodule since 2026-09-29, and versioned with the rest.
+- **Always running on the Core**, as `stemdeck.service`, on workspace 2. A (re)start no
+  longer takes the screen: `tools/rig-keep-the-screen.sh` puts back the workspace that was
+  showing. A restart still costs a burst of JACK xruns from the graph change — not mid-set.
+- **MOTION and ▾** at the right end of the top bar: over to A³ Motion, or to any of the rig's
+  workspaces, at the same place as A³ Motion's STEMDECK key. The list is drawn inside
+  StemDeck's own window; a separate popup window came up black on the rig.
 
 ### Documentation (`a3-doc`)
 
@@ -304,6 +324,8 @@ On `main` since `v03.0`, not tagged yet.
 - The OSC reference lists every path, with send and receive per device, and one page lists
   every port.
 - These release notes.
+- The Core's screen: its workspaces and the bar (user and configuration pages), the workspace
+  switch in StemDeck and A³ Motion, and StemDeck on workspace 2 instead of 4.
 
 ## v03.0 (2026-09-12)
 

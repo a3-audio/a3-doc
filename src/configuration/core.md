@@ -3,7 +3,7 @@
 | Part | What it is |
 | :--- | :--- |
 | OS | Debian with a Linux realtime kernel |
-| Window manager | xfce |
+| Window manager | i3, with named workspaces — see [The screen](#core-config-screen) |
 | Audio backend | REAPER |
 | VU metering | SuperCollider |
 | OSC router | `~/.local/bin/a3-core.py`, started by a `systemd --user` service |
@@ -50,6 +50,50 @@ nothing all evening, and OSC over UDP has no way of saying so.
 
 See the [OSC reference](https://a3-audio.github.io/a3-doc/ressources/osc.html)
 for what arrives.
+(core-config-screen)=
+
+## The screen: i3 workspaces and the bar
+
+The a3-core package ships the i3 config as
+`~/.local/share/a3-core/config/i3/config`. It names the rig's workspaces and
+moves each program's window to its own:
+
+| Workspace | Rule |
+| :--- | :--- |
+| `1:MOTION` | `for_window [class="A3 Motion UI"]` |
+| `2:STEMDECK` | `assign [class="StemDeck"]`; the main window (`title="^StemDeck$"`) gets `border none`, every other StemDeck window floats |
+| `3:REAPER` | `for_window [class="REAPER"]` |
+| `4:QJACKCTL` | `for_window [class="QjackCtl"]` |
+| `5:SCARLETT` | `for_window [title="Scarlett 18i20 USB"]` |
+
+The names are what the two touch apps' workspace switch and i3bar show; both
+read them from i3 (`i3-msg -t get_workspaces`), so a workspace renamed or
+added here shows up without a change to either app. `workspace number N`
+still finds them, as do `$mod+1` … `$mod+5`.
+
+StemDeck's main window is tiled without a border instead of set to i3's full
+screen: each dialog StemDeck opened ended the full screen. Its dialogs float
+over it.
+
+**The bar.** i3bar (`bar { id a3 … }`) sits at the top, with
+`strip_workspace_numbers yes` and `status_command i3status`. i3 has no bar
+per workspace, so `a3-bar-per-workspace.service` (a `systemd --user` service
+running `~/.local/bin/a3-bar-per-workspace.py`) follows i3's workspace events
+and sets the bar's mode: `dock` on workspace 3 and up, `invisible` on 1 and
+2, where A³ Motion and StemDeck fill the screen and switch between each other
+themselves. The service restarts when i3 does, since an i3 restart ends the
+event stream.
+
+**StemDeck** runs as `stemdeck.service`, shipped in the StemDeck repository
+(`.config/systemd/user/`), not in the a3-core package — see
+[Always running on the Core](#stemdeck-on-the-core). Its
+`tools/rig-keep-the-screen.sh` puts back the workspace that was showing when
+StemDeck (re)starts. A StemDeck restart changes the JACK graph and costs a
+burst of xruns: not during a set.
+
+The package depends on `x11-utils`, `x11-xserver-utils` and `i3status` for
+what the screen scripts and the bar call.
+
 ## Supercollider script VU-Meter
 - 12-Channel Jack client (could be more for ie light and vj control)
 - sends vu-meter (peak and rms) via OSC
