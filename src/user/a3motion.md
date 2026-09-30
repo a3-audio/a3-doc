@@ -403,7 +403,7 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 <!-- QUESTION (maintainer): Save as names a copy after the file the editor shows (copyBaseFor(_panelFile)); with no file shown it falls back to "Action" on every tab, so SETS › from set › Save as straight after opening SETS wrote a set called "Action" (recorded 2026-09-29). Should a set copy be named after the loaded set instead? -->
 
-<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
+<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0, 12.2 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
 
 ![The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip.](pics_user/howto-files-keep-tweak.gif)
 
