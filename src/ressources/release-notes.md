@@ -11,6 +11,19 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### The whole system: one truth for OSC
+
+- **Every OSC address, port and IP is written once**, in `/usr/share/a3/a3-osc.json`, shipped
+  by the a3-core package. Core, A³ Motion, the A³ Mixer (from a copy beside its script),
+  StemDeck, the beat-analyzer and the zita units all take them from there. See
+  {ref}`Where addresses and ports live <osc-truth>`.
+- **The vocabulary was straightened:** channels count 1–4 on the wire (were 0–3); `/fx/*`
+  became `/filter/*`, `/channel/N/fx` `/channel/N/filter`, the lamps `/channel/N/pfl/led` and
+  `/channel/N/filter/led`, `pot_1`/`pot_2` `/channel/N/filter/frequency` and `/filter/q`,
+  `/master/phones_mix`/`phones_volume` `phones-mix`/`phones-volume`, `/master/return`
+  `/master/fx-return`, and the meters `/vu/1..40`. Anything outside the A³ repositories that
+  speaks the old words has to follow.
+
 ### A³ Motion (`a3-motion-ui`)
 
 **One clip per channel, six actions**
@@ -233,6 +246,15 @@ On `main` since `v03.0`, not tagged yet.
   four clips running held the picture at about 8 frames a second. Now about 40, and the touch
   screen answers at once. The picture itself is unchanged.
 
+**OSC**
+
+- **Addresses, ports and hosts come from `a3-osc.json`.** The `oscSender`, `oscReceiver` and
+  `oscAddresses` blocks of `config.json` are no longer read, and the **Network** page is gone
+  from the menu.
+- Meters by name: the input dots are `in1_pre` … `in4_pre`, the sphere's glow `main_sub`, the
+  towers `main_top1` … `main_top4`, and the MIXER page's master column shows **ten** meters,
+  `main_sub` and `main_top1` … `main_top9` (it showed five).
+
 **Start-up and build**
 
 - The app waits until the screen is really there, and refuses to start without a display
@@ -252,6 +274,13 @@ On `main` since `v03.0`, not tagged yet.
 - **No more lag from Core:** one loop reads each OSC port. It used to start a thread per
   message, and under load those piled up until the mixer and Motion stopped reaching
   REAPER. Core also no longer shares its processor core with Motion's screen.
+- **Core reads `a3-osc.json`** for every address and port, and does not start without it. The
+  package renders the file for what cannot read JSON (`a3-osc-render user`: the zita units,
+  the beat-analyzer's `.env`) and takes its standard network from it.
+- **The window says which truth each device speaks:** a line per device under the peers,
+  *a3-osc.json is Core's* or, in red, *DIFFERS from Core's*.
+- The OSC register is built from `a3-osc.json`, one row per address shape and device, instead
+  of being lifted out of the sources.
 - REAPER is told only the OSC addresses Core uses, which shortens its report at start from
   23 to 14 seconds.
 - An update no longer reinstalls REAPER and its plugins under a running REAPER (which
@@ -297,6 +326,11 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Mixer (`a3-mixer`)
 
+- **The desk reads a copy of `a3-osc.json`** beside its script
+  (`software/scripts/a3-osc.json`, copied from the Core at deploy); without it the service
+  stops and says where it looked. It sends `/device/hello` with the copy's sha256.
+- Its meters by name: inputs `in1_pre` … `in4_pre`, outputs `main_sub` and
+  `main_top1` … `main_top7`.
 - The tap keys blink with the beat; the bright key carries the cue, and the dim one taps.
 - At start the desk asks what is on, so its lamps are right from the first moment.
 - One dark display no longer takes the other five with it, and a crashed display process no
@@ -324,11 +358,16 @@ On `main` since `v03.0`, not tagged yet.
 - The octave choice has hysteresis: near the edge of the tempo range the clock no longer flips
   between a tempo and its double.
 - **Forty VU inputs, named after the REAPER channel map:** `vu_in1_pre` … `vu_free70`, fed
-  from REAPER out 31–70 and sent as `/vu/0..39` in four bundles, one per block of ten.
-  `NUM_VU_CHANNELS=40`. A³ Motion and the A³ Mixer still read the old twelve positions until
-  they are moved to the new indices.
+  from REAPER out 31–70 and sent as `/vu/1..40` in four bundles, one per block of ten.
+  `NUM_VU_CHANNELS=40`.
+- **Targets, ports and addresses come from the `a3-osc` block** in `build/.env`, which the
+  a3-core package writes from `a3-osc.json`. Target lines written by hand are commented out
+  as `# was: …`; there is no fallback target any more.
 
 ### StemDeck (`stemdeck`)
+
+- The Pro DJ Link ports come from `a3-osc.json`; without the file the PIO status line says
+  `PIO: no a3-osc.json`.
 
 - **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
   own output bus, any of them switchable to aux — is carried by the a3-system repository as a
@@ -357,7 +396,10 @@ On `main` since `v03.0`, not tagged yet.
 - The Core's screen: its workspaces and the bar (user and configuration pages), the workspace
   switch in StemDeck and A³ Motion, and StemDeck on workspace 2 instead of 4.
 - The REAPER channel map and the forty-meter VU map on the Core's configuration page; the
-  OSC reference, the ports page and the beat analyzer page list `/vu/0..39`.
+  OSC reference, the ports page and the beat analyzer page list `/vu/1..40`.
+- **The OSC reference's address and meter tables and the ports page's listener table are
+  rendered from `a3-osc.json`** (a3-core's `tools/render_docs.py`), with a section on where
+  addresses and ports live, the renames of 2026-09-30 and the `DIFFERS` line.
 
 ## v03.0 (2026-09-12)
 
