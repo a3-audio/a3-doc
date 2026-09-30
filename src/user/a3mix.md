@@ -11,7 +11,9 @@ every device is told all of it.
 
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
-The numbers below refer to that picture.
+The numbers below refer to that picture. It is older than the V02 panel: FX
+SEND and RETURN are real knobs on the device but have no place in the drawing,
+so they are listed without a number.
 
 ## The channel strip
 
@@ -20,7 +22,7 @@ them.
 
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
-| 0 | **FX SEND** | how much of this channel reaches the FX bus, where the delay that follows the beat sits | −inf … 0 dB |
+| – | **FX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
 | 1 | **TRIM** | the level of the signal coming in | −inf … 0 dB |
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
@@ -32,7 +34,7 @@ them.
 | 9 | **CUE** | sends this channel to the headphones (PFL). Lit blue while it is on |  |
 
 ```{note}
-Until 2026-09-12 the FX SEND knob (0) did something else entirely: it drove the **3D
+Until 2026-09-12 the FX SEND knob did something else entirely: it drove the **3D
 blend** — how far the channel was spread into the room — because it was the
 only continuous control the desk had for that. A³ Motion's per-channel pot
 took that job over, and the knob got its own name back.
