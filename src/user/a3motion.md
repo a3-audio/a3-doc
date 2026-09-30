@@ -636,10 +636,11 @@ Every window opens from a key with its name on it. Here's where each key lives.
 | **FILES** | sets, clips, shapes and actions on disk | FILES, top of the global strip | FILES again; MIXER or PADS (swaps it); any tab; MENU; PAGE on the panel |
 | **MIXER** | all four mixer strips and the master | MIXER, top of the global strip | the same as FILES |
 | **PADS** | the panel's pads on the screen | PADS, top of the global strip | the same as FILES |
-| **Menu** and its pages | skins, network, LEDs, folders | MENU, right end of the status bar, or MENU on the panel | ‹ (back) or MENU: one level; ✕: all of it |
+| **Menu** and its pages | skins, network, LEDs, folders | MENU in the status bar, or MENU on the panel | ‹ (back) or MENU: one level; ✕: all of it |
 | a list of values, an edit box | changing one menu value | double tap or ENTER on a menu row | ENTER or a tap on a value (keeps it); back, MENU or Escape (drops it) |
 | the colour picker | changing one colour in the Skin Editor | double tap a colour row | **done**, back or MENU. The colour stays either way: it is changed as you drag. Escape does nothing here |
 | **Keyboard** | typing names and values | KEYS, status bar; comes up by itself when there is something to type | KEYS again, or HIDE |
+| the workspace list | going to another of the Core's screens | ▾, right end of the status bar | a tap on a workspace (goes there), or a tap beside the list |
 
 Only one of FILES, MIXER and PADS is open at a time; each opens on top of the
 sphere, and the channel row, the bar and the global strip stay in view under
@@ -659,7 +660,7 @@ Delete; text typed in the editor stays, marked unsaved.
 Top to bottom:
 
 1. the **status bar**: clock, tempo, what was last done, the beat, CLEAN,
-   KEYS, MENU;
+   KEYS, MENU, and the workspace switch STEMDECK ▾;
 2. the **sphere**: the room seen from above;
 3. the **channel row**: one field per channel;
 4. the **bar**: five tabs and the page they open, on the left three quarters;
@@ -677,6 +678,13 @@ Top to bottom:
 | **CLEAN** | switches to the clean skin — thin lines, plain blobs, effects off — and back to the skin you had. Greyed out when the device has no clean skin |
 | **KEYS** | shows or hides the on-screen keyboard |
 | **MENU** | opens the menu; see [The menu](#motion-menu) |
+| **STEMDECK** | shows [StemDeck](stemdeck.md), on the Core's screen. StemDeck has the same key, reading MOTION, at exactly the same place, so a second tap brings you back |
+| **▾** | opens the list of the Core's workspaces — MOTION, STEMDECK, REAPER, QJACKCTL, and SCARLETT while the Scarlett mixer runs; only those with a window on them. The one on the screen is highlighted; tap one to go there, beside the list to close it |
+
+The switch at the right end looks like StemDeck's keys, not like your skin:
+it belongs to the rig rather than to A³ Motion, and it is the same key in
+both apps. On REAPER, QJACKCTL and SCARLETT a bar at the top of the screen
+names the workspaces; tap MOTION there to come back.
 
 #### The sphere
 
@@ -1106,7 +1114,7 @@ What the pads show:
 
 ### The menu
 
-Opened with **MENU** at the right end of the status bar, or MENU on the panel.
+Opened with **MENU** in the status bar, left of STEMDECK, or MENU on the panel.
 It opens on top of the sphere. **Nothing in the menu is needed to play.**
 
 | Page | What it holds |

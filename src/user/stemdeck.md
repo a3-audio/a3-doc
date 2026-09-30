@@ -15,8 +15,9 @@ graph. Its four stem buses and its aux bus go to A³ Core; a stem you send to
 Motion. A sixth bus, **PHONES**, is for the headphones.
 
 On the A³ Core machine StemDeck is always there: a user service starts it
-full screen on its own i3 workspace, number 4, of the Core's 768 × 1024
-portrait screen — see [Always running on the Core](#stemdeck-on-the-core).
+on its own i3 workspace, **STEMDECK** (number 2), filling the Core's
+768 × 1024 portrait screen — see [Always running on the Core](#stemdeck-on-the-core).
+A³ Motion is one tap away, on the key at the top right.
 
 It can also be **the tempo master** of the whole system when there are no
 CDJs in the booth: its master deck's beat goes out on Pro DJ Link, the
@@ -99,11 +100,32 @@ bottom, the library.
 
 The top bar holds **REC**, **AUTO DJ**, the **SYNC** source, **Audio** (the
 audio device; greyed out under JACK, where the routing is qjackctl's) and
-**Settings** (where the stem library is). Where the width leaves room it also
-shows the audio status: JACK client, sample rate, buffer, connected ports,
-xruns.
+**Settings** (where the stem library is), and at the right end the
+workspace switch, **MOTION** and **▾** (see
+[Over to A³ Motion](#stemdeck-workspaces)). Where the width leaves room it
+also shows the audio status: JACK client, sample rate, buffer, connected
+ports, xruns.
 
 ![StemDeck's top bar](pics_user/stemdeck-topbar.png)
+
+(stemdeck-workspaces)=
+
+### Over to A³ Motion, and back
+
+StemDeck and A³ Motion share the Core's screen, each on its own workspace.
+The two keys at the right end of the top bar switch between them:
+
+- **MOTION** shows A³ Motion. A³ Motion has the same switch, reading
+  **STEMDECK**, at exactly the same place — so the key under your finger
+  stays put, and tapping twice brings you back.
+- **▾** opens a list of the rig's workspaces: MOTION, STEMDECK, REAPER,
+  QJACKCTL, and SCARLETT while the Scarlett mixer runs. Only workspaces with
+  a window on them are listed. The one on the screen is highlighted; tap
+  another to go there, or tap beside the list to close it.
+
+On REAPER, QJACKCTL and SCARLETT a bar at the top of the screen lists the
+workspaces by name; tap STEMDECK or MOTION there to come back. The two touch
+screens hide that bar, since they have their own switch.
 
 (stemdeck-settings)=
 
@@ -456,9 +478,12 @@ file that changes is analysed again; to analyse everything anew, delete
 
 ### Always running on the Core
 
-On the A³ Core machine StemDeck runs as a user service and sits on i3
-workspace 4, full screen (the rule is in the a3-core package's i3 config).
-From the StemDeck checkout:
+On the A³ Core machine StemDeck runs as a user service and sits alone on i3
+workspace `2:STEMDECK`, filling it. The rules are in the a3-core package's
+i3 config: the main window is tiled without a border rather than put in i3's
+full screen, because every dialog StemDeck opened ended full screen; all its
+other windows — Settings, Audio, Create stems, the folder choosers, message
+boxes — float over it. From the StemDeck checkout:
 
 ```sh
 cp .config/systemd/user/stemdeck.service ~/.config/systemd/user/
@@ -467,8 +492,19 @@ systemctl --user enable --now stemdeck
 ```
 
 It starts the build in `build-make/` of that checkout, so a rebuild is picked
-up by `systemctl --user restart stemdeck`. Restart it between sets, not
-during one: the restart costs a burst of JACK xruns.
+up by `systemctl --user restart stemdeck`.
+
+A (re)start takes the screen for a moment: JUCE builds the window more than
+once as it comes up, and the first one takes the focus. The service therefore
+runs `tools/rig-keep-the-screen.sh` around the start — it remembers the
+workspace that was showing and switches back to it once StemDeck's main
+window is there, so A³ Motion stays on the screen if it was.
+
+```{warning}
+**Do not restart StemDeck mid-set.** Its JACK client leaving and joining
+changes the audio graph, and that costs a burst of JACK xruns — audible
+clicks on everything the Core plays. Restart it between sets.
+```
 
 Demo and promo videos are recorded with OBS Studio, outside StemDeck.
 

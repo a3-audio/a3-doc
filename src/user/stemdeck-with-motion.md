@@ -57,8 +57,8 @@ and a first set to try it with.
 
 StemDeck plays into REAPER's inputs 11–22 on A³ Core, one of two ways:
 
-- **StemDeck on the Core** — the usual case, where it runs full screen on
-  the Core's workspace 4. A³ Core's patchbay connects its twelve outputs
+- **StemDeck on the Core** — the usual case, where it fills the Core's
+  workspace STEMDECK (number 2). A³ Core's patchbay connects its twelve outputs
   straight to REAPER's `in11` … `in22`.
 - **StemDeck on another machine** — its first ten outputs travel over the
   network as ten audio channels (zita-j2n on the StemDeck side, zita-n2j on
@@ -110,7 +110,7 @@ controls.
 
 **StemDeck on the Core machine itself?** Then there is nothing to wire: the
 a3-core package's patchbay connects its twelve outputs to REAPER's `in11` …
-`in22`, and the user service keeps it running on workspace 4 (see
+`in22`, and the user service keeps it running on workspace 2 (see
 [Always running on the Core](#stemdeck-on-the-core)). Go on with the clock.
 
 **On A³ Core**, for a StemDeck on another machine, there is nothing to do
@@ -184,6 +184,11 @@ channel is plain stereo, however busy its blob looks on the screen.
 ## Your first set
 
 Ten minutes, one track, four stems in four places.
+
+When both run on the Core, they share its one screen. The key at the far
+right of each top bar goes to the other — **MOTION** in StemDeck,
+**STEMDECK** in A³ Motion, at the same spot in both, so one finger goes back
+and forth without moving (see [Over to A³ Motion](#stemdeck-workspaces)).
 
 1. **Load a track in StemDeck.** Pick one you know well, split by StemDeck
    (drums, bass, other, vocals). Check the meters in StemDeck's mixer: all
