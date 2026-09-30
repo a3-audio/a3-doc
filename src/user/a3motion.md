@@ -950,8 +950,6 @@ preparing.** During a set you need **Load** and nothing else.
 
 ![FILES, with the set "Peak" shown](pics_user/a3-motion-ui-files-sets.png)
 
-<!-- IMAGE: FILES › SETS in quiet-indigo-2, to replace a3-motion-ui-files-sets.png, which is still in the old skin. Not taken on 2026-09-30: opening FILES needs a tap on the rig's running A³ Motion. -->
-
 On the left, top to bottom: the four tabs **SETS**, **CLIPS**, **SVG** and
 **ACTIONS**, two by two; **from set** / **from clip**; the filter; the list;
 then the keys. On the right, the **editor** with the chosen file as text.
@@ -1001,9 +999,7 @@ Anything you turn here, the desk sees too, and the other way round. Tap
 **MIXER** in the global strip; it opens on top of the sphere until you tap
 MIXER again, a tab, or MENU.
 
-<!-- IMAGE: the MIXER overlay, in quiet-indigo-2. Not taken on 2026-09-30: opening it needs a tap on the rig's running A³ Motion. The old
-a3-motion-ui-mixer-overlay.png shows a VOL knob, an MST knob and a filter row
-that are gone. -->
+![The MIXER window over the sphere](pics_user/a3-motion-ui-mixer-overlay.png)
 
 The knobs show what is really set, not what this device last did: a hand on
 the desk moves them here too, and a restart mid-evening brings them back as
@@ -1069,8 +1065,6 @@ screen holds it. A key's face lights while it is active: SHIFT held, a take
 running, the menu open, TAP pressed or on the beat.
 
 ![The PADS window](pics_user/a3-motion-ui-pads.png)
-
-<!-- IMAGE: the PADS window as it is since the PADS panel of 2026-09-30 (square pads on six rows, the function keys at both ends, the grey block), in quiet-indigo-2, to replace a3-motion-ui-pads.png, which shows the earlier layout. Not taken: opening PADS needs a tap on the rig's running A³ Motion. -->
 
 - **Play\|Pause** starts or stops the clip on the **next downbeat**.
   **SHIFT + Play\|Pause** does it now, which is also how you stop a running
@@ -1187,7 +1181,7 @@ fire only on a double tap or ENTER.
   default skin it saves a copy called **custom** and switches to it, so the
   default itself is never written over.
 
-<!-- IMAGE: the Skin Editor with its sections, in quiet-indigo-2. Not taken on 2026-09-30: it has to be taken in the sandbox, never on the rig, because leaving the editor writes the skin. -->
+![The Skin Editor, its sections on the left of the sphere](pics_user/a3-motion-ui-skin-editor.png)
 
 <!-- QUESTION (maintainer): the colour picker has no undo (closeColourPicker keeps what applyPickedColour already wrote into the document) and no Escape, while the edit box undoes the whole document on Escape (_documentBeforeMask). Should the picker undo on back/Escape like the edit box? -->
 
@@ -1232,7 +1226,7 @@ keys, so every key sits above exactly one encoder:
 
 The symbols page holds what scripts, clips and sets are written with.
 
-<!-- IMAGE: the keyboard in the bar's place (768x352 crop from y 672), in quiet-indigo-2. Not taken on 2026-09-30: KEYS needs a tap on the rig's running A³ Motion. -->
+![The keyboard in the bar's place](pics_user/a3-motion-ui-keyboard.png)
 
 - **SHIFT** once: the next letter is a capital. Twice: caps lock. A third
   time: off. The panel's SHIFT held while you tap a key also gives a capital.
