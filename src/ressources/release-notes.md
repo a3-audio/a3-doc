@@ -324,7 +324,7 @@ On `main` since `v03.0`, not tagged yet.
 - The octave choice has hysteresis: near the edge of the tempo range the clock no longer flips
   between a tempo and its double.
 - **Forty VU inputs, named after the REAPER channel map:** `vu_in1_pre` … `vu_free70`, fed
-  from REAPER out 31–70 and sent as `/vu/0..39` in three bundles (16+16+8).
+  from REAPER out 31–70 and sent as `/vu/0..39` in four bundles, one per block of ten.
   `NUM_VU_CHANNELS=40`. A³ Motion and the A³ Mixer still read the old twelve positions until
   they are moved to the new indices.
 

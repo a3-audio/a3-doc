@@ -251,7 +251,7 @@ Two rules carry the whole table:
 
 The beat-analyzer needs `NUM_VU_CHANNELS=40` in its `build/.env` to open all
 forty inputs (see {ref}`Beat Analyzer <beat-analyzer-config>`). It sends them as
-three OSC bundles of 16, 16 and 8 meters. The port names live in its
+four OSC bundles, one per block of ten (inputs, Main, Booth, stereo). The port names live in its
 `src/audio/vu_ports.cpp`.
 
 ```{warning}

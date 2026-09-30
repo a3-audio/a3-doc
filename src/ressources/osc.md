@@ -449,7 +449,7 @@ target named in its `.env`; see
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
 | /beat | /beat | int (beat), int (bar), float (bpm) | [1-4], [-], [-] | The beat clock. **Sent** in every clock mode, to every target — in mode 0 except the target named `motion`. **Received** on 7775 and relayed only in mode 0; ints and floats are both accepted, and a beat outside 1–4 is dropped. In mode 2 the bar is always 0.
-| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | One meter per JACK input `vu_in1_pre` … `vu_free70` (REAPER out 31–70, see the {ref}`REAPER channel map <core-vu-map>`), as three bundles of 16, 16 and 8, 25 times a second. Sent to a target's `OSC_VU_*` port where one is set, else to its `OSC_HOST_*` port
+| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | One meter per JACK input `vu_in1_pre` … `vu_free70` (REAPER out 31–70, see the {ref}`REAPER channel map <core-vu-map>`), as four bundles, one per block of ten (inputs, Main, Booth, stereo), 25 times a second. Sent to a target's `OSC_VU_*` port where one is set, else to its `OSC_HOST_*` port
 | /clockmode | - | int or float | [0-2] | 0 a3motion, 1 intern, 2 pioneer. Clamped to 0–2. Not stored: it starts in 1 every time
 | /tap | - | int or float, optional | [1-4] | Tap tempo, counted only in mode 1. The number is logged and otherwise unused — a tap always sets the beat to 1
 
