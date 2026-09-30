@@ -191,7 +191,7 @@ finger can move a sound.
 
 ![Tap the small sphere, drag up, drag sideways, double tap, tap the small sphere again: camera on, lean, turn, reset, off.](pics_user/howto-sphere-camera-mode.gif)
 
-<!-- GIF: howto-sphere-zoom.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In camera mode turn the mouse wheel in and out, then double tap: back to normal. | "Camera mode on" / "Mouse wheel (or pinch): zoom in" / "...and out" / "Double tap: back to normal" | mouse wheel (xdotool click 4/5), so no finger ring on the zoom -->
+<!-- GIF: howto-sphere-zoom.gif | region: 0,36,768,624 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0, 12.2 s | steps: In camera mode turn the mouse wheel in and out, then double tap: back to normal. | "Camera mode on" / "Mouse wheel (or pinch): zoom in" / "...and out" / "Double tap: back to normal" | mouse wheel (xdotool click 4/5), so no finger ring on the zoom -->
 
 ![In camera mode turn the mouse wheel in and out, then double tap: back to normal.](pics_user/howto-sphere-zoom.gif)
 
