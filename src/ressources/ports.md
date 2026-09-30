@@ -129,7 +129,7 @@ Rendered from `a3-osc.json` — edit the file, not this table. A host of `any`
 | iem | multiencoder-1 | local (127.0.0.1) | 1337 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML|R (receiver set inside the plug-in, in the REAPER project) |
+| dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
 | zita-n2j | audio | any (0.0.0.0) | 65100 | network audio from radla (10 channels, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
 | radla | vu | radla (192.168.43.96) | 9001 | /vu |

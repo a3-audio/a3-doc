@@ -100,7 +100,7 @@ acting on it itself.
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
-| `/filter/mode` | f|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
+| `/filter/mode` | f\|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
 | `/filter/led` | s | core | mixer, motion | the filter section's lamp: blue HPF, green LPF (was /fx/led) |
 | `/master/volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the main outputs |
 | `/master/booth` | f | mixer, motion | core (Core passes it on to mixer, motion) | the booth outputs |
