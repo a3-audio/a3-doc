@@ -1144,11 +1144,9 @@ MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
 however deep. **Escape never quits the app.** In a booth, one elbow on a
 keyboard shouldn't end your set.
 
-<!-- STALE (2026-09-30): this GIF still shows the Network page, which is gone from the menu; re-record it on another page row. -->
+<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30 (after the Network page left the menu), quiet-indigo-2, --fuzz 1% | steps: Tap MENU, tap Skin Editor, tap All values, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
 
-<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
-
-![Tap MENU, tap Network, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
+![Tap MENU, tap Skin Editor, open All values, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
 
 #### Skin
 
