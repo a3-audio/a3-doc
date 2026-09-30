@@ -259,7 +259,7 @@ where it started on a bar line.
 
 <!-- QUESTION (maintainer): in the recording (2026-09-29) clip-top dragged 40-60 px after elv changed nothing visible, and a double tap on elv left the shape at the bottom rather than at ear level (its rest is "the middle of the clip band", ClipKnobs.hh elevationKnobSpec). Is that the intended rest, and what does clip-top need to show its ceiling? Needs a look at the device. -->
 
-<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" -->
+<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.6 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" | channel 1 alone on Break Heartbeat (the notch shows the turn; spin 0 in the clip); spin is dragged far, since its first steps take 32 and 16 bars a turn -->
 
 ![On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops.](pics_user/howto-motion-rotation.gif)
 
