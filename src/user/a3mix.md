@@ -11,7 +11,9 @@ every device is told all of it.
 
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
-The numbers below refer to that picture.
+The numbers below refer to that picture. It is older than the V02 panel: FX
+SEND and FX RETURN are real knobs on the device but have no place in the drawing,
+so they are listed without a number.
 
 ## The channel strip
 
@@ -20,19 +22,19 @@ them.
 
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
-| 0 | **FX SEND** | how much of this channel reaches the FX bus, where the delay that follows the beat sits | −inf … 0 dB |
+| – | **FX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
 | 1 | **TRIM** | the level of the signal coming in | −inf … 0 dB |
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
 | 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
 | 5 | **INPUT VU** | the level *before* the fader |  |
-| 6 | **CUE** | sends this channel to the headphones |  |
+| 6 | **TAP** | taps the tempo — see *Tempo* below. All four strips' keys do the same, and their lamps flash red on the beat |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
-| 8 | **FX** | switches this channel's VCF filter on. Lit while it is on |  |
-| 9 | **3D** | out of service — see below |  |
+| 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
+| 9 | **CUE** | sends this channel to the headphones (PFL). Lit blue while it is on |  |
 
 ```{note}
-Until 2026-09-12 this knob did something else entirely: it drove the **3D
+Until 2026-09-12 the FX SEND knob did something else entirely: it drove the **3D
 blend** — how far the channel was spread into the room — because it was the
 only continuous control the desk had for that. A³ Motion's per-channel pot
 took that job over, and the knob got its own name back.
@@ -41,15 +43,13 @@ The price, named: the desk has no 3D control any more. The 3D blend is A³
 Motion's pot, and only that.
 ```
 
-```{warning}
-**Out of service since 2026-09-12.** The switch is still on the panel and does
-nothing: A³ Core's `3d` became a continuous blend, so a momentary key sending
-into it would drive that blend to the stop for as long as it is held — the key
-is therefore disconnected in software rather than left to do that. Core no
-longer understands `/channel/[0-3]/4d` either.
-
-3D per channel is set from A³ Motion, on its own pot, and it is a blend rather
-than a switch. What this key should do instead has not been decided.
+```{note}
+**The keys were rearranged on 2026-09-19.** Key 9 used to be **3D**; on
+2026-09-12 its job moved to A³ Motion's per-channel pot, where 3D is a blend
+rather than a switch, and the key was left without one. It carries the cue
+now, because its blue lamp is the bright one and a cue lamp has to be
+readable in the dark. Key 6, where CUE used to be, has the dim red lamp and
+carries the tap, which only flashes.
 ```
 
 ## The filter section
@@ -64,11 +64,13 @@ which channels go through it.
 | 12 | **HPF** | high-pass: lets what is above the cutoff through |
 | 13 | **LPF** | low-pass: lets what is below the cutoff through |
 
+The section's lamp shows which mode is on: blue for HPF, green for LPF.
+
 ## Tempo
 
 | № | Control | What it does |
 | :--- | :--- | :--- |
-| 13b | **TAP** | taps the tempo, the same as A³ Motion's TAP key |
+| 6 | **TAP** | taps the tempo, the same as A³ Motion's TAP key — on the press, not the release |
 
 It goes **straight to the beat-analyzer**, not through A³ Core: a tap is
 timing, and timing does not want a relay in the middle. Until 2026-09-12 it
@@ -83,6 +85,7 @@ left the desk, and nothing happened at the other end.
 | 15 | **CUE/MIX** | left is cue only, right is the main mix, the centre sums both |  |
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
+| – | **FX RETURN** | the level of the FX return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
 | 19 | **OUTPUT VU** | the level of the eight output channels |  |
 
