@@ -5,15 +5,16 @@ per device. One page, because the alternative is what happened on 2026-09-24:
 three files disagreed about the A³ Mixer's address and port, and each of them
 looked authoritative on its own.
 
-Everything below was **measured on the running rig**, not read out of a config
-file. Where a config disagrees with this page, the config is the thing to fix.
+Since 2026-09-30 there is one place those facts are written:
+`/usr/share/a3/a3-osc.json`, shipped by the a3-core package — see
+{ref}`Where addresses and ports live <osc-truth>`. The table of listeners
+below is rendered from that file; the per-device sections describe it, and
+where they give a number it is the file's.
 
 ## Hosts
 
-| Device | Address |
-| :--- | :--- |
-| A³ Core | `192.168.8.10` |
-| A³ Mixer | `192.168.8.11` |
+The machines are named in the file's `hosts` section; the Host column of the
+[listener table](#ports-by-listener) shows each name with its address.
 
 A³ Motion's UI currently runs **on the Core machine**, which is why Core and
 the beat-analyzer address it as `127.0.0.1`. On a rig where it runs on its own
@@ -38,8 +39,9 @@ A³ Mixer 192.168.8.11 ── enp5s0 ┘
 - **The Core sits in the path.** With the Core machine off, the A³ Mixer has
   no network.
 - The a3-core package writes this: its install asks for the second socket
-  (`a3-core/bridge-with`, empty for no bridge) and for the address. See the
-  a3-core README.
+  (`a3-core/bridge-with`, empty for no bridge) and for the address. The
+  "standard network" it offers is the `network` section of `a3-osc.json`. See
+  the a3-core README.
 
 Measured on the rig after a cold boot (2026-09-25): the mixer answers in
 0.7 ms, the router in 0.5 ms.
@@ -48,10 +50,12 @@ Measured on the rig after a cold boot (2026-09-25): the mixer answers in
 
 Per service: where it sends, and where its return arrives. A send is an
 address and port on the far end; a return is a port this service holds open.
+The numbers are `a3-osc.json`'s `listeners`, and who sends where is its
+`routes`.
 
 ```text
 A³ MIXER
-  send    192.168.8.10:9000   Core           gain, EQ, volume, PFL, FX, 3D toggle
+  send    192.168.8.10:9000   Core           gain, EQ, volume, PFL, filter, /device/hello
           192.168.8.10:7775   beat-analyzer  /tap
   return  7772                               VU and lamp state
 
@@ -59,7 +63,7 @@ A³ MOTION
   send    127.0.0.1:9000      Core           positions, clip settings, /state/recall
           127.0.0.1:7775      beat-analyzer  /tap, /beat, /clockmode
   return  7771                               relayed state, recall answer, /beat
-          7772                               /vu/0..11
+          7772                               /vu/1..40
           7777                               /EnergyVisualizer/RMS
 
 A³ CORE
@@ -77,10 +81,10 @@ REAPER
 
 BEAT-ANALYZER
   send    127.0.0.1:7771      A³ Motion      /beat
-          127.0.0.1:7772      A³ Motion      /vu/0..11
-          192.168.8.11:7772   A³ Mixer       /vu/0..11
+          127.0.0.1:7772      A³ Motion      /vu/1..40
+          192.168.8.11:7772   A³ Mixer       /vu/1..40
           192.168.43.96:9000  radla          /beat
-          192.168.43.96:9001  radla          /vu/0..11
+          192.168.43.96:9001  radla          /vu/1..40
   return  7775                               /beat, /tap, /clockmode
           50000-50002                        Pioneer Pro DJ Link
 ```
@@ -102,20 +106,38 @@ because the two other `192.168.43.x` addresses that used to sit in the
 analyzer's config (`.55` for the Mixer, `.54` for Motion) are dead and were
 wrong. What `radla` does with what it receives is not documented here.
 
+(ports-by-listener)=
+
 ## Ports, by listener
 
-| Port | Listener |
-| ---: | :--- |
-| 7771 | A³ Motion UI — control |
-| 7772 | A³ Motion UI — VU |
-| 7772 | A³ Mixer — VU (same number, different host) |
-| 7775 | beat-analyzer — beat clock |
-| 7777 | A³ Motion UI — energy |
-| 9000 | A³ Core — commands |
-| 9001 | REAPER |
-| 9002 | A³ Core — REAPER's feedback |
-| 50000–50002 | beat-analyzer — Pioneer Pro DJ Link |
-| 1337–1340 | REAPER — its own OSC devices |
+Rendered from `a3-osc.json` — edit the file, not this table. A host of `any`
+(`0.0.0.0`) means the program listens on every interface of its own machine;
+`local` means only on the machine itself.
+
+<!-- a3-osc:ports -->
+| Program | Role | Host | Port | Carries |
+| --- | --- | --- | --- | --- |
+| core | osc | any (0.0.0.0) | 9000 | every controller's messages, and /beat from the analyzer |
+| core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
+| core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
+| motion | osc | any (0.0.0.0) | 7771 | Core's relays, /beat |
+| motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
+| motion | energy | any (0.0.0.0) | 7777 | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
+| mixer | osc | mixer (192.168.8.11) | 7772 | Core's relays and lamps, /beat, /vu |
+| beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
+| reaper | osc | local (127.0.0.1) | 9001 | Core's /track/... control |
+| iem | multiencoder-1 | local (127.0.0.1) | 1337 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| zita-n2j | audio | any (0.0.0.0) | 65100 | network audio from radla (10 channels, not OSC) |
+| radla | osc | radla (192.168.43.96) | 9000 | /beat |
+| radla | vu | radla (192.168.43.96) | 9001 | /vu |
+| radla | zita-n2j | radla (192.168.43.96) | 55100 | network audio from Core (zita-j2n, 2 channels, not OSC) |
+| prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
+| prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
+| prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
+<!-- /a3-osc:ports -->
 
 ---
 
@@ -152,13 +174,13 @@ lamps should show.
 
 | Port | From | What |
 | ---: | :--- | :--- |
-| 7772 | A³ Core, beat-analyzer | `/vu/0..11`, and the PFL and FX lamp states |
+| 7772 | A³ Core, beat-analyzer | `/vu/1..40`, and the PFL and filter lamp states |
 
 **Sends**
 
 | To | Port | What |
 | :--- | ---: | :--- |
-| A³ Core | 9000 | gain, EQ, volume, PFL, FX, the 3D toggle |
+| A³ Core | 9000 | gain, EQ, volume, PFL, filter, `/device/hello` |
 | beat-analyzer | 7775 | `/tap` |
 
 `/tap` goes straight at the beat-analyzer rather than through Core. Core's
@@ -174,8 +196,8 @@ time.
 | Port | From | What |
 | ---: | :--- | :--- |
 | 7771 | A³ Core, beat-analyzer | Relayed channel state, the recall answer, `/beat` |
-| 7772 | beat-analyzer | `/vu/0..11` |
-| 7777 | A³ Core | `/EnergyVisualizer/RMS`, the 426-point sphere |
+| 7772 | beat-analyzer | `/vu/1..40` |
+| 7777 | REAPER (the IEM EnergyVisualizer) | `/EnergyVisualizer/RMS`, the 426-point sphere |
 
 **Sends**
 
@@ -204,12 +226,12 @@ Beat detection and VU metering, straight off JACK.
 | To | Port | What |
 | :--- | ---: | :--- |
 | A³ Motion UI | 7771 | `/beat` |
-| A³ Motion UI | 7772 | `/vu/0..11` |
-| A³ Mixer | 7772 | `/vu/0..11` |
+| A³ Motion UI | 7772 | `/vu/1..40` |
+| A³ Mixer | 7772 | `/vu/1..40` |
 
-Targets are named in its `.env` as `OSC_HOST_<name>` and `OSC_VU_<name>`. With
-no `.env` present it falls back to a single target on `127.0.0.1` — so a build
-directory without one reaches nothing off the machine, quietly.
+Targets are named in its `.env` as `OSC_HOST_<name>` and `OSC_VU_<name>`,
+inside the `a3-osc` block that the a3-core package renders from
+`a3-osc.json`. Without any target it says the block is missing.
 
 ## REAPER
 
@@ -256,8 +278,10 @@ A scheme where the **block says the owner** would remove a class of mistake:
 with the offset inside a block keeping its meaning everywhere: `+0` control,
 `+1` VU, `+2` energy, `+5` beat clock.
 
-**This is a proposal, not the current state.** Renumbering touches all four
-devices plus the REAPER OSC config, and a half-done renumbering is worse than
-an untidy one that works — a device sending into a port nobody holds is
-silent, and silence is the hardest fault here to see. The tables above are
-what the rig does today.
+**This is a proposal, not the current state.** Since 2026-09-30 the devices'
+side of a renumbering is one edit in `a3-osc.json`, but the ports set inside
+REAPER and its plug-ins still have to follow by hand, and the desk's copy of
+the file has to be refreshed. A half-done renumbering is worse than an untidy
+one that works — a device sending into a port nobody holds is silent, and
+silence is the hardest fault here to see. The tables above are what the rig
+does today.

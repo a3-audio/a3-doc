@@ -45,13 +45,13 @@ the strip existing and anybody looking at it next to the desk.
 Three tables, three ears: `onMixerChannelValue`, `onMasterValue`,
 `onFilterValue`, each carrying a slot that indexes the matching table in
 `OscAddresses`. The master and filter tables are walked **after** the channel
-ones, because `/master/volume` and `/channel/0/volume` are one word apart and
+ones, because `/master/volume` and `/channel/1/volume` are one word apart and
 crossing them would put the room's level on a channel fader with neither
 number looking wrong.
 
-`/fx/mode` arrives as a number, 1 for high pass — the spelling this device
+`/filter/mode` arrives as a number, 1 for high pass — the spelling this device
 already sends on that address. The word the desk's LED reads travels
-`/fx/led` and never reaches this handler.
+`/filter/led` and never reaches this handler.
 
 ### Rest positions
 

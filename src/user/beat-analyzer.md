@@ -43,7 +43,7 @@ with `/clockmode`.
 ### What each mode needs
 
 **INT — a3motion.** Nothing but A³ Motion. Motion sends its own `/beat` to
-port 7775; the beat-analyzer relays each one to every target in its
+the beat-analyzer's clock port (7775); the beat-analyzer relays each one to every target in its
 configuration **except the one named `motion`**, so Motion never hears its
 own beat come back. In this mode the beat-analyzer's own clock is paused,
 and a `/tap` it receives does nothing here.
@@ -90,7 +90,8 @@ CDJ. See [Playing without CDJs](#beat-analyzer-without-cdjs).
 ### Switching modes by hand
 
 A³ Motion's clock key is the normal way. Anything that can send OSC can do the
-same — `/clockmode` with an integer to port **7775** on the Core machine. With
+same — `/clockmode` with an integer to the clock port on the Core machine,
+**7775** as `a3-osc.json` has it today. With
 `oscsend` from liblo-tools, on the Core machine itself:
 
 ```sh
@@ -143,21 +144,22 @@ every packet regardless of which started first.
 
 ## The meters
 
-The beat-analyzer measures twelve JACK inputs, `vu_1` … `vu_12`, and sends
-each as a peak and an RMS value between 0 and 1, all twelve in one packet.
-It gives a channel no meaning of its own: **which signal is on which meter is
-decided by the JACK patching alone.** In the A³ setup:
+The beat-analyzer measures forty JACK inputs, fed from REAPER's outputs
+31–70, and sends each as a peak and an RMS value between 0 and 1, as four
+OSC bundles, one per block of ten (inputs, Main, Booth, stereo). It gives a channel no meaning of its own beyond
+its port name: **which signal is on which meter is decided by the JACK
+patching alone.** Input *n*, counted from 1, is REAPER out 30 + *n* and sends
+on `/vu/n` — `vu_main_sub` on out 41 arrives as `/vu/11`, for instance. The
+whole table is the {ref}`VU meter map <core-vu-map>` on the Core's
+configuration page.
 
-| JACK input | OSC address | Signal | A³ Motion shows it as |
-| :--- | :--- | :--- | :--- |
-| `vu_1` … `vu_4` | `/vu/0` … `/vu/3` | mixer channels 1–4 | the corona around each channel blob |
-| `vu_5` | `/vu/4` | subwoofer | the glow of the sphere |
-| `vu_6` … `vu_9` | `/vu/5` … `/vu/8` | speakers 1–4 | the lightning of each speaker |
-| `vu_10` … `vu_12` | `/vu/9` … `/vu/11` | – | unused |
+`NUM_VU_CHANNELS=40` in `build/.env` opens all forty; builds from before
+2026-09-30 name their inputs `vu_1` … `vu_12` instead.
 
-The inputs count from 1, the addresses from 0: `vu_N` arrives as
-`/vu/(N-1)`. Patch with the OSC numbers in mind and every meter lands one
-channel across — and still looks plausible.
+A³ Motion and the A³ Mixer look their meters up by name (`in1_pre`,
+`main_sub`, `main_top1`, …) in `a3-osc.json`, so they follow this map; which
+device shows which meter is under {ref}`The meters <osc-vu-meters>`. Until
+2026-09-30 the numbers counted from 0 (`/vu/0..39`).
 
 (beat-analyzer-config)=
 
@@ -176,23 +178,42 @@ beat-analyzer checkout. It reads, in this order, the first of:
 2. `.env` one directory up, in the checkout itself
 3. `.env.example` in the working directory
 
-and with none of them, it sends to a single target on `127.0.0.1:9000`. The
-template is `.env.example` in the checkout:
+The template is `.env.example` in the checkout:
 
 ```sh
 cp .env.example build/.env
 ```
 
+**Where it sends and listens is not written by hand.** The a3-core package
+renders it from `a3-osc.json` into a block at the end of `build/.env` when it
+is installed (`a3-osc-render user`):
+
+```sh
+# >>> a3-osc: rendered from a3-osc.json by a3-osc-render -- edit the truth, not this
+OSC_HOST_core=127.0.0.1:9000
+…
+# <<< a3-osc
+```
+
+The rest of the file stays yours. A target line written by hand outside the
+block — `OSC_HOST_*`, `OSC_VU_*` and the other keys the block carries — is
+commented out as `# was: …` at the next install: it would be a second truth.
+Without any target the beat-analyzer says the block is missing. To change a
+target or a port, change `a3-osc.json`; see
+{ref}`Where addresses and ports live <osc-truth>`.
+
 The settings that matter most:
 
 | Setting | What it does |
 | :--- | :--- |
-| `OSC_HOST_<name>=host:port` | one target for `/beat` (and the meters, unless `OSC_VU_<name>` is set). As many as you like. The name `motion` is special: in INT mode that target does not get the relayed beat |
-| `OSC_VU_<name>=host:port` | a separate port for that target's meters, so `/beat` and `/vu` do not share a socket |
-| `OSC_PORT_A3MOTION` | where `/beat`, `/clockmode` and `/tap` arrive. 7775 |
+| `OSC_HOST_<name>=host:port` | **in the a3-osc block.** One target for `/beat` (and the meters, unless `OSC_VU_<name>` is set). The name `motion` is special: in INT mode that target does not get the relayed beat |
+| `OSC_VU_<name>=host:port` | **in the a3-osc block.** A separate port for that target's meters, so `/beat` and `/vu` do not share a socket |
+| `OSC_PORT_A3MOTION` | **in the a3-osc block.** Where `/beat`, `/clockmode` and `/tap` arrive |
+| `OSC_ADDRESS_BEAT`, `_TAP`, `_CLOCKMODE`, `_VU` | **in the a3-osc block.** The addresses it speaks |
+| `PIONEER_PORT_ANNOUNCE`, `_BEAT`, `_STATUS` | **in the a3-osc block.** The Pro DJ Link ports, 50000–50002 |
 | `BPM_MIN`, `BPM_MAX` | the tempo range the clock counts in. A tempo outside it is doubled or halved into it |
 | `PIONEER_DEVICE_NUM` | its player number on the Pro DJ Link network. 7 |
-| `NUM_VU_CHANNELS` | how many meters. 12 |
+| `NUM_VU_CHANNELS` | how many meters. 40, the A³ channel map; at most 64 |
 | `OSC_SEND_RATE` | meter updates per second. 25 |
 | `VU_RMS_ATTACK`, `VU_RMS_RELEASE`, `VU_PEAK_FALLOFF` | how fast the meters rise and fall |
 | `DEBUG_BEAT_CONSOLE`, `DEBUG_PIONEER_CONSOLE` | print every beat, or every Pro DJ Link beat, to the log |
@@ -206,8 +227,8 @@ systemctl --user restart beat-analyzer
 The clock mode is **not** a setting. The beat-analyzer always starts in mode 1
 (intern) and changes when it is told to.
 
-Which port on which device gets what is listed, as measured on the rig, in
-[Ports and endpoints](../ressources/ports.md). The messages themselves are in
+Which port on which device gets what is listed, rendered from `a3-osc.json`,
+in [Ports and endpoints](../ressources/ports.md). The messages themselves are in
 the {ref}`OSC reference <osc-beat-analyzer>`.
 
 (beat-analyzer-troubleshooting)=
@@ -222,8 +243,8 @@ the {ref}`OSC reference <osc-beat-analyzer>`.
 | EXT: the tempo no longer follows the track | You tapped: a tapped tempo stays. Tap the new tempo, or restart the service |
 | PIO: nothing arrives | The Core machine has to be on the same network as the players, and nothing else on it may hold ports 50000–50002 exclusively. The log says `Pioneer Receiver konnte nicht gestartet werden` if it could not bind them |
 | PIO: it follows the wrong player | It follows whoever says master while playing. Set master on the player you mean |
-| The meters all sit one channel across | The JACK patching is off by one: `vu_N` is `/vu/(N-1)` |
-| The meters don't move at all | Check the service, then the `OSC_VU_*` / `OSC_HOST_*` entries in `build/.env` against [Ports and endpoints](../ressources/ports.md) |
+| The meters all sit one channel across | The JACK patching is off by one: REAPER out *N* belongs on the port that sends `/vu/(N-30)` |
+| The meters don't move at all | Check the service, then that `build/.env` ends in the `a3-osc` block with its `OSC_VU_*` / `OSC_HOST_*` entries. If it is missing, run `a3-osc-render user` and restart the service |
 
 Its log is the service's journal:
 

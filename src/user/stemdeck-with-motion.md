@@ -115,23 +115,35 @@ a3-core package's patchbay connects its twelve outputs to REAPER's `in11` …
 
 **On A³ Core**, for a StemDeck on another machine, there is nothing to do
 either: the a3-core package runs zita-n2j for ten channels and its patchbay
-wires them into REAPER inputs 11–20.
+wires them into REAPER inputs 11–20. The Core's zita units take their address
+and port from `~/.config/a3/osc.env`, which the package writes from
+`a3-osc.json` (`a3-osc-render user`).
 
 **On the StemDeck machine**, send the ten outputs to the Core over the
 network. StemDeck's repository ships two systemd user services for this,
 under `.config/systemd/user/`:
 
 - `zita-j2n.service` sends StemDeck's 10 channels to the Core, UDP port
-  65100 — the port the a3-core package's zita-n2j listens on;
+  65100 — the port the a3-core package's zita-n2j listens on (`zita-n2j.audio`
+  in `a3-osc.json`);
 - `zita-n2j.service` receives 2 channels back from the Core on UDP port
-  55100, where the a3-core package's zita-j2n sends REAPER's recording bus.
+  55100, where the a3-core package's zita-j2n sends REAPER's recording bus
+  (`radla.zita-n2j` in `a3-osc.json`).
+
+Both units start zita through StemDeck's `tools/zita-from-truth.py`, which
+reads the Core's address and both ports from `a3-osc.json` — on the StemDeck
+machine a copy at the same path as on the Core, `/usr/share/a3/a3-osc.json`
+(StemDeck's PIO clock reads it too). Only the channel counts are written in
+the units. Until 2026-09-30 `zita-j2n.service` named the Core's address
+itself, and after the rig moved to 192.168.8.x it sent to the old one without
+a word.
 
 Both come back by themselves 2 s after they drop out: zita ends on some
 changes to the audio graph, and the units restart it with no limit on how
 often.
 
-1. Check the Core's address in `zita-j2n.service` (the `ExecStart` line) and
-   correct it if your Core sits elsewhere.
+1. Copy the Core's `/usr/share/a3/a3-osc.json` to the same path on this
+   machine (as root), and again whenever the a3-core package changes it.
 2. Install and start both units, from the StemDeck checkout:
 
    ```sh

@@ -118,7 +118,7 @@ next downbeat.
 
 ![In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped.](pics_user/howto-files-load-set.gif)
 
-<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
+<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing) | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
 
 ![Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip.](pics_user/howto-files-load-clip.gif)
 
@@ -191,7 +191,7 @@ finger can move a sound.
 
 ![Tap the small sphere, drag up, drag sideways, double tap, tap the small sphere again: camera on, lean, turn, reset, off.](pics_user/howto-sphere-camera-mode.gif)
 
-<!-- GIF: howto-sphere-zoom.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In camera mode turn the mouse wheel in and out, then double tap: back to normal. | "Camera mode on" / "Mouse wheel (or pinch): zoom in" / "...and out" / "Double tap: back to normal" | mouse wheel (xdotool click 4/5), so no finger ring on the zoom -->
+<!-- GIF: howto-sphere-zoom.gif | region: 0,36,768,624 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: In camera mode turn the mouse wheel in and out, then double tap: back to normal. | "Camera mode on" / "Mouse wheel (or pinch): zoom in" / "...and out" / "Double tap: back to normal" | mouse wheel (xdotool click 4/5), so no finger ring on the zoom -->
 
 ![In camera mode turn the mouse wheel in and out, then double tap: back to normal.](pics_user/howto-sphere-zoom.gif)
 
@@ -259,7 +259,7 @@ where it started on a bar line.
 
 <!-- QUESTION (maintainer): in the recording (2026-09-29) clip-top dragged 40-60 px after elv changed nothing visible, and a double tap on elv left the shape at the bottom rather than at ear level (its rest is "the middle of the clip band", ClipKnobs.hh elevationKnobSpec). Is that the intended rest, and what does clip-top need to show its ceiling? Needs a look at the device. -->
 
-<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" -->
+<!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.6 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" | channel 1 alone on Break Heartbeat (the notch shows the turn; spin 0 in the clip); spin is dragged far, since its first steps take 32 and 16 bars a turn -->
 
 ![On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops.](pics_user/howto-motion-rotation.gif)
 
@@ -267,7 +267,7 @@ where it started on a bar line.
 
 ![On MOTION drag elv up: the small sphere and the sphere show the shape rising.](pics_user/howto-motion-elevation.gif)
 
-<!-- GIF: howto-motion-tilt-roll.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With the camera leant, drag tilt up, drag roll up, double tap both: the shape's plane leans and comes back flat. | "Camera leant, MOTION tab" / "tilt leans the plane forward" / "roll leans it sideways" / "Double tap both: flat again" -->
+<!-- GIF: howto-motion-tilt-roll.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.7 s | steps: With the camera leant, drag tilt up, drag roll up, double tap both: the shape's plane leans and comes back flat. | "Camera leant, MOTION tab" / "tilt leans the plane forward" / "roll leans it sideways" / "Double tap both: flat again" | channel 1 alone on Break Heartbeat; the double taps go tilt first, then roll -->
 
 ![With the camera leant, drag tilt up, drag roll up, double tap both: the shape's plane leans and comes back flat.](pics_user/howto-motion-tilt-roll.gif)
 
@@ -403,7 +403,7 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 <!-- QUESTION (maintainer): Save as names a copy after the file the editor shows (copyBaseFor(_panelFile)); with no file shown it falls back to "Action" on every tab, so SETS › from set › Save as straight after opening SETS wrote a set called "Action" (recorded 2026-09-29). Should a set copy be named after the loaded set instead? -->
 
-<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
+<!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
 
 ![The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip.](pics_user/howto-files-keep-tweak.gif)
 
@@ -476,7 +476,7 @@ tapped since. Tap it in again.
 
 <!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
 
-<!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
+<!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), --width 500 (the strip at its own size) | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
 
 ![Tap the clock key to INT, tap the beat display eight times: the BPM follows.](pics_user/howto-statusbar-tap.gif)
 
@@ -503,15 +503,15 @@ tapped since. Tap it in again.
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 
-<!-- GIF: howto-menu-skin.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays. | "MENU › Skin: double tap" / "Browse: each skin previews" / "Back: the old one stays" | arrow keys (xdotool key Down x3, Escape), so no finger ring on the browse; a tap would choose and save a skin -->
+<!-- GIF: howto-menu-skin.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), --fps 6 to stay under 3 MB | steps: In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays. | "MENU › Skin: double tap" / "Browse: each skin previews" / "Back: the old one stays" | arrow keys (xdotool key Down x3, Escape), so no finger ring on the browse; a tap would choose and save a skin -->
 
 ![In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays.](pics_user/howto-menu-skin.gif)
 
-<!-- GIF: howto-menu-skin-editor-value.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back. | "Skin Editor: double tap a value" / "+ steps it: 0.55, 0.605, 0.665" / "Esc: back to 0.500, nothing kept" | the edit box covers the sphere, so only the number shows the step; Escape, not Enter, keeps the sandbox skin as it was -->
+<!-- GIF: howto-menu-skin-editor-value.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), the panel keyboard | steps: In the Skin Editor (All values and skin actions) double tap netGain, tap + three times, press Escape: the value is back. | "Skin Editor: double tap a value" / "+ steps it: 0.55, 0.605, 0.665" / "Esc: back to 0.500, nothing kept" | the edit box covers the sphere, so only the number shows the step; Escape (the panel keyboard's ESC), not Enter, keeps the sandbox skin as it was -->
 
 ![In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back.](pics_user/howto-menu-skin-editor-value.gif)
 
-<!-- GIF: howto-menu-skin-editor-colour.gif | region: 0,36,768,624 | recorded 2026-09-29, 9.9 s | steps: In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done. | "Double tap a colour: the picker" / "Drag: channel 1 recolours live" / "The hue strip for another hue" / "done keeps it" | Escape does not close the picker, only done; opening the editor on "default" switches the skin to "custom" -->
+<!-- GIF: howto-menu-skin-editor-colour.gif | region: 0,36,768,624 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: In the Skin Editor (All values and skin actions) double tap channel 1's colour, drag across the picker and the hue strip, tap done. | "Double tap a colour: the picker" / "Drag: channel 1 recolours live" / "The hue strip for another hue" / "done keeps it" | Escape does not close the picker, only done; recorded on quiet-indigo-2, whose name the editor keeps (the sandbox's copy of the skin) -->
 
 ![In the Skin Editor double tap channel 1's colour, drag across the picker and the hue strip, tap done.](pics_user/howto-menu-skin-editor-colour.gif)
 
@@ -526,18 +526,12 @@ bar shows or hides it by hand.
 
 ### How to point the device at another Core
 
-MENU, then tap **Network** (one tap opens it). Double tap a row, type the new
-host, port or address, and press ENTER. The page is saved when you leave it.
-
-```{warning}
-**An address only changes on this side.** The other device has to send or
-listen on the same one. A typo doesn't fail loudly: A³ Motion just sends to
-an address nobody listens to.
-```
-
-<!-- GIF: howto-menu-network.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back. | "MENU › Network" / "Hosts, ports, OSC addresses" / "Drag down to the ports" / "Double tap a port to type" / "Esc: the old port is back" | Escape at the end, so the sandbox config stays as it was -->
-
-![In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back.](pics_user/howto-menu-network.gif)
+**Not on the device.** Since 2026-09-30 A³ Motion reads every host, port and
+OSC address from `a3-osc.json`, the one file the a3-core package installs for
+the whole system, and the **Network** page is gone from the menu. To point it
+at another Core, that file changes — and with it every other device, so
+nothing can end up sending to an address nobody listens to. See
+{ref}`Where addresses and ports live <osc-truth>`.
 
 (motion-panic)=
 
@@ -573,7 +567,6 @@ These are fine in soundcheck and loud in front of a crowd:
   [How to fire and assign actions](#motion-howto-action).
 - **Developer Mode** (in the menu) lets Save write over the shipped files.
   Leave it off on a gig.
-- **Network** settings: a wrong address goes quiet without telling you.
 
 And the ones people worry about that are safe: deleting a file (whatever is
 loaded keeps playing), scrolling through the menu (a value only changes in
@@ -649,7 +642,7 @@ sphere, and the channel row, the bar and the global strip stay in view under
 it. Closing FILES ends a rename without keeping it and cancels an armed
 Delete; text typed in the editor stays, marked unsaved.
 
-<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-09-30, quiet-indigo-2, PADS as the panel | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" -->
+<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), PADS as the panel | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" -->
 
 ![Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes.](pics_user/howto-overlays.gif)
 
@@ -1024,7 +1017,7 @@ touch on it takes over from wherever it sits.
 | Control | What it does |
 | :--- | :--- |
 | the column | the **master fader**: grab its handle and drag, one to one. No double tap: full on the master is the one gesture that makes the whole room loud at once |
-| output meters, at its foot | the subwoofer and the four speakers. Read only |
+| output meters, at its foot | ten: the main sub and tops 1–9. Read only |
 | **BTH** | booth level |
 | **MIX** | headphone blend between cue and master. Double tap: the middle |
 | **PHN** | headphone level |
@@ -1119,7 +1112,6 @@ It opens on top of the sphere. **Nothing in the menu is needed to play.**
 | :--- | :--- |
 | **Skin** | which skin is loaded, as a list; the skin previews as you browse it with the arrow keys |
 | **Skin Editor** | every value the loaded skin holds, grouped by what it is |
-| **Network** | the OSC hosts, ports and addresses |
 | **Button LEDs** | the colours of the panel's keys |
 | **Pattern Folder** | where clips, shapes, actions and sets are read from |
 | **Sphere in Menu** | **on**: the sphere keeps drawing behind the menu; **off**: it rests while the menu is open |
@@ -1136,13 +1128,13 @@ it:
 | Gesture | What it does |
 | :--- | :--- |
 | drag the list, or the empty strips left and right of it | scrolls, the way a phone does |
-| tap a row that leads to a page (Skin Editor, Network, Button LEDs, Pattern Folder) | opens that page, at once |
+| tap a row that leads to a page (Skin Editor, Button LEDs, Pattern Folder) | opens that page, at once |
 | tap any other row | selects it |
 | double tap a row, or ENTER | opens it: a list of its values (Skin, Sphere in Menu, Developer Mode), an edit box, or the colour picker |
 | in a list of values | tap or ENTER chooses, and a tap chooses at once; Escape or back leaves without choosing |
 | in an edit box | type with the keyboard; ENTER keeps; Escape, back or ✕ undo. A skin number also has **− / +** keys that step it while you watch |
 
-Two fingers scroll as one. Inside a page — the Skin Editor, Network and the
+Two fingers scroll as one. Inside a page — the Skin Editor and the
 others — a tap selects a row and a double tap opens it, as above. **Mind the
 double tap on the main menu's page rows:** the first tap has already opened
 the page, and the second lands on whatever row is under your finger there.
@@ -1152,9 +1144,9 @@ MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
 however deep. **Escape never quits the app.** In a booth, one elbow on a
 keyboard shouldn't end your set.
 
-<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
+<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30 (after the Network page left the menu), quiet-indigo-2, --fuzz 1% | steps: Tap MENU, tap Skin Editor, tap All values, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
 
-![Tap MENU, tap Network, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
+![Tap MENU, tap Skin Editor, open All values, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
 
 #### Skin
 
@@ -1189,14 +1181,13 @@ fire only on a double tap or ENTER.
 
 <!-- QUESTION (maintainer): the colour picker has no undo (closeColourPicker keeps what applyPickedColour already wrote into the document) and no Escape, while the edit box undoes the whole document on Escape (_documentBeforeMask). Should the picker undo on back/Escape like the edit box? -->
 
-#### Network, Button LEDs, Pattern Folder
+#### Button LEDs, Pattern Folder
 
-Each shows only its own part of the device's settings, as rows: Network the
-OSC sender, receiver and addresses; Button LEDs the key colours; Pattern Folder
-the folder the library is read from. Double tap a row to type a new value, or
-to pick a colour. The page is saved when you leave it. For Network, see
-[How to point the device at another Core](#motion-howto-network) and its
-warning.
+Each shows only its own part of the device's settings, as rows: Button LEDs
+the key colours; Pattern Folder the folder the library is read from. Double
+tap a row to type a new value, or to pick a colour. The page is saved when you
+leave it. Hosts, ports and addresses are not in the menu any more: see
+[How to point the device at another Core](#motion-howto-network).
 
 #### Sphere in Menu, Developer Mode
 
@@ -1531,7 +1522,7 @@ panel rather than ten:
 *More* moves the room towards energy and openness, *less* towards calm and
 weight. Every action script says which it is on its `Mood:` line.
 
-<!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
+<!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing) | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
 
 ![With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped.](pics_user/howto-library-load-set.gif)
 
@@ -1808,7 +1799,8 @@ full list of messages is in the [OSC reference](../ressources/osc.md).
   `/tap` in every mode.
 - **SHIFT + an action pad** plays the action with the messages to Core held
   back, which is why only the screen sees the preview.
-- **Network** in the menu holds the hosts, ports and addresses. See
+- **Hosts, ports and addresses** come from `a3-osc.json`, not from the
+  device's own settings. See
   [How to point the device at another Core](#motion-howto-network).
 
 ### The squeeze, in numbers

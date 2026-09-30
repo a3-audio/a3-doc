@@ -29,6 +29,14 @@ remote.
 | 3 | **POWER LED** | says whether it is on |
 | 4 | **Fan and filter** | clean it regularly |
 
+## Audio in and out
+
+REAPER takes the A³ Mixer's four channels and the return in as stereo pairs,
+and sends in blocks of ten: Main on outputs 1–10, Booth on 11–20, Phones, Rec
+and Aux on 21–30, and forty VU meters on 31–70 for the Beat Analyzer. Which
+output carries what, and which meter arrives as which `/vu/` address, is the
+{ref}`REAPER channel map <core-reaper-channel-map>` on the configuration page.
+
 ## Clock sources
 
 The tempo the system runs on can come from three places, chosen on A³
@@ -75,7 +83,10 @@ can see what the devices are actually saying to each other.
 ![The window, showing the traffic](pics_user/a3-core-window.png)
 
 Along the top are the peers, each with a dot that says when it was last heard
-from. Below that, one row per OSC address: how often it has gone past, how
+from. Under the peers, one line per device that has named itself says whether
+it speaks the same `a3-osc.json` as Core: *a3-osc.json is Core's*, or in red
+*a3-osc.json DIFFERS from Core's* — then that device's copy of the file is out
+of date (see {ref}`Where addresses and ports live <osc-differs>`). Below that, one row per OSC address: how often it has gone past, how
 fast, the last value, and which device it came from or went to.
 
 This is the answer to *"is it the cable, the setting, or me?"*. OSC runs over

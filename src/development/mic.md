@@ -14,10 +14,12 @@
 	- Fader
 	- Encoder
 
-- Receives OSC messages from A³ Core
-	- Input vu meters per channel (`/vu/*`)
-	- Output vu meters for the master section
-	- The lamps (`/channel/*/led/*`, `/fx/led`)
+- Receives OSC messages from A³ Core and the beat-analyzer
+	- Input vu meters per channel: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`)
+	- Output vu meters for the master section: `main_sub` and
+	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
+	- The lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`, `/filter/led`)
+	- The beat (`/beat`)
 
 - Sends messages back to the microcontroller via USB serial
 	- LEDs
@@ -25,10 +27,31 @@
 
 A second script, `a3-mixer-set-display/`, drives the channel displays.
 
+### Addresses, ports and the copy of a3-osc.json
+
+The script has no address, port or IP of its own. It reads them from
+`a3-osc.json` — the one file A³ Core's package ships as
+`/usr/share/a3/a3-osc.json` (see
+{ref}`Where addresses and ports live <osc-truth>`). The desk is its own
+machine, so it reads a **copy** beside the script:
+`software/scripts/a3-osc.json` in the a3-mixer checkout on the desk. The copy
+is not in git.
+
+**Deploying or updating the desk therefore has one step more:** copy the
+Core's `/usr/share/a3/a3-osc.json` to `software/scripts/a3-osc.json`, and do
+it again whenever the a3-core package changes. Without the copy the mixer
+service stops at start and says where it looked for it.
+
+Its meters are looked up by name in the file's `vu_meters`, not by number.
+And with every state request — at start, too — the desk sends
+`/device/hello` with the sha256 of its copy, so A³ Core's window can say
+whether the desk's copy is Core's own or **differs** from it.
+
 ### What it is sent and does not listen for
 
-Three `dispatcher.map` calls, and that is the whole list: `/vu/*`,
-`/channel/*/led/*`, `/fx/led`. A³ Core sends it a great deal more — every
+A handful of `dispatcher.map` calls, and that is the whole list: the meters,
+the lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`,
+`/filter/led`) and `/beat`. A³ Core sends it a great deal more — every
 channel's gain, EQ, volume and FX send, the whole master section, the shared
 filter, every flag — and all of it is dropped without a word, because
 pythonosc passes a message with no matching pattern straight into nothing.
@@ -73,8 +96,9 @@ the same day.
 `send_button_leds_data` had a branch of its own for `led_mode == 0` — pfl's —
 that wrote `0 if led_on else 255` while every other lamp wrote
 `255 if led_on else 0`. A³ Core inverted pfl on the way out as well. The two
-cancelled: the desk was right, and `/channel/n/led/pfl` carried the opposite
-of what its name said.
+cancelled: the desk was right, and the pfl lamp's address
+(`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` since 2026-09-30) carried
+the opposite of what its name said.
 
 That cost nothing while the desk was the only thing listening. It stopped
 being nobody's problem when the lamps became something **every** device is

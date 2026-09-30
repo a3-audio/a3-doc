@@ -27,7 +27,7 @@ them.
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
 | 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
-| 5 | **INPUT VU** | the level *before* the fader |  |
+| 5 | **INPUT VU** | the level *before* the fader (`in1_pre` … `in4_pre` in the {ref}`meter map <core-vu-map>`) |  |
 | 6 | **TAP** | taps the tempo — see *Tempo* below. All four strips' keys do the same, and their lamps flash red on the beat |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
 | 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
@@ -87,7 +87,7 @@ left the desk, and nothing happened at the other end.
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
 | – | **FX RETURN** | the level of the FX return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
-| 19 | **OUTPUT VU** | the level of the eight output channels |  |
+| 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`) |  |
 
 ## Connectors
 
