@@ -217,17 +217,13 @@ a knob stood at before the restart says nothing about where it stands now, and
 sitting in the value column it would be indistinguishable from a live one.
 What answers *where is it now* is `/state/recall`.
 
-## SuperCollider vu-meter.scd
-- Receives audio from REAPER and the system via the JACK audio server
-- Sends peak and RMS VU meters as OSC messages to
-	- A³ Mixer
-	- A³ Motion
-	- external
-
 ## Beat-Analyzer
 [beat-analyzer](https://github.com/rafjagger/beat-analyzer) is a separate
 C++/CMake service on the same JACK graph. It produces the beat clock every
-device follows, and the VU meters that drive the A³ Motion visuals. Its clock
+device follows, and the VU meters (peak and RMS, from REAPER's outputs 31–70 —
+see the {ref}`VU map <core-vu-map>`) for A³ Motion, the A³ Mixer and anything
+else listed in its `.env`. It took the metering over from a SuperCollider
+script, which is obsolete. Its clock
 source is selectable at runtime with `/clockmode`: its own onset/tempo
 analysis, an external `/beat` from A³ Motion, or a Pioneer Pro DJ Link master.
 

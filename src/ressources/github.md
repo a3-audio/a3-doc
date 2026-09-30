@@ -5,7 +5,7 @@
 | Repository | What it is |
 | :--- | :--- |
 | [a3-system](https://github.com/a3-audio/a3-system) | The umbrella: what the system is and how it fits together |
-| [a3-core](https://github.com/a3-audio/a3-core) | The sound server — its Debian package tree, the OSC router, the SuperCollider backend and the REAPER project |
+| [a3-core](https://github.com/a3-audio/a3-core) | The sound server — its Debian package tree, the OSC router and the REAPER project |
 | [a3-mixer](https://github.com/a3-audio/a3-mixer) | The DJ mixer: control scripts and KiCad hardware |
 | [a3-motion](https://github.com/a3-audio/a3-motion) | The motion sampler: ESP32-S3 panel firmware and hardware |
 | [a3-motion-ui](https://github.com/a3-audio/a3-motion-ui) | The JUCE/C++ touchscreen UI, also a submodule of a3-motion |

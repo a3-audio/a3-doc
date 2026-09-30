@@ -85,7 +85,7 @@ against the old behaviour has to drop its own inversion as well.
 
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
-| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the SuperCollider backend, not by `a3-core.py`. Which index is which signal: the {ref}`REAPER channel map <core-vu-map>`.
+| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the beat-analyzer, not by `a3-core.py`. Which index is which signal: the {ref}`REAPER channel map <core-vu-map>`.
 | - | /channel/[0-3]/led/pfl | bool | [0 or 1] | Whether the pfl lamp is lit. **1 is lit** — see the warning below; it was the other way round until 2026-09-12.
 | - | /channel/[0-3]/led/fx | bool | [0 or 1] | Whether the fx lamp is lit
 | - | /fx/led | string | [high_pass, low_pass] | fx mode, as the word the desk's firmware reads

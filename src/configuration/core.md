@@ -5,7 +5,7 @@
 | OS | Debian with a Linux realtime kernel |
 | Window manager | i3, with named workspaces — see [The screen](#core-config-screen) |
 | Audio backend | REAPER |
-| VU metering | SuperCollider |
+| VU metering | the beat-analyzer — see the {ref}`VU map <core-vu-map>` |
 | OSC router | `~/.local/bin/a3-core.py`, started by a `systemd --user` service |
 
 ## The OSC router
@@ -94,10 +94,6 @@ burst of xruns: not during a set.
 The package depends on `x11-utils`, `x11-xserver-utils` and `i3status` for
 what the screen scripts and the bar call.
 
-## Supercollider script VU-Meter
-- 12-Channel Jack client (could be more for ie light and vj control)
-- sends vu-meter (peak and rms) via OSC
-- ```VU-Meter.scd```
 ## User VNC interface 
 To setup patching and recording
 - Qjackctl (Patching)
