@@ -178,12 +178,11 @@ the files themselves:
   are the maintainer's description, not something the project file says.
 - That `Main` carries the subwoofer on its channel 1 and the four speakers on
   2–5 is read off the meters (`dec_master` 2–5 go to the speaker meters).
-- **Meter 5 (`vu_5`, the subwoofer in the OSC reference) is fed by
-  `dec_rec` 1–2**, the binaural mix, not by `dec_master`.
-- **The booth path is not wired:** `dec_booth` receives nothing, and `Booth`
-  sits at −inf with its hardware output on 1–8, the same outputs as `Main`.
+- *Fixed in the maintainer's template of 2026-09-30:* meter 5 was fed by
+  `dec_rec` instead of `dec_master` channel 1; `dec_booth` received nothing and
+  `Booth` shared `Main`'s hardware outputs; `Aux Send` was empty.
 - `ADAT In` has no record input set, so the ADAT receive on channel 2 carries
-  nothing. `Aux Send` is an empty track. `Return`'s master send goes to
+  nothing. `Return`'s master send goes to
   REAPER's master track, which has no hardware output.
 - The patchbay still carries a `screencast` socket on outputs 7–8; StemDeck
   no longer has a screencast.
@@ -199,10 +198,11 @@ and the JACK patchbay are rebuilt to this map.
 
 ### What REAPER receives
 
-| Hardware inputs | What |
+| Input | What |
 | :--- | :--- |
-| 4 stereo pairs | the A³ Mixer's channels 1–4 |
-| 1 stereo pair | the return |
+| 4 stereo pairs (hardware) | the A³ Mixer's channels 1–4 |
+| 1 stereo pair (hardware) | the FX return — the fifth stereo input, the mixer's FX RETURN knob |
+| REAPER in 11–22 | StemDeck: deck 1–4, aux and phones, each L/R |
 
 ### What REAPER sends
 
