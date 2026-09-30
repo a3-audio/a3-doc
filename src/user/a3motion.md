@@ -118,7 +118,7 @@ next downbeat.
 
 ![In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped.](pics_user/howto-files-load-set.gif)
 
-<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
+<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
 
 ![Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip.](pics_user/howto-files-load-clip.gif)
 
