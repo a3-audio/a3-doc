@@ -642,7 +642,7 @@ sphere, and the channel row, the bar and the global strip stay in view under
 it. Closing FILES ends a rename without keeping it and cancels an armed
 Delete; text typed in the editor stays, marked unsaved.
 
-<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-09-30, quiet-indigo-2, PADS as the panel | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" -->
+<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0, PADS as the panel | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" -->
 
 ![Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes.](pics_user/howto-overlays.gif)
 
