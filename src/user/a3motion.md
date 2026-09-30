@@ -417,7 +417,7 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 ![In FILES › CLIPS tap one of your own clips, tap Delete (it asks Sure?), tap Delete again: the row is gone.](pics_user/howto-files-delete.gif)
 
-<!-- GIF: howto-files-edit-save.gif | region: 0,0,768,1024 | recorded 2026-09-29, 10.2 s | steps: In FILES › ACTIONS tap your own copy, type in the editor, tap another row (refused), tap Save. | "FILES › ACTIONS, your own copy" / "Tap in the editor and type" / "Another row? Save or Cancel first" / "Save: written, keyboard gone" | full screen: Onboard comes up and the UI shrinks into the upper part while typing -->
+<!-- GIF: howto-files-edit-save.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In FILES › ACTIONS tap your own copy, type in the editor, tap another row (refused), tap Save. | "FILES › ACTIONS, your own copy" / "Tap in the editor and type" / "Another row? Save or Cancel first" / "Save: written, keyboard gone" -->
 
 ![In FILES › ACTIONS tap your own copy, type in the editor, tap another row (refused), tap Save.](pics_user/howto-files-edit-save.gif)
 
@@ -505,7 +505,7 @@ tapped since. Tap it in again.
 
 ![In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays.](pics_user/howto-menu-skin.gif)
 
-<!-- GIF: howto-menu-skin-editor-value.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.9 s | steps: In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back. | "Skin Editor: double tap a value" / "+ steps it: 0.55, 0.605, 0.665" / "Esc: back to 0.500, nothing kept" | the edit box covers the sphere, so only the number shows the step; Escape, not Enter, keeps the sandbox skin as it was -->
+<!-- GIF: howto-menu-skin-editor-value.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back. | "Skin Editor: double tap a value" / "+ steps it: 0.55, 0.605, 0.665" / "Esc: back to 0.500, nothing kept" | the edit box covers the sphere, so only the number shows the step; Escape, not Enter, keeps the sandbox skin as it was -->
 
 ![In the Skin Editor double tap netGain, tap + three times, press Escape: the value is back.](pics_user/howto-menu-skin-editor-value.gif)
 
@@ -533,7 +533,7 @@ listen on the same one. A typo doesn't fail loudly: A³ Motion just sends to
 an address nobody listens to.
 ```
 
-<!-- GIF: howto-menu-network.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back. | "MENU › Network" / "Hosts, ports, OSC addresses" / "Drag down to the ports" / "Double tap a port to type" / "Esc: the old port is back" | Escape at the end, so the sandbox config stays as it was -->
+<!-- GIF: howto-menu-network.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back. | "MENU › Network" / "Hosts, ports, OSC addresses" / "Drag down to the ports" / "Double tap a port to type" / "Esc: the old port is back" | Escape at the end, so the sandbox config stays as it was -->
 
 ![In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back.](pics_user/howto-menu-network.gif)
 
