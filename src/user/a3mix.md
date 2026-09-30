@@ -12,7 +12,7 @@ every device is told all of it.
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 The numbers below refer to that picture. It is older than the V02 panel: FX
-SEND and RETURN are real knobs on the device but have no place in the drawing,
+SEND and FX RETURN are real knobs on the device but have no place in the drawing,
 so they are listed without a number.
 
 ## The channel strip
@@ -85,7 +85,7 @@ left the desk, and nothing happened at the other end.
 | 15 | **CUE/MIX** | left is cue only, right is the main mix, the centre sums both |  |
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
-| – | **RETURN** | the FX return: how much of the FX bus comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
+| – | **FX RETURN** | the level of the FX return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
 | 19 | **OUTPUT VU** | the level of the eight output channels |  |
 
