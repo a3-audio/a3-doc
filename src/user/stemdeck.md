@@ -38,9 +38,7 @@ wire it and a first set: [StemDeck × A³ Motion](stemdeck-with-motion.md).
   the rest
 - Built with JUCE
 
-![StemDeck on the Core's screen, both decks empty](pics_user/stemdeck-main.png)
-
-<!-- IMAGE: the whole main window with a set loaded on both decks, one of them playing. Not taken on 2026-09-30: loading a set on the rig's running StemDeck changes the live session. -->
+![StemDeck on the Core's screen: both decks loaded, deck A playing](pics_user/stemdeck-main.png)
 
 (stemdeck-stem-sets)=
 
@@ -121,9 +119,7 @@ Core's touch screen has no keyboard. StemDeck remembers it.
 
 ### Decks
 
-![Deck A, empty: title, time, BPM, CUE and PLAY, the loop and sync keys, the tempo fader](pics_user/stemdeck-deck.png)
-
-<!-- IMAGE: the same deck with a set loaded and a loop set, BPM and "Original" filled in. Not taken: it needs a set loaded on the rig's running StemDeck. -->
+![Deck A playing: title, time, overview, BPM with the original tempo, CUE and PLAY, and at the foot the tempo fader with the loop, sync and grid keys](pics_user/stemdeck-deck.png)
 
 Laid out like a CDJ, without the platter: at 768 pixels a deck has no room
 for a jog wheel, and the controller's wheels do that job (see the StemDeck
@@ -173,9 +169,7 @@ strips, the output meters for buses 1–4, AUX and PH.
 
 ### Library
 
-![The library: search box, Load to A and Load to B, Create stems… and Rescan](pics_user/stemdeck-library.png)
-
-<!-- IMAGE: the library with a few sets listed and the BPM column filled. Not taken: the rig's library holds the maintainer's own music. -->
+![The library: search box, Load to A and Load to B, the library folder with its set count, Create stems… and Rescan, and the sets by artist and album](pics_user/stemdeck-library.png)
 
 One row per set: **Artist | Album | Set | BPM | Stems | Length** — artist and
 album from the folders, BPM once analysed. It starts sorted artist → album →
