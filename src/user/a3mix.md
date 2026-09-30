@@ -25,7 +25,7 @@ them.
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
 | 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
-| 5 | **INPUT VU** | the level *before* the fader |  |
+| 5 | **INPUT VU** | the level *before* the fader (`in1_pre` … `in4_pre` in the {ref}`meter map <core-vu-map>`) |  |
 | 6 | **CUE** | sends this channel to the headphones |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
 | 8 | **FX** | switches this channel's VCF filter on. Lit while it is on |  |
@@ -46,7 +46,7 @@ Motion's pot, and only that.
 nothing: A³ Core's `3d` became a continuous blend, so a momentary key sending
 into it would drive that blend to the stop for as long as it is held — the key
 is therefore disconnected in software rather than left to do that. Core no
-longer understands `/channel/[0-3]/4d` either.
+longer understands `/channel/{ch}/4d` either.
 
 3D per channel is set from A³ Motion, on its own pot, and it is a blend rather
 than a switch. What this key should do instead has not been decided.
@@ -84,7 +84,7 @@ left the desk, and nothing happened at the other end.
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
-| 19 | **OUTPUT VU** | the level of the eight output channels |  |
+| 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`) |  |
 
 ## Connectors
 

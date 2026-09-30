@@ -83,7 +83,10 @@ can see what the devices are actually saying to each other.
 ![The window, showing the traffic](pics_user/a3-core-window.png)
 
 Along the top are the peers, each with a dot that says when it was last heard
-from. Below that, one row per OSC address: how often it has gone past, how
+from. Under the peers, one line per device that has named itself says whether
+it speaks the same `a3-osc.json` as Core: *a3-osc.json is Core's*, or in red
+*a3-osc.json DIFFERS from Core's* — then that device's copy of the file is out
+of date (see {ref}`Where addresses and ports live <osc-differs>`). Below that, one row per OSC address: how often it has gone past, how
 fast, the last value, and which device it came from or went to.
 
 This is the answer to *"is it the cable, the setting, or me?"*. OSC runs over

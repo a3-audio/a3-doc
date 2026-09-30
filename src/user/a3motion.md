@@ -526,18 +526,12 @@ bar shows or hides it by hand.
 
 ### How to point the device at another Core
 
-MENU, then tap **Network** (one tap opens it). Double tap a row, type the new
-host, port or address, and press ENTER. The page is saved when you leave it.
-
-```{warning}
-**An address only changes on this side.** The other device has to send or
-listen on the same one. A typo doesn't fail loudly: A³ Motion just sends to
-an address nobody listens to.
-```
-
-<!-- GIF: howto-menu-network.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back. | "MENU › Network" / "Hosts, ports, OSC addresses" / "Drag down to the ports" / "Double tap a port to type" / "Esc: the old port is back" | Escape at the end, so the sandbox config stays as it was -->
-
-![In MENU tap Network, drag to the ports, double tap a port, type, press Escape: the old port is back.](pics_user/howto-menu-network.gif)
+**Not on the device.** Since 2026-09-30 A³ Motion reads every host, port and
+OSC address from `a3-osc.json`, the one file the a3-core package installs for
+the whole system, and the **Network** page is gone from the menu. To point it
+at another Core, that file changes — and with it every other device, so
+nothing can end up sending to an address nobody listens to. See
+{ref}`Where addresses and ports live <osc-truth>`.
 
 (motion-panic)=
 
@@ -573,7 +567,6 @@ These are fine in soundcheck and loud in front of a crowd:
   [How to fire and assign actions](#motion-howto-action).
 - **Developer Mode** (in the menu) lets Save write over the shipped files.
   Leave it off on a gig.
-- **Network** settings: a wrong address goes quiet without telling you.
 
 And the ones people worry about that are safe: deleting a file (whatever is
 loaded keeps playing), scrolling through the menu (a value only changes in
@@ -1024,7 +1017,7 @@ touch on it takes over from wherever it sits.
 | Control | What it does |
 | :--- | :--- |
 | the column | the **master fader**: grab its handle and drag, one to one. No double tap: full on the master is the one gesture that makes the whole room loud at once |
-| output meters, at its foot | the subwoofer and the four speakers. Read only |
+| output meters, at its foot | ten: the main sub and tops 1–9. Read only |
 | **BTH** | booth level |
 | **MIX** | headphone blend between cue and master. Double tap: the middle |
 | **PHN** | headphone level |
@@ -1119,7 +1112,6 @@ It opens on top of the sphere. **Nothing in the menu is needed to play.**
 | :--- | :--- |
 | **Skin** | which skin is loaded, as a list; the skin previews as you browse it with the arrow keys |
 | **Skin Editor** | every value the loaded skin holds, grouped by what it is |
-| **Network** | the OSC hosts, ports and addresses |
 | **Button LEDs** | the colours of the panel's keys |
 | **Pattern Folder** | where clips, shapes, actions and sets are read from |
 | **Sphere in Menu** | **on**: the sphere keeps drawing behind the menu; **off**: it rests while the menu is open |
@@ -1136,13 +1128,13 @@ it:
 | Gesture | What it does |
 | :--- | :--- |
 | drag the list, or the empty strips left and right of it | scrolls, the way a phone does |
-| tap a row that leads to a page (Skin Editor, Network, Button LEDs, Pattern Folder) | opens that page, at once |
+| tap a row that leads to a page (Skin Editor, Button LEDs, Pattern Folder) | opens that page, at once |
 | tap any other row | selects it |
 | double tap a row, or ENTER | opens it: a list of its values (Skin, Sphere in Menu, Developer Mode), an edit box, or the colour picker |
 | in a list of values | tap or ENTER chooses, and a tap chooses at once; Escape or back leaves without choosing |
 | in an edit box | type with the keyboard; ENTER keeps; Escape, back or ✕ undo. A skin number also has **− / +** keys that step it while you watch |
 
-Two fingers scroll as one. Inside a page — the Skin Editor, Network and the
+Two fingers scroll as one. Inside a page — the Skin Editor and the
 others — a tap selects a row and a double tap opens it, as above. **Mind the
 double tap on the main menu's page rows:** the first tap has already opened
 the page, and the second lands on whatever row is under your finger there.
@@ -1151,6 +1143,8 @@ the page, and the second lands on whatever row is under your finger there.
 MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
 however deep. **Escape never quits the app.** In a booth, one elbow on a
 keyboard shouldn't end your set.
+
+<!-- STALE (2026-09-30): this GIF still shows the Network page, which is gone from the menu; re-record it on another page row. -->
 
 <!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
 
@@ -1189,14 +1183,13 @@ fire only on a double tap or ENTER.
 
 <!-- QUESTION (maintainer): the colour picker has no undo (closeColourPicker keeps what applyPickedColour already wrote into the document) and no Escape, while the edit box undoes the whole document on Escape (_documentBeforeMask). Should the picker undo on back/Escape like the edit box? -->
 
-#### Network, Button LEDs, Pattern Folder
+#### Button LEDs, Pattern Folder
 
-Each shows only its own part of the device's settings, as rows: Network the
-OSC sender, receiver and addresses; Button LEDs the key colours; Pattern Folder
-the folder the library is read from. Double tap a row to type a new value, or
-to pick a colour. The page is saved when you leave it. For Network, see
-[How to point the device at another Core](#motion-howto-network) and its
-warning.
+Each shows only its own part of the device's settings, as rows: Button LEDs
+the key colours; Pattern Folder the folder the library is read from. Double
+tap a row to type a new value, or to pick a colour. The page is saved when you
+leave it. Hosts, ports and addresses are not in the menu any more: see
+[How to point the device at another Core](#motion-howto-network).
 
 #### Sphere in Menu, Developer Mode
 
@@ -1808,7 +1801,8 @@ full list of messages is in the [OSC reference](../ressources/osc.md).
   `/tap` in every mode.
 - **SHIFT + an action pad** plays the action with the messages to Core held
   back, which is why only the screen sees the preview.
-- **Network** in the menu holds the hosts, ports and addresses. See
+- **Hosts, ports and addresses** come from `a3-osc.json`, not from the
+  device's own settings. See
   [How to point the device at another Core](#motion-howto-network).
 
 ### The squeeze, in numbers

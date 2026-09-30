@@ -115,16 +115,23 @@ a3-core package's patchbay connects its twelve outputs to REAPER's `in11` …
 
 **On A³ Core**, for a StemDeck on another machine, there is nothing to do
 either: the a3-core package runs zita-n2j for ten channels and its patchbay
-wires them into REAPER inputs 11–20.
+wires them into REAPER inputs 11–20. The Core's zita units take their address
+and port from `~/.config/a3/osc.env`, which the package writes from
+`a3-osc.json` (`a3-osc-render user`).
 
 **On the StemDeck machine**, send the ten outputs to the Core over the
 network. StemDeck's repository ships two systemd user services for this,
 under `.config/systemd/user/`:
 
 - `zita-j2n.service` sends StemDeck's 10 channels to the Core, UDP port
-  65100 — the port the a3-core package's zita-n2j listens on;
+  65100 — the port the a3-core package's zita-n2j listens on (`zita-n2j.audio`
+  in `a3-osc.json`);
 - `zita-n2j.service` receives 2 channels back from the Core on UDP port
-  55100, where the a3-core package's zita-j2n sends REAPER's recording bus.
+  55100, where the a3-core package's zita-j2n sends REAPER's recording bus
+  (`radla.zita-n2j` in `a3-osc.json`).
+
+These two units are StemDeck's own and do not read `a3-osc.json`: if the
+file's ports change, change them here by hand.
 
 Both come back by themselves 2 s after they drop out: zita ends on some
 changes to the audio graph, and the units restart it with no limit on how

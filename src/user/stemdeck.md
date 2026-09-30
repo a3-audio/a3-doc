@@ -385,7 +385,10 @@ SYNC follows the **Pro DJ Link tempo master**: its tempo, pitch included, and
 its beat. Both decks may follow at once, each with its own half/one/two.
 
 - StemDeck joins the link as **virtual CDJ 6** and listens on UDP ports
-  50000–50002. It shares those ports, so it can run on the same machine as the
+  50000–50002, which it reads from the A³ system's `a3-osc.json` (see
+  {ref}`Where addresses and ports live <osc-truth>`). Without that file the
+  PIO clock does not start and its status line says `PIO: no a3-osc.json`.
+  It shares those ports, so it can run on the same machine as the
   beat-analyzer (virtual CDJ 7), and both get the beats. If the network is not
   up yet, it tries again every two seconds.
 - It learns who is master from the players' status packets. Some of those are
@@ -522,4 +525,5 @@ Demo and promo videos are recorded with OBS Studio, outside StemDeck.
 | A stem does not move | Its A³ channel's **3d** has to be up and its clip playing. A stem only on **A** (AUX) is on Core's Return track, not on a channel — light its bus number again. See [StemDeck × A³ Motion](#stemdeck-with-motion-troubleshooting) |
 | MASTER is on, but A³ Motion does not follow | Wait for the deck's BPM: nothing goes out before its analysis is done. Is the deck playing? Is A³ Motion on **PIO**? |
 | The downbeat on A³ Motion is on the wrong beat | StemDeck counts the bar from the grid's first beat. Set CUE on the real first beat of a bar and press **GRID**, then **SNAP** |
+| The PIO status line says `PIO: no a3-osc.json` | StemDeck did not find `/usr/share/a3/a3-osc.json`, where it reads its Pro DJ Link ports. On the Core the a3-core package installs it |
 | SYNC: PIO says **no master** | The status packets don't reach StemDeck. It follows the player chosen in the box beside the readout instead |

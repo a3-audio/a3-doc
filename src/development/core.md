@@ -5,18 +5,23 @@
 [a3-core](https://github.com/a3-audio/a3-core) repository is the runtime: it
 turns incoming OSC into DSP settings.
 
-- Receives OSC on port **9000** from
+- Receives OSC on `core.osc` (port 9000) from
 	- A³ Mixer
 	- A³ Motion
 	- the beat-analyzer (`/beat`)
-- Receives REAPER's feedback on its own port **9002**
-- Serves the window over HTTP on **9080**
+- Receives REAPER's feedback on its own port, `core.reaper-feedback` (9002)
+- Serves the window over HTTP on `core.web` (9080)
 - Sends OSC to
-	- REAPER (`127.0.0.1:9001`)
-	- the IEM MultiEncoder instances (`127.0.0.1:1337+n`, one port per instance)
-	- the IEM DualDelay on the FX bus (`127.0.0.1:1340`)
+	- REAPER (`reaper.osc`)
+	- the IEM MultiEncoder instances (`iem.multiencoder-1..3`, one port per instance)
+	- the IEM DualDelay on the FX bus (`dualdelay.osc`)
 	- A³ Mixer
 	- A³ Motion
+
+Every one of those names, and every address it speaks, comes from
+`/usr/share/a3/a3-osc.json`, read at start-up by `lib/a3_osc.py`; the numbers
+above are that file's. See
+{ref}`Where addresses and ports live <osc-truth>`.
 
 The parameter curves — the functions that map a controller value to a DSP
 setting — are pure functions of one number and live in `lib/a3_core_curves.py`.
@@ -30,7 +35,7 @@ because each of them was a number whose meaning was invisible at the call site:
 | :--- | :--- |
 | `share/a3-core/layout.json` | the map between an A³ channel and the REAPER project — track numbers, FX slots, send numbers, and every OSC address template |
 | `share/a3-core/curves.json` | the parameter curves |
-| `share/a3-core/osc-register.json` | the generated catalogue of every address the system can speak |
+| `share/a3-core/osc-register.json` | the generated catalogue of every address the system can speak, a view of `a3-osc.json` |
 
 ### What the register got rid of
 
@@ -96,8 +101,9 @@ That was true and it was the wrong conclusion: **a lamp shows a status, and a
 status belongs to whoever shows one.** They are broadcast.
 
 Which made the inversion everybody's problem instead of nobody's. Core sent
-"not pfl" and `a3-mixer.py` inverted it back, the two cancelled, and
-`/channel/n/led/pfl` carried the opposite of its own name. Both came out on
+"not pfl" and `a3-mixer.py` inverted it back, the two cancelled, and the pfl
+lamp's address (`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` since
+2026-09-30) carried the opposite of its own name. Both came out on
 the same day, so what reaches the desk's LED is unchanged and the address
 means what it says.
 
@@ -106,7 +112,7 @@ it changed, and `broadcast()` drops a value already passed on.
 
 ### The way back
 
-REAPER's feedback arrives on port 9002 and is read backwards: the address says
+REAPER's feedback arrives on `core.reaper-feedback` and is read backwards: the address says
 which control, and `invert()` undoes the curve the value went out on. `lib/a3_core_reverse.py` holds that second table, and
 `tools/tests/test_reverse_covers_forward.py` holds it against the forward
 path in `a3-core.py` — two tables that must agree drift, and here the drift is
@@ -144,7 +150,7 @@ where chasing a tempo is audible.
 
 ## The window
 
-Core serves a page on `http://<core>:9080` that shows what is actually going
+Core serves a page on `http://<core>:9080` (`core.web`) that shows what is actually going
 over the wire. It exists because every silent link in this system looks the
 same from the outside: OSC over UDP has no error for *nobody was listening*.
 
@@ -167,6 +173,16 @@ Three rules the page is built on, each of them paid for once:
   problem attached, never an exception. Core makes the sound; this is a
   convenience.
 
+### Which truth each device speaks
+
+A device on its own machine reads its own copy of `a3-osc.json`, and a copy
+can fall behind. So the A³ Mixer names itself with every state request — at
+start, too — on `/device/hello`, with the sha256 of its copy. Core
+(`lib/a3_core_devices.py`) holds that against the hash of its own file, and
+the window shows one line per device under the peers: *a3-osc.json is Core's*,
+or in red *a3-osc.json DIFFERS from Core's*. What to do about the red one is
+in {ref}`the OSC reference <osc-differs>`.
+
 ### The register
 
 A traffic log cannot say what is *possible*. Looking up the FX send of a
@@ -174,14 +190,21 @@ channel bus in the window gave three rows and none of them the answer — the
 address had simply never flown, and REAPER only reports sends for tracks that
 happen to be in its bank window.
 
-So the other half: `tools/osc_register.py` reads the six sources that define
-addresses — Core's `layout.json`, `a3-motion-ui`'s `OscAddresses.hh`,
+So the other half: `tools/osc_register.py` writes
+`share/a3-core/osc-register.json`, and since 2026-09-30 it builds it from
+`a3-osc.json` — one row per address shape and device, 70 entries at the time
+of writing, each with its device and its direction from Core's side (`in`,
+`out`, `both`, or `aside` for traffic that passes Core by). REAPER's and the
+IEM plug-ins' words are in it too, listed as `both`, because the file does not
+say more about them. `tools/tests/test_osc_register.py` holds the register
+against the file, so it cannot drift unnoticed.
+
+Until that date the register was lifted out of six sources in four
+repositories — Core's `layout.json`, `a3-motion-ui`'s `OscAddresses.hh`,
 `a3-mixer.py`, the `a3-core.ReaperOSC` surface, `a3-core.py` itself and the
-beat-analyzer — and writes `share/a3-core/osc-register.json`: 520 entries,
-each with its device, direction, and the file and line it came from. A test
-regenerates it and compares, so it cannot drift unnoticed; run somewhere the
-other repositories are missing, that test **skips and says so** rather than
-passing quietly.
+beat-analyzer — 520 entries with the file and line each came from, and its
+test skipped wherever the other checkouts were missing. Every address is
+written once now, so there is nothing left to lift out.
 
 ![The register, filtered by device](pics_development/a3core-window-register.png)
 
