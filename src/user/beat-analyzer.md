@@ -143,21 +143,25 @@ every packet regardless of which started first.
 
 ## The meters
 
-The beat-analyzer measures twelve JACK inputs, `vu_1` … `vu_12`, and sends
-each as a peak and an RMS value between 0 and 1, all twelve in one packet.
-It gives a channel no meaning of its own: **which signal is on which meter is
-decided by the JACK patching alone.** In the A³ setup:
+The beat-analyzer measures forty JACK inputs, fed from REAPER's outputs
+31–70, and sends each as a peak and an RMS value between 0 and 1, as three
+OSC bundles of 16, 16 and 8. It gives a channel no meaning of its own beyond
+its port name: **which signal is on which meter is decided by the JACK
+patching alone.** Input *i*, counted from 0, is REAPER out 31 + *i* and sends
+on `/vu/i` — `vu_main_sub` on out 41 arrives as `/vu/10`, for instance. The
+whole table is the {ref}`VU meter map <core-vu-map>` on the Core's
+configuration page.
 
-| JACK input | OSC address | Signal | A³ Motion shows it as |
-| :--- | :--- | :--- | :--- |
-| `vu_1` … `vu_4` | `/vu/0` … `/vu/3` | mixer channels 1–4 | the corona around each channel blob |
-| `vu_5` | `/vu/4` | subwoofer | the glow of the sphere |
-| `vu_6` … `vu_9` | `/vu/5` … `/vu/8` | speakers 1–4 | the lightning of each speaker |
-| `vu_10` … `vu_12` | `/vu/9` … `/vu/11` | – | unused |
+`NUM_VU_CHANNELS=40` in `build/.env` opens all forty; builds from before
+2026-09-30 name their inputs `vu_1` … `vu_12` instead.
 
-The inputs count from 1, the addresses from 0: `vu_N` arrives as
-`/vu/(N-1)`. Patch with the OSC numbers in mind and every meter lands one
-channel across — and still looks plausible.
+```{warning}
+A³ Motion and the A³ Mixer still read the old twelve positions — Motion
+`/vu/0`–`/vu/3` as the channels, `/vu/4` as the subwoofer, `/vu/5`–`/vu/8` as
+the speakers; the Mixer `/vu/0`–`/vu/3` as its inputs and `/vu/4`–`/vu/11` as
+its outputs. Until both are moved to the new indices, their meters show the
+wrong signals.
+```
 
 (beat-analyzer-config)=
 
@@ -192,7 +196,7 @@ The settings that matter most:
 | `OSC_PORT_A3MOTION` | where `/beat`, `/clockmode` and `/tap` arrive. 7775 |
 | `BPM_MIN`, `BPM_MAX` | the tempo range the clock counts in. A tempo outside it is doubled or halved into it |
 | `PIONEER_DEVICE_NUM` | its player number on the Pro DJ Link network. 7 |
-| `NUM_VU_CHANNELS` | how many meters. 12 |
+| `NUM_VU_CHANNELS` | how many meters. 40, the A³ channel map; at most 64 |
 | `OSC_SEND_RATE` | meter updates per second. 25 |
 | `VU_RMS_ATTACK`, `VU_RMS_RELEASE`, `VU_PEAK_FALLOFF` | how fast the meters rise and fall |
 | `DEBUG_BEAT_CONSOLE`, `DEBUG_PIONEER_CONSOLE` | print every beat, or every Pro DJ Link beat, to the log |
@@ -222,7 +226,7 @@ the {ref}`OSC reference <osc-beat-analyzer>`.
 | EXT: the tempo no longer follows the track | You tapped: a tapped tempo stays. Tap the new tempo, or restart the service |
 | PIO: nothing arrives | The Core machine has to be on the same network as the players, and nothing else on it may hold ports 50000–50002 exclusively. The log says `Pioneer Receiver konnte nicht gestartet werden` if it could not bind them |
 | PIO: it follows the wrong player | It follows whoever says master while playing. Set master on the player you mean |
-| The meters all sit one channel across | The JACK patching is off by one: `vu_N` is `/vu/(N-1)` |
+| The meters all sit one channel across | The JACK patching is off by one: REAPER out *N* belongs on the port that sends `/vu/(N-31)` |
 | The meters don't move at all | Check the service, then the `OSC_VU_*` / `OSC_HOST_*` entries in `build/.env` against [Ports and endpoints](../ressources/ports.md) |
 
 Its log is the service's journal:

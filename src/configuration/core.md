@@ -170,7 +170,9 @@ Reading it:
   binaurally onto outputs 7–8, which go to zita-j2n (back to a remote
   StemDeck's REC inputs) and to the beat-analyzer's `bpm_1`.
 - **The meters:** `VU-Meters` puts twelve meter channels on outputs 21–32 for
-  the beat-analyzer's `vu_1` … `vu_12`.
+  the beat-analyzer's `vu_1` … `vu_12`. The
+  [channel map](#core-reaper-channel-map) below replaces this with forty
+  meters on outputs 31–70.
 
 What the picture interprets rather than reads, and what looks unfinished in
 the files themselves:
@@ -189,6 +191,77 @@ the files themselves:
   REAPER's master track, which has no hardware output.
 - The patchbay still carries a `screencast` socket on outputs 7–8; StemDeck
   no longer has a screencast.
+
+
+(core-reaper-channel-map)=
+
+## REAPER channel map
+
+The inputs and outputs REAPER uses, decided on 2026-09-30. The routing picture
+above still shows the template as shipped before that date; REAPER's routing
+and the JACK patchbay are rebuilt to this map.
+
+### What REAPER receives
+
+| Hardware inputs | What |
+| :--- | :--- |
+| 4 stereo pairs | the A³ Mixer's channels 1–4 |
+| 1 stereo pair | the return |
+
+### What REAPER sends
+
+The outputs come in blocks of ten:
+
+| Out | Block | Content |
+| :--- | :--- | :--- |
+| 1–10 | Main | 1 sub, 2–10 tops 1–9 |
+| 11–20 | Booth | 11 sub, 12–20 tops 1–9 |
+| 21–30 | Stereo | 21–22 Phones, 23–24 Rec, 25–26 Aux, 27–30 free |
+| 31–70 | VU meters | to the beat-analyzer, see below |
+
+(core-vu-map)=
+
+### The VU meters: REAPER out 31–70
+
+Outputs 31–70 go to the beat-analyzer's forty JACK inputs, one meter each,
+and the beat-analyzer sends each as `/vu/i` (peak and RMS). Input *i*,
+counted from 0, is fed from REAPER out 31 + *i* and sends on `/vu/i`:
+
+| REAPER out | beat-analyzer port | OSC | Meter |
+| :--- | :--- | :--- | :--- |
+| 31–34 | `vu_in1_pre` … `vu_in4_pre` | `/vu/0`–`/vu/3` | channel inputs 1–4, pre-fader, post-FX |
+| 35–38 | `vu_in1_post` … `vu_in4_post` | `/vu/4`–`/vu/7` | channel inputs 1–4, post-fader |
+| 39–40 | `vu_free39`, `vu_free40` | `/vu/8`, `/vu/9` | free |
+| 41 | `vu_main_sub` | `/vu/10` | Main sub |
+| 42–50 | `vu_main_top1` … `vu_main_top9` | `/vu/11`–`/vu/19` | Main tops 1–9 |
+| 51 | `vu_booth_sub` | `/vu/20` | Booth sub |
+| 52–60 | `vu_booth_top1` … `vu_booth_top9` | `/vu/21`–`/vu/29` | Booth tops 1–9 |
+| 61–62 | `vu_phones_L`, `vu_phones_R` | `/vu/30`, `/vu/31` | Phones |
+| 63–64 | `vu_rec_L`, `vu_rec_R` | `/vu/32`, `/vu/33` | Rec |
+| 65–66 | `vu_aux_L`, `vu_aux_R` | `/vu/34`, `/vu/35` | Aux |
+| 67–70 | `vu_free67` … `vu_free70` | `/vu/36`–`/vu/39` | free |
+
+Two rules carry the whole table:
+
+- **A meter sits 40 outputs above what it measures:** Main sub on out 1 is
+  metered on out 41, Booth sub on 11 on 51, Phones on 21 on 61.
+- **beat-analyzer channel = REAPER out − 30**, and the OSC index counts from
+  0: out 31 is the first channel and sends `/vu/0`, out 70 the fortieth and
+  sends `/vu/39`.
+
+The beat-analyzer needs `NUM_VU_CHANNELS=40` in its `build/.env` to open all
+forty inputs (see {ref}`Beat Analyzer <beat-analyzer-config>`). It sends them as
+three OSC bundles of 16, 16 and 8 meters. The port names live in its
+`src/audio/vu_ports.cpp`.
+
+```{warning}
+**A³ Motion and the A³ Mixer still read the old positions.** Motion takes
+`/vu/0`–`/vu/3` as the channel inputs, `/vu/4` as the subwoofer and
+`/vu/5`–`/vu/8` as the speakers; the Mixer takes `/vu/0`–`/vu/3` as its input
+meters and `/vu/4`–`/vu/11` as its output meters. Under this map `/vu/4` is
+channel 1 post-fader, not the subwoofer. Moving both devices to the new
+indices is the next step; it is not done yet.
+```
 
 
 ## Screenshots

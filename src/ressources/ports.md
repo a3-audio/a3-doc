@@ -59,7 +59,7 @@ A³ MOTION
   send    127.0.0.1:9000      Core           positions, clip settings, /state/recall
           127.0.0.1:7775      beat-analyzer  /tap, /beat, /clockmode
   return  7771                               relayed state, recall answer, /beat
-          7772                               /vu/0..11
+          7772                               /vu/0..39
           7777                               /EnergyVisualizer/RMS
 
 A³ CORE
@@ -77,10 +77,10 @@ REAPER
 
 BEAT-ANALYZER
   send    127.0.0.1:7771      A³ Motion      /beat
-          127.0.0.1:7772      A³ Motion      /vu/0..11
-          192.168.8.11:7772   A³ Mixer       /vu/0..11
+          127.0.0.1:7772      A³ Motion      /vu/0..39
+          192.168.8.11:7772   A³ Mixer       /vu/0..39
           192.168.43.96:9000  radla          /beat
-          192.168.43.96:9001  radla          /vu/0..11
+          192.168.43.96:9001  radla          /vu/0..39
   return  7775                               /beat, /tap, /clockmode
           50000-50002                        Pioneer Pro DJ Link
 ```
@@ -152,7 +152,7 @@ lamps should show.
 
 | Port | From | What |
 | ---: | :--- | :--- |
-| 7772 | A³ Core, beat-analyzer | `/vu/0..11`, and the PFL and FX lamp states |
+| 7772 | A³ Core, beat-analyzer | `/vu/0..39`, and the PFL and FX lamp states |
 
 **Sends**
 
@@ -174,7 +174,7 @@ time.
 | Port | From | What |
 | ---: | :--- | :--- |
 | 7771 | A³ Core, beat-analyzer | Relayed channel state, the recall answer, `/beat` |
-| 7772 | beat-analyzer | `/vu/0..11` |
+| 7772 | beat-analyzer | `/vu/0..39` |
 | 7777 | A³ Core | `/EnergyVisualizer/RMS`, the 426-point sphere |
 
 **Sends**
@@ -204,8 +204,8 @@ Beat detection and VU metering, straight off JACK.
 | To | Port | What |
 | :--- | ---: | :--- |
 | A³ Motion UI | 7771 | `/beat` |
-| A³ Motion UI | 7772 | `/vu/0..11` |
-| A³ Mixer | 7772 | `/vu/0..11` |
+| A³ Motion UI | 7772 | `/vu/0..39` |
+| A³ Mixer | 7772 | `/vu/0..39` |
 
 Targets are named in its `.env` as `OSC_HOST_<name>` and `OSC_VU_<name>`. With
 no `.env` present it falls back to a single target on `127.0.0.1` — so a build

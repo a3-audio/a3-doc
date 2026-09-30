@@ -29,6 +29,14 @@ remote.
 | 3 | **POWER LED** | says whether it is on |
 | 4 | **Fan and filter** | clean it regularly |
 
+## Audio in and out
+
+REAPER takes the A³ Mixer's four channels and the return in as stereo pairs,
+and sends in blocks of ten: Main on outputs 1–10, Booth on 11–20, Phones, Rec
+and Aux on 21–30, and forty VU meters on 31–70 for the Beat Analyzer. Which
+output carries what, and which meter arrives as which `/vu/` address, is the
+{ref}`REAPER channel map <core-reaper-channel-map>` on the configuration page.
+
 ## Clock sources
 
 The tempo the system runs on can come from three places, chosen on A³

@@ -85,7 +85,7 @@ against the old behaviour has to drop its own inversion as well.
 
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
-| - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the SuperCollider backend, not by `a3-core.py`.
+| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | Peak and rms vu meter. Sent by the SuperCollider backend, not by `a3-core.py`. Which index is which signal: the {ref}`REAPER channel map <core-vu-map>`.
 | - | /channel/[0-3]/led/pfl | bool | [0 or 1] | Whether the pfl lamp is lit. **1 is lit** — see the warning below; it was the other way round until 2026-09-12.
 | - | /channel/[0-3]/led/fx | bool | [0 or 1] | Whether the fx lamp is lit
 | - | /fx/led | string | [high_pass, low_pass] | fx mode, as the word the desk's firmware reads
@@ -303,10 +303,7 @@ restriction.
 
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
-| /vu/[0-3] | - | float (peak), float (rms) | [0-1], [0-1] | Audio channels 1-4 — drives the corona around each channel blob
-| /vu/4 | - | float (peak), float (rms) | [0-1], [0-1] | Subwoofer — drives the sphere glow
-| /vu/[5-8] | - | float (peak), float (rms) | [0-1], [0-1] | Speakers 1-4 — drives the speaker spotlights
-| /vu/[9-11] | - | float (peak), float (rms) | [0-1], [0-1] | Received but unused — silently discarded
+| /vu/[0-39] | - | float (peak), float (rms) | [0-1], [0-1] | The meters, one per index as in the {ref}`REAPER channel map <core-vu-map>`. **Motion still reads the old positions** — see below.
 | /EnergyVisualizer/RMS | - | 426 × float | [0-1] each | Energy arriving from each direction, one value per point of the IEM EnergyVisualizer's sphere — lights the sphere itself. Port 7777.
 | /channel/[0-3]/azimuth | /channel/[0-3]/azimuth | float | [-180-180] | Where the channel's sound is, in degrees. Sent while a blob moves; **received** since 2026-09-12, so Core can put the blob where the sound already is.
 | /channel/[0-3]/elevation | /channel/[0-3]/elevation | float | [-90-90] | The same, in elevation
@@ -342,24 +339,24 @@ match. A mismatch does not report itself: the message is sent correctly, to an a
 listening for.
 ```
 
-The index ranges above exist only in A³ Motion — senders do not carry that meaning. The
-`beat-analyzer`, for instance, simply emits `NUM_VU_CHANNELS` (default 12) meters, one per JACK
-input, in port order. Which physical signal ends up on which index is decided by the JACK patching
-alone, and changing that wiring changes what the UI shows with nothing to warn you.
+The meaning of an index exists only in the receiver — senders do not carry it. The
+`beat-analyzer` emits `NUM_VU_CHANNELS` (40) meters, one per JACK input, in port order; which
+physical signal ends up on which index is decided by the JACK patching alone. Since 2026-09-30 the
+A³ setup follows the {ref}`REAPER channel map <core-vu-map>`: `/vu/0..39` carry REAPER's outputs
+31–70, so `/vu/i` is REAPER out 31 + *i*.
 
-Note the base mismatch when patching: the analyzer's JACK ports are 1-based (`vu_1` … `vu_12`)
-while the OSC addresses are 0-based, so **`vu_N` arrives as `/vu/(N-1)`**. In the A³ setup the
-speakers therefore sit on ports `vu_6`..`vu_9`, not `vu_5`..`vu_8`:
+```{warning}
+**A³ Motion and the A³ Mixer still read the old twelve positions** and have not been moved to the
+new indices yet — that is the next step. Until then:
 
-| JACK port | OSC address | Signal |
-| :--- | :--- | :--- |
-| vu_1 .. vu_4 | /vu/0 .. /vu/3 | Mixer channels 1-4 |
-| vu_5 | /vu/4 | Subwoofer |
-| vu_6 .. vu_9 | /vu/5 .. /vu/8 | Speakers 1-4 |
-| vu_10 .. vu_12 | /vu/9 .. /vu/11 | currently unused |
-
-Levels may still arrive on the unused indices if something is patched to those ports; that is not
-a sign they are being evaluated.
+| Index | A³ Motion reads it as | A³ Mixer reads it as | Under the new map it is |
+| :--- | :--- | :--- | :--- |
+| /vu/0 .. /vu/3 | channels 1-4 (corona around each blob) | input meters 1-4 | channel inputs 1-4, pre-fader, post-FX |
+| /vu/4 | subwoofer (sphere glow) | output meter 1 | channel input 1, post-fader |
+| /vu/5 .. /vu/8 | speakers 1-4 (speaker spotlights) | output meters 2-5 | channel inputs 2-4 post-fader, free |
+| /vu/9 .. /vu/11 | unused | output meters 6-8 | free, Main sub, Main top 1 |
+| /vu/12 .. /vu/39 | unused | unused | the rest of the map |
+```
 
 ### /channel/[0-3]/3d
 
@@ -452,7 +449,7 @@ target named in its `.env`; see
 | RECEIVE | SEND | DATA TYPE | DATA | DESCRIPTION
 | :---| :--- | :--- | :--- | :---
 | /beat | /beat | int (beat), int (bar), float (bpm) | [1-4], [-], [-] | The beat clock. **Sent** in every clock mode, to every target — in mode 0 except the target named `motion`. **Received** on 7775 and relayed only in mode 0; ints and floats are both accepted, and a beat outside 1–4 is dropped. In mode 2 the bar is always 0.
-| - | /vu/[0-11] | float (peak), float (rms) | [0-1], [0-1] | One meter per JACK input `vu_1` … `vu_12`, as one bundle, 25 times a second. Sent to a target's `OSC_VU_*` port where one is set, else to its `OSC_HOST_*` port
+| - | /vu/[0-39] | float (peak), float (rms) | [0-1], [0-1] | One meter per JACK input `vu_in1_pre` … `vu_free70` (REAPER out 31–70, see the {ref}`REAPER channel map <core-vu-map>`), as three bundles of 16, 16 and 8, 25 times a second. Sent to a target's `OSC_VU_*` port where one is set, else to its `OSC_HOST_*` port
 | /clockmode | - | int or float | [0-2] | 0 a3motion, 1 intern, 2 pioneer. Clamped to 0–2. Not stored: it starts in 1 every time
 | /tap | - | int or float, optional | [1-4] | Tap tempo, counted only in mode 1. The number is logged and otherwise unused — a tap always sets the beat to 1
 

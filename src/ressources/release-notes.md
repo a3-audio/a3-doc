@@ -290,6 +290,10 @@ On `main` since `v03.0`, not tagged yet.
   Scarlett mixer, with the workspace names shown without numbers. It is hidden on the two
   touch screens; `a3-bar-per-workspace.service` switches it.
 - The package also depends on `x11-utils`, `x11-xserver-utils` and `i3status`.
+- **A new REAPER channel map** (2026-09-30): the Mixer's four channels and the return in as
+  stereo pairs; out in blocks of ten — Main 1–10 and Booth 11–20 (a sub and nine tops each),
+  Phones, Rec and Aux on 21–26, and forty VU meters on 31–70, each 40 outputs above what it
+  measures. REAPER's routing and the patchbay are rebuilt to it by hand.
 
 ### A³ Mixer (`a3-mixer`)
 
@@ -319,6 +323,10 @@ On `main` since `v03.0`, not tagged yet.
 - The example `.env` follows the rig's network.
 - The octave choice has hysteresis: near the edge of the tempo range the clock no longer flips
   between a tempo and its double.
+- **Forty VU inputs, named after the REAPER channel map:** `vu_in1_pre` … `vu_free70`, fed
+  from REAPER out 31–70 and sent as `/vu/0..39` in three bundles (16+16+8).
+  `NUM_VU_CHANNELS=40`. A³ Motion and the A³ Mixer still read the old twelve positions until
+  they are moved to the new indices.
 
 ### StemDeck (`stemdeck`)
 
@@ -348,6 +356,8 @@ On `main` since `v03.0`, not tagged yet.
 - These release notes.
 - The Core's screen: its workspaces and the bar (user and configuration pages), the workspace
   switch in StemDeck and A³ Motion, and StemDeck on workspace 2 instead of 4.
+- The REAPER channel map and the forty-meter VU map on the Core's configuration page; the
+  OSC reference, the ports page and the beat analyzer page list `/vu/0..39`.
 
 ## v03.0 (2026-09-12)
 
