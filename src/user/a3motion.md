@@ -1573,9 +1573,7 @@ clips of the next phase, **Load the next set** in FILES.
 
 #### Shapes (50)
 
-<!-- QUESTION (maintainer): the contact sheet a3-motion-shapes-50.png is stale (it shows the library before v2), so it is not shown. Regenerate it, or drop the image? -->
-
-<!-- IMAGE: pics_user/a3-motion-shapes-50.png still shows the library before v2 (Random, Lissajous 3-5, Hypo 8-3 ...). Regenerate it from pattern/system/*.svg, then put it back here: ![All fifty shapes; the rhythm figures are points, numbered in the order they are jumped to](pics_user/a3-motion-shapes-50.png) -->
+![All fifty shapes; the rhythm figures are points, numbered in the order they are jumped to](pics_user/a3-motion-shapes-50.png)
 
 A shape is the path alone — no speed, no height, no width; the clip adds those.
 They are named `<Family> <Name>`. On disk the file name starts with the
