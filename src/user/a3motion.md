@@ -411,7 +411,9 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 ![In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own.](pics_user/howto-files-save-set.gif)
 
-<!-- GIF: howto-keyboard-rename.gif | region: full screen 0,0,768,1024 | steps: FILES; Rename; type a name on the keyboard; ENTER | "Rename: the keyboard comes up" / "ENTER keeps the name" | round 2 (reserve); replaces howto-files-rename.gif and howto-statusbar-keys.gif -->
+<!-- GIF: howto-keyboard-rename.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2, the panel keyboard | steps: In FILES tap your own file, tap Rename: the keyboard comes up; DEL back to "Speed ", type Riff, ENTER. | "Rename: the keyboard comes up" / "DEL takes the old name back" / "Type the new one" / "ENTER keeps the name" -->
+
+![In FILES tap your own file, tap Rename: the keyboard comes up; DEL back to "Speed ", type Riff, ENTER.](pics_user/howto-keyboard-rename.gif)
 
 <!-- GIF: howto-files-delete.gif | region: 0,36,768,620 | recorded 2026-09-29, 8.4 s | steps: In FILES › CLIPS tap one of your own clips, tap Delete (it asks Sure?), tap Delete again: the row is gone. | "Your own clips can go" / "Tap the row" / "Delete asks: Sure?" / "Press again: gone" -->
 
@@ -647,7 +649,7 @@ sphere, and the channel row, the bar and the global strip stay in view under
 it. Closing FILES ends a rename without keeping it and cancels an armed
 Delete; text typed in the editor stays, marked unsaved.
 
-<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-09-29, 9.5 s | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" | shows the PADS page before feat/pads-panel; re-record when that lands -->
+<!-- GIF: howto-overlays.gif | region: 0,36,768,712 | recorded 2026-09-30, quiet-indigo-2, PADS as the panel | steps: Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes. | "FILES, MIXER, PADS: over the sphere" / "FILES" / "MIXER: one at a time" / "PADS" / "A bar tab closes it" -->
 
 ![Tap FILES, MIXER, PADS: each lies over the sphere, one at a time. Tap CLIP: it closes.](pics_user/howto-overlays.gif)
 
