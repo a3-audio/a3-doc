@@ -45,8 +45,8 @@ On `main` since `v03.0`, not tagged yet.
 - A second action while the first is still sounding takes over; afterwards the clip comes back
   to itself, not to the first action.
 - An action button with nothing on it does nothing, and its pad is dark.
-- The PADS page is 2×4 per channel, with a block that fires a pad on all four channels: Play
-  all, Stop all, and each action.
+- The PADS page is 2×4 per channel, with a scene column that fires a pad on all four channels
+  (see *The keyboard is the panel* below).
 - The channel row shows the clip's name instead of a slot number.
 - Sets store the six actions per channel. **Sets from before are copied once to
   `pattern/backup-two-slots/`** on the first start, then read with slot 1 as the clip and the
@@ -176,6 +176,28 @@ On `main` since `v03.0`, not tagged yet.
 - The colour picker is JUCE's own colour field.
 - A CLEAN key switches to a clean skin and back.
 - Every action script names every parameter it takes, with its range.
+
+**The keyboard is the panel**
+
+- **PADS is the panel, key for key:** 44 keys on the panel's ten columns and six rows. On the
+  left TAP and clock, then the scene column — Play all, A1, A3 and A5 on every channel; the four
+  channels in the middle; the six function keys on the right. The scene block's second column
+  (Stop all, and A2, A4, A6 across channels) is gone.
+- **The in-app keyboard stands on the same grid**, QWERTY instead of QWERTZ: ESC and 123 in the
+  left column's top two keys, DEL and ENTER in the right's, the letters in rows 2–4, SHIFT,
+  ◀ ▶, SPACE, ' " and HIDE along the bottom. **123** holds digits and the symbols scripts are
+  written with. No umlauts any more. The four rows of twelve on the encoder fields, walked by
+  the encoders, are gone.
+- **While the keyboard is up, the whole panel types:** each of the 44 buttons is the key in its
+  place, and types on press. No clip fires and TAP, REC, MENU and SHIFT do nothing else;
+  running clips go on, pots and faders are unchanged. HIDE or ESC gives the panel back, and a
+  key pressed while typing keeps its release on the keyboard, so ESC (on TAP) never taps. This
+  reverses the earlier rule that the pads keep playing while you type.
+- Encoder 1 (channel 1, upper) moves the text cursor; the other encoders keep their jobs.
+- While typing, the pad and key LEDs show the keyboard: letters dim, the other keys in the
+  skin's accent colour.
+- On the screen a key still types on release (slide off to cancel); DEL and the arrows repeat
+  while held.
 
 **Clock**
 
