@@ -476,7 +476,7 @@ tapped since. Tap it in again.
 
 <!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
 
-<!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
+<!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), --width 500 (the strip at its own size) | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
 
 ![Tap the clock key to INT, tap the beat display eight times: the BPM follows.](pics_user/howto-statusbar-tap.gif)
 
