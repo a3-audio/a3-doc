@@ -118,7 +118,7 @@ next downbeat.
 
 ![In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped.](pics_user/howto-files-load-set.gif)
 
-<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
+<!-- GIF: howto-files-load-clip.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip. | "Choose the channel first" / "FILES › CLIPS" / "Tap a clip: it only shows" / "Load puts it on channel 2" -->
 
 ![Tap channel 2, open FILES › CLIPS, tap a clip, tap Load: channel 2 gets the clip.](pics_user/howto-files-load-clip.gif)
 
@@ -474,7 +474,7 @@ tapped since. Tap it in again.
 
 <!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
 
-<!-- GIF: howto-statusbar-tap.gif | region: 0,0,560,36 | recorded 2026-09-29, 9.5 s | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
+<!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
 
 ![Tap the clock key to INT, tap the beat display eight times: the BPM follows.](pics_user/howto-statusbar-tap.gif)
 
@@ -501,7 +501,7 @@ tapped since. Tap it in again.
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 
-<!-- GIF: howto-menu-skin.gif | region: 0,0,768,1024 | recorded 2026-09-29, 10.0 s | steps: In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays. | "MENU › Skin: double tap" / "Browse: each skin previews" / "Back: the old one stays" | arrow keys (xdotool key Down x3, Escape), so no finger ring on the browse; a tap would choose and save a skin -->
+<!-- GIF: howto-menu-skin.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays. | "MENU › Skin: double tap" / "Browse: each skin previews" / "Back: the old one stays" | arrow keys (xdotool key Down x3, Escape), so no finger ring on the browse; a tap would choose and save a skin -->
 
 ![In MENU double tap Skin, step down three skins with the arrow key (each previews), press Escape: the old skin stays.](pics_user/howto-menu-skin.gif)
 
@@ -1148,7 +1148,7 @@ MENU itself. Back and MENU close **one level**; ✕ closes all of it at once,
 however deep. **Escape never quits the app.** In a booth, one elbow on a
 keyboard shouldn't end your set.
 
-<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-29, 9.8 s | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
+<!-- GIF: howto-menu-navigate.gif | region: 0,0,768,660 | recorded 2026-09-30, quiet-indigo-2 | steps: Tap MENU, tap Network, drag the list, tap back, tap ✕. | "MENU opens it over the sphere" / "Tap a row: its page" / "Drag to scroll" / "‹ back: one level up" / "✕ closes all of it" | a page row opens on ONE tap; a double tap lands the second tap inside the page -->
 
 ![Tap MENU, tap Network, drag the list, tap back, tap ✕.](pics_user/howto-menu-navigate.gif)
 
@@ -1496,7 +1496,7 @@ panel rather than ten:
 *More* moves the room towards energy and openness, *less* towards calm and
 weight. Every action script says which it is on its `Mood:` line.
 
-<!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-09-29, 9.8 s | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
+<!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-09-30, quiet-indigo-2 | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
 
 ![With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped.](pics_user/howto-library-load-set.gif)
 
