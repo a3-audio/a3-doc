@@ -312,7 +312,7 @@ job fails straight away and the strip says `separator not installed`.
 
 ## Audio out
 
-StemDeck is a JACK client named `StemDeck`. Its ports (the twelve or sixteen
+StemDeck is a JACK client named `StemDeck`. Its ports (the twelve
 outputs, what is on each, and the `rec_L` / `rec_R` inputs that feed **REC**
 in the top bar, which writes a 24-bit FLAC to `recordings/` next to `stems/`)
 and where they arrive on A³ Core are all on the
