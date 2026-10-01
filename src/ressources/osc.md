@@ -89,7 +89,7 @@ acting on it itself.
 | `/channel/{ch}/eq/low` | f | mixer, motion | core (Core passes it on to mixer, motion) | EQ low band |
 | `/channel/{ch}/volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | channel fader |
 | `/channel/{ch}/aux-send` | f | mixer, motion | core (Core passes it on to mixer, motion) | send to the FX bus (the beat-synced DualDelay) |
-| `/channel/{ch}/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue the channel to the headphones (its pre-fader send to dec_phones); was pfl until 2026-10-01 |
+| `/channel/{ch}/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue the channel to the headphones (its pre-fader send to enc_phones); was pfl until 2026-10-01 |
 | `/channel/{ch}/cue/led` | f | core | mixer, motion | the cue lamp, 1 = lit |
 | `/stem/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue StemDeck's phones to the headphones (the stems track's send to dec_phones), toggled like a channel's cue |
 | `/stem/cue/led` | f | core | mixer, motion | the stem cue lamp, 1 = lit (the C field on the aux-return display) |
@@ -492,13 +492,13 @@ job over on `/channel/{ch}/3d`, and on **2026-09-12** the desk's knob got its
 own job back:
 
 ```
-/channel/{ch}/aux-send  ──▶  /track/{9,13,17,21}/send/3/volume   (normalised 0..1)
+/channel/{ch}/aux-send  ──▶  /track/{1,5,9,13}/send/1/volume   (normalised 0..1)
 ```
 
-Send **3** of the channel bus reaches the FX bus. The number is the position
+Send **1** of the channel bus reaches `enc_fx`, the aux bus (template of 2026-10-01). The number is the position
 among the *sending* track's sends, which REAPER derives from the order its
 receivers appear in the project — and the cue and mix sends to
-`dec_phones` are among them. It lives in Core's `layout.json` rather than in the
+`enc_phones` (3 and 4) are among them. It lives in Core's `layout.json` rather than in the
 source, so a send that moves in the REAPER project can be found by reading
 one file.
 

@@ -99,12 +99,12 @@ cue everywhere, on the desk, on A³ Motion's key and on the wire
 
 What the headphones hear is set in the REAPER project, in the sends of the
 channel buses, not on separate tracks. Each channel bus sends to
-`dec_phones` twice: send 3 is taken **before** the fader (the cue), send 4
+`enc_phones` twice: send 3 is taken **before** the fader (the cue), send 4
 **after** it (the mix). The **CUE/MIX** knob crossfades the two at constant
 power, cue on the left, mix on the right. A deck's cue send opens only while
 its cue key is on; the mix sends follow the knob alone.
 
-Two more things reach `dec_phones`:
+Two more things reach the headphones, on `dec_phones`:
 
 - **The stem cue** opens the send 6 of the `stems` track, which carries
   StemDeck's phones (REAPER inputs 23–24). It behaves like a deck's cue and
