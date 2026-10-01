@@ -62,7 +62,7 @@ means something. Two controls have such a position:
 constexpr std::optional<float>
 mixerControlRestPosition (MixerControl control)
 {
-  if (control == MixerControl::FxSend)
+  if (control == MixerControl::AuxSend)
     return 0.f;
   return {};
 }
