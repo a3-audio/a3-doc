@@ -328,10 +328,11 @@ and the rules for it, are on the
 - **AUX is one stem, chosen at the desk.** The aux-return display selects a
   stem (or the empty field); a push lights **A** on that stem and takes it from
   the previous one.
-- **Core sets C while a channel is cued.** With a stem on a cued channel, Core
-  switches that stem's **C** and overrides C clicks on StemDeck's own screen;
-  a push of another stem moves the C along. With the channel on analog, all C
-  switches are off. See {ref}`the cue <a3mix-cue>`.
+- **Core sets the C switches.** A stem's **C** is on while it plays on a cued
+  desk channel and off otherwise; Core sets them at every cue change, push and
+  report, so a C clicked on StemDeck's own screen is switched back. A push of
+  another stem moves the C along; with the channel on analog, all C switches
+  are off. See {ref}`the cue <a3mix-cue>`.
 - **StemDeck says hello to Core every 30 seconds**, and Core learns its
   address from that. StemDeck listens on UDP port 7780.
 - **A fresh StemDeck starts with every stem on AUX only**, on no desk channel,

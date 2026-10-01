@@ -112,7 +112,9 @@ comes in on the channel:**
   in StemDeck and keeps the channel's own cue send (channel bus send 3) shut.
   The stem is heard once, dry, from StemDeck's CUE bus, before the fader.
   Push another stem onto the channel while it is cued and the C moves with it.
-  Core overrides C clicks on StemDeck's own screen while this holds.
+  The C switches are Core's: at every cue change, push or report from
+  StemDeck, Core sets them from the cued channels, so a C clicked on
+  StemDeck's own screen is switched back.
 - **With A on the channel** it is the normal channel cue, and all of
   StemDeck's C switches are off.
 
