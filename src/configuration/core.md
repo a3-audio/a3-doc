@@ -251,12 +251,12 @@ login, then — as `aaa` — `systemctl --user daemon-reload` and **start**
 `a3-user-install.service`, which runs `recipes/user_install.sh` in the
 background (next section). Linger is switched off again at the end.
 
-The postinst does **not** enable `a3-main.service`: the line is there but
-commented out. Enable it once, as `aaa`, so the rig comes up at boot:
-
-```sh
-systemctl --user enable a3-main.service
-```
+`a3-main.service` needs no `enable` of its own: the package ships the
+`default.target.wants` links for it, for both zita units and for
+`a3-bar-per-workspace` in the config tree, and step 4 copies them into
+`~/.config/systemd/user/` — so the rig comes up at boot. (The postinst still
+carries an `enable a3-main` line, commented out; the links made it
+unnecessary.)
 
 ### 9. The boot loader
 
@@ -380,9 +380,10 @@ priority given; "CPUs 1–3" is `CPUAffinity=1 2 3`, which keeps CPU 0 free.
 | `a3-user-install` | `recipes/user_install.sh` | no | — | no | normal |
 
 "Not wanted" means `a3-main` does not start the zita units, but stops them
-with itself: they start at login only where they are enabled on their own
-(`systemctl --user enable zita-j2n zita-n2j`). The same goes for
-`a3-bar-per-workspace`. Every unit is `WantedBy=default.target`.
+with itself: they start at login on their own, through the
+`default.target.wants` links the package ships for them (step 4 copies them
+into `~/.config`). The same goes for `a3-bar-per-workspace`. Every unit is
+`WantedBy=default.target`.
 
 ### `a3-jack.service` — the JACK server
 
