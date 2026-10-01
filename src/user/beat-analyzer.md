@@ -48,9 +48,9 @@ configuration **except the one named `motion`**, so Motion never hears its
 own beat come back. In this mode the beat-analyzer's own clock is paused,
 and a `/tap` it receives does nothing here.
 
-**EXT — intern.** Music on the beat-analyzer's input. Its JACK input `bpm_1`
-is patched from REAPER by Core's patchbay, so whatever REAPER hands it is what
-it listens to. From that it finds onsets and a tempo, and a clock of its own
+**EXT — intern.** Music on the beat-analyzer's input, which Core's patchbay
+connects to REAPER (see the {doc}`Patchbay page <../ressources/patchbay>`), so
+whatever REAPER hands it is what it listens to. From that it finds onsets and a tempo, and a clock of its own
 counts the beats — it keeps counting between detected beats, and at the last
 tempo if the music stops. Tapping works here:
 
@@ -144,17 +144,14 @@ every packet regardless of which started first.
 
 ## The meters
 
-The beat-analyzer measures forty JACK inputs, fed from REAPER's outputs
-31–70, and sends each as a peak and an RMS value between 0 and 1, as four
-OSC bundles, one per block of ten (inputs, Main, Booth, stereo). It gives a channel no meaning of its own beyond
-its port name: **which signal is on which meter is decided by the JACK
-patching alone.** Input *n*, counted from 1, is REAPER out 30 + *n* and sends
-on `/vu/n` — `vu_main_sub` on out 41 arrives as `/vu/11`, for instance. The
-whole table is the {ref}`VU meter map <core-vu-map>` on the Core's
-configuration page.
+The beat-analyzer measures forty JACK inputs, and sends each as a peak and an
+RMS value between 0 and 1, as four OSC bundles, one per block of ten (inputs,
+Main, Booth, stereo). It gives a channel no meaning of its own beyond its port
+name: **which signal is on which meter is decided by the JACK patching
+alone.** Which REAPER output feeds which port, and the whole table, are on the
+{doc}`Patchbay page <../ressources/patchbay>` ({ref}`VU meter map <core-vu-map>`).
 
-`NUM_VU_CHANNELS=40` in `build/.env` opens all forty; builds from before
-2026-09-30 name their inputs `vu_1` … `vu_12` instead.
+`NUM_VU_CHANNELS=40` in `build/.env` opens all forty.
 
 A³ Motion and the A³ Mixer look their meters up by name (`in1_pre`,
 `main_sub`, `main_top1`, …) in `a3-osc.json`, so they follow this map; which
@@ -238,12 +235,12 @@ the {ref}`OSC reference <osc-beat-analyzer>`.
 | Symptom | What to do |
 | :--- | :--- |
 | A³ Motion reads PIO or EXT, but the tempo follows the wrong source | The beat-analyzer restarted, or started after A³ Motion, and is back in its start mode (intern). Tap Motion's clock key once round, back to the mode you want: every step tells the beat-analyzer again |
-| EXT: no beat, the BPM stands still | Is the service running (`systemctl --user status beat-analyzer`)? Is `bpm_1` connected in qjackctl? Is music reaching REAPER? |
+| EXT: no beat, the BPM stands still | Is the service running (`systemctl --user status beat-analyzer`)? Is its tempo input connected in qjackctl (see the {doc}`Patchbay page <../ressources/patchbay>`)? Is music reaching REAPER? |
 | EXT: half or double your tempo | Set `BPM_MIN`–`BPM_MAX` to one octave around the music, for house and techno e.g. 70–140. A wider range lets the clock count either one |
 | EXT: the tempo no longer follows the track | You tapped: a tapped tempo stays. Tap the new tempo, or restart the service |
 | PIO: nothing arrives | The Core machine has to be on the same network as the players, and nothing else on it may hold ports 50000–50002 exclusively. The log says `Pioneer Receiver konnte nicht gestartet werden` if it could not bind them |
 | PIO: it follows the wrong player | It follows whoever says master while playing. Set master on the player you mean |
-| The meters all sit one channel across | The JACK patching is off by one: REAPER out *N* belongs on the port that sends `/vu/(N-30)` |
+| The meters all sit one channel across | The JACK patching is off by one: see the {doc}`Patchbay page <../ressources/patchbay>` |
 | The meters don't move at all | Check the service, then that `build/.env` ends in the `a3-osc` block with its `OSC_VU_*` / `OSC_HOST_*` entries. If it is missing, run `a3-osc-render user` and restart the service |
 
 Its log is the service's journal:

@@ -312,32 +312,20 @@ job fails straight away and the strip says `separator not installed`.
 
 ## Audio out
 
-StemDeck is a JACK client named `StemDeck` with twelve outputs, six stereo
-pairs:
-
-| Ports | What is on them |
-| :--- | :--- |
-| `deck1_L`, `deck1_R` | bus 1: stem 1 of deck A plus stem 1 of deck B |
-| `deck2_L`, `deck2_R` | bus 2: the two stems 2 |
-| `deck3_L`, `deck3_R` | bus 3: the two stems 3 |
-| `deck4_L`, `deck4_R` | bus 4: the two stems 4 |
-| `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
-| `phones_L`, `phones_R` | every stem switched to **P** and every deck on **PHONES**, before the fader |
-
-Despite the names, `deck1` … `deck4` are the **buses**, one per stem
-position, not the decks. Two **inputs**, `rec_L` and `rec_R`, feed **REC** in
-the top bar, which writes them to a 24-bit FLAC in `recordings/` next to
-`stems/`.
+StemDeck is a JACK client named `StemDeck`. Its ports (the twelve or sixteen
+outputs, what is on each, and the `rec_L` / `rec_R` inputs that feed **REC**
+in the top bar, which writes a 24-bit FLAC to `recordings/` next to `stems/`)
+and where they arrive on A³ Core are all on the
+{doc}`Patchbay page <../ressources/patchbay>`. Despite the names,
+`deck1` … `deck4` are the **buses**, one per stem position, not the decks.
 
 - **Nothing is connected automatically.** Patch the ports yourself, in
-  qjackctl or any other patchbay.
+  qjackctl or any other patchbay. On the Core, the a3-core package's patchbay
+  does it; how to wire a StemDeck on another machine is on
+  [StemDeck × A³ Motion](#stemdeck-with-motion-map).
 - **In the A³ setup each bus is an A³ channel.** Bus N arrives on A³ Core's
   channel N, the channel A³ Motion moves as channel N; aux arrives on Core's
-  Return track. On the Core, the a3-core package's patchbay connects all
-  twelve outputs straight to REAPER's `in11` … `in22`; phones (`in21`,
-  `in22`) is not used by the REAPER project. The whole map, and how to wire a
-  StemDeck on another machine, is on
-  [StemDeck × A³ Motion](#stemdeck-with-motion-map).
+  Return track.
 - StemDeck **never starts a JACK server**. It uses the one that is running,
   or PipeWire's JACK interface; with neither, it falls back to a plain audio
   device (ALSA), chosen with **Audio**. With fewer than twelve outputs
@@ -351,7 +339,7 @@ the top bar, which writes them to a 24-bit FLAC in `recordings/` next to
   pw-metadata -n settings 0 clock.force-rate 44100
   ```
 
-<!-- NOTE: the bus-to-channel map follows a3-core's package: zita-n2j --chan 1-10 and StemDeck's own 12 outputs, both on the patchbay's reaper-stemplayer socket (REAPER in11..in22), and the REAPER template (track zita-n2j: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused). REAPER's inputs and outputs, as the patchbay sees them, are on the A³ Core configuration page. -->
+<!-- NOTE: audio I/O (ports, REAPER inputs, zita channels) is documented once, on the Patchbay page (src/ressources/patchbay.md). The REAPER template routes the zita-n2j track: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused. -->
 
 (stemdeck-sync)=
 
