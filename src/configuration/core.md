@@ -860,14 +860,13 @@ The inputs and outputs REAPER uses, decided on 2026-09-30. REAPER's routing
 and the JACK patchbay are rebuilt to this map; the patchbay as shipped is
 described above.
 
-**What REAPER receives:**
+**What REAPER receives** — hardware first, then StemDeck in one of its two modes:
 
-| Input | What |
-| :--- | :--- |
-| 4 stereo pairs (hardware) | the A³ Mixer's channels 1–4 |
-| 1 stereo pair (hardware) | the FX return — the fifth stereo input, the mixer's FX RETURN knob |
-| REAPER in 11–22 | StemDeck in 6× stereo mode: deck 1–4, aux and phones, each L/R |
-| REAPER in 11–26 | StemDeck in 8× stereo mode: deck A stems 1–4, then deck B stems 1–4, each L/R |
+| In | Block | Content |
+| :--- | :--- | :--- |
+| 1–10 | Mixer (hardware) | 1–2 channel 1, 3–4 channel 2, 5–6 channel 3, 7–8 channel 4, 9–10 FX return |
+| 11–22 | StemDeck, 6× stereo | 11–18 decks 1–4, 19–20 aux, 21–22 phones |
+| 11–26 | StemDeck, 8× stereo | 11–18 deck A stems 1–4, 19–26 deck B stems 1–4 |
 
 **What REAPER sends** — the outputs come in blocks of ten:
 
