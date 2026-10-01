@@ -219,9 +219,8 @@ through everything that differs.
 
 ### 5. Ownership and permissions
 
-`~/.local`, `~/.config` and `~/.ssh` are given to `aaa`. Every directory in
-`~/.config` is set to `0755` and every file to `0664`; `~/.ssh` to `0700` and
-its files to `0600`.
+`~/.local` and `~/.config` are given to `aaa`. Every directory in
+`~/.config` is set to `0755` and every file to `0664`.
 
 ### 6. Rendering the one truth: `a3-osc-render user`
 
@@ -595,13 +594,6 @@ Written by the postinst, not shipped:
 | `/etc/systemd/network/a3.network`, or the three `*-a3-bridge*` files | network answered *yes* (see [step 1](#core-postinst)) |
 | `/etc/network/interfaces` | lines for the configured interfaces commented out |
 | `/etc/X11/xorg.conf.d/10-headless.conf` | headless answered *yes*; renamed to `.off` on *no* |
-
-### `~/.ssh/authorized_keys`
-
-Shipped by the package and replaced on every install; the postinst makes
-`~/.ssh` readable by `aaa` alone. It decides who can log in to the Core over
-SSH as `aaa` — keys added on the machine are lost at the next install unless
-they are in the package too.
 
 ### `~/.local/bin` — programs
 
