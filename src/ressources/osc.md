@@ -91,8 +91,6 @@ acting on it itself.
 | `/channel/{ch}/aux-send` | f | mixer, motion | core (Core passes it on to mixer, motion) | send to the FX bus (the beat-synced DualDelay) |
 | `/channel/{ch}/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue the channel to the headphones (its pre-fader send to enc_phones); was pfl until 2026-10-01 |
 | `/channel/{ch}/cue/led` | f | core | mixer, motion | the cue lamp, 1 = lit |
-| `/stem/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue StemDeck's phones to the headphones (the stems track's send to dec_phones), toggled like a channel's cue |
-| `/stem/cue/led` | f | core | mixer, motion | the stem cue lamp, 1 = lit (the C field on the aux-return display) |
 | `/channel/{ch}/filter` | f | mixer, motion | core (Core passes it on to mixer, motion) | this channel through the master filter |
 | `/channel/{ch}/filter/led` | f | core | mixer, motion | the filter key's lamp, 1 = lit |
 | `/channel/{ch}/filter/frequency` | f | motion | core (Core passes it on to mixer, motion) | the channel's own filter cutoff (was pot_1) |
@@ -101,7 +99,7 @@ acting on it itself.
 | `/channel/{ch}/azimuth` | f | motion | core | the channel's direction, degrees |
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
 | `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed) |
-| `/channel/{ch}/stem` | i | core | mixer, motion | the stem pair on this channel: 0 none, 1-8 = StemDeck channels 1/2 ... 15/16 |
+| `/channel/{ch}/stem` | i | core | mixer, motion | the stems on this channel's bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
 | `/filter/mode` | f\|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
@@ -112,14 +110,17 @@ acting on it itself.
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
 | `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the aux return, the fifth stereo input (was /master/return) |
 | `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed) |
-| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: mute or unmute the pair it shows |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the pair the aux return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
-| `/device/hello` | ss | mixer | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
+| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: toggle AUX of the pair it shows |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the pair the aux return's encoder is on (0 none free), then pairs 1-8: 1 = it plays on the return (AUX on) |
+| `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
+| `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
+| `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
+| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 the stem pairs (stem_a1 ... stem_b4, the louder side); see vu_meters |
+| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); see vu_meters |
 <!-- /a3-osc:addresses -->
 
 ### Renamed on 2026-09-30
@@ -140,8 +141,13 @@ written against the old words has to follow:
 | `/vu/0..39` | `/vu/1..40` |
 
 On **2026-10-01** PFL became cue, on the wire too: `/channel/{ch}/pfl` is now
-`/channel/{ch}/cue`, `/channel/{ch}/pfl/led` is now `/channel/{ch}/cue/led`, and
-`/stem/cue` and `/stem/cue/led` are new.
+`/channel/{ch}/cue`, `/channel/{ch}/pfl/led` is now `/channel/{ch}/cue/led`.
+
+Later the same day StemDeck joined the wire: the desk switches its buses
+through Core (`/stemdeck/...`), `/channel/{ch}/stem` became a bit mask of the
+stems on a channel, and `/stem/cue` and `/stem/cue/led` were dropped again;
+the aux-return display has no C field any more. StemDeck also sends its own
+stem meters, `/vu/41`–`/vu/48`.
 
 `/device/hello` is new; see [above](#osc-differs).
 
@@ -274,8 +280,7 @@ DualDelay each speak their own vendor's language — `/track/…`,
 that has something to say to it.
 
 **The lamps are broadcast too**, because a lamp shows a status and a status
-belongs to whoever shows one. `/channel/{ch}/cue/led`,
-`/stem/cue/led`, `/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
+belongs to whoever shows one. `/channel/{ch}/cue/led`, `/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
 alongside the flag itself on `/channel/{ch}/cue` — two vocabularies for one
 fact: a lamp is a light, a flag is a setting.
 
@@ -309,7 +314,7 @@ that is not obvious:
 - **gain, the EQ bands, volume and `aux-send`** go back to every device when
   REAPER reports them — see *The way back* below. `aux-send` has driven the FX
   send again since 2026-09-12.
-- **`/channel/{ch}/cue`, `/stem/cue` and `/channel/{ch}/filter`** take two spellings, see
+- **`/channel/{ch}/cue` and `/channel/{ch}/filter`** take two spellings, see
   below, and Core **sends** the resulting state back on the same address,
   always as a number.
 - **`/channel/{ch}/3d`** is how far the channel is spread into the 3D field.
@@ -436,7 +441,7 @@ is relayed as safely as the gain.
 ```
 
 **What the desk does with it today: nothing.** `a3-mixer.py` listens for the
-meters and the lamps (`/channel/{ch}/cue/led`, `/stem/cue/led`, `/channel/{ch}/filter/led`,
+meters and the lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`,
 `/filter/led`) and for nothing else, so all of this arrives there and is
 dropped without a word. It is still sent — the desk is where most of those
 controls are, and its channel displays are the obvious ear — but nobody should
