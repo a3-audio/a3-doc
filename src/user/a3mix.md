@@ -104,10 +104,22 @@ channel buses, not on separate tracks. Each channel bus sends to
 power, cue on the left, mix on the right. A deck's cue send opens only while
 its cue key is on; the mix sends follow the knob alone.
 
-A deck's cue puts that channel in the headphones, on the cue side. A stem that
-is on that channel is in it automatically, because it comes through the
-channel bus. The **return's cue send opens on the cue side while any deck cue
-is on**, so a cued deck brings its FX along.
+A channel's cue is its **CUE** key on the desk, or the CUE key on A³ Motion,
+and nothing else: the encoder push no longer touches it. **The cue plays what
+comes in on the channel:**
+
+- **With a stem on the channel**, Core switches that stem's **C** (CUE) switch
+  in StemDeck and keeps the channel's own cue send (channel bus send 3) shut.
+  The stem is heard once, dry, from StemDeck's CUE bus, before the fader.
+  Push another stem onto the channel while it is cued and the C moves with it.
+  The C switches are Core's: at every cue change, push or report from
+  StemDeck, Core sets them from the cued channels, so a C clicked on
+  StemDeck's own screen is switched back.
+- **With A on the channel** it is the normal channel cue, and all of
+  StemDeck's C switches are off.
+
+The **return's cue send opens on the cue side while any deck cue is on**, so a
+cued deck brings its FX along.
 
 Two more things reach the headphones, on `dec_phones`:
 
@@ -130,28 +142,53 @@ switches in StemDeck: buses 1–4 (they feed the desk's channels 1–4), AUX
 (the aux return) and CUE (StemDeck's headphone bus). **StemDeck owns these
 switches**; Core only relays what the desk asks for and what StemDeck reports.
 
-Each channel has a stem display. It shows every stem StemDeck has on that
-channel's bus — several can be lit if you set them so on StemDeck's screen — or
-**A**, the analog input, when there is none. Above the **A**, in the top row's
-fifth column, a **C** field shows that channel's cue, filled while it is on.
+The desk has five small OLED displays: one for each channel 1–4 and one for
+the aux return. Together they show StemDeck's eight stems — deck A's stems 1–4
+in the top row, deck B's stems 1–4 in the bottom row — and a fifth field at the
+bottom right.
 
-- **Turn a channel's encoder** to step through **A** and the stems that are on
-  no other channel. A turn makes exactly one stem play on that channel; any
-  other stem on that bus is switched off. A stem put on a channel loses its
-  AUX; a stem that leaves a channel gets its AUX back, unless it is still on
-  another channel.
-- **A push on the channel's encoder** toggles the channel's cue.
-- While a stem is on a channel, Core shuts the analog input of that channel:
-  the channel plays the stem only. With no stem there, the analog input plays.
-- The **aux-return display** lists the stems that are on no channel. Its
-  encoder moves the cursor over them, and a **push** toggles AUX of the stem
-  under the cursor, in StemDeck. The return has no C field.
-- A fresh StemDeck starts with every stem on AUX only, so the desk shows **A** on
-every channel until you put a stem on one; a session saved earlier restores its
-own switches.
+![The five stem displays, scaled up three times: channels 1 to 4, then the aux return](pics_user/a3-mix-stem-displays.png)
 
-The desk shows what StemDeck reports, so a click on StemDeck's own screen
-  shows on the desk too.
+*Left to right: channels 1–4, then the return. Channel 1 has stem A1 (●) with
+its frame on it. Channel 2 plays B2 (■) while its frame rests on the free A4.
+Channel 3 plays A3 (▲), framed. Channel 4 plays its analog input (◆ in the A
+field), framed. The return has B3 (★), framed.*
+
+**Symbols, not numbers.** Every place owns a symbol: channel 1 is ● (circle),
+2 is ■ (square), 3 is ▲ (triangle), 4 is ◆ (diamond), the aux return is ★
+(star). A stem's field shows the symbol of the place where that stem plays, or
+nothing when it plays nowhere. There are no labels and no digits. Under each
+stem field a small level bar shows that stem's level (the `/vu/41`–`/vu/48`
+meters StemDeck sends).
+
+**The fifth field.** On a channel display it is the channel's analog input,
+**A**: it shows the channel's own symbol while the channel plays its analog
+input. On the aux-return display it is an empty field, meaning no stem on the
+return.
+
+- **Turn a channel's encoder** to move the frame — the selected field is drawn
+  filled white — over **A** and the stems that are not playing anywhere else.
+  Nothing switches while you turn.
+- **Push the encoder** to load the selection onto the channel. StemDeck
+  switches that stem onto the channel's bus and the previous one off. **A**
+  takes every stem off the channel, and the analog input plays.
+- **One input per channel, and a stem is in one place only**: never on two
+  channels, and never on a channel and the return. While a stem is on a
+  channel, Core shuts that channel's analog input.
+- **The aux return works like a fifth channel.** Turn to select a stem or the
+  empty field; push puts exactly that one stem on the return (its AUX switch in
+  StemDeck) and the previous one leaves. The empty field takes every stem off
+  the return.
+- **No C field.** A channel's cue is its CUE key (see {ref}`the cue <a3mix-cue>`).
+- Core holds the four channels' selections and the return's, keeps them across
+  a restart and announces them. Without StemDeck, turning still moves the
+  frame, a push does nothing and every channel shows A.
+- A fresh StemDeck starts with every stem on AUX only, so every channel shows
+  **A** until you load a stem; a session saved earlier restores its own
+  switches.
+
+The desk shows what StemDeck reports, so a click on a bus switch on StemDeck's
+own screen shows on the desk too.
 
 StemDeck says hello to Core every 30 seconds. If it is silent for a minute,
 Core shows **A** on every channel and the analog inputs play again; Core
