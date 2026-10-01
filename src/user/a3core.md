@@ -31,11 +31,8 @@ remote.
 
 ## Audio in and out
 
-REAPER takes the A³ Mixer's four channels and the return in as stereo pairs,
-and sends in blocks of ten: Main on outputs 1–10, Booth on 11–20, Phones, Rec
-and Aux on 21–30, and forty VU meters on 31–70 for the Beat Analyzer. Which
-output carries what, and which meter arrives as which `/vu/` address, is the
-{ref}`REAPER channel map <core-reaper-channel-map>` on the configuration page.
+Every audio input and output — what REAPER takes in and sends, the meters
+and the network audio — is on the {doc}`Patchbay page <../ressources/patchbay>`.
 
 ## Clock sources
 
