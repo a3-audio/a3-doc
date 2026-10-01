@@ -12,7 +12,7 @@ drums can stay put while the pads fly round the room.
 It runs on Linux, as a program with its own window, and plays into the JACK
 graph. Its four stem buses and its aux bus go to A³ Core; a stem you send to
 **aux** can be put onto a movement there and moved through the room by A³
-Motion. A sixth bus, **PHONES**, is for the headphones.
+Motion. A sixth bus, **CUE**, is for the headphones.
 
 On the A³ Core machine StemDeck is always there: a user service starts it
 on its own i3 workspace, **STEMDECK** (number 2), filling the Core's
@@ -172,7 +172,7 @@ through the track, turn the mouse wheel to zoom.
 
 ### Mixer
 
-![The mixer: per stem a knob, M and six bus switches; channel faders, PHONES and the output meters](pics_user/stemdeck-mixer.png)
+![The mixer: per stem a knob, M and six bus switches; channel faders, CUE and the output meters](pics_user/stemdeck-mixer.png)
 
 One channel strip per deck, and per stem:
 
@@ -180,12 +180,12 @@ One channel strip per deck, and per stem:
 | :--- | :--- |
 | **gain knob** | −60 to +6 dB. Double-click for 0 dB |
 | **M** | mutes the stem |
-| **1 2 3 / 4 A P** | the six buses: 1–4, **A** for AUX and **P** for PHONES. A stem plays on every bus that is lit — any number at once, none for silence. A new set starts with stem N on bus N |
+| **1 2 3 / 4 A C** | the six buses: 1–4, **A** for AUX and **C** for CUE, the headphones. A stem plays on every bus that is lit — any number at once, none for silence. A new set starts with stem N on bus N |
 
-Buses 1–4 and AUX are **after the channel fader**; PHONES is **before** it.
+Buses 1–4 and AUX are **after the channel fader**; CUE is **before** it.
 Knob and mute act on all of them. Below the stems, the channel fader and
-**PHONES**, which puts the whole deck on the phones bus. Between the two
-strips, the output meters for buses 1–4, AUX and PH.
+**CUE**, which puts the whole deck on the cue bus. Between the two
+strips, the output meters for buses 1–4, AUX and CUE.
 
 (stemdeck-library)=
 

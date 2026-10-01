@@ -69,7 +69,7 @@ spreads them over the four channels the same way:
 | `deck3_L`, `deck3_R` (bus 3) | **channel 3** | other |
 | `deck4_L`, `deck4_R` (bus 4) | **channel 4** | vocals |
 | `aux_L`, `aux_R` | the **Return** track, set by the **RET** pot | every stem switched to **A** (AUX) |
-| `phones_L`, `phones_R` | nothing: the REAPER project does not use them | every stem on **P**, every deck on PHONES |
+| `phones_L`, `phones_R` | nothing: the REAPER project does not use them | every stem on **C**, every deck on CUE |
 
 From there a stem is just another source on its channel: it goes through
 that channel's strip — gain, EQ and fader on the A³ Mixer, 3d, freq and Q on

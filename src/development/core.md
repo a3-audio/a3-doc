@@ -102,8 +102,8 @@ status belongs to whoever shows one.** They are broadcast.
 
 Which made the inversion everybody's problem instead of nobody's. Core sent
 "not pfl" and `a3-mixer.py` inverted it back, the two cancelled, and the pfl
-lamp's address (`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` since
-2026-09-30) carried the opposite of its own name. Both came out on
+lamp's address (`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` from
+2026-09-30, `/channel/{ch}/cue/led` since 2026-10-01) carried the opposite of its own name. Both came out on
 the same day, so what reaches the desk's LED is unchanged and the address
 means what it says.
 

@@ -55,7 +55,7 @@ The numbers are `a3-osc.json`'s `listeners`, and who sends where is its
 
 ```text
 A³ MIXER
-  send    192.168.8.10:9000   Core           gain, EQ, volume, PFL, filter, /device/hello
+  send    192.168.8.10:9000   Core           gain, EQ, volume, cue, filter, /device/hello
           192.168.8.10:7775   beat-analyzer  /tap
   return  7772                               VU and lamp state
 
@@ -150,7 +150,7 @@ it does, something else asked for.
 
 | Port | From | What |
 | ---: | :--- | :--- |
-| 9000 | A³ Mixer, A³ Motion, beat-analyzer | Commands: gain, EQ, volume, PFL, FX, positions, `/state/recall` |
+| 9000 | A³ Mixer, A³ Motion, beat-analyzer | Commands: gain, EQ, volume, cue, FX, positions, `/state/recall` |
 | 9002 | REAPER | Feedback: what a fader or a plugin actually did |
 
 **Sends**
@@ -174,13 +174,13 @@ lamps should show.
 
 | Port | From | What |
 | ---: | :--- | :--- |
-| 7772 | A³ Core, beat-analyzer | `/vu/1..40`, and the PFL and filter lamp states |
+| 7772 | A³ Core, beat-analyzer | `/vu/1..40`, and the cue and filter lamp states |
 
 **Sends**
 
 | To | Port | What |
 | :--- | ---: | :--- |
-| A³ Core | 9000 | gain, EQ, volume, PFL, filter, `/device/hello` |
+| A³ Core | 9000 | gain, EQ, volume, cue, filter, `/device/hello` |
 | beat-analyzer | 7775 | `/tap` |
 
 `/tap` goes straight at the beat-analyzer rather than through Core. Core's

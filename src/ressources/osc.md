@@ -89,8 +89,10 @@ acting on it itself.
 | `/channel/{ch}/eq/low` | f | mixer, motion | core (Core passes it on to mixer, motion) | EQ low band |
 | `/channel/{ch}/volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | channel fader |
 | `/channel/{ch}/aux-send` | f | mixer, motion | core (Core passes it on to mixer, motion) | send to the FX bus (the beat-synced DualDelay) |
-| `/channel/{ch}/pfl` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue to the headphones |
-| `/channel/{ch}/pfl/led` | f | core | mixer, motion | the cue lamp, 1 = lit |
+| `/channel/{ch}/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue the channel to the headphones (its pre-fader send to dec_phones); was pfl until 2026-10-01 |
+| `/channel/{ch}/cue/led` | f | core | mixer, motion | the cue lamp, 1 = lit |
+| `/stem/cue` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue StemDeck's phones to the headphones (the stems track's send to dec_phones), toggled like a channel's cue |
+| `/stem/cue/led` | f | core | mixer, motion | the stem cue lamp, 1 = lit (the C field on the aux-return display) |
 | `/channel/{ch}/filter` | f | mixer, motion | core (Core passes it on to mixer, motion) | this channel through the master filter |
 | `/channel/{ch}/filter/led` | f | core | mixer, motion | the filter key's lamp, 1 = lit |
 | `/channel/{ch}/filter/frequency` | f | motion | core (Core passes it on to mixer, motion) | the channel's own filter cutoff (was pot_1) |
@@ -136,6 +138,10 @@ written against the old words has to follow:
 | `/master/phones_mix`, `/master/phones_volume` | `/master/phones-mix`, `/master/phones-volume` |
 | `/master/return` | `/master/fx-return` (since 2026-10-01 `/master/aux-return`) |
 | `/vu/0..39` | `/vu/1..40` |
+
+On **2026-10-01** PFL became cue, on the wire too: `/channel/{ch}/pfl` is now
+`/channel/{ch}/cue`, `/channel/{ch}/pfl/led` is now `/channel/{ch}/cue/led`, and
+`/stem/cue` and `/stem/cue/led` are new.
 
 `/device/hello` is new; see [above](#osc-differs).
 
@@ -268,9 +274,9 @@ DualDelay each speak their own vendor's language — `/track/…`,
 that has something to say to it.
 
 **The lamps are broadcast too**, because a lamp shows a status and a status
-belongs to whoever shows one. `/channel/{ch}/pfl/led`,
-`/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
-alongside the flag itself on `/channel/{ch}/pfl` — two vocabularies for one
+belongs to whoever shows one. `/channel/{ch}/cue/led`,
+`/stem/cue/led`, `/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
+alongside the flag itself on `/channel/{ch}/cue` — two vocabularies for one
 fact: a lamp is a light, a flag is a setting.
 
 Nothing is sent unless the status moved. A flag is announced only where it
@@ -279,9 +285,10 @@ state messages produce one round of lamps, not five.
 ```
 
 ```{warning}
-**The pfl lamp changed meaning on 2026-09-12** (its address was
-`/channel/[0-3]/led/pfl` then, `/channel/{ch}/pfl/led` since 2026-09-30). It
-used to carry the *opposite* of the lamp: Core sent "not pfl" and
+**The cue lamp changed meaning on 2026-09-12** (it was called pfl then; its
+address was `/channel/[0-3]/led/pfl`, `/channel/{ch}/pfl/led` from 2026-09-30,
+and `/channel/{ch}/cue/led` since 2026-10-01). It
+used to carry the *opposite* of the lamp: Core sent "not pfl" (the old name) and
 `a3-mixer.py` inverted it back, the two cancelled, and the desk was right
 while the wire said the reverse of its own name. That cost nothing while the
 desk was the only reader.
@@ -302,7 +309,7 @@ that is not obvious:
 - **gain, the EQ bands, volume and `aux-send`** go back to every device when
   REAPER reports them — see *The way back* below. `aux-send` has driven the FX
   send again since 2026-09-12.
-- **`/channel/{ch}/pfl` and `/channel/{ch}/filter`** take two spellings, see
+- **`/channel/{ch}/cue`, `/stem/cue` and `/channel/{ch}/filter`** take two spellings, see
   below, and Core **sends** the resulting state back on the same address,
   always as a number.
 - **`/channel/{ch}/3d`** is how far the channel is spread into the 3D field.
@@ -341,7 +348,7 @@ register, which is what that register is for:
 
 ### The two spellings of a button
 
-The difference between a string and a number on `pfl`, `filter` and
+The difference between a string and a number on `cue`, `filter` and
 `/filter/mode` is not sloppiness — it is the difference between the devices.
 The A³ Mixer passes on the serial line of a momentary button, so it sends the
 **edge** `"1"` when the finger goes down and `"0"` when it comes off. A³
@@ -349,7 +356,7 @@ Motion shows a **state** on a screen and sends that state as a number. Core
 resolves both, by the *type* of the argument.
 
 This matters when changing either end: make `a3-mixer.py` send `int(value)`
-and every button press becomes a state, so PFL on the desk turns into a
+and every button press becomes a state, so the cue key on the desk turns into a
 momentary — on only while the finger rests on it. No test in any of the repos
 catches that.
 
@@ -429,7 +436,7 @@ is relayed as safely as the gain.
 ```
 
 **What the desk does with it today: nothing.** `a3-mixer.py` listens for the
-meters and the lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`,
+meters and the lamps (`/channel/{ch}/cue/led`, `/stem/cue/led`, `/channel/{ch}/filter/led`,
 `/filter/led`) and for nothing else, so all of this arrives there and is
 dropped without a word. It is still sent — the desk is where most of those
 controls are, and its channel displays are the obvious ear — but nobody should
@@ -490,8 +497,8 @@ own job back:
 
 Send **3** of the channel bus reaches the FX bus. The number is the position
 among the *sending* track's sends, which REAPER derives from the order its
-receivers appear in the project — for the channel buses that is 1-pfl,
-ph-mix, enc_fx, enc_main. It lives in Core's `layout.json` rather than in the
+receivers appear in the project — and the cue and mix sends to
+`dec_phones` are among them. It lives in Core's `layout.json` rather than in the
 source, so a send that moves in the REAPER project can be found by reading
 one file.
 
@@ -525,7 +532,7 @@ What the [address table](#osc-addresses) does not say about Motion:
   channel-value strip, and the left and right hardware encoders.
 - **The channel strip, the master section and the shared filter** on the MIX
   pages send the same addresses the A³ Mixer sends, and are **received** back
-  since 2026-09-12: Core relays what REAPER reports. `pfl` and `filter` go
+  since 2026-09-12: Core relays what REAPER reports. `cue` and `filter` go
   both ways as the **state**, not an edge; `/filter/mode` as a number, 1 for
   high pass.
 - **`/state/recall`** is sent once at start-up: *tell me what is already
@@ -594,7 +601,7 @@ itself rather than a per-loudspeaker level.
 
 Since 2026-09-10 A³ Motion carries a **software channel strip** of its own: six
 pots per channel — GAIN, HIGH, MID, LOW, VOL and, since 2026-09-12, SEND — plus
-PFL and FX, and a second page for the summing section and the shared filter.
+CUE and FX, and a second page for the summing section and the shared filter.
 Every one of them sends the same address the A³ Mixer sends, so Core cannot
 tell the two apart and does not have to.
 

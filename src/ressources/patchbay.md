@@ -181,7 +181,7 @@ StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
 | `deck3_L`, `deck3_R` | bus 3: the two stems 3 |
 | `deck4_L`, `deck4_R` | bus 4: the two stems 4 |
 | `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
-| `phones_L`, `phones_R` | every stem switched to **P** and every deck on **PHONES**, before the fader |
+| `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader |
 
 Despite the names, `deck1` … `deck4` are the **buses**, one per stem
 position, not the decks.
