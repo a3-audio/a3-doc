@@ -28,19 +28,25 @@ device `hw:USB`, at 44.1 kHz. In JACK the card is the client `system`:
 
 ## REAPER's inputs and outputs: the channel map
 
-The inputs and outputs REAPER uses, decided on 2026-09-30. REAPER's routing
+The inputs and outputs REAPER uses (outputs decided on 2026-09-30, inputs on
+2026-10-01). REAPER's routing
 and the JACK patchbay are rebuilt to this map; the patchbay as shipped is
 described [further down](#patchbay-shipped).
 
 ### REAPER's inputs
 
-**What REAPER receives** — hardware first, then StemDeck in one of its two modes:
+**What REAPER receives** — two blocks, configured the same way: four stereo
+decks, one aux, one phones.
 
 | In | Block | Content |
 | :--- | :--- | :--- |
-| 1–10 | Mixer (hardware) | 1–2 channel 1, 3–4 channel 2, 5–6 channel 3, 7–8 channel 4, 9–10 FX return |
-| 11–22 | StemDeck, 6× stereo | 11–18 decks 1–4, 19–20 aux, 21–22 phones |
-| 11–26 | StemDeck, 8× stereo | 11–18 deck A stems 1–4, 19–26 deck B stems 1–4 |
+| 1–8 | Analog | decks 1–4, stereo (the A³ Mixer's channels 1–4) |
+| 9–10 | Analog | aux (the FX return) |
+| 11–12 | Analog | phones |
+| 13–20 | StemDeck | decks 1–4, stereo (StemDeck's buses 1–4) |
+| 21–22 | StemDeck | aux |
+| 23–24 | StemDeck | phones |
+| 25–30 | free | |
 
 ### REAPER's outputs
 
@@ -48,9 +54,12 @@ described [further down](#patchbay-shipped).
 
 | Out | Block | Content |
 | :--- | :--- | :--- |
-| 1–10 | Main | 1 sub, 2–10 tops 1–9 |
-| 11–20 | Booth | 11 sub, 12–20 tops 1–9 |
-| 21–30 | Stereo | 21–22 Phones, 23–24 Rec, 25–26 Aux, 27–30 free |
+| 1–10 | Main | 1 sub, 2–10 tops |
+| 11–20 | Booth | 11 sub, 12–20 tops |
+| 21–22 | Phones | stereo |
+| 23–24 | Rec | stereo |
+| 25–26 | Aux | stereo |
+| 27–30 | free | |
 | 31–70 | VU meters | to the beat-analyzer, see below |
 
 ## The beat-analyzer's inputs
@@ -149,28 +158,23 @@ inputs in order, once, and saved. How to set that up is under
 {ref}`StemDeck × A³ Motion <stemdeck-with-motion-setup>`.
 
 The ten network channels are StemDeck's first ten outputs, and on the Core
-they arrive on REAPER's inputs 11–20:
+they belong on REAPER's inputs 13–22:
 
 | StemDeck output | Network channel | REAPER in |
 | :--- | :---: | :---: |
-| `deck1_L`, `deck1_R` (bus 1) | 1–2 | 11–12 |
-| `deck2_L`, `deck2_R` (bus 2) | 3–4 | 13–14 |
-| `deck3_L`, `deck3_R` (bus 3) | 5–6 | 15–16 |
-| `deck4_L`, `deck4_R` (bus 4) | 7–8 | 17–18 |
-| `aux_L`, `aux_R` | 9–10 | 19–20 |
-| `phones_L`, `phones_R` | – | not sent (21–22 only from a local StemDeck) |
+| `deck1_L`, `deck1_R` (bus 1) | 1–2 | 13–14 |
+| `deck2_L`, `deck2_R` (bus 2) | 3–4 | 15–16 |
+| `deck3_L`, `deck3_R` (bus 3) | 5–6 | 17–18 |
+| `deck4_L`, `deck4_R` (bus 4) | 7–8 | 19–20 |
+| `aux_L`, `aux_R` | 9–10 | 21–22 |
+| `phones_L`, `phones_R` | – | not sent (23–24 only from a local StemDeck) |
 
 ## StemDeck's ports
 
-StemDeck is a JACK client named `StemDeck`. Its output mode is StemDeck's own
-setting; the patchbay only knows the first.
+StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
+`deck4_R`, `aux_L/R`, `phones_L/R` — its six buses, mixed inside StemDeck.
 
-| Mode | Outputs | Meaning |
-| :--- | :--- | :--- |
-| 6× stereo (internal routing) | 12: `deck1_L` … `deck4_R`, `aux_L/R`, `phones_L/R` | decks 1–4, aux and phones, mixed inside StemDeck |
-| 8× stereo (external routing) | 16: `a1_L`, `a1_R` … `a4_R`, `b1_L` … `b4_R` | deck A's stems 1–4, then deck B's; every stem at full level, so the A³ Mixer chooses |
-
-| Ports | What is on them (6× stereo) |
+| Ports | What is on them |
 | :--- | :--- |
 | `deck1_L`, `deck1_R` | bus 1: stem 1 of deck A plus stem 1 of deck B |
 | `deck2_L`, `deck2_R` | bus 2: the two stems 2 |
@@ -184,8 +188,7 @@ position, not the decks.
 
 | Direction | Ports | Arrives on / comes from |
 | :--- | :--- | :--- |
-| out, 6× stereo | 12 ports above | REAPER in 11–22 (local StemDeck, via the patchbay) |
-| out, 8× stereo | 16 ports above | REAPER in 11–26 |
+| out | 12 ports above | REAPER in 13–24 |
 | in | `rec_L`, `rec_R` | REAPER's rec pair (`out7`, `out8`); feeds **REC** in StemDeck's top bar |
 
 - **StemDeck never connects anything itself**; the cables are the
@@ -246,11 +249,16 @@ file names them.
 
 **Not yet in the patchbay, or open:**
 
-- The 8× stereo ports `a1_L` … `b4_R` are not connected; the patchbay has no
-  socket for them, nor for REAPER's inputs 23–26.
-- The beat-analyzer's sixteen stem inputs `vu_stem_a1_L` …
-  `vu_stem_b4_R` have no socket and no cable, neither from
-  `zita-n2j` nor from the local StemDeck.
+- The input layout of 2026-10-01 (analog 1–12, StemDeck 13–24) is the target;
+  the patchbay as shipped still cables the hardware to `in1` … `in10` and
+  StemDeck to `in11` … `in22`.
+- StemDeck still offers an "8× stereo" output mode from an earlier plan; it is
+  being removed — leave Output on 6× stereo.
+- The beat-analyzer's sixteen stem inputs `vu_stem_a1_L` … `vu_stem_b4_R`
+  come from the same earlier plan and are being removed; the stems' levels
+  will come from StemDeck itself.
+- StemDeck's phones (23–24) do not travel over the network: `zita-n2j` carries
+  ten channels.
 - The beat-analyzer's VU socket has twelve ports (`vu_1` … `vu_12`) fed from
   REAPER's `out21` … `out32`; the [channel map](#core-reaper-channel-map)
   above has forty inputs on outputs 31–70, and its output blocks reach
@@ -258,7 +266,7 @@ file names them.
 - `reaper_main` and `reaper_rec` both list `out7`, `out8`: those two outputs
   go to hardware playback and to the recording mix at once. The channel map
   puts Rec on out 23–24.
-- `zita-n2j` has ten ports, REAPER's StemDeck inputs twelve. Local StemDeck
-  and `zita-n2j` are both cabled to `in11` … `in22`; use one at a time.
+- Local StemDeck and `zita-n2j` are both cabled to the same REAPER inputs;
+  use one at a time.
 - The Music Player Daemon socket exists, but MPD may not be installed.
 - The `bpm_1` input takes one channel of the pair only.
