@@ -117,7 +117,7 @@ acting on it itself.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n; see vu_meters |
+| `/vu/{n}` | ff | beat-analyzer | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 the stem pairs (stem_a1 ... stem_b4, the louder side); see vu_meters |
 <!-- /a3-osc:addresses -->
 
 ### Renamed on 2026-09-30
@@ -198,6 +198,14 @@ its number:
 | `/vu/38` | free68 |
 | `/vu/39` | free69 |
 | `/vu/40` | free70 |
+| `/vu/41` | stem_a1 |
+| `/vu/42` | stem_a2 |
+| `/vu/43` | stem_a3 |
+| `/vu/44` | stem_a4 |
+| `/vu/45` | stem_b1 |
+| `/vu/46` | stem_b2 |
+| `/vu/47` | stem_b3 |
+| `/vu/48` | stem_b4 |
 <!-- /a3-osc:vu -->
 
 ## A³ Core
