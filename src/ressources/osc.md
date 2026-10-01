@@ -111,7 +111,7 @@ acting on it itself.
 | `/master/fx-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the FX return, the fifth stereo input (was /master/return) |
 | `/fx-return/stem/turn` | i | mixer | core | the FX return's encoder turned by this many clicks (signed) |
 | `/fx-return/stem/push` | i | mixer | core | the FX return's encoder pushed: mute or unmute the pair it shows |
-| `/fx-return/stem` | ii | core | mixer, motion | the pair the FX return shows (0 none free) and whether it is muted there (1) |
+| `/fx-return/stem` | iiiiiiiii | core | mixer, motion | the pair the FX return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
 | `/device/hello` | ss | mixer | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
