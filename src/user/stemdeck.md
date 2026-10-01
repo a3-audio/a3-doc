@@ -351,7 +351,7 @@ the top bar, which writes them to a 24-bit FLAC in `recordings/` next to
   pw-metadata -n settings 0 clock.force-rate 44100
   ```
 
-<!-- NOTE: the bus-to-channel map follows a3-core's package: zita-n2j --chan 1-10 and StemDeck's own 12 outputs, both on the patchbay's reaper-stemplayer socket (REAPER in11..in22), and the REAPER template (track zita-n2j: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused). The routing picture is on the A³ Core configuration page. -->
+<!-- NOTE: the bus-to-channel map follows a3-core's package: zita-n2j --chan 1-10 and StemDeck's own 12 outputs, both on the patchbay's reaper-stemplayer socket (REAPER in11..in22), and the REAPER template (track zita-n2j: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused). REAPER's inputs and outputs, as the patchbay sees them, are on the A³ Core configuration page. -->
 
 (stemdeck-sync)=
 
