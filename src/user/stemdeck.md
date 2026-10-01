@@ -14,6 +14,9 @@ graph. Its four stem buses and its aux bus go to A³ Core; a stem you send to
 **aux** can be put onto a movement there and moved through the room by A³
 Motion. A sixth bus, **CUE**, is for the headphones.
 
+In the A³ system you can leave the screen alone: the A³ Mixer
+[remote-controls StemDeck](#stemdeck-remote) through the Core.
+
 On the A³ Core machine StemDeck is always there: a user service starts it
 on its own i3 workspace, **STEMDECK** (number 2), filling the Core's
 768 × 1024 portrait screen — see [Always running on the Core](#stemdeck-on-the-core).
@@ -183,6 +186,8 @@ One channel strip per deck, and per stem:
 | **1 2 3 / 4 A C** | the six buses: 1–4, **A** for AUX and **C** for CUE, the headphones. A stem plays on every bus that is lit — any number at once, none for silence. A new set starts with stem N on bus N |
 
 Buses 1–4 and AUX are **after the channel fader**; CUE is **before** it.
+The six switches are StemDeck's own: the desk sets them through A³ Core and
+StemDeck reports every change back, so the desk and this screen always agree.
 Knob and mute act on all of them. Below the stems, the channel fader and
 **CUE**, which puts the whole deck on the cue bus. Between the two
 strips, the output meters for buses 1–4, AUX and CUE.
@@ -308,6 +313,28 @@ The script installs Demucs and the CPU build of PyTorch into
 `~/.local/share/StemDeck/separator` and downloads the model. Without it, a
 job fails straight away and the strip says `separator not installed`.
 
+(stemdeck-remote)=
+
+### Remote control from the desk
+
+With A³ Core running, the A³ Mixer chooses what is on its channels: turn a
+channel's encoder and the stems step through that channel's bus. What the desk
+displays, and the rules for it, are on the
+{ref}`desk's stem displays <a3mix-displays>`. From StemDeck's side:
+
+- **StemDeck keeps the truth.** Core only relays the desk's request to switch a
+  bus and asks StemDeck for all switches when it hears StemDeck for the first
+  time. A click on a bus switch here also shows on the desk.
+- **StemDeck says hello to Core every 30 seconds**, and Core learns its
+  address from that. StemDeck listens on UDP port 7780.
+- **A fresh StemDeck starts with every stem on AUX only**, on no desk channel,
+  so it takes no channel and no analog input goes silent. A session saved
+  before this change restores its own switches.
+- **Stem meters.** StemDeck sends one meter per stem to the desk only
+  (deck A stems 1–4 are `/vu/41`–`/vu/44`, deck B `/vu/45`–`/vu/48`), 25 times
+  a second. Each is measured after the stem's knob and mute, before the fader
+  and the buses.
+
 (stemdeck-audio)=
 
 ## Audio out
@@ -330,6 +357,9 @@ and where they arrive on A³ Core are all on the
   or PipeWire's JACK interface; with neither, it falls back to a plain audio
   device (ALSA), chosen with **Audio**. With fewer than twelve outputs
   there, the buses are summed down onto the ones there are.
+- **There is one output mode:** the six stereo buses, twelve JACK ports
+  (`deck1_L` … `phones_R`). The earlier "8× stereo (external routing)" mode
+  and its setting are gone.
 - It takes the graph's sample rate and buffer size as they are, and resamples
   the stems itself. It asks for nothing on purpose: changing a running graph
   throws out other clients (zita-j2n, for one). If the rate matters, set it

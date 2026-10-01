@@ -211,6 +211,7 @@ The settings that matter most:
 | `BPM_MIN`, `BPM_MAX` | the tempo range the clock counts in. A tempo outside it is doubled or halved into it |
 | `PIONEER_DEVICE_NUM` | its player number on the Pro DJ Link network. 7 |
 | `NUM_VU_CHANNELS` | how many meters. 40, the A³ channel map; at most 64 |
+| `NUM_STEM_METERS` | how many stem meters (`/vu/41`–`/vu/48`). 0 by default, because StemDeck sends its own; 8 turns the analyzer's own back on, and the two would fight |
 | `OSC_SEND_RATE` | meter updates per second. 25 |
 | `VU_RMS_ATTACK`, `VU_RMS_RELEASE`, `VU_PEAK_FALLOFF` | how fast the meters rise and fall |
 | `DEBUG_BEAT_CONSOLE`, `DEBUG_PIONEER_CONSOLE` | print every beat, or every Pro DJ Link beat, to the log |

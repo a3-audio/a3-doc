@@ -124,18 +124,24 @@ names: which device shows which meter is listed under
 
 ### The stem meters
 
-**Since 2026-10-01.** The beat-analyzer has 16 more JACK
-inputs, `vu_stem_a1_L`, `vu_stem_a1_R` … `vu_stem_b4_R`, for the StemDeck's
-eight stereo stems. They are fed from `zita-n2j` and/or the local StemDeck;
-the patchbay does not connect them yet. Each stem pair is one meter (the
-louder side) and is sent as `/vu/41`–`/vu/48`:
+**StemDeck sends its own stem meters.** One per stem, `/vu/41`–`/vu/48`
+(deck A stems 1–4 = 41–44, deck B = 45–48), 25 Hz, peak (the louder side) and
+rms (over both channels), measured after the stem's knob and mute, before the
+fader and the buses. The beat-analyzer therefore meters no stems by default.
+
+The beat-analyzer still has 16 optional JACK inputs, `vu_stem_a1_L` …
+`vu_stem_b4_R`, for the same eight stems. They are fed from `zita-n2j` and/or
+the local StemDeck; the patchbay does not connect them. With them on, each
+stem pair is one meter (the louder side) sent as `/vu/41`–`/vu/48`, the same
+addresses StemDeck uses:
 
 | beat-analyzer in | beat-analyzer ports | OSC | Meter (`vu_meters`) |
 | :--- | :--- | :--- | :--- |
 | 41–48 | `vu_stem_a1_L/R` … `vu_stem_a4_L/R` | `/vu/41`–`/vu/44` | `stem_a1` … `stem_a4` |
 | 49–56 | `vu_stem_b1_L/R` … `vu_stem_b4_L/R` | `/vu/45`–`/vu/48` | `stem_b1` … `stem_b4` |
 
-`NUM_STEM_METERS` in its `build/.env` sets how many (default 8, 0 = off).
+`NUM_STEM_METERS` in its `build/.env` sets how many (default 0 = off; 8 turns
+them on, which would fight with StemDeck's own meters).
 With stem meters on, a `NUM_VU_CHANNELS` above 40 is clamped to 40.
 
 ## Network audio: zita
@@ -181,7 +187,7 @@ StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
 | `deck3_L`, `deck3_R` | bus 3: the two stems 3 |
 | `deck4_L`, `deck4_R` | bus 4: the two stems 4 |
 | `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
-| `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader |
+| `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader: StemDeck's own headphone bus, REAPER inputs 23–24 |
 
 Despite the names, `deck1` … `deck4` are the **buses**, one per stem
 position, not the decks.
@@ -236,7 +242,7 @@ file names them.
 | From | → To | Note |
 | :--- | :--- | :--- |
 | `system_in` (`capture_1` … `10`) | `reaper-analog` (`in1` … `in10`) | the A³ Mixer's channels and the aux return |
-| `StemDeck` (12 ports) | `reaper-stemdeck` (`in11` … `in22`) | local StemDeck, 6× stereo mode |
+| `StemDeck` (12 ports) | `reaper-stemdeck` (`in11` … `in22`) | local StemDeck |
 | `zita_stemdeck` (`out_1` … `out_10`) | `reaper-stemdeck` (`in11` … `in20`) | StemDeck on another machine |
 | `MPD` (`left`, `right`) | `reaper_deck_4` (`in7`, `in8`) | overlaps the interface's inputs 7–8 |
 | `reaper_main` (`out1` … `out20`) | `system_out` (`playback_1` … `20`) | hardware playback |
@@ -252,11 +258,6 @@ file names them.
 - The input layout of 2026-10-01 (analog 1–12, StemDeck 13–24) is the target;
   the patchbay as shipped still cables the hardware to `in1` … `in10` and
   StemDeck to `in11` … `in22`.
-- StemDeck still offers an "8× stereo" output mode from an earlier plan; it is
-  being removed — leave Output on 6× stereo.
-- The beat-analyzer's sixteen stem inputs `vu_stem_a1_L` … `vu_stem_b4_R`
-  come from the same earlier plan and are being removed; the stems' levels
-  will come from StemDeck itself.
 - StemDeck's phones (23–24) do not travel over the network: `zita-n2j` carries
   ten channels.
 - The beat-analyzer's VU socket has twelve ports (`vu_1` … `vu_12`) fed from
