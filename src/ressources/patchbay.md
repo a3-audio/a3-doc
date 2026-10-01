@@ -90,19 +90,19 @@ name without its `vu_` prefix is the meter's name in `a3-osc.json`'s
 `vu_meters` (`in1_pre`, `main_sub`, …), and the devices look their meters up
 by it:
 
-| REAPER out | beat-analyzer port | OSC | Meter |
-| :--- | :--- | :--- | :--- |
-| 31–34 | `vu_in1_pre` … `vu_in4_pre` | `/vu/1`–`/vu/4` | channel inputs 1–4, pre-fader, post-FX |
-| 35–38 | `vu_in1_post` … `vu_in4_post` | `/vu/5`–`/vu/8` | channel inputs 1–4, post-fader |
-| 39–40 | `vu_free39`, `vu_free40` | `/vu/9`, `/vu/10` | free |
-| 41 | `vu_main_sub` | `/vu/11` | Main sub |
-| 42–50 | `vu_main_top1` … `vu_main_top9` | `/vu/12`–`/vu/20` | Main tops 1–9 |
-| 51 | `vu_booth_sub` | `/vu/21` | Booth sub |
-| 52–60 | `vu_booth_top1` … `vu_booth_top9` | `/vu/22`–`/vu/30` | Booth tops 1–9 |
-| 61–62 | `vu_phones_L`, `vu_phones_R` | `/vu/31`, `/vu/32` | Phones |
-| 63–64 | `vu_rec_L`, `vu_rec_R` | `/vu/33`, `/vu/34` | Rec |
-| 65–66 | `vu_aux_L`, `vu_aux_R` | `/vu/35`, `/vu/36` | Aux |
-| 67–70 | `vu_free67` … `vu_free70` | `/vu/37`–`/vu/40` | free |
+| REAPER out | beat-analyzer in | beat-analyzer port | OSC | Meter |
+| :--- | :--- | :--- | :--- | :--- |
+| 31–34 | 1–4 | `vu_in1_pre` … `vu_in4_pre` | `/vu/1`–`/vu/4` | channel inputs 1–4, pre-fader, post-FX |
+| 35–38 | 5–8 | `vu_in1_post` … `vu_in4_post` | `/vu/5`–`/vu/8` | channel inputs 1–4, post-fader |
+| 39–40 | 9–10 | `vu_free39`, `vu_free40` | `/vu/9`, `/vu/10` | free |
+| 41 | 11 | `vu_main_sub` | `/vu/11` | Main sub |
+| 42–50 | 12–20 | `vu_main_top1` … `vu_main_top9` | `/vu/12`–`/vu/20` | Main tops 1–9 |
+| 51 | 21 | `vu_booth_sub` | `/vu/21` | Booth sub |
+| 52–60 | 22–30 | `vu_booth_top1` … `vu_booth_top9` | `/vu/22`–`/vu/30` | Booth tops 1–9 |
+| 61–62 | 31–32 | `vu_phones_L`, `vu_phones_R` | `/vu/31`, `/vu/32` | Phones |
+| 63–64 | 33–34 | `vu_rec_L`, `vu_rec_R` | `/vu/33`, `/vu/34` | Rec |
+| 65–66 | 35–36 | `vu_aux_L`, `vu_aux_R` | `/vu/35`, `/vu/36` | Aux |
+| 67–70 | 37–40 | `vu_free67` … `vu_free70` | `/vu/37`–`/vu/40` | free |
 
 Two rules carry the whole table:
 
@@ -130,10 +130,10 @@ eight stereo stems. They are fed from `zita-n2j` and/or the local StemDeck;
 the patchbay does not connect them yet. Each stem pair is one meter (the
 louder side) and is sent as `/vu/41`–`/vu/48`:
 
-| beat-analyzer ports | OSC | Meter (`vu_meters`) |
-| :--- | :--- | :--- |
-| `vu_stem_a1_L/R` … `vu_stem_a4_L/R` | `/vu/41`–`/vu/44` | `stem_a1` … `stem_a4` |
-| `vu_stem_b1_L/R` … `vu_stem_b4_L/R` | `/vu/45`–`/vu/48` | `stem_b1` … `stem_b4` |
+| beat-analyzer in | beat-analyzer ports | OSC | Meter (`vu_meters`) |
+| :--- | :--- | :--- | :--- |
+| 41–48 | `vu_stem_a1_L/R` … `vu_stem_a4_L/R` | `/vu/41`–`/vu/44` | `stem_a1` … `stem_a4` |
+| 49–56 | `vu_stem_b1_L/R` … `vu_stem_b4_L/R` | `/vu/45`–`/vu/48` | `stem_b1` … `stem_b4` |
 
 `NUM_STEM_METERS` in its `build/.env` sets how many (default 8, 0 = off).
 With stem meters on, a `NUM_VU_CHANNELS` above 40 is clamped to 40.
