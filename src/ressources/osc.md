@@ -98,6 +98,8 @@ acting on it itself.
 | `/channel/{ch}/3d` | f | motion | core (Core passes it on to mixer, motion) | blend between the channel's moving and steady encoders |
 | `/channel/{ch}/azimuth` | f | motion | core | the channel's direction, degrees |
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
+| `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed) |
+| `/channel/{ch}/stem` | i | core | mixer, motion | the stem pair on this channel: 0 none, 1-8 = StemDeck channels 1/2 ... 15/16 |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
 | `/filter/mode` | f\|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
@@ -107,6 +109,9 @@ acting on it itself.
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
 | `/master/fx-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the FX return, the fifth stereo input (was /master/return) |
+| `/fx-return/stem/turn` | i | mixer | core | the FX return's encoder turned by this many clicks (signed) |
+| `/fx-return/stem/push` | i | mixer | core | the FX return's encoder pushed: mute or unmute the pair it shows |
+| `/fx-return/stem` | ii | core | mixer, motion | the pair the FX return shows (0 none free) and whether it is muted there (1) |
 | `/device/hello` | ss | mixer | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
