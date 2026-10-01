@@ -89,7 +89,7 @@ A few things follow from that:
   has six switches, **1 2 3 / 4 A P**. Light **A** (AUX) and switch its own
   number off, and the stem leaves its A³ channel and its movement for the
   Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
-  desk's FX return). Light two numbers and it plays on two channels, moving
+  desk's aux return). Light two numbers and it plays on two channels, moving
   with both.
 
 (stemdeck-with-motion-setup)=

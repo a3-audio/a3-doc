@@ -27,7 +27,7 @@ not need to.
 ![The MIX page](../user/pics_user/a3-motion-ui-mix.png)
 
 `SEND` — how much of the channel reaches the FX bus, where the beat-synced
-delay sits — was added on 2026-09-12, when the desk's FX-send knob stopped
+delay sits — was added on 2026-09-12, when the desk's aux send knob stopped
 driving the 3D blend and got its own job back.
 
 **The whole mixer listens as well as speaks**, since the same day. A³ Core

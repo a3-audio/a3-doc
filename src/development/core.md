@@ -185,7 +185,7 @@ in {ref}`the OSC reference <osc-differs>`.
 
 ### The register
 
-A traffic log cannot say what is *possible*. Looking up the FX send of a
+A traffic log cannot say what is *possible*. Looking up the aux send of a
 channel bus in the window gave three rows and none of them the answer — the
 address had simply never flown, and REAPER only reports sends for tracks that
 happen to be in its bank window.

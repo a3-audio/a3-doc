@@ -52,7 +52,7 @@ whether the desk's copy is Core's own or **differs** from it.
 A handful of `dispatcher.map` calls, and that is the whole list: the meters,
 the lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`,
 `/filter/led`) and `/beat`. A³ Core sends it a great deal more — every
-channel's gain, EQ, volume and FX send, the whole master section, the shared
+channel's gain, EQ, volume and aux send, the whole master section, the shared
 filter, every flag — and all of it is dropped without a word, because
 pythonosc passes a message with no matching pattern straight into nothing.
 

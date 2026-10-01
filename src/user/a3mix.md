@@ -12,7 +12,7 @@ every device is told all of it.
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 The numbers below refer to that picture. It is older than the V02 panel: FX
-SEND and FX RETURN are real knobs on the device but have no place in the drawing,
+SEND and AUX RETURN are real knobs on the device but have no place in the drawing,
 so they are listed without a number.
 
 ## The channel strip
@@ -22,7 +22,7 @@ them.
 
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
-| – | **FX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
+| – | **AUX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
 | 1 | **TRIM** | the level of the signal coming in | −inf … 0 dB |
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
@@ -34,7 +34,7 @@ them.
 | 9 | **CUE** | sends this channel to the headphones (PFL). Lit blue while it is on |  |
 
 ```{note}
-Until 2026-09-12 the FX SEND knob did something else entirely: it drove the **3D
+Until 2026-09-12 the AUX SEND knob did something else entirely: it drove the **3D
 blend** — how far the channel was spread into the room — because it was the
 only continuous control the desk had for that. A³ Motion's per-channel pot
 took that job over, and the knob got its own name back.
@@ -85,7 +85,7 @@ left the desk, and nothing happened at the other end.
 | 15 | **CUE/MIX** | left is cue only, right is the main mix, the centre sums both |  |
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
-| – | **FX RETURN** | the level of the FX return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
+| – | **AUX RETURN** | the level of the aux return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
 | 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`) |  |
 

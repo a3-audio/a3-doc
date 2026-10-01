@@ -34,7 +34,7 @@ EQ HIGH | 1
 EQ MID | 2 
 EQ LOW | 3 
 VOLUME | 4
-FX SEND | 5
+AUX SEND | 5
 
 #### Multiplexer 5 (hc4051)
 Function (potentiometer) | Pin

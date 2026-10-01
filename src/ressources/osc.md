@@ -88,7 +88,7 @@ acting on it itself.
 | `/channel/{ch}/eq/mid` | f | mixer, motion | core (Core passes it on to mixer, motion) | EQ mid band |
 | `/channel/{ch}/eq/low` | f | mixer, motion | core (Core passes it on to mixer, motion) | EQ low band |
 | `/channel/{ch}/volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | channel fader |
-| `/channel/{ch}/fx-send` | f | mixer, motion | core (Core passes it on to mixer, motion) | send to the FX bus (the beat-synced DualDelay) |
+| `/channel/{ch}/aux-send` | f | mixer, motion | core (Core passes it on to mixer, motion) | send to the FX bus (the beat-synced DualDelay) |
 | `/channel/{ch}/pfl` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue to the headphones |
 | `/channel/{ch}/pfl/led` | f | core | mixer, motion | the cue lamp, 1 = lit |
 | `/channel/{ch}/filter` | f | mixer, motion | core (Core passes it on to mixer, motion) | this channel through the master filter |
@@ -108,10 +108,10 @@ acting on it itself.
 | `/master/booth` | f | mixer, motion | core (Core passes it on to mixer, motion) | the booth outputs |
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
-| `/master/fx-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the FX return, the fifth stereo input (was /master/return) |
-| `/fx-return/stem/turn` | i | mixer | core | the FX return's encoder turned by this many clicks (signed) |
-| `/fx-return/stem/push` | i | mixer | core | the FX return's encoder pushed: mute or unmute the pair it shows |
-| `/fx-return/stem` | iiiiiiiii | core | mixer, motion | the pair the FX return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
+| `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the FX return, the fifth stereo input (was /master/return) |
+| `/aux-return/stem/turn` | i | mixer | core | the FX return's encoder turned by this many clicks (signed) |
+| `/aux-return/stem/push` | i | mixer | core | the FX return's encoder pushed: mute or unmute the pair it shows |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the pair the FX return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
 | `/device/hello` | ss | mixer | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
@@ -134,7 +134,7 @@ written against the old words has to follow:
 | `/channel/{ch}/led/fx` | `/channel/{ch}/filter/led` |
 | `/channel/{ch}/pot_1`, `/channel/{ch}/pot_2` | `/channel/{ch}/filter/frequency`, `/channel/{ch}/filter/q` |
 | `/master/phones_mix`, `/master/phones_volume` | `/master/phones-mix`, `/master/phones-volume` |
-| `/master/return` | `/master/fx-return` |
+| `/master/return` | `/master/aux-return` |
 | `/vu/0..39` | `/vu/1..40` |
 
 `/device/hello` is new; see [above](#osc-differs).
@@ -299,8 +299,8 @@ that is not obvious:
 - **Values are 0–1**, except the position: `azimuth` −180…180 and `elevation`
   −90…90 degrees. The position is clamped, and the **clamped** value is what a
   recall replays.
-- **gain, the EQ bands, volume and `fx-send`** go back to every device when
-  REAPER reports them — see *The way back* below. `fx-send` has driven the FX
+- **gain, the EQ bands, volume and `aux-send`** go back to every device when
+  REAPER reports them — see *The way back* below. `aux-send` has driven the FX
   send again since 2026-09-12.
 - **`/channel/{ch}/pfl` and `/channel/{ch}/filter`** take two spellings, see
   below, and Core **sends** the resulting state back on the same address,
@@ -310,7 +310,7 @@ that is not obvious:
   on a recall.
 - **`/master/phones-mix`** is the one value that goes out unbent, as a plain
   track volume.
-- **`/master/fx-return`** is the desk's FX-return pot. Since 2026-09-29 it
+- **`/master/aux-return`** is the desk's aux return pot. Since 2026-09-29 it
   drives the PurestGain on REAPER track 28 "Return"; full travel is 0 dB.
 - **`/filter/mode`** arrives as the word (`high_pass`, `low_pass`) or as a
   number, 1 for high pass. Core **sends** it as a number; the word goes to the
@@ -396,14 +396,14 @@ out the track numbers:
 | `/track/{12,16,20,24}/fx/1/fxparam/1/value` | `/channel/{ch}/gain` |
 | `/track/{12,16,20,24}/fx/2/fxparam/{1,2,3}/value` | `/channel/{ch}/eq/{high,mid,low}` |
 | `/track/{9,13,17,21}/fx/1/fxparam/*` | `/channel/{ch}/volume` |
-| `/track/{9,13,17,21}/send/3/volume` | `/channel/{ch}/fx-send` |
+| `/track/{9,13,17,21}/send/3/volume` | `/channel/{ch}/aux-send` |
 | `/track/{12,16,20,24}/fx/3/fxparam/7/value` | `/filter/frequency` |
 | `/track/{12,16,20,24}/fx/3/fxparam/6/value` | `/filter/resonance` |
 | `/track/1/fx/1/fxparam/*` | `/master/volume` |
 | `/track/2/fx/1/fxparam/*` | `/master/booth` |
 | `/track/3/fx/2/fxparam/1/value` | `/master/phones-volume` |
 | `/track/8/volume` | `/master/phones-mix` |
-| `/track/28/fx/1/fxparam/1/value` | `/master/fx-return` |
+| `/track/28/fx/1/fxparam/1/value` | `/master/aux-return` |
 
 The filter is one control written to all four input tracks, so it is
 **reported on a channel's track and answered globally**. A value already
@@ -423,7 +423,7 @@ up and never comes down. The two encoder pots were relayed for a few hours on
 If it cannot — gain, the EQ bands, volume — REAPER's value **is** the device's
 value and there is nothing to ratchet.
 
-`fx-send` was the one entry that was a decision rather than an impossibility,
+`aux-send` was the one entry that was a decision rather than an impossibility,
 and the decision went the other way on 2026-09-12: no action drives it, so it
 is relayed as safely as the gain.
 ```
@@ -476,16 +476,16 @@ following. REAPER accepts and reports every tempo correctly; the plug-in just
 does not act on it. Addressed directly, it takes the value every time.
 ```
 
-### The FX send, and what happened to 3D
+### The aux send, and what happened to 3D
 
-For years the Mixer's FX-send knob did **not** drive the FX send. It drove
+For years the Mixer's aux send knob did **not** drive the aux send. It drove
 the stereo/multi crossfade — the 3D function — because it was the only
 continuous control the desk had for it. A³ Motion's per-channel pot took that
 job over on `/channel/{ch}/3d`, and on **2026-09-12** the desk's knob got its
 own job back:
 
 ```
-/channel/{ch}/fx-send  ──▶  /track/{9,13,17,21}/send/3/volume   (normalised 0..1)
+/channel/{ch}/aux-send  ──▶  /track/{9,13,17,21}/send/3/volume   (normalised 0..1)
 ```
 
 Send **3** of the channel bus reaches the FX bus. The number is the position
@@ -604,7 +604,7 @@ A double tap puts a control back on its **rest position**, where it has one:
 
 | Control | Where | Rests at | Why |
 | :--- | :--- | :--- | :--- |
-| SEND | MIX page | 0 | An FX send you cannot get rid of in one gesture is an FX send you will not reach for. It also **starts** there: nothing relays it back, so what the knob shows is all there is, and a knob showing half while meaning nothing is worse than one showing nothing. |
+| SEND | MIX page | 0 | An aux send you cannot get rid of in one gesture is an aux send you will not reach for. It also **starts** there: nothing relays it back, so what the knob shows is all there is, and a knob showing half while meaning nothing is worse than one showing nothing. |
 | 3d, freq | channel-value strip | 0.5 | Twelve o'clock — the middle of a 270° sweep, and one place to reach for rather than two |
 | Q | channel-value strip | 0 | A filter that still resonates after being put back has not been put back. The Airwindows Isolator3 at the far end rests its own Q at zero too. |
 
