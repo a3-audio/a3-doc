@@ -108,10 +108,10 @@ acting on it itself.
 | `/master/booth` | f | mixer, motion | core (Core passes it on to mixer, motion) | the booth outputs |
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
-| `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the FX return, the fifth stereo input (was /master/return) |
-| `/aux-return/stem/turn` | i | mixer | core | the FX return's encoder turned by this many clicks (signed) |
-| `/aux-return/stem/push` | i | mixer | core | the FX return's encoder pushed: mute or unmute the pair it shows |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the pair the FX return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
+| `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the aux return, the fifth stereo input (was /master/return) |
+| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed) |
+| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: mute or unmute the pair it shows |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the pair the aux return shows (0 none free), then pairs 1-8: 1 plays on the return, 0 is silent there (muted, or on a channel) |
 | `/device/hello` | ss | mixer | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
@@ -134,7 +134,7 @@ written against the old words has to follow:
 | `/channel/{ch}/led/fx` | `/channel/{ch}/filter/led` |
 | `/channel/{ch}/pot_1`, `/channel/{ch}/pot_2` | `/channel/{ch}/filter/frequency`, `/channel/{ch}/filter/q` |
 | `/master/phones_mix`, `/master/phones_volume` | `/master/phones-mix`, `/master/phones-volume` |
-| `/master/return` | `/master/aux-return` |
+| `/master/return` | `/master/fx-return` (since 2026-10-01 `/master/aux-return`) |
 | `/vu/0..39` | `/vu/1..40` |
 
 `/device/hello` is new; see [above](#osc-differs).
