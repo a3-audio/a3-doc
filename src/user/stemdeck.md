@@ -327,7 +327,10 @@ displays, and the rules for it, are on the
   time. A click on a bus switch here also shows on the desk.
 - **StemDeck says hello to Core every 30 seconds**, and Core learns its
   address from that. StemDeck listens on UDP port 7780.
-- **Stem meters.** StemDeck sends one meter per stem to the desk and A³ Motion
+- **A fresh StemDeck starts with every stem on AUX only**, on no desk channel,
+  so it takes no channel and no analog input goes silent. A session saved
+  before this change restores its own switches.
+- **Stem meters.** StemDeck sends one meter per stem to the desk only
   (deck A stems 1–4 are `/vu/41`–`/vu/44`, deck B `/vu/45`–`/vu/48`), 25 times
   a second. Each is measured after the stem's knob and mute, before the fader
   and the buses.

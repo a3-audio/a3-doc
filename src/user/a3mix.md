@@ -111,8 +111,10 @@ is on**, so a cued deck brings its FX along.
 
 Two more things reach the headphones, on `dec_phones`:
 
-- **StemDeck's own CUE switches.** A stem with its CUE switch on (set on
-  StemDeck's screen) is heard on the cue side, through StemDeck's headphone bus
+- **StemDeck's own CUE bus.** Core keeps this send always open, on the cue
+  side of the crossfade. What is on the bus is StemDeck's decision: a stem's CUE
+  switch, or a deck's PHONES/CUE button on StemDeck, which puts the whole deck
+  there before the fader. It is heard through StemDeck's headphone bus
   (REAPER inputs 23–24). That is how you pre-listen a stem that is on no
   channel.
 - **The analog phones** (REAPER inputs 11–12) always go to `dec_phones`, with
@@ -144,7 +146,11 @@ fifth column, a **C** field shows that channel's cue, filled while it is on.
 - The **aux-return display** lists the stems that are on no channel. Its
   encoder moves the cursor over them, and a **push** toggles AUX of the stem
   under the cursor, in StemDeck. The return has no C field.
-- The desk shows what StemDeck reports, so a click on StemDeck's own screen
+- A fresh StemDeck starts with every stem on AUX only, so the desk shows **A** on
+every channel until you put a stem on one; a session saved earlier restores its
+own switches.
+
+The desk shows what StemDeck reports, so a click on StemDeck's own screen
   shows on the desk too.
 
 StemDeck says hello to Core every 30 seconds. If it is silent for a minute,
