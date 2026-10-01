@@ -18,7 +18,7 @@
 	- Input vu meters per channel: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`)
 	- Output vu meters for the master section: `main_sub` and
 	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
-	- The lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`, `/filter/led`)
+	- The lamps (`/channel/{ch}/cue/led`, `/stem/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
 	- The beat (`/beat`)
 
 - Sends messages back to the microcontroller via USB serial
@@ -50,9 +50,9 @@ whether the desk's copy is Core's own or **differs** from it.
 ### What it is sent and does not listen for
 
 A handful of `dispatcher.map` calls, and that is the whole list: the meters,
-the lamps (`/channel/{ch}/pfl/led`, `/channel/{ch}/filter/led`,
+the lamps (`/channel/{ch}/cue/led`, `/stem/cue/led`, `/channel/{ch}/filter/led`,
 `/filter/led`) and `/beat`. A³ Core sends it a great deal more — every
-channel's gain, EQ, volume and FX send, the whole master section, the shared
+channel's gain, EQ, volume and aux send, the whole master section, the shared
 filter, every flag — and all of it is dropped without a word, because
 pythonosc passes a message with no matching pattern straight into nothing.
 
@@ -97,7 +97,7 @@ the same day.
 that wrote `0 if led_on else 255` while every other lamp wrote
 `255 if led_on else 0`. A³ Core inverted pfl on the way out as well. The two
 cancelled: the desk was right, and the pfl lamp's address
-(`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` since 2026-09-30) carried
+(`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` from 2026-09-30, `/channel/{ch}/cue/led` since 2026-10-01) carried
 the opposite of what its name said.
 
 That cost nothing while the desk was the only thing listening. It stopped

@@ -21,7 +21,7 @@ device `hw:USB`, at 44.1 kHz. In JACK the card is the client `system`:
 
 | Direction | Ports | Used for |
 | :--- | :--- | :--- |
-| capture | `capture_1` … `capture_10` | the A³ Mixer's channels and the FX return, see REAPER's inputs 1–10 below |
+| capture | `capture_1` … `capture_10` | the A³ Mixer's channels and the aux return, see REAPER's inputs 1–10 below |
 | playback | `playback_1` … `playback_20` | the Main and the Booth outputs, see REAPER's outputs 1–20 below |
 
 (core-reaper-channel-map)=
@@ -41,7 +41,7 @@ decks, one aux, one phones.
 | In | Block | Content |
 | :--- | :--- | :--- |
 | 1–8 | Analog | decks 1–4, stereo (the A³ Mixer's channels 1–4) |
-| 9–10 | Analog | aux (the FX return) |
+| 9–10 | Analog | aux (the aux return) |
 | 11–12 | Analog | phones |
 | 13–20 | StemDeck | decks 1–4, stereo (StemDeck's buses 1–4) |
 | 21–22 | StemDeck | aux |
@@ -181,7 +181,7 @@ StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
 | `deck3_L`, `deck3_R` | bus 3: the two stems 3 |
 | `deck4_L`, `deck4_R` | bus 4: the two stems 4 |
 | `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
-| `phones_L`, `phones_R` | every stem switched to **P** and every deck on **PHONES**, before the fader |
+| `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader |
 
 Despite the names, `deck1` … `deck4` are the **buses**, one per stem
 position, not the decks.
@@ -235,7 +235,7 @@ file names them.
 
 | From | → To | Note |
 | :--- | :--- | :--- |
-| `system_in` (`capture_1` … `10`) | `reaper-analog` (`in1` … `in10`) | the A³ Mixer's channels and the FX return |
+| `system_in` (`capture_1` … `10`) | `reaper-analog` (`in1` … `in10`) | the A³ Mixer's channels and the aux return |
 | `StemDeck` (12 ports) | `reaper-stemdeck` (`in11` … `in22`) | local StemDeck, 6× stereo mode |
 | `zita_stemdeck` (`out_1` … `out_10`) | `reaper-stemdeck` (`in11` … `in20`) | StemDeck on another machine |
 | `MPD` (`left`, `right`) | `reaper_deck_4` (`in7`, `in8`) | overlaps the interface's inputs 7–8 |

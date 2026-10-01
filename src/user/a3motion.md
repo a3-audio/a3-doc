@@ -428,7 +428,7 @@ Double tap a knob to clear its lane; the other lanes stay.
 ### How to mix from the screen
 
 - **One channel:** select it and open the **CHMIX** tab — its gain, EQ,
-  send, PFL, FX and volume.
+  send, CUE, FX and volume.
 - **All four and the master:** tap **MIXER** in the global strip.
 - **Volume:** the meter *is* the VOL fader, and the handle on it is the fader
   cap. Grab the **handle** and drag, one to one. A drag that starts anywhere
@@ -914,7 +914,7 @@ encoders.
 | **GAIN** | input gain. Double tap: full |
 | **HIGH**, **MID**, **LOW** | the three EQ bands. Double tap: flat |
 | **SEND** | how much of the channel goes to the FX bus, where the delay that follows the beat sits. Double tap: none |
-| **PFL** | the channel on the headphones (cue). Tap to switch |
+| **CUE** | the channel on the headphones (its pre-fader cue send). Tap to switch |
 | **FX** | puts the channel through the shared filter (FX FREQ, FX RES, FX MODE in MIXER). Tap to switch |
 | meter, on the right | the channel's level, and its **VOL fader**: the handle is the volume. **Grab the handle** and drag, one to one; a drag that starts elsewhere on the meter does nothing. Double tap the meter: full volume |
 
@@ -998,7 +998,7 @@ MIXER again, a tab, or MENU.
 
 The knobs show what is really set, not what this device last did: a hand on
 the desk moves them here too, and a restart mid-evening brings them back as
-they are. That holds for the PFL and FX keys as well. The A³ Mixer has no
+they are. That holds for the CUE and FX keys as well. The A³ Mixer has no
 motor faders: turn a knob here and the hardware one stays put, and the next
 touch on it takes over from wherever it sits.
 
@@ -1010,7 +1010,7 @@ touch on it takes over from wherever it sits.
 | **GAIN** | input gain. Double tap: full |
 | **HIGH**, **MID**, **LOW** | the EQ. Double tap: flat |
 | **SEND** | to the FX bus. **SEND comes up shut, and a double tap takes it back there** |
-| **PFL**, **FX** | cue, and the channel through the shared filter. Tap to switch |
+| **CUE**, **FX** | cue, and the channel through the shared filter. Tap to switch |
 
 **The master column**, on the right:
 
@@ -1288,7 +1288,7 @@ REC and CHMIX.** Without SHIFT an encoder turns the field above it:
 | CLIP | clip, direction, two lengths | shape, end, two lengths | on a length: plays at that length |
 | MOTION | spin, swell, strX, strY | sway, clip-top, tswp, rswp | swaps to the other knob of the field: rot, reach, sqzX, sqzY / elv, clip-bot, tilt, roll |
 | REC | clip, rec mode, two lengths | shape, fade, two lengths | on fade: swaps to bias |
-| CHMIX | GAIN, HIGH, MID, LOW | SEND, PFL, FX, VOL | on PFL or FX: switches it |
+| CHMIX | GAIN, HIGH, MID, LOW | SEND, CUE, FX, VOL | on CUE or FX: switches it |
 | ACTION | A1–A6, the list, the key ring, AUDIO/MOTION | the four values of the card's marked row | list: assigns; key ring: presses; lower row: marks the next row; see [ACTION](#motion-action) |
 
 Where an encoder has two knobs to choose from, the bar marks the one it is on.

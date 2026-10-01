@@ -34,7 +34,7 @@ EQ HIGH | 1
 EQ MID | 2 
 EQ LOW | 3 
 VOLUME | 4
-FX SEND | 5
+AUX SEND | 5
 
 #### Multiplexer 5 (hc4051)
 Function (potentiometer) | Pin
@@ -54,7 +54,7 @@ FX TOGGLE | 0-3
 3D TOGGLE | 4-7
 
 ### Leds
-- 4 led-buttons for heapdphones prelisten function (pfl)
+- 4 led-buttons for heapdphones prelisten function (cue)
 - 4x9 NeoPixel for input vu (ws2811)
 - 10 NeoPixel for fx and 3d-section (ws2811)
 - 1x 8x32 LED-Matrix max7219

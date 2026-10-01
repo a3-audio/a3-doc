@@ -12,7 +12,7 @@ every device is told all of it.
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
 The numbers below refer to that picture. It is older than the V02 panel: FX
-SEND and FX RETURN are real knobs on the device but have no place in the drawing,
+SEND and AUX RETURN are real knobs on the device but have no place in the drawing,
 so they are listed without a number.
 
 ## The channel strip
@@ -22,7 +22,7 @@ them.
 
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
-| – | **FX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
+| – | **AUX SEND** | one per channel: how much of it goes to the tape delay on the FX bus, which follows the beat. Not in the picture | −inf … 0 dB |
 | 1 | **TRIM** | the level of the signal coming in | −inf … 0 dB |
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
@@ -31,10 +31,10 @@ them.
 | 6 | **TAP** | taps the tempo — see *Tempo* below. All four strips' keys do the same, and their lamps flash red on the beat |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
 | 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
-| 9 | **CUE** | sends this channel to the headphones (PFL). Lit blue while it is on |  |
+| 9 | **CUE** | puts this channel on the headphones: opens its cue send, taken before the fader (see *The cue* below). Lit blue while it is on |  |
 
 ```{note}
-Until 2026-09-12 the FX SEND knob did something else entirely: it drove the **3D
+Until 2026-09-12 the AUX SEND knob did something else entirely: it drove the **3D
 blend** — how far the channel was spread into the room — because it was the
 only continuous control the desk had for that. A³ Motion's per-channel pot
 took that job over, and the knob got its own name back.
@@ -82,12 +82,49 @@ left the desk, and nothing happened at the other end.
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
 | 14 | **HEADPHONE LEVEL** | the headphone output |  |
-| 15 | **CUE/MIX** | left is cue only, right is the main mix, the centre sums both |  |
+| 15 | **CUE/MIX** | the phones-mix knob: left is cue only, right is the mix, in between a crossfade at constant power (see *The cue* below) |  |
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
-| – | **FX RETURN** | the level of the FX return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
+| – | **AUX RETURN** | the level of the aux return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
 | 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`) |  |
+
+(a3mix-cue)=
+
+## The cue
+
+The cue used to be called PFL (pre-fader listen); since 2026-10-01 it is the
+cue everywhere, on the desk, on A³ Motion's key and on the wire
+(`/channel/{ch}/cue`).
+
+What the headphones hear is set in the REAPER project, in the sends of the
+channel buses, not on separate tracks. Each channel bus sends to
+`enc_phones` twice: send 3 is taken **before** the fader (the cue), send 4
+**after** it (the mix). The **CUE/MIX** knob crossfades the two at constant
+power, cue on the left, mix on the right. A deck's cue send opens only while
+its cue key is on; the mix sends follow the knob alone.
+
+Two more things reach the headphones, on `dec_phones`:
+
+- **The stem cue** opens the send 6 of the `stems` track, which carries
+  StemDeck's phones (REAPER inputs 23–24). It behaves like a deck's cue and
+  sits on the left side of the crossfade.
+- **The analog phones** (REAPER inputs 11–12) always go to `dec_phones`, with
+  no switch.
+
+(a3mix-displays)=
+
+## The stem displays
+
+Each channel has a stem display. The fields of its 5×2 grid show the stems and
+their levels; **A** is the analog input. Above the **A**, in the top row's
+fifth column, every display has a **C** field.
+
+- On a **channel display** C shows that channel's cue, filled while it is on.
+  A **push on the channel's encoder** toggles it.
+- On the **aux-return display** C is the **stem cue**. Turn the cursor past the
+  eight stems onto C and push to toggle it. A push on a stem still toggles
+  that stem's AUX.
 
 ## Connectors
 
