@@ -180,7 +180,7 @@ acting on it itself.
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
-| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its truth; Core's window shows whether it is Core's own |
+| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
 | `/core/here` | ss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth and its fingerprint (sha256 of the canonical JSON) |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
