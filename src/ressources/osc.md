@@ -65,9 +65,9 @@ one).
 **Core announces itself.** Every 2 seconds it broadcasts OSC `/core/here` to
 its subnet's broadcast address, port 7790, with two strings: the URL of
 `/api/truth` and the fingerprint. Broadcasts do not cross a router, so a
-device on another subnet (radla) will be given Core's URL in
-`~/.config/a3/core` instead — a later step; until then it needs its own copy
-of the file.
+device on another subnet (radla, 192.168.43.x) is given Core's URL in
+`~/.config/a3/core` instead and asks Core itself — see
+{ref}`StemDeck on radla <osc-radla>`. No copy of the file is needed there.
 
 (osc-follow)=
 
@@ -93,6 +93,33 @@ With `$A3_OSC_TRUTH` set, an app does not follow Core.
 editing `~/.config/a3/network.json` and restarting Core, StemDeck's and
 Motion's windows close and reopen once, about 5 s. With the same truth,
 nothing happens. Motion saves its state on the way out.
+
+(osc-radla)=
+
+#### StemDeck on radla
+
+radla is on another subnet, so Core's `/core/here` never reaches it. Instead:
+
+1. Write Core's address into `~/.config/a3/core` on radla: one line, e.g.
+   `http://192.168.8.10:9080`. A trailing slash or the full `/api/truth` URL
+   also works; a blank file counts as not set.
+2. Restart StemDeck.
+
+StemDeck then asks Core's `/api/truth` at start and every 30 s. If the
+`X-A3-Truth` header equals the truth it runs on, nothing happens. Otherwise it
+fetches, checks the body's sha256 against the header and that the truth is
+usable, writes `~/.cache/a3/a3-osc.json` whole and quits with exit code 1;
+systemd restarts it and its window reopens once. If Core cannot be reached,
+StemDeck says so once in the journal and plays on.
+
+radla's zita units (`tools/zita-from-truth.py`) read `~/.cache/a3/a3-osc.json`
+first, then `/usr/share/a3/a3-osc.json`; no hand copy in `/usr/share/a3` is
+needed. They read it only at their start, so after Core's address changes
+restart them once, after StemDeck has restarted:
+`systemctl --user restart zita-j2n zita-n2j`.
+
+On the Core machine nothing changes: StemDeck and Motion hear the broadcast,
+and there is no `~/.config/a3/core` there.
 
 ### When a port or an address has to change
 
