@@ -6,7 +6,9 @@ three files disagreed about the A³ Mixer's address and port, and each of them
 looked authoritative on its own.
 
 Since 2026-09-30 there is one place those facts are written:
-`/usr/share/a3/a3-osc.json`, shipped by the a3-core package — see
+`a3-osc.json` — the contract shipped by the a3-core package, the hosts and
+network in the maintainer's `~/.config/a3/network.json` on the Core machine,
+joined by Core and served at `http://<core>:9080/api/truth` — see
 {ref}`Where addresses and ports live <osc-truth>`. The table of listeners
 below is rendered from that file; the per-device sections describe it, and
 where they give a number it is the file's.
@@ -40,7 +42,8 @@ A³ Mixer 192.168.8.11 ── enp5s0 ┘
   no network.
 - The a3-core package writes this: its install asks for the second socket
   (`a3-core/bridge-with`, empty for no bridge) and for the address. The
-  "standard network" it offers is the `network` section of `a3-osc.json`. See
+  "standard network" it offers is the `network` section of `a3-osc.json`, and
+it keeps the chosen values in `~/.config/a3/network.json`. See
   the a3-core README.
 
 Measured on the rig after a cold boot (2026-09-25): the mixer answers in
@@ -110,7 +113,11 @@ wrong. What `radla` does with what it receives is not documented here.
 
 ## Ports, by listener
 
-Rendered from `a3-osc.json` — edit the file, not this table. A host of `any`
+Rendered from `a3-osc.json` — edit the file, not this table. Port **9080**
+serves the traffic window and also `GET /api/truth`, the joined truth; port
+**7790** is not Core's listener but the announcement: Core broadcasts
+`/core/here` to it every 2 s and every device that follows Core's truth (today
+the desk) listens there. A host of `any`
 (`0.0.0.0`) means the program listens on every interface of its own machine;
 `local` means only on the machine itself.
 
@@ -282,8 +289,8 @@ with the offset inside a block keeping its meaning everywhere: `+0` control,
 
 **This is a proposal, not the current state.** Since 2026-09-30 the devices'
 side of a renumbering is one edit in `a3-osc.json`, but the ports set inside
-REAPER and its plug-ins still have to follow by hand, and the desk's copy of
-the file has to be refreshed. A half-done renumbering is worse than an untidy
+REAPER and its plug-ins still have to follow by hand; the desk follows Core's
+announcement by itself. A half-done renumbering is worse than an untidy
 one that works — a device sending into a port nobody holds is silent, and
 silence is the hardest fault here to see. The tables above are what the rig
 does today.
