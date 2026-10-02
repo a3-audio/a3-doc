@@ -8,10 +8,28 @@ endpoints](ports.md). This page is about what the messages *mean*.
 ## Where addresses and ports live
 
 Every OSC address, port and IP of the system is written **once**, in
-`/usr/share/a3/a3-osc.json`. The a3-core package ships it (source:
-`platform-config/debian-x86_64/a3-core/usr/share/a3/a3-osc.json` in
-[a3-core](https://github.com/a3-audio/a3-core)), and since 2026-09-30 nothing
-else carries these facts. The file has these sections:
+`a3-osc.json`, and since 2026-09-30 nothing else carries these facts. Since
+2026-10-02 the file has **two parts** with two owners:
+
+- **The contract** — addresses, arguments, who sends and who hears, ports,
+  routes, the VU map — is the package's. The a3-core package ships it as
+  `/usr/share/a3/a3-osc.json` (source:
+  `platform-config/debian-x86_64/a3-core/usr/share/a3/a3-osc.json` in
+  [a3-core](https://github.com/a3-audio/a3-core)) and replaces it on every
+  install.
+- **The network** — `hosts` (the machines' addresses) and `network` (Core's own
+  interface, bridge, gateway, DNS) — is the maintainer's. It lives in
+  `~/.config/a3/network.json` on the Core machine. The installer creates that
+  file once, from the package's values, and never overwrites it.
+
+Core **joins** the two, key by key: what `network.json` names wins, and a host
+missing from it comes from the package. A `network.json` that does not parse,
+or that lacks the `hosts` or `network` object, is **refused**: Core says why in
+its journal and uses the package's values.
+
+Core serves the joined result at `http://<core>:9080/api/truth`. The header
+`X-A3-Truth` carries its **fingerprint**, the sha256 of the canonical JSON
+(sorted keys, no spaces, UTF-8). The file has these sections:
 
 | Section | What it holds |
 | :--- | :--- |
@@ -30,28 +48,43 @@ that file, not written by hand.
 
 | Device | How it gets the file |
 | :--- | :--- |
-| A³ Core | reads it directly (`a3_osc.py`) |
-| A³ Motion | reads it directly. Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
-| A³ Mixer | reads a **copy** beside its script, `software/scripts/a3-osc.json` in the a3-mixer checkout on the desk — it is its own machine. Without the copy the mixer service stops at start and says where it looked |
-| StemDeck | reads its Pro DJ Link ports (50000–50002) from it. Without the file its PIO status line says `PIO: no a3-osc.json` |
+| A³ Core | reads the package's contract and joins `~/.config/a3/network.json` over it (`a3_osc.py`), then serves the result |
+| A³ Motion | reads `/usr/share/a3/a3-osc.json` directly (it will get Core's truth in a later step). Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
+| A³ Mixer | **fetches it from Core.** It listens for Core's `/core/here` on 7790, keeps the last truth in `~/.cache/a3/a3-osc.json` and restarts itself when Core announces a different fingerprint — see {ref}`the desk page <mic-truth>`. Without a truth it waits for the announcement; it does not exit |
+| StemDeck | still reads `/usr/share/a3/a3-osc.json` directly (later step), for its Pro DJ Link ports (50000–50002). Without the file its PIO status line says `PIO: no a3-osc.json` |
 | beat-analyzer | reads an `a3-osc` block in its `build/.env`, which the a3-core package writes at install (`a3-osc-render user`) — see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | zita-j2n, zita-n2j | the units take address and port from `~/.config/a3/osc.env`, also written by `a3-osc-render user` |
-| the package's install | the "standard network" it offers comes from the file's `network` section |
+| the package's install | the "standard network" it offers comes from the package's `network` section, and it creates `~/.config/a3/network.json` from it once |
 
-**Core needs the file before it starts.** It reads it once, at start-up, and
-a Core without it does not come up at all. The package installs it, so after
-a package install it is there; a Core started from a checkout needs the
-package's file in place first (or `$A3_OSC_TRUTH` naming another one).
+**Core needs the package's file before it starts.** It reads it once, at
+start-up, and a Core without it does not come up at all. The package installs
+it, so after a package install it is there; a Core started from a checkout
+needs the package's file in place first (or `$A3_OSC_TRUTH` naming another
+one).
+
+**Core announces itself.** Every 2 seconds it broadcasts OSC `/core/here` to
+its subnet's broadcast address, port 7790, with two strings: the URL of
+`/api/truth` and the fingerprint. Broadcasts do not cross a router, so a
+device on another subnet (radla) will be given Core's URL in
+`~/.config/a3/core` instead — a later step.
 
 ### When a port or an address has to change
 
+**An address or host** (the network is yours):
+
+1. Edit `~/.config/a3/network.json` on the Core machine.
+2. Restart Core. It renders the zita units' and the beat-analyzer's
+   addresses at its start (`~/.config/a3/osc.env`, the `a3-osc` block of the
+   analyzer's `.env`), so they follow with it; restart those two to pick the
+   change up. The desk sees Core's new fingerprint within seconds and
+   restarts itself.
+
+**A port, an address or a word of the contract** (the package's):
+
 1. Edit `a3-osc.json` in a3-core and install the package again on the Core
-   machine.
-2. Copy the Core's `/usr/share/a3/a3-osc.json` to `software/scripts/a3-osc.json`
-   in the a3-mixer checkout on the desk, and restart the mixer service.
-3. Run `a3-osc-render user` on the Core, so the beat-analyzer's block and the
-   zita units follow (the package's install runs it as well), and restart
-   what reads them.
+   machine; restart Core.
+2. Nothing to copy: the desk follows Core's announcement. The beat-analyzer and
+   zita follow Core's restart, as above.
 
 Nothing is changed on a device itself: a device holding its own copy of a
 port is how three files came to disagree about the A³ Mixer's address on
@@ -62,14 +95,18 @@ port is how three files came to disagree about the A³ Mixer's address on
 ### "DIFFERS from Core's"
 
 With every state request, and so at every start, the A³ Mixer sends
-`/device/hello` with its name and the sha256 of its copy of the file. Core's
-window shows one line per device under the peers:
+`/device/hello` with its name and the sha256 of its truth. Core compares it
+against its own **fingerprint** (the sha256 of the joined truth it serves).
+Core's window shows one line per device under the peers:
 
 - **a3-osc.json is Core's** — the desk speaks what Core speaks.
-- **a3-osc.json DIFFERS from Core's**, in red — the desk's copy is not the one
-  installed on the Core. Copy the Core's file over again (step 2 above).
+- **a3-osc.json DIFFERS from Core's**, in red — the device's truth is not the
+  one Core serves. The desk fixes this itself within seconds of the next
+  announcement; if it stays red, look in the desk's log for a refused fetch.
   Until then the desk may be sending to an address or port nobody listens on,
-  and OSC over UDP will not say so.
+  and OSC over UDP will not say so. **StemDeck still hashes the package file**
+  until a later step, so for now its line shows *differs* whenever
+  `network.json` changes something.
 
 (osc-addresses)=
 
@@ -700,9 +737,10 @@ MultiEncoders' (`iem.multiencoder-1..3`, set in the REAPER project).
 
 Worth knowing before chasing a silent link.
 
-- **A copy that has not followed.** The A³ Mixer reads its own copy of
-  `a3-osc.json`; a copy older than the Core's shows as *DIFFERS from Core's*
-  in Core's window — see [above](#osc-differs).
+- **A truth that has not followed.** A device on an older truth than Core's
+  shows as *DIFFERS from Core's* in Core's window — see
+  [above](#osc-differs). The desk follows by itself; StemDeck shows it until
+  it too gets Core's truth.
 - **A target written by hand** into the beat-analyzer's `.env`, outside the
   `a3-osc` block, is commented out (`# was: …`) at the next install: it would
   be a second truth.

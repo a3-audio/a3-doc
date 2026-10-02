@@ -19,8 +19,15 @@ turns incoming OSC into DSP settings.
 	- A³ Motion
 
 Every one of those names, and every address it speaks, comes from
-`/usr/share/a3/a3-osc.json`, read at start-up by `lib/a3_osc.py`; the numbers
-above are that file's. See
+`/usr/share/a3/a3-osc.json`, read at start-up by `lib/a3_osc.py`, which joins
+the maintainer's `~/.config/a3/network.json` over it (`hosts` and `network`,
+key by key; a file that does not parse or lacks either object is refused, said
+in the journal, and the package's values stand). The numbers above are the
+joined truth's. Core serves it at `GET /api/truth` on 9080, with the sha256 of
+the canonical JSON (sorted keys, no spaces, UTF-8) in the `X-A3-Truth` header,
+and announces it every 2 s by UDP broadcast to its subnet, port 7790: OSC
+`/core/here` with the URL and the fingerprint. At start it also renders zita's
+and the beat-analyzer's addresses. See
 {ref}`Where addresses and ports live <osc-truth>`.
 
 The parameter curves — the functions that map a controller value to a DSP
@@ -175,10 +182,11 @@ Three rules the page is built on, each of them paid for once:
 
 ### Which truth each device speaks
 
-A device on its own machine reads its own copy of `a3-osc.json`, and a copy
-can fall behind. So the A³ Mixer names itself with every state request — at
-start, too — on `/device/hello`, with the sha256 of its copy. Core
-(`lib/a3_core_devices.py`) holds that against the hash of its own file, and
+A device on its own machine holds its own truth, and it can fall behind. The
+A³ Mixer fetches Core's on its own (see
+{ref}`the desk <mic-truth>`), and names itself with every state request — at
+start, too — on `/device/hello`, with the sha256 of what it holds. Core
+(`lib/a3_core_devices.py`) holds that against its fingerprint, and
 the window shows one line per device under the peers: *a3-osc.json is Core's*,
 or in red *a3-osc.json DIFFERS from Core's*. What to do about the red one is
 in {ref}`the OSC reference <osc-differs>`.

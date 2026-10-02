@@ -22,8 +22,10 @@ in the order it happens:
 
 ```{note}
 **No addresses and no ports on this page.** Every OSC address, port and IP of
-the system is written once, in `/usr/share/a3/a3-osc.json`, which this package
-installs — see {ref}`Where addresses and ports live <osc-truth>`. Where a
+the system is written once, in `a3-osc.json`: the contract in
+`/usr/share/a3/a3-osc.json`, which this package installs, and the network
+(hosts and Core's own interface) in `~/.config/a3/network.json`, which is
+yours — see {ref}`Where addresses and ports live <osc-truth>`. Where a
 program below talks to the network, this page names *what* it talks to, by
 the name the file gives it (`core.osc`, `motion.energy`, …), and the file says
 where that is.
@@ -225,7 +227,8 @@ through everything that differs.
 ### 6. Rendering the one truth: `a3-osc-render user`
 
 Run as `aaa`. Some programs cannot read JSON, so their addresses are written
-out from `/usr/share/a3/a3-osc.json` as text:
+out from the joined truth (the package's file with `~/.config/a3/network.json`
+over it) as text:
 
 - `~/.config/a3/osc.env` — the targets of the two zita units (see
   [zita-j2n and zita-n2j](#core-zita)).
@@ -236,7 +239,9 @@ out from `/usr/share/a3/a3-osc.json` as text:
   found outside the block is commented out, not deleted.
 
 If it fails, the install says so: the zita units would start without their
-addresses. After changing `a3-osc.json`, run `a3-osc-render user` again (see
+addresses. Core renders the same two at **its own start**, so a changed
+`network.json` reaches them with Core's restart; run `a3-osc-render user` by
+hand only to refresh them without restarting Core (see
 {ref}`When a port or an address has to change <osc-truth>`).
 
 ### 7. System services
@@ -433,7 +438,8 @@ Mixer, A³ Motion and any further subscriber.
   an installed rig.
 - **It needs the one truth.** Core reads `/usr/share/a3/a3-osc.json` once at
   start-up and does not start without it (or `$A3_OSC_TRUTH` naming another
-  file).
+  file). It then joins `~/.config/a3/network.json` over it, serves the result
+  at `http://<core>:9080/api/truth` and announces it every 2 s on port 7790.
 - **No restart.** The unit has no `Restart=`.
 
 #### Its arguments
@@ -560,18 +566,35 @@ update:
 | **postinst, `cp -rn`** | `~/.local/share/a3-core/config/*` → `~/.config/` | only new files arrive; existing ones are never replaced |
 
 Plus what the postinst and `user_install.sh` *write* rather than copy: the
-network files, the headless X config, `~/.venv`, `~/.config/a3/osc.env`, the
+network files, `~/.config/a3/network.json` (once, never overwritten), the headless X config, `~/.venv`, `~/.config/a3/osc.env`, the
 beat-analyzer's `.env` block, REAPER and the plug-ins.
 
 **Edit the package, not the machine** — except where the tables below say
 otherwise. A file that is replaced on update loses a local edit at the next
 install.
 
-### The one truth: `/usr/share/a3/a3-osc.json`
+### The one truth: `/usr/share/a3/a3-osc.json` and `~/.config/a3/network.json`
 
-Every OSC address, port and IP of the system, its network and its forty
-meters. Replaced on every install. **Do not edit it on the machine:** change
-it in the a3-core repository and install the package again — see
+The truth is in two parts.
+
+`/usr/share/a3/a3-osc.json` is the **contract**: every OSC address, its
+arguments, its senders and receivers, the ports, the routes and the forty
+meters, with the package's default hosts and network. Replaced on every
+install. **Do not edit it on the machine:** change it in the a3-core
+repository and install the package again.
+
+`~/.config/a3/network.json` is the **network**, and it is yours: the `hosts`
+(the machines' addresses) and `network` (Core's own interface, bridge,
+gateway, DNS). The installer creates it once from the package's values and
+never overwrites it. Core joins it over the contract key by key; a host the
+file does not name comes from the package. A file that does not parse, or
+lacks the `hosts` or `network` object, is refused: Core says why in its
+journal and uses the package's values.
+
+**To change an address:** edit `network.json`, restart Core. The beat-analyzer
+and zita addresses are rendered at Core's start, and the desk restarts itself
+within seconds. Core serves the joined truth at `GET /api/truth` on port 9080,
+with its fingerprint in the `X-A3-Truth` header — see
 {ref}`Where addresses and ports live <osc-truth>`.
 
 (core-etc)=

@@ -27,25 +27,42 @@
 
 A second script, `a3-mixer-set-display/`, drives the channel displays.
 
-### Addresses, ports and the copy of a3-osc.json
+(mic-truth)=
+
+### Addresses, ports and where the desk gets them
 
 The script has no address, port or IP of its own. It reads them from
-`a3-osc.json` — the one file A³ Core's package ships as
-`/usr/share/a3/a3-osc.json` (see
-{ref}`Where addresses and ports live <osc-truth>`). The desk is its own
-machine, so it reads a **copy** beside the script:
-`software/scripts/a3-osc.json` in the a3-mixer checkout on the desk. The copy
-is not in git.
+`a3-osc.json`, the system's one truth (see
+{ref}`Where addresses and ports live <osc-truth>`) — and it gets that file
+**from Core**, not by hand.
 
-**Deploying or updating the desk therefore has one step more:** copy the
-Core's `/usr/share/a3/a3-osc.json` to `software/scripts/a3-osc.json`, and do
-it again whenever the a3-core package changes. Without the copy the mixer
-service stops at start and says where it looked for it.
+- **The cache.** The desk keeps the last truth it fetched in
+  `~/.cache/a3/a3-osc.json`. The service runs as root, so that is root's home
+  on the desk.
+- **The announcement.** The desk listens on UDP port 7790. Every 2 seconds
+  Core broadcasts OSC `/core/here` there, with two strings: the URL of its
+  truth and the truth's fingerprint. A broadcast does not cross a router.
+- **The update.** When Core announces a fingerprint other than the cached
+  file's, the desk fetches `/api/truth` from that URL and checks that the
+  body's sha256, the `X-A3-Truth` header and the announcement all agree. If
+  they do, it stores the file (written whole, so a cut-off write leaves the old
+  one) and **exits**; systemd restarts it on the new truth. If the fetch is
+  refused, the desk logs why and keeps running on what it has.
+- **At start** it takes the first of these: `$A3_OSC_TRUTH` if set; the cache;
+  the old copy beside the script, `software/scripts/a3-osc.json` (kept for one
+  release, then it goes); otherwise it waits for Core's announcement. A desk
+  without a truth, or with one that lacks a word, no longer exits into a
+  restart loop.
 
-Its meters are looked up by name in the file's `vu_meters`, not by number.
+**Deploying the desk therefore needs no copy step.** Start the service with
+Core on the same network and the first announcement brings the truth. Changing
+an address is done on Core — see
+{ref}`When a port or an address has to change <osc-truth>`.
+
+Its meters are looked up by name in the truth's `vu_meters`, not by number.
 And with every state request — at start, too — the desk sends
-`/device/hello` with the sha256 of its copy, so A³ Core's window can say
-whether the desk's copy is Core's own or **differs** from it.
+`/device/hello` with its name and the sha256 of its truth, which Core's window
+compares against Core's fingerprint.
 
 ### What it is sent and does not listen for
 
