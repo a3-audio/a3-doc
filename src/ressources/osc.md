@@ -190,7 +190,7 @@ acting on it itself.
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
 | `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves its menu's cursor (D1/D2/A, or a deck's stems 1-4 and back), switches nothing |
 | `/channel/{ch}/stem` | i | core | mixer, motion | the stems on this channel's bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input |
-| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: on D1/D2 enters that deck, on A plays the analog input, on a stem loads it as the channel's only stem, on back returns |
+| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: on D1/D2 enters that deck, on A plays the analog input, on a stem loads it as the channel's stem of that deck (one of each deck may play) or unloads it if loaded, on back returns |
 | `/channel/{ch}/stem/menu` | ii | core | mixer, motion | the channel's menu: the level (0 = D1/D2/A, 1 = deck 1, 2 = deck 2), then the cursor (0-2 at the top; stems 0-3 and 4 = back in a deck) |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
