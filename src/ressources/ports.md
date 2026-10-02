@@ -124,6 +124,7 @@ Rendered from `a3-osc.json` — edit the file, not this table. A host of `any`
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
 | motion | energy | any (0.0.0.0) | 7777 | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
 | stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them |
+| devices | announce | any (0.0.0.0) | 7790 | Core's /core/here broadcast: where every device fetches the truth |
 | mixer | osc | mixer (192.168.8.11) | 7772 | Core's relays and lamps, /beat, /vu |
 | beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | reaper | osc | local (127.0.0.1) | 9001 | Core's /track/... control |
