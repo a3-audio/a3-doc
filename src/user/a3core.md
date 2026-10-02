@@ -83,8 +83,8 @@ Along the top are the peers, each with a dot that says when it was last heard
 from. Under the peers, one line per device that has named itself says whether
 it speaks the same `a3-osc.json` as Core: *a3-osc.json is Core's*, or in red
 *a3-osc.json DIFFERS from Core's* — then that device is on an older truth than Core's (see
-{ref}`Where addresses and ports live <osc-differs>`; the desk fixes itself
-within seconds). Below that, one row per OSC address: how often it has gone past, how
+{ref}`Where addresses and ports live <osc-differs>`; the desk, StemDeck and Motion fix
+themselves within seconds). Below that, one row per OSC address: how often it has gone past, how
 fast, the last value, and which device it came from or went to.
 
 This is the answer to *"is it the cable, the setting, or me?"*. OSC runs over

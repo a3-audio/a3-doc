@@ -183,9 +183,9 @@ Three rules the page is built on, each of them paid for once:
 ### Which truth each device speaks
 
 A device on its own machine holds its own truth, and it can fall behind. The
-A³ Mixer fetches Core's on its own (see
-{ref}`the desk <mic-truth>`), and names itself with every state request — at
-start, too — on `/device/hello`, with the sha256 of what it holds. Core
+A³ Mixer, StemDeck and A³ Motion fetch Core's on their own (see
+{ref}`the desk <mic-truth>` and {ref}`Following Core <osc-follow>`), and name themselves with every state request — at
+start, too — on `/device/hello`, with the sha256 of what they hold. Core
 (`lib/a3_core_devices.py`) holds that against its fingerprint, and
 the window shows one line per device under the peers: *a3-osc.json is Core's*,
 or in red *a3-osc.json DIFFERS from Core's*. What to do about the red one is

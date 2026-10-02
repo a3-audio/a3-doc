@@ -49,9 +49,9 @@ that file, not written by hand.
 | Device | How it gets the file |
 | :--- | :--- |
 | A³ Core | reads the package's contract and joins `~/.config/a3/network.json` over it (`a3_osc.py`), then serves the result |
-| A³ Motion | reads `/usr/share/a3/a3-osc.json` directly (it will get Core's truth in a later step). Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
+| A³ Motion | **fetches it from Core**, the same way as the desk, and shares the cache `~/.cache/a3/a3-osc.json` with StemDeck — see {ref}`Following Core <osc-follow>`. Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
 | A³ Mixer | **fetches it from Core.** It listens for Core's `/core/here` on 7790, keeps the last truth in `~/.cache/a3/a3-osc.json` and restarts itself when Core announces a different fingerprint — see {ref}`the desk page <mic-truth>`. Without a truth it waits for the announcement; it does not exit |
-| StemDeck | still reads `/usr/share/a3/a3-osc.json` directly (later step), for its Pro DJ Link ports (50000–50002). Without the file its PIO status line says `PIO: no a3-osc.json` |
+| StemDeck | **fetches it from Core**, like Motion, from the shared cache — see {ref}`Following Core <osc-follow>`. It reads its Pro DJ Link ports (50000–50002) and its `stemdeck.bus` from it. Without any truth its PIO status line says `PIO: no a3-osc.json` |
 | beat-analyzer | reads an `a3-osc` block in its `build/.env`, which the a3-core package writes at install (`a3-osc-render user`) — see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | zita-j2n, zita-n2j | the units take address and port from `~/.config/a3/osc.env`, also written by `a3-osc-render user` |
 | the package's install | the "standard network" it offers comes from the package's `network` section, and it creates `~/.config/a3/network.json` from it once |
@@ -66,7 +66,33 @@ one).
 its subnet's broadcast address, port 7790, with two strings: the URL of
 `/api/truth` and the fingerprint. Broadcasts do not cross a router, so a
 device on another subnet (radla) will be given Core's URL in
-`~/.config/a3/core` instead — a later step.
+`~/.config/a3/core` instead — a later step; until then it needs its own copy
+of the file.
+
+(osc-follow)=
+
+### Following Core: StemDeck and A³ Motion
+
+StemDeck and A³ Motion run on the Core machine as user `aaa` and **share one
+cache**, `~/.cache/a3/a3-osc.json`. Each one, like the desk, listens for
+Core's `/core/here` on UDP 7790 (the two share the port). At start it takes
+the first of these: `$A3_OSC_TRUTH` if set; the cache, if it reads as a truth;
+otherwise the package's `/usr/share/a3/a3-osc.json`.
+
+When Core announces a fingerprint the app does not hold, it fetches
+`http://<core>:9080/api/truth` off the UI thread and checks that the body's
+sha256, the `X-A3-Truth` header and the announcement agree, and that the
+truth is usable: StemDeck needs `stemdeck.bus`, Motion needs every address it
+speaks. Then it writes the cache whole and **quits with exit code 1**;
+systemd (`Restart=on-failure`, 5 s) starts it again on the new truth. A
+refusal is logged once per reason and the app runs on.
+
+With `$A3_OSC_TRUTH` set, an app does not follow Core.
+
+**What you see:** after a Core install that changes the truth, or after
+editing `~/.config/a3/network.json` and restarting Core, StemDeck's and
+Motion's windows close and reopen once, about 5 s. With the same truth,
+nothing happens. Motion saves its state on the way out.
 
 ### When a port or an address has to change
 
@@ -77,14 +103,15 @@ device on another subnet (radla) will be given Core's URL in
    addresses at its start (`~/.config/a3/osc.env`, the `a3-osc` block of the
    analyzer's `.env`), so they follow with it; restart those two to pick the
    change up. The desk sees Core's new fingerprint within seconds and
-   restarts itself.
+   restarts itself; so do StemDeck and Motion, whose windows reopen once.
 
 **A port, an address or a word of the contract** (the package's):
 
 1. Edit `a3-osc.json` in a3-core and install the package again on the Core
    machine; restart Core.
-2. Nothing to copy: the desk follows Core's announcement. The beat-analyzer and
-   zita follow Core's restart, as above.
+2. Nothing to copy: the desk, StemDeck and Motion follow Core's announcement
+   (StemDeck's and Motion's windows reopen once). The beat-analyzer and zita
+   follow Core's restart, as above.
 
 Nothing is changed on a device itself: a device holding its own copy of a
 port is how three files came to disagree about the A³ Mixer's address on
@@ -95,18 +122,17 @@ port is how three files came to disagree about the A³ Mixer's address on
 ### "DIFFERS from Core's"
 
 With every state request, and so at every start, the A³ Mixer sends
-`/device/hello` with its name and the sha256 of its truth. Core compares it
+`/device/hello` with its name and the sha256 of its truth; StemDeck sends it
+too, hashing the cache it runs on. Core compares it
 against its own **fingerprint** (the sha256 of the joined truth it serves).
 Core's window shows one line per device under the peers:
 
-- **a3-osc.json is Core's** — the desk speaks what Core speaks.
+- **a3-osc.json is Core's** — the device speaks what Core speaks.
 - **a3-osc.json DIFFERS from Core's**, in red — the device's truth is not the
-  one Core serves. The desk fixes this itself within seconds of the next
-  announcement; if it stays red, look in the desk's log for a refused fetch.
-  Until then the desk may be sending to an address or port nobody listens on,
-  and OSC over UDP will not say so. **StemDeck still hashes the package file**
-  until a later step, so for now its line shows *differs* whenever
-  `network.json` changes something.
+  one Core serves. The desk, StemDeck and Motion fix this
+  themselves within seconds of the next announcement; if it stays red, look in
+  the device's log for a refused fetch. Until then it may be sending to an
+  address or port nobody listens on, and OSC over UDP will not say so.
 
 (osc-addresses)=
 
@@ -154,7 +180,7 @@ acting on it itself.
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
-| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
+| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its truth; Core's window shows whether it is Core's own |
 | `/core/here` | ss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth and its fingerprint (sha256 of the canonical JSON) |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
@@ -739,8 +765,7 @@ Worth knowing before chasing a silent link.
 
 - **A truth that has not followed.** A device on an older truth than Core's
   shows as *DIFFERS from Core's* in Core's window — see
-  [above](#osc-differs). The desk follows by itself; StemDeck shows it until
-  it too gets Core's truth.
+  [above](#osc-differs). The desk, StemDeck and Motion follow by themselves.
 - **A target written by hand** into the beat-analyzer's `.env`, outside the
   `a3-osc` block, is commented out (`# was: …`) at the next install: it would
   be a second truth.

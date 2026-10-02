@@ -130,9 +130,11 @@ under `.config/systemd/user/`:
   (`radla.zita-n2j` in `a3-osc.json`).
 
 Both units start zita through StemDeck's `tools/zita-from-truth.py`, which
-reads the Core's address and both ports from `a3-osc.json` — on the StemDeck
-machine a copy at the same path as on the Core, `/usr/share/a3/a3-osc.json`
-(StemDeck's PIO clock reads it too). Only the channel counts are written in
+reads the Core's address and both ports from `a3-osc.json` — on the Core
+machine the package's `/usr/share/a3/a3-osc.json`; on another StemDeck machine
+a copy at the same path (StemDeck's PIO clock reads it too). StemDeck itself
+follows Core's truth on the Core machine, and its window reopens once when
+that changes — see {ref}`Following Core <osc-follow>`. Only the channel counts are written in
 the units. Until 2026-09-30 `zita-j2n.service` named the Core's address
 itself, and after the rig moved to 192.168.8.x it sent to the old one without
 a word.
@@ -141,8 +143,10 @@ Both come back by themselves 2 s after they drop out: zita ends on some
 changes to the audio graph, and the units restart it with no limit on how
 often.
 
-1. Copy the Core's `/usr/share/a3/a3-osc.json` to the same path on this
-   machine (as root), and again whenever the a3-core package changes it.
+1. On a StemDeck machine other than the Core, copy the Core's
+   `/usr/share/a3/a3-osc.json` to the same path on this machine (as root),
+   and again whenever the a3-core package changes it. On the Core machine
+   there is nothing to copy.
 2. Install and start both units, from the StemDeck checkout:
 
    ```sh

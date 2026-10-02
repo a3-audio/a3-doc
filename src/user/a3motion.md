@@ -528,10 +528,14 @@ bar shows or hides it by hand.
 
 **Not on the device.** Since 2026-09-30 A³ Motion reads every host, port and
 OSC address from `a3-osc.json`, the one file the a3-core package installs for
-the whole system, and the **Network** page is gone from the menu. To point it
-at another Core, that file changes — and with it every other device, so
-nothing can end up sending to an address nobody listens to. See
-{ref}`Where addresses and ports live <osc-truth>`.
+the whole system, and the **Network** page is gone from the menu. Motion takes
+that file **from Core**: when Core's truth changes (a Core install, or an edit
+of `~/.config/a3/network.json` and a Core restart), Motion's window closes and
+reopens once, about 5 s, and saves its state on the way out. With the same
+truth nothing happens. To point it at another Core, that file changes — and
+with it every other device, so nothing can end up sending to an address nobody
+listens to. See {ref}`Where addresses and ports live <osc-truth>` and
+{ref}`Following Core <osc-follow>`.
 
 (motion-panic)=
 
