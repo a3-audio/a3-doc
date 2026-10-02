@@ -153,8 +153,9 @@ that plays, the cursor on 2. Middle left: deck 1's level, stem 3 crossed out
 because it plays on channel 2, the cursor on it. Middle right: the return in
 STEM mode, with nine meters. Bottom: the return in ANALOG mode.*
 
-**The rule.** A channel plays **one stem** or its **analog input**, and a stem
-plays on **one channel** at most. Core enforces it. Whatever the channel
+**The rule.** A channel plays **one stem of each deck** -- a stem of D1, a stem
+of D2, or one of each -- or its **analog input**, and a stem plays on **one
+channel** at most. Core enforces it. Whatever the channel
 does not play is silent: while a stem is on a channel, Core shuts the
 channel's analog input.
 
@@ -164,13 +165,14 @@ A channel's encoder is a menu of two levels.
 
 - **Level 1: D1 · D2 · A.** Turn moves over StemDeck's deck 1, deck 2 and the
   analog input.
-  - **Push on A** plays the analog input at once; the channel's stem leaves.
+  - **Push on A** plays the analog input at once; the channel's stems leave.
   - **Push on D1 or D2** only enters that deck. Nothing changes in the sound
     yet.
 - **Level 2: 1 · 2 · 3 · 4 · <.** Turn moves over the deck's four stems and
   the way back.
-  - **Push on a stem** loads it as the channel's **only** stem, replacing what
-    played there.
+  - **Push on a stem** loads it as the channel's stem **of that deck**,
+    replacing that deck's stem there; the other deck's stem stays.
+  - **Push on the loaded stem** (the underlined one) takes it off the channel.
   - A stem that **plays on another channel** is crossed out, with that
     channel's number small at its top right. A push on it does nothing.
   - **Push on <** goes back to level 1.
@@ -180,11 +182,12 @@ what the channel plays is underlined. The lower half is the **waveform** of
 what the channel plays, as StemDeck draws it: a mirrored envelope along a
 centre line, running right to left, the newest sound entering at the right edge
 and about 13 seconds across. A channel shows its stem, or its own analog input
-when it is on analog. A line that stays flat is silence.
+when it is on analog; with a stem of each deck, the louder of the two. A line
+that stays flat is silence.
 
-**One stem per channel, kept by Core.** If StemDeck shows several stems on one
-channel (an old session can), Core keeps the lowest and switches the others
-off, about 0.3 s after StemDeck's reports have settled.
+**One stem of each deck per channel, kept by Core.** If StemDeck shows several
+stems of one deck on one channel (an old session can), Core keeps the lowest
+and switches the others off, about 0.3 s after StemDeck's reports have settled.
 
 ### The aux return
 

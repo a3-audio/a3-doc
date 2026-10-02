@@ -326,9 +326,10 @@ and the rules for it, are on the
 - **StemDeck keeps the truth.** Core only relays the desk's request to switch a
   bus and asks StemDeck for all switches when it hears StemDeck for the first
   time. A click on a bus switch here also shows on the desk.
-- **One stem per channel.** A channel plays one stem, and a stem plays on one
-  channel at most. If a session shows several stems on one bus, Core keeps the
-  lowest and switches the others off, about 0.3 s after your reports settle.
+- **One stem of each deck per channel.** A channel plays at most one stem of
+  each deck, and a stem plays on one channel at most. If a session shows
+  several stems of one deck on one bus, Core keeps the lowest and switches the
+  others off, about 0.3 s after your reports settle.
 - **AUX follows the return's mode.** In STEM mode every stem no channel plays
   has its **A** lit, and Core switches a free stem's A back on if you click it
   off. In ANALOG mode no stem is on AUX. A stem loaded on a channel loses its

@@ -329,12 +329,14 @@ On `main` since `v03.0`, not tagged yet.
 - **A channel's encoder is a two-level menu** (2026-10-02), replacing the dot grid. Level 1
   turns over **D1 · D2 · A**: push on A plays the analog input at once, push on D1 or D2
   only enters that deck. Level 2 turns over **1 · 2 · 3 · 4 · <**: push on a stem loads it as
-  the channel's only stem, a stem that plays on another channel is crossed out with that
+  the channel's stem of that deck (one of each deck may play; push on the loaded one takes it
+  off), a stem that plays on another channel is crossed out with that
   channel's number and a push on it does nothing, push on < goes back. The display has the
   menu in its upper half (cursor inverted, what plays underlined) and the waveform below. See
   {ref}`the stem displays <a3mix-displays>`.
-- **One stem per channel, a stem on one channel at most**, kept by Core: when StemDeck shows
-  several stems on one channel (an old session), Core keeps the lowest and switches the others
+- **One stem of each deck per channel, a stem on one channel at most**, kept by Core: when
+  StemDeck shows several stems of one deck on one channel (an old session), Core keeps the
+  lowest and switches the others
   off about 0.3 s after the reports settle.
 - **The aux return has two options, STEM and ANALOG.** Turn chooses, push switches. In STEM
   every stem no channel plays goes to the return; in ANALOG no stem does and the analog

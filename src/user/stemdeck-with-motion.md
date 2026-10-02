@@ -92,7 +92,8 @@ A few things follow from that:
   number off, and the stem leaves its A³ channel and its movement for the
   Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
   desk's aux return). On the desk, loading a stem on a channel does this for
-  you: it puts one stem on the channel and takes its AUX away. A stem no
+  you: it puts the stem on the channel -- one of each deck at most -- and takes its
+  AUX away. A stem no
   channel plays goes back to AUX while the return is in STEM mode. Light two numbers and it plays on two channels, moving
   with both.
 
