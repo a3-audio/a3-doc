@@ -201,9 +201,9 @@ acting on it itself.
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
 | `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the aux return, the fifth stereo input (was /master/return) |
-| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its selection |
-| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: the selected stem becomes the one on the return (0: none) |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's selection (0 = the empty field), then pairs 1-8: 1 = on the return (AUX) |
+| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its selection over the stems on no channel |
+| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: switches its selected stem on or off the return (0: none) |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's selection (1-8; 0 = no stem free), then pairs 1-8: 1 = on the return (AUX) |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
