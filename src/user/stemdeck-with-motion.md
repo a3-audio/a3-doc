@@ -81,7 +81,7 @@ A few things follow from that:
   shuts that channel's analog input (REAPER's `analog` track send to
   `N-input`); with no stem there, the analog input plays. A CDJ on channel 1
   is silent while a stem is on channel 1, and the stem moves through the same
-  strip. You choose it on the desk: turn the channel's encoder to select, push to load (see
+  strip. You choose it on the desk: turn the channel's encoder to a deck, push, then turn to the stem and push (see
   {ref}`the desk's stem displays <a3mix-displays>`).
 - **A set with its own stem names** (`DUB`, `KICK`, `PADS`, `PERC`, …) goes
   on the buses in the order its endings sort — see
@@ -91,9 +91,9 @@ A few things follow from that:
   has six switches, **1 2 3 / 4 A C**. Light **A** (AUX) and switch its own
   number off, and the stem leaves its A³ channel and its movement for the
   Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
-  desk's aux return). On the desk, a push of a channel's encoder does this for
-  you (after turning to select the stem, which may be one that sits on AUX): it
-  puts one stem on the channel and takes its AUX away. Light two numbers and it plays on two channels, moving
+  desk's aux return). On the desk, loading a stem on a channel does this for
+  you: it puts one stem on the channel and takes its AUX away. A stem no
+  channel plays goes back to AUX while the return is in STEM mode. Light two numbers and it plays on two channels, moving
   with both.
 
 (stemdeck-with-motion-setup)=
