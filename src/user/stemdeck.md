@@ -325,9 +325,9 @@ and the rules for it, are on the
 - **StemDeck keeps the truth.** Core only relays the desk's request to switch a
   bus and asks StemDeck for all switches when it hears StemDeck for the first
   time. A click on a bus switch here also shows on the desk.
-- **AUX is one stem, chosen at the desk.** The aux-return display selects a
-  stem (or the empty field); a push lights **A** on that stem and takes it from
-  the previous one.
+- **AUX can hold several stems, chosen at the desk.** The aux-return display
+  moves over the stems that are on no channel; a push lights **A** on that stem
+  or, when it is lit, switches it off. A stem loaded on a channel loses its A.
 - **Core sets the C switches.** A stem's **C** is on while it plays on a cued
   desk channel and off otherwise; Core sets them at every cue change, push and
   report, so a C clicked on StemDeck's own screen is switched back. A push of

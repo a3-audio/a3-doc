@@ -326,6 +326,18 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Mixer (`a3-mixer`)
 
+- **The stem displays are a grid of dots** (2026-10-02), replacing the symbols, framed
+  fields and level bars. Deck A's stems sit in the top row with **A** at its end, deck B's
+  below. A filled dot is selectable, a hollow ring plays on another channel. A channel shows
+  only its own digit at what it plays; the return shows at every stem the digit of where it
+  plays (1–4 channel, 5 return). The cursor is an inverted box. The lower half is a mirrored
+  waveform running right to left, about 13 s across: a channel shows its stem or analog
+  input, the return the loudest stem on it. See
+  {ref}`the stem displays <a3mix-displays>`.
+- **Choosing a stem works again:** a channel can pick any stem that is on no other channel,
+  stems on the aux return included (before, every stem StemDeck put on AUX was invisible to
+  the channels). Pushing it takes it off the return. The return now holds **several** stems:
+  its push switches the stem under the cursor on or off.
 - **The desk reads a copy of `a3-osc.json`** beside its script
   (`software/scripts/a3-osc.json`, copied from the Core at deploy); without it the service
   stops and says where it looked. It sends `/device/hello` with the copy's sha256.
