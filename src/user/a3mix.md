@@ -143,49 +143,64 @@ switches in StemDeck: buses 1–4 (they feed the desk's channels 1–4), AUX
 switches**; Core only relays what the desk asks for and what StemDeck reports.
 
 The desk has five small OLED displays: one for each channel 1–4 and one for
-the aux return. Together they show StemDeck's eight stems — deck A's stems 1–4
-in the top row, deck B's stems 1–4 in the bottom row — and a fifth field at the
-bottom right.
+the aux return. Together they show StemDeck's eight stems.
 
-![The five stem displays, scaled up three times: channels 1 to 4, then the aux return](pics_user/a3-mix-stem-displays.png)
+![Four of the stem displays: channel 1 playing a stem, channel 3 on analog, the return, and a display with nothing free](pics_user/a3-mix-stem-grid.png)
 
-*Left to right: channels 1–4, then the return. Channel 1 has stem A1 (●) with
-its frame on it. Channel 2 plays B2 (■) while its frame rests on the free A4.
-Channel 3 plays A3 (▲), framed. Channel 4 plays its analog input (◆ in the A
-field), framed. The return has B3 (★), framed.*
+*Top left: channel 1 plays a stem (the 1), the cursor stands on another, and a
+ring marks a stem that plays elsewhere. Top right: channel 3 plays its analog
+input (the 3 on A, at the end of the top row), the cursor on it. Bottom left:
+the aux return, with the digit of where each stem plays and the cursor on a
+free one. Bottom right: a return display where every stem plays on a channel.*
 
-**Symbols, not numbers.** Every place owns a symbol: channel 1 is ● (circle),
-2 is ■ (square), 3 is ▲ (triangle), 4 is ◆ (diamond), the aux return is ★
-(star). A stem's field shows the symbol of the place where that stem plays, or
-nothing when it plays nowhere. There are no labels and no digits. Under each
-stem field a small level bar shows that stem's level (the `/vu/41`–`/vu/48`
-meters StemDeck sends).
+**The rule.** A stem plays **either on one channel or on the aux return**,
+never on two channels. The return can hold **several** stems. While a stem is
+on a channel, Core shuts that channel's analog input.
 
-**The fifth field.** On a channel display it is the channel's analog input,
-**A**: it shows the channel's own symbol while the channel plays its analog
-input. On the aux-return display it is an empty field, meaning no stem on the
-return.
+**Turn and push.**
 
-- **Turn a channel's encoder** to move the frame — the selected field is drawn
-  filled white — over **A** and the stems that are not playing anywhere else.
-  Nothing switches while you turn.
-- **Push the encoder** to load the selection onto the channel. StemDeck
-  switches that stem onto the channel's bus and the previous one off. **A**
-  takes every stem off the channel, and the analog input plays.
-- **One input per channel, and a stem is in one place only**: never on two
-  channels, and never on a channel and the return. While a stem is on a
-  channel, Core shuts that channel's analog input.
-- **The aux return works like a fifth channel.** Turn to select a stem or the
-  empty field; push puts exactly that one stem on the return (its AUX switch in
-  StemDeck) and the previous one leaves. The empty field takes every stem off
-  the return.
-- **No C field.** A channel's cue is its CUE key (see {ref}`the cue <a3mix-cue>`).
-- Core holds the four channels' selections and the return's, keeps them across
-  a restart and announces them. Without StemDeck, turning still moves the
-  frame, a push does nothing and every channel shows A.
+- **A channel's encoder:** turn moves the cursor over **A** (the analog
+  input) and over the stems that are **not on another channel**. A stem on the
+  aux return counts as free here. Nothing switches while you turn. Push loads
+  the cursor's choice on the channel: what played there is switched off, and a
+  stem that was on the return leaves it. Choose **A** and push, and the
+  channel is back on its analog input.
+- **The aux return's encoder:** turn moves over the stems that are on **no
+  channel**. Push **switches the stem on or off the return**: a stem that is
+  not there goes on, a stem that is there comes off. Do it again for the next
+  stem, and the return holds both.
+- **No C field.** A channel's cue is its CUE key (see
+  {ref}`the cue <a3mix-cue>`), unchanged.
+
+**The upper half: a grid of dots.** Deck A's four stems sit in the top row,
+deck B's four in the row below. **A** (analog) is at the end of the top row.
+The **cursor** is an inverted box, a white square with the dot or digit drawn
+black, where the encoder stands.
+
+- A **filled dot** is a stem you can select. A **hollow ring** is a stem that
+  plays on another channel.
+- A **channel display** shows one digit only, its own (1–4), at what it
+  plays: a stem, or **A** when the channel is on analog.
+- The **return display** is the overview. At every stem it shows the digit of
+  where that stem plays: 1–4 for a channel, 5 for the return, and a plain dot
+  where it plays nowhere.
+
+**The lower half: a waveform.** It looks like the one in StemDeck: a mirrored
+envelope along a centre line. It runs from right to left, the newest sound
+entering at the right edge, and spans about 13 seconds (five steps a second,
+two columns a step). The `/vu/41`–`/vu/48` meters StemDeck sends drive it.
+
+- A **channel** shows the stem it plays, or its own analog input when it is on
+  analog.
+- The **return** shows the loudest of the stems on it.
+- A line that stays flat is silence: a meter that stops draws nothing.
+
+- Core holds the four channels' selections and the return's cursor, keeps them
+  across a restart and announces them. Without StemDeck, turning still moves
+  the cursor, a push does nothing and every channel shows A.
 - A fresh StemDeck starts with every stem on AUX only, so every channel shows
-  **A** until you load a stem; a session saved earlier restores its own
-  switches.
+  **A** until you load a stem, and the return display shows a 5 at every stem;
+  a session saved earlier restores its own switches.
 
 The desk shows what StemDeck reports, so a click on a bus switch on StemDeck's
 own screen shows on the desk too.

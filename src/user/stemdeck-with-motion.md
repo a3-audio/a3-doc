@@ -92,8 +92,8 @@ A few things follow from that:
   number off, and the stem leaves its A³ channel and its movement for the
   Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
   desk's aux return). On the desk, a push of a channel's encoder does this for
-  you (after turning to select the stem): it puts one stem on the channel and
-  takes its AUX away. Light two numbers and it plays on two channels, moving
+  you (after turning to select the stem, which may be one that sits on AUX): it
+  puts one stem on the channel and takes its AUX away. Light two numbers and it plays on two channels, moving
   with both.
 
 (stemdeck-with-motion-setup)=
