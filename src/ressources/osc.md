@@ -188,10 +188,10 @@ acting on it itself.
 | `/channel/{ch}/3d` | f | motion | core (Core passes it on to mixer, motion) | blend between the channel's moving and steady encoders |
 | `/channel/{ch}/azimuth` | f | motion | core | the channel's direction, degrees |
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
-| `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves the selection, switches nothing |
+| `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves its menu's cursor (D1/D2/A, or a deck's stems 1-4 and back), switches nothing |
 | `/channel/{ch}/stem` | i | core | mixer, motion | the stems on this channel's bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input |
-| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: load the selected input (A or a stem) onto the channel |
-| `/channel/{ch}/stem/selected` | i | core | mixer, motion | the channel's selection: 0 = A (analog), 1-8 = stem pair |
+| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: on D1/D2 enters that deck, on A plays the analog input, on a stem loads it as the channel's only stem, on back returns |
+| `/channel/{ch}/stem/menu` | ii | core | mixer, motion | the channel's menu: the level (0 = D1/D2/A, 1 = deck 1, 2 = deck 2), then the cursor (0-2 at the top; stems 0-3 and 4 = back in a deck) |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
 | `/filter/mode` | f\|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
@@ -201,9 +201,10 @@ acting on it itself.
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
 | `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the aux return, the fifth stereo input (was /master/return) |
-| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its selection over the stems on no channel |
-| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: switches its selected stem on or off the return (0: none) |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's selection (1-8; 0 = no stem free), then pairs 1-8: 1 = on the return (AUX) |
+| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its cursor between analog (0) and stem (1) |
+| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: switches the return to the mode under the cursor |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's cursor (0 = analog, 1 = stem), then pairs 1-8: 1 = on the return (AUX) |
+| `/aux-return/stem/mode` | i | core | mixer, motion | the aux return's mode: 1 = stem (every stem on no channel plays on the return), 0 = analog (no stem on the return) |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
