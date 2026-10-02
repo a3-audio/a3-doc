@@ -318,16 +318,21 @@ job fails straight away and the strip says `separator not installed`.
 ### Remote control from the desk
 
 With A³ Core running, the A³ Mixer chooses what is on its channels: turn a
-channel's encoder to select a stem, push to load it. What the desk displays,
+channel's encoder to a deck, push to enter it, then turn to a stem and push to
+load it. What the desk displays,
 and the rules for it, are on the
 {ref}`desk's stem displays <a3mix-displays>`. From StemDeck's side:
 
 - **StemDeck keeps the truth.** Core only relays the desk's request to switch a
   bus and asks StemDeck for all switches when it hears StemDeck for the first
   time. A click on a bus switch here also shows on the desk.
-- **AUX can hold several stems, chosen at the desk.** The aux-return display
-  moves over the stems that are on no channel; a push lights **A** on that stem
-  or, when it is lit, switches it off. A stem loaded on a channel loses its A.
+- **One stem per channel.** A channel plays one stem, and a stem plays on one
+  channel at most. If a session shows several stems on one bus, Core keeps the
+  lowest and switches the others off, about 0.3 s after your reports settle.
+- **AUX follows the return's mode.** In STEM mode every stem no channel plays
+  has its **A** lit, and Core switches a free stem's A back on if you click it
+  off. In ANALOG mode no stem is on AUX. A stem loaded on a channel loses its
+  A.
 - **Core sets the C switches.** A stem's **C** is on while it plays on a cued
   desk channel and off otherwise; Core sets them at every cue change, push and
   report, so a C clicked on StemDeck's own screen is switched back. A push of
