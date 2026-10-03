@@ -121,6 +121,20 @@ On `main` since `v03.0`, not tagged yet.
 
 **Sets and files**
 
+- **Four new mood sets: Tribal, Tension, Acid and Ambient** (2026-10-03). The library is now
+  14 sets, 70 clips and 71 actions (50 shapes, unchanged). Each set has four clips and a spare,
+  and six gestures that move several things at once:
+  - *Tribal* (after Groove, cues Tension Siren): Gallop, Ping Pong, Clave, Zigzag; Move Stomp,
+    Move Call, Width Drum Roll, Speed Double Gallop, FX Thunder.
+  - *Tension* (cues Drop Impact): Siren, Vortex, Helix, Riser; Move Siren, Lift Climb, Speed
+    Accelerate, Width Tighten, FX Filter Rise.
+  - *Acid* (after Break, cues Dub Echo): Loop, Infinity, Epicycle, Pulse; Move Squeeze Sweep,
+    Width Inhale, Move Phase Drift, Speed Double Twist, FX Resonance Climb.
+  - *Ambient* (after Deep, cues Float Aurora): Drift, Wave, Breath, Kepler; Lift Cloud, Move
+    Wind, Width Fog, Speed Slow Tide, FX Rain.
+- **"Only FX changes the sound" no longer holds.** Any action may move and sound at once; A5 is
+  still the dedicated FX and A6 the Cue into the next phase. Every FX still has to change the
+  sound.
 - Save as for a set writes the new set where the list reads it. It shows up straight away and
   no longer overwrites an older set that has the same name.
 - A set carries the four speed keys; loading it brings them back. Sets written before this

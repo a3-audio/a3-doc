@@ -1435,7 +1435,7 @@ screens, and keep the drinks on the other side.
 
 ### Sets and moods
 
-The library ships **50 shapes, 50 clips, 50 actions and 10 sets**, laid out along
+The library ships **50 shapes, 70 clips, 71 actions and 14 sets**, laid out along
 **the arc of a night**: from the first half-empty hour, through the build and the
 peak, to the last record. Every name starts with a **prefix** that says where it
 belongs, so things that belong together sit together in every list in FILES:
@@ -1447,14 +1447,19 @@ belongs, so things that belong together sit together in every list in FILES:
 | Actions | what they do: **Move**, **Lift**, **Width**, **Speed**, **Dub**, **FX**, **Cue** | `Lift Up`, `FX Riser`, `Cue Peak Anthem` |
 | Shapes | the family of the shape | `Flower Rose 5` |
 
-The ten phases, in the order a night usually runs:
+The ten phases of the main arc, in the order a night usually runs:
 
 `Warmup · Groove · Build · Peak · Drop · Break · Dub · Deep · Float · Closing`
 
-**Only FX changes the sound.** Every other action moves the sound through the
-room and leaves the channel's 3d, filter and resonance alone. So a button you
-have never pressed before can be pressed in front of a full floor: at worst the
-sound ends up somewhere unexpected in the room, while the mix stays as you left it.
+Four **mood phases** sit beside it and are entered from it: **Tribal** after
+Groove, **Tension** after Tribal, **Acid** after Break and **Ambient** after Deep.
+That makes 14 phases, one set each.
+
+**Any action may move and sound at once.** A gesture can turn the figure, open
+the filter and push the 3d in one press; the mood sets are full of them. Only
+**A5 stays the dedicated FX** and **A6 the Cue** into the next phase. So look at
+an action's description before you press it in front of a full floor: a button
+you have never used may change the mix as well as the position.
 
 What makes a movement read one way or the other is well studied:
 
@@ -1490,7 +1495,7 @@ And the vocabulary the shapes and actions are made from:
 - **Build-up, drop, breakdown.** The build widens, rises and opens the filter; the drop releases
   it all at once; the breakdown strips it back.
 
-#### The ten sets
+#### The fourteen sets
 
 One set per phase. Each loads the phase's first four clips onto channels 1–4;
 the fifth clip of the phase is the **spare**, for a Cue or for loading by hand
@@ -1508,6 +1513,10 @@ from FILES › CLIPS.
 | Deep | Undertow, Sub, Fog, Lurk | Cellar | Lift Sway / Lift Floor | Move Rock / Lift Down | FX Resonate | Cue Float Aurora |
 | Float | Aurora, Canopy, Blossom, Lullaby | Cloud | Lift Overhead / Width Close | Width Breathe / Move Unwind | FX Swell | Cue Closing Sunset |
 | Closing | Sunset, Farewell, Tide, Ember | Still | Lift Up / Lift Down | Width Open / Speed Tape Stop | FX Swell | Cue Warmup Halo |
+| Tribal | Gallop, Ping Pong, Clave, Zigzag | Echo | Move Stomp / Move Call | Width Drum Roll / Speed Double Gallop | FX Thunder | Cue Tension Siren |
+| Tension | Siren, Vortex, Helix, Riser | Collapse | Move Siren / Lift Climb | Speed Accelerate / Width Tighten | FX Filter Rise | Cue Drop Impact |
+| Acid | Loop, Infinity, Epicycle, Pulse | Hypocycle | Move Squeeze Sweep / Width Inhale | Move Phase Drift / Speed Double Twist | FX Resonance Climb | Cue Dub Echo |
+| Ambient | Drift, Wave, Breath, Kepler | Ellipse | Lift Cloud / Move Wind | Width Fog / Speed Slow Tide | FX Rain | Cue Float Aurora |
 
 <!-- QUESTION (maintainer): the layout rule below says A3 is a strong "more", but Break and Float carry Width Breathe on A3, whose own Mood: line says "less" (library agent, 37b2001). The table shows what ships. Swap the actions, or change the rule? -->
 
@@ -1515,20 +1524,76 @@ The clip names in the table leave out the phase: channel 1 of *Peak* plays
 `Peak Anthem`. All four channels of a set carry the same six actions.
 
 **The six buttons sit the same way in every set**, so the hands learn one
-panel rather than ten:
+panel rather than fourteen:
 
 | | left | right |
 | :--- | :--- | :--- |
 | **top row** (A1 / A2) | a gentle **more** | a gentle **less** |
 | **middle row** (A3 / A4) | a strong **more** | a strong **less** |
-| **bottom row** (A5 / A6) | **FX** — the one button that changes the sound | **Cue** into the next phase |
+| **bottom row** (A5 / A6) | **FX** — the dedicated sound button: 3d and filter | **Cue** into the next phase |
 
-*More* moves the room towards energy and openness, *less* towards calm and
-weight. Every action script says which it is on its `Mood:` line.
+In the ten main sets, *more* moves the room towards energy and openness, *less* towards calm and
+weight. The four mood sets use the top two rows for their own gestures instead. Every action script says which it is on its `Mood:` line.
 
 <!-- GIF: howto-library-load-set.gif | region: 0,0,768,1024 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing) | steps: With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped. | "Four channels playing" / "FILES › SETS" / "Tap Warmup: it only shows" / "Load: the set is on, all stopped" / "Close FILES, then ▶ when ready" | a shipped set loads stopped, so it ends with FILES closed and ▶ ready -->
 
 ![With four channels playing, open FILES › SETS, tap Warmup, tap Load, close FILES: the set is loaded, stopped.](pics_user/howto-library-load-set.gif)
+
+#### The four mood sets
+
+Each of these is one mood, built the way *Groove* is: four figures that belong
+together, one per channel, and six gestures that each move several things at
+once. Any channel can take any gesture. Where a gesture says *held*, it lasts
+only while the pad is held. The first two rows are not "more" and "less" here,
+they are different gestures of the same mood.
+
+**Tribal** — percussive, close to the ground, call and answer. Sits after
+*Groove*; A6 cues **Tension Siren**.
+
+- Clips: Gallop (Rhythm Gallop), Ping Pong (Rhythm Ping Pong, which answers
+  channel 1 from the opposite side), Clave (Rhythm Clave 2-3, Groove's clave turned
+  round), Zigzag (Edge Zigzag, hard corners) · spare: Echo (Rhythm Echo).
+- Actions: **Move Stomp** (held; the figure stamps round once a bar and leans to
+  the floor), **Move Call** (the figure jumps to the opposite side and answers),
+  **Width Drum Roll** (held; a fast squeeze sweep, front-back against
+  left-right), **Speed Double Gallop** (held; twice as fast, low and rolling),
+  **FX Thunder** (held; the 3d hits full and the filter goes low and dark),
+  **Cue Tension Siren**.
+
+**Tension** — circling, rising, faster. Sits after *Tribal* (or a *Build*); A6
+cues **Drop Impact**.
+
+- Clips: Siren (Orbit Circle), Vortex (Spiral Vortex), Helix (Spiral Helix),
+  Riser (Spiral Riser) · spare: Collapse (Spiral Collapse), the moment before
+  the drop.
+- Actions: **Move Siren** (held; circles once a bar, brighter as it goes),
+  **Lift Climb** (held; climbs to the ceiling while held), **Speed Accelerate**
+  (held; four times as fast and turning), **Width Tighten** (held; narrows to a
+  point and pulses), **FX Filter Rise** (held; the filter opens all the way,
+  slowly, resonance high), **Cue Drop Impact**.
+
+**Acid** — one figure turning slowly, hypnotic, with resonance. Sits after
+*Break*; A6 cues **Dub Echo**.
+
+- Clips: Loop (Loop 3-4), Infinity (Loop Infinity), Epicycle (Cycle Epi 3-1),
+  Pulse (Orbit Pulse) · spare: Hypocycle (Cycle Hypo 5-3), the long one.
+- Actions: **Move Squeeze Sweep** (held; the figure is squeezed and the squeeze
+  sweeps), **Width Inhale** (held; the spread breathes out and in, the filter with
+  it), **Move Phase Drift** (the figure slips a quarter turn and drifts out of
+  phase, at most one turn in eight bars), **Speed Double Twist** (held; twice as
+  fast and twisting), **FX Resonance Climb** (held; the acid line opens:
+  resonance high, cutoff climbing), **Cue Dub Echo**.
+
+**Ambient** — weather overhead, slow and wide. Sits after *Deep*; A6 cues
+**Float Aurora**.
+
+- Clips: Drift (Wander Drift, overhead), Wave (Wander Wave), Breath (Spiral
+  Breath), Kepler (Orbit Kepler) · spare: Ellipse (Orbit Ellipse), calm and flat.
+- Actions: **Lift Cloud** (held; the figure rises slowly into the ceiling and
+  drifts there), **Move Wind** (held; a slow turn with a pull downwards),
+  **Width Fog** (held; spreads wide and soft), **Speed Slow Tide** (held; half as
+  fast, rising and falling like a tide), **FX Rain** (held; some 3d, the cutoff
+  low, a long tail), **Cue Float Aurora**.
 
 #### Across a night
 
@@ -1539,6 +1604,10 @@ The A6 Cues chain the sets into the arc of a night:
   next drop. Round that loop as often as the floor asks for it.
 - **The side road:** Dub → Deep → Float → Closing, and Closing cues **Warmup**
   for the next night (or the next DJ).
+- **The mood sets** hang off the arc: Groove is followed by **Tribal**, which
+  cues **Tension**, which cues **Drop** (Groove's own A6 still cues Build). **Acid**
+  follows Break and cues **Dub**; **Ambient** follows Deep and cues **Float**.
+  You enter them by loading the set in FILES.
 - **Getting onto the side road** is up to you: load the Dub or the Deep set in
   FILES, or put one of the two spare Cues on a button — **Cue Dub Echo**, the dub
   escape, or **Cue Closing Still**, the emergency calm for when the fire alarm
@@ -1598,10 +1667,10 @@ on the sixteenths of its rhythm:
 - **Gallop:** the sixteenth gallop, x.xx on every beat, over three points.
 - **Echo:** throws that halve, like a delay's repeats.
 
-#### Clips (50), by phase
+#### Clips (70), by phase
 
 A clip is a shape plus everything it is played with: speed, height, width,
-spin, the accent. Five per phase, named `<Phase> <Name>`; the first four are
+spin, the accent. Five per phase, 14 phases, named `<Phase> <Name>`; the first four are
 the set's, the fifth is the spare.
 
 | Phase | Clips (shape) | Character |
@@ -1616,6 +1685,10 @@ the set's, the fifth is the spare.
 | **Deep** | Undertow (Spiral Collapse), Sub (Orbit Circle), Fog (Wander Drift), Lurk (Wander Wave) · spare: Cellar (Cycle Hypo 5-3) | low, slow, dark |
 | **Float** | Aurora (Loop 1-2), Canopy (Cycle Hypo 7-2), Blossom (Flower Petal), Lullaby (Loop Figure 8) · spare: Cloud (Flower Clover) | overhead, slow, smooth |
 | **Closing** | Sunset (Flower Rose 4), Farewell (Spiral Collapse), Tide (Wander Wave), Ember (Orbit Ellipse) · spare: Still (Orbit Circle) | descending, slowing, settling |
+| **Tribal** | Gallop (Rhythm Gallop), Ping Pong (Rhythm Ping Pong), Clave (Rhythm Clave 2-3), Zigzag (Edge Zigzag) · spare: Echo (Rhythm Echo) | percussive, low, call and answer |
+| **Tension** | Siren (Orbit Circle), Vortex (Spiral Vortex), Helix (Spiral Helix), Riser (Spiral Riser) · spare: Collapse (Spiral Collapse) | circling, rising, faster |
+| **Acid** | Loop (Loop 3-4), Infinity (Loop Infinity), Epicycle (Cycle Epi 3-1), Pulse (Orbit Pulse) · spare: Hypocycle (Cycle Hypo 5-3) | one figure, slowly turning, hypnotic |
+| **Ambient** | Drift (Wander Drift), Wave (Wander Wave), Breath (Spiral Breath), Kepler (Orbit Kepler) · spare: Ellipse (Orbit Ellipse) | overhead, slow, wide |
 
 <!-- QUESTION (maintainer): the Character column comes from the library plan; the clip JSON files carry no mood text of their own. Should they, like the actions' Mood: line? -->
 
@@ -1626,15 +1699,15 @@ Some shapes turn up in several phases — Orbit Circle is a calm *Halo* in the
 warm-up, a heavy *Sub* in Deep and a *Still* at closing time. The shape is the
 path; the clip decides whether it floats overhead or rumbles under the floor.
 
-#### Actions (50)
+#### Actions (71)
 
 An action changes the clip for as long as its accent lasts, then the clip comes
 back to itself (see ACTION). The prefix says what it changes:
 
-- **Move, Lift, Width, Speed, Dub** only move the sound: turns, height, spread,
-  tempo of the shape, dub tricks in space. 3d, filter and resonance stay where
-  you set them.
-- **FX** are the only actions that change the sound — 3d and the filter.
+- **Move, Lift, Width, Speed, Dub** mostly move the sound: turns, height, spread,
+  tempo of the shape, dub tricks in space. Any of them may also touch 3d, filter
+  and resonance where the mood calls for it (the mood sets' gestures often do).
+- **FX** are the dedicated sound actions — 3d and the filter. Every FX changes the sound.
 - **Cue** loads a clip and plays it (see *Across a night* above).
 
 **Mode**: **Hold** acts for as long as the pad is held; **1shot** fires and lets
@@ -1654,6 +1727,12 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Move Tilt | the shape leans forward and rocks | more — the room tips towards you (Q1/Q2) | Hold |
 | Move Rock | the shape swings up and down the room | more — a swing; groove (Q1) | Hold |
 | Move Mirror | the shape turned half round and run backwards | less — a reflective turn | Hold |
+| Move Stomp | the figure stamps round once a bar and leans to the floor | more — percussive, low; tribal (Q1) | Hold |
+| Move Call | the figure jumps to the opposite side and answers | a dialogue between channels | 1shot |
+| Move Squeeze Sweep | the figure is squeezed and the squeeze sweeps | hypnotic — one figure, kneaded; acid (Q2) | Hold |
+| Move Phase Drift | the figure slips a quarter turn and starts drifting | hypnotic — out of phase with the others; acid (Q2) | 1shot |
+| Move Wind | a slow turn with a pull downwards | less — wind through the room; ambient (Q3) | Hold |
+| Move Siren | the figure circles once a bar, brighter as it goes | more — an alarm; tension (Q2) | Hold |
 
 **Lift** — height:
 
@@ -1665,6 +1744,8 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Lift Down | the shape sinks below ear height | less — weight; darker (Q3) | Hold |
 | Lift Floor | the sound goes under the floor | less — heavy, dark (Q3) | Hold |
 | Lift Sway | the height sways on the bar | more — a slow swell of height (Q4 → Q1) | Hold |
+| Lift Cloud | the figure rises slowly into the ceiling and drifts there | less — weather overhead; ambient (Q3) | Hold |
+| Lift Climb | the figure climbs to the ceiling while held | more — rising; tension (Q2) | Hold |
 
 **Width** — spread:
 
@@ -1676,6 +1757,10 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Width Point | everything pulls in to one point | less — the sound comes close; tension (Q2) | Hold |
 | Width Breathe | the spread opens and closes slowly | less — a calm breath (Q4) | Hold |
 | Width Squash | pressed flat, springs back when you let go | less — pressure (Q2/Q3) | Hold |
+| Width Drum Roll | a fast squeeze sweep, front-back against left-right | more — a roll on the skins; tribal (Q1) | Hold |
+| Width Inhale | the spread breathes out and in, the filter with it | hypnotic — slow lungs; acid (Q2) | Hold |
+| Width Fog | the figure spreads wide and soft | less — everything blurs; ambient (Q3) | Hold |
+| Width Tighten | the figure narrows to a point and pulses | more — the room closes in; tension (Q2) | Hold |
 
 **Speed** — the tempo of the shape:
 
@@ -1686,6 +1771,10 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Speed Stutter | the shape chatters at a sixteenth | more — nervous; a stutter edit in space (Q2) | Hold |
 | Speed Tape Stop | the shape winds down and stands still | less — the motor stops; the end of a phrase (Q3) | 1shot |
 | Speed Halt | everything that moves on its own stops, and the pass ends | less — the reset | 1shot |
+| Speed Double Gallop | twice as fast, low and rolling | more — the gallop runs; tribal (Q1) | Hold |
+| Speed Double Twist | twice as fast and twisting | more — the line gets busy; acid (Q2) | Hold |
+| Speed Slow Tide | half as fast, rising and falling like a tide | less — energy down; ambient (Q3) | Hold |
+| Speed Accelerate | four times as fast and turning | more — faster and faster; tension (Q2) | Hold |
 
 **Dub** — the dub desk's moves, played in space instead of on the sound:
 
@@ -1698,7 +1787,7 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Dub Scatter | somewhere else every time it is put on a button | more — a surprise; playful | 1shot |
 | Dub Stitch | the gaps in a take glide shut | less — smooth, calm (Q4) | Hold |
 
-**FX** — the only ones that change the sound:
+**FX** — the dedicated sound actions:
 
 | Action | What it does | Mood | Mode |
 | :--- | :--- | :--- | :--- |
@@ -1708,6 +1797,10 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | FX Riser | four bars of build: spread, spin, filter | more — the build before the drop (Q2 → Q1) | Hold |
 | FX Impact | the drop: everything at once, then a long fall | more — the release; impact (Q2 → Q1) | 1shot |
 | FX Swell | depth and filter rise together, gently | more — a warm lift (Q4 → Q1) | Hold |
+| FX Thunder | the 3d hits full and the filter goes low and dark | more — weight under the drums; tribal (Q1) | Hold |
+| FX Resonance Climb | the acid line opens: resonance high, cutoff climbing | more — the squelch; acid (Q2) | Hold |
+| FX Rain | a soft wash: some 3d, the cutoff low, a long tail | less — rain on the roof; ambient (Q3) | Hold |
+| FX Filter Rise | the filter opens all the way, slowly, resonance high | more — the riser before the drop; tension (Q2) | Hold |
 
 **Cue** — load a clip, play it on the next downbeat:
 
@@ -1725,6 +1818,7 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Cue Warmup Halo | Warmup Halo | Closing |
 | Cue Dub Echo | Dub Echo | — the dub escape |
 | Cue Closing Still | Closing Still | — the emergency calm |
+| Cue Tension Siren | Tension Siren | Tribal |
 
 **README** in the ACTIONS list is not an action but the scripting manual.
 Firing it changes nothing.
