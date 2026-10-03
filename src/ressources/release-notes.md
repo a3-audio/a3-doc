@@ -333,8 +333,8 @@ On `main` since `v03.0`, not tagged yet.
   on D1 puts the cursor behind the dot, on the stem that plays, and turning steps through
   **1 2 3 4 <** (the field shows `D1.2`, `D1.<`). Push on a stem loads it as
   the channel's stem of that deck (one of each deck may play; push on the loaded one takes it
-  off) and jumps back onto the field; a stem that plays on another channel is crossed out with
-  that channel's number and a push on it does nothing; push on < changes nothing and jumps
+  off) and jumps back onto the field; a stem that plays on another channel reads e.g.
+  `D1.1>4` (stem 1 is on channel 4), not inverted, and a push on it does nothing; push on < changes nothing and jumps
   back. The display has the
   menu in its upper half (cursor inverted, what plays underlined) and the waveform below. See
   {ref}`the stem displays <a3mix-displays>`.

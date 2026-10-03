@@ -149,7 +149,7 @@ the aux return.
 
 *Top left: a channel that plays deck 1's stem 3, the cursor on D1. Top right:
 D1 being edited, the cursor behind the dot on 2 -- a push would load stem 2.
-Middle left: stem 1 crossed out because it plays on channel 4. Middle right:
+Middle left: `D1.1>4`, stem 1 plays on channel 4 and cannot be loaded here. Middle right:
 `<`, which leaves the channel as it is (still underlined: stem 3 plays on).
 Bottom left: the return in STEM mode, with nine meters. Bottom right: the
 return in ANALOG mode.*
@@ -178,9 +178,9 @@ display: a deck's stem is edited in place, behind the dot.
     jumps back onto the field.
   - **Push on the loaded stem** (the underlined one) takes it off the channel
     and jumps back.
-  - A stem that **plays on another channel** is crossed out, with that
-    channel's number small beside it. A push on it does nothing, and the
-    cursor stays behind the dot.
+  - A stem that **plays on another channel** says where: `D1.1>4` is stem 1,
+    playing on channel 4. It is not inverted, because a push on it does
+    nothing; the cursor stays behind the dot.
   - **Push on <** changes nothing and jumps back.
 
 **The display.** The upper half is the menu: the cursor is inverted -- a whole
