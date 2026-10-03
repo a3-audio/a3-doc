@@ -145,13 +145,14 @@ switches**; Core only relays what the desk asks for and what StemDeck reports.
 The desk has five small OLED displays: one for each channel 1–4 and one for
 the aux return.
 
-![Stem menus on the desk's displays: a channel at the top level, two channels at the deck level, the return in stem mode and in analog mode](pics_user/a3-mix-stem-menu.png)
+![Stem menus on the desk's displays: a channel's menu, three times while its deck 1 stem is edited, the return in stem mode and in analog mode](pics_user/a3-mix-stem-menu.png)
 
-*Top left: a channel at the top level, the cursor on D1, D2 underlined as the
-source it plays from. Top right: deck 2's level, stem 1 underlined as the one
-that plays, the cursor on 2. Middle left: deck 1's level, stem 3 crossed out
-because it plays on channel 2, the cursor on it. Middle right: the return in
-STEM mode, with nine meters. Bottom: the return in ANALOG mode.*
+*Top left: a channel that plays deck 1's stem 3, the cursor on D1. Top right:
+D1 being edited, the cursor behind the dot on 2 -- a push would load stem 2.
+Middle left: stem 1 crossed out because it plays on channel 4. Middle right:
+`<`, which leaves the channel as it is (still underlined: stem 3 plays on).
+Bottom left: the return in STEM mode, with nine meters. Bottom right: the
+return in ANALOG mode.*
 
 **The rule.** A channel plays **one stem of each deck** -- a stem of D1, a stem
 of D2, or one of each -- or its **analog input**, and a stem plays on **one
@@ -161,26 +162,30 @@ channel's analog input.
 
 ### A channel's menu
 
-A channel's encoder is a menu of two levels.
+A channel's menu is one row, **D1.3 · D2.- · A**, and it never leaves the
+display: a deck's stem is edited in place, behind the dot.
 
-- **Level 1: D1.3 · D2.- · A.** Turn moves over StemDeck's deck 1, deck 2 and
-  the analog input. Each deck says which of its stems plays on this channel:
-  `D1.3` is deck 1's stem 3, `D2.-` means nothing from deck 2.
-  - **Push on A** plays the analog input at once; the channel's stems leave.
-  - **Push on D1 or D2** only enters that deck. Nothing changes in the sound
-    yet.
-- **Level 2: one large entry at a time.** Turn steps through the deck's
-  stems, `D1.1` … `D1.4`, and `<` for the way back.
+- **Turn** moves the cursor over StemDeck's deck 1, deck 2 and the analog
+  input. Each deck says which of its stems plays on this channel: `D1.3` is
+  deck 1's stem 3, `D2.-` means nothing from deck 2.
+- **Push on A** plays the analog input at once; the channel's stems leave.
+- **Push on D1 or D2** moves the cursor behind that field's dot, onto the stem
+  that plays (or stem 1 if none does). Nothing changes in the sound yet.
+  **Turn** now steps through `1 2 3 4 <`, and the field shows the candidate:
+  `D1.2`, `D1.<`.
   - **Push on a stem** loads it as the channel's stem **of that deck**,
-    replacing that deck's stem there; the other deck's stem stays.
-  - **Push on the loaded stem** (the underlined one) takes it off the channel.
+    replacing that deck's stem there; the other deck's stem stays. The cursor
+    jumps back onto the field.
+  - **Push on the loaded stem** (the underlined one) takes it off the channel
+    and jumps back.
   - A stem that **plays on another channel** is crossed out, with that
-    channel's number small beside it. A push on it does nothing.
-  - **Push on <** goes back to level 1.
+    channel's number small beside it. A push on it does nothing, and the
+    cursor stays behind the dot.
+  - **Push on <** changes nothing and jumps back.
 
-**The display.** The upper half is the menu: at the top level the cursor is
-inverted and what the channel plays is underlined; in a deck the one entry
-shown is the cursor, underlined if it plays here. The lower half is the **waveform** of
+**The display.** The upper half is the menu: the cursor is inverted -- a whole
+field, or only the part behind the dot while a stem is edited -- and what the
+channel plays is underlined. The lower half is the **waveform** of
 what the channel plays, as StemDeck draws it: a mirrored envelope along a
 centre line, running right to left, the newest sound entering at the right edge
 and about 13 seconds across. A channel shows its stem, or its own analog input

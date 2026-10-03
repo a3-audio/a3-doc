@@ -329,11 +329,13 @@ On `main` since `v03.0`, not tagged yet.
 - **A channel's encoder is a two-level menu** (2026-10-02), replacing the dot grid. Level 1
   turns over **D1 · D2 · A**: push on A plays the analog input at once, push on D1 or D2
   only enters that deck; the top level reads e.g. **D1.3 D2.- A** -- which stem of each deck
-  plays (2026-10-03). Level 2 shows one large entry at a time, **D1.1** … **D1.4** and **<**:
-  push on a stem loads it as
+  plays (2026-10-03). A deck is edited in place, with no screen of its own (2026-10-03): push
+  on D1 puts the cursor behind the dot, on the stem that plays, and turning steps through
+  **1 2 3 4 <** (the field shows `D1.2`, `D1.<`). Push on a stem loads it as
   the channel's stem of that deck (one of each deck may play; push on the loaded one takes it
-  off), a stem that plays on another channel is crossed out with that
-  channel's number and a push on it does nothing, push on < goes back. The display has the
+  off) and jumps back onto the field; a stem that plays on another channel is crossed out with
+  that channel's number and a push on it does nothing; push on < changes nothing and jumps
+  back. The display has the
   menu in its upper half (cursor inverted, what plays underlined) and the waveform below. See
   {ref}`the stem displays <a3mix-displays>`.
 - **One stem of each deck per channel, a stem on one channel at most**, kept by Core: when
