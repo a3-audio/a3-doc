@@ -328,7 +328,9 @@ On `main` since `v03.0`, not tagged yet.
 
 - **A channel's encoder is a two-level menu** (2026-10-02), replacing the dot grid. Level 1
   turns over **D1 · D2 · A**: push on A plays the analog input at once, push on D1 or D2
-  only enters that deck. Level 2 turns over **1 · 2 · 3 · 4 · <**: push on a stem loads it as
+  only enters that deck; the top level reads e.g. **D1.3 D2.- A** -- which stem of each deck
+  plays (2026-10-03). Level 2 shows one large entry at a time, **D1.1** … **D1.4** and **<**:
+  push on a stem loads it as
   the channel's stem of that deck (one of each deck may play; push on the loaded one takes it
   off), a stem that plays on another channel is crossed out with that
   channel's number and a push on it does nothing, push on < goes back. The display has the

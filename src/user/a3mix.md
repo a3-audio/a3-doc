@@ -163,22 +163,24 @@ channel's analog input.
 
 A channel's encoder is a menu of two levels.
 
-- **Level 1: D1 · D2 · A.** Turn moves over StemDeck's deck 1, deck 2 and the
-  analog input.
+- **Level 1: D1.3 · D2.- · A.** Turn moves over StemDeck's deck 1, deck 2 and
+  the analog input. Each deck says which of its stems plays on this channel:
+  `D1.3` is deck 1's stem 3, `D2.-` means nothing from deck 2.
   - **Push on A** plays the analog input at once; the channel's stems leave.
   - **Push on D1 or D2** only enters that deck. Nothing changes in the sound
     yet.
-- **Level 2: 1 · 2 · 3 · 4 · <.** Turn moves over the deck's four stems and
-  the way back.
+- **Level 2: one large entry at a time.** Turn steps through the deck's
+  stems, `D1.1` … `D1.4`, and `<` for the way back.
   - **Push on a stem** loads it as the channel's stem **of that deck**,
     replacing that deck's stem there; the other deck's stem stays.
   - **Push on the loaded stem** (the underlined one) takes it off the channel.
   - A stem that **plays on another channel** is crossed out, with that
-    channel's number small at its top right. A push on it does nothing.
+    channel's number small beside it. A push on it does nothing.
   - **Push on <** goes back to level 1.
 
-**The display.** The upper half is the text menu: the cursor is inverted and
-what the channel plays is underlined. The lower half is the **waveform** of
+**The display.** The upper half is the menu: at the top level the cursor is
+inverted and what the channel plays is underlined; in a deck the one entry
+shown is the cursor, underlined if it plays here. The lower half is the **waveform** of
 what the channel plays, as StemDeck draws it: a mirrored envelope along a
 centre line, running right to left, the newest sound entering at the right edge
 and about 13 seconds across. A channel shows its stem, or its own analog input
