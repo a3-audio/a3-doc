@@ -99,8 +99,10 @@ comes in on the channel:**
 - **With A on the channel** it is the normal channel cue, and all of
   StemDeck's C switches are off.
 
-**The return is on the mix side only.** A cue does not bring it into the
-headphones: it carries stems or the analog return, not a deck's effects.
+**The return has a cue of its own**, the CUE field on its display (see
+{ref}`the aux return <a3mix-displays>`). A channel's cue does not bring the
+return along: it carries stems or the analog return, not a deck's effects. On
+the mix side the return is always heard, like every channel.
 
 Two more things reach the headphones, on `dec_phones`:
 
@@ -185,24 +187,31 @@ off, about 0.3 s after StemDeck's reports have settled.
 
 ### The aux return
 
-![The return's selector: STEM at the left, its heading inverted because stem mode plays, with the cursor arrow over its loud bar; ANALOG at the right with a low bar](pics_user/a3-mix-return-selector.png)
+![The return's selector: STEM at the left with a loud bar and the bracket over it, because stem mode plays; ANALOG in the middle with a low bar; at the right, behind a thin line, the CUE field, filled because the return is cued, with the cursor arrow over it](pics_user/a3-mix-return-selector.png)
 
-*Stem mode plays, so the STEM heading is inverted. The arrow points at STEM,
-which is loud. ANALOG at the right is quiet.*
+*Stem mode plays, so the bracket is over STEM, which is loud. ANALOG is quiet.
+The CUE field at the right is filled: the return is cued. The arrow points at
+CUE.*
 
 The return's display shows **two meters**, one for each mode, each under its
-heading:
+heading, and a **CUE field** at the right:
 
 - **STEM** (left): the stems on StemDeck's AUX bus, the louder of its two
   sides. With an older StemDeck that does not send this meter, STEM shows the
   loudest stem on the return.
-- **ANALOG** (right): the analog return, the louder of aux L and R.
+- **ANALOG** (middle): the analog return, the louder of aux L and R.
+- **CUE** (right, behind a thin line): the return's own cue. It looks like a
+  channel's STEM toggle: filled while the return is cued, an outline while it
+  is not.
 
-They are plain bars, like the channels' meters. The heading of the mode
-that plays is **inverted**. **Turn** moves the cursor, the same arrow as on a
-channel, between STEM and ANALOG; **push** switches the return to the mode
-under the cursor:
+The meters are plain bars, like the channels' meters. The **bracket** marks the
+mode that plays. **Turn** moves the cursor, the same arrow as on a channel, in a
+ring: STEM, ANALOG, CUE, then STEM again. **Push** does what the field under the
+cursor says:
 
+- **CUE:** switches the return's cue on or off. The mode stays as it is. While
+  the cue is on, the return is in the headphones on the cue side of the
+  phones-mix knob.
 - **STEM, stem mode:** every stem that no channel plays goes to the return
   (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
   a stem a channel lets go returns to it. If you switch a free stem's **A**
@@ -221,7 +230,7 @@ last over. A clean bar at full scale stays solid, so you can tell the two apart.
 
 ### Without StemDeck
 
-- Core holds each channel's cursor and last stem and the return's mode, keeps
+- Core holds each channel's cursor and last stem and the return's mode and cue, keeps
   them across a restart and announces them. A channel's cursor starts on the
   STEM toggle.
 - **Without StemDeck**, turning still moves the cursor, a push switches
