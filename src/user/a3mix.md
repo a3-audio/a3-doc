@@ -154,13 +154,19 @@ The display does not show **which** stem plays on the channel, only that one
 does. While you turn, you want to see the selector and nothing else.
 
 **Turn** moves the cursor over nine positions: the eight stems, then the
-STEM toggle. It stops at both ends and switches nothing.
+STEM toggle. It runs in a ring: one click left from the first stem is the
+STEM toggle, one click right from the toggle the first stem. Turning switches
+nothing.
 
 **Push on a stem** makes it the channel's only input. The channel's other
 stem leaves. If the stem plays on another channel, it moves here, and that
 channel goes back to its analog input. Core remembers it as the
-channel's **last stem**. A push on the stem that already plays changes
-nothing.
+channel's **last stem**.
+
+**Push on the stem that already plays** takes it off the channel, as the STEM
+toggle's off does: the channel plays its analog input again, and the stem stays
+the last stem. With the return in STEM mode, the stem goes to the return. A
+second push brings it back to the channel.
 
 **Push on the STEM toggle** switches the stem off and on:
 
