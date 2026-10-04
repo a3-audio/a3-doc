@@ -188,10 +188,10 @@ acting on it itself.
 | `/channel/{ch}/3d` | f | motion | core (Core passes it on to mixer, motion) | blend between the channel's moving and steady encoders |
 | `/channel/{ch}/azimuth` | f | motion | core | the channel's direction, degrees |
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
-| `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves its menu's cursor (D1/D2/A, or a deck's stems 1-4 and back), switches nothing |
+| `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves its selector's cursor over the nine inputs, stopping at both ends; switches nothing |
 | `/channel/{ch}/stem` | i | core | mixer, motion | the stems on this channel's bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input |
-| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: on D1/D2 enters that deck at the stem it plays, on A plays the analog input, on a stem loads it as the channel's stem of that deck (one of each deck may play) or unloads it if loaded and returns to the top, on back returns; a stem playing on another channel does nothing |
-| `/channel/{ch}/stem/menu` | ii | core | mixer, motion | the channel's menu: the level (0 = D1/D2/A, 1 = deck 1, 2 = deck 2), then the cursor (0-2 at the top; stems 0-3 and 4 = back in a deck) |
+| `/channel/{ch}/stem/push` | i | mixer | core | the channel's encoder pushed: the input under the cursor becomes the channel's only input -- a stem playing on another channel moves here, A releases every stem so the analog input plays; a push on what already plays changes nothing |
+| `/channel/{ch}/stem/cursor` | i | core | mixer, motion | the channel's selector cursor: 0-3 deck 1's stems 1-4, 4-7 deck 2's stems 1-4, 8 = A, the analog input |
 | `/filter/frequency` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, motion | core (Core passes it on to mixer, motion) | the master filter's resonance (was /fx/resonance) |
 | `/filter/mode` | f\|s | mixer, motion | core (Core passes it on to mixer, motion) | high-pass or low-pass (was /fx/mode) |
