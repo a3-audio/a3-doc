@@ -22,10 +22,8 @@ on a tower, a Mac and a NUC.
 | **V02** | AMD Threadripper, 16 cores | Digigram LX Dante |
 | **V01** | Intel i5, 4 cores | MiniDSP Streamer (USB ↔ ADAT), Behringer ADA8000, Behringer U-Phoria as a headphone amp, JBL GTO6000 6-channel amp, TP-Link 5-port PoE switch |
 
-The machine these pages were written on is a different box running the same
-software: an **Intel NUC8i7HNK** (i7-8705G) on Debian with a realtime kernel.
-A³ Core is not tied to one computer — it is that install plus REAPER,
-the beat-analyzer and the OSC router, and it has run on a tower, a Mac and this.
+The rig runs on an **Intel NUC8i7HNK** (i7-8705G) on
+Debian with a realtime kernel; it also runs A³ Motion's UI and StemDeck.
 
 ![A³ Core on an Intel NUC](pics_assembly/v03/a3core_v03_nuc.jpg)
 

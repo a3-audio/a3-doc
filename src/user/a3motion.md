@@ -1910,19 +1910,6 @@ the ellipse belongs to the shape and travels with it.
 
 ### The panel's electronics
 
-An ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) reads the panel's buttons, encoders,
-pots and LEDs, and talks to the Raspberry Pi over a binary poll-frame protocol
-on USB serial.
-
-## Specs
-
-Current revision, V03:
-
-- PoE, 31.5 W max
-- Raspberry Pi 5 running the touchscreen UI
-- ESP32-S3 for the panel's buttons, encoders, pots and LEDs
-- 7" capacitive multi-touch display
-- A³ Motion Buttonmatrix PCB V03, A³ Motion Mainboard PCB V03
-
-Earlier revisions are listed under
-[Configuration](https://a3-audio.github.io/a3-doc/configuration/moc.html).
+The panel has a microcontroller of its own and connects to the UI computer
+over USB. What it is made of, which computers run the UI and how its serial
+port is found: {ref}`A³ Motion hardware <moc-hardware>`.

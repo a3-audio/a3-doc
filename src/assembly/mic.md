@@ -24,7 +24,7 @@
 ![](pics_assembly/v02/a3mix_v02_desk_01.jpg) | 
 ![](pics_assembly/v02/a3mix_v02_wires_01.jpg) | ![](pics_assembly/v02/a3mix_v02_wires_02.jpg)
 
-## Specifications
+## Specifications, V02
 ### Multiplexer pin configuration
 #### Multiplexer 1-4 (hc4051)
 Function (potentiometer)| Pin

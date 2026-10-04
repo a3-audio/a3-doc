@@ -124,5 +124,6 @@ unchanged and this function is now one branch.
 
 ## Panel firmware
 Written in C++ as a PlatformIO project,
-[`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware).
-V02 runs on a Teensy 4.1; V03 moves to a Raspberry Pi Pico with Ethernet.
+[`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware),
+for the panel controller named on {ref}`A³ Mixer hardware <mic-hardware>`.
+How to build it: {doc}`build`.

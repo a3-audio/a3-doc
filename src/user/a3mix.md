@@ -248,15 +248,7 @@ so it can take up to about 90 seconds.
 | Back | **PHONES IN** | the cue outputs coming back, 2× female XLR |
 | Back | **ETHERNET** | the PoE switch — power and every message, on one cable |
 
-## A³ Mix Specification
+## Hardware
 
-Shipping revision, V02:
-
-- PoE, 24 W max
-- Raspberry Pi 3B and Teensy 4.1
-- A³ Mixer Mainboard PCB V02
-
-**V03 is in development** and replaces that pair with a single Raspberry Pi
-Pico with Ethernet (WIZnet W5500-EVB-Pico), plus USB-C, 45 mm faders and a
-6.3 mm front jack. See
-[Configuration](https://a3-audio.github.io/a3-doc/configuration/mic.html).
+What the desk is made of, today and planned: {ref}`A³ Mixer hardware
+<mic-hardware>`.

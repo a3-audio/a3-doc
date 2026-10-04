@@ -37,10 +37,8 @@ front | from inside | the button matrix, with the ESP32-S3
 ---|---|---
 ![](pics_assembly/v03/a3motion_v03_panel_front.jpg) | ![](pics_assembly/v03/a3motion_v03_panel_back.jpg) | ![](pics_assembly/v03/a3motion_v03_buttonmatrix_esp32.jpg)
 
-**V03 moves from a Teensy 4.1 to an ESP32-S3** (`esp32-s3-devkitc-1-n16r8`),
-the board sitting at the top of the matrix PCB. It talks to the UI over a
-binary poll-frame protocol on USB serial — see
-[A³ Motion Development](https://a3-audio.github.io/a3-doc/development/moc.html).
+The ESP32-S3 sits at the top of the matrix PCB. What the panel is made of and
+how it reaches the UI: {ref}`A³ Motion hardware <moc-hardware>`.
 
 ### Running
 
@@ -78,7 +76,7 @@ draft | print
 ![a3motion-housing](pics_assembly/v02/a3motion_v02_housing_01.jpg) | ![](pics_assembly/v02/a3motion_v02_housing_02.jpg)
 
 
-## Estimated power consumption
+## Estimated power consumption, V02
 Device | Watts
 ---|---
 Raspberry Pi 4b | 15W

@@ -18,9 +18,10 @@ where they give a number it is the file's.
 The machines are named in the file's `hosts` section; the Host column of the
 [listener table](#ports-by-listener) shows each name with its address.
 
-A³ Motion's UI currently runs **on the Core machine**, which is why Core and
-the beat-analyzer address it as `127.0.0.1`. On a rig where it runs on its own
-Raspberry Pi that becomes the Pi's address; nothing else changes.
+A³ Motion's UI runs **on the Core machine** on the rig, which is why Core and
+the beat-analyzer address it as `127.0.0.1`. Where it runs on a machine of its
+own (see {ref}`A³ Motion hardware <moc-hardware>`), that becomes the machine's
+address; nothing else changes.
 
 ## Cabling
 
