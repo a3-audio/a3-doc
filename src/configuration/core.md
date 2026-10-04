@@ -477,6 +477,8 @@ front of the rig.
 | `--no-web` | do not open the window at all |
 | `--save-project` | ask REAPER to save its project every few minutes when something has moved. Off by default: with REAPER started from a template there is no project file, and saving opens a dialog over the panel |
 
+(core-subscriber)=
+
 #### Adding a department
 
 A light or video desk that wants to follow the show needs no change to any
