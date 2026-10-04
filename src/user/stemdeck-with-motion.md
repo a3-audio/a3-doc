@@ -46,10 +46,10 @@ and a first set to try it with.
 - **One clock, from the music itself.** With StemDeck as master, the beat
   A³ Motion follows is the beat of the deck that is playing, tempo fader
   included. Nudge the tempo on StemDeck and the room speeds up with it.
-- **Both decks on one channel.** A channel can play one stem of each deck,
-  so put both decks' drums on channel 1 and channel 1 is "the drums"
-  whichever deck they come from. Blend from one track into the next and the
-  movements carry on: the channel is the part, not the deck.
+- **The channel is the part, not the deck.** A channel plays one stem at a
+  time, from either deck. Keep the drums on channel 1 and channel 1 is "the
+  drums" whichever deck they come from: push deck 2's drums onto channel 1
+  and its movement carries on with the next track.
 
 (stemdeck-with-motion-map)=
 
@@ -81,18 +81,18 @@ A few things follow from that:
   shuts that channel's analog input (REAPER's `analog` track send to
   `N-input`); with no stem there, the analog input plays. A CDJ on channel 1
   is silent while a stem is on channel 1, and the stem moves through the same
-  strip. You choose it on the desk: turn the channel's encoder to a deck, push, then turn to the stem and push (see
-  {ref}`the desk's stem displays <a3mix-displays>`).
+  strip. You choose it on the desk: turn the channel's encoder to the stem
+  and push (see {ref}`the desk's input selectors <a3mix-displays>`).
 - **Nothing is on a channel at first.** StemDeck starts with every stem on
   AUX only (see [Where the stems start](#stemdeck-start-buses)); a stem
-  reaches a channel when you load it there. A set with its own stem names
+  reaches a channel when you push it there. A set with its own stem names
   (`DUB`, `KICK`, `PADS`, `PERC`, …) numbers its stems in the order its
   endings sort — see [Stem sets](#stemdeck-stem-sets).
 - **A stem plays on every bus that is lit.** Each stem in StemDeck's mixer
   has six switches, **1 2 3 / 4 A C**. A stem on a number is on that A³
   channel and moves with it; a stem on **A** (AUX) only is on the Return
   track, whose level is the RET pot (on A³ Motion's MIXER, and the desk's aux
-  return), and does not move. Loading a stem on a channel from the desk puts
+  return), and does not move. Pushing a stem onto a channel from the desk puts
   it on that number and takes its AUX away; what the desk enforces is on
   {ref}`StemDeck's remote control <stemdeck-remote>`.
 
@@ -203,7 +203,7 @@ and forth without moving (see [Over to A³ Motion](#stemdeck-workspaces)).
 
 1. **Load a track in StemDeck.** Pick one you know well, split by StemDeck
    (drums, bass, other, vocals). **Put its four stems on channels 1–4**: on
-   the desk, load each channel's stem; without the desk, light bus 1 on the
+   the desk, push each channel's stem; without the desk, light bus 1 on the
    drums, 2 on the bass, 3 on other and 4 on the vocals in StemDeck's mixer.
    Check the meters in StemDeck's mixer: all four buses move. On A³ Motion
    the four channel meters move with them.
