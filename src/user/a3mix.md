@@ -27,7 +27,7 @@ them.
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
 | 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
-| 5 | **INPUT VU** | the level *before* the fader (`in1_pre` … `in4_pre` in the {ref}`meter map <core-vu-map>`) |  |
+| 5 | **INPUT VU** | the level *before* the fader, 8 LEDs (`in1_pre` … `in4_pre` in the {ref}`meter map <core-vu-map>`) |  |
 | 6 | **TAP** | taps the tempo — see *Tempo* below. All four strips' keys do the same, and their lamps flash red on the beat |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
 | 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
@@ -132,19 +132,20 @@ stem is on a channel, Core shuts the channel's analog input.
 
 ### A channel
 
-![A channel's selector: deck 2's stem 1 plays (solid), the cursor is under deck 1's stem 3, which is silent](pics_user/a3-mix-input-selector.png)
+![A channel's selector: nine meters under D1, D2 and A, divided by two thin lines; music on six of them; the cursor under deck 1's stem 3, which is silent](pics_user/a3-mix-input-selector.png)
 
-*Deck 2's stem 1 plays: its bar is solid. The cursor is the bar under deck 1's
-stem 3, which is silent (a floor line).*
+*Music plays on six inputs. The cursor is the bar under deck 1's stem 3,
+which is silent, so its meter shows nothing.*
 
 A channel's encoder is an input selector. Its display shows **nine meters**
 under the headings **D1 | D2 | A**: deck 1's stems 1–4, deck 2's stems 1–4,
-and the channel's analog input.
+and the channel's analog input. A thin vertical line divides the three groups.
 
-- **The input that plays** is a solid bar. It stays visible in silence.
-- **The other inputs** are outlined at their level. A silent one is a floor
-  line.
-- **The cursor** is a bar under one meter.
+- **Every meter** is a plain bar at its level. A silent input shows nothing.
+- **The cursor** is a bar under one meter. It is the only mark on the display.
+
+The display does not show which input plays. While you turn, you want to see
+the selector and nothing else.
 
 **Turn** moves the cursor over the nine meters. It stops at both ends and
 switches nothing.
@@ -157,24 +158,32 @@ switches nothing.
 - **A** releases every stem from the channel, so its analog input plays.
 - A push on what already plays changes nothing.
 
+After a push the cursor stays on what you selected.
+
 **One stem per channel, kept by Core.** If StemDeck shows several stems on one
 channel (an old session can), Core keeps the lowest and switches the others
 off, about 0.3 s after StemDeck's reports have settled.
 
 ### The aux return
 
-![The return's selector: SA plays (solid), the cursor is under SA, the analog return A is outlined at its level](pics_user/a3-mix-return-selector.png)
+![The return's selector: SA plays and is filled, A is outlined, the cursor is under SA, the scale 0 and -18 between the pairs](pics_user/a3-mix-return-selector.png)
 
-*SA plays and the cursor is under it. A, the analog return, is outlined at its
-level.*
+*SA plays: its segments are filled, with a peak segment held at the top of
+the left bar. A, the analog return, is outlined. The cursor is under SA.*
 
-The return's display shows **two meters**:
+The return's display is a stereo meter, like a hardware one. It shows **two
+sources**, each a pair of segmented bars, left and right:
 
-- **SA**: the loudest stem on the return.
+- **SA**: the stems on StemDeck's AUX bus. With an older StemDeck that does
+  not send this meter, SA shows the loudest stem on the return, on both bars.
 - **A**: the analog return (aux L/R).
 
-The mode that plays is solid. **Turn** moves the cursor between the two,
-**push** switches the return to the mode under the cursor:
+Each bar has 12 segments of 4 dB. The scale between the pairs marks 0 dB and
+−18 dB. A peak segment holds the highest level for a second.
+
+The source that plays is filled, the other is outlined. **Turn** moves the
+cursor between the two, **push** switches the return to the source under the
+cursor:
 
 - **SA, stem mode:** every stem that no channel plays goes to the return
   (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
@@ -182,6 +191,11 @@ The mode that plays is solid. **Turn** moves the cursor between the two,
   off in StemDeck, Core undoes it after about 0.3 s.
 - **A, analog mode:** no stem is on the return. The analog return plays as it
   is routed in REAPER.
+
+### How the meters move
+
+The meters update 10 times a second. They rise at once and fall smoothly,
+20 dB a second, like a VU meter.
 
 ### Without StemDeck
 
@@ -193,11 +207,12 @@ The mode that plays is solid. **Turn** moves the cursor between the two,
   **A** until you push a stem; a session saved earlier restores its own
   switches.
 
-The desk shows what StemDeck reports, so a click on a bus switch on StemDeck's
-own screen shows on the desk too.
+Core follows what StemDeck reports, so a click on a bus switch on StemDeck's
+own screen counts too. The channel displays do not show it: they show the
+cursor only.
 
 StemDeck says hello to Core every 30 seconds. If it is silent for a minute,
-Core shows **A** on every channel and the analog inputs play again; Core
+Core puts every channel back on **A** and the analog inputs play again; Core
 notices at the next hello of any device, which the desk sends every 30 seconds,
 so it can take up to about 90 seconds.
 
