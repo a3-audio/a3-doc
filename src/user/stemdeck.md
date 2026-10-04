@@ -203,13 +203,12 @@ strips, the output meters for buses 1–4, AUX and CUE. The top segment of each
 is a **clip lamp**: it lights when that output goes above full scale and stays
 lit for a second, so a single peak is not missed.
 
-**AUX is 6 dB lower on purpose.** The AUX bus is trimmed by a fixed 6 dB after
-the stems are summed — before its meter, so the meter shows what leaves
-StemDeck. The four stems of a set add up to the full track, and in Core's
-stem return mode both decks can be on AUX at once: two full tracks, which
-would clip. The other side of it: a stem moved from AUX to a channel 1–4 is
-6 dB louder there. To bring the return back up, raise the Return track in
-REAPER.
+**The buses are 6 dB lower on purpose.** Channels 1–4 and AUX are trimmed by a
+fixed 6 dB after the stems are summed — before their meters, so the meters show
+what leaves StemDeck. The four stems of a set add up to the full track, and in
+Core's stem return mode both decks can be on AUX at once: two full tracks, which
+would clip. The channels carry the same trim, so a stem is as loud on a channel
+as on the return. CUE is not trimmed.
 
 (stemdeck-library)=
 
