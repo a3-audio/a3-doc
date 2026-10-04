@@ -182,6 +182,9 @@ in that same network. On one machine it always is; the whole clock chain is
 described on the Beat Analyzer page under
 {ref}`Playing without CDJs <beat-analyzer-without-cdjs>`.
 
+On a Pro DJ Link network you do not run, ask the venue first — see
+{doc}`../ressources/trademarks`.
+
 <!-- IMAGE: StemDeck's top bar with "PIO master: A" next to A³ Motion's clock key reading PIO and the same BPM -->
 
 ### 3. The room: 3d up

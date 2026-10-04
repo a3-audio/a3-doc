@@ -72,7 +72,7 @@ beat-analyzer is restarted.
 <!-- QUESTION (maintainer): beat_processing.cpp calls BTrack's fixTempo() on every accepted tap and nothing ever calls unfixTempo() (btrack_wrapper.h has it). So after one tap, EXT never follows a tempo change again until the service restarts. Intended ("the DJ has spoken"), or should the lock be released — after a time, or on a double tap? The page describes it as it is. -->
 
 **PIO — pioneer.** A Pro DJ Link network the Core machine is on. The
-beat-analyzer joins it as a **virtual CDJ, number 7**, and listens on the
+beat-analyzer appears on it as a **player, number 7**, and listens on the
 Pro DJ Link ports (`prolink.*`). It follows the **tempo master**: the player whose status
 says master while it plays. Until it has heard who the master is, it takes the
 beats of any player. The tempo it sends is the master's track tempo with its
@@ -80,6 +80,10 @@ pitch applied — what the master's display shows.
 
 The Pro DJ Link beat says where the beat is in the bar, not which bar it is,
 so in PIO the bar number in `/beat` is always 0.
+
+Joining a Pro DJ Link network you do not run is at your own risk: ask the
+venue before the Core machine joins theirs. A³ is not affiliated with
+AlphaTheta or Pioneer — see {doc}`../ressources/trademarks`.
 
 ```{note}
 **No CDJs? Use StemDeck as the master.** StemDeck can be the tempo master on
@@ -111,9 +115,9 @@ The chain, as the code runs it:
 ```text
 StemDeck, deck with MASTER on
    │  Pro DJ Link: a beat packet on every beat, a status packet every 200 ms,
-   │  as virtual CDJ 6, sent as broadcast on UDP 50001 / 50002
+   │  as player 6, sent as broadcast on UDP 50001 / 50002
    ▼
-beat-analyzer, clock mode 2 (pioneer), virtual CDJ 7
+beat-analyzer, clock mode 2 (pioneer), player 7
    │  takes StemDeck as the tempo master: it says master, and it plays
    │  /beat  beat-in-bar, 0, bpm
    ▼

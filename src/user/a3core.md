@@ -43,7 +43,7 @@ Motion's clock key:
 | :--- | :--- | :--- |
 | **INT** | **a3motion** | A³ Motion's own tempo, tapped on Motion and relayed by the Beat Analyzer |
 | **EXT** | **intern** | the Beat Analyzer's own FFT/onset detection |
-| **PIO** | **pioneer** | the master beat from Pioneer Pro DJ Link — a CDJ, or [StemDeck](stemdeck.md) as master |
+| **PIO** | **pioneer** | the master beat from a Pro DJ Link network — a CDJ, or [StemDeck](stemdeck.md) as master |
 
 What each mode needs is on the [Beat Analyzer](beat-analyzer.md) page.
 

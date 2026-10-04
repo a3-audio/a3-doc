@@ -1316,7 +1316,7 @@ cursor. HIDE or ESC gives the panel back. See [The keyboard](#motion-keyboard).
 | :--- | :--- |
 | **INT** | this device. Tap the beat display, or TAP on the panel |
 | **EXT** | the beat analyser, listening to the music |
-| **PIO** | Pioneer Pro DJ Link: the tempo master on the link |
+| **PIO** | Pro DJ Link: the tempo master on the link |
 
 **Which one?** PIO when you play CDJs on a link, or [StemDeck](stemdeck.md)
 as master; INT and tap for vinyl or a lone laptop; EXT when the beat analyser
