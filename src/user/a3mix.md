@@ -209,6 +209,10 @@ under the cursor:
 The meters update 10 times a second. They rise at once and fall smoothly,
 20 dB a second, like a VU meter. There are no peak marks.
 
+A meter that goes over full scale (above 0 dBFS) is drawn **hatched**, with
+dark diagonal lines through the bar, and stays hatched for a second after the
+last over. A clean bar at full scale stays solid, so you can tell the two apart.
+
 ### Without StemDeck
 
 - Core holds each channel's cursor and last stem and the return's mode, keeps

@@ -416,6 +416,10 @@ On `main` since `v03.0`, not tagged yet.
   `PIO: no a3-osc.json`.
 - **A meter for the AUX bus**, L and R (`stem_aux_L`/`stem_aux_R`, `/vu/49`–`/vu/50`), sent
   to the desk, which shows it as STEM on the aux return.
+- **AUX is trimmed by a fixed 6 dB**, before its meter and its output, so both decks on the
+  stem return no longer clip; a stem moved from AUX to a channel is 6 dB louder there. The
+  output meters light a **clip lamp** above full scale, held for a second. See
+  {ref}`Mixer <stemdeck-mixer>`.
 
 - **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
   own output bus, any of them switchable to aux — is carried by the a3-system repository as a
