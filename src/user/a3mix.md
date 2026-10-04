@@ -1,6 +1,6 @@
 # A³ Mixer
 
-- [A³ Mixer Repository](https://github.com/a3-audio/a3-system)
+- [A³ Mixer Repository](https://github.com/a3-audio/a3-mixer)
 - Standalone OSC controller, four channels
 - Input VU meter per channel, eight output VU meters
 
@@ -33,24 +33,8 @@ them.
 | 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
 | 9 | **CUE** | puts this channel on the headphones: opens its cue send, taken before the fader (see *The cue* below). Lit blue while it is on |  |
 
-```{note}
-Until 2026-09-12 the AUX SEND knob did something else entirely: it drove the **3D
-blend** — how far the channel was spread into the room — because it was the
-only continuous control the desk had for that. A³ Motion's per-channel pot
-took that job over, and the knob got its own name back.
-
-The price, named: the desk has no 3D control any more. The 3D blend is A³
-Motion's pot, and only that.
-```
-
-```{note}
-**The keys were rearranged on 2026-09-19.** Key 9 used to be **3D**; on
-2026-09-12 its job moved to A³ Motion's per-channel pot, where 3D is a blend
-rather than a switch, and the key was left without one. It carries the cue
-now, because its blue lamp is the bright one and a cue lamp has to be
-readable in the dark. Key 6, where CUE used to be, has the dim red lamp and
-carries the tap, which only flashes.
-```
+The desk has no 3D control: how far a channel spreads into the room is A³
+Motion's per-channel pot.
 
 ## The filter section
 
@@ -73,9 +57,7 @@ The section's lamp shows which mode is on: blue for HPF, green for LPF.
 | 6 | **TAP** | taps the tempo, the same as A³ Motion's TAP key — on the press, not the release |
 
 It goes **straight to the beat-analyzer**, not through A³ Core: a tap is
-timing, and timing does not want a relay in the middle. Until 2026-09-12 it
-went to Core, which had never subscribed to it — the key worked, the message
-left the desk, and nothing happened at the other end.
+timing, and timing does not want a relay in the middle.
 
 ## Monitoring and outputs
 
@@ -93,9 +75,8 @@ left the desk, and nothing happened at the other end.
 
 ## The cue
 
-The cue used to be called PFL (pre-fader listen); since 2026-10-01 it is the
-cue everywhere, on the desk, on A³ Motion's key and on the wire
-(`/channel/{ch}/cue`).
+The cue is called cue everywhere — on the desk, on A³ Motion's key and on the
+wire (`/channel/{ch}/cue`).
 
 What the headphones hear is set in the REAPER project, in the sends of the
 channel buses, not on separate tracks. Each channel bus sends to
