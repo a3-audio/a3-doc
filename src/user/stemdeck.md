@@ -412,6 +412,10 @@ StemDeck's side:
   (deck A stems 1–4 are `/vu/41`–`/vu/44`, deck B `/vu/45`–`/vu/48`), 25 times
   a second. Each is measured after the stem's knob and mute, before the fader
   and the buses.
+- **AUX bus meter.** StemDeck also meters its AUX bus as a stereo pair,
+  `/vu/49` (L) and `/vu/50` (R), at the same rate: peak and rms of each side
+  after the bus, i.e. what goes to the aux return. The desk shows it as SA
+  beside the analog return A.
 
 (stemdeck-audio)=
 
