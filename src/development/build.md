@@ -34,7 +34,7 @@ Run each command from the root of the repository named.
 | a3-motion panel firmware | `pio run` in `firmware/`; `pio run -t upload` flashes it (the port is found by USB ID, see {ref}`moc-serial`) | `pio test -e native` and `python3 -m unittest test_host` in `firmware/` |
 | a3-motion-ui | `./build.sh` (`-d` for Debug) | `./test.sh` |
 | beat-analyzer | `git submodule update --init`, then `./build.sh` | `cd build && ctest` |
-| StemDeck | `./start.sh` builds and starts it, see {ref}`Build and start <stemdeck-build>` | `cmake -S . -B build -DSTEMDECK_TESTS=ON`, `cmake --build build --target stemdeck-tests`, `ctest --test-dir build`; the Python tools: `python3 -m unittest discover -s tools/tests` |
+| StemDeck | `./start.sh` builds and starts it, see {ref}`Build and start <stemdeck-build>` | `cmake -S . -B build -DSTEMDECK_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/local/juce`, `cmake --build build --target stemdeck-tests`, `ctest --test-dir build`; the Python tools: `python3 -m unittest discover -s tools/tests` |
 | a3-doc | `sphinx-build src doc` | |
 
 **A³ Motion UI: use `./test.sh`, not `ctest` on its own.** `ctest` runs the
