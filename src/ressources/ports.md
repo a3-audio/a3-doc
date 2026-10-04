@@ -78,18 +78,47 @@ truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `a
 
 ## Who sends where
 
-The file's `routes`, by sender. Each target is a listener of the table above.
+The file's `routes`, rendered from `a3-osc.json` — edit the file, not this
+table. Each target is a listener of the table above; *Carries* is the route's
+own mark where it has one (`vu`: the meters), otherwise what that listener
+takes. As a sender, `iem` is the IEM EnergyVisualizer plug-in inside the
+REAPER project, and `prolink` is a Pioneer player on the network (a CDJ);
+StemDeck as tempo master has rows of its own.
 
-| Sender | Sends to |
-| :--- | :--- |
-| A³ Mixer | `core.osc` (gain, EQ, volume, cue, filter, `/device/hello`), `beat-analyzer.clock` (`/tap`) |
-| A³ Motion | `core.osc` (positions, clip settings, mixer, `/state/recall`), `beat-analyzer.clock` (`/tap`, `/beat`, `/clockmode`) |
-| A³ Core | `reaper.osc`, `iem.multiencoder-1` … `-3`, `dualdelay.osc` (the engine); `motion.osc`, `mixer.osc`, `stemdeck.osc` (relayed state, lamps, the recall answer, bus switches); `devices.announce` (`/core/here`) |
-| REAPER | `core.reaper-feedback` (what a fader or a plug-in did); its IEM EnergyVisualizer sends to `motion.energy` |
-| beat-analyzer | `core.osc`, `motion.osc`, `mixer.osc`, `radla.osc` (`/beat`); `motion.vu`, `mixer.osc`, `radla.vu` (`/vu`) |
-| StemDeck | `core.osc` (bus switch reports, hello), `mixer.osc` (stem meters), `prolink.announce`, `prolink.status` and the beat packets (as tempo master) |
-| zita-j2n (Core) | `radla.zita-n2j` (2 channels) |
-| radla | `zita-n2j.audio` (10 channels) |
+<!-- a3-osc:routes -->
+| From | To | Carries |
+| --- | --- | --- |
+| mixer | `core.osc` | every controller's messages, and /beat from the analyzer |
+| mixer | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
+| motion | `core.osc` | every controller's messages, and /beat from the analyzer |
+| motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
+| core | `motion.osc` | Core's relays, /beat |
+| core | `mixer.osc` | Core's relays and lamps, /beat, /vu |
+| core | `reaper.osc` | Core's /track/... control |
+| core | `iem.multiencoder-1` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| core | `iem.multiencoder-2` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| core | `iem.multiencoder-3` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
+| core | `dualdelay.osc` | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| core | `stemdeck.osc` | Core's bus switches and its request for all of them |
+| core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
+| reaper | `core.reaper-feedback` | REAPER's own OSC feedback |
+| beat-analyzer | `core.osc` | every controller's messages, and /beat from the analyzer |
+| beat-analyzer | `motion.osc` | Core's relays, /beat |
+| beat-analyzer | `mixer.osc` | Core's relays and lamps, /beat, /vu |
+| beat-analyzer | `radla.osc` | /beat |
+| beat-analyzer | `motion.vu` | the analyzer's /vu bundles |
+| beat-analyzer | `mixer.osc` | vu |
+| beat-analyzer | `radla.vu` | /vu |
+| iem | `motion.energy` | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
+| zita-j2n | `radla.zita-n2j` | network audio from Core (zita-j2n, 2 channels, not OSC) |
+| radla | `zita-n2j.audio` | network audio from radla (10 channels, not OSC) |
+| stemdeck | `prolink.announce` | Pro DJ Link keep-alives (broadcast, not OSC) |
+| stemdeck | `prolink.status` | Pro DJ Link status packets (broadcast, not OSC) |
+| stemdeck | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
+| stemdeck | `core.osc` | every controller's messages, and /beat from the analyzer |
+| stemdeck | `mixer.osc` | vu |
+| prolink | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
+<!-- /a3-osc:routes -->
 
 Worth knowing:
 
