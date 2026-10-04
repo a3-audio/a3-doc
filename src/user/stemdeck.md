@@ -199,7 +199,17 @@ The six switches are StemDeck's own: the desk sets them through A³ Core and
 StemDeck reports every change back, so the desk and this screen always agree.
 Knob and mute act on all of them. Below the stems, the channel fader and
 **CUE**, which puts the whole deck on the cue bus. Between the two
-strips, the output meters for buses 1–4, AUX and CUE.
+strips, the output meters for buses 1–4, AUX and CUE. The top segment of each
+is a **clip lamp**: it lights when that output goes above full scale and stays
+lit for a second, so a single peak is not missed.
+
+**AUX is 6 dB lower on purpose.** The AUX bus is trimmed by a fixed 6 dB after
+the stems are summed — before its meter, so the meter shows what leaves
+StemDeck. The four stems of a set add up to the full track, and in Core's
+stem return mode both decks can be on AUX at once: two full tracks, which
+would clip. The other side of it: a stem moved from AUX to a channel 1–4 is
+6 dB louder there. To bring the return back up, raise the Return track in
+REAPER.
 
 (stemdeck-library)=
 
@@ -415,7 +425,7 @@ StemDeck's side:
   and the buses.
 - **AUX bus meter.** StemDeck also meters its AUX bus as a stereo pair,
   `/vu/49` (L) and `/vu/50` (R), at the same rate: peak and rms of each side
-  after the bus, i.e. what goes to the aux return. The desk shows it as STEM
+  after the bus and its 6 dB trim, i.e. what goes to the aux return. The desk shows it as STEM
   beside the analog return, ANALOG.
 
 (stemdeck-audio)=
