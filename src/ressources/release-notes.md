@@ -286,6 +286,8 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Core (`a3-core`)
 
+- **The return stays out of the cue:** a cued channel no longer brings the whole aux return
+  into the headphones; the return is heard on the mix side only.
 - **Total recall:** Core writes the evening down and plays it back on the next start. At
   start it asks REAPER to report everything, so the order the services start in no longer
   matters, and it plays the evening back only once REAPER has finished reporting —
