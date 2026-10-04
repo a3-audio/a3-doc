@@ -456,7 +456,8 @@ and where they arrive on A³ Core are all on the
 <!-- IMAGE: the top bar under SYNC: PIO, with the PIO status readout (e.g. "PIO 128.0 · CDJ 2") and the player box. Not taken: switching SYNC on the rig's running StemDeck turns off every SYNC that was on. The top bar as it is, under SYNC: DECK, is under "The screen" above. -->
 
 **SYNC** on a deck makes it follow a leader. The **SYNC: DECK | PIO** button
-in the top bar chooses which leader: the other deck, or the CDJs. Switching it
+in the top bar chooses which leader: the other deck, or the Pro DJ Link tempo
+master. Switching it
 turns off every SYNC that was on.
 
 Both follow by the same rules:
@@ -477,12 +478,12 @@ beat sync does.
 
 (stemdeck-pio)=
 
-### PIO: following the CDJs
+### PIO: following the Pro DJ Link tempo master
 
 SYNC follows the **Pro DJ Link tempo master**: its tempo, pitch included, and
 its beat. Both decks may follow at once, each with its own half/one/two.
 
-- StemDeck joins the link as **virtual CDJ 6** and listens on the Pro DJ
+- StemDeck appears on the link as **player 6** and listens on the Pro DJ
   Link ports (`prolink.*`), which it reads from the A³ system's `a3-osc.json` (see
   {ref}`Where addresses and ports live <osc-truth>`). On the Core machine that
   file comes from Core itself: StemDeck follows it, and when the truth changes
@@ -490,7 +491,7 @@ its beat. Both decks may follow at once, each with its own half/one/two.
   {ref}`Following Core <osc-follow>`. Without any truth the PIO clock does not
   start and its status line says `PIO: no a3-osc.json`.
   It shares those ports, so it can run on the same machine as the
-  beat-analyzer (virtual CDJ 7), and both get the beats. If the network is not
+  beat-analyzer (player 7), and both get the beats. If the network is not
   up yet, it tries again every two seconds.
 - It learns who is master from the players' status packets. Some of those are
   sent to one address only, so on a machine it shares with the beat-analyzer
@@ -505,12 +506,15 @@ its beat. Both decks may follow at once, each with its own half/one/two.
 The player number is the setting `pioDevice` in
 `~/.config/StemDeck/StemDeck.settings`.
 
+Joining a Pro DJ Link network you do not run is at your own risk: ask the
+venue before StemDeck joins theirs.
+
 (stemdeck-master)=
 
 ## MASTER: StemDeck as the tempo master
 
-No CDJs on the link? Then StemDeck is the CDJ. Each deck has a **MASTER**
-button, as a CDJ has: the master deck's beat goes out on the Pro DJ Link
+No CDJs on the link? Then StemDeck can be the tempo master. Each deck has a
+**MASTER** button, as on a CDJ: the master deck's beat goes out on the Pro DJ Link
 network, and whatever follows the link's tempo master follows StemDeck. In the
 A³ system that is the beat-analyzer in clock mode 2, and through it A³ Motion
 on **PIO**. The whole chain is on the beat-analyzer's page:
@@ -520,10 +524,10 @@ on **PIO**. The whole chain is on the beat-analyzer's page:
   over; on the master, to turn MASTER off. With MASTER off and SYNC not on
   PIO, StemDeck leaves the network.
 - **With no master chosen, the only playing deck becomes master by itself** —
-  except under SYNC: PIO, where a real CDJ may hold master and two masters
+  except under SYNC: PIO, where another player may hold master and two masters
   would pull every listener back and forth, and except after you turned
   MASTER off by hand.
-- **What goes out**, as virtual CDJ 6: a **beat packet on every beat** of the
+- **What goes out**, as player 6: a **beat packet on every beat** of the
   master deck — tempo is the track's BPM times the tempo fader, the beat in
   the bar counted from the first beat of the grid — and a **status packet
   every 200 ms**: master, playing or not, tempo, beat.
@@ -543,7 +547,9 @@ on **PIO**. The whole chain is on the beat-analyzer's page:
 
 The packets are laid out the way
 [prolink-connect](https://github.com/EvanPurkhiser/prolink-connect) reads
-them, so tools built on it see StemDeck as a CDJ.
+them, so tools built on it see StemDeck as a player on the network. This is
+an independent implementation; A³ is not affiliated with AlphaTheta or
+Pioneer — see {doc}`../ressources/trademarks`.
 
 (stemdeck-build)=
 

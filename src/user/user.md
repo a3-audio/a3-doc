@@ -54,7 +54,7 @@ naming it when the Core starts. See
 A³ Core also runs the [**Beat Analyzer**](beat-analyzer.md): it produces
 the tempo the whole system follows, together with the VU meters the other two
 devices show. Its clock can come from A³ Motion's own tempo, from listening to
-the music, or from a Pioneer Pro DJ Link master — a CDJ, or
+the music, or from a Pro DJ Link tempo master — a CDJ, or
 [StemDeck](stemdeck.md) when there are no CDJs — chosen on A³ Motion's clock
 key.
 

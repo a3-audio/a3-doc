@@ -82,7 +82,8 @@ The file's `routes`, rendered from `a3-osc.json` — edit the file, not this
 table. Each target is a listener of the table above; *Carries* is the route's
 own mark where it has one (`vu`: the meters), otherwise what that listener
 takes. As a sender, `iem` is the IEM EnergyVisualizer plug-in inside the
-REAPER project, and `prolink` is a Pioneer player on the network (a CDJ);
+REAPER project, and `prolink` is any player on the Pro DJ Link network (a
+CDJ, for example);
 StemDeck as tempo master has rows of its own.
 
 <!-- a3-osc:routes -->
