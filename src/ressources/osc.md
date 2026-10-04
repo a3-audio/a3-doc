@@ -253,7 +253,8 @@ before the eight flags. The channel's push no longer toggles the cue.
 
 On **2026-10-04** each channel's encoder became an input selector:
 `/channel/{ch}/stem/menu` (ii) is now `/channel/{ch}/stem/cursor` (i), 0–7
-the eight stems, 8 = A. See {ref}`the desk's input selectors <a3mix-displays>`.
+the eight stems, 8 = A. Later the same day 8 became the STEM toggle, which takes the
+channel's stem off and brings it back. See {ref}`the desk's input selectors <a3mix-displays>`.
 
 `/device/hello` is new; see [above](#osc-differs).
 

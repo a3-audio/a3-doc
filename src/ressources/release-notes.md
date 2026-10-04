@@ -348,24 +348,26 @@ On `main` since `v03.0`, not tagged yet.
 ### A³ Mixer (`a3-mixer`)
 
 - **A channel's encoder is an input selector**, replacing the dot grid. The display shows
-  nine meters under **D1 | D2 | A**: deck 1's stems, deck 2's stems and the analog input,
-  the three groups divided by thin lines. Every meter is a plain bar at its level; the cursor
-  under one meter is the only mark, and the display does not show which input plays.
-  Turning moves the cursor and switches nothing; a push makes the input under the cursor the
-  channel's only one -- a stem playing on another channel moves here, A releases every stem.
-  See {ref}`the input selectors <a3mix-displays>`.
+  eight stem meters under **D1 | D2** and, at the right, a **STEM toggle**: filled while a
+  stem plays on the channel, an outline while none does. It does not show which stem. Every
+  meter is a plain bar at its level; the cursor is a small arrow pointing down at one. Turning moves the
+  cursor over the eight stems and the toggle and switches nothing. A push on a stem makes it
+  the channel's only input (a stem playing on another channel moves here) and its last stem;
+  a push on the toggle takes the stem off, so the analog input plays, or brings the last stem
+  back. Core keeps the last stem across a restart. See
+  {ref}`the input selectors <a3mix-displays>`.
 - **One stem per channel, a stem on one channel at most**, kept by Core: when StemDeck shows
   several stems on one channel (an old session), Core keeps the lowest and switches the
   others off about 0.3 s after the reports settle.
-- **The aux return has two modes, stem and analog.** Its display is a stereo meter with
-  segmented bars, like a hardware one: SA (StemDeck's AUX bus, L and R; with an older
-  StemDeck the loudest stem on the return) and A (the analog return), 12 segments of 4 dB,
-  a 0 / −18 dB scale and a peak segment held for a second. The source that plays is filled,
-  the other outlined; turning moves the cursor, a push switches. In stem mode every stem no
+- **The aux return has two modes, stem and analog.** Its display shows two mono meters,
+  plain bars like the channels': STEM (StemDeck's AUX bus, the louder side; with an older
+  StemDeck the loudest stem on the return) and ANALOG (the louder side of the analog return),
+  each under its heading. The heading of the mode that plays is inverted;
+  turning moves the cursor, a push switches. In stem mode every stem no
   channel plays goes to the return; in analog mode no stem does and the analog return plays
   as routed in REAPER. The return no longer switches single stems.
 - **The display meters update 10 times a second**, rise at once and fall smoothly at
-  20 dB/s. A display is redrawn only when its pixels change.
+  20 dB/s, with no peak marks. A display is redrawn only when its pixels change.
 - **The main VU uses all four LED modules (32 rows)** again, and the input VUs light
   8 LEDs a channel. This needs the new Teensy firmware.
 - The firmware reports all eight encoder-switch channels, not only the first five.
@@ -413,7 +415,7 @@ On `main` since `v03.0`, not tagged yet.
 - The Pro DJ Link ports come from `a3-osc.json`; without the file the PIO status line says
   `PIO: no a3-osc.json`.
 - **A meter for the AUX bus**, L and R (`stem_aux_L`/`stem_aux_R`, `/vu/49`–`/vu/50`), sent
-  to the desk, which shows it as SA on the aux return.
+  to the desk, which shows it as STEM on the aux return.
 
 - **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
   own output bus, any of them switchable to aux — is carried by the a3-system repository as a
