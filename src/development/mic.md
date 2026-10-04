@@ -45,13 +45,16 @@ split in two:
   Core's announcements are read, the meters' movement and the layout.
   `channel_picture()` turns a cursor, eight stem levels and whether a stem
   plays into the D1 | D2 headings, eight plain bars, the dividers, the STEM
-  toggle and a cursor box. The toggle's slot is `TOGGLE_METERS` (2) meters
-  wide, so on a 128-pixel display the bars keep 10 of their 11 pixels and
-  the toggle has room for its letters and a light band under the cursor. `return_picture()` turns
+  toggle and the cursor's arrow box. The toggle's slot is `TOGGLE_METERS`
+  (2) meters wide, so on a 128-pixel display the bars keep 10 of their 11
+  pixels and the toggle has room for its letters. `return_picture()` turns
   the cursor, the mode and two levels (STEM, ANALOG) into two mono bars
-  under their headings, the playing mode's heading inverted, AUX as a title
-  between them, and a cursor box. Both work for a display of any size. It
-  is tested without a Pi.
+  under their headings, the playing mode's heading inverted, and the arrow
+  box; nothing stands between the two (the AUX title is gone). `_bands()`
+  returns three row bands: the headings, the arrow (`ARROW_ROWS`, 5 rows,
+  with a dark row above and below) and the meters, which run to the bottom
+  row (rows 19–63 on a 64-row display). Both work for a display of any
+  size. It is tested without a Pi.
 - **`a3_mixer_displays.py`** draws that layout with PIL and sends it to the
   SSD1306s through the TCA9548A multiplexer. It needs the Pi's libraries and
   imports them only when the displays are opened. Without them the desk runs
@@ -59,15 +62,16 @@ split in two:
 
 What it draws:
 
-- **The cursor is an inverted column** over its slot, below the headings:
-  light, with the bar drawn dark inside a one-pixel dark frame (`FRAME`).
-  Without the frame a silent selected meter would look like a full one.
+- **The cursor is an arrow**: a solid triangle pointing down,
+  `ARROW_WIDTH` (10) pixels wide and `ARROW_ROWS` (5) rows tall, each row a
+  pixel narrower on either side. It sits in the arrow band, centred over the
+  selected meter or toggle. Meters and the toggle are drawn the same whether
+  selected or not.
 - **The STEM toggle** is a filled field with dark letters while a stem plays
   (the channel's mask is not 0), an outline with light letters while none
-  does; the letters stand one over the other. The field sits `TOGGLE_INSET`
-  (3) pixels inside its slot. Under the cursor the slot turns light and every
-  colour flips, so the 3-pixel light band keeps a selected ON toggle from
-  reading as an unselected OFF one.
+  does; the letters stand one over the other, `FRAME` (1) pixel inside the
+  field. The field sits `TOGGLE_INSET` (3) pixels inside its slot, apart
+  from the divider beside it.
 
 How it draws:
 

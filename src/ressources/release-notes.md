@@ -350,7 +350,7 @@ On `main` since `v03.0`, not tagged yet.
 - **A channel's encoder is an input selector**, replacing the dot grid. The display shows
   eight stem meters under **D1 | D2** and, at the right, a **STEM toggle**: filled while a
   stem plays on the channel, an outline while none does. It does not show which stem. Every
-  meter is a plain bar at its level; the cursor is an inverted column. Turning moves the
+  meter is a plain bar at its level; the cursor is a small arrow pointing down at one. Turning moves the
   cursor over the eight stems and the toggle and switches nothing. A push on a stem makes it
   the channel's only input (a stem playing on another channel moves here) and its last stem;
   a push on the toggle takes the stem off, so the analog input plays, or brings the last stem
@@ -362,7 +362,7 @@ On `main` since `v03.0`, not tagged yet.
 - **The aux return has two modes, stem and analog.** Its display shows two mono meters,
   plain bars like the channels': STEM (StemDeck's AUX bus, the louder side; with an older
   StemDeck the loudest stem on the return) and ANALOG (the louder side of the analog return),
-  with AUX as the title between them. The heading of the mode that plays is inverted;
+  each under its heading. The heading of the mode that plays is inverted;
   turning moves the cursor, a push switches. In stem mode every stem no
   channel plays goes to the return; in analog mode no stem does and the analog return plays
   as routed in REAPER. The return no longer switches single stems.

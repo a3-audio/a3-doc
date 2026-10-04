@@ -132,11 +132,11 @@ stem is on a channel, Core shuts the channel's analog input.
 
 ### A channel
 
-![A channel's selector: eight meters under D1 and D2, music on six of them; the cursor is the light column on deck 1's stem 3, which is silent; at the right the STEM toggle, filled because a stem plays on the channel](pics_user/a3-mix-input-selector.png)
+![A channel's selector: eight meters under D1 and D2, music on six of them; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right the STEM toggle, filled because a stem plays on the channel](pics_user/a3-mix-input-selector.png)
 
-*Music plays on six stems. The cursor is the light column on deck 1's
-stem 3, which is silent, so the column is empty inside. The STEM toggle at the
-right is filled: a stem plays on this channel.*
+*Music plays on six stems. The arrow points at deck 1's stem 3, which is
+silent, so its meter shows nothing. The STEM toggle at the right is filled: a
+stem plays on this channel.*
 
 A channel's encoder is an input selector. Its display shows **eight stem
 meters** under the headings **D1 | D2**: deck 1's stems 1–4 and deck 2's
@@ -146,9 +146,9 @@ top to bottom. Thin vertical lines divide D1, D2 and the toggle.
 - **Every meter** is a plain bar at its level. A silent stem shows nothing.
 - **The STEM toggle** is a filled block while a stem plays on the channel,
   and an outline while none plays (the channel plays its analog input).
-- **The cursor** is an inverted column: the column turns light and its bar is
-  drawn dark. On the toggle the toggle's colours flip, so you can still tell
-  on from off.
+- **The cursor** is a small arrow pointing down, between the headings and
+  the meters, over the selected meter or the toggle. The meter or toggle
+  under it looks the same as the others.
 
 The display does not show **which** stem plays on the channel, only that one
 does. While you turn, you want to see the selector and nothing else.
@@ -179,24 +179,22 @@ off, about 0.3 s after StemDeck's reports have settled.
 
 ### The aux return
 
-![The return's selector: STEM at the left, its heading inverted because stem mode plays, with the cursor on it as a light column, its loud bar drawn dark inside; ANALOG at the right with a low bar; AUX in the middle](pics_user/a3-mix-return-selector.png)
+![The return's selector: STEM at the left, its heading inverted because stem mode plays, with the cursor arrow over its loud bar; ANALOG at the right with a low bar](pics_user/a3-mix-return-selector.png)
 
-*Stem mode plays, so the STEM heading is inverted. The cursor is on STEM: its
-column is light and its bar, nearly full, is drawn dark. ANALOG at the right
-is quiet.*
+*Stem mode plays, so the STEM heading is inverted. The arrow points at STEM,
+which is loud. ANALOG at the right is quiet.*
 
-The return's display shows **two meters**, one for each mode, with the large
-title **AUX** between them:
+The return's display shows **two meters**, one for each mode, each under its
+heading:
 
 - **STEM** (left): the stems on StemDeck's AUX bus, the louder of its two
   sides. With an older StemDeck that does not send this meter, STEM shows the
   loudest stem on the return.
 - **ANALOG** (right): the analog return, the louder of aux L and R.
 
-They are plain bars, like the channels' meters. AUX is a title only; the
-cursor never goes there. The heading of the mode that plays is
-**inverted**. **Turn** moves the cursor between STEM and ANALOG (the same
-inverted column as on a channel), **push** switches the return to the mode
+They are plain bars, like the channels' meters. The heading of the mode
+that plays is **inverted**. **Turn** moves the cursor, the same arrow as on a
+channel, between STEM and ANALOG; **push** switches the return to the mode
 under the cursor:
 
 - **STEM, stem mode:** every stem that no channel plays goes to the return
