@@ -383,7 +383,8 @@ job fails straight away and the strip says `separator not installed`.
 ### Remote control from the desk
 
 With A³ Core running, the A³ Mixer chooses what is on its channels: turn a
-channel's encoder to a stem and push. How the desk does it, and the rules for
+channel's encoder to a stem and push; the channel's **STEM** toggle takes
+it off and brings it back. How the desk does it, and the rules for
 it, are on the {ref}`desk's input selectors <a3mix-displays>`. From
 StemDeck's side:
 
@@ -414,8 +415,8 @@ StemDeck's side:
   and the buses.
 - **AUX bus meter.** StemDeck also meters its AUX bus as a stereo pair,
   `/vu/49` (L) and `/vu/50` (R), at the same rate: peak and rms of each side
-  after the bus, i.e. what goes to the aux return. The desk shows it as SA
-  beside the analog return A.
+  after the bus, i.e. what goes to the aux return. The desk shows it as STEM
+  beside the analog return, ANALOG.
 
 (stemdeck-audio)=
 

@@ -82,7 +82,8 @@ A few things follow from that:
   `N-input`); with no stem there, the analog input plays. A CDJ on channel 1
   is silent while a stem is on channel 1, and the stem moves through the same
   strip. You choose it on the desk: turn the channel's encoder to the stem
-  and push (see {ref}`the desk's input selectors <a3mix-displays>`).
+  and push. A push on the channel's **STEM** toggle takes the stem off and
+  brings it back (see {ref}`the desk's input selectors <a3mix-displays>`).
 - **Nothing is on a channel at first.** StemDeck starts with every stem on
   AUX only (see [Where the stems start](#stemdeck-start-buses)); a stem
   reaches a channel when you push it there. A set with its own stem names
