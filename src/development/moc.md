@@ -10,8 +10,8 @@ It owns the motion patterns — recording them from the touchscreen, storing
 them as ticks, and playing them back in time with the beat clock — and speaks
 OSC to A³ Core.
 
-Built with `build.sh`; the test suite runs with `ctest` from `build/` and is
-currently around 1,100 cases.
+How to build and test it (`./build.sh`, `./test.sh`) and which JUCE it needs:
+{doc}`build`. Where it runs: {ref}`A³ Motion hardware <moc-hardware>`.
 
 ## Current Version — V03
 ![The A³ Motion UI as it stands on 2026-09-30, ACTION page open](../user/pics_user/a3-motion-ui-display-one-clip.png)
@@ -182,6 +182,7 @@ And before that:
 
 ## Panel firmware
 The buttons, encoders, pots and LEDs are handled by a microcontroller of their
-own, which reaches the UI over a binary poll-frame protocol on USB serial.
-V02 used a Teensy 4.1; V03 uses an ESP32-S3, built with PlatformIO from
-[`firmware/`](https://github.com/a3-audio/a3-motion/tree/main/firmware).
+own (see {ref}`A³ Motion hardware <moc-hardware>`), which reaches the UI over a
+binary poll-frame protocol on USB serial. The firmware is a PlatformIO project
+in [`firmware/`](https://github.com/a3-audio/a3-motion/tree/main/firmware);
+how to build, test and flash it is on {doc}`build`.

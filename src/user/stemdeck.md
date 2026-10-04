@@ -484,16 +484,18 @@ them, so tools built on it see StemDeck as a CDJ.
 StemDeck is built from source, on Linux. It needs:
 
 - CMake 3.22 or newer, a C++17 compiler, pkg-config
-- **JUCE 9**, installed so that CMake finds it, plus JUCE's own Linux build
-  dependencies. `start.sh` looks for it under `~/local/juce` unless
-  `CMAKE_PREFIX_PATH` says otherwise
+- **JUCE**, the version every A³ product builds against (see
+  {ref}`JUCE <build-juce>`), plus JUCE's own Linux build dependencies.
+  `start.sh` looks for it under `~/local/juce` unless `CMAKE_PREFIX_PATH`
+  says otherwise
 - JACK, FLAC, Vorbis and Ogg development files. On Debian:
 
   ```sh
   apt install libjack-jackd2-dev libflac-dev libvorbis-dev libogg-dev
   ```
 
-- GoogleTest (`libgtest-dev`), only for the tests
+- GoogleTest (`libgtest-dev`), only for the tests (how to run them:
+  {ref}`Build and test <build-commands>`)
 
 Then, in the StemDeck checkout:
 

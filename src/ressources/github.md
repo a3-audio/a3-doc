@@ -25,7 +25,6 @@
 - [osccontrol-light](https://github.com/drlight-code/osccontrol-light) — an
   audio plugin that speaks OSC
 
-There are **no builds to download.** Everything here is built from source; the
-A³ Motion UI has a `build.sh` and runs standalone, with the full interface and
-no controller attached, which is how it can be tried without the hardware in
-the room.
+There are **no builds to download.** Everything here is built from source —
+see {doc}`../development/build`, or let the
+{doc}`installer <../configuration/install>` do it.
