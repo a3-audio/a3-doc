@@ -351,9 +351,10 @@ On `main` since `v03.0`, not tagged yet.
   eight stem meters under **D1 | D2** and, at the right, a **STEM toggle**: filled while a
   stem plays on the channel, an outline while none does. It does not show which stem. Every
   meter is a plain bar at its level; the cursor is a small arrow pointing down at one. Turning moves the
-  cursor over the eight stems and the toggle and switches nothing. A push on a stem makes it
-  the channel's only input (a stem playing on another channel moves here) and its last stem;
-  a push on the toggle takes the stem off, so the analog input plays, or brings the last stem
+  cursor over the eight stems and the toggle in a ring (left from the first stem is the
+  toggle) and switches nothing. A push on a stem makes it the channel's only input (a stem
+  playing on another channel or on the return moves here) and its last stem; a push on the
+  stem that already plays sends it to the return in STEM mode; a push on the toggle takes the stem off, so the analog input plays, or brings the last stem
   back. Core keeps the last stem across a restart. See
   {ref}`the input selectors <a3mix-displays>`.
 - **One stem per channel, a stem on one channel at most**, kept by Core: when StemDeck shows
