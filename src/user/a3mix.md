@@ -69,7 +69,7 @@ timing, and timing does not want a relay in the middle.
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
 | – | **AUX RETURN** | the level of the aux return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
-| 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`) |  |
+| 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`), one column each over all 32 rows of the LED matrix |  |
 
 (a3mix-cue)=
 
@@ -86,7 +86,7 @@ power, cue on the left, mix on the right. A deck's cue send opens only while
 its cue key is on; the mix sends follow the knob alone.
 
 A channel's cue is its **CUE** key on the desk, or the CUE key on A³ Motion,
-and nothing else: the encoder push no longer touches it. **The cue plays what
+and nothing else: the encoder push does not touch it. **The cue plays what
 comes in on the channel:**
 
 - **With a stem on the channel**, Core switches that stem's **C** (CUE) switch
@@ -115,7 +115,7 @@ Two more things reach the headphones, on `dec_phones`:
 
 (a3mix-displays)=
 
-## The stem displays
+## The input selectors
 
 The desk remote-controls [StemDeck](stemdeck.md) through A³ Core. StemDeck has
 two decks with four stems each, eight stems in all. Each stem has six bus
@@ -123,94 +123,74 @@ switches in StemDeck: buses 1–4 (they feed the desk's channels 1–4), AUX
 (the aux return) and CUE (StemDeck's headphone bus). **StemDeck owns these
 switches**; Core only relays what the desk asks for and what StemDeck reports.
 
-The desk has five small OLED displays: one for each channel 1–4 and one for
-the aux return.
+The desk has five small OLED displays, each with an encoder: one for each
+channel 1–4 and one for the aux return.
 
-![Stem menus on the desk's displays: a channel's menu, three times while its deck 1 stem is edited, the return in stem mode and in analog mode](pics_user/a3-mix-stem-menu.png)
+**The rule.** A channel plays **one input**: one stem, or its **analog
+input**. A stem plays on **one channel** at most. Core enforces both. While a
+stem is on a channel, Core shuts the channel's analog input.
 
-*Top left: a channel that plays deck 1's stem 3, the cursor on D1. Top right:
-D1 being edited, the cursor behind the dot on 2 -- a push would load stem 2.
-Middle left: `D1.1`, stem 1, which plays on channel 4 and is offered like any other stem (a push on it is refused). Middle right:
-`<`, which leaves the channel as it is (still underlined: stem 3 plays on).
-Bottom left: the return in STEM mode, with nine meters. Bottom right: the
-return in ANALOG mode.*
+### A channel
 
-**The rule.** A channel plays **one stem of each deck** -- a stem of D1, a stem
-of D2, or one of each -- or its **analog input**, and a stem plays on **one
-channel** at most. Core enforces it. Whatever the channel
-does not play is silent: while a stem is on a channel, Core shuts the
-channel's analog input.
+![A channel's selector: deck 2's stem 1 plays (solid), the cursor is under deck 1's stem 3, which is silent](pics_user/a3-mix-input-selector.png)
 
-### A channel's menu
+*Deck 2's stem 1 plays: its bar is solid. The cursor is the bar under deck 1's
+stem 3, which is silent (a floor line).*
 
-A channel's menu is one row, **D1.3 · D2.- · A**, and it never leaves the
-display: a deck's stem is edited in place, behind the dot.
+A channel's encoder is an input selector. Its display shows **nine meters**
+under the headings **D1 | D2 | A**: deck 1's stems 1–4, deck 2's stems 1–4,
+and the channel's analog input.
 
-- **Turn** moves the cursor over StemDeck's deck 1, deck 2 and the analog
-  input. Each deck says which of its stems plays on this channel: `D1.3` is
-  deck 1's stem 3, `D2.-` means nothing from deck 2.
-- **Push on A** plays the analog input at once; the channel's stems leave.
-- **Push on D1 or D2** moves the cursor behind that field's dot, onto the stem
-  that plays (or stem 1 if none does). Nothing changes in the sound yet.
-  **Turn** now steps through `1 2 3 4 <`, and the field shows the candidate:
-  `D1.2`, `D1.<`.
-  - **Push on a stem** loads it as the channel's stem **of that deck**,
-    replacing that deck's stem there; the other deck's stem stays. The cursor
-    jumps back onto the field.
-  - **Push on the loaded stem** (the underlined one) takes it off the channel
-    and jumps back.
-  - A stem that **plays on another channel** looks like any other choice:
-    the field is always `D1.` and one inverted character, with no mark for it.
-    A push on it is **refused**: nothing is loaded, nothing leaves the other
-    channel, and the cursor stays behind the dot. To move a stem here, take it
-    off its channel first (push on the loaded stem there).
-  - **Push on <** changes nothing and jumps back.
+- **The input that plays** is a solid bar. It stays visible in silence.
+- **The other inputs** are outlined at their level. A silent one is a floor
+  line.
+- **The cursor** is a bar under one meter.
 
-**The display.** The upper half is the menu: the cursor is inverted -- a whole
-field, or only the part behind the dot while a stem is edited -- and what the
-channel plays is underlined. The lower half is the **waveform** of
-what the channel plays, as StemDeck draws it: a mirrored envelope along a
-centre line, running right to left, the newest sound entering at the right edge
-and about 13 seconds across. A channel shows its stem, or its own analog input
-when it is on analog; with a stem of each deck, the louder of the two. A line
-that stays flat is silence.
+**Turn** moves the cursor over the nine meters. It stops at both ends and
+switches nothing.
 
-**One stem of each deck per channel, kept by Core.** If StemDeck shows several
-stems of one deck on one channel (an old session can), Core keeps the lowest
-and switches the others off, about 0.3 s after StemDeck's reports have settled.
+**Push** makes the input under the cursor the channel's only input:
+
+- **A stem** plays here, and the channel's other stem leaves. If the stem
+  plays on another channel, it moves here, and that channel goes back to its
+  analog input.
+- **A** releases every stem from the channel, so its analog input plays.
+- A push on what already plays changes nothing.
+
+**One stem per channel, kept by Core.** If StemDeck shows several stems on one
+channel (an old session can), Core keeps the lowest and switches the others
+off, about 0.3 s after StemDeck's reports have settled.
 
 ### The aux return
 
-The return's encoder has only **two options: STEM and ANALOG.** Turn chooses,
-push switches to the one under the cursor.
+![The return's selector: SA plays (solid), the cursor is under SA, the analog return A is outlined at its level](pics_user/a3-mix-return-selector.png)
 
-- **STEM:** every stem that no channel plays goes to the return (StemDeck's
-  **A** on that stem). A stem a channel loads leaves it, a stem a channel lets
-  go returns to it. If you switch a free stem's **A** off in StemDeck, Core
-  undoes it after about 0.3 s.
-- **ANALOG:** no stem is on the return. The analog return plays as it is routed
-  in REAPER.
+*SA plays and the cursor is under it. A, the analog return, is outlined at its
+level.*
 
-The display shows **STEM** and **ANALOG** (the active one underlined, the
-cursor inverted) and **nine meters**, with no waveform: the eight stems
-(A1–A4, B1–B4) and one stereo meter for the analog return (aux L/R).
+The return's display shows **two meters**:
 
-### The main VU meter
+- **SA**: the loudest stem on the return.
+- **A**: the analog return (aux L/R).
 
-The LED meter on the desk shows the stems as well. Its **top module (rows
-25–32) shows the eight stems**, one column each, A1–A4 then B1–B4. The main
-meter (the sub and the seven tops) uses **rows 1–24**. This needs the new
-Teensy firmware.
+The mode that plays is solid. **Turn** moves the cursor between the two,
+**push** switches the return to the mode under the cursor:
 
-### Cue, and without StemDeck
+- **SA, stem mode:** every stem that no channel plays goes to the return
+  (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
+  a stem a channel lets go returns to it. If you switch a free stem's **A**
+  off in StemDeck, Core undoes it after about 0.3 s.
+- **A, analog mode:** no stem is on the return. The analog return plays as it
+  is routed in REAPER.
 
-- **No C field.** A channel's cue is its CUE key (see
-  {ref}`the cue <a3mix-cue>`), unchanged.
-- Core holds each channel's menu and the return's mode, keeps them across a
-  restart and announces them. Without StemDeck, turning still moves the
-  cursor, a push does nothing and every channel shows A.
+### Without StemDeck
+
+- Core holds each channel's cursor and the return's mode, keeps them across a
+  restart and announces them. A channel's cursor starts on A.
+- **Without StemDeck**, turning still moves the cursor, a push switches
+  nothing, and every channel plays A.
 - A fresh StemDeck starts with every stem on AUX only, so every channel plays
-  **A** until you load a stem; a session saved earlier restores its own
+  **A** until you push a stem; a session saved earlier restores its own
   switches.
 
 The desk shows what StemDeck reports, so a click on a bus switch on StemDeck's

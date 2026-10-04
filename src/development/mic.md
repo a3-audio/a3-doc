@@ -20,13 +20,50 @@
 	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
 	- The lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
 	- The beat (`/beat`)
-	- The state of its stem displays (`/channel/{ch}/stem…`, `/aux-return/stem…`)
+	- The state of its input selectors (`/channel/{ch}/stem…`, `/aux-return/stem…`)
+	- StemDeck's stem meters (`/vu/41`–`/vu/48`)
 
 - Sends messages back to the microcontroller via USB serial
-	- LEDs
-	- Displays
+	- LEDs and VU meters
 
-A second script, `a3-mixer-set-display/`, drives the channel displays.
+- Draws the five OLED displays itself, over I2C (see *The displays* below)
+
+(mic-displays)=
+
+### The displays
+
+What the displays show and how the encoders work is on
+{ref}`the desk's input selectors <a3mix-displays>`. Inside `a3-mixer.py` it is
+split in two:
+
+- **`a3-mixer-set-display/display_panel.py`** is the pure part, with no
+  hardware: which display sits on which multiplexer channel (`PANELS`), how
+  Core's announcements are read, and the layout. `channel_picture()` and
+  `return_picture()` turn a cursor, what plays and the meter levels into
+  headings, meters and a cursor box for a display of any size. It is tested
+  without a Pi.
+- **`a3_mixer_displays.py`** draws that layout with PIL and sends it to the
+  SSD1306s through the TCA9548A multiplexer. It needs the Pi's libraries and
+  imports them only when the displays are opened. Without them the desk runs
+  on without displays.
+
+How it draws:
+
+- **A thread of its own.** The OSC thread only notes what a display should
+  show; the display thread always draws the latest state, so a fast turn does
+  not queue one draw per click.
+- **Meters on a clock.** Peaks are held, and the meters step
+  `METER_STEPS_PER_SECOND` (5) times a second, with the loudest peak since
+  the last step. A meter not heard for 0.5 s falls to silence. A turn or an
+  announcement is drawn before waiting meter redraws.
+- **Partial updates.** `a3_mixer_oled.py` sends only the windows of the
+  picture that changed, not the whole 1 KB frame.
+- **A failed display** is one line in the journal; it is tried again two
+  seconds later with its latest picture, drawn whole.
+
+`a3-mixer-set-display.py` is a separate one-shot script, run by its own unit
+at boot. It writes each display's name; `a3-mixer.py` draws over it when it
+starts.
 
 (mic-truth)=
 

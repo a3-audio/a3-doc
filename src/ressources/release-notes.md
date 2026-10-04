@@ -347,30 +347,23 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Mixer (`a3-mixer`)
 
-- **A channel's encoder is a two-level menu** (2026-10-02), replacing the dot grid. Level 1
-  turns over **D1 · D2 · A**: push on A plays the analog input at once, push on D1 or D2
-  only enters that deck; the top level reads e.g. **D1.3 D2.- A** -- which stem of each deck
-  plays (2026-10-03). A deck is edited in place, with no screen of its own (2026-10-03): push
-  on D1 puts the cursor behind the dot, on the stem that plays, and turning steps through
-  **1 2 3 4 <** (the field shows `D1.2`, `D1.<`). Push on a stem loads it as
-  the channel's stem of that deck (one of each deck may play; push on the loaded one takes it
-  off) and jumps back onto the field; a stem that plays on another channel looks like
-  any other choice (one inverted character behind the dot, no mark), and a push on it is
-  refused by Core: nothing changes and the cursor stays; push on < changes nothing and jumps
-  back. The display has the
-  menu in its upper half (cursor inverted, what plays underlined) and the waveform below. See
-  {ref}`the stem displays <a3mix-displays>`.
-- **One stem of each deck per channel, a stem on one channel at most**, kept by Core: when
-  StemDeck shows several stems of one deck on one channel (an old session), Core keeps the
-  lowest and switches the others
-  off about 0.3 s after the reports settle.
-- **The aux return has two options, STEM and ANALOG.** Turn chooses, push switches. In STEM
-  every stem no channel plays goes to the return; in ANALOG no stem does and the analog
-  return plays as routed in REAPER. Its display shows the two words and nine meters (the
-  eight stems and one stereo meter for the analog return), no waveform. The return no longer
-  switches single stems.
-- **The main VU shows the stems:** the top LED module (rows 25–32) has one column per stem,
-  A1–A4 and B1–B4; the main meter uses rows 1–24. This needs the new Teensy firmware.
+- **A channel's encoder is an input selector**, replacing the dot grid. The display shows
+  nine meters under **D1 | D2 | A**: deck 1's stems, deck 2's stems and the analog input.
+  What plays is a solid bar, the others are outlined at their level, the cursor is a bar
+  under one meter. Turning moves the cursor and switches nothing; a push makes the input
+  under the cursor the channel's only one -- a stem playing on another channel moves here,
+  A releases every stem. No waveform, no menu. See
+  {ref}`the input selectors <a3mix-displays>`.
+- **One stem per channel, a stem on one channel at most**, kept by Core: when StemDeck shows
+  several stems on one channel (an old session), Core keeps the lowest and switches the
+  others off about 0.3 s after the reports settle.
+- **The aux return has two modes, stem and analog.** Its display shows two meters, SA (the
+  loudest stem on the return) and A (the analog return); turning moves the cursor, a push
+  switches. In stem mode every stem no channel plays goes to the return; in analog mode no
+  stem does and the analog return plays as routed in REAPER. The return no longer switches
+  single stems.
+- **The main VU uses all four LED modules (32 rows)** again. This needs the new Teensy
+  firmware.
 - The cue is unchanged.
 - **The desk reads a copy of `a3-osc.json`** beside its script
   (`software/scripts/a3-osc.json`, copied from the Core at deploy); without it the service

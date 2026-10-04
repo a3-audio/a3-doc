@@ -251,6 +251,10 @@ moves a selection, a push loads it. New are `/channel/{ch}/stem/push` and
 `/aux-return/stem` now carries the return's selection (0 = the empty field)
 before the eight flags. The channel's push no longer toggles the cue.
 
+On **2026-10-04** each channel's encoder became an input selector:
+`/channel/{ch}/stem/menu` (ii) is now `/channel/{ch}/stem/cursor` (i), 0–7
+the eight stems, 8 = A. See {ref}`the desk's input selectors <a3mix-displays>`.
+
 `/device/hello` is new; see [above](#osc-differs).
 
 (osc-vu-meters)=
@@ -507,7 +511,7 @@ the device's value and there is nothing to ratchet.
 ```
 
 **The desk does not use these values.** `a3-mixer.py` listens for the meters,
-the lamps, `/beat` and its stem displays' state; everything above arrives
+the lamps, `/beat` and its input selectors' state; everything above arrives
 there and is dropped. Its pots are analog, so a returned value could only be
 displayed, not set.
 
