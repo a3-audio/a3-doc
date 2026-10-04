@@ -214,7 +214,7 @@ acting on it itself.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); see vu_meters |
+| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; see vu_meters |
 <!-- /a3-osc:addresses -->
 
 ### Renamed on 2026-09-30
@@ -324,6 +324,8 @@ its number:
 | `/vu/46` | stem_b2 |
 | `/vu/47` | stem_b3 |
 | `/vu/48` | stem_b4 |
+| `/vu/49` | stem_aux_L |
+| `/vu/50` | stem_aux_R |
 <!-- /a3-osc:vu -->
 
 (osc-core)=
