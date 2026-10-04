@@ -322,6 +322,8 @@ its number:
 | `/vu/48` | stem_b4 |
 <!-- /a3-osc:vu -->
 
+(osc-core)=
+
 ## A³ Core
 
 A³ Core listens on **three** ports, and which one a message arrives at
@@ -333,6 +335,8 @@ decides what it means. Their numbers are on the {ref}`ports page
 | `core.osc` | Commands from A³ Mixer, A³ Motion, StemDeck and the beat-analyzer | The room talking to Core |
 | `core.reaper-feedback` | REAPER's feedback | REAPER reports what Core itself set. One port for both would have Core reading REAPER's reports as commands and answering them — a loop on a rig that makes sound |
 | `core.web` | HTTP, not OSC — the {doc}`window <../development/core>` and `/api/truth` | A browser page, no OSC at all |
+
+(osc-everyone)=
 
 ### Everything goes to everyone
 
@@ -428,6 +432,8 @@ and every button press becomes a state, so the cue key on the desk turns into a
 momentary — on only while the finger rests on it. No test in any of the repos
 catches that.
 
+(osc-recall)=
+
 ### /state/recall
 
 Sent by a device that has just come up and knows nothing about the room.
@@ -456,6 +462,8 @@ with less. A value Core has never seen is left
 **out** rather than sent as zero — zero degrees is the front of the room, a
 real position, and answering it would move the sound while claiming to
 report where it already is.
+
+(osc-way-back)=
 
 ### The way back: what REAPER reports
 
@@ -502,6 +510,8 @@ the device's value and there is nothing to ratchet.
 the lamps, `/beat` and its stem displays' state; everything above arrives
 there and is dropped. Its pots are analog, so a returned value could only be
 displayed, not set.
+
+(osc-beat-delay)=
 
 ### /beat, and the delay that follows it
 
