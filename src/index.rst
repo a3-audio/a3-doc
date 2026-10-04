@@ -7,6 +7,7 @@ Thanks for your interest in the A³ system.
 The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions.
 
 The other sections contain pictures and explanations of assembly, configuration and development.
+To set a machine up as a part of the system, start with `Installing the system <https://a3-audio.github.io/a3-doc/configuration/install.html>`_.
 
 *******
 Contact

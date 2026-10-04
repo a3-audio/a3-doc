@@ -2,7 +2,8 @@
 
 One version is one tag, set on every repository at once: the devices are built and played
 together, so they are released together. Each section lists what changed, grouped by device,
-newest version first. Each group names the repository the changes live in.
+newest version first. Each group names the repository the changes live in. To put a version
+on a machine, use {doc}`install <../configuration/install>` (`install --update VERSION`).
 
 For how the system got here, the reasoning and the wrong turns included, see
 [History](history.md).
@@ -11,11 +12,12 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
-### The whole system: one truth for OSC
+### The whole system
 
-- **Every OSC address, port and IP is written once**, in `/usr/share/a3/a3-osc.json`, shipped
-  by the a3-core package. Core, A³ Motion, the A³ Mixer (from a copy beside its script),
-  StemDeck, the beat-analyzer and the zita units all take them from there. See
+- **Every OSC address, port and IP is written once**, in `a3-osc.json`: the contract shipped
+  by the a3-core package, the network in `~/.config/a3/network.json` on the Core. Core serves
+  the joined file; the A³ Mixer, StemDeck and A³ Motion fetch it from Core, the beat-analyzer
+  and the zita units get it rendered at install and at Core's start. See
   {ref}`Where addresses and ports live <osc-truth>`.
 - **The vocabulary was straightened:** channels count 1–4 on the wire (were 0–3); `/fx/*`
   became `/filter/*`, `/channel/N/fx` `/channel/N/filter`, the lamps `/channel/N/pfl/led` and
@@ -23,6 +25,11 @@ On `main` since `v03.0`, not tagged yet.
   `/master/phones_mix`/`phones_volume` `phones-mix`/`phones-volume`, `/master/return`
   `/master/fx-return`, and the meters `/vu/1..40`. Anything outside the A³ repositories that
   speaks the old words has to follow.
+
+- **One installer for the whole system:** `install` in a3-system sets a machine up as Core,
+  StemDeck and Motion (the Mixer is listed, not installable yet), at one version, checking out
+  only the submodules those roles need. See {doc}`../configuration/install`.
+- **One JUCE for every product**, 9.0.3, pinned in the installer. See {ref}`JUCE <build-juce>`.
 
 ### A³ Motion (`a3-motion-ui`)
 

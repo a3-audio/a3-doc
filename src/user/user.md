@@ -66,7 +66,7 @@ figure that takes four bars keeps taking four bars when the tempo changes.
 | :--- | :--- |
 | **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
 | **Assembly** | prototype pictures and how the boxes go together |
-| **Configuration** | the files each device reads at startup |
+| **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
 | **Development** | building and hacking on the software |
 | [**History**](https://a3-audio.github.io/a3-doc/ressources/history.html) | project impressions |
 | [**OSC reference**](https://a3-audio.github.io/a3-doc/ressources/osc.html) | every address the system speaks |
