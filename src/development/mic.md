@@ -20,6 +20,7 @@
 	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
 	- The lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
 	- The beat (`/beat`)
+	- The state of its stem displays (`/channel/{ch}/stem…`, `/aux-return/stem…`)
 
 - Sends messages back to the microcontroller via USB serial
 	- LEDs
@@ -39,8 +40,8 @@ The script has no address, port or IP of its own. It reads them from
 - **The cache.** The desk keeps the last truth it fetched in
   `~/.cache/a3/a3-osc.json`. The service runs as root, so that is root's home
   on the desk.
-- **The announcement.** The desk listens on UDP port 7790. Every 2 seconds
-  Core broadcasts OSC `/core/here` there, with two strings: the URL of its
+- **The announcement.** The desk listens on `devices.announce`. Every 2
+  seconds Core broadcasts OSC `/core/here` there, with two strings: the URL of its
   truth and the truth's fingerprint. A broadcast does not cross a router.
 - **The update.** When Core announces a fingerprint other than the cached
   file's, the desk fetches `/api/truth` from that URL and checks that the
@@ -66,63 +67,15 @@ compares against Core's fingerprint.
 
 ### What it is sent and does not listen for
 
-A handful of `dispatcher.map` calls, and that is the whole list: the meters,
-the lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`,
-`/filter/led`) and `/beat`. A³ Core sends it a great deal more — every
-channel's gain, EQ, volume and aux send, the whole master section, the shared
-filter, every flag — and all of it is dropped without a word, because
-pythonosc passes a message with no matching pattern straight into nothing.
-
-That has been true for as long as the reverse path has existed. It stopped
-being invisible on 2026-09-12, when A³ Motion's software mixer began showing
-the same values: the desk is now the only device in the system that does not
-know its own state beyond its lamps.
-
-Wiring it up is not the hard part. The pots here are **analog** — a returned
-value cannot move a knob, only be displayed — so the question is what a
-channel display should show when the knob under it and the value in REAPER
-disagree, and they will, the moment somebody touches the same channel on the
-other mixer. A display showing a number the knob below it does not have is
-worse than one showing nothing. Tracked in
-`issues/a3-mixer-hoert-nur-leds-und-vu.md`.
-
-### Three addresses that went out and were never answered
-
-Found on 2026-09-12 by holding the OSC reference against A³ Core's generated
-register:
-
-- **`/channel/n/enc` and `/channel/n/encbtn`** — the channel's rotary encoder
-  and its push switch. No handler anywhere, and no decision behind them. The
-  script even remembered which encoder was used last, so something was
-  planned; nobody could say what. Removed.
-- **`/tap`** — went to A³ Core, on an address Core never subscribed to. The
-  handler was there, its `dispatcher.map` line was commented out, and so was
-  the `rtmidi` import it needed. The key kept sending and UDP had no way of
-  saying that nobody listened. It now goes **straight at the beat-analyzer**,
-  the same port and the same message A³ Motion's TAP key sends — press only,
-  and `int 1`, which the analyzer reads as the beat within the bar. A tap is
-  timing, and timing does not want a relay in the middle.
-
-The **3D key** went in the same round, for a different reason: it is not on
-the panel in hardware v3.2, so its entry described a key nobody has and its
-lamp a light that is not there. A³ Core's side of it (`/channel/n/4d`) went
-the same day.
-
-### The pfl lamp was inverted twice
-
-`send_button_leds_data` had a branch of its own for `led_mode == 0` — pfl's —
-that wrote `0 if led_on else 255` while every other lamp wrote
-`255 if led_on else 0`. A³ Core inverted pfl on the way out as well. The two
-cancelled: the desk was right, and the pfl lamp's address
-(`/channel/n/led/pfl` then, `/channel/{ch}/pfl/led` from 2026-09-30, `/channel/{ch}/cue/led` since 2026-10-01) carried
-the opposite of what its name said.
-
-That cost nothing while the desk was the only thing listening. It stopped
-being nobody's problem when the lamps became something **every** device is
-told, so both inversions came out on the same day. What reaches the pixel is
-unchanged and this function is now one branch.
+Core sends the desk much more than it listens for — every channel's gain, EQ,
+volume and aux send, the master section, the shared filter, every flag — and
+pythonosc drops a message with no matching pattern without a word. The pots
+are analog: a returned value could only be displayed, not set, and what a
+display should show while the knob under it and REAPER disagree is not
+decided. See {ref}`The way back <osc-way-back>`.
 
 ## Panel firmware
 Written in C++ as a PlatformIO project,
-[`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware).
-V02 runs on a Teensy 4.1; V03 moves to a Raspberry Pi Pico with Ethernet.
+[`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware),
+for the panel controller named on {ref}`A³ Mixer hardware <mic-hardware>`.
+How to build it: {doc}`build`.

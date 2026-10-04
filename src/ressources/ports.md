@@ -1,32 +1,24 @@
 # Ports and endpoints
 
-Every UDP port the devices listen on, and every place each one sends, stated
-per device. One page, because the alternative is what happened on 2026-09-24:
-three files disagreed about the A³ Mixer's address and port, and each of them
-looked authoritative on its own.
-
-Since 2026-09-30 there is one place those facts are written:
-`a3-osc.json` — the contract shipped by the a3-core package, the hosts and
-network in the maintainer's `~/.config/a3/network.json` on the Core machine,
-joined by Core and served at `http://<core>:9080/api/truth` — see
-{ref}`Where addresses and ports live <osc-truth>`. The table of listeners
-below is rendered from that file; the per-device sections describe it, and
-where they give a number it is the file's.
+Every UDP port the devices listen on, and who sends to it. Both are facts of
+`a3-osc.json` — see {ref}`Where addresses and ports live <osc-truth>`: the
+listener table below is rendered from it, and the other pages name a port by
+its listener name (`core.osc`, `motion.vu`, …) rather than by its number.
 
 ## Hosts
 
 The machines are named in the file's `hosts` section; the Host column of the
 [listener table](#ports-by-listener) shows each name with its address.
 
-A³ Motion's UI currently runs **on the Core machine**, which is why Core and
-the beat-analyzer address it as `127.0.0.1`. On a rig where it runs on its own
-Raspberry Pi that becomes the Pi's address; nothing else changes.
+A³ Motion's UI runs **on the Core machine** on the rig, which is why Core and
+the beat-analyzer address it as `127.0.0.1`. Where it runs on a machine of its
+own (see {ref}`A³ Motion hardware <moc-hardware>`), that becomes the machine's
+address; nothing else changes.
 
 ## Cabling
 
 The router has one free port, so the A³ Mixer hangs on the Core machine's
-**second socket**, and the Core **bridges** its two sockets into one segment
-(since 2026-09-25):
+**second socket**, and the Core **bridges** its two sockets into one segment:
 
 ```text
 router 192.168.8.1 ───── eno1   ┐
@@ -40,84 +32,18 @@ A³ Mixer 192.168.8.11 ── enp5s0 ┘
   boot, not at once.
 - **The Core sits in the path.** With the Core machine off, the A³ Mixer has
   no network.
-- The a3-core package writes this: its install asks for the second socket
-  (`a3-core/bridge-with`, empty for no bridge) and for the address. The
-  "standard network" it offers is the `network` section of `a3-osc.json`, and
-it keeps the chosen values in `~/.config/a3/network.json`. See
-  the a3-core README.
-
-Measured on the rig after a cold boot (2026-09-25): the mixer answers in
-0.7 ms, the router in 0.5 ms.
-
-## The list
-
-Per service: where it sends, and where its return arrives. A send is an
-address and port on the far end; a return is a port this service holds open.
-The numbers are `a3-osc.json`'s `listeners`, and who sends where is its
-`routes`.
-
-```text
-A³ MIXER
-  send    192.168.8.10:9000   Core           gain, EQ, volume, cue, filter, /device/hello
-          192.168.8.10:7775   beat-analyzer  /tap
-  return  7772                               VU and lamp state
-
-A³ MOTION
-  send    127.0.0.1:9000      Core           positions, clip settings, /state/recall
-          127.0.0.1:7775      beat-analyzer  /tap, /beat, /clockmode
-  return  7771                               relayed state, recall answer, /beat
-          7772                               /vu/1..40
-          7777                               /EnergyVisualizer/RMS
-
-A³ CORE
-  send    127.0.0.1:9001      REAPER         everything that becomes audio
-          127.0.0.1:7771      A³ Motion      relayed state, recall answer
-          192.168.8.11:7772   A³ Mixer       VU and lamp state
-  return  9000                               commands from Mixer, Motion, analyzer
-          9002                               REAPER feedback
-
-REAPER
-  send    127.0.0.1:9002      A³ Core        what a fader or a plugin did
-          127.0.0.1:7777      A³ Motion      /EnergyVisualizer/RMS   (IEM plugin)
-  return  9001                               from Core
-          1337-1340                          its own OSC devices
-
-BEAT-ANALYZER
-  send    127.0.0.1:7771      A³ Motion      /beat
-          127.0.0.1:7772      A³ Motion      /vu/1..40
-          192.168.8.11:7772   A³ Mixer       /vu/1..40
-          192.168.43.96:9000  radla          /beat
-          192.168.43.96:9001  radla          /vu/1..40
-  return  7775                               /beat, /tap, /clockmode
-          50000-50002                        Pioneer Pro DJ Link
-```
-
-Three of these are worth reading twice.
-
-**REAPER sends to A³ Motion directly.** `/EnergyVisualizer/RMS` is a VST3
-plugin inside the REAPER project addressing Motion on 7777. It does not pass
-through Core, which is why Core's register marks it `aside` and why it keeps
-working across things that stop Core.
-
-**A³ Core holds two return ports on purpose.** Reading REAPER's feedback on
-the same port as commands would have Core answering its own reports — a loop
-on a rig that is making sound.
-
-**`radla` is off this subnet.** `192.168.43.96`, reached through the gateway
-at `192.168.8.1`, and it answers — a live target, not a leftover. Worth saying
-because the two other `192.168.43.x` addresses that used to sit in the
-analyzer's config (`.55` for the Mixer, `.54` for Motion) are dead and were
-wrong. What `radla` does with what it receives is not documented here.
+- The a3-core package writes this; see {ref}`What the installation does
+  <core-postinst>`.
 
 (ports-by-listener)=
 
 ## Ports, by listener
 
-Rendered from `a3-osc.json` — edit the file, not this table. Port **9080**
-serves the traffic window and also `GET /api/truth`, the joined truth; port
-**7790** is not Core's listener but the announcement: Core broadcasts
-`/core/here` to it every 2 s and every device that follows Core's truth (today
-the desk) listens there. A host of `any`
+Rendered from `a3-osc.json` — edit the file, not this table. `core.web` serves
+the traffic window and also `GET /api/truth`, the joined truth.
+`devices.announce` is not Core's listener but the announcement: Core
+broadcasts `/core/here` to it every 2 s, and every device that follows Core's
+truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `any`
 (`0.0.0.0`) means the program listens on every interface of its own machine;
 `local` means only on the machine itself.
 
@@ -148,121 +74,39 @@ the desk) listens there. A host of `any`
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
 <!-- /a3-osc:ports -->
 
----
+(ports-routes)=
 
-## A³ Core
+## Who sends where
 
-The machine that makes the sound. It has no interface of its own; everything
-it does, something else asked for.
+The file's `routes`, by sender. Each target is a listener of the table above.
 
-**Receives**
+| Sender | Sends to |
+| :--- | :--- |
+| A³ Mixer | `core.osc` (gain, EQ, volume, cue, filter, `/device/hello`), `beat-analyzer.clock` (`/tap`) |
+| A³ Motion | `core.osc` (positions, clip settings, mixer, `/state/recall`), `beat-analyzer.clock` (`/tap`, `/beat`, `/clockmode`) |
+| A³ Core | `reaper.osc`, `iem.multiencoder-1` … `-3`, `dualdelay.osc` (the engine); `motion.osc`, `mixer.osc`, `stemdeck.osc` (relayed state, lamps, the recall answer, bus switches); `devices.announce` (`/core/here`) |
+| REAPER | `core.reaper-feedback` (what a fader or a plug-in did); its IEM EnergyVisualizer sends to `motion.energy` |
+| beat-analyzer | `core.osc`, `motion.osc`, `mixer.osc`, `radla.osc` (`/beat`); `motion.vu`, `mixer.osc`, `radla.vu` (`/vu`) |
+| StemDeck | `core.osc` (bus switch reports, hello), `mixer.osc` (stem meters), `prolink.announce`, `prolink.status` and the beat packets (as tempo master) |
+| zita-j2n (Core) | `radla.zita-n2j` (2 channels) |
+| radla | `zita-n2j.audio` (10 channels) |
 
-| Port | From | What |
-| ---: | :--- | :--- |
-| 9000 | A³ Mixer, A³ Motion, beat-analyzer | Commands: gain, EQ, volume, cue, FX, positions, `/state/recall` |
-| 9002 | REAPER | Feedback: what a fader or a plugin actually did |
+Worth knowing:
 
-**Sends**
-
-| To | Port | What |
-| :--- | ---: | :--- |
-| REAPER | 9001 | Everything that becomes audio |
-| A³ Motion UI | 7771 | Relayed state and the answer to `/state/recall` |
-| A³ Mixer | 7772 | VU and lamp state |
-
-Two receive ports rather than one is deliberate: reading REAPER's reports on
-the same port as commands would have Core answering its own feedback — a loop
-on a rig that is making sound. See [OSC](osc.md).
-
-## A³ Mixer
-
-Four channels of desk. Sends what the hands do; receives what the meters and
-lamps should show.
-
-**Receives**
-
-| Port | From | What |
-| ---: | :--- | :--- |
-| 7772 | A³ Core, beat-analyzer | `/vu/1..40`, and the cue and filter lamp states |
-
-**Sends**
-
-| To | Port | What |
-| :--- | ---: | :--- |
-| A³ Core | 9000 | gain, EQ, volume, cue, filter, `/device/hello` |
-| beat-analyzer | 7775 | `/tap` |
-
-`/tap` goes straight at the beat-analyzer rather than through Core. Core's
-handler for it is gone.
-
-## A³ Motion
-
-The one with the screen. Records movement trajectories and plays them back in
-time.
-
-**Receives**
-
-| Port | From | What |
-| ---: | :--- | :--- |
-| 7771 | A³ Core, beat-analyzer | Relayed channel state, the recall answer, `/beat` |
-| 7772 | beat-analyzer | `/vu/1..40` |
-| 7777 | REAPER (the IEM EnergyVisualizer) | `/EnergyVisualizer/RMS`, the 426-point sphere |
-
-**Sends**
-
-| To | Port | What |
-| :--- | ---: | :--- |
-| A³ Core | 9000 | Positions, clip settings, `/state/recall` |
-| beat-analyzer | 7775 | `/tap`, `/beat` |
-
-Three receive ports because the three streams have nothing to do with each
-other and very different rates: control is occasional, VU is 25 Hz, and the
-energy sphere is 426 floats a frame.
-
-## beat-analyzer
-
-Beat detection and VU metering, straight off JACK.
-
-**Receives**
-
-| Port | From | What |
-| ---: | :--- | :--- |
-| 7775 | A³ Motion, A³ Mixer | `/beat`, `/tap`, `/clockmode` |
-| 50000–50002 | Pioneer Pro DJ Link | Keep-alive, beat packets, status |
-
-**Sends**
-
-| To | Port | What |
-| :--- | ---: | :--- |
-| A³ Motion UI | 7771 | `/beat` |
-| A³ Motion UI | 7772 | `/vu/1..40` |
-| A³ Mixer | 7772 | `/vu/1..40` |
-
-Targets are named in its `.env` as `OSC_HOST_<name>` and `OSC_VU_<name>`,
-inside the `a3-osc` block that the a3-core package renders from
-`a3-osc.json`. Without any target it says the block is missing.
-
-## REAPER
-
-Core's engine. Not a device anyone touches, but it holds ports and it is easy
-to confuse with Core because the numbers are adjacent.
-
-**Receives** on 9001, from Core. **Sends** to Core on 9002. It also holds
-1337–1340 for its own OSC devices.
-
----
-
-## Two things worth knowing
-
-**The same port number appears on more than one host, on purpose.** 7772 is
-"the VU port" on both A³ Motion and the A³ Mixer. Reading a port number
-without its host is how `192.168.43.55:7771` came to sit in a config file: the
-port was taken from the wrong device and the address from an older network.
-
-**A port a device sends *from* is not a port anything listens on.** Every
-device also holds a handful of high-numbered ephemeral sockets; those are the
-kernel's, they change on every start, and they mean nothing. Only the ports on
-this page are fixed.
+- **REAPER sends to A³ Motion directly.** `/EnergyVisualizer/RMS` comes from a
+  plug-in inside the REAPER project and does not pass Core, which is why
+  Core's register marks it `aside`.
+- **A³ Core holds two receive ports on purpose.** Reading REAPER's feedback
+  on the command port would have Core answering its own reports — a loop.
+- **A³ Motion holds three**, because control, meters (25 Hz) and the energy
+  sphere (426 floats a frame) have nothing to do with each other.
+- **`/tap` goes straight to the beat-analyzer**, from the desk and from A³
+  Motion, not through Core: a tap is timing.
+- **`radla` is off this subnet**, reached through the gateway; it receives
+  the beat, the meters and network audio.
+- **The same port number appears on more than one host, on purpose** (7772 is
+  the meter port of both A³ Motion and the A³ Mixer): read a port with its
+  host. A port a device sends *from* is an ephemeral one and means nothing.
 
 ## The numbering, and what would be better
 
@@ -287,10 +131,10 @@ A scheme where the **block says the owner** would remove a class of mistake:
 with the offset inside a block keeping its meaning everywhere: `+0` control,
 `+1` VU, `+2` energy, `+5` beat clock.
 
-**This is a proposal, not the current state.** Since 2026-09-30 the devices'
-side of a renumbering is one edit in `a3-osc.json`, but the ports set inside
-REAPER and its plug-ins still have to follow by hand; the desk follows Core's
-announcement by itself. A half-done renumbering is worse than an untidy
+**This is a proposal, not the current state.** The devices' side of a
+renumbering is one edit in `a3-osc.json`, but the ports set inside REAPER and
+its plug-ins still have to follow by hand; the desk, StemDeck and A³ Motion
+follow Core's announcement by themselves. A half-done renumbering is worse than an untidy
 one that works — a device sending into a port nobody holds is silent, and
 silence is the hardest fault here to see. The tables above are what the rig
 does today.

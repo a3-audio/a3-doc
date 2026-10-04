@@ -12,6 +12,11 @@ in the order it happens:
 4. [The files](#core-files) — every file the installation puts on the
    machine, where it lands, and whether you are meant to edit it.
 
+The usual way onto a machine is the a3-system {doc}`installer <install>`
+(role Core): it builds this package from the version's a3-core, asks the
+package's questions up front and installs it. The package then does what this
+page describes either way.
+
 | Part | What it is |
 | :--- | :--- |
 | OS | Debian testing with a Linux realtime kernel |
@@ -53,7 +58,9 @@ for one user, **`aaa`**: its paths name that home directory.
 
 ### Installing
 
-One command, as `aaa`:
+With the {doc}`installer <install>`, or — for the newest package from the
+apt archive, on a3-core's `main` whatever version the rest is on — one
+command, as `aaa`:
 
 ```sh
 wget -qO- "https://raw.githubusercontent.com/a3-audio/a3-core/main/platform-config/debian-x86_64/a3-core_install.sh" | sudo bash
@@ -195,21 +202,31 @@ A virtual environment at `~/.venv`, and into it the packages in
 `~/.local/share/a3-core/recipes/requirements.txt`: `numpy`, `python-osc`,
 `mido`, `FreeSimpleGUI`. Core runs on this environment's Python.
 
-### 4. The configuration, copied into `~/.config`
-
-```sh
-cp -rn /home/aaa/.local/share/a3-core/config/* /home/aaa/.config/
-```
+### 4. The configuration, installed into `~/.config`
 
 The package carries its configuration under `~/.local/share/a3-core/config/`
-(listed in [part 4](#core-config-tree)) and copies it into `~/.config`. The
-`-n` means **no clobber: a file that is already there is never replaced.** On
-a fresh machine everything arrives; on an installed one only *new* files do.
-A configuration somebody tuned at the rig survives every update — and a fix
-to a file that already exists never arrives by itself.
+(listed in [part 4](#core-config-tree)) and installs it into `~/.config`, file
+by file:
 
-To bring the package's version of such a file onto the machine on purpose,
-use `tools/config-status.py` from an a3-core checkout:
+- A file that is **missing** is installed.
+- A file that is **the same** is left alone.
+- A file that **differs** — left over from an older a3, or edited on this
+  machine — is replaced only if its part was chosen. The install asks which
+  parts to replace (`a3-core/replace-config`), offering only the parts that
+  differ, all of them ticked; an unattended install takes them all. The parts
+  are `reaper`, `i3`, `systemd`, `qjackctl` (QjackCtl and the patchbay), `iem`
+  and `other`, by the folder a file sits in.
+- Every replaced file is first copied to
+  `~/.config/a3-replaced/<date_time>/`, under its own path, and the install
+  names it. A file whose part was not chosen stays, and is named too.
+
+The REAPER template nearly always differs, because REAPER saves the running
+project over it when it stops. If it is replaced while REAPER runs, REAPER is
+stopped first — its save lands in the old file, which goes to the backup —
+and started again on the new template.
+
+To compare one file with the package's version, or to bring one over on
+purpose, use `tools/config-status.py` from an a3-core checkout:
 
 ```sh
 python3 tools/config-status.py                  # list what differs
@@ -302,9 +319,9 @@ Notes:
   package does not ship it; it sets only the two keys REAPER needs to find
   the plug-ins. The IEM suite comes from Debian, in `/usr/lib/vst3`.
 - The beat-analyzer is **not** cloned: it is built from the a3-system
-  workspace checkout, which carries it as a submodule. If that checkout is not
-  there yet, the step says so and is skipped — set up the workspace, then
-  start `a3-user-install.service` again. A `build/.env` that already exists is
+  checkout, which carries it as a submodule. If that checkout is not there
+  yet, the step says so and is skipped — clone a3-system (see
+  {doc}`install`), then start `a3-user-install.service` again. A `build/.env` that already exists is
   never overwritten. Without one, the analyzer reaches nothing off the
   machine.
 - To fetch REAPER and the plug-ins again on purpose:
@@ -367,8 +384,8 @@ journalctl --user -u a3-core -f
 
 ### User units at a glance
 
-All live in `~/.config/systemd/user/` (copied from the package with `cp -rn`,
-see [part 4](#core-config-tree)). "RT" is `CPUSchedulingPolicy=rr` with the
+All live in `~/.config/systemd/user/` (installed from the package's
+configuration, see [part 4](#core-config-tree)). "RT" is `CPUSchedulingPolicy=rr` with the
 priority given; "CPUs 1–3" is `CPUAffinity=1 2 3`, which keeps CPU 0 free.
 
 | Unit | Starts | Part of `a3-main` | Ordered after | Restarts | Scheduling |
@@ -433,13 +450,12 @@ Mixer, A³ Motion and any further subscriber.
   mask. Core was pinned to CPU 0, the CPU the Motion UI draws on; whenever
   the UI peaked, Core got no time and the kernel dropped its incoming OSC.
   The audio threads on the other CPUs run realtime, so an ordinary Core only
-  takes what they leave. It is a drop-in rather than a line in the unit
-  because `cp -rn` never overwrites an existing unit — only a new file reaches
-  an installed rig.
+  takes what they leave.
 - **It needs the one truth.** Core reads `/usr/share/a3/a3-osc.json` once at
   start-up and does not start without it (or `$A3_OSC_TRUTH` naming another
   file). It then joins `~/.config/a3/network.json` over it, serves the result
-  at `http://<core>:9080/api/truth` and announces it every 2 s on port 7790.
+  on `core.web` and announces it every 2 s on `devices.announce` (see
+  {ref}`Where addresses and ports live <osc-truth>`).
 - **No restart.** The unit has no `Restart=`.
 
 #### Its arguments
@@ -460,6 +476,8 @@ front of the rig.
 | `--print-osc` | also print every message, the way Core did before the window existed. Off by default: it was 301,385 journal lines an hour on one address alone |
 | `--no-web` | do not open the window at all |
 | `--save-project` | ask REAPER to save its project every few minutes when something has moved. Off by default: with REAPER started from a template there is no project file, and saving opens a dialog over the panel |
+
+(core-subscriber)=
 
 #### Adding a department
 
@@ -563,7 +581,7 @@ update:
 | :--- | :--- | :--- |
 | **dpkg** | everything in the package tree | replaced with the package's version |
 | **dpkg, conffile** | the files under `/etc` listed in `DEBIAN/conffiles` | kept if you changed them; dpkg asks |
-| **postinst, `cp -rn`** | `~/.local/share/a3-core/config/*` → `~/.config/` | only new files arrive; existing ones are never replaced |
+| **postinst, file by file** | `~/.local/share/a3-core/config/*` → `~/.config/` | new files arrive; a differing file is replaced only if its part is chosen, after a backup (see [step 4](#core-postinst)) |
 
 Plus what the postinst and `user_install.sh` *write* rather than copy: the
 network files, `~/.config/a3/network.json` (once, never overwritten), the headless X config, `~/.venv`, `~/.config/a3/osc.env`, the
@@ -593,8 +611,7 @@ journal and uses the package's values.
 
 **To change an address:** edit `network.json`, restart Core. The beat-analyzer
 and zita addresses are rendered at Core's start, and the desk restarts itself
-within seconds. Core serves the joined truth at `GET /api/truth` on port 9080,
-with its fingerprint in the `X-A3-Truth` header — see
+within seconds. How Core serves the joined truth is in
 {ref}`Where addresses and ports live <osc-truth>`.
 
 (core-etc)=
@@ -683,12 +700,13 @@ Replaced on every install. Not meant to be edited on the machine.
 
 (core-config-tree)=
 
-### `~/.config` — the configuration (copied with `cp -rn`)
+### `~/.config` — the configuration
 
-From `~/.local/share/a3-core/config/`, copied once and never overwritten
-afterwards (see [step 4](#core-postinst)). **These are the files that are
-meant to be tuned at the rig.** To get a newer package version of one onto an
-installed machine, use `tools/config-status.py --install PATH`.
+From `~/.local/share/a3-core/config/`, installed file by file (see
+[step 4](#core-postinst)). **These are the files that are tuned at the rig** —
+and an install replaces a tuned file when its part is chosen, keeping the old
+one in `~/.config/a3-replaced/`. Take a tuning worth keeping into the package
+(see [Machine and package stay one](#core-mirror)).
 
 | In `~/.config` | What it is |
 | :--- | :--- |
@@ -717,6 +735,8 @@ Not copied but written into `~/.config` by the installation:
 | `~/.local/vst/TAL-Filter-2.vst3` | TAL-Filter-2 |
 | `~/.local/clap/airwindows.clap` | Airwindows Consolidated |
 | `~/a3-system/beat-analyzer/build/` | the built beat-analyzer, and its `.env` if there was none |
+
+(core-mirror)=
 
 ### Machine and package stay one
 

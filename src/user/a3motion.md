@@ -526,16 +526,12 @@ bar shows or hides it by hand.
 
 ### How to point the device at another Core
 
-**Not on the device.** Since 2026-09-30 A³ Motion reads every host, port and
-OSC address from `a3-osc.json`, the one file the a3-core package installs for
-the whole system, and the **Network** page is gone from the menu. Motion takes
-that file **from Core**: when Core's truth changes (a Core install, or an edit
-of `~/.config/a3/network.json` and a Core restart), Motion's window closes and
-reopens once, about 5 s, and saves its state on the way out. With the same
-truth nothing happens. To point it at another Core, that file changes — and
-with it every other device, so nothing can end up sending to an address nobody
-listens to. See {ref}`Where addresses and ports live <osc-truth>` and
-{ref}`Following Core <osc-follow>`.
+**Not on the device.** A³ Motion takes every host, port and OSC address from
+Core's `a3-osc.json`, and there is no Network page in its menu. It is pointed
+at another Core by changing that file on the Core, which moves every other
+device with it. What happens on the screen when it changes is in
+{ref}`Following Core <osc-follow>`; how to change it, in
+{ref}`Where addresses and ports live <osc-truth>`.
 
 (motion-panic)=
 
@@ -1910,19 +1906,6 @@ the ellipse belongs to the shape and travels with it.
 
 ### The panel's electronics
 
-An ESP32-S3 (`esp32-s3-devkitc-1-n16r8`) reads the panel's buttons, encoders,
-pots and LEDs, and talks to the Raspberry Pi over a binary poll-frame protocol
-on USB serial.
-
-## Specs
-
-Current revision, V03:
-
-- PoE, 31.5 W max
-- Raspberry Pi 5 running the touchscreen UI
-- ESP32-S3 for the panel's buttons, encoders, pots and LEDs
-- 7" capacitive multi-touch display
-- A³ Motion Buttonmatrix PCB V03, A³ Motion Mainboard PCB V03
-
-Earlier revisions are listed under
-[Configuration](https://a3-audio.github.io/a3-doc/configuration/moc.html).
+The panel has a microcontroller of its own and connects to the UI computer
+over USB. What it is made of, which computers run the UI and how its serial
+port is found: {ref}`A³ Motion hardware <moc-hardware>`.

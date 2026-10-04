@@ -4,9 +4,10 @@
 
 - [A³ System Repository](https://github.com/a3-audio/a3-system)
 
-Three devices on one ethernet switch, which also powers them (PoE). They talk
-to each other **exclusively over OSC** — never through each other, never over
-audio cables.
+Three devices on one network. They talk to each other **exclusively over
+OSC**, never over audio cables. How they are cabled is on the
+{doc}`ports page <../ressources/ports>`; what each is made of, on its
+configuration page.
 
 | Device | What it is | What it does |
 | :--- | :--- | :--- |
@@ -46,7 +47,7 @@ ever **one** state, and every device is told all of it.
 
 The same feed can be given to anything else — a light or video desk, say — by
 naming it when the Core starts. See
-[A³ Core Configuration](https://a3-audio.github.io/a3-doc/configuration/core.html).
+{ref}`Adding a department <core-subscriber>`.
 
 ## The beat
 
@@ -66,7 +67,7 @@ figure that takes four bars keeps taking four bars when the tempo changes.
 | :--- | :--- |
 | **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
 | **Assembly** | prototype pictures and how the boxes go together |
-| **Configuration** | the files each device reads at startup |
+| **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
 | **Development** | building and hacking on the software |
 | [**History**](https://a3-audio.github.io/a3-doc/ressources/history.html) | project impressions |
 | [**OSC reference**](https://a3-audio.github.io/a3-doc/ressources/osc.html) | every address the system speaks |

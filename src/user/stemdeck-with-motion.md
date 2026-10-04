@@ -38,18 +38,18 @@ and a first set to try it with.
 - **One part at a time, not the whole track.** A moving full mix smears; a
   moving vocal over a drum kit that stays put is a *gesture*. The ear can
   follow one thing flying about while the rest keeps its footing.
-- **The stems line up with the channels.** A set made by StemDeck's
-  [stem creator](#stemdeck-stem-creator) puts drums on bus 1, bass on 2,
-  other on 3 and vocals on 4 — and bus N arrives on A³ channel N. Every
-  track you split lands the same way round, so a clip on channel 4 is
-  *always* moving the vocal.
+- **A stem gets a channel of its own.** Bus N arrives on A³ channel N, and
+  you choose which stem is on which bus — on the desk, or with the bus
+  switches in StemDeck's mixer. A set made by StemDeck's
+  [stem creator](#stemdeck-stem-creator) is always drums, bass, other, vocals
+  as stems 1–4, so the same choice fits every track you split.
 - **One clock, from the music itself.** With StemDeck as master, the beat
   A³ Motion follows is the beat of the deck that is playing, tempo fader
   included. Nudge the tempo on StemDeck and the room speeds up with it.
-- **Both decks, one channel per stem.** Each bus carries stem N of **deck A
-  and deck B** together, so channel 1 is "the drums" whichever deck they come
-  from. Blend from one track into the next and the movements carry on: the
-  channel is the part, not the deck.
+- **Both decks on one channel.** A channel can play one stem of each deck,
+  so put both decks' drums on channel 1 and channel 1 is "the drums"
+  whichever deck they come from. Blend from one track into the next and the
+  movements carry on: the channel is the part, not the deck.
 
 (stemdeck-with-motion-map)=
 
@@ -62,12 +62,12 @@ inputs they arrive on are all on the
 {doc}`Patchbay page <../ressources/patchbay>`. Either way the REAPER project
 spreads them over the four channels the same way:
 
-| StemDeck output | Arrives on | In a set made by StemDeck |
+| StemDeck output | Arrives on | What is on it |
 | :--- | :--- | :--- |
-| `deck1_L`, `deck1_R` (bus 1) | **channel 1** | drums |
-| `deck2_L`, `deck2_R` (bus 2) | **channel 2** | bass |
-| `deck3_L`, `deck3_R` (bus 3) | **channel 3** | other |
-| `deck4_L`, `deck4_R` (bus 4) | **channel 4** | vocals |
+| `deck1_L`, `deck1_R` (bus 1) | **channel 1** | every stem switched to **1** |
+| `deck2_L`, `deck2_R` (bus 2) | **channel 2** | every stem switched to **2** |
+| `deck3_L`, `deck3_R` (bus 3) | **channel 3** | every stem switched to **3** |
+| `deck4_L`, `deck4_R` (bus 4) | **channel 4** | every stem switched to **4** |
 | `aux_L`, `aux_R` | the **Return** track, set by the **RET** pot | every stem switched to **A** (AUX) |
 | `phones_L`, `phones_R` | StemDeck's own headphone bus (REAPER inputs 23–24), heard on the cue side | every stem on **C**, every deck on CUE |
 
@@ -83,19 +83,18 @@ A few things follow from that:
   is silent while a stem is on channel 1, and the stem moves through the same
   strip. You choose it on the desk: turn the channel's encoder to a deck, push, then turn to the stem and push (see
   {ref}`the desk's stem displays <a3mix-displays>`).
-- **A set with its own stem names** (`DUB`, `KICK`, `PADS`, `PERC`, …) goes
-  on the buses in the order its endings sort — see
-  [Stem sets](#stemdeck-stem-sets). Which part lands on which channel is
-  whatever that order says.
+- **Nothing is on a channel at first.** StemDeck starts with every stem on
+  AUX only (see [Where the stems start](#stemdeck-start-buses)); a stem
+  reaches a channel when you load it there. A set with its own stem names
+  (`DUB`, `KICK`, `PADS`, `PERC`, …) numbers its stems in the order its
+  endings sort — see [Stem sets](#stemdeck-stem-sets).
 - **A stem plays on every bus that is lit.** Each stem in StemDeck's mixer
-  has six switches, **1 2 3 / 4 A C**. Light **A** (AUX) and switch its own
-  number off, and the stem leaves its A³ channel and its movement for the
-  Return track, whose level is the RET pot (on A³ Motion's MIXER, and the
-  desk's aux return). On the desk, loading a stem on a channel does this for
-  you: it puts the stem on the channel -- one of each deck at most -- and takes its
-  AUX away. A stem no
-  channel plays goes back to AUX while the return is in STEM mode. Light two numbers and it plays on two channels, moving
-  with both.
+  has six switches, **1 2 3 / 4 A C**. A stem on a number is on that A³
+  channel and moves with it; a stem on **A** (AUX) only is on the Return
+  track, whose level is the RET pot (on A³ Motion's MIXER, and the desk's aux
+  return), and does not move. Loading a stem on a channel from the desk puts
+  it on that number and takes its AUX away; what the desk enforces is on
+  {ref}`StemDeck's remote control <stemdeck-remote>`.
 
 (stemdeck-with-motion-setup)=
 
@@ -123,32 +122,28 @@ and port from `~/.config/a3/osc.env`, which the package writes from
 network. StemDeck's repository ships two systemd user services for this,
 under `.config/systemd/user/`:
 
-- `zita-j2n.service` sends StemDeck's 10 channels to the Core, UDP port
-  65100 — the port the a3-core package's zita-n2j listens on (`zita-n2j.audio`
-  in `a3-osc.json`);
-- `zita-n2j.service` receives 2 channels back from the Core on UDP port
-  55100, where the a3-core package's zita-j2n sends REAPER's recording bus
-  (`radla.zita-n2j` in `a3-osc.json`).
+- `zita-j2n.service` sends StemDeck's 10 channels to the Core, to the
+  listener `zita-n2j.audio` of the a3-core package's zita-n2j;
+- `zita-n2j.service` receives 2 channels back from the Core on
+  `radla.zita-n2j`, where the a3-core package's zita-j2n sends REAPER's
+  recording bus.
 
-Both units start zita through StemDeck's `tools/zita-from-truth.py`, which
-reads the Core's address and both ports from `a3-osc.json` — on the Core
-machine the package's `/usr/share/a3/a3-osc.json`; on another StemDeck machine
-a copy at the same path (StemDeck's PIO clock reads it too). StemDeck itself
-follows Core's truth on the Core machine, and its window reopens once when
-that changes — see {ref}`Following Core <osc-follow>`. Only the channel counts are written in
-the units. Until 2026-09-30 `zita-j2n.service` named the Core's address
-itself, and after the rig moved to 192.168.8.x it sent to the old one without
-a word.
+The ports are on {doc}`../ressources/ports`. Both units start zita through
+StemDeck's `tools/zita-from-truth.py`, which reads the Core's address and both
+ports from the truth StemDeck fetched from Core — see
+{ref}`StemDeck on radla <osc-radla>`. Only the channel counts are written in
+the units.
 
 Both come back by themselves 2 s after they drop out: zita ends on some
 changes to the audio graph, and the units restart it with no limit on how
 often.
 
-1. On a StemDeck machine other than the Core, copy the Core's
-   `/usr/share/a3/a3-osc.json` to the same path on this machine (as root),
-   and again whenever the a3-core package changes it. On the Core machine
-   there is nothing to copy.
-2. Install and start both units, from the StemDeck checkout:
+1. On a StemDeck machine other than the Core, tell StemDeck where Core is
+   (`~/.config/a3/core`, see {ref}`StemDeck on radla <osc-radla>`). On the
+   Core machine there is nothing to do.
+2. Install and start both units, from the StemDeck checkout — or let the
+   {doc}`installer <../configuration/install>` do it (role StemDeck on a
+   machine without the Core):
 
    ```sh
    cp .config/systemd/user/zita-*.service ~/.config/systemd/user/
@@ -207,8 +202,11 @@ right of each top bar goes to the other — **MOTION** in StemDeck,
 and forth without moving (see [Over to A³ Motion](#stemdeck-workspaces)).
 
 1. **Load a track in StemDeck.** Pick one you know well, split by StemDeck
-   (drums, bass, other, vocals). Check the meters in StemDeck's mixer: all
-   four buses move. On A³ Motion the four channel meters move with them.
+   (drums, bass, other, vocals). **Put its four stems on channels 1–4**: on
+   the desk, load each channel's stem; without the desk, light bus 1 on the
+   drums, 2 on the bass, 3 on other and 4 on the vocals in StemDeck's mixer.
+   Check the meters in StemDeck's mixer: all four buses move. On A³ Motion
+   the four channel meters move with them.
 2. **Make StemDeck the clock** as above: press PLAY, check `PIO master: A`,
    set A³ Motion to **PIO**. The BPM on A³ Motion matches StemDeck's deck.
 3. **Load a set on A³ Motion.** FILES › SETS › *Warmup* › **Load**, then close
@@ -223,8 +221,9 @@ and forth without moving (see [Over to A³ Motion](#stemdeck-workspaces)).
 6. **Play the stems with the actions.** Hold **A1** on the vocal channel for
    a gentle lift, let go, and it comes back. In every shipped set the left
    pads push the energy up, the right pads take it down.
-7. **Mix the next track in** on StemDeck's other deck. Its drums join
-   channel 1, its vocal channel 4 — already on the move. When you hand
+7. **Mix the next track in** on StemDeck's other deck, its stems loaded on
+   the same channels. Its drums join channel 1, its vocal channel 4 —
+   already on the move. When you hand
    MASTER to the new deck, A³ Motion follows its tempo.
 8. **Walk the night on.** A6 on a channel cues that channel into the next
    phase (*Groove* after *Warmup*); load the next set in FILES when you want

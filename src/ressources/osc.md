@@ -8,8 +8,8 @@ endpoints](ports.md). This page is about what the messages *mean*.
 ## Where addresses and ports live
 
 Every OSC address, port and IP of the system is written **once**, in
-`a3-osc.json`, and since 2026-09-30 nothing else carries these facts. Since
-2026-10-02 the file has **two parts** with two owners:
+`a3-osc.json`, and nothing else carries these facts. The file has **two
+parts** with two owners:
 
 - **The contract** — addresses, arguments, who sends and who hears, ports,
   routes, the VU map — is the package's. The a3-core package ships it as
@@ -27,7 +27,8 @@ missing from it comes from the package. A `network.json` that does not parse,
 or that lacks the `hosts` or `network` object, is **refused**: Core says why in
 its journal and uses the package's values.
 
-Core serves the joined result at `http://<core>:9080/api/truth`. The header
+Core serves the joined result at `/api/truth` on its listener `core.web`
+(`http://<core>:9080/api/truth`; the ports are on {ref}`the ports page <ports-by-listener>`). The header
 `X-A3-Truth` carries its **fingerprint**, the sha256 of the canonical JSON
 (sorted keys, no spaces, UTF-8). The file has these sections:
 
@@ -50,8 +51,8 @@ that file, not written by hand.
 | :--- | :--- |
 | A³ Core | reads the package's contract and joins `~/.config/a3/network.json` over it (`a3_osc.py`), then serves the result |
 | A³ Motion | **fetches it from Core**, the same way as the desk, and shares the cache `~/.cache/a3/a3-osc.json` with StemDeck — see {ref}`Following Core <osc-follow>`. Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
-| A³ Mixer | **fetches it from Core.** It listens for Core's `/core/here` on 7790, keeps the last truth in `~/.cache/a3/a3-osc.json` and restarts itself when Core announces a different fingerprint — see {ref}`the desk page <mic-truth>`. Without a truth it waits for the announcement; it does not exit |
-| StemDeck | **fetches it from Core**, like Motion, from the shared cache — see {ref}`Following Core <osc-follow>`. It reads its Pro DJ Link ports (50000–50002) and its `stemdeck.bus` from it. Without any truth its PIO status line says `PIO: no a3-osc.json` |
+| A³ Mixer | **fetches it from Core.** It listens for Core's `/core/here` on `devices.announce`, keeps the last truth in `~/.cache/a3/a3-osc.json` and restarts itself when Core announces a different fingerprint — see {ref}`the desk page <mic-truth>`. Without a truth it waits for the announcement; it does not exit |
+| StemDeck | **fetches it from Core**, like Motion, from the shared cache — see {ref}`Following Core <osc-follow>`. It reads its Pro DJ Link ports (`prolink.*`) and its `stemdeck.bus` from it. Without any truth its PIO status line says `PIO: no a3-osc.json` |
 | beat-analyzer | reads an `a3-osc` block in its `build/.env`, which the a3-core package writes at install (`a3-osc-render user`) — see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | zita-j2n, zita-n2j | the units take address and port from `~/.config/a3/osc.env`, also written by `a3-osc-render user` |
 | the package's install | the "standard network" it offers comes from the package's `network` section, and it creates `~/.config/a3/network.json` from it once |
@@ -63,7 +64,7 @@ needs the package's file in place first (or `$A3_OSC_TRUTH` naming another
 one).
 
 **Core announces itself.** Every 2 seconds it broadcasts OSC `/core/here` to
-its subnet's broadcast address, port 7790, with two strings: the URL of
+its subnet's broadcast address, on `devices.announce`, with two strings: the URL of
 `/api/truth` and the fingerprint. Broadcasts do not cross a router, so a
 device on another subnet (radla, 192.168.43.x) is given Core's URL in
 `~/.config/a3/core` instead and asks Core itself — see
@@ -75,12 +76,12 @@ device on another subnet (radla, 192.168.43.x) is given Core's URL in
 
 StemDeck and A³ Motion run on the Core machine as user `aaa` and **share one
 cache**, `~/.cache/a3/a3-osc.json`. Each one, like the desk, listens for
-Core's `/core/here` on UDP 7790 (the two share the port). At start it takes
+Core's `/core/here` on `devices.announce` (the two share the port). At start it takes
 the first of these: `$A3_OSC_TRUTH` if set; the cache, if it reads as a truth;
 otherwise the package's `/usr/share/a3/a3-osc.json`.
 
 When Core announces a fingerprint the app does not hold, it fetches
-`http://<core>:9080/api/truth` off the UI thread and checks that the body's
+`/api/truth` on `core.web` off the UI thread and checks that the body's
 sha256, the `X-A3-Truth` header and the announcement agree, and that the
 truth is usable: StemDeck needs `stemdeck.bus`, Motion needs every address it
 speaks. Then it writes the cache whole and **quits with exit code 1**;
@@ -141,8 +142,7 @@ and there is no `~/.config/a3/core` there.
    follow Core's restart, as above.
 
 Nothing is changed on a device itself: a device holding its own copy of a
-port is how three files came to disagree about the A³ Mixer's address on
-2026-09-24.
+port is a second truth.
 
 (osc-differs)=
 
@@ -266,7 +266,7 @@ its number:
 
 | Device | Shows |
 | :--- | :--- |
-| A³ Motion | the input dots: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) — five until 2026-09-30 |
+| A³ Motion | the input dots: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
 | A³ Mixer | its four input meters: `in1_pre` … `in4_pre`; its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`) |
 
 <!-- a3-osc:vu -->
@@ -322,17 +322,21 @@ its number:
 | `/vu/48` | stem_b4 |
 <!-- /a3-osc:vu -->
 
+(osc-core)=
+
 ## A³ Core
 
 A³ Core listens on **three** ports, and which one a message arrives at
-decides what it means. The numbers are `a3-osc.json`'s, given here for
-orientation:
+decides what it means. Their numbers are on the {ref}`ports page
+<ports-by-listener>`:
 
-| Listener | Port | What arrives | Why it is its own port |
-| :--- | :--- | :--- | :--- |
-| `core.osc` | 9000 | Commands from A³ Mixer, A³ Motion and the beat-analyzer | The room talking to Core |
-| `core.reaper-feedback` | 9002 | REAPER's feedback | REAPER reports what Core itself set. One port for both would have Core reading REAPER's reports as commands and answering them — a loop on a rig that makes sound. Until 2026-09-30 the filter even shared REAPER's word, `/fx/*`. |
-| `core.web` | 9080 | HTTP, not OSC — the [window](https://a3-audio.github.io/a3-doc/development/core.html) | A browser page, no OSC at all |
+| Listener | What arrives | Why it is its own port |
+| :--- | :--- | :--- |
+| `core.osc` | Commands from A³ Mixer, A³ Motion, StemDeck and the beat-analyzer | The room talking to Core |
+| `core.reaper-feedback` | REAPER's feedback | REAPER reports what Core itself set. One port for both would have Core reading REAPER's reports as commands and answering them — a loop on a rig that makes sound |
+| `core.web` | HTTP, not OSC — the {doc}`window <../development/core>` and `/api/truth` | A browser page, no OSC at all |
+
+(osc-everyone)=
 
 ### Everything goes to everyone
 
@@ -340,12 +344,9 @@ orientation:
 to every subscriber, always — the A³ Mixer, A³ Motion, and whatever else is
 plugged in.
 
-That rule replaced a per-message device list on 2026-09-12, and the list is
-why. It named the A³ Mixer for as long as only the desk had a channel strip;
-A³ Motion grew one, the list stayed as it was, and **nothing failed** — a
-message nobody is told to send is an absence, not an error, and OSC over UDP
-has no way of reporting one. It was found three days later, as GAIN and VOL
-reading zero on a rig that was making sound.
+A per-message recipient list goes stale without failing: a message nobody is
+told to send is an absence, not an error, and OSC over UDP has no way of
+reporting one.
 
 ```
       what comes in                        what goes out
@@ -366,14 +367,8 @@ reading zero on a rig that was making sound.
 ```
 
 A new department is a command-line argument rather than a change to the
-source:
-
-```
-a3-core.py --subscriber light=192.168.43.60:7771 --subscriber video=10.0.0.9:7771
-```
-
-Repeatable. A subscriber that cannot be parsed stops Core from starting rather
-than being skipped — for the same reason as above.
+source: see {ref}`Adding a department <core-subscriber>` on the Core's
+configuration page.
 
 ```{note}
 **The engine is not a subscriber.** REAPER, the IEM MultiEncoders and the
@@ -384,25 +379,12 @@ that has something to say to it.
 **The lamps are broadcast too**, because a lamp shows a status and a status
 belongs to whoever shows one. `/channel/{ch}/cue/led`, `/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
 alongside the flag itself on `/channel/{ch}/cue` — two vocabularies for one
-fact: a lamp is a light, a flag is a setting.
+fact: a lamp is a light, a flag is a setting. A lamp address carries the lamp
+as it is: lit is lit.
 
 Nothing is sent unless the status moved. A flag is announced only where it
 actually changed, and a value already passed on is dropped — five identical
 state messages produce one round of lamps, not five.
-```
-
-```{warning}
-**The cue lamp changed meaning on 2026-09-12** (it was called pfl then; its
-address was `/channel/[0-3]/led/pfl`, `/channel/{ch}/pfl/led` from 2026-09-30,
-and `/channel/{ch}/cue/led` since 2026-10-01). It
-used to carry the *opposite* of the lamp: Core sent "not pfl" (the old name) and
-`a3-mixer.py` inverted it back, the two cancelled, and the desk was right
-while the wire said the reverse of its own name. That cost nothing while the
-desk was the only reader.
-
-Both inversions came out together, so what reaches the desk's LED is
-unchanged and the address now means **this lamp is lit**. Anything written
-against the old behaviour has to drop its own inversion as well.
 ```
 
 ### What the address table does not say
@@ -414,8 +396,7 @@ that is not obvious:
   −90…90 degrees. The position is clamped, and the **clamped** value is what a
   recall replays.
 - **gain, the EQ bands, volume and `aux-send`** go back to every device when
-  REAPER reports them — see *The way back* below. `aux-send` has driven the FX
-  send again since 2026-09-12.
+  REAPER reports them — see *The way back* below.
 - **`/channel/{ch}/cue` and `/channel/{ch}/filter`** take two spellings, see
   below, and Core **sends** the resulting state back on the same address,
   always as a number.
@@ -424,8 +405,8 @@ that is not obvious:
   on a recall.
 - **`/master/phones-mix`** is the one value that goes out unbent, as a plain
   track volume.
-- **`/master/aux-return`** is the desk's aux return pot. Since 2026-09-29 it
-  drives the PurestGain on REAPER track 28 "Return"; full travel is 0 dB.
+- **`/master/aux-return`** is the desk's aux return pot. It drives the
+  PurestGain on REAPER track 28 "Return"; full travel is 0 dB.
 - **`/filter/mode`** arrives as the word (`high_pass`, `low_pass`) or as a
   number, 1 for high pass. Core **sends** it as a number; the word goes to the
   desk on `/filter/led`.
@@ -433,25 +414,9 @@ that is not obvious:
   FX bus.
 - **`/vu/{n}`** is sent by the beat-analyzer, not by `a3-core.py`.
 
-```{note}
-**Three addresses were listed here for years and have no handler in
-`a3-core.py`:** `/channel/{ch}/reverb`, `/channel/{ch}/width` and
-`/channel/{ch}/order`. A value sent to one of them is counted as
-unrecognised and dropped. They are left out of the table above rather than
-described as working, because a reference that lists an address nobody
-answers costs an evening to disprove.
-
-**And four went the other way — sent, never documented, never answered.** All
-four are gone as of 2026-09-12, found by holding this page against the
-register, which is what that register is for:
-
-| Address | Was sent by | What became of it |
-| :--- | :--- | :--- |
-| `/channel/{ch}/enc` | the A³ Mixer's rotary encoder | removed. Core never had a branch for it and nobody could say what it was meant to do |
-| `/channel/{ch}/encbtn` | that encoder's push switch | removed |
-| `/tap` | the A³ Mixer's tap key | **rerouted.** It now goes where A³ Motion's TAP goes — straight at the beat-analyzer's clock port, press only, `int 1`. Core's end is gone: the handler, its commented-out `dispatcher.map`, and the commented-out `rtmidi` import it needed. Re-enabling that one line would have raised a `NameError` in the OSC thread at the first keypress |
-| `/channel/{ch}/4d` | nothing, since hardware v3.2 | **removed**, with the 3D key that used to send it, its flag, its lamp and its line in the state file. 3D per channel is A³ Motion's pot, on `/channel/{ch}/3d` |
-```
+`/channel/{ch}/reverb`, `/width` and `/order` have no handler in
+`a3-core.py`; a value sent to one of them is counted as unrecognised and
+dropped.
 
 ### The two spellings of a button
 
@@ -466,6 +431,8 @@ This matters when changing either end: make `a3-mixer.py` send `int(value)`
 and every button press becomes a state, so the cue key on the desk turns into a
 momentary — on only while the finger rests on it. No test in any of the repos
 catches that.
+
+(osc-recall)=
 
 ### /state/recall
 
@@ -495,6 +462,8 @@ with less. A value Core has never seen is left
 **out** rather than sent as zero — zero degrees is the front of the room, a
 real position, and answering it would move the sound while claiming to
 report where it already is.
+
+(osc-way-back)=
 
 ### The way back: what REAPER reports
 
@@ -531,32 +500,25 @@ drive it?**
 If it can — `3d`, `freq` and `Q` — REAPER holds the base value *plus* the
 running accent envelope while the device holds only the base. Writing the one
 into the other makes every accent's peak the new base, so the value ratchets
-up and never comes down. The two encoder pots were relayed for a few hours on
-2026-09-12 and had to be taken out again.
+up and never comes down. These are not relayed.
 
-If it cannot — gain, the EQ bands, volume — REAPER's value **is** the device's
-value and there is nothing to ratchet.
-
-`aux-send` was the one entry that was a decision rather than an impossibility,
-and the decision went the other way on 2026-09-12: no action drives it, so it
-is relayed as safely as the gain.
+If it cannot — gain, the EQ bands, volume, `aux-send` — REAPER's value **is**
+the device's value and there is nothing to ratchet.
 ```
 
-**What the desk does with it today: nothing.** `a3-mixer.py` listens for the
-meters and the lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`,
-`/filter/led`) and for nothing else, so all of this arrives there and is
-dropped without a word. It is still sent — the desk is where most of those
-controls are, and its channel displays are the obvious ear — but nobody should
-read this table and conclude the desk is being kept up to date. It is, as of
-2026-09-12, the only device in the system that does not know its own state
-beyond its lamps.
+**The desk does not use these values.** `a3-mixer.py` listens for the meters,
+the lamps, `/beat` and its stem displays' state; everything above arrives
+there and is dropped. Its pots are analog, so a returned value could only be
+displayed, not set.
+
+(osc-beat-delay)=
 
 ### /beat, and the delay that follows it
 
 The beat-analyzer has listed Core as one of its OSC targets all along; Core
 simply had nowhere to put the message. It now takes the tempo out of it and
 hands it to the **IEM DualDelay** on the FX bus, on its own port
-(`dualdelay.osc` in `a3-osc.json`, 1340):
+(`dualdelay.osc` in `a3-osc.json`):
 
 ```
 beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)
@@ -568,64 +530,39 @@ Not every beat. A delay is the one effect where chasing a tempo is audible —
 rewriting a delay line's length shifts the pitch of whatever is still in it —
 so a reading has to do two things before it is passed on: **hold still for a
 whole bar**, and differ from what the delay already has by at least 0.1 BPM.
-Measured on the rig: 55 beats received, one message sent in thirty seconds.
 
 Both delay lines get the same tempo. They keep their own multipliers, which
 is what makes the two sides a ping-pong rather than one echo, and the
 multiplier is set in the plug-in rather than from here.
 
-```{warning}
-Two things live in the plug-in and not in any repository, and without them
-nothing arrives: its **OSC receiver has to be open** (click the status line
-at the lower left of the plug-in, *Listen to port* → `1340` → **OPEN**), and
-its **`Sync` has to be off** — with Sync on, the plug-in follows REAPER's
-project tempo and ignores `delayBPM`.
+The plug-in's OSC receiver has to be opened by hand and its `Sync` switched
+off; see {ref}`REAPER: the template, the plug-ins <core-reaper>`. Going
+through REAPER's project tempo instead does not hold: the plug-in takes a new
+project tempo only when the transport starts.
 
-The port typed into the plug-in has to be the one `a3-osc.json` names for
-`dualdelay.osc`: the plug-in cannot read the file.
+### The aux send
 
-Going through REAPER's project tempo instead was tried and does not hold: the
-plug-in takes a new tempo once, when the transport starts, and then stops
-following. REAPER accepts and reports every tempo correctly; the plug-in just
-does not act on it. Addressed directly, it takes the value every time.
-```
-
-### The aux send, and what happened to 3D
-
-For years the Mixer's aux send knob did **not** drive the aux send. It drove
-the stereo/multi crossfade — the 3D function — because it was the only
-continuous control the desk had for it. A³ Motion's per-channel pot took that
-job over on `/channel/{ch}/3d`, and on **2026-09-12** the desk's knob got its
-own job back:
+The desk's aux send knob drives the channel's send to the aux bus:
 
 ```
 /channel/{ch}/aux-send  ──▶  /track/{1,5,9,13}/send/1/volume   (normalised 0..1)
 ```
 
-Send **1** of the channel bus reaches `enc_fx`, the aux bus (template of 2026-10-01). The number is the position
-among the *sending* track's sends, which REAPER derives from the order its
-receivers appear in the project — and the cue and mix sends to
-`enc_phones` (3 and 4) are among them. It lives in Core's `layout.json` rather than in the
-source, so a send that moves in the REAPER project can be found by reading
-one file.
+Send **1** of the channel bus reaches `enc_fx`, the aux bus. The number is the
+position among the *sending* track's sends, which REAPER derives from the
+order its receivers appear in the project — and the cue and mix sends to
+`enc_phones` (3 and 4) are among them. It lives in Core's `layout.json` rather
+than in the source, so a send that moves in the REAPER project can be found by
+reading one file.
 
-**The price, named:** the desk has no 3D control any more. The key is still on
-the panel — it was taken out of service in software rather than removed from
-the metal — and Core's boolean behind it (`/channel/{ch}/4d`) was removed on
-2026-09-12, after having had a listener and no talker for as long as anybody
-could remember. The 3D blend is A³ Motion's pot, and only that.
-
-Taking the key out of service is a **guard**, not tidying: `3d` is the
-continuous blend now, so a momentary key sending `"1"` into it would drive the
-blend to the stop while the finger is down. What the key should do instead is
-an open question.
+The desk has no 3D control. The 3D blend is A³ Motion's pot, on
+`/channel/{ch}/3d`, and only that.
 
 ## A³ Motion
 
 A³ Motion listens on three ports, all three from `a3-osc.json`: `motion.osc`
-(7771) for Core's relays and `/beat`, `motion.vu` (7772) for the
-beat-analyzer's meters, and `motion.energy` (7777) for the IEM
-EnergyVisualizer — so neither the high-rate VU stream nor the energy grid
+for Core's relays and `/beat`, `motion.vu` for the beat-analyzer's meters,
+and `motion.energy` for the IEM EnergyVisualizer — so neither the high-rate VU stream nor the energy grid
 shares a socket with the beat clock. All three are served by the same handler,
 so the split is a convention, not a restriction.
 
@@ -638,8 +575,8 @@ What the [address table](#osc-addresses) does not say about Motion:
   and **`/channel/{ch}/filter/q`** are the `freq` and `Q` rows of the
   channel-value strip, and the left and right hardware encoders.
 - **The channel strip, the master section and the shared filter** on the MIX
-  pages send the same addresses the A³ Mixer sends, and are **received** back
-  since 2026-09-12: Core relays what REAPER reports. `cue` and `filter` go
+  pages send the same addresses the A³ Mixer sends, and are **received**
+  back: Core relays what REAPER reports. `cue` and `filter` go
   both ways as the **state**, not an edge; `/filter/mode` as a number, 1 for
   high pass.
 - **`/state/recall`** is sent once at start-up: *tell me what is already
@@ -667,7 +604,7 @@ Motion reads them from `a3-osc.json`; the `oscSender`, `oscReceiver` and
 The meaning of a meter's number exists only in the file — senders do not
 carry it. The `beat-analyzer` emits `NUM_VU_CHANNELS` (40) meters, one per
 JACK input, in port order; which physical signal ends up on which number is
-decided by the JACK patching alone. Since 2026-09-30 the A³ setup follows the
+decided by the JACK patching alone. The A³ setup follows the
 {ref}`REAPER channel map <core-vu-map>`: `/vu/n` is REAPER out 30 + *n*, and
 A³ Motion and the A³ Mixer find their meters by name — see
 [The meters](#osc-vu-meters).
@@ -679,15 +616,7 @@ whenever the channel's potentiometer moves. In `a3-core.py` it crossfades the
 channel between its stereo encoder and its multi encoder (REAPER FX 1,
 parameters 1 and 15 on one, parameter 1 on the other).
 
-**This address used to be a toggle**, flipping a flag on the value 1 and
-reporting an LED state back to A³ Mixer. The boolean moved to
-`/channel/{ch}/4d` when this address took the continuous value, and on
-2026-09-12 the boolean went too. 3D per channel is this address, continuous,
-and nothing else.
-
-The Mixer's key for it is **still on the panel** and no longer sends anything:
-a momentary key putting `"1"` into a continuous blend drives it to the stop for
-as long as it is held.
+It is continuous; no device sends it as a switch.
 
 ### /EnergyVisualizer/RMS
 
@@ -706,59 +635,33 @@ itself rather than a per-loudspeaker level.
 
 ### The MIX page
 
-Since 2026-09-10 A³ Motion carries a **software channel strip** of its own: six
-pots per channel — GAIN, HIGH, MID, LOW, VOL and, since 2026-09-12, SEND — plus
-CUE and FX, and a second page for the summing section and the shared filter.
-Every one of them sends the same address the A³ Mixer sends, so Core cannot
-tell the two apart and does not have to.
-
-![The MIX page of the A³ Motion UI](../user/pics_user/a3-motion-ui-mix.png)
-
-A double tap puts a control back on its **rest position**, where it has one:
-
-| Control | Where | Rests at | Why |
-| :--- | :--- | :--- | :--- |
-| SEND | MIX page | 0 | An aux send you cannot get rid of in one gesture is an aux send you will not reach for. It also **starts** there: nothing relays it back, so what the knob shows is all there is, and a knob showing half while meaning nothing is worse than one showing nothing. |
-| 3d, freq | channel-value strip | 0.5 | Twelve o'clock — the middle of a 270° sweep, and one place to reach for rather than two |
-| Q | channel-value strip | 0 | A filter that still resonates after being put back has not been put back. The Airwindows Isolator3 at the far end rests its own Q at zero too. |
-
-A double tap on a MIX pot other than SEND does nothing: a gain that snaps to
-a default mid-set is a channel that jumps in the room.
+A³ Motion's software channel strip — GAIN, HIGH, MID, LOW, VOL, SEND, CUE and
+FX per channel, and a second page for the summing section and the shared
+filter — sends the same addresses the A³ Mixer sends, so Core cannot tell the
+two apart and does not have to. The controls themselves are on
+{ref}`MIXER <motion-mixer>`.
 
 ### Total recall at start-up
 
-A device that has just come up used to **announce** its own idea of where each
-sound was, and the room jumped to it. It now **asks** first.
-
-At start-up A³ Motion sends `/state/recall` and holds its own output for a
-moment — the hold is released as soon as an answer arrives, and by a short
-grace period if none does. What Core replays lands on the blobs, the pots and
-the encoders, and only then does the device start talking.
-
-The rule for who wins, decided 2026-09-12:
+At start-up A³ Motion sends `/state/recall` and holds its own output until the
+answer arrives, or a short grace period passes. What Core replays lands on the
+blobs, the pots and the encoders, and only then does the device start
+talking. Who wins:
 
 - **At start-up, Core wins.** It is the one that knows what is audible.
-- **When a set is loaded, the set wins.** Loading a set is an explicit act,
-  and it would be useless if the room overrode it.
+- **When a set is loaded, the set wins.** Loading a set is an explicit act.
 
-```{note}
-A reverse path that **asks** is right; one that **reports** is a loop. The
-per-channel pots briefly had a continuous reverse path from REAPER and it fed
-back: REAPER held the sum of a base gain and an accent, A³ Motion held only
-the base, and each round trip raised the base a little. Roughly ten of 3382
-messages slipped past the echo filter — enough. It was taken out again on
-2026-09-12; `/state/recall` is what replaced it, because it is asked for once
-rather than arriving forever.
-```
+A reverse path that **asks** once is right; one that **reports** continuously
+is a loop for values an action can drive (see *The way back* above).
 
 (osc-beat-analyzer)=
 
 ## beat-analyzer
 
 The beat clock and the meters. It listens on **one** OSC port,
-`beat-analyzer.clock` in `a3-osc.json` (7775), which reaches it as
+`beat-analyzer.clock` in `a3-osc.json`, which reaches it as
 `OSC_PORT_A3MOTION` in the `a3-osc` block of its `.env`, and on the three Pro
-DJ Link ports, 50000–50002, which carry no OSC at all. What it sends goes to
+DJ Link ports (`prolink.*`), which carry no OSC at all. What it sends goes to
 every target in that block; see {ref}`Beat Analyzer <beat-analyzer-config>`.
 
 What the [address table](#osc-addresses) does not say about it:
@@ -798,23 +701,13 @@ Worth knowing before chasing a silent link.
   `a3-osc` block, is commented out (`# was: …`) at the next install: it would
   be a second truth.
 
-Until 2026-09-30 the addresses were in the source: `a3-core.py` defaulted to
-the Mixer and Motion by literal, `a3-mixer.py` reached Core and the
-beat-analyzer on a literal address and could not be pointed elsewhere, and the
-beat-analyzer's targets lived only in its hand-written `.env`. All three read
-`a3-osc.json` now.
-
 ## The register: which addresses exist at all
 
-A³ Core ships a **register** of every address the system can speak. Since
-2026-09-30 it is built from `a3-osc.json` — one row per address shape and
-device, 70 entries at the time of writing — and no longer lifted out of the
-sources of four repositories. Core's window holds that register against the
+A³ Core ships a **register** of every address the system can speak, built
+from `a3-osc.json` — one row per address shape and device. Core's window holds that register against the
 traffic it has actually seen, so it can say the one thing a message log never
 could: **an address that exists and has never arrived is a dead wire.**
 
 ![The register, filtered to the A³ Mixer](../development/pics_development/a3core-window-register-mixer.png)
 
-Everything marked *nie* in that column has never been heard from. See
-[A³ Core Development](https://a3-audio.github.io/a3-doc/development/core.html)
-for the window itself.
+Everything marked *nie* in that column has never been heard from. See {doc}`../development/core` for the window itself.

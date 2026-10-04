@@ -182,15 +182,16 @@ StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
 
 | Ports | What is on them |
 | :--- | :--- |
-| `deck1_L`, `deck1_R` | bus 1: stem 1 of deck A plus stem 1 of deck B |
-| `deck2_L`, `deck2_R` | bus 2: the two stems 2 |
-| `deck3_L`, `deck3_R` | bus 3: the two stems 3 |
-| `deck4_L`, `deck4_R` | bus 4: the two stems 4 |
+| `deck1_L`, `deck1_R` | bus 1: every stem switched to **1**, from either deck, after the fader |
+| `deck2_L`, `deck2_R` | bus 2: every stem switched to **2** |
+| `deck3_L`, `deck3_R` | bus 3: every stem switched to **3** |
+| `deck4_L`, `deck4_R` | bus 4: every stem switched to **4** |
 | `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
 | `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader: StemDeck's own headphone bus, REAPER inputs 23–24 |
 
-Despite the names, `deck1` … `deck4` are the **buses**, one per stem
-position, not the decks.
+Despite the names, `deck1` … `deck4` are the **buses**, one per desk
+channel, not the decks. Which stems are on them is set by StemDeck's bus
+switches (see {ref}`StemDeck's mixer <stemdeck-mixer>`).
 
 | Direction | Ports | Arrives on / comes from |
 | :--- | :--- | :--- |
