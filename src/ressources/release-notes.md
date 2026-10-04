@@ -286,8 +286,10 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Core (`a3-core`)
 
-- **The return stays out of the cue:** a cued channel no longer brings the whole aux return
-  into the headphones; the return is heard on the mix side only.
+- **The return stays out of a channel's cue and has a cue of its own:** a cued channel no
+  longer brings the whole aux return into the headphones. The return's own cue (the CUE field
+  on its display, `/aux-return/cue/led`) puts it on the cue side of the phones-mix knob; Core
+  keeps it across a restart.
 - **Total recall:** Core writes the evening down and plays it back on the next start. At
   start it asks REAPER to report everything, so the order the services start in no longer
   matters, and it plays the evening back only once REAPER has finished reporting —
@@ -349,6 +351,9 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Mixer (`a3-mixer`)
 
+- **A CUE field on the return display**, at the right like a channel's STEM toggle: the
+  encoder runs STEM, ANALOG, CUE in a ring, a push on CUE switches the return's cue, the
+  field is filled while it is on. See {ref}`the input selectors <a3mix-displays>`.
 - **A channel's encoder is an input selector**, replacing the dot grid. The display shows
   eight stem meters under **D1 | D2** and, at the right, a **STEM toggle**: filled while a
   stem plays on the channel, an outline while none does. It does not show which stem. Every

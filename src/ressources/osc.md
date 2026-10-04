@@ -201,10 +201,11 @@ acting on it itself.
 | `/master/phones-mix` | f | mixer, motion | core (Core passes it on to mixer, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, motion | core (Core passes it on to mixer, motion) | the headphone level |
 | `/master/aux-return` | f | mixer, motion | core (Core passes it on to mixer, motion) | the aux return, the fifth stereo input (was /master/return) |
-| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its cursor between analog (0) and stem (1) |
-| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: switches the return to the mode under the cursor |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's cursor (0 = analog, 1 = stem), then pairs 1-8: 1 = on the return (AUX) |
+| `/aux-return/stem/turn` | i | mixer | core | the aux return's encoder turned by this many clicks (signed): moves its cursor in a ring along the display, STEM (1) -> ANALOG (0) -> CUE (2) -> STEM; switches nothing |
+| `/aux-return/stem/push` | i | mixer | core | the aux return's encoder pushed: switches the return to the mode under the cursor; on CUE it toggles the return's cue and switches no mode |
+| `/aux-return/stem` | iiiiiiiii | core | mixer, motion | the aux return's cursor (0 = analog, 1 = stem, 2 = cue), then pairs 1-8: 1 = on the return (AUX) |
 | `/aux-return/stem/mode` | i | core | mixer, motion | the aux return's mode: 1 = stem (every stem on no channel plays on the return), 0 = analog (no stem on the return) |
+| `/aux-return/cue/led` | f | core | mixer, motion | the aux return's cue lamp, 1 = on |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
