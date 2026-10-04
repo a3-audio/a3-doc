@@ -22,9 +22,10 @@
 	- The beat (`/beat`)
 	- The state of its input selectors (`/channel/{ch}/stem…`, `/aux-return/stem…`)
 	- The meters on its displays: StemDeck's stem meters `stem_a1` … `stem_b4`
-	  (`/vu/41`–`/vu/48`) and the inputs `in1_pre` … `in4_pre` on the
-	  channels; StemDeck's AUX bus `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`)
-	  and the analog return `aux_L`/`aux_R` on the return
+	  (`/vu/41`–`/vu/48`) on the channels; StemDeck's AUX bus
+	  `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and the analog return
+	  `aux_L`/`aux_R` on the return. The inputs `in1_pre` … `in4_pre` go to
+	  the LED VUs only, no display (`Displays.note_analog` is gone)
 
 - Sends messages back to the microcontroller via USB serial
 	- LEDs and VU meters
@@ -42,15 +43,31 @@ split in two:
 - **`a3-mixer-set-display/display_panel.py`** is the pure part, with no
   hardware: which display sits on which multiplexer channel (`PANELS`), how
   Core's announcements are read, the meters' movement and the layout.
-  `channel_picture()` turns a cursor and nine levels into headings, plain
-  bars, the dividers and a cursor box; `return_picture()` turns the cursor,
-  the mode and four levels with their peaks into segmented bars, the scale
-  and a cursor box. Both work for a display of any size. It is tested
-  without a Pi.
+  `channel_picture()` turns a cursor, eight stem levels and whether a stem
+  plays into the D1 | D2 headings, eight plain bars, the dividers, the STEM
+  toggle and a cursor box. The toggle's slot is `TOGGLE_METERS` (2) meters
+  wide, so on a 128-pixel display the bars keep 10 of their 11 pixels and
+  the toggle has room for its letters and a light band under the cursor. `return_picture()` turns
+  the cursor, the mode and two levels (STEM, ANALOG) into two mono bars
+  under their headings, the playing mode's heading inverted, AUX as a title
+  between them, and a cursor box. Both work for a display of any size. It
+  is tested without a Pi.
 - **`a3_mixer_displays.py`** draws that layout with PIL and sends it to the
   SSD1306s through the TCA9548A multiplexer. It needs the Pi's libraries and
   imports them only when the displays are opened. Without them the desk runs
   on without displays.
+
+What it draws:
+
+- **The cursor is an inverted column** over its slot, below the headings:
+  light, with the bar drawn dark inside a one-pixel dark frame (`FRAME`).
+  Without the frame a silent selected meter would look like a full one.
+- **The STEM toggle** is a filled field with dark letters while a stem plays
+  (the channel's mask is not 0), an outline with light letters while none
+  does; the letters stand one over the other. The field sits `TOGGLE_INSET`
+  (3) pixels inside its slot. Under the cursor the slot turns light and every
+  colour flips, so the 3-pixel light band keeps a selected ON toggle from
+  reading as an unselected OFF one.
 
 How it draws:
 
@@ -60,18 +77,21 @@ How it draws:
   waiting meter redraws.
 - **Meters on a clock.** Peaks are held, and the meters step
   `METER_STEPS_PER_SECOND` (10) times a second, with the loudest peak since
-  the last step. A meter not heard for 0.5 s falls to silence.
+  the last step. A meter not heard for 0.5 s falls to silence. A stereo
+  source on the return shows the louder of its two sides.
 - **Ballistics.** Each meter goes through a `Ballistics` unit: it rises at
-  once and falls `METER_FALL_DB_PER_SECOND` (20 dB/s) over the 48 dB range;
-  the return's peak segment holds `PEAK_HOLD_SECONDS` (1 s), then falls the
-  same way. The fall runs on the clock, so a late step falls as far as the
-  time that passed.
-- **SA's source.** The return's SA bars take `stem_aux_L`/`stem_aux_R` once
-  the desk has heard them. A truth without these names never sends them, and
-  SA falls back to the loudest stem playing on the return, on both bars.
+  once and falls `METER_FALL_DB_PER_SECOND` (20 dB/s) over the 48 dB range.
+  No display draws a peak. The fall runs on the clock, so a late step falls
+  as far as the time that passed.
+- **STEM's source.** The return's STEM meter takes `stem_aux_L`/`stem_aux_R`
+  once the desk has heard them. A truth without these names never sends
+  them, and STEM falls back to the loudest stem playing on the return.
 - **Redrawn only when the pixels change.** After each step, a display is
-  redrawn only if its meters and cursor in pixels (`pixel_key()`) differ from
-  what was last drawn. The bus carries about 17 draws a second; ten steps on
+  redrawn only if what it paints in pixels (`pixel_key()`: the bars, the
+  cursor, the toggle's on/off and the headings, so a mode change counts)
+  differs from what was last drawn. `show_channel()` posts a redraw only
+  when the channel changes between no stem and some stem: the display does
+  not show which stem, so another stem moves no pixel. The bus carries about 17 draws a second; ten steps on
   five displays would be 50.
 - **Partial updates.** `a3_mixer_oled.py` sends only the windows of the
   picture that changed, not the whole 1 KB frame.
