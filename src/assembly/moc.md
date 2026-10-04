@@ -4,7 +4,37 @@
 
 Drawn, printed, populated, and running — in that order.
 
-### The housing, as drawn
+### The print-ready housing (October 2026)
+
+The v3 housing was rebuilt in FreeCAD from sketches and Part features only, so
+every part can be changed from its sketch. It prints on a Bambu A1.
+
+assembled | exploded
+---|---
+![The rebuilt v3 housing, assembled: the faceplate with the pad PCB on the left and the display on the right, the enclosure below](pics_assembly/v03/a3motion_v03_print_assembled.png) | ![The rebuilt v3 housing, exploded: faceplate halves, display, pad PCB, display clamps and the two enclosure halves](pics_assembly/v03/a3motion_v03_print_exploded.png)
+
+- **Print:** every part is at most 238 × 252 mm. The enclosure and the
+  faceplate are two halves each, joined by 45° scarfs, so no part prints a
+  floating strip. Support only under the 5 mm display ledge of the faceplates.
+- **Fastening:** M3 throughout. Twelve countersunk screws hold the faceplate;
+  the enclosure halves join with three screws in the floor and two in each side
+  wall.
+- **Inside:** the pad PCB hangs from the faceplate on three standoffs and rests
+  on ledges, a centre rib and wall fins. The display (Winstar
+  WF104GSWFMLHBV#) is held by two clamps over 3 mm foam. The NUC (NUC8i7HNK)
+  slides in from the open end of the top half. A blower (Sunon MF50151VX)
+  draws air from under the display and blows it out through the back wall.
+- **Files:** the model is `hardware/housing/freecad/housing_v3.FCStd` in
+  a3-motion; `hardware/housing/freecad/production/` holds every part in print
+  orientation as STL, and one 3MF per plate. More renders are in
+  `hardware/housing/images/`.
+- **Replaced files:** this housing overwrote the production files of the earlier
+  v3 under the same names — `housing_v3-motion_box.3mf`,
+  `housing_v3-motion_pcbCut008.stl`, `housing_v3-motion_pcbfaceplate.3mf` and
+  `housing_v3-motion_pcbfaceplate.stl`. A print made from those files before
+  October 2026 is the earlier housing shown below.
+
+### The earlier v3 housing, as drawn
 
 Four views of the enclosure and two of the display bezel. The four round
 openings in the front wall are the per-channel potentiometers; the perforated
