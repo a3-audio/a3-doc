@@ -99,8 +99,8 @@ comes in on the channel:**
 - **With A on the channel** it is the normal channel cue, and all of
   StemDeck's C switches are off.
 
-The **return's cue send opens on the cue side while any deck cue is on**, so a
-cued deck brings its FX along.
+**The return is on the mix side only.** A cue does not bring it into the
+headphones: it carries stems or the analog return, not a deck's effects.
 
 Two more things reach the headphones, on `dec_phones`:
 
