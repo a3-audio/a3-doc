@@ -43,7 +43,7 @@ with `/clockmode`.
 ### What each mode needs
 
 **INT — a3motion.** Nothing but A³ Motion. Motion sends its own `/beat` to
-the beat-analyzer's clock port (7775); the beat-analyzer relays each one to every target in its
+the beat-analyzer's clock port (`beat-analyzer.clock`); the beat-analyzer relays each one to every target in its
 configuration **except the one named `motion`**, so Motion never hears its
 own beat come back. In this mode the beat-analyzer's own clock is paused,
 and a `/tap` it receives does nothing here.
@@ -72,8 +72,8 @@ beat-analyzer is restarted.
 <!-- QUESTION (maintainer): beat_processing.cpp calls BTrack's fixTempo() on every accepted tap and nothing ever calls unfixTempo() (btrack_wrapper.h has it). So after one tap, EXT never follows a tempo change again until the service restarts. Intended ("the DJ has spoken"), or should the lock be released — after a time, or on a double tap? The page describes it as it is. -->
 
 **PIO — pioneer.** A Pro DJ Link network the Core machine is on. The
-beat-analyzer joins it as a **virtual CDJ, number 7**, and listens on UDP
-ports 50000–50002. It follows the **tempo master**: the player whose status
+beat-analyzer joins it as a **virtual CDJ, number 7**, and listens on the
+Pro DJ Link ports (`prolink.*`). It follows the **tempo master**: the player whose status
 says master while it plays. Until it has heard who the master is, it takes the
 beats of any player. The tempo it sends is the master's track tempo with its
 pitch applied — what the master's display shows.
@@ -137,7 +137,7 @@ downbeat falls on the wrong beat, that is where to look.
 on at the last tempo it had, as it does whenever the beats stop.
 
 The same works on one machine: StemDeck and the beat-analyzer both listen on
-ports 50000–50002, and because StemDeck sends as broadcast, both of them get
+the Pro DJ Link ports, and because StemDeck sends as broadcast, both of them get
 every packet regardless of which started first.
 
 (beat-analyzer-meters)=
@@ -207,7 +207,7 @@ The settings that matter most:
 | `OSC_VU_<name>=host:port` | **in the a3-osc block.** A separate port for that target's meters, so `/beat` and `/vu` do not share a socket |
 | `OSC_PORT_A3MOTION` | **in the a3-osc block.** Where `/beat`, `/clockmode` and `/tap` arrive |
 | `OSC_ADDRESS_BEAT`, `_TAP`, `_CLOCKMODE`, `_VU` | **in the a3-osc block.** The addresses it speaks |
-| `PIONEER_PORT_ANNOUNCE`, `_BEAT`, `_STATUS` | **in the a3-osc block.** The Pro DJ Link ports, 50000–50002 |
+| `PIONEER_PORT_ANNOUNCE`, `_BEAT`, `_STATUS` | **in the a3-osc block.** The Pro DJ Link ports (`prolink.*`) |
 | `BPM_MIN`, `BPM_MAX` | the tempo range the clock counts in. A tempo outside it is doubled or halved into it |
 | `PIONEER_DEVICE_NUM` | its player number on the Pro DJ Link network. 7 |
 | `NUM_VU_CHANNELS` | how many meters. 40, the A³ channel map; at most 64 |
@@ -239,7 +239,7 @@ the {ref}`OSC reference <osc-beat-analyzer>`.
 | EXT: no beat, the BPM stands still | Is the service running (`systemctl --user status beat-analyzer`)? Is its tempo input connected in qjackctl (see the {doc}`Patchbay page <../ressources/patchbay>`)? Is music reaching REAPER? |
 | EXT: half or double your tempo | Set `BPM_MIN`–`BPM_MAX` to one octave around the music, for house and techno e.g. 70–140. A wider range lets the clock count either one |
 | EXT: the tempo no longer follows the track | You tapped: a tapped tempo stays. Tap the new tempo, or restart the service |
-| PIO: nothing arrives | The Core machine has to be on the same network as the players, and nothing else on it may hold ports 50000–50002 exclusively. The log says `Pioneer Receiver konnte nicht gestartet werden` if it could not bind them |
+| PIO: nothing arrives | The Core machine has to be on the same network as the players, and nothing else on it may hold the Pro DJ Link ports exclusively. The log says `Pioneer Receiver konnte nicht gestartet werden` if it could not bind them |
 | PIO: it follows the wrong player | It follows whoever says master while playing. Set master on the player you mean |
 | The meters all sit one channel across | The JACK patching is off by one: see the {doc}`Patchbay page <../ressources/patchbay>` |
 | The meters don't move at all | Check the service, then that `build/.env` ends in the `a3-osc` block with its `OSC_VU_*` / `OSC_HOST_*` entries. If it is missing, run `a3-osc-render user` and restart the service |

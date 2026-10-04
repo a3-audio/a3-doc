@@ -483,8 +483,8 @@ beat sync does.
 SYNC follows the **Pro DJ Link tempo master**: its tempo, pitch included, and
 its beat. Both decks may follow at once, each with its own half/one/two.
 
-- StemDeck joins the link as **virtual CDJ 6** and listens on UDP ports
-  50000–50002, which it reads from the A³ system's `a3-osc.json` (see
+- StemDeck joins the link as **virtual CDJ 6** and listens on the Pro DJ
+  Link ports (`prolink.*`), which it reads from the A³ system's `a3-osc.json` (see
   {ref}`Where addresses and ports live <osc-truth>`). On the Core machine that
   file comes from Core itself: StemDeck follows it, and when the truth changes
   its window closes and reopens once (about 5 s) — see
