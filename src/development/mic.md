@@ -21,7 +21,10 @@
 	- The lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
 	- The beat (`/beat`)
 	- The state of its input selectors (`/channel/{ch}/stem…`, `/aux-return/stem…`)
-	- StemDeck's stem meters (`/vu/41`–`/vu/48`)
+	- The meters on its displays: StemDeck's stem meters `stem_a1` … `stem_b4`
+	  (`/vu/41`–`/vu/48`) and the inputs `in1_pre` … `in4_pre` on the
+	  channels; StemDeck's AUX bus `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`)
+	  and the analog return `aux_L`/`aux_R` on the return
 
 - Sends messages back to the microcontroller via USB serial
 	- LEDs and VU meters
@@ -38,9 +41,11 @@ split in two:
 
 - **`a3-mixer-set-display/display_panel.py`** is the pure part, with no
   hardware: which display sits on which multiplexer channel (`PANELS`), how
-  Core's announcements are read, and the layout. `channel_picture()` and
-  `return_picture()` turn a cursor, what plays and the meter levels into
-  headings, meters and a cursor box for a display of any size. It is tested
+  Core's announcements are read, the meters' movement and the layout.
+  `channel_picture()` turns a cursor and nine levels into headings, plain
+  bars, the dividers and a cursor box; `return_picture()` turns the cursor,
+  the mode and four levels with their peaks into segmented bars, the scale
+  and a cursor box. Both work for a display of any size. It is tested
   without a Pi.
 - **`a3_mixer_displays.py`** draws that layout with PIL and sends it to the
   SSD1306s through the TCA9548A multiplexer. It needs the Pi's libraries and
@@ -51,11 +56,23 @@ How it draws:
 
 - **A thread of its own.** The OSC thread only notes what a display should
   show; the display thread always draws the latest state, so a fast turn does
-  not queue one draw per click.
+  not queue one draw per click. A turn or an announcement is drawn before
+  waiting meter redraws.
 - **Meters on a clock.** Peaks are held, and the meters step
-  `METER_STEPS_PER_SECOND` (5) times a second, with the loudest peak since
-  the last step. A meter not heard for 0.5 s falls to silence. A turn or an
-  announcement is drawn before waiting meter redraws.
+  `METER_STEPS_PER_SECOND` (10) times a second, with the loudest peak since
+  the last step. A meter not heard for 0.5 s falls to silence.
+- **Ballistics.** Each meter goes through a `Ballistics` unit: it rises at
+  once and falls `METER_FALL_DB_PER_SECOND` (20 dB/s) over the 48 dB range;
+  the return's peak segment holds `PEAK_HOLD_SECONDS` (1 s), then falls the
+  same way. The fall runs on the clock, so a late step falls as far as the
+  time that passed.
+- **SA's source.** The return's SA bars take `stem_aux_L`/`stem_aux_R` once
+  the desk has heard them. A truth without these names never sends them, and
+  SA falls back to the loudest stem playing on the return, on both bars.
+- **Redrawn only when the pixels change.** After each step, a display is
+  redrawn only if its meters and cursor in pixels (`pixel_key()`) differ from
+  what was last drawn. The bus carries about 17 draws a second; ten steps on
+  five displays would be 50.
 - **Partial updates.** `a3_mixer_oled.py` sends only the windows of the
   picture that changed, not the whole 1 KB frame.
 - **A failed display** is one line in the journal; it is tried again two
@@ -116,3 +133,12 @@ Written in C++ as a PlatformIO project,
 [`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware),
 for the panel controller named on {ref}`A³ Mixer hardware <mic-hardware>`.
 How to build it: {doc}`build`.
+
+- **Input VUs:** 8 LEDs a channel.
+- **Main VU:** eight columns over all four LED modules, 32 rows; the stem
+  columns on the top module are gone.
+- **Encoder switches:** it reports all eight channels of the encoder-switch
+  multiplexer (`EB` lines); `a3-mixer.py` ignores a channel it has no target
+  for.
+
+A Teensy flashed with older firmware needs flashing again for these.
