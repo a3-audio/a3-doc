@@ -209,13 +209,13 @@ acting on it itself.
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX, 6 CUE |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
-| `/device/hello` | ss | mixer, stemdeck | core | a device names itself and the sha256 of its copy of this file; Core's window shows whether it is Core's own |
+| `/device/hello` | ss | mixer, stemdeck, motion | core | a device names itself and the sha256 of its copy of this file, at start and every 30 s; Core's window shows whether it is Core's own. Core follows the StemDeck and the Motion that arrived last (one of each), a remote Motion instead of the rig's own, and forgets one silent for a minute |
 | `/core/here` | ss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth and its fingerprint (sha256 of the canonical JSON) |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; see vu_meters |
+| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; see vu_meters. A remote Motion gets the analyzer's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
 ### Renamed on 2026-09-30
