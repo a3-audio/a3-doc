@@ -52,6 +52,7 @@ truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `a
 | --- | --- | --- | --- | --- |
 | core | osc | any (0.0.0.0) | 9000 | every controller's messages, and /beat from the analyzer |
 | core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
+| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's /vu bundles, forwarded unchanged to a remote Motion while one is followed (the analyzer's .env needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's block) |
 | core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
 | motion | osc | any (0.0.0.0) | 7771 | Core's relays, /beat |
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
@@ -94,6 +95,7 @@ StemDeck as tempo master has rows of its own.
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | core | `motion.osc` | Core's relays, /beat |
+| core | `motion.vu` | the analyzer's /vu bundles |
 | core | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | core | `reaper.osc` | Core's /track/... control |
 | core | `iem.multiencoder-1` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
@@ -108,6 +110,7 @@ StemDeck as tempo master has rows of its own.
 | beat-analyzer | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | beat-analyzer | `radla.osc` | /beat |
 | beat-analyzer | `motion.vu` | the analyzer's /vu bundles |
+| beat-analyzer | `core.vu-relay` | vu |
 | beat-analyzer | `mixer.osc` | vu |
 | beat-analyzer | `radla.vu` | /vu |
 | iem | `motion.energy` | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
