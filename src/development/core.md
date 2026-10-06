@@ -41,9 +41,9 @@ an update treats it is in {ref}`the package's files <core-files>`.
 
 A device sends `/state/recall` and Core replays the whole state as the
 ordinary messages; what comes back, in which order, and why Core holds the
-position and the 3D blend itself is in {ref}`/state/recall <osc-recall>`
+position and the 3D value itself is in {ref}`/state/recall <osc-recall>`
 of the OSC reference. The modules: `a3_core_recall.py`, `a3_core_state.py`
-(the lamps and the blend, kept across a restart in the state file) and
+(the lamps and 3D, kept across a restart in the state file) and
 `a3_core_evening.py`.
 
 ### Everything goes to everyone

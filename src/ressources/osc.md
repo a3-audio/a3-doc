@@ -185,7 +185,7 @@ acting on it itself.
 | `/channel/{ch}/filter/led` | f | core | mixer, motion | the filter key's lamp, 1 = lit |
 | `/channel/{ch}/filter/frequency` | f | motion | core (Core passes it on to mixer, motion) | the channel's own filter cutoff (was pot_1) |
 | `/channel/{ch}/filter/q` | f | motion | core (Core passes it on to mixer, motion) | the channel's own filter Q (was pot_2) |
-| `/channel/{ch}/3d` | f | motion | core (Core passes it on to mixer, motion) | blend between the channel's moving and steady encoders |
+| `/channel/{ch}/3d` | f | motion | core (Core passes it on to mixer, motion) | how much of the channel's isolated band moves, as an amplitude 0..1; the steady rest never changes |
 | `/channel/{ch}/azimuth` | f | motion | core | the channel's direction, degrees |
 | `/channel/{ch}/elevation` | f | motion | core | the channel's height, degrees |
 | `/channel/{ch}/stem/turn` | i | mixer | core | the channel's encoder turned by this many clicks (signed): moves its selector's cursor over the nine positions (eight stems, then the STEM toggle) in a ring: left from the first stem is the toggle, right from the toggle the first stem; switches nothing |
@@ -424,9 +424,9 @@ that is not obvious:
 - **`/channel/{ch}/cue` and `/channel/{ch}/filter`** take two spellings, see
   below, and Core **sends** the resulting state back on the same address,
   always as a number.
-- **`/channel/{ch}/3d`** is how far the channel is spread into the 3D field.
-  Core crossfades the channel's stereo and multi encoder on it, and replays it
-  on a recall.
+- **`/channel/{ch}/3d`** is how much of the channel's isolated band moves in
+  the 3D field. Core sets the band's gain from it — the steady rest stays at
+  0 dB — and replays it on a recall.
 - **`/master/phones-mix`** is the one value that goes out unbent, as a plain
   track volume.
 - **`/master/aux-return`** is the desk's aux return pot. It drives the
@@ -470,11 +470,11 @@ What comes back, in this order:
 
 1. **The lamps** — Core's own flags, read off its state file, complete even
    on a cold start.
-2. **The position and the crossfade** — `azimuth`, `elevation` and `3d` per
+2. **The position and the 3D value** — `azimuth`, `elevation` and `3d` per
    channel. Core holds these because nobody else can be asked: the position
    goes straight to the IEM plugins on their own port, so REAPER never
-   reports it back, and the crossfade reaches REAPER as two gains on two
-   tracks, which a single number cannot be read back out of.
+   reports it back, and `3d` reaches REAPER as a gain that cannot be read
+   back below its −40 dB floor.
 3. **The continuous values** — what REAPER last reported. Core relays these
    rather than holding an opinion of its own.
 
@@ -579,7 +579,7 @@ order its receivers appear in the project — and the cue and mix sends to
 than in the source, so a send that moves in the REAPER project can be found by
 reading one file.
 
-The desk has no 3D control. The 3D blend is A³ Motion's pot, on
+The desk has no 3D control. 3D is A³ Motion's pot, on
 `/channel/{ch}/3d`, and only that.
 
 ## A³ Motion
@@ -636,9 +636,21 @@ A³ Motion and the A³ Mixer find their meters by name — see
 ### /channel/{ch}/3d
 
 A third per-channel value beside `filter/frequency` and `filter/q`, sent
-whenever the channel's potentiometer moves. In `a3-core.py` it crossfades the
-channel between its stereo encoder and its multi encoder (REAPER FX 1,
-parameters 1 and 15 on one, parameter 1 on the other).
+whenever the channel's potentiometer moves. Each channel is split in REAPER:
+`n-multi-enc` carries the steady signal; `n-stereo-enc` carries two Airwindows
+Isolator3 — FX 2 cuts the band that moves, FX 3 cuts the same band from a
+phase-inverted copy of the steady signal and so takes it out of the steady
+bed. `filter/frequency` and `filter/q` go to both, with the same value.
+
+`3d` is the band's level, read as an amplitude: Core sets the gain container
+on `n-stereo-enc` (FX 1, parameters 1 and 15) to 20·log10(3d) dB, with
+PurestGain's −40 dB floor at 3d ≤ 0.01. The steady gain on `n-multi-enc`
+(FX 1, parameter 1) stays at 0 dB for every value. Because the moving band
+and the subtracted band share the one gain, band and rest add up to the
+input at every 3d, frequency and Q: turning 3d moves sound, it does not make
+the channel louder or quieter. (Until 2026-10-06 this was a crossfade that
+also lowered the steady gain above 3d 0.5, and the channel was not
+level-neutral.)
 
 It is continuous; no device sends it as a switch.
 

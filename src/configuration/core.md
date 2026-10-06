@@ -663,7 +663,7 @@ install. Each does one thing:
 | `a3_core_reaper.py` | what Core asks REAPER to do beyond setting values |
 | `a3_core_reverse.py` | turns REAPER's feedback back into an A³ message |
 | `a3_core_curves.py` | turns a REAPER value back into the A³ value that produced it |
-| `a3_core_crossfade.py` | how much of a channel moves: the balance between its two tracks |
+| `a3_core_crossfade.py` | how much of a channel moves: the 3D law (the band's gain; the steady rest stays at 0 dB) and the filter messages for both Isolators |
 | `a3_core_buttons.py` | what a button message asks for, when two senders mean two things |
 | `a3_core_echo.py` | tells Core's own echo apart from news |
 | `a3_core_tempo.py` | passes the tempo on, but not every flicker |
