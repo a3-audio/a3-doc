@@ -408,11 +408,10 @@ StemDeck's side:
   has its **A** lit, and Core switches a free stem's A back on if you click it
   off. In analog mode no stem is on AUX. A stem pushed onto a channel loses
   its A.
-- **Core sets the C switches.** A stem's **C** is on while it plays on a cued
-  desk channel and off otherwise; Core sets them at every cue change, push and
-  report, so a C clicked on StemDeck's own screen is switched back. A push of
-  another stem moves the C along; with the channel on analog, all C switches
-  are off. See {ref}`the cue <a3mix-cue>`.
+- **The C switches are yours.** A stem's **C** puts it on StemDeck's CUE bus,
+  for pre-listening here, e.g. a stem no channel plays yet. Core does not set
+  them: a desk channel's cue goes through the channel itself (see
+  {ref}`the cue <a3mix-cue>`).
 - **StemDeck says hello to Core every 30 seconds**, and Core learns its
   address from that. StemDeck listens on `stemdeck.osc` (see
   {doc}`../ressources/ports`).
