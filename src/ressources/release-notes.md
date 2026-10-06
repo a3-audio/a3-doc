@@ -286,6 +286,9 @@ On `main` since `v03.0`, not tagged yet.
 
 ### A³ Core (`a3-core`)
 
+- **A stem is cued through its channel:** a cued channel playing a stem opens its own cue
+  send like an analog one, so the headphones hear the channel's filter and EQ. Core no longer
+  sets StemDeck's C switches; they are StemDeck's own pre-listening.
 - **The return stays out of a channel's cue and has a cue of its own:** a cued channel no
   longer brings the whole aux return into the headphones. The return's own cue (the CUE field
   on its display, `/aux-return/cue/led`) puts it on the cue side of the phones-mix knob; Core

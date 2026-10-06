@@ -89,25 +89,20 @@ A channel's cue is its **CUE** key on the desk, or the CUE key on A³ Motion,
 and nothing else: the encoder push does not touch it. **The cue plays what
 comes in on the channel:**
 
-- **With a stem on the channel**, Core switches that stem's **C** (CUE) switch
-  in StemDeck and keeps the channel's own cue send (channel bus send 3) shut.
-  The stem is heard once, dry, from StemDeck's CUE bus, before the fader.
-  Push another stem onto the channel while it is cued and the C moves with it.
-  The C switches are Core's: at every cue change, push or report from
-  StemDeck, Core sets them from the cued channels, so a C clicked on
-  StemDeck's own screen is switched back.
-- **With A on the channel** it is the normal channel cue, and all of
-  StemDeck's C switches are off.
+- It is always the channel's own cue send (channel bus send 3), whether the
+  channel plays its analog input or a stem: you hear what the channel makes of
+  it, with its filter and EQ, before the fader. Push another stem onto the
+  channel while it is cued and the cue simply follows the channel.
 
 **The return has a cue of its own**, the CUE field on its display (see
 {ref}`the aux return <a3mix-displays>`). A channel's cue does not bring the
 return along: it carries stems or the analog return, not a deck's effects. On
 the mix side the return is always heard, like every channel.
 
-Two more things reach the headphones, on `dec_phones`:
+Two more things reach the headphones:
 
-- **StemDeck's own CUE bus.** Core keeps this send always open, on the cue
-  side of the crossfade. What is on the bus is StemDeck's decision: a stem's CUE
+- **StemDeck's own CUE bus**, through `enc_phones`. Core keeps this send always
+  open, on the cue side of the crossfade. What is on the bus is StemDeck's decision: a stem's CUE
   switch, or a deck's PHONES/CUE button on StemDeck, which puts the whole deck
   there before the fader. It is heard through StemDeck's headphone bus
   (REAPER inputs 23–24). That is how you pre-listen a stem that is on no
