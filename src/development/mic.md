@@ -15,7 +15,9 @@
 	- Encoder
 
 - Receives OSC messages from A³ Core and the beat-analyzer
-	- Input vu meters per channel: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`)
+	- Input vu meters per channel, in stereo: `in1_pre_L` … `in4_pre_R`
+	  (`/vu/51`–`/vu/58`), the louder side shown; with a truth from before
+	  these meters, the mono `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`)
 	- Output vu meters for the master section: `main_sub` and
 	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
 	- The lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
@@ -24,8 +26,8 @@
 	- The meters on its displays: StemDeck's stem meters `stem_a1` … `stem_b4`
 	  (`/vu/41`–`/vu/48`) on the channels; StemDeck's AUX bus
 	  `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and the analog return
-	  `aux_L`/`aux_R` on the return. The inputs `in1_pre` … `in4_pre` go to
-	  the LED VUs only, no display (`Displays.note_analog` is gone)
+	  `aux_L`/`aux_R` on the return. The input meters go to the LED VUs and
+	  to the channel display's A (`Displays.note_input`)
 
 - Sends messages back to the microcontroller via USB serial
 	- LEDs and VU meters
@@ -43,14 +45,17 @@ split in two:
 - **`a3-mixer-set-display/display_panel.py`** is the pure part, with no
   hardware: which display sits on which multiplexer channel (`PANELS`), how
   Core's announcements are read, the meters' movement and the layout.
-  `channel_picture()` turns a cursor, eight stem levels and whether a stem
-  plays into the D1 | D2 headings, eight plain bars, the dividers, the STEM
-  toggle and the cursor's arrow box. The toggle's slot is `TOGGLE_METERS`
-  (2) meters wide, so on a 128-pixel display the bars keep 10 of their 11
-  pixels and the toggle has room for its letters. `return_picture()` turns
+  `channel_picture()` turns a cursor, nine levels (eight stems, then the
+  analog input) and the channel's stem mask into the D1 | D2 | A headings,
+  nine plain bars, the dividers, the cursor's arrow box and the active
+  bracket over what plays: the playing stem (the mask's lowest bit), or A
+  (`ANALOG_INPUT`, position 8) when none plays. The ninth slot is
+  `LAST_SLOT_METERS` (2) meters wide, so on a 128-pixel display the bars
+  keep 10 of their 11 pixels; A's bar is a stem's width, centred in it. The
+  return's CUE field takes the same slot. `return_picture()` turns
   the cursor, the mode and two levels (STEM, ANALOG) into two mono bars
-  under their headings, the playing mode's heading inverted, and the arrow
-  box; nothing stands between the two (the AUX title is gone). `_bands()`
+  under their headings, the active bracket over the playing mode's meter,
+  the CUE field and the arrow box; nothing stands between the two (the AUX title is gone). `_bands()`
   returns three row bands: the headings, the arrow (`ARROW_ROWS`, 5 rows,
   with a dark row above and below) and the meters, which run to the bottom
   row (rows 19–63 on a 64-row display). Both work for a display of any
@@ -65,13 +70,21 @@ What it draws:
 - **The cursor is an arrow**: a solid triangle pointing down,
   `ARROW_WIDTH` (10) pixels wide and `ARROW_ROWS` (5) rows tall, each row a
   pixel narrower on either side. It sits in the arrow band, centred over the
-  selected meter or toggle. Meters and the toggle are drawn the same whether
-  selected or not.
-- **The STEM toggle** is a filled field with dark letters while a stem plays
-  (the channel's mask is not 0), an outline with light letters while none
-  does; the letters stand one over the other, `FRAME` (1) pixel inside the
-  field. The field sits `TOGGLE_INSET` (3) pixels inside its slot, apart
-  from the divider beside it.
+  selected meter or the return's CUE field. Meters are drawn the same
+  whether selected or not.
+- **The active bracket** is a "]" turned 90 degrees counter-clockwise,
+  `BRACKET_ROWS` (4) rows tall: its top line in the dark row over the
+  meter, a leg down either side in the gaps, so the bar stays whole. It
+  marks what plays, on a channel and on the return.
+- **A's bar** is the channel's input meter, the louder side, and only while
+  the analog input plays (`_analog_peak()`). That meter carries whatever
+  plays on the channel, so while a stem plays A stays dark rather than show
+  the stem under its letter.
+- **The return's CUE field** is a filled field with dark letters while the
+  return is cued, an outline with light letters while it is not; the
+  letters stand one over the other, `FRAME` (1) pixel inside the field. The field sits
+  `TOGGLE_INSET` (3) pixels inside its slot, apart from the divider beside
+  it.
 
 How it draws:
 
@@ -92,10 +105,10 @@ How it draws:
   them, and STEM falls back to the loudest stem playing on the return.
 - **Redrawn only when the pixels change.** After each step, a display is
   redrawn only if what it paints in pixels (`pixel_key()`: the bars, the
-  cursor, the toggle's on/off and the headings, so a mode change counts)
-  differs from what was last drawn. `show_channel()` posts a redraw only
-  when the channel changes between no stem and some stem: the display does
-  not show which stem, so another stem moves no pixel. The bus carries about 17 draws a second; ten steps on
+  cursor, the CUE field's on/off, the bracket and the headings, so a mode
+  change counts) differs from what was last drawn. `show_channel()` posts a
+  redraw only when the stem that plays changes, or between A and a stem: a
+  stem added above the playing one moves no pixel. The bus carries about 17 draws a second; ten steps on
   five displays would be 50.
 - **Partial updates.** `a3_mixer_oled.py` sends only the windows of the
   picture that changed, not the whole 1 KB frame.
@@ -158,7 +171,12 @@ Written in C++ as a PlatformIO project,
 for the panel controller named on {ref}`A³ Mixer hardware <mic-hardware>`.
 How to build it: {doc}`build`.
 
-- **Input VUs:** 8 LEDs a channel.
+- **Input VUs:** 8 LEDs a channel, coloured by position: 1–4 green, 5–6
+  yellow, 7–8 red. `a3-mixer.py` sends the top lit LED's index
+  (`channel_leds()` in `a3_mixer_meters.py`): LED *n* lights when the peak
+  reaches `CHANNEL_LED_THRESHOLDS_DB`, −36, −24, −18, −12, −9, −6, −3 and
+  0 dBFS. There is no separate peak dot. An older firmware draws the same
+  bar, green with its top LED red.
 - **Main VU:** eight columns over all four LED modules, 32 rows; the stem
   columns on the top module are gone.
 - **Encoder switches:** it reports all eight channels of the encoder-switch

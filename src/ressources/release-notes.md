@@ -12,6 +12,49 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### 2026-10-06 and 2026-10-07
+
+**A³ Mixer (`a3-mixer`)**
+
+- **A instead of the STEM toggle.** A channel display reads **D1 | D2 | A**; position 8 is
+  **A**, the analog input, with a bar for the channel's input level while the analog input
+  plays (dark while a stem plays). The bracket marks what plays: the stem, or A. See
+  {ref}`the input selectors <a3mix-displays>`.
+- **The channel LEDs have fixed colours:** four green, two yellow, two red at the top, the bar
+  following the peak at −36, −24, −18, −12, −9, −6, −3 and 0 dBFS. The wandering red peak
+  LED is gone. This needs the new Teensy firmware.
+- The channel LEDs show the louder side of the channel's stereo input meter.
+- **The desk drains and coalesces its OSC** before handling it: per meter it keeps only the
+  newest value and drops the meters it does not show, so the selector and lamp messages no
+  longer wait behind a queue of meters.
+
+**A³ Core (`a3-core`)**
+
+- **A push on A only selects the analog input:** a playing stem leaves the channel (in STEM
+  return mode it goes to the return); while the analog input plays, nothing happens. Core no
+  longer remembers a last stem.
+- **3D is level-neutral:** 3D sets only the band's gain, the steady bed stays at 0 dB, and
+  Core sends the filter frequency and Q to both Isolators itself instead of relying on a
+  REAPER parameter link.
+- **Stereo channel meters**, `/vu/51`–`/vu/66`: each channel's input and channel bus, L and R.
+- **The REAPER template is normalised:** every gain stage at unity, the automation envelopes
+  removed.
+
+**StemDeck (`stemdeck`)**
+
+- The desk meters go out as **one OSC bundle per tick**, and a silent StemDeck sends none.
+
+**A³ Motion (`a3-motion-ui`)**
+
+- **A blob follows the finger again:** a mouse event during a touch no longer takes over the
+  finger's grab.
+- **Knobs without lag:** a knob follows only the first input source of a gesture (every finger
+  arrives twice, as touch and as mouse), and a turn redraws only the channel values.
+- **A channel face's pots are fingertip-tall touch columns**, and a knob's whole range is four
+  fingertips of travel.
+- **Motion is pure OSC:** the audio engine is out of the app and moved to its own repository,
+  `a3-audio/a3-engine`.
+
 ### The whole system
 
 - **Every OSC address, port and IP is written once**, in `a3-osc.json`: the contract shipped
