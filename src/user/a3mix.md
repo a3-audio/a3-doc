@@ -27,7 +27,7 @@ them.
 | 2 | **EQ HIGH** | high band | −inf … 0 dB (24 kHz) |
 | 3 | **EQ MID** | middle band | −inf … 0 dB (1 kHz) |
 | 4 | **EQ LOW** | low band | −inf … 0 dB (20 Hz) |
-| 5 | **INPUT VU** | the level *before* the fader, 8 LEDs (`in1_pre` … `in4_pre` in the {ref}`meter map <core-vu-map>`) |  |
+| 5 | **INPUT VU** | the level *before* the fader, 8 LEDs with fixed colours: four green, two yellow, two red at the top. The bar follows the peak; the LEDs light at −36, −24, −18, −12, −9, −6, −3 and 0 dBFS, so red means −3 dBFS and clipping. The louder side of the channel's stereo meter (`in1_pre_L`/`_R` … `in4_pre_L`/`_R` in the {ref}`meter table <osc-vu-meters>`) |  |
 | 6 | **TAP** | taps the tempo — see *Tempo* below. All four strips' keys do the same, and their lamps flash red on the beat |  |
 | 7 | **FADER** | the level going out | −inf … 0 dB |
 | 8 | **FX** | switches this channel's VCF filter on. Lit green while it is on |  |
@@ -129,52 +129,54 @@ stem is on a channel, Core shuts the channel's analog input.
 
 ### A channel
 
-![A channel's selector: eight meters under D1 and D2, music on six of them; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right the STEM toggle, filled because a stem plays on the channel](pics_user/a3-mix-input-selector.png)
+![A channel's selector as it looked until 2026-10-06: eight meters under D1 and D2, music on six of them; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right the STEM toggle, filled because a stem plays on the channel](pics_user/a3-mix-input-selector.png)
 
-*Music plays on six stems. The arrow points at deck 1's stem 3, which is
-silent, so its meter shows nothing. The STEM toggle at the right is filled: a
-stem plays on this channel.*
+*The picture is from before 2026-10-07: where it shows the filled STEM field,
+the display now shows **A** with the analog input's bar. Music plays on six
+stems. The arrow points at deck 1's stem 3, which is silent, so its meter
+shows nothing.*
 
-A channel's encoder is an input selector. Its display shows **eight stem
-meters** under the headings **D1 | D2**: deck 1's stems 1–4 and deck 2's
-stems 1–4. At the right is the **STEM toggle**, the word STEM written from
-top to bottom. Thin vertical lines divide D1, D2 and the toggle.
+A channel's encoder is an input selector. Its display shows nine meters under
+the headings **D1 | D2 | A**: deck 1's stems 1–4, deck 2's stems 1–4, and at
+the right **A**, the channel's **analog input**. Thin vertical lines divide
+D1, D2 and A.
 
-- **Every meter** is a plain bar at its level. A silent stem shows nothing.
-- **The STEM toggle** is a filled block while a stem plays on the channel,
-  and an outline while none plays (the channel plays its analog input).
+The desk's **A** is the analog input. It is not StemDeck's **A** switch, which
+puts a stem on the aux return.
+
+- **Every stem meter** is a plain bar at its level. A silent stem shows
+  nothing.
+- **A's bar** is the channel's input level while the analog input plays, the
+  louder side of its stereo input meter. While a stem plays on the channel,
+  A's bar is dark: the input meter then carries the stem, not the analog
+  input.
+- **The bracket**, a small "]" turned on its side over a meter, marks what
+  plays on the channel: the stem that plays, or A while the analog input
+  plays.
 - **The cursor** is a small arrow pointing down, between the headings and
-  the meters, over the selected meter or the toggle. The meter or toggle
-  under it looks the same as the others.
+  the meters, over the selected meter. The meter under it looks the same as
+  the others.
 
-The display does not show **which** stem plays on the channel, only that one
-does. While you turn, you want to see the selector and nothing else.
-
-**Turn** moves the cursor over nine positions: the eight stems, then the
-STEM toggle. It runs in a ring: one click left from the first stem is the
-STEM toggle, one click right from the toggle the first stem. Turning switches
-nothing.
+**Turn** moves the cursor over nine positions: the eight stems, then A. It
+runs in a ring: one click left from the first stem is A, one click right
+from A the first stem. Turning switches nothing.
 
 **Push on a stem** makes it the channel's only input. The channel's other
 stem leaves. If the stem plays on another channel, it moves here, and that
-channel goes back to its analog input. Core remembers it as the
-channel's **last stem**.
+channel goes back to its analog input.
 
-**Push on the stem that already plays** takes it off the channel, as the STEM
-toggle's off does: the channel plays its analog input again, and the stem stays
-the last stem. With the return in STEM mode, the stem goes to the return. A
-second push brings it back to the channel.
+**Push on the stem that already plays** takes it off the channel: the channel
+plays its analog input again. With the return in STEM mode, the stem goes to
+the return. To bring it back, push it again.
 
-**Push on the STEM toggle** switches the stem off and on:
+**Push on A** selects the analog input:
 
-- **While a stem plays**, it goes off and the channel plays its analog
-  input. The stem is remembered as the last stem.
-- **While no stem plays**, the last stem comes back. If it plays on another
-  channel now, it moves here. If the channel has no last stem yet, nothing
-  happens.
+- **While a stem plays**, the stem leaves the channel and the analog input
+  plays. With the return in STEM mode, the stem goes to the return.
+- **While the analog input already plays**, nothing happens.
 
-After a push the cursor stays where it is. The last stem is kept across a
-restart of Core.
+Core does not remember which stem played: to get a stem back, turn to it and
+push. After a push the cursor stays where it is.
 
 **One stem per channel, kept by Core.** If StemDeck shows several stems on one
 channel (an old session can), Core keeps the lowest and switches the others
@@ -195,8 +197,8 @@ heading, and a **CUE field** at the right:
   sides. With an older StemDeck that does not send this meter, STEM shows the
   loudest stem on the return.
 - **ANALOG** (middle): the analog return, the louder of aux L and R.
-- **CUE** (right, behind a thin line): the return's own cue. It looks like a
-  channel's STEM toggle: filled while the return is cued, an outline while it
+- **CUE** (right, behind a thin line, where a channel shows A): the return's
+  own cue. The field is filled while the return is cued, an outline while it
   is not.
 
 The meters are plain bars, like the channels' meters. The **bracket** marks the
@@ -225,9 +227,8 @@ last over. A clean bar at full scale stays solid, so you can tell the two apart.
 
 ### Without StemDeck
 
-- Core holds each channel's cursor and last stem and the return's mode and cue, keeps
-  them across a restart and announces them. A channel's cursor starts on the
-  STEM toggle.
+- Core holds each channel's cursor and the return's mode and cue, keeps
+  them across a restart and announces them. A channel's cursor starts on A.
 - **Without StemDeck**, turning still moves the cursor, a push switches
   nothing, and every channel plays its analog input.
 - A fresh StemDeck starts with every stem on AUX only, so every channel plays
@@ -235,8 +236,7 @@ last over. A clean bar at full scale stays solid, so you can tell the two apart.
   its own switches.
 
 Core follows what StemDeck reports, so a click on a bus switch on StemDeck's
-own screen counts too. The STEM toggle shows it; which stem it is, the
-display does not show.
+own screen counts too: the bracket moves to the stem that plays.
 
 StemDeck says hello to Core every 30 seconds. If it is silent for a minute,
 Core takes every stem off the channels and the analog inputs play again; Core

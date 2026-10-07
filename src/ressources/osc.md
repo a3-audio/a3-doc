@@ -257,6 +257,10 @@ On **2026-10-04** each channel's encoder became an input selector:
 the eight stems, 8 = A. Later the same day 8 became the STEM toggle, which takes the
 channel's stem off and brings it back. See {ref}`the desk's input selectors <a3mix-displays>`.
 
+On **2026-10-07** position 8 is **A**, the analog input, again: a push there takes a
+playing stem off the channel, and changes nothing while the analog input already plays.
+Core no longer remembers a last stem. The addresses stay as they are.
+
 `/device/hello` is new; see [above](#osc-differs).
 
 (osc-vu-meters)=
@@ -273,7 +277,7 @@ its number:
 | Device | Shows |
 | :--- | :--- |
 | A³ Motion | the input dots: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
-| A³ Mixer | its four input meters: `in1_pre` … `in4_pre`; its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and the channel's `in{ch}_pre`; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
+| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`; `in1_pre` … `in4_pre` with a truth from before them); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A while the analog input plays, the same input meter; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
 
 <!-- a3-osc:vu -->
 | Address | Meter |

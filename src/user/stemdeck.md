@@ -392,8 +392,8 @@ job fails straight away and the strip says `separator not installed`.
 ### Remote control from the desk
 
 With A³ Core running, the A³ Mixer chooses what is on its channels: turn a
-channel's encoder to a stem and push; the channel's **STEM** toggle takes
-it off and brings it back. How the desk does it, and the rules for
+channel's encoder to a stem and push; a push on the channel's **A** (its
+analog input) takes it off. How the desk does it, and the rules for
 it, are on the {ref}`desk's input selectors <a3mix-displays>`. From
 StemDeck's side:
 
