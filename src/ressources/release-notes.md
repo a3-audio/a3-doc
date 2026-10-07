@@ -42,6 +42,11 @@ On `main` since `v03.0`, not tagged yet.
   input, whatever the channel plays. They replace the mono meters `in1_pre` … `in4_post`.
 - **The REAPER template is normalised:** every gain stage at unity, the automation envelopes
   removed.
+- **The return's mode chooses its source:** STEM plays StemDeck's AUX bus, ANALOG the analog
+  inputs 11/12, never both summed. Core switches them by send volume (`analog` and `stems`
+  track send 5 to `aux_return`) at start-up, recall and every mode change. The return's
+  ANALOG meter, `aux_L`/`aux_R` (`/vu/35`–`/vu/36`), now shows analog 11/12, whatever plays.
+  See {ref}`the aux return <a3mix-displays>`.
 
 **StemDeck (`stemdeck`)**
 
