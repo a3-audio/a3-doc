@@ -21,7 +21,7 @@ device `hw:USB`, at 44.1 kHz. In JACK the card is the client `system`:
 
 | Direction | Ports | Used for |
 | :--- | :--- | :--- |
-| capture | `capture_1` … `capture_10` | the A³ Mixer's channels and the aux return, see REAPER's inputs 1–10 below |
+| capture | `capture_1` … `capture_12` | the A³ Mixer's channels, the phones and the aux return, see REAPER's inputs 1–12 below |
 | playback | `playback_1` … `playback_20` | the Main and the Booth outputs, see REAPER's outputs 1–20 below |
 
 (core-reaper-channel-map)=
@@ -41,8 +41,8 @@ decks, one aux, one phones.
 | In | Block | Content |
 | :--- | :--- | :--- |
 | 1–8 | Analog | decks 1–4, stereo (the A³ Mixer's channels 1–4) |
-| 9–10 | Analog | aux (the aux return) |
-| 11–12 | Analog | phones |
+| 9–10 | Analog | phones |
+| 11–12 | Analog | aux (the aux return's analog input, played in ANALOG mode) |
 | 13–20 | StemDeck | decks 1–4, stereo (StemDeck's buses 1–4) |
 | 21–22 | StemDeck | aux |
 | 23–24 | StemDeck | phones |
@@ -58,7 +58,7 @@ decks, one aux, one phones.
 | 11–20 | Booth | 11 sub, 12–20 tops |
 | 21–22 | Phones | stereo |
 | 23–24 | Rec | stereo |
-| 25–26 | Aux | stereo |
+| 25–26 | Aux | the aux return's analog input (analog 11–12), to the beat-analyzer's `vu_aux_L`, `vu_aux_R` |
 | 27–30 | free | |
 | 31–70 | VU meters | to the beat-analyzer, see below |
 
@@ -100,7 +100,7 @@ by it:
 | 52–60 | 22–30 | `vu_booth_top1` … `vu_booth_top9` | `/vu/22`–`/vu/30` | Booth tops 1–9 |
 | 61–62 | 31–32 | `vu_phones_L`, `vu_phones_R` | `/vu/31`, `/vu/32` | Phones |
 | 63–64 | 33–34 | `vu_rec_L`, `vu_rec_R` | `/vu/33`, `/vu/34` | Rec |
-| 65–66 | 35–36 | `vu_aux_L`, `vu_aux_R` | `/vu/35`, `/vu/36` | Aux |
+| 25–26 | 35–36 | `vu_aux_L`, `vu_aux_R` | `/vu/35`, `/vu/36` | the aux return's analog input, analog 11–12, whatever the return plays |
 | 67–70 | 37–40 | `vu_free67` … `vu_free70` | `/vu/37`–`/vu/40` | free |
 
 Two rules carry the whole table:
@@ -110,6 +110,9 @@ Two rules carry the whole table:
 - **beat-analyzer channel = REAPER out − 30 = the OSC number**, counted from
   1 (since 2026-09-30; it was 0 before): out 31 is the first channel and sends
   `/vu/1`, out 70 the fortieth and sends `/vu/40`.
+
+The aux pair is the exception to both: `vu_aux_L`, `vu_aux_R` hear REAPER out
+25–26 itself, the analog return input (analog 11–12), not out 65–66.
 
 The beat-analyzer needs `NUM_VU_CHANNELS=40` in its `build/.env` to open all
 forty REAPER inputs (see {ref}`Beat Analyzer <beat-analyzer-config>`). It sends
@@ -241,7 +244,7 @@ file names them.
 
 | From | → To | Note |
 | :--- | :--- | :--- |
-| `system_in` (`capture_1` … `10`) | `reaper-analog` (`in1` … `in10`) | the A³ Mixer's channels and the aux return |
+| `system_in` (`capture_1` … `12`) | `reaper_analog` (`in1` … `in12`) | the A³ Mixer's channels, the phones and the aux return |
 | `StemDeck` (12 ports) | `reaper-stemdeck` (`in11` … `in22`) | local StemDeck |
 | `zita_stemdeck` (`out_1` … `out_10`) | `reaper-stemdeck` (`in11` … `in20`) | StemDeck on another machine |
 | `MPD` (`left`, `right`) | `reaper_deck_4` (`in7`, `in8`) | overlaps the interface's inputs 7–8 |

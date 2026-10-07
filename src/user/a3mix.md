@@ -67,7 +67,7 @@ timing, and timing does not want a relay in the middle.
 | 15 | **CUE/MIX** | the phones-mix knob: left is cue only, right is the mix, in between a crossfade at constant power (see *The cue* below) |  |
 | 16 | **BOOTH** | the monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | the public address outputs | −inf … 0 dB |
-| – | **AUX RETURN** | the level of the aux return — the fifth stereo input beside the four channels, where an external effect comes back into the mix (the gain on REAPER's *Return* track). Not in the picture | 0 dB at full travel |
+| – | **AUX RETURN** | the level of the aux return — the fifth stereo input beside the four channels. It plays the analog inputs 11/12 or StemDeck's AUX bus, whichever the return's display selects (see {ref}`the aux return <a3mix-displays>`); the gain on REAPER's *Return* track. Not in the picture | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM for the master and per input channel — work in progress |  |
 | 19 | **OUTPUT VU** | the level of eight main outputs: the sub and tops 1–7 (`main_sub`, `main_top1` … `main_top7`), one column each over all 32 rows of the LED matrix |  |
 
@@ -189,13 +189,19 @@ off, about 0.3 s after StemDeck's reports have settled.
 The CUE field at the right is filled: the return is cued. The arrow points at
 CUE.*
 
-The return's display shows **two meters**, one for each mode, each under its
-heading, and a **CUE field** at the right:
+The return plays **one of two sources**, never both: **STEM**, StemDeck's AUX
+bus, or **ANALOG**, the analog inputs 11/12. The mode chooses which; Core
+opens that source's way into the return in REAPER and shuts the other.
 
-- **STEM** (left): the stems on StemDeck's AUX bus, the louder of its two
-  sides. With an older StemDeck that does not send this meter, STEM shows the
-  loudest stem on the return.
-- **ANALOG** (middle): the analog return, the louder of aux L and R.
+The return's display shows **two meters**, one for each source, each under its
+heading, and a **CUE field** at the right. Both meters show their input
+whatever the return plays, so you see a source's level before you switch to it:
+
+- **STEM** (left): StemDeck's AUX bus, the louder of its two sides. With an
+  older StemDeck that does not send this meter, STEM shows the loudest stem on
+  the return.
+- **ANALOG** (middle): the analog inputs 11/12, the louder of the two
+  (`aux_L`, `aux_R`).
 - **CUE** (right, behind a thin line, where a channel shows A): the return's
   own cue. The field is filled while the return is cued, an outline while it
   is not.
@@ -208,12 +214,13 @@ cursor says:
 - **CUE:** switches the return's cue on or off. The mode stays as it is. While
   the cue is on, the return is in the headphones on the cue side of the
   phones-mix knob.
-- **STEM, stem mode:** every stem that no channel plays goes to the return
+- **STEM, stem mode:** the return plays StemDeck's AUX bus; analog 11/12 is
+  shut. Every stem that no channel plays goes to the return
   (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
   a stem a channel lets go returns to it. If you switch a free stem's **A**
   off in StemDeck, Core undoes it after about 0.3 s.
-- **ANALOG, analog mode:** no stem is on the return. The analog return plays
-  as it is routed in REAPER.
+- **ANALOG, analog mode:** the return plays the analog inputs 11/12; StemDeck's
+  AUX is shut and no stem is on it.
 
 ### How the meters move
 

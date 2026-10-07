@@ -68,7 +68,7 @@ spreads them over the four channels the same way:
 | `deck2_L`, `deck2_R` (bus 2) | **channel 2** | every stem switched to **2** |
 | `deck3_L`, `deck3_R` (bus 3) | **channel 3** | every stem switched to **3** |
 | `deck4_L`, `deck4_R` (bus 4) | **channel 4** | every stem switched to **4** |
-| `aux_L`, `aux_R` | the **Return** track, set by the **RET** pot | every stem switched to **A** (AUX) |
+| `aux_L`, `aux_R` | the **Return** track, set by the **RET** pot, while the return is in STEM mode (in ANALOG mode it plays the analog inputs 11/12) | every stem switched to **A** (AUX) |
 | `phones_L`, `phones_R` | StemDeck's own headphone bus (REAPER inputs 23–24), heard on the cue side | every stem on **C**, every deck on CUE |
 
 From there a stem is just another source on its channel: it goes through

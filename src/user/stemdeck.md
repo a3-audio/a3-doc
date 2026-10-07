@@ -406,7 +406,8 @@ StemDeck's side:
   reports settle.
 - **AUX follows the return's mode.** In stem mode every stem no channel plays
   has its **A** lit, and Core switches a free stem's A back on if you click it
-  off. In analog mode no stem is on AUX. A stem pushed onto a channel loses
+  off. In analog mode no stem is on AUX, and the return plays the analog
+  inputs 11/12 instead of the AUX bus. A stem pushed onto a channel loses
   its A.
 - **The C switches are yours.** A stem's **C** puts it on StemDeck's CUE bus,
   for pre-listening here, e.g. a stem no channel plays yet. Core does not set
