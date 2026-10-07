@@ -55,12 +55,13 @@ decks, one aux, one phones.
 | Out | Block | Content |
 | :--- | :--- | :--- |
 | 1–10 | Main | 1 sub, 2–10 tops |
-| 11–20 | Booth | 11 sub, 12–20 tops |
-| 21–22 | Phones | stereo |
-| 23–24 | Rec | stereo |
+| 11–20 | Booth | 11 sub, 12–20 tops; also metered as they are (`vu_booth_sub` … `vu_booth_top9`) |
+| 21–22 | Phones | stereo; also metered as they are (`vu_phones_L`, `vu_phones_R`) |
+| 23–24 | Rec | stereo; also metered as they are (`vu_rec_L`, `vu_rec_R`) |
 | 25–26 | Aux | the aux return's analog input (analog 11–12), to the beat-analyzer's `vu_aux_L`, `vu_aux_R` |
 | 27–30 | free | |
-| 31–70 | VU meters | to the beat-analyzer, see below |
+| 31–50 | VU meters | the analog inputs (31–38) and the Main meters (41–50), to the beat-analyzer, see below |
+| 51–66 | Channel meters | every channel's L and R before (51–58) and after (59–66) its fader, to the beat-analyzer |
 
 ## The beat-analyzer's inputs
 
@@ -69,7 +70,8 @@ The beat-analyzer is a JACK client with one tempo input and the meter inputs.
 | Ports | Count | Fed from | Used for |
 | :--- | :---: | :--- | :--- |
 | `bpm_1` | 1 | REAPER's rec pair (`out7`, `out8`), the first channel of the pair only | tempo detection in clock mode EXT — intern |
-| `vu_analog1_L` … `vu_free70` | 40 | REAPER out 31–70 | the meters `/vu/1`–`/vu/40` |
+| `vu_analog1_L` … `vu_free70` | 40 | REAPER out 31–50 and 11–26 (see below) | the meters `/vu/1`–`/vu/40` |
+| `vu_in1_pre_L` … `vu_in4_post_R` | 16 | REAPER out 51–66 | the channel meters `/vu/51`–`/vu/66` |
 | `vu_stem_a1_L/R` … `vu_stem_b4_L/R` | 16 | StemDeck's eight stereo stems (`zita-n2j` and/or the local StemDeck) | the stem meters `/vu/41`–`/vu/48` |
 
 ### Tempo: `bpm_1`
@@ -80,12 +82,20 @@ clock mode 1 (EXT — intern, see the
 
 (core-vu-map)=
 
-### The VU meters: REAPER out 31–70
+### The VU meters: which REAPER out feeds which `/vu/n`
 
-Outputs 31–70 go to the beat-analyzer's forty JACK inputs, one meter each,
-and the beat-analyzer sends each as `/vu/n` (peak and RMS). Eight more
-meters, for the StemDeck stems, come on top (below). Input *n*,
-counted from 1, is fed from REAPER out 30 + *n* and sends on `/vu/n`. A port
+The beat-analyzer meters REAPER outputs, one JACK input each, and sends each
+as `/vu/n` (peak and RMS). The StemDeck meters, `/vu/41`–`/vu/50`, come from
+StemDeck itself (below). Which REAPER out feeds `/vu/n` depends on the range:
+
+| `/vu/n` | REAPER out |
+| :--- | :--- |
+| 1–20 | *n* + 30 (out 31–50) |
+| 21–36 | *n* − 10 (out 11–26) |
+| 41–50 | none: StemDeck sends them |
+| 51–66 | *n* (out 51–66) |
+
+`/vu/9`–`/vu/10` and `/vu/37`–`/vu/40` are free. A port
 name without its `vu_` prefix is the meter's name in `a3-osc.json`'s
 `vu_meters` (`analog1_L`, `main_sub`, …), and the devices look their meters up
 by it:
@@ -96,23 +106,26 @@ by it:
 | 39–40 | 9–10 | `vu_free39`, `vu_free40` | `/vu/9`, `/vu/10` | free |
 | 41 | 11 | `vu_main_sub` | `/vu/11` | Main sub |
 | 42–50 | 12–20 | `vu_main_top1` … `vu_main_top9` | `/vu/12`–`/vu/20` | Main tops 1–9 |
-| 51 | 21 | `vu_booth_sub` | `/vu/21` | Booth sub |
-| 52–60 | 22–30 | `vu_booth_top1` … `vu_booth_top9` | `/vu/22`–`/vu/30` | Booth tops 1–9 |
-| 61–62 | 31–32 | `vu_phones_L`, `vu_phones_R` | `/vu/31`, `/vu/32` | Phones |
-| 63–64 | 33–34 | `vu_rec_L`, `vu_rec_R` | `/vu/33`, `/vu/34` | Rec |
+| 11 | 21 | `vu_booth_sub` | `/vu/21` | Booth sub |
+| 12–20 | 22–30 | `vu_booth_top1` … `vu_booth_top9` | `/vu/22`–`/vu/30` | Booth tops 1–9 |
+| 21–22 | 31–32 | `vu_phones_L`, `vu_phones_R` | `/vu/31`, `/vu/32` | Phones |
+| 23–24 | 33–34 | `vu_rec_L`, `vu_rec_R` | `/vu/33`, `/vu/34` | Rec |
 | 25–26 | 35–36 | `vu_aux_L`, `vu_aux_R` | `/vu/35`, `/vu/36` | the aux return's analog input, analog 11–12, whatever the return plays |
-| 67–70 | 37–40 | `vu_free67` … `vu_free70` | `/vu/37`–`/vu/40` | free |
+| – | 37–40 | `vu_free67` … `vu_free70` | `/vu/37`–`/vu/40` | free, no cable |
+| 51–58 | – | `vu_in1_pre_L` … `vu_in4_pre_R` | `/vu/51`–`/vu/58` | the channels' inputs after TRIM/EQ, L and R |
+| 59–66 | – | `vu_in1_post_L` … `vu_in4_post_R` | `/vu/59`–`/vu/66` | the channel buses after the fader, L and R |
 
-Two rules carry the whole table:
+How the ranges come about:
 
-- **A meter sits 40 outputs above what it measures:** Main sub on out 1 is
-  metered on out 41, Booth sub on 11 on 51, Phones on 21 on 61.
-- **beat-analyzer channel = REAPER out − 30 = the OSC number**, counted from
-  1 (since 2026-09-30; it was 0 before): out 31 is the first channel and sends
-  `/vu/1`, out 70 the fortieth and sends `/vu/40`.
+- **Main is metered on a copy 40 outputs up:** Main sub on out 1 is metered
+  on out 41. The analog inputs are tapped onto out 31–38 (track "analog"),
+  before any channel processing.
+- **Booth, Phones, Rec and the aux return are metered as they are**, on the
+  outputs that carry them (11–26), so `/vu/21`–`/vu/36` hear out *n* − 10.
+- **The channel meters keep their number:** out 51–66 sends `/vu/51`–`/vu/66`.
 
-The aux pair is the exception to both: `vu_aux_L`, `vu_aux_R` hear REAPER out
-25–26 itself, the analog return input (analog 11–12), not out 65–66.
+The meter names (`free67` … `free70`) still carry the out numbers of the
+earlier one-rule map; nothing feeds them.
 
 The beat-analyzer needs `NUM_VU_CHANNELS=40` in its `build/.env` to open all
 forty REAPER inputs (see {ref}`Beat Analyzer <beat-analyzer-config>`). It sends
