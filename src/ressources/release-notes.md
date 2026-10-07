@@ -17,8 +17,8 @@ On `main` since `v03.0`, not tagged yet.
 **A³ Mixer (`a3-mixer`)**
 
 - **A instead of the STEM toggle.** A channel display reads **D1 | D2 | A**; position 8 is
-  **A**, the analog input, with a bar for the channel's input level while the analog input
-  plays (dark while a stem plays). The bracket marks what plays: the stem, or A. See
+  **A**, the analog input, with a bar for the level at the channel's analog input, shown
+  whatever plays. The bracket marks what plays: the stem, or A. See
   {ref}`the input selectors <a3mix-displays>`.
 - **The channel LEDs have fixed colours:** four green, two yellow, two red at the top, the bar
   following the peak at −36, −24, −18, −12, −9, −6, −3 and 0 dBFS. The wandering red peak
