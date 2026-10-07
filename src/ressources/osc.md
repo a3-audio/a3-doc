@@ -358,6 +358,32 @@ the mono channel meters `in1_pre` … `in4_post`, which the stereo meters
 | `/vu/66` | in4_post_R |
 <!-- /a3-osc:vu -->
 
+(osc-meter-ballistics)=
+
+### How a meter moves
+
+**The meters send raw peaks; every display moves its bar the same way.**
+Decided 2026-10-07: the desk's displays, the channel and main LEDs, StemDeck's
+strips and A³ Motion's meters rise, fall and hold alike. A source sends, per
+tick, the highest peak since the last one, with no fall and no hold. Each
+display applies the ballistics on its own clock: the attack (0 = a new peak
+shows at once), the release in dB per second, and how long the highest recent
+peak stays shown before it falls at the release rate. A new peak above the
+held one starts the hold again.
+
+The numbers are the `meters` block of the truth, so they are changed in one
+place, on Core: every device reads them from the truth it gets from Core and
+restarts on the changed fingerprint. A truth from before the block reads as
+the numbers below.
+
+<!-- a3-osc:meters -->
+| Key | Value |
+| --- | --- |
+| `attack_ms` | 0 |
+| `release_db_per_second` | 20 |
+| `peak_hold_seconds` | 1.5 |
+<!-- /a3-osc:meters -->
+
 (osc-core)=
 
 ## A³ Core
