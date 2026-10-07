@@ -608,6 +608,7 @@ its edit box), and pressing Escape on a keyboard (it never quits the app).
 | A double tap on **3D** does nothing | The panel is attached, and its pot decides. Turn the pot |
 | The mixer's hardware control and the screen disagree | The A³ Mixer has no motor faders. Touch the hardware control and it takes over |
 | You changed an OSC address and nothing reacts | The other side must use the same one. Put it back, or change both |
+| The rig is silent after a start | Core is not up, or REAPER was restarted without it. Restart `a3-main`; the journal (`journalctl --user -u a3-core`) has `gate:` lines saying what was opened and what stayed shut. See {ref}`the silent start <core-silent-start>` |
 | The screen is frozen | Restart the device. The room doesn't move: it asks Core where every sound is |
 
 <!-- QUESTION (maintainer): "restart the device" in the last row: what is the DJ-safe way on the rig, pulling the network cable (PoE)? And how long until it is back? -->
@@ -1340,7 +1341,12 @@ saved in a set either.
 A³ Motion asks A³ Core where each sound already is, and takes the answer
 before it says anything itself. So switching the device on, or restarting it
 mid-evening, doesn't move the room: the blobs appear where the sound actually
-is, and the pots are where they were.
+is, and the pots are where they were. Before its window appears it also
+waits up to 10 s for Core to announce the OSC address file (see
+{ref}`Where addresses and ports live <osc-truth>`), so the screen comes up
+once, with the right addresses, instead of opening and restarting. If Core
+doesn't announce within 10 s, the window opens on the file on disk; a change
+announced later still restarts it.
 
 Loading a **set** is the other way round. That is a deliberate act, so the set
 wins: it stops what was running, sets each channel's 3d, freq and Q, and
