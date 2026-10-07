@@ -69,7 +69,7 @@ The beat-analyzer is a JACK client with one tempo input and the meter inputs.
 | Ports | Count | Fed from | Used for |
 | :--- | :---: | :--- | :--- |
 | `bpm_1` | 1 | REAPER's rec pair (`out7`, `out8`), the first channel of the pair only | tempo detection in clock mode EXT — intern |
-| `vu_in1_pre` … `vu_free70` | 40 | REAPER out 31–70 | the meters `/vu/1`–`/vu/40` |
+| `vu_analog1_L` … `vu_free70` | 40 | REAPER out 31–70 | the meters `/vu/1`–`/vu/40` |
 | `vu_stem_a1_L/R` … `vu_stem_b4_L/R` | 16 | StemDeck's eight stereo stems (`zita-n2j` and/or the local StemDeck) | the stem meters `/vu/41`–`/vu/48` |
 
 ### Tempo: `bpm_1`
@@ -87,13 +87,12 @@ and the beat-analyzer sends each as `/vu/n` (peak and RMS). Eight more
 meters, for the StemDeck stems, come on top (below). Input *n*,
 counted from 1, is fed from REAPER out 30 + *n* and sends on `/vu/n`. A port
 name without its `vu_` prefix is the meter's name in `a3-osc.json`'s
-`vu_meters` (`in1_pre`, `main_sub`, …), and the devices look their meters up
+`vu_meters` (`analog1_L`, `main_sub`, …), and the devices look their meters up
 by it:
 
 | REAPER out | beat-analyzer in | beat-analyzer port | OSC | Meter |
 | :--- | :--- | :--- | :--- | :--- |
-| 31–34 | 1–4 | `vu_in1_pre` … `vu_in4_pre` | `/vu/1`–`/vu/4` | channel inputs 1–4, pre-fader, post-FX |
-| 35–38 | 5–8 | `vu_in1_post` … `vu_in4_post` | `/vu/5`–`/vu/8` | channel inputs 1–4, post-fader |
+| 31–38 | 1–8 | `vu_analog1_L` … `vu_analog4_R` | `/vu/1`–`/vu/8` | the four channels' analog inputs, L and R (track "analog", before any channel processing) |
 | 39–40 | 9–10 | `vu_free39`, `vu_free40` | `/vu/9`, `/vu/10` | free |
 | 41 | 11 | `vu_main_sub` | `/vu/11` | Main sub |
 | 42–50 | 12–20 | `vu_main_top1` … `vu_main_top9` | `/vu/12`–`/vu/20` | Main tops 1–9 |

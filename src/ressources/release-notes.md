@@ -37,6 +37,9 @@ On `main` since `v03.0`, not tagged yet.
   Core sends the filter frequency and Q to both Isolators itself instead of relying on a
   REAPER parameter link.
 - **Stereo channel meters**, `/vu/51`–`/vu/66`: each channel's input and channel bus, L and R.
+- **`/vu/1`–`/vu/8` are the analog inputs**, `analog1_L` … `analog4_R` (REAPER out 31–38,
+  beat-analyzer ports `vu_analog1_L` … `vu_analog4_R`): the level at each channel's analog
+  input, whatever the channel plays. They replace the mono meters `in1_pre` … `in4_post`.
 - **The REAPER template is normalised:** every gain stage at unity, the automation envelopes
   removed.
 

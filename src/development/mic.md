@@ -16,8 +16,10 @@
 
 - Receives OSC messages from A³ Core and the beat-analyzer
 	- Input vu meters per channel, in stereo: `in1_pre_L` … `in4_pre_R`
-	  (`/vu/51`–`/vu/58`), the louder side shown; with a truth from before
-	  these meters, the mono `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`)
+	  (`/vu/51`–`/vu/58`), the louder side shown
+	- The analog inputs, in stereo: `analog1_L` … `analog4_R`
+	  (`/vu/1`–`/vu/8`), the level at each channel's analog input
+	  whatever the channel plays
 	- Output vu meters for the master section: `main_sub` and
 	  `main_top1` … `main_top7` (`/vu/11`–`/vu/18`)
 	- The lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`)
