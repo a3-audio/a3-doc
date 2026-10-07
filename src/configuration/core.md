@@ -429,11 +429,16 @@ Runs `~/.local/opt/REAPER/reaper` without splash screen and error dialogs,
 opening the template `~/.config/REAPER/ProjectTemplates/a3-reaper.RPP`. It
 waits until JACK accepts clients (`jack_wait -w`) — JACK has no readiness
 notification, and "started" is not "ready". **Stopping it saves nothing**
-(`-close all :nosave`, since 2026-10-07): the template is what the package
-shipped, every start. What Core controls comes back through Core's start-up
-recall, which replays every controlled value. What was changed **only in
-REAPER** — a plug-in setting, a route — is lost on stop unless you save it
-deliberately into the template. REAPER takes Core's commands on its listener
+(`ExecStop=… reaper -closeall:nosave`, since 2026-10-07; REAPER's own help
+documents `-close[all][:save|:nosave][:exit]`, and with spaces `all` and
+`:nosave` would be read as file names): every start opens the template as it
+lies on disk, which is the package's version only if you took the package's
+template at the replace-config question. The earlier stop command never wrote
+the template either, so REAPER-only changes were not kept on stop before this
+change. What Core controls comes back through Core's start-up recall, which
+replays every controlled value. What was changed **only in REAPER** — a
+plug-in setting, a route — is lost on stop unless you save it deliberately
+into the template. REAPER takes Core's commands on its listener
 `reaper.osc` and reports back to Core's `core.reaper-feedback`.
 
 (core-silent-start)=
@@ -448,11 +453,16 @@ track and fades back to the template's fader level over 1 s.
 
 - **Only what REAPER reports muted is opened.** If Core restarts during a set,
   REAPER reports the outputs open and Core sends it nothing: a Core restart
-  changes nothing audible.
-- **A silent rig after a start means Core is not up**, or REAPER was restarted
-  on its own, without Core to open the outputs. Restart `a3-main`. If Core
-  hears no mute or fader report for a track it leaves that one shut and says so
-  in the journal.
+  changes nothing audible, except a track you muted by hand in REAPER: Core
+  cannot tell a hand mute from the template's, so it opens that one too
+  (decided).
+- **A silent rig after a start means Core is not up**, or REAPER never
+  answered Core's OSC, or REAPER was restarted on its own, without Core to open
+  the outputs. In the second case there is no `gate:` line; look for
+  `startup: REAPER does not answer yet`. Once REAPER runs, restarting
+  `a3-core` alone is enough to open the outputs (lighter than `a3-main`). If
+  REAPER answers but reports no mute or fader state for a gated track, Core
+  leaves that one shut and says so in the journal.
 - **Rec stays open**, so the beat analyzer has its BPM input while the outputs
   are shut. The booth and phones meters read silence while shut, since they
   are measured after the track.
@@ -738,7 +748,7 @@ one in `~/.config/a3-replaced/`. Take a tuning worth keeping into the package
 
 | In `~/.config` | What it is |
 | :--- | :--- |
-| `REAPER/ProjectTemplates/a3-reaper.RPP` | the REAPER project every start opens, and that `a3-reaper.service` starts muted on the three outputs — tracks, routing, plug-ins and their state. See [REAPER](#core-reaper) |
+| `REAPER/ProjectTemplates/a3-reaper.RPP` | the REAPER project every start opens; the template itself starts the three outputs muted (not `a3-reaper.service`). It is the package's version only if you took it at the replace-config question — tracks, routing, plug-ins and their state. See [REAPER](#core-reaper) |
 | `REAPER/OSC/a3-core.ReaperOSC` | REAPER's OSC pattern file: which REAPER parameters answer to which OSC address |
 | `REAPER/Effects/a3crossover.jsfx` | a JSFX crossover effect |
 | `REAPER/FXChains/purestgain_8.RfxChain` | an FX chain |
