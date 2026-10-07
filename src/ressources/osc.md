@@ -277,7 +277,7 @@ its number:
 | Device | Shows |
 | :--- | :--- |
 | A³ Motion | each channel's input, in stereo, the louder side shown (the corona round its blob, its meter on the MIXER pages): `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
-| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A while the analog input plays, the same input meter; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
+| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A, the channel's analog input `analog1_L`/`_R` … `analog4_L`/`_R` (`/vu/1`–`/vu/8`, the louder side), whatever plays; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
 
 **`/vu/1`–`/vu/8` are the analog inputs**, `analog1_L` … `analog4_R`: each
 channel's two analog input channels (REAPER's "analog" track, the sound card's
