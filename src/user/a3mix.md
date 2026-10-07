@@ -129,12 +129,13 @@ stem is on a channel, Core shuts the channel's analog input.
 
 ### A channel
 
-![A channel's selector as it looked until 2026-10-06: eight meters under D1 and D2, music on six of them; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right the STEM toggle, filled because a stem plays on the channel](pics_user/a3-mix-input-selector.png)
+![A channel's selector: eight meters under D1 and D2, music on six of them, the bracket over deck 1's stem 2, which plays on the channel; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right, behind a thin line, A with a low bar, the analog input; short ticks beside the bars mark -9 and -3 dBFS](pics_user/a3-mix-input-selector.png)
 
-*The picture is from before 2026-10-07: where it shows the filled STEM field,
-the display now shows **A** with the analog input's bar. Music plays on six
-stems. The arrow points at deck 1's stem 3, which is silent, so its meter
-shows nothing.*
+*Deck 1's stem 2 plays on the channel, so the bracket is over it. Music plays
+on six stems; the arrow points at deck 1's stem 3, which is silent, so its
+meter shows nothing. A shows a little level at the analog input. The short
+ticks beside the bars mark −9 dBFS (where the channel LEDs turn yellow) and
+−3 dBFS (red); the bars use the same scale as the LEDs.*
 
 A channel's encoder is an input selector. Its display shows nine meters under
 the headings **D1 | D2 | A**: deck 1's stems 1–4, deck 2's stems 1–4, and at
@@ -185,9 +186,9 @@ off, about 0.3 s after StemDeck's reports have settled.
 
 ![The return's selector: STEM at the left with a loud bar and the bracket over it, because stem mode plays; ANALOG in the middle with a low bar; at the right, behind a thin line, the CUE field, filled because the return is cued, with the cursor arrow over it](pics_user/a3-mix-return-selector.png)
 
-*Stem mode plays, so the bracket is over STEM, which is loud. ANALOG is quiet.
-The CUE field at the right is filled: the return is cued. The arrow points at
-CUE.*
+*Stem mode plays, so the bracket is over STEM, which is loud. ANALOG, the
+analog return input, is quiet. The CUE field at the right is filled: the
+return is cued. The arrow points at CUE. The ticks mark −9 and −3 dBFS.*
 
 The return plays **one of two sources**, never both: **STEM**, StemDeck's AUX
 bus, or **ANALOG**, the analog inputs 11/12. The mode chooses which; Core
