@@ -445,11 +445,12 @@ into the template. REAPER takes Core's commands on its listener
 
 #### The silent start
 
-The template starts with the three outputs — main, booth and phones — **muted**,
-so a cold start is silent instead of playing the template's levels for the
-seconds before the recall lands. Core opens them once the start-up recall has
-been applied: about 0.2 s later it takes each fader to minimum, unmutes the
-track and fades back to the template's fader level over 1 s.
+The template starts with the three outputs — main, booth and phones — and the
+main meter's track `main_vu` **muted**, so a cold start is silent instead of
+playing the template's levels for the seconds before the recall lands. Core
+opens them once the start-up recall has been applied: about 0.2 s later it
+takes each fader to minimum, unmutes the track and fades back to the
+template's fader level over 1 s.
 
 - **Only what REAPER reports muted is opened.** If Core restarts during a set,
   REAPER reports the outputs open and Core sends it nothing: a Core restart
@@ -464,8 +465,12 @@ track and fades back to the template's fader level over 1 s.
   REAPER answers but reports no mute or fader state for a gated track, Core
   leaves that one shut and says so in the journal.
 - **Rec stays open**, so the beat analyzer has its BPM input while the outputs
-  are shut. The booth and phones meters read silence while shut, since they
-  are measured after the track.
+  are shut.
+- **The desk's meters stay dark while the room is silent.** The booth and
+  phones meters are measured after their tracks; the main meter has a track of
+  its own, `main_vu`, which the gate mutes with the outputs. All of them rise
+  with the fade. What the main meter measures is unchanged: the programme
+  level, independent of the main fader.
 
 ```sh
 journalctl --user -u a3-core | grep 'gate:'
@@ -709,7 +714,7 @@ install. Each does one thing:
 | `a3_core_state.py` | what only Core knows, kept across a restart |
 | `a3_core_evening.py` | the evening as Core saw it, for the next start |
 | `a3_core_snapshot.py` | saves in between, so a power cut does not cost the evening |
-| `a3_core_gate.py` | opens main, booth and phones after the start-up recall, with a 1 s fade. See [the silent start](#core-silent-start) |
+| `a3_core_gate.py` | opens main, booth, phones and the main meter's track after the start-up recall, with a 1 s fade. See [the silent start](#core-silent-start) |
 | `a3_core_recall.py` | Core saying its state again |
 | `a3_core_startup.py` | what Core has to say at start-up so everyone means the same |
 | `a3_core_seen.py` | the addresses Core has seen, kept across a restart |
