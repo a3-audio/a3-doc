@@ -404,11 +404,11 @@ StemDeck's side:
   plays on one channel at most. If a session shows several stems on one bus,
   Core keeps the lowest and switches the others off, about 0.3 s after your
   reports settle.
-- **AUX follows the return's mode.** In stem mode every stem no channel plays
-  has its **A** lit, and Core switches a free stem's A back on if you click it
-  off. In analog mode no stem is on AUX, and the return plays the analog
-  inputs 11/12 instead of the AUX bus. A stem pushed onto a channel loses
-  its A.
+- **Every stem no channel plays is on AUX.** Its **A** is lit in either
+  return mode, and Core switches a free stem's A back on if you click it off.
+  A stem pushed onto a channel loses its A. The return's mode only chooses
+  what the return plays: in stem mode the AUX bus, in analog mode the analog
+  inputs 11/12, and then the stems on AUX are not heard.
 - **The C switches are yours.** A stem's **C** puts it on StemDeck's CUE bus,
   for pre-listening here, e.g. a stem no channel plays yet. Core does not set
   them: a desk channel's cue goes through the channel itself (see

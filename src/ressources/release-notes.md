@@ -30,6 +30,9 @@ On `main` since `v03.0`, not tagged yet.
 
 **A³ Core (`a3-core`)**
 
+- **Every stem no channel plays is on AUX, in both return modes:** one stem per bus, the rest
+  on AUX, as StemDeck does. Analog mode no longer takes the stems off AUX; it shuts StemDeck's
+  AUX on the return instead, so a mode switch changes no stem.
 - **A push on A only selects the analog input:** a playing stem leaves the channel (in STEM
   return mode it goes to the return); while the analog input plays, nothing happens. Core no
   longer remembers a last stem.

@@ -221,7 +221,8 @@ cursor says:
   a stem a channel lets go returns to it. If you switch a free stem's **A**
   off in StemDeck, Core undoes it after about 0.3 s.
 - **ANALOG, analog mode:** the return plays the analog inputs 11/12; StemDeck's
-  AUX is shut and no stem is on it.
+  AUX is shut. The free stems stay on AUX, unheard, so switching back to STEM
+  brings them back at once; the STEM meter keeps showing them.
 
 ### How the meters move
 
