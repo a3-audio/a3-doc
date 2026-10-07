@@ -146,10 +146,9 @@ puts a stem on the aux return.
 
 - **Every stem meter** is a plain bar at its level. A silent stem shows
   nothing.
-- **A's bar** is the channel's input level while the analog input plays, the
-  louder side of its stereo input meter. While a stem plays on the channel,
-  A's bar is dark: the input meter then carries the stem, not the analog
-  input.
+- **A's bar** is the level at the channel's analog input, always — also while
+  a stem plays on the channel — so you see there is something on analog before
+  you switch to it (the louder side of `analog<N>_L/R`, /vu 1-8).
 - **The bracket**, a small "]" turned on its side over a meter, marks what
   plays on the channel: the stem that plays, or A while the analog input
   plays.

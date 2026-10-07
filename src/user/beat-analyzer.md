@@ -157,7 +157,7 @@ alone.** Which REAPER output feeds which port, and the whole table, are on the
 
 `NUM_VU_CHANNELS=40` in `build/.env` opens all forty.
 
-A³ Motion and the A³ Mixer look their meters up by name (`in1_pre`,
+A³ Motion and the A³ Mixer look their meters up by name (`analog1_L`,
 `main_sub`, `main_top1`, …) in `a3-osc.json`, so they follow this map; which
 device shows which meter is under {ref}`The meters <osc-vu-meters>`. Until
 2026-09-30 the numbers counted from 0 (`/vu/0..39`).

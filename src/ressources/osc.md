@@ -215,7 +215,7 @@ acting on it itself.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each, = REAPER out n: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the analyzer's from Core (core.vu-relay), unchanged |
+| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n = REAPER out 30 + n for 1-40: 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (REAPER track "analog" = system:capture_1-8, before any channel processing, shown under the desk's A even while a stem plays); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each, = REAPER out n: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the analyzer's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
 ### Renamed on 2026-09-30
@@ -276,20 +276,28 @@ its number:
 
 | Device | Shows |
 | :--- | :--- |
-| A³ Motion | the input dots: `in1_pre` … `in4_pre` (`/vu/1`–`/vu/4`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
-| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`; `in1_pre` … `in4_pre` with a truth from before them); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A while the analog input plays, the same input meter; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
+| A³ Motion | each channel's input, in stereo, the louder side shown (the corona round its blob, its meter on the MIXER pages): `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
+| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A, the channel's analog input `analog1_L`/`_R` … `analog4_L`/`_R` (`/vu/1`–`/vu/8`, the louder side), whatever plays; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
+
+**`/vu/1`–`/vu/8` are the analog inputs**, `analog1_L` … `analog4_R`: each
+channel's two analog input channels (REAPER's "analog" track, the sound card's
+captures 1–8), before any channel processing. They read the analog input
+whatever the channel plays, so the desk can show under its **A** that something
+arrives there while a stem is on the channel. Until 2026-10-07 these slots were
+the mono channel meters `in1_pre` … `in4_post`, which the stereo meters
+`/vu/51`–`/vu/66` replaced.
 
 <!-- a3-osc:vu -->
 | Address | Meter |
 | --- | --- |
-| `/vu/1` | in1_pre |
-| `/vu/2` | in2_pre |
-| `/vu/3` | in3_pre |
-| `/vu/4` | in4_pre |
-| `/vu/5` | in1_post |
-| `/vu/6` | in2_post |
-| `/vu/7` | in3_post |
-| `/vu/8` | in4_post |
+| `/vu/1` | analog1_L |
+| `/vu/2` | analog1_R |
+| `/vu/3` | analog2_L |
+| `/vu/4` | analog2_R |
+| `/vu/5` | analog3_L |
+| `/vu/6` | analog3_R |
+| `/vu/7` | analog4_L |
+| `/vu/8` | analog4_R |
 | `/vu/9` | free39 |
 | `/vu/10` | free40 |
 | `/vu/11` | main_sub |
@@ -710,7 +718,7 @@ What the [address table](#osc-addresses) does not say about it:
   target — in mode 0 except the target named `motion`. It is **received** on
   the clock port and relayed only in mode 0; ints and floats are both
   accepted, and a beat outside 1–4 is dropped. In mode 2 the bar is always 0.
-- **`/vu/{n}`**: one meter per JACK input `vu_in1_pre` … `vu_free70` (REAPER
+- **`/vu/{n}`**: one meter per JACK input `vu_analog1_L` … `vu_free70` (REAPER
   out 31–70), as four bundles, one per block of ten (inputs, Main, Booth,
   stereo), 25 times a second. Sent to a target's `OSC_VU_*` entry where one is
   set, else to its `OSC_HOST_*` entry.

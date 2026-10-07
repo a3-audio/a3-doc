@@ -17,8 +17,8 @@ On `main` since `v03.0`, not tagged yet.
 **A³ Mixer (`a3-mixer`)**
 
 - **A instead of the STEM toggle.** A channel display reads **D1 | D2 | A**; position 8 is
-  **A**, the analog input, with a bar for the channel's input level while the analog input
-  plays (dark while a stem plays). The bracket marks what plays: the stem, or A. See
+  **A**, the analog input, with a bar for the level at the channel's analog input, shown
+  whatever plays. The bracket marks what plays: the stem, or A. See
   {ref}`the input selectors <a3mix-displays>`.
 - **The channel LEDs have fixed colours:** four green, two yellow, two red at the top, the bar
   following the peak at −36, −24, −18, −12, −9, −6, −3 and 0 dBFS. The wandering red peak
@@ -37,6 +37,9 @@ On `main` since `v03.0`, not tagged yet.
   Core sends the filter frequency and Q to both Isolators itself instead of relying on a
   REAPER parameter link.
 - **Stereo channel meters**, `/vu/51`–`/vu/66`: each channel's input and channel bus, L and R.
+- **`/vu/1`–`/vu/8` are the analog inputs**, `analog1_L` … `analog4_R` (REAPER out 31–38,
+  beat-analyzer ports `vu_analog1_L` … `vu_analog4_R`): the level at each channel's analog
+  input, whatever the channel plays. They replace the mono meters `in1_pre` … `in4_post`.
 - **The REAPER template is normalised:** every gain stage at unity, the automation envelopes
   removed.
 
