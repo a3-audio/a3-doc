@@ -21,7 +21,8 @@ turns incoming OSC into DSP settings.
 Every one of those names, and every address it speaks, comes from
 `/usr/share/a3/a3-osc.json`, read at start-up by `lib/a3_osc.py`, which joins
 the maintainer's `~/.config/a3/network.json` over it (`hosts` and `network`,
-key by key). Core serves the joined truth, announces it, and at start renders
+and `meters` when the file has it, key by key; a `meters` block that fails
+`Truth.meters()`'s checks is dropped alone and named in `meters_problem`). Core serves the joined truth, announces it, and at start renders
 zita's and the beat-analyzer's addresses — see
 {ref}`Where addresses and ports live <osc-truth>`; the ports are on
 {doc}`../ressources/ports`.

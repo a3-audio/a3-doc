@@ -591,6 +591,8 @@ beat-analyzer's `.env` block, REAPER and the plug-ins.
 otherwise. A file that is replaced on update loses a local edit at the next
 install.
 
+(core-the-one-truth)=
+
 ### The one truth: `/usr/share/a3/a3-osc.json` and `~/.config/a3/network.json`
 
 The truth is in two parts.
@@ -613,6 +615,27 @@ journal and uses the package's values.
 and zita addresses are rendered at Core's start, and the desk restarts itself
 within seconds. How Core serves the joined truth is in
 {ref}`Where addresses and ports live <osc-truth>`.
+
+**To tune the meters on the rig:** `network.json` may also carry a `meters`
+block beside `hosts` and `network` (decided 2026-10-07). It joins key by key
+over the package's {ref}`meter ballistics <osc-meter-ballistics>`, so a block
+with only `peak_hold_seconds` changes the hold and nothing else:
+
+```json
+{
+ "hosts": { "...": "as the installer wrote them" },
+ "network": { "...": "as the installer wrote it" },
+ "meters": { "peak_hold_seconds": 2.5 }
+}
+```
+
+Restart Core. The joined truth it serves has a new fingerprint, so the desk,
+A³ Motion and StemDeck fetch it and restart on their own. The keys are
+`attack_ms` (0 or more), `release_db_per_second` (more than 0) and
+`peak_hold_seconds` (0 or more). A block with a wrong type, a value out of
+range or an unknown key is refused on its own: Core writes
+`network.json's meters refused, the package's are used: …` to its journal,
+keeps the package's numbers and still uses the file's hosts and network.
 
 (core-etc)=
 

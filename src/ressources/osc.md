@@ -374,7 +374,9 @@ held one starts the hold again.
 The numbers are the `meters` block of the truth, so they are changed in one
 place, on Core: every device reads them from the truth it gets from Core and
 restarts on the changed fingerprint. A truth from before the block reads as
-the numbers below.
+the numbers below. The table shows the package's values; on the rig they can
+be tuned without a new package in Core's `~/.config/a3/network.json` — see
+{ref}`The one truth <core-the-one-truth>` in the Core configuration.
 
 <!-- a3-osc:meters -->
 | Key | Value |
