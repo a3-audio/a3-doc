@@ -44,10 +44,11 @@ clock counts on between beats, and at the last tempo when music stops. Taps:
   intervals); from the third, every tap resets the beat to 1.
 - Taps outside `BPM_MIN`–`BPM_MAX` are ignored.
 
-```{warning}
-**A tapped tempo stays.** After a tap the phase still follows the music, the
-tempo does not. New taps change it; only a restart hands it back to the
-analysis.
+```{note}
+**A tapped tempo holds for 16 bars.** After a tap the phase still follows the
+music, the tempo does not. Sixteen bars after the last tap the analysis takes
+the tempo back, starting from the tapped one; a new tap starts the 16 bars
+over. `TAP_LOCK_BARS` sets the bars (0 = until a restart).
 ```
 
 **PIO — pioneer.** The Core on a Pro DJ Link network: it joins as **player 7**
@@ -143,6 +144,7 @@ missing. To change one, change `a3-osc.json`
 | `OSC_ADDRESS_BEAT`, `_TAP`, `_CLOCKMODE`, `_VU` *(block)* | its addresses |
 | `PIONEER_PORT_ANNOUNCE`, `_BEAT`, `_STATUS` *(block)* | Pro DJ Link ports |
 | `BPM_MIN`, `BPM_MAX` | tempo range; outside it, doubled or halved in |
+| `TAP_LOCK_BARS` | bars a tapped tempo holds before the analysis takes over (default 16, 0 = until restart) |
 | `PIONEER_DEVICE_NUM` | player number, 7 |
 | `NUM_VU_CHANNELS` | meters: 40 (max 64) |
 | `NUM_STEM_METERS` | 0; 8 would fight StemDeck's own stem meters |
@@ -169,7 +171,7 @@ Ports: [Ports and endpoints](../ressources/ports.md). Messages:
 | Motion on PIO/EXT, tempo from the wrong source | The analyzer restarted into mode 1. Step Motion's clock key once round |
 | EXT: no beat | Service running? `bpm_1` patched ({doc}`Patchbay <../ressources/patchbay>`)? Music in REAPER? |
 | EXT: half or double tempo | `BPM_MIN`–`BPM_MAX` one octave around the music, e.g. 70–140 |
-| EXT: tempo stopped following | You tapped; tap again or restart the service |
+| EXT: tempo stopped following | You tapped: it follows again 16 bars after the last tap (`TAP_LOCK_BARS`) |
 | PIO: nothing arrives | Core on the players' network, ports free? Log: `Pioneer Receiver konnte nicht gestartet werden` |
 | PIO: wrong player | It follows whoever says master while playing |
 | Meters one channel across | JACK patching off by one |
