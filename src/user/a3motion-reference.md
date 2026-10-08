@@ -15,7 +15,7 @@
 | **PADS** | the panel on the screen | PADS, global strip | as FILES |
 | **Menu** | skins, LEDs, folders | MENU, status bar or panel | ‹ or MENU: one level; ✕: all |
 | value list, edit box | one menu value | double tap or ENTER on a row | ENTER or a tap keeps; back, MENU or Escape drops |
-| colour picker | one skin colour | double tap a colour row | **done**, back or MENU; the colour is kept either way; Escape does nothing |
+| colour picker | one skin colour | double tap a colour row | **done** keeps the colour; back, MENU or Escape put the old one back |
 | **Keyboard** | typing | KEYS, or by itself | KEYS or HIDE |
 | workspace list | the Core's other screens | ▾, status bar | tap a workspace, or beside the list |
 
