@@ -107,8 +107,8 @@ the [lane](#motion-howto-lanes).
 | :--- | :--- |
 | **FILES**, **MIXER**, **PADS** | open their window; tap again to close |
 | elevation picture | the channels seen from the side. Tap: camera mode |
-| **▶ / ❚❚** | Play\|Pause on the **next downbeat**; blinks while waiting |
-| **■** | stop **now**; ends a take |
+| **▶ / ❚❚** | Play\|Pause on the **next downbeat**; blinks while waiting. ❚❚ keeps the place, ▶ goes on from the bar it was in |
+| **■** | stop **now** and back to the top; ends a take |
 | **A** | fires the chosen action button while held |
 | **●** | arms a take and opens [REC](#motion-rec) |
 
@@ -306,8 +306,9 @@ screen work as on the panel.
 
 | You press | It happens |
 | :--- | :--- |
-| Play\|Pause | **next downbeat** |
-| SHIFT + Play\|Pause, ■ | **now** (the panel has no stop pad) |
+| Play\|Pause | **next downbeat** (a running clip pauses, keeping its place) |
+| SHIFT + Play\|Pause | pause **now** (the panel has no stop pad) |
+| ■ on the screen | stop **now**, back to the top |
 | action pad | **now** |
 | SHIFT + action pad | now, screen-only preview while held |
 | a Cue | loads now, starts on the **next downbeat** |

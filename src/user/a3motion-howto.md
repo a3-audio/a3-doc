@@ -33,14 +33,17 @@ the set's values. The room hears it.
 
 | To | Do | When |
 | :--- | :--- | :--- |
-| start | **Play\|Pause** pad, or **▶** | next downbeat (blinks while waiting) |
-| stop on the beat | **Play\|Pause** again, or **❚❚** | next downbeat |
-| stop now | **■**, or **SHIFT** + **Play\|Pause** | now |
+| start, or go on after a pause | **Play\|Pause** pad, or **▶** | next downbeat (blinks while waiting) |
+| pause on the beat | **Play\|Pause** again, or **❚❚** | next downbeat |
+| pause now | **SHIFT** + **Play\|Pause** | now |
+| stop, back to the top | **■** | now |
 | cancel a waiting start | **Play\|Pause** while it blinks | now |
 | start all four | PADS › **Play all** (stopped clips only) | next downbeat |
 
-There is no Stop all. Every start begins at the top of the shape; a stop
-leaves the sound where it is.
+There is no Stop all. A pause keeps the place: the next start goes on from
+the start of the bar the clip was in, so it lands on the music's bars again.
+**■** forgets it, and the next start begins at the top of the shape. Either
+way the sound stays where it is until the clip plays again.
 
 <!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.8 s | steps: Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat. | "Clip stopped" / "▶ blinks: waiting for the downbeat" / "On the one: it plays" / "❚❚ waits for the downbeat too" / "Paused, right on the one" | replaced howto-play-pause.gif -->
 
@@ -49,6 +52,8 @@ leaves the sound where it is.
 <!-- GIF: howto-transport-stop.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.0 s | steps: With the clip playing tap ■: it stops at once. Tap ▶: it starts from the top on the downbeat. | "Channel 1 plays" / "■ stops now, no waiting" / "Next ▶ starts from the top" -->
 
 ![With the clip playing tap ■: it stops at once. Tap ▶: it starts from the top on the downbeat.](pics_user/howto-transport-stop.gif)
+
+<!-- RE-SHOOT: a GIF of ❚❚ then ▶ going on from the bar it was in (a3-motion-ui feat/pause-resumes) -->
 
 <!-- GIF: howto-pads-scene.gif | region: 0,36,768,590 | steps: PADS; Play all; downbeat; 2 s | "The scene column plays all four" / "Play all: in on the downbeat" | round 1, no. 7; Stop all is gone since 2026-09-30 -->
 
