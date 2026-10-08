@@ -34,16 +34,17 @@ the set's values. The room hears it.
 | To | Do | When |
 | :--- | :--- | :--- |
 | start, or go on after a pause | **Play\|Pause** pad, or **▶** | next downbeat (blinks while waiting) |
-| pause on the beat | **Play\|Pause** again, or **❚❚** | next downbeat |
-| pause now | **SHIFT** + **Play\|Pause** | now |
-| stop, back to the top | **■** | now |
+| pause | **Play\|Pause** again, or **❚❚** | next downbeat |
+| stop, back to the top | **SHIFT** + **Play\|Pause**, or **■** | now |
+| start from the top, now | **SHIFT** + **Play\|Pause** on a still clip | now |
 | cancel a waiting start | **Play\|Pause** while it blinks | now |
 | start all four | PADS › **Play all** (stopped clips only) | next downbeat |
 
 There is no Stop all. A pause keeps the place: the next start goes on from
-the start of the bar the clip was in, so it lands on the music's bars again.
-**■** forgets it, and the next start begins at the top of the shape. Either
-way the sound stays where it is until the clip plays again.
+where it stood, on a downbeat, so it lands on the music's bars again. While
+paused, **▶** and the pad blink slowly, two beats on, two off. **SHIFT** or
+**■** forgets the place, and the next start begins at the top of the shape.
+Either way the sound stays where it is until the clip plays again.
 
 <!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.8 s | steps: Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat. | "Clip stopped" / "▶ blinks: waiting for the downbeat" / "On the one: it plays" / "❚❚ waits for the downbeat too" / "Paused, right on the one" | replaced howto-play-pause.gif -->
 

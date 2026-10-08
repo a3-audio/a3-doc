@@ -8,7 +8,7 @@
 
 | You want | Do this |
 | :--- | :--- |
-| one channel still | **■** (selected channel, back to the top), or **SHIFT** + its **Play\|Pause** (pauses, keeps the place) |
+| one channel still | its **Play\|Pause** (pauses on the downbeat, keeps the place), or **SHIFT** + its **Play\|Pause** / **■** (now, back to the top) |
 | all four still | the same on each channel; there is no Stop all |
 | plain stereo | **3d** pot down: still in the mix, no longer in the room |
 | a chain to end | Play\|Pause, ■ or another action pad on that channel |

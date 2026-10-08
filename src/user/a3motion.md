@@ -65,7 +65,8 @@ mixer channel.
    downbeat.
 6. **Hold A1**: the movement changes, and returns when you let go. Left pads
    push energy up, right pads down; top row gentle, middle row strong.
-7. **Press Play\|Pause again**: it stops on the downbeat; the sound stays.
+7. **Press Play\|Pause again**: it pauses on the downbeat; the sound stays.
+   Press it once more and it goes on from there.
 
 That's the whole loop. Before your first gig, read
 [On stage](a3motion-on-stage.md).

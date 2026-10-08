@@ -108,7 +108,7 @@ the [lane](#motion-howto-lanes).
 | :--- | :--- |
 | **FILES**, **MIXER**, **PADS** | open their window; tap again to close |
 | elevation picture | the channels seen from the side. Tap: camera mode |
-| **▶ / ❚❚** | Play\|Pause on the **next downbeat**; blinks while waiting. ❚❚ keeps the place, ▶ goes on from the bar it was in |
+| **▶ / ❚❚** | Play\|Pause on the **next downbeat**; blinks while waiting. ❚❚ keeps the place, ▶ goes on from there and blinks slowly while paused |
 | **■** | stop **now** and back to the top; ends a take |
 | **A** | fires the chosen action button while held |
 | **●** | arms a take and opens [REC](#motion-rec) |
@@ -302,14 +302,15 @@ screen work as on the panel.
 - A pad press selects its channel.
 - **Play all** starts only stopped clips. No Stop all; no A2/A4/A6 across
   channels.
-- Lights: Play\|Pause lit while playing, blinking while waiting; action pads
+- Lights: Play\|Pause lit while playing, blinking while waiting, blinking
+  slowly (two beats on, two off) while paused; action pads
   dim when assigned, dark when empty, **white while running**; PAGE lit on the
   selected channel.
 
 | You press | It happens |
 | :--- | :--- |
 | Play\|Pause | **next downbeat** (a running clip pauses, keeping its place) |
-| SHIFT + Play\|Pause | pause **now** (the panel has no stop pad) |
+| SHIFT + Play\|Pause | **now**: a running or pausing clip stops, back to the top (the panel has no stop pad); a still one starts from the top |
 | ■ on the screen | stop **now**, back to the top |
 | action pad | **now** |
 | SHIFT + action pad | now, screen-only preview while held |
