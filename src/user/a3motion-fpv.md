@@ -8,7 +8,9 @@ key between them is in the status bar, right of the clock key; it lights
 while FPV is up. Switching only changes what you see: the sound does not
 move, and the device wakes up in the view it was left in.
 
-<!-- SCREENSHOT: fpv-overview.png | region: full screen 0,0,768,1024 | steps: FPV with ch 1 and ch 2 in ORBIT, ch 3 and ch 4 in CLIP, three groups on the floor (a G, a C, an X) | caption: "FPV: the sphere with its ships and groups, four channel strips below" | not recorded: the rig was in use (2026-10-08) -->
+<!-- SCREENSHOT: fpv-overview.png | region: full screen 0,0,768,1024 | recorded 2026-10-08 off the device (sandbox on Xvfb, a3-motion-ui 5f180dc, quiet-indigo-2, set Deep, EXT 124 BPM) | steps: FPV, three groups on the floor (G1 a G, G2 a C, G3 an X) | all four channels are in CLIP: ORBIT needs the panel's PAGE, which an off-device recording cannot press; re-take with ch 1 and ch 2 in ORBIT on the rig | caption: "FPV: the sphere with its ships and groups, four channel strips below" -->
+
+![FPV: the sphere with its ships and groups, four channel strips below](pics_user/fpv-overview.png)
 
 | Part | What it shows |
 | :--- | :--- |
@@ -41,7 +43,9 @@ the other beats.
 - **Groups last for the session.** A restart of the device clears the floor.
 - **Up to eight.** A ninth tap says `-- 8 GROUPS`.
 
-<!-- GIF: howto-fpv-groups.gif | region: sphere 0,36,768,640 (to be measured in FPV) | steps: tap the floor three times; tap G2 four times (C, H, X, G); drag G1; hold G3 until it goes | "Tap the floor: a group" / "Tap it: crowd, hotspot, dead zone" / "Drag it where the people are" / "Hold it: gone" | not recorded: the rig was in use (2026-10-08) -->
+<!-- GIF: howto-fpv-groups.gif | region: sphere 560x560+104+82 | recorded 2026-10-08 off the device (sandbox on Xvfb, a3-motion-ui 5f180dc, quiet-indigo-2, set Deep, EXT 124 BPM) | steps: tap the floor three times; tap G2 four times (C, H, X, G); drag G1; hold G3 until it goes | "Tap the floor: a group" / "Tap it: crowd, hotspot, dead zone" / "Drag it where the people are" / "Hold it: gone" -->
+
+![Tap the floor three times: G1, G2, G3. Tap G2: crowd, hotspot, dead zone, group. Drag G1. Hold G3: gone.](pics_user/howto-fpv-groups.gif)
 
 (motion-fpv-orbit)=
 
@@ -72,7 +76,7 @@ underneath.
   flying its orbit; its blob follows it, and Play\|Pause or PAGE reads
   `CH1 ORBIT`.
 
-<!-- GIF: howto-fpv-orbit.gif | region: full screen 0,0,768,1024 | steps: ch 1 playing in CLIP; short PAGE press on ch 1; 8 bars; short PAGE again | "CLIP: the ship flies its clip" / "PAGE: ORBIT, no jump" / "One lap every four bars" / "PAGE again: back onto the clip, in phase" | not recorded: the rig was in use (2026-10-08) -->
+<!-- GIF: howto-fpv-orbit.gif | region: full screen 0,0,768,1024 | steps: ch 1 playing in CLIP; short PAGE press on ch 1; 8 bars; short PAGE again | "CLIP: the ship flies its clip" / "PAGE: ORBIT, no jump" / "One lap every four bars" / "PAGE again: back onto the clip, in phase" | not recorded: needs the panel's PAGE, which an off-device recording cannot press (2026-10-08) -->
 
 (motion-fpv-escort)=
 
@@ -96,7 +100,7 @@ circle it flies). A thin line in the ship's colour joins it to its group.
 - While PAGE is held, a tap never removes a group, however long the finger
   stays.
 
-<!-- GIF: howto-fpv-escort.gif | region: full screen 0,0,768,1024 | steps: ch 2 in ORBIT; hold ch 2 PAGE, tap G1; 4 bars; hold PAGE, tap empty floor | "Hold PAGE, tap a group" / "The ship circles it" / "Hold PAGE, tap the floor: patrol" | not recorded: the rig was in use (2026-10-08) -->
+<!-- GIF: howto-fpv-escort.gif | region: full screen 0,0,768,1024 | steps: ch 2 in ORBIT; hold ch 2 PAGE, tap G1; 4 bars; hold PAGE, tap empty floor | "Hold PAGE, tap a group" / "The ship circles it" / "Hold PAGE, tap the floor: patrol" | not recorded: needs the panel's PAGE, which an off-device recording cannot press (2026-10-08) -->
 
 (motion-fpv-breath)=
 
