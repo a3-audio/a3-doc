@@ -8,26 +8,22 @@
 [On stage](a3motion-on-stage.md) open before your first gig.
 ```
 
-Three devices on one network. They talk to each other **exclusively over
-OSC**, never over audio cables. How they are cabled is on the
-{doc}`ports page <../ressources/ports>`; what each is made of, on its
-configuration page.
+Three devices on one network, talking **only OSC**
+({doc}`ports <../ressources/ports>`):
 
 | Device | What it is | What it does |
 | :--- | :--- | :--- |
-| [**A³ Core**](https://a3-audio.github.io/a3-doc/user/a3core.html) | the sound server | takes the analog signals, computes the 3D field, sends it out. Remote controlled; no interface of its own |
-| [**A³ Mixer**](https://a3-audio.github.io/a3-doc/user/a3mix.html) | a 4-channel DJ mixer | gain, EQ, filter, faders, cue — every control sends OSC to Core |
-| [**A³ Motion**](https://a3-audio.github.io/a3-doc/user/a3motion.html) | the motion sampler | records and plays back *where a sound is* and how it travels, like a loopstation for movement |
+| [**A³ Core**](a3core.md) | the sound server | takes the audio in, computes the 3D field, sends it out; remote controlled |
+| [**A³ Mixer**](a3mix.md) | a 4-channel DJ mixer | gain, EQ, filter, faders, cue, all as OSC |
+| [**A³ Motion**](a3motion.md) | the motion sampler | a loopstation for *where a sound is* |
 
-Your decks, headphones and the booth and main speakers connect to A³ Core's
-audio hardware. The other two devices carry no audio at all.
-
-Two programs belong to the system as well:
+All audio — decks, phones, booth, main — connects to A³ Core. Two programs
+belong too:
 
 | Program | What it is | What it does |
 | :--- | :--- | :--- |
-| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | runs on the A³ Core machine. Sends the beat every device follows and the level meters every device shows |
-| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems each, every stem on its own output — so one part of a track can move through the room while the rest stays put. Can be the tempo master when there are no CDJs |
+| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | on the Core: the beat and the level meters for every device |
+| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems, each on its own output, so one part can move alone; tempo master without CDJs |
 
 ```{tip}
 **StemDeck × A³ Motion.** Put StemDeck's four stems on A³ Motion's four
