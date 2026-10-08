@@ -107,63 +107,12 @@ controls.
 
 ### 1. The audio: StemDeck into A³ Core
 
-**StemDeck on the Core machine itself?** Then there is nothing to wire: the
-a3-core package's patchbay connects its outputs to REAPER (see the
-{doc}`Patchbay page <../ressources/patchbay>`), and the user service keeps it
-running on workspace 2 (see
-[Always running on the Core](#stemdeck-on-the-core)). Go on with the clock.
-
-**On A³ Core**, for a StemDeck on another machine, there is nothing to do
-either: the a3-core package runs zita-n2j and its patchbay wires it into
-REAPER (channels and inputs: see the Patchbay page). The Core's zita units take their address
-and port from `~/.config/a3/osc.env`, which the package writes from
-`a3-osc.json` (`a3-osc-render user`).
-
-**On the StemDeck machine**, send the ten outputs to the Core over the
-network. StemDeck's repository ships two systemd user services for this,
-under `.config/systemd/user/`:
-
-- `zita-j2n.service` sends StemDeck's 10 channels to the Core, to the
-  listener `zita-n2j.audio` of the a3-core package's zita-n2j;
-- `zita-n2j.service` receives 2 channels back from the Core on
-  `radla.zita-n2j`, where the a3-core package's zita-j2n sends REAPER's
-  recording bus.
-
-The ports are on {doc}`../ressources/ports`. Both units start zita through
-StemDeck's `tools/zita-from-truth.py`, which reads the Core's address and both
-ports from the truth StemDeck fetched from Core — see
-{ref}`StemDeck on radla <osc-radla>`. Only the channel counts are written in
-the units.
-
-Both come back by themselves 2 s after they drop out: zita ends on some
-changes to the audio graph, and the units restart it with no limit on how
-often.
-
-1. On a StemDeck machine other than the Core, tell StemDeck where Core is
-   (`~/.config/a3/core`, see {ref}`StemDeck on radla <osc-radla>`). On the
-   Core machine there is nothing to do.
-2. Install and start both units, from the StemDeck checkout — or let the
-   {doc}`installer <../configuration/install>` do it (role StemDeck on a
-   machine without the Core):
-
-   ```sh
-   cp .config/systemd/user/zita-*.service ~/.config/systemd/user/
-   systemctl --user daemon-reload
-   systemctl --user enable --now zita-j2n zita-n2j
-   ```
-
-   Run the same lines again to update them after a StemDeck update.
-3. Patch StemDeck's outputs into `zita-j2n`'s inputs **in order**:
-   `deck1_L` → 1, `deck1_R` → 2, … `aux_R` → 10. StemDeck
-   [never connects anything by itself](#stemdeck-audio), and neither do the
-   zita units, so this is on you — once, in qjackctl or any patchbay, and
-   saved. The two channels arriving at `zita-n2j` are patched by hand the
-   same way, wherever you want them.
-4. Settle the StemDeck machine's sample rate **before** StemDeck starts.
-   StemDeck takes the rate it finds and asks for nothing, on purpose: changing
-   a running graph throws zita out — it comes back after 2 s, but the stems
-   drop out meanwhile.
-
+**StemDeck on the Core machine itself** — the usual case — needs no wiring:
+the a3-core package's patchbay connects its outputs to REAPER (see the
+{doc}`Patchbay page <../ressources/patchbay>`), and a user service keeps it
+running on workspace 2 (see [Always running on the Core](#stemdeck-on-the-core)).
+On another machine, see
+[StemDeck on another machine](#stemdeck-with-motion-remote-machine).
 
 ### 2. The clock: StemDeck as master
 
@@ -241,6 +190,60 @@ and forth without moving (see [Over to A³ Motion](#stemdeck-workspaces)).
 `1`–`4` for deck A) and watch its channel meter drop on A³ Motion while the
 clip keeps going. Bring it back on the one and it re-enters already in
 motion. It's a small thing; the room will think you rehearsed it.
+
+(stemdeck-with-motion-remote-machine)=
+
+## StemDeck on another machine
+
+StemDeck's ten outputs travel to the Core over the network, as zita audio.
+
+**On A³ Core** there is nothing to do: the a3-core package runs zita-n2j and
+its patchbay wires it into REAPER (see the Patchbay page). Its zita units take
+address and port from `~/.config/a3/osc.env`, rendered from `a3-osc.json`.
+
+**On the StemDeck machine**, StemDeck's repository ships two systemd user
+services, under `.config/systemd/user/`:
+
+- `zita-j2n.service` sends StemDeck's 10 channels to the Core, to the
+  listener `zita-n2j.audio` of the a3-core package's zita-n2j;
+- `zita-n2j.service` receives 2 channels back from the Core on
+  `radla.zita-n2j`, where the a3-core package's zita-j2n sends REAPER's
+  recording bus.
+
+The ports are on {doc}`../ressources/ports`. Both units start zita through
+StemDeck's `tools/zita-from-truth.py`, which reads the Core's address and both
+ports from the truth StemDeck fetched from Core — see
+{ref}`StemDeck on radla <osc-radla>`. Only the channel counts are written in
+the units.
+
+Both come back by themselves 2 s after they drop out: zita ends on some
+changes to the audio graph, and the units restart it with no limit on how
+often.
+
+1. On a StemDeck machine other than the Core, tell StemDeck where Core is
+   (`~/.config/a3/core`, see {ref}`StemDeck on radla <osc-radla>`). On the
+   Core machine there is nothing to do.
+2. Install and start both units, from the StemDeck checkout — or let the
+   {doc}`installer <../configuration/install>` do it (role StemDeck on a
+   machine without the Core):
+
+   ```sh
+   cp .config/systemd/user/zita-*.service ~/.config/systemd/user/
+   systemctl --user daemon-reload
+   systemctl --user enable --now zita-j2n zita-n2j
+   ```
+
+   Run the same lines again to update them after a StemDeck update.
+3. Patch StemDeck's outputs into `zita-j2n`'s inputs **in order**:
+   `deck1_L` → 1, `deck1_R` → 2, … `aux_R` → 10. StemDeck
+   [never connects anything by itself](#stemdeck-audio), and neither do the
+   zita units, so this is on you — once, in qjackctl or any patchbay, and
+   saved. The two channels arriving at `zita-n2j` are patched by hand the
+   same way, wherever you want them.
+4. Settle the StemDeck machine's sample rate **before** StemDeck starts.
+   StemDeck takes the rate it finds and asks for nothing, on purpose: changing
+   a running graph throws zita out — it comes back after 2 s, but the stems
+   drop out meanwhile.
 
 (stemdeck-with-motion-troubleshooting)=
 
