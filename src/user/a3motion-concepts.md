@@ -53,10 +53,16 @@ mode (in its own colour) says how much a pass replaces — as in DAW automation:
 | :--- | :--- | :--- |
 | **Touch** | changes only where your finger is | drawing, fixing a corner |
 | **Latch** | after a touch, holds your last spot for the rest of the pass | parking a sound |
-| **Write** | overwrites the whole pass | starting clean |
+| **Write** | replaces one pass, then overdubs like Touch | starting clean |
 
 **Draw in Touch, not Latch**: in Latch, lifting halfway parks the rest of the
-pass. A take is the **last finished pass**; lanes use the same mode.
+pass. A take is the **last finished pass**; lanes use the same mode. While you
+record, the old path stays drawn faintly underneath.
+
+**Coming from REAPER**: Touch is REAPER's Touch, without a glide back on
+release. Latch is REAPER's Latch with *reset latch on loop* on. Write differs:
+REAPER wipes every pass; Motion wipes only the first, so a forgotten take is
+never erased down to one spot.
 
 (motion-actions-play)=
 
