@@ -41,7 +41,7 @@ The tables here and on the ports page are rendered from it.
 | A³ Core | the package's contract joined with `network.json` (`a3_osc.py`); serves it |
 | A³ Motion | fetches it from Core, shared cache `~/.cache/a3/a3-osc.json`; see [Following Core](#osc-follow). No addresses in its `config.json` or menu |
 | A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
-| StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`. Without: `PIO: no a3-osc.json` |
+| StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`, and `stemdeck.ahead` if the truth has it (its preview of the music). Without: `PIO: no a3-osc.json` |
 | beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-osc-render user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | zita-j2n, zita-n2j | `~/.config/a3/osc.env`, same renderer |
 | installer | offers the package's `network` and creates `network.json` from it once |
@@ -61,7 +61,7 @@ start each takes `$A3_OSC_TRUTH`, else a valid cache, else the package file.
 
 On an unknown fingerprint the app fetches `/api/truth` off the UI thread,
 checks body sha256, header and announcement agree and the truth is usable
-(StemDeck needs `stemdeck.bus`, Motion every address it speaks), writes the
+(StemDeck needs `stemdeck.bus`, Motion every address it speaks; `stemdeck.ahead` is optional for both, so an older truth is still usable), writes the
 cache and **exits 1**; systemd restarts it after 5 s. A refusal is logged once
 per reason. With `$A3_OSC_TRUTH` set it does not follow.
 
@@ -150,6 +150,7 @@ Core acts on it, then relays or announces it.
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX (StemDeck's own cue bus 6 is gone since 2026-10-07: a channel is cued through its own bus) |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
+| `/stemdeck/ahead` | ssif | stemdeck | core (Core passes it on to motion) | StemDeck's preview of the music on the audible deck (the MASTER deck when both are heard; spec fpv-pilots, phase A): the current bar's section (groove, build, drop, breakdown; none: no deck is heard, or it is not analysed yet), the next section (end: no change before the set ends), the bars until it (-1: a loop turns back before it) and the bar's energy 0-1 against the set's loud bars. On every downbeat and on a load, jump, loop, pitch or deck change; Core passes it on to the Motion it follows, unchanged, and never replays it |
 | `/device/hello` | ss | mixer, stemdeck, motion | core | a device names itself and the sha256 of its copy of this file, at start and every 30 s; Core's window shows whether it is Core's own. Core follows the StemDeck and the Motion that arrived last (one of each), a remote Motion instead of the rig's own, and forgets one silent for a minute |
 | `/core/here` | ss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth and its fingerprint (sha256 of the canonical JSON) |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |

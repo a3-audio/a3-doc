@@ -42,7 +42,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
 | core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's /vu bundles, forwarded unchanged to a remote Motion while one is followed (the analyzer needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's conf.d, 50-a3-osc.env) |
 | core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
-| motion | osc | any (0.0.0.0) | 7771 | Core's relays, /beat |
+| motion | osc | any (0.0.0.0) | 7771 | Core's relays (StemDeck's preview among them), /beat |
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
 | motion | energy | any (0.0.0.0) | 7777 | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
 | stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them |
@@ -79,7 +79,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | mixer | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
-| core | `motion.osc` | Core's relays, /beat |
+| core | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
 | core | `motion.vu` | the analyzer's /vu bundles |
 | core | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | core | `reaper.osc` | Core's /track/... control |
@@ -91,7 +91,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
 | reaper | `core.reaper-feedback` | REAPER's own OSC feedback |
 | beat-analyzer | `core.osc` | every controller's messages, and /beat from the analyzer |
-| beat-analyzer | `motion.osc` | Core's relays, /beat |
+| beat-analyzer | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
 | beat-analyzer | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | beat-analyzer | `radla.osc` | /beat |
 | beat-analyzer | `motion.vu` | the analyzer's /vu bundles |
