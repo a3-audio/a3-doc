@@ -42,11 +42,13 @@ Contact
 .. toctree::
    :titlesonly:
    :maxdepth: 1
-   :caption: configuration
-   :glob:
+   :caption: Configuration
    :hidden:
 
-   configuration/*
+   configuration/install
+   configuration/core
+   configuration/mic
+   configuration/moc
 
 .. toctree::
    :titlesonly:

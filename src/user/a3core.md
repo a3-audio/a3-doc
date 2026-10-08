@@ -1,26 +1,16 @@
 # A³ Core
 
-- [A³ Core Repository](https://github.com/a3-audio/a3-core)
-- A freely configurable audio server
-- Runs on Linux audio hardware; VNC remote desktop control
-
-A³ Core is where the sound actually is. It takes the analog signals in,
-computes the 3D/ambisonics field, and sends it back out — and it does all of
-that under remote control: **it has no interface of its own.** A³ Mixer and A³
-Motion tell it what to do over OSC, and so can anything else that speaks the
-same addresses.
-
-It also runs the [**Beat Analyzer**](beat-analyzer.md), which produces the
-tempo the whole system follows and the VU meters the other two devices show.
+Where the sound is: it takes the analog inputs, computes the 3D/ambisonics
+field and sends it out, **with no interface of its own** — A³ Mixer, A³ Motion
+and anything speaking the same OSC control it. It also runs the
+[**Beat Analyzer**](beat-analyzer.md) (tempo and meters). Linux, remote
+desktop over VNC. Source: [a3-core](https://github.com/a3-audio/a3-core).
 
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
-The numbers below refer to that picture.
-
 ## The front panel
 
-Four things, and none of them is a control for the audio — that is all
-remote.
+Nothing here controls audio:
 
 | № | Element | What it does |
 | :--- | :--- | :--- |
@@ -31,28 +21,19 @@ remote.
 
 ## Audio in and out
 
-Every audio input and output — what REAPER takes in and sends, the meters
-and the network audio — is on the {doc}`Patchbay page <../ressources/patchbay>`.
+All of it: {doc}`Patchbay <../ressources/patchbay>`.
 
 ## Clock sources
 
-The tempo the system runs on can come from three places, chosen on A³
-Motion's clock key:
-
-| Motion reads | Mode | Where the tempo comes from |
-| :--- | :--- | :--- |
-| **INT** | **a3motion** | A³ Motion's own tempo, tapped on Motion and relayed by the Beat Analyzer |
-| **EXT** | **intern** | the Beat Analyzer's own FFT/onset detection |
-| **PIO** | **pioneer** | the master beat from a Pro DJ Link network — a CDJ, or [StemDeck](stemdeck.md) as master |
-
-What each mode needs is on the [Beat Analyzer](beat-analyzer.md) page.
+The tempo comes from A³ Motion (**INT**), from the music (**EXT**) or from a
+Pro DJ Link tempo master (**PIO**), chosen on A³ Motion's clock key. What each
+mode needs: {ref}`Beat Analyzer › Clock modes <beat-analyzer-modes>`.
 
 (core-workspaces)=
 
 ## The screen and its workspaces
 
-The Core's portrait screen (768 × 1024, touch) shows one thing at a time.
-Each program has its own workspace, named for what is on it:
+The portrait touch screen (768 × 1024) shows one workspace at a time:
 
 | Workspace | What is on it |
 | :--- | :--- |
@@ -62,42 +43,26 @@ Each program has its own workspace, named for what is on it:
 | **QJACKCTL** (4) | the JACK patching |
 | **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
 
-**Between the two touch screens**, use the key at the far right of their top
-bars: STEMDECK in A³ Motion, MOTION in StemDeck. It sits at the same spot in
-both, so the key under your finger stays put. The **▾** beside it lists every
-workspace that has a window on it.
-
-**On REAPER, QJACKCTL and SCARLETT** a bar at the top of the screen shows the
-workspaces by name — tap MOTION or STEMDECK there to get back to playing. The
-bar is hidden on the two touch screens, which fill the whole screen.
+- **Between the touch apps**: the key at the far right of the top bar
+  (STEMDECK in A³ Motion, MOTION in StemDeck), in the same spot in both. **▾**
+  lists workspaces that have a window.
+- **On REAPER, QJACKCTL, SCARLETT**: tap MOTION or STEMDECK in the bar at the
+  top (hidden on the touch apps, which fill the screen).
 
 ## The window
 
-A³ Core has no interface of its own — but it does have a window. Point a
-browser at **`http://<core>:9080`** from anywhere on the same network and you
-can see what the devices are actually saying to each other.
+**`http://<core>:9080`** from anywhere on the network shows what the devices
+actually say to each other — the answer to *"cable, setting, or me?"*, since
+over UDP a control nobody hears looks like one that works.
 
 ![The window, showing the traffic](pics_user/a3-core-window.png)
 
-Along the top are the peers, each with a dot that says when it was last heard
-from. Under the peers, one line per device that has named itself says whether
-it speaks the same `a3-osc.json` as Core: *a3-osc.json is Core's*, or in red
-*a3-osc.json DIFFERS from Core's* — then that device is on an older truth than Core's (see
-{ref}`Where addresses and ports live <osc-differs>`; the desk, StemDeck and Motion fix
-themselves within seconds). Below that, one row per OSC address: how often it has gone past, how
-fast, the last value, and which device it came from or went to.
-
-This is the answer to *"is it the cable, the setting, or me?"*. OSC runs over
-UDP, which has no way of reporting that nobody was listening — a control that
-does nothing and a control that is not connected look exactly alike. In the
-window they do not.
-
-Two things worth knowing:
-
-- The selector on the right switches between **Verkehr** (what has actually
-  gone past) and **Register** (every address the system *can* speak, whether
-  it has ever been used or not). Tick *nur tote Drähte* in the register view
-  and you are looking at everything that exists and has never arrived.
-- The list of addresses survives a restart of Core; the running values and the
-  history do not. Nothing here changes anything — it is a window, not a
-  control surface.
+- **Top**: the peers, each with a last-heard dot; per device, *a3-osc.json is
+  Core's* or, red, *DIFFERS from Core's* (an older truth;
+  {ref}`what to do <osc-differs>` — desk, StemDeck and Motion fix themselves
+  within seconds).
+- **Rows**: one per address — count, rate, last value, device.
+- **Verkehr / Register**: what went past, or every address that *can* exist;
+  *nur tote Drähte* shows those that never arrived.
+- The address list survives a Core restart; values and history don't. It
+  only looks, it never controls.
