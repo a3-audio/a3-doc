@@ -40,7 +40,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | --- | --- | --- | --- | --- |
 | core | osc | any (0.0.0.0) | 9000 | every controller's messages, and /beat from the analyzer |
 | core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
-| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's /vu bundles, forwarded unchanged to a remote Motion while one is followed (the analyzer's .env needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's block) |
+| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's /vu bundles, forwarded unchanged to a remote Motion while one is followed (the analyzer needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's conf.d, 50-a3-osc.env) |
 | core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
 | motion | osc | any (0.0.0.0) | 7771 | Core's relays, /beat |
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
