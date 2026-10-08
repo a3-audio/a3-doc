@@ -1,24 +1,19 @@
 # Ports and endpoints
 
-Every UDP port the devices listen on, and who sends to it. Both are facts of
-`a3-osc.json` — see {ref}`Where addresses and ports live <osc-truth>`: the
-listener table below is rendered from it, and the other pages name a port by
-its listener name (`core.osc`, `motion.vu`, …) rather than by its number.
+Every UDP port and who sends to it, rendered from `a3-osc.json`
+({ref}`truth <osc-truth>`). Other pages name a port by its listener
+(`core.osc`, `motion.vu`, …).
 
 ## Hosts
 
-The machines are named in the file's `hosts` section; the Host column of the
-[listener table](#ports-by-listener) shows each name with its address.
-
-A³ Motion's UI runs **on the Core machine** on the rig, which is why Core and
-the beat-analyzer address it as `127.0.0.1`. Where it runs on a machine of its
-own (see {ref}`A³ Motion hardware <moc-hardware>`), that becomes the machine's
-address; nothing else changes.
+Named in `hosts`; see the [listener table](#ports-by-listener). On the rig A³
+Motion runs **on the Core**, hence `127.0.0.1`; on its own machine
+({ref}`hardware <moc-hardware>`) that machine's address replaces it.
 
 ## Cabling
 
-The router has one free port, so the A³ Mixer hangs on the Core machine's
-**second socket**, and the Core **bridges** its two sockets into one segment:
+The router has one free port, so the A³ Mixer hangs on the Core's **second
+socket**, bridged with the first:
 
 ```text
 router 192.168.8.1 ───── eno1   ┐
@@ -26,26 +21,19 @@ router 192.168.8.1 ───── eno1   ┐
 A³ Mixer 192.168.8.11 ── enp5s0 ┘
 ```
 
-- The address lives on `br0`, not on either socket. `networkctl` shows `br0`
-  as *routable* and both sockets as *enslaved*.
-- Spanning tree is on, so the bridge forwards about **thirty seconds** after
-  boot, not at once.
-- **The Core sits in the path.** With the Core machine off, the A³ Mixer has
-  no network.
-- The a3-core package writes this; see {ref}`What the installation does
-  <core-postinst>`.
+- The address is on `br0` (`networkctl`: `br0` *routable*, sockets *enslaved*).
+- STP on: forwarding starts about **30 s** after boot.
+- **Core off, Mixer offline.**
+- Written by the package ({ref}`install <core-postinst>`).
 
 (ports-by-listener)=
 
 ## Ports, by listener
 
-Rendered from `a3-osc.json` — edit the file, not this table. `core.web` serves
-the traffic window and also `GET /api/truth`, the joined truth.
-`devices.announce` is not Core's listener but the announcement: Core
-broadcasts `/core/here` to it every 2 s, and every device that follows Core's
-truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `any`
-(`0.0.0.0`) means the program listens on every interface of its own machine;
-`local` means only on the machine itself.
+Rendered: edit `a3-osc.json`, not this. `core.web` also serves
+`GET /api/truth`. `devices.announce` is where Core broadcasts `/core/here` every
+2 s for the devices that follow it. Host `any` (`0.0.0.0`): every interface;
+`local`: this machine only.
 
 <!-- a3-osc:ports -->
 | Program | Role | Host | Port | Carries |
@@ -79,13 +67,9 @@ truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `a
 
 ## Who sends where
 
-The file's `routes`, rendered from `a3-osc.json` — edit the file, not this
-table. Each target is a listener of the table above; *Carries* is the route's
-own mark where it has one (`vu`: the meters), otherwise what that listener
-takes. As a sender, `iem` is the IEM EnergyVisualizer plug-in inside the
-REAPER project, and `prolink` is any player on the Pro DJ Link network (a
-CDJ, for example);
-StemDeck as tempo master has rows of its own.
+The file's `routes`, rendered. *Carries*: the route's mark (`vu`: meters), else
+what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
+`prolink`: any Pro DJ Link player; StemDeck as master has its own rows.
 
 <!-- a3-osc:routes -->
 | From | To | Carries |
@@ -124,34 +108,20 @@ StemDeck as tempo master has rows of its own.
 | prolink | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
 <!-- /a3-osc:routes -->
 
-Worth knowing:
-
-- **REAPER sends to A³ Motion directly.** `/EnergyVisualizer/RMS` comes from a
-  plug-in inside the REAPER project and does not pass Core, which is why
-  Core's register marks it `aside`.
-- **A³ Core holds two receive ports on purpose.** Reading REAPER's feedback
-  on the command port would have Core answering its own reports — a loop.
-- **A³ Motion holds three**, because control, meters (25 Hz) and the energy
-  sphere (426 floats a frame) have nothing to do with each other.
-- **`/tap` goes straight to the beat-analyzer**, from the desk and from A³
-  Motion, not through Core: a tap is timing.
-- **`radla` is off this subnet**, reached through the gateway; it receives
-  the beat, the meters and network audio.
-- **The same port number appears on more than one host, on purpose** (7772 is
-  the meter port of both A³ Motion and the A³ Mixer): read a port with its
-  host. A port a device sends *from* is an ephemeral one and means nothing.
+- **REAPER → A³ Motion directly**: `/EnergyVisualizer/RMS` bypasses Core
+  (`aside` in the register).
+- **Core has two receive ports** so it never answers REAPER's reports as
+  commands; **Motion three** (control, 25 Hz meters, 426-float energy frames).
+- **`/tap` goes straight to the beat-analyzer**: timing wants no relay.
+- **`radla`** is off this subnet, via the gateway: beat, meters, network audio.
+- **Read a port with its host**: 7772 is both Motion's and the Mixer's meter
+  port. A sending port is ephemeral and means nothing.
 
 ## The numbering, and what would be better
 
-The present allocation grew rather than being chosen, and it shows:
-
-- `7771`, `7772`, `7775`, `7777` are four ports in one range with three
-  different owners and two gaps.
-- `9000`, `9001`, `9002` interleave Core and REAPER, so "the 900x port" is
-  ambiguous in exactly the conversation where it matters.
-- Nothing about a number says which device owns it.
-
-A scheme where the **block says the owner** would remove a class of mistake:
+The numbers grew: `7771`, `7772`, `7775`, `7777` have three owners and two
+gaps; `9000`–`9002` interleave Core and REAPER; no number names its owner.
+**Proposal** — the block names the owner:
 
 | Block | Owner |
 | :--- | :--- |
@@ -161,13 +131,8 @@ A scheme where the **block says the owner** would remove a class of mistake:
 | `7710–7719` | A³ Mixer |
 | `7720–7729` | beat-analyzer |
 
-with the offset inside a block keeping its meaning everywhere: `+0` control,
-`+1` VU, `+2` energy, `+5` beat clock.
+with fixed offsets: `+0` control, `+1` VU, `+2` energy, `+5` beat clock.
 
-**This is a proposal, not the current state.** The devices' side of a
-renumbering is one edit in `a3-osc.json`, but the ports set inside REAPER and
-its plug-ins still have to follow by hand; the desk, StemDeck and A³ Motion
-follow Core's announcement by themselves. A half-done renumbering is worse than an untidy
-one that works — a device sending into a port nobody holds is silent, and
-silence is the hardest fault here to see. The tables above are what the rig
-does today.
+**Not the current state.** The devices follow one edit of `a3-osc.json`, but
+ports set inside REAPER and its plug-ins must follow by hand, and a half-done
+renumbering is silent. The tables above are what the rig does today.
