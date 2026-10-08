@@ -315,8 +315,8 @@ loses your taps**: back on INT you get the tempo INT had when you first left.
 
 - **CLEAN** (status bar): thin lines, no effects, lighter on the machine. The
   shipped default skin already is clean.
-- **Another skin:** MENU, double tap **Skin**; ↑ ↓ preview, ENTER keeps, Escape
-  goes back. **A tap chooses at once**, without preview.
+- **Another skin:** MENU, double tap **Skin**; tap a skin to preview it, tap it
+  again to keep it. Back goes to the old one (or ↑ ↓, ENTER, Escape).
 - **Your own:** MENU › **Skin Editor**. On the default skin, leaving saves a
   copy called **custom** and switches to it, even unchanged.
 

@@ -9,7 +9,7 @@ to play.**
 
 | Page | Holds |
 | :--- | :--- |
-| **Skin** | the skin list, previewed with the arrow keys |
+| **Skin** | the skin list: a tap previews, a second tap keeps |
 | **Skin Editor** | every value of the loaded skin |
 | **Button LEDs** | the panel's key colours |
 | **Pattern Folder** | where the library is read from |
@@ -35,8 +35,9 @@ to play.**
 
 ### Skin
 
-↑ ↓ preview each skin on the sphere; ENTER keeps, Escape or back restores.
-**A tap chooses at once**, no preview, and saves it. Dragging only scrolls.
+A tap previews a skin on the sphere; a second tap on the same skin keeps and
+saves it (a double tap keeps at once). Back, or closing MENU, restores the running
+skin. ↑ ↓, ENTER and Escape do the same from the keyboard. Dragging only scrolls.
 
 ### Skin Editor
 
