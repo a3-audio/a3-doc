@@ -81,10 +81,13 @@ next version.
 | :--- | :--- |
 | Realtime and audio | `linux-image-rt-amd64`, `jackd2`, `libjack-jackd2-dev`, `jack-example-tools`, `qjackctl`, `zita-ajbridge`, `zita-njbridge`, `libsamplerate0-dev` |
 | 3D audio | `iem-plugin-suite-vst3` |
-| Screen | `lightdm`, `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm` |
+| Screen | `lightdm`, `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `xserver-xorg-video-amdgpu`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm`, `dex`, `unclutter-xfixes`, `maim`, `xclip`, `brightnessctl` |
 | Python (Core) | `python3`, `python3-pip`, `python3-venv`, `python3-rtmidi` |
-| Building the beat-analyzer | `build-essential`, `cmake`, `pkg-config`, `git` |
-| Tools | `systemd`, `sudo`, `curl`, `wget`, `gpg`, `unzip`, `liblo-tools`, `net-tools`, `htop`, `vim`, `tree` |
+| Build tools | `build-essential`, `cmake`, `pkg-config`, `git` |
+| Tools | `systemd`, `sudo`, `openssh-server`, `curl`, `wget`, `gpg`, `unzip`, `liblo-tools`, `net-tools`, `htop`, `vim`, `tree` |
+
+It **recommends** `beat-analyzer`, its own package; apt installs it along unless
+Recommends are switched off.
 
 It **conflicts with and removes**: `network-manager`, `wpasupplicant`,
 `modemmanager`, `dhcpcd-base`, `bluetooth`, `bluez`, `bluez-obexd`, `blueman`,
