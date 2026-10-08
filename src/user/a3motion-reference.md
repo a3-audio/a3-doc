@@ -51,7 +51,9 @@ Top to bottom: **status bar**, **sphere**, **channel row**, then the **bar**
 
 #### The sphere
 
-The room from above, you in the middle at ear height; **the top is the front**.
+The room from above: the middle is overhead, the rim is ear height. **Front** is
+0° at ear height, the direction Core's speaker layout calls 0°: the rim's top
+point, as long as camera mode has not turned the view.
 Each channel is a blob where its sound is; it swells and sparks with the
 channel's level. A playing clip draws its path as a braid. Below ear height is
 drawn darker. The corners are the speakers: lightning shows each one's level,

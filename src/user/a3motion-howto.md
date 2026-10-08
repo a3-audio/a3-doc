@@ -62,8 +62,12 @@ leaves the sound where it is.
    on the beat.
 2. Let go: a playing clip takes it back; a stopped one leaves it there.
 
-Two fingers take two blobs; the top of the sphere is the front. **A dragged
-blob pushes others aside, and their sound moves too**: steer round them.
+Two fingers take two blobs. Seen from straight above, as the sphere starts,
+its middle is overhead and its rim is ear height. **Front** is 0° at ear
+height, the direction Core's speaker layout calls 0°: the rim's top point.
+Turned in camera mode, front turns with the room. A dragged blob pushes others
+aside **on the screen only**, so you can reach it; their sound stays where it
+is, and they ease back when you let go.
 
 **Look without moving anything** (camera mode):
 
@@ -71,7 +75,7 @@ blob pushes others aside, and their sound moves too**: steer round them.
 2. Drag up/down to lean the view, sideways to walk round.
 3. Double tap: straight above. Tap the small sphere again to leave.
 
-<!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back. | "Channel 1 plays its clip" / "Drag a blob: the sound follows" / "Let go: the clip takes it back" | the drag path goes round the other blobs, which a dragged blob pushes aside -->
+<!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back. | "Channel 1 plays its clip" / "Drag a blob: the sound follows" / "Let go: the clip takes it back" | the drag path goes round the other blobs, which a dragged blob pushes aside on the screen -->
 
 ![With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back.](pics_user/howto-sphere-drag-blob.gif)
 
