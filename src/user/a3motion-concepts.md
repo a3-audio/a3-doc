@@ -36,7 +36,9 @@ freq and Q, and restarts what the set says was playing, together, on the next
 
 ## How a shape sits on the sphere
 
-- The shape is a flat disc wrapped over the room like a cap, centred at `elv`.
+- The shape is a flat disc wrapped over the room. **`elv` sets its top**: it
+  spreads downwards from there, as far as `reach` says (upwards with a
+  negative `reach`), and its very middle runs to the nearer pole.
 - Past `clip-top` or `clip-bot` a point keeps its direction and loses height,
   so a shape travels **around** a ceiling.
 - **`rot` goes all the way round**; a stopped spin leaves the shape where it is.
