@@ -138,24 +138,83 @@ Rhythm shapes are points: the sound jumps on the sixteenths of the rhythm.
 ### Clips (70), by phase
 
 A clip is a shape plus speed, height, width, spin and accent. Five per phase:
-four for the set, one spare.
+four for the set, one spare. Each clip says what it is for in its own file
+(`mood`); this table is written from the files.
 
-| Phase | Clips (shape) | Character |
-| :--- | :--- | :--- |
-| **Warmup** | Halo (Orbit Circle), Breath (Spiral Breath), Sunrise (Flower Rose 7), Horizon (Loop Infinity) · spare: Drift (Wander Drift) | slow, high, open |
-| **Groove** | Four Floor (Rhythm Four Floor), Tresillo (Rhythm Tresillo), Clave (Rhythm Clave 3-2), Offbeat (Rhythm Offbeat) · spare: Shuffle (Rhythm Shuffle) | jumps on the beat grid, at ear height |
-| **Build** | Riser (Spiral Riser), Pulse (Orbit Pulse), Loop (Loop 3-4), Gallop (Rhythm Gallop) · spare: Vortex (Spiral Vortex) | opening, speeding up, rising |
-| **Peak** | Anthem (Flower Rose 5), Festival (Loop 2-3), Carousel (Cycle Epi 7-3), Star (Edge Star) · spare: Euphoria (Flower Trefoil) | wide, fast, lifted |
-| **Drop** | Impact (Edge Astroid), Warehouse (Edge Square), Strobe (Edge Corner), Whirlwind (Cycle Epi 3-1) · spare: Ping Pong (Rhythm Ping Pong) | hard, angular, close |
-| **Break** | Standstill (Orbit Arc), Collapse (Spiral Collapse), Monolith (Edge Diamond), Suspend (Loop Figure 8) · spare: Heartbeat (Flower Heart) | still, suspended, drawn in |
-| **Dub** | Echo (Rhythm Echo), Pendulum (Orbit Pendulum), Tunnel (Spiral Helix), Kepler (Orbit Kepler) · spare: Skank (Rhythm Offbeat) | throws, swings, near and far |
-| **Deep** | Undertow (Spiral Collapse), Sub (Orbit Circle), Fog (Wander Drift), Lurk (Wander Wave) · spare: Cellar (Cycle Hypo 5-3) | low, slow, dark |
-| **Float** | Aurora (Loop 1-2), Canopy (Cycle Hypo 7-2), Blossom (Flower Petal), Lullaby (Loop Figure 8) · spare: Cloud (Flower Clover) | overhead, slow, smooth |
-| **Closing** | Sunset (Flower Rose 4), Farewell (Spiral Collapse), Tide (Wander Wave), Ember (Orbit Ellipse) · spare: Still (Orbit Circle) | descending, slowing, settling |
-| **Tribal** | Gallop (Rhythm Gallop), Ping Pong (Rhythm Ping Pong), Clave (Rhythm Clave 2-3), Zigzag (Edge Zigzag) · spare: Echo (Rhythm Echo) | percussive, low, call and answer |
-| **Tension** | Siren (Orbit Circle), Vortex (Spiral Vortex), Helix (Spiral Helix), Riser (Spiral Riser) · spare: Collapse (Spiral Collapse) | circling, rising, faster |
-| **Acid** | Loop (Loop 3-4), Infinity (Loop Infinity), Epicycle (Cycle Epi 3-1), Pulse (Orbit Pulse) · spare: Hypocycle (Cycle Hypo 5-3) | one figure, slowly turning, hypnotic |
-| **Ambient** | Drift (Wander Drift), Wave (Wander Wave), Breath (Spiral Breath), Kepler (Orbit Kepler) · spare: Ellipse (Orbit Ellipse) | overhead, slow, wide |
+<!-- a3-motion:clips -->
+| Phase | Clip | Shape | Mood |
+| --- | --- | --- | --- |
+| **Warmup** | Halo | Orbit Circle | a slow halo overhead, gently breathing |
+|  | Breath | Spiral Breath | one long breath above the room |
+|  | Sunrise | Flower Rose 7 | a wide flower rising and sinking overhead |
+|  | Horizon | Loop Infinity | a figure eight held level at ear height |
+|  | Drift (spare) | Wander Drift | drifting high and open, no hurry |
+| **Groove** | Four Floor | Rhythm Four Floor | a jump on every beat, at ear height |
+|  | Tresillo | Rhythm Tresillo | jumps on 3+3+2, turning slowly |
+|  | Clave | Rhythm Clave 3-2 | the 3-2 clave, jumps that answer |
+|  | Offbeat | Rhythm Offbeat | jumps between the beats, wide |
+|  | Shuffle (spare) | Rhythm Shuffle | a swung jump, turning |
+| **Build** | Riser | Spiral Riser | a spiral climbing as it opens |
+|  | Pulse | Orbit Pulse | a circle that swells faster and faster |
+|  | Loop | Loop 3-4 | a fast loop, lifting |
+|  | Gallop | Rhythm Gallop | galloping jumps that pick up pace |
+|  | Vortex (spare) | Spiral Vortex | a wide vortex, the whole room turning |
+| **Peak** | Anthem | Flower Rose 5 | a big flower overhead, swelling |
+|  | Festival | Loop 2-3 | a fast loop over the crowd, swaying |
+|  | Carousel | Cycle Epi 7-3 | a carousel turning high and fast |
+|  | Star | Edge Star | a star thrown wide overhead |
+|  | Euphoria (spare) | Flower Trefoil | a lifted trefoil, swelling on the bar |
+| **Drop** | Impact | Edge Astroid | hard corners slamming round the room |
+|  | Warehouse | Edge Square | a square that bounces back and forth |
+|  | Strobe | Edge Corner | corner to corner, fast as a strobe |
+|  | Whirlwind | Cycle Epi 3-1 | a whirlwind, the fastest turn there is |
+|  | Ping Pong (spare) | Rhythm Ping Pong | left, right, left, wide on the beat |
+| **Break** | Standstill | Orbit Arc | an arc that nearly stops, close |
+|  | Collapse | Spiral Collapse | a spiral drawing in |
+|  | Monolith | Edge Diamond | a small diamond, slow and heavy |
+|  | Suspend | Loop Figure 8 | a slow figure eight hanging overhead |
+|  | Heartbeat (spare) | Flower Heart | a heart shape beating close |
+| **Dub** | Echo | Rhythm Echo | a throw and its echo, wide |
+|  | Pendulum | Orbit Pendulum | a pendulum swinging near and far |
+|  | Tunnel | Spiral Helix | a low helix, deep like a tunnel |
+|  | Kepler | Orbit Kepler | an orbit slow far out, fast close in |
+|  | Skank (spare) | Rhythm Offbeat | the offbeat, fading in and out of the room |
+| **Deep** | Undertow | Spiral Collapse | a spiral pulling down and in |
+|  | Sub | Orbit Circle | a small circle on the floor, shrinking |
+|  | Fog | Wander Drift | low drifting, fading at the edges |
+|  | Lurk | Wander Wave | a slow wave close to the floor |
+|  | Cellar (spare) | Cycle Hypo 5-3 | a stretched cycle down low |
+| **Float** | Aurora | Loop 1-2 | a loop overhead, breathing like light |
+|  | Canopy | Cycle Hypo 7-2 | a canopy straight overhead, wide |
+|  | Blossom | Flower Petal | petals opening above the room |
+|  | Lullaby | Loop Figure 8 | a very slow figure eight overhead |
+|  | Cloud (spare) | Flower Clover | a slow clover drifting high |
+| **Closing** | Sunset | Flower Rose 4 | a flower sinking towards ear height |
+|  | Farewell | Spiral Collapse | a slow spiral drawing in |
+|  | Tide | Wander Wave | a wave coming in and going out |
+|  | Ember | Orbit Ellipse | a small slow ellipse, low and warm |
+|  | Still (spare) | Orbit Circle | a small circle at ear height, almost still |
+| **Tribal** | Gallop | Rhythm Gallop | galloping jumps, low and turning |
+|  | Ping Pong | Rhythm Ping Pong | left, right, turning against the beat |
+|  | Clave | Rhythm Clave 2-3 | the 2-3 clave, swaying up and down |
+|  | Zigzag | Edge Zigzag | a zigzag across the floor, beat by beat |
+|  | Echo (spare) | Rhythm Echo | a call and its echo |
+| **Tension** | Siren | Orbit Circle | a circle turning like a siren |
+|  | Vortex | Spiral Vortex | a fast vortex, swaying down |
+|  | Helix | Spiral Helix | a helix winding round the room |
+|  | Riser | Spiral Riser | a spiral rising, swelling |
+|  | Collapse (spare) | Spiral Collapse | a spiral closing in |
+| **Acid** | Loop | Loop 3-4 | one loop, turning a little every lap |
+|  | Infinity | Loop Infinity | a figure eight that keeps turning |
+|  | Epicycle | Cycle Epi 3-1 | a slow epicycle, swelling on the bar |
+|  | Pulse | Orbit Pulse | a tight circle, close and insistent |
+|  | Hypocycle (spare) | Cycle Hypo 5-3 | a hypocycle tracing its rosette |
+| **Ambient** | Drift | Wander Drift | a very slow drift high overhead |
+|  | Wave | Wander Wave | a slow wave that swells wide |
+|  | Breath | Spiral Breath | a slow breath, turning |
+|  | Kepler | Orbit Kepler | an orbit near and far, unhurried |
+|  | Ellipse (spare) | Orbit Ellipse | a calm ellipse round the room |
+<!-- /a3-motion:clips -->
 
 
 **Default** (no shape) is the fallback for a channel without a clip.
