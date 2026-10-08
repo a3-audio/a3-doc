@@ -30,54 +30,42 @@ quiet-indigo-2. The recording plan is kept outside this repository. -->
 
 ### Words you will meet
 
-| Word | What it means here |
+| Word | Meaning |
 | :--- | :--- |
-| **channel** | one of the four mixer channels A³ Motion moves. Channel 1 is the leftmost field on the screen and the leftmost column on the panel. Each channel keeps its own colour wherever it appears |
-| **selected channel** | the one the bar shows and edits. Tap its field in the channel row to select it |
-| **shape** | the path the sound traces. The screen labels it **SVG**, after the file format it is kept in |
-| **clip** | a shape plus every value it is played with: speed, height, width, spin, direction. Each channel has one |
+| **channel** | one of the four mixer channels; channel 1 is leftmost on screen and panel, each in its own colour |
+| **selected channel** | the one the bar shows; tap its field in the channel row |
+| **shape** | the path the sound traces; labelled **SVG** |
+| **clip** | a shape plus speed, height, width, spin, direction; one per channel |
 | **pass** | one time through the shape |
-| **action** | a short script on one of a channel's six action pads, **A1–A6**. It changes the clip while you hold the pad (or once, on a tap), then lets go |
-| **set** | which clip and which six actions each of the four channels has, plus their 3d, freq and Q |
-| **take** | a new recording of a shape, drawn with your finger on the sphere |
+| **action** | a short script on pads **A1–A6** that changes the clip while held (or once) |
+| **set** | clip and six actions for each channel, plus 3d, freq and Q |
+| **take** | a new shape drawn with your finger |
 | **lane** | a knob movement recorded in a take |
-| **downbeat** | the one: the first beat of a bar. Play waits for it |
-| **3d** | how much of a channel is in the room. Fully down: plain stereo, like any mixer. Up: the channel follows its blob |
-| **bar** and **global strip** | the bottom of the screen. The **bar** is the five tabs and their page, on the left three quarters; the **global strip** is the column of keys on the right quarter |
-| **LENGTH** | how long one pass takes, **counted in beats**: 16 is four bars, 4 is one bar |
+| **downbeat** | beat one of a bar; Play waits for it |
+| **3d** | how much of a channel is in the room: down is plain stereo |
+| **bar**, **global strip** | the bottom of the screen: five tabs and their page (left), a column of keys (right) |
+| **LENGTH** | beats per pass: 16 is four bars |
 
 (motion-get-started)=
 
 ## Get started: your first ten minutes
 
-You need A³ Motion, A³ Core and the A³ Mixer on the A³ network switch, and
-music playing on at least one mixer channel.
+You need A³ Motion, A³ Core and the A³ Mixer on the A³ switch, and music on a
+mixer channel.
 
-1. **Plug in.** Connect A³ Motion to the A³ switch. It is powered over the
-   network cable and starts by itself. It is ready when the screen shows the
-   sphere — the room, seen from above — with the four channel fields under it.
-   Play some music on the mixer: the meters in the channel row move. If they
-   stay still, see [Troubleshooting](#motion-troubleshooting).
-2. **Check the clock.** Top left of the screen is the clock key with the BPM
-   beside it. Tap the key until it reads **PIO** if your CDJs are on Pro DJ
-   Link, **EXT** if the beat analyser is listening to the music, or **INT** if
-   you want to tap the tempo yourself. The BPM should match your deck.
-3. **Load a set.** Tap **FILES** (top of the global strip), then **SETS**, tap
-   *Warmup* and tap **Load**. All four channels now have a clip and six
-   actions. Tap **FILES** again to close it.
-4. **Turn 3d up** on the channel your track is on: that channel's pot on the
-   panel (above its pads), or **3D** in its field in the channel row.
-   **At 3d = 0 you hear no movement.** The channel stays in plain stereo,
-   whatever its blob does on the screen.
-5. **Press Play.** Press that channel's **Play\|Pause** pad (top left of its
-   eight pads). It blinks while it waits for the next downbeat, then the clip
-   starts and your track travels the room.
-6. **Fire an action.** Hold the channel's **A1** pad. The movement changes
-   while you hold it and comes back when you let go. In every shipped set the
-   left pads push the energy up and the right pads take it down; the top row
-   is gentle, the middle row strong.
-7. **Stop.** Press **Play\|Pause** again: the clip stops on the next downbeat,
-   and the sound stays where it is.
+1. **Plug in** to the A³ switch (power comes over the cable). Ready when the
+   sphere and four channel fields show; the meters move with the music (else
+   [Troubleshooting](#motion-troubleshooting)).
+2. **Check the clock** (top left): tap to **PIO** for CDJs on Pro DJ Link,
+   **EXT** for the beat analyser, **INT** to tap yourself. The BPM should match.
+3. **Load a set**: **FILES** › **SETS** › *Warmup* › **Load**; **FILES** closes.
+4. **Turn 3d up** on your track's channel (its pot, or **3D** in the channel
+   row). **At 3d = 0 you hear no movement.**
+5. **Press Play\|Pause** (top left of its pads): it blinks, then starts on the
+   downbeat.
+6. **Hold A1**: the movement changes, and returns when you let go. Left pads
+   push energy up, right pads down; top row gentle, middle row strong.
+7. **Press Play\|Pause again**: it stops on the downbeat; the sound stays.
 
 That's the whole loop. Before your first gig, read
 [On stage](a3motion-on-stage.md).
