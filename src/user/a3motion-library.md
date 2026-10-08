@@ -214,6 +214,11 @@ four for the set, one spare. Each clip says what it is for in its own file
 |  | Breath | Spiral Breath | a slow breath, turning |
 |  | Kepler | Orbit Kepler | an orbit near and far, unhurried |
 |  | Ellipse (spare) | Orbit Ellipse | a calm ellipse round the room |
+| **Space** | Anchor | Wander Drift | a small drift that stays near home |
+|  | Orbit | Orbit Circle | a small circle just below ear height |
+|  | Pendulum | Orbit Pendulum | a slow swing from side to side |
+|  | Corners | Edge Square | a slow square, visiting each corner |
+|  | Lift (spare) | Orbit Ellipse | an ellipse that sways up and down |
 <!-- /a3-motion:clips -->
 
 
