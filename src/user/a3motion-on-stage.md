@@ -76,5 +76,3 @@ its edit box), and pressing Escape on a keyboard (it never quits the app).
 | The rig is silent after a start | Core is not up, or REAPER was restarted without it. Restart `a3-main`; the journal (`journalctl --user -u a3-core`) has `gate:` lines saying what was opened and what stayed shut. See {ref}`the silent start <core-silent-start>` |
 | The screen is frozen | Restart the device. The room doesn't move: it asks Core where every sound is |
 
-<!-- QUESTION (maintainer): "restart the device" in the last row: what is the DJ-safe way on the rig, pulling the network cable (PoE)? And how long until it is back? -->
-

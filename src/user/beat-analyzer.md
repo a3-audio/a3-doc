@@ -69,8 +69,6 @@ analysis only goes back to finding the tempo on its own after the
 beat-analyzer is restarted.
 ```
 
-<!-- QUESTION (maintainer): beat_processing.cpp calls BTrack's fixTempo() on every accepted tap and nothing ever calls unfixTempo() (btrack_wrapper.h has it). So after one tap, EXT never follows a tempo change again until the service restarts. Intended ("the DJ has spoken"), or should the lock be released — after a time, or on a double tap? The page describes it as it is. -->
-
 **PIO — pioneer.** A Pro DJ Link network the Core machine is on. The
 beat-analyzer appears on it as a **player, number 7**, and listens on the
 Pro DJ Link ports (`prolink.*`). It follows the **tempo master**: the player whose status

@@ -55,8 +55,6 @@ you are on, Escape or back puts the running one back. **A tap on a skin
 chooses it straight away**, with no preview, and writes it into the device's
 settings. Dragging the list only scrolls it.
 
-<!-- QUESTION (maintainer): the preview is reachable only by the arrow keys (GlobalSettingsComponent::keyPressed → onPickerBrowsed); a drag scrolls without previewing, a tap applies and writes config.json (applySkin), and the panel's encoders don't reach the menu at all (handleEncoderTurn has no menu case, although previewSkin's comment speaks of "the encoder"). So on the device without a keyboard there is no way to look at a skin before it is chosen. Intended? -->
-
 ### Skin Editor
 
 Every value of the loaded skin, under headings: surfaces, text, states,
@@ -77,8 +75,6 @@ fire only on a double tap or ENTER.
   default itself is never written over.
 
 ![The Skin Editor, its sections on the left of the sphere](pics_user/a3-motion-ui-skin-editor.png)
-
-<!-- QUESTION (maintainer): the colour picker has no undo (closeColourPicker keeps what applyPickedColour already wrote into the document) and no Escape, while the edit box undoes the whole document on Escape (_documentBeforeMask). Should the picker undo on back/Escape like the edit box? -->
 
 ### Button LEDs, Pattern Folder
 

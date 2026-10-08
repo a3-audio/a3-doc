@@ -50,8 +50,6 @@ freq and Q to the set's values. The room hears it.
 Every start begins at the top of the shape. A stop leaves the sound where it
 is; it doesn't jump anywhere.
 
-<!-- QUESTION (maintainer): the key is called Play|Pause and shows ❚❚, but in the code a "pause" is a stop: every start begins at position 0 (MotionEngine::startPlaying), so ❚❚, SHIFT + Play|Pause and ■ all end in the same state and differ only in timing. The page describes it that way. Is that the intent (and the label stays), or should ❚❚ resume where it stopped? -->
-
 <!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.8 s | steps: Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat. | "Clip stopped" / "▶ blinks: waiting for the downbeat" / "On the one: it plays" / "❚❚ waits for the downbeat too" / "Paused, right on the one" | replaced howto-play-pause.gif -->
 
 ![Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat.](pics_user/howto-transport-play-pause.gif)
@@ -80,10 +78,6 @@ Two fingers take two blobs. The top of the sphere is the front of the room.
 **Steer round the other blobs.** A dragged blob pushes every blob it comes
 close to out of its way, and their sound moves with them. Drag straight
 through a crowd and you carry the others along.
-
-<!-- QUESTION (maintainer): MotionComponent::disoccludeBlobs pushes every blob near a held one aside and writes the new position to the engine (setChannel3DPosition), so the pushed channels move in the room too. In the recording one drag gathered three other blobs and carried them. Is moving the other channels' sound intended, or should the push be screen-only? -->
-
-<!-- QUESTION (maintainer): which way is "front" in a venue? The osc reference says 0° azimuth is the front of the room; the page now says the top of the sphere is the front. A DJ needs to know where that is before dragging: the booth side, the stage, or wherever Core was set up? -->
 
 **To look from another angle without moving anything**, use camera mode:
 
@@ -168,8 +162,6 @@ value, the left knob moves it** in time with the bars.
 
 Whatever moves on its own counts in bars, never seconds, so it comes back to
 where it started on a bar line.
-
-<!-- QUESTION (maintainer): in the recording (2026-09-29) clip-top dragged 40-60 px after elv changed nothing visible, and a double tap on elv left the shape at the bottom rather than at ear level (its rest is "the middle of the clip band", ClipKnobs.hh elevationKnobSpec). Is that the intended rest, and what does clip-top need to show its ceiling? Needs a look at the device. -->
 
 <!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.6 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" | channel 1 alone on Break Heartbeat (the notch shows the turn; spin 0 in the clip); spin is dragged far, since its first steps take 32 and 16 bars a turn -->
 
@@ -312,8 +304,6 @@ Double tap a knob to clear its lane; the other lanes stay.
   when it asks **Sure?**. Delete removes the file, not the music: whatever is
   loaded keeps playing.
 
-<!-- QUESTION (maintainer): Save as names a copy after the file the editor shows (copyBaseFor(_panelFile)); with no file shown it falls back to "Action" on every tab, so SETS › from set › Save as straight after opening SETS wrote a set called "Action" (recorded 2026-09-29). Should a set copy be named after the loaded set instead? -->
-
 <!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
 
 ![The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip.](pics_user/howto-files-keep-tweak.gif)
@@ -385,8 +375,6 @@ the beat analyser.
 the tempo is the one INT had the first time you left it, not the one you
 tapped since. Tap it in again.
 
-<!-- QUESTION (maintainer): A3MotionUIComponent::applyClockMode saves _internalBPM only when it is still 0 (the first time INT is left) and taps never update it, so INT → EXT → PIO → INT restores a stale tempo (recorded: 116 BPM tapped, 60 BPM after the round trip). Bug? The page describes it as it is. -->
-
 <!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), --width 500 (the strip at its own size) | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
 
 ![Tap the clock key to INT, tap the beat display eight times: the BPM follows.](pics_user/howto-statusbar-tap.gif)
@@ -407,10 +395,6 @@ tapped since. Tap it in again.
 - **Your own colours and sizes:** MENU › **Skin Editor**. Opening it on the
   shipped default skin makes a copy called **custom** as you leave, even if you
   changed nothing, and switches to it.
-
-<!-- QUESTION (maintainer): CLEAN on the shipped default: clean.json and default.json are byte-identical since 648628d, so the key lights and nothing else changes (howto-statusbar-clean.gif could not be recorded). Intended, or should one of the two differ? -->
-
-<!-- QUESTION (maintainer): closing the Skin Editor always saves (closeSkinEditor → saveEditedSkin), and on "default" that means writing custom.json and switching to "custom" (skinNameToWriteTo) even when nothing was changed -- recorded 2026-09-29, a look was enough. Should an unchanged editor leave the skin alone? -->
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 

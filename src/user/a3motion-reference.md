@@ -252,8 +252,6 @@ channel's 3d from where you set it towards `max`; the **freq** and **q** rows
 do the same for the filter's cutoff and resonance. A `max` of 0 switches that
 row off.
 
-<!-- QUESTION (maintainer): do the freq and q accents only ever raise the filter, like the 3d one, or can they lower it? The code says only "0 is off". -->
-
 **The MOTION tab** shows each value as it will land. **Grey**: the action
 leaves it to the clip, and the clip's own value is shown as a hint. **In the
 channel's colour**: the action sets it. **Two taps** on a MOTION value, or on
@@ -264,10 +262,6 @@ channel's colour**: the action sets it. **Two taps** on a MOTION value, or on
 every channel and every set that uses it, shipped ones too. To keep the
 original, copy it first: see [Fire and assign actions](#motion-howto-action).
 ```
-
-<!-- QUESTION (maintainer): Save as is lit only while the editor holds unsaved text (scriptKeysFor: saveAs = unsaved), so an unchanged file can't be copied as it is -- the page now tells the DJ to change a comment first. Should Save as copy an unchanged file? -->
-
-<!-- QUESTION (maintainer): FILES protects shipped files (Save stays dark unless Developer Mode is on, shippedFileMayBeOverwritten), but ACTION writes a turned value into the script in place, shipped or not (decided 2026-09-29, "always in place"). So a DJ with Developer Mode off can change a factory action by turning a knob, but can't save the same change typed in FILES. The page describes both as they are. Which one should give way? -->
 
 How an accent rises and falls, what "the clip as it is now" means, chains and
 two actions at once: see [How actions play](#motion-actions-play). How the

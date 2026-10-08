@@ -64,8 +64,6 @@ from FILES › CLIPS.
 | Acid | Loop, Infinity, Epicycle, Pulse | Hypocycle | Move Squeeze Sweep / Width Inhale | Move Phase Drift / Speed Double Twist | FX Resonance Climb | Cue Dub Echo |
 | Ambient | Drift, Wave, Breath, Kepler | Ellipse | Lift Cloud / Move Wind | Width Fog / Speed Slow Tide | FX Rain | Cue Float Aurora |
 
-<!-- QUESTION (maintainer): the layout rule below says A3 is a strong "more", but Break and Float carry Width Breathe on A3, whose own Mood: line says "less" (library agent, 37b2001). The table shows what ships. Swap the actions, or change the rule? -->
-
 The clip names in the table leave out the phase: channel 1 of *Peak* plays
 `Peak Anthem`. All four channels of a set carry the same six actions.
 
@@ -196,8 +194,6 @@ the set's, the fifth is the spare.
 | **Tension** | Siren (Orbit Circle), Vortex (Spiral Vortex), Helix (Spiral Helix), Riser (Spiral Riser) · spare: Collapse (Spiral Collapse) | circling, rising, faster |
 | **Acid** | Loop (Loop 3-4), Infinity (Loop Infinity), Epicycle (Cycle Epi 3-1), Pulse (Orbit Pulse) · spare: Hypocycle (Cycle Hypo 5-3) | one figure, slowly turning, hypnotic |
 | **Ambient** | Drift (Wander Drift), Wave (Wander Wave), Breath (Spiral Breath), Kepler (Orbit Kepler) · spare: Ellipse (Orbit Ellipse) | overhead, slow, wide |
-
-<!-- QUESTION (maintainer): the Character column comes from the library plan; the clip JSON files carry no mood text of their own. Should they, like the actions' Mood: line? -->
 
 Plus **Default**: no shape. It is what a channel with no clip falls back on,
 not something to play.
