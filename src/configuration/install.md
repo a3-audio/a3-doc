@@ -2,39 +2,34 @@
 
 # Installing the system
 
-[a3-system](https://github.com/a3-audio/a3-system) carries every part of the
-A³ system as a submodule, and its `install` sets a machine up as one or more
-parts — or updates it. It builds everything from source, at one version of the
-whole system.
+[a3-system](https://github.com/a3-audio/a3-system) carries every part as a
+submodule; `install` sets a machine up as one or more parts, or updates it,
+built from source at one system version.
 
 ```sh
 git clone https://github.com/a3-audio/a3-system ~/a3-system
 ~/a3-system/install
 ```
 
-`install` asks three things — which version, which roles this machine has,
-and each role's settings — shows a summary, and installs after a yes. Steps
-that need root run through `sudo`.
+It asks version, roles and their settings, shows a summary, installs on yes;
+root steps use `sudo`.
 
 (install-roles)=
 
 ## Roles
 
-A machine can have any of them; they are installed in this order.
+Any combination, installed in this order:
 
 | Role | What it installs | Submodules it checks out |
 | :--- | :--- | :--- |
-| **Core** | the {ref}`a3-core Debian package <core-package>`, built from this version's a3-core, its install questions (network, headless screen, which local configuration to replace) asked up front, and then held so `apt upgrade` does not move it. The package's {ref}`user-side installer <core-user-install>` builds the beat-analyzer | `a3-core`, `beat-analyzer` |
-| **StemDeck** | builds {doc}`StemDeck <../user/stemdeck>` and enables `stemdeck.service`. On a machine without the Core role, also StemDeck's two zita units, which carry the audio to the Core; JACK is then that machine's own business | `stemdeck` |
-| **Motion** | builds {doc}`A³ Motion's UI <moc>` and enables `a3-motion.service`, adds the user to `dialout` for the panel's serial port, and flashes the panel firmware when it changed since the last flash | `a3-motion` (with its `ui`) |
-| **Mixer** | listed, but not installable yet: the desk is set up by hand, see {ref}`Running the desk <mic-run>` | `a3-mixer` |
+| **Core** | the {ref}`a3-core package <core-package>` from this version, its questions asked up front, then held against `apt upgrade`; its {ref}`user installer <core-user-install>` builds the beat-analyzer | `a3-core`, `beat-analyzer` |
+| **StemDeck** | builds {doc}`StemDeck <../user/stemdeck>`, enables `stemdeck.service`; without Core also the two zita units (JACK is then the machine's own) | `stemdeck` |
+| **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `ui`) |
+| **Mixer** | not installable yet: {ref}`by hand <mic-run>` | `a3-mixer` |
 
-Only the submodules the chosen roles need are checked out, at the commits this
-version of a3-system records. A submodule with local changes stops the update
-rather than being overwritten.
-
-StemDeck and Motion build against the one pinned JUCE; the installer builds it
-into `~/local/juce` if it is not there (see {ref}`JUCE <build-juce>`).
+Only the needed submodules are checked out, at this version's commits; local
+changes in one stop the update. StemDeck and Motion use the pinned
+{ref}`JUCE <build-juce>`, built into `~/local/juce` if missing.
 
 (install-options)=
 
@@ -48,17 +43,15 @@ into `~/local/juce` if it is not there (see {ref}`JUCE <build-juce>`).
 | `install --dry-run` | shows every command and runs none |
 | `install --flash-firmware` | flashes the Motion panel even if its firmware is unchanged |
 
-A version is a tag, the same in every repository; see the
-{doc}`release notes <../ressources/release-notes>`.
+A version is a tag, the same in every repository
+({doc}`release notes <../ressources/release-notes>`).
 
 (install-settings)=
 
 ## Settings
 
-The answers are kept in **`~/.config/a3/install.conf`**, a plain INI file, and
-the next run starts from them, so Enter keeps every earlier answer. Copy it to
-another machine and run `install --config <file>` to set that machine up the
-same way.
+Answers are kept in **`~/.config/a3/install.conf`** (INI); Enter keeps them
+next time. Copy it and run `install --config <file>` to clone a setup.
 
 | Section | Keys |
 | :--- | :--- |
@@ -67,12 +60,10 @@ same way.
 | `[core]` | `configure_network`, `interface`, `address`, `gateway`, `dns`, `bridge_with`, `headless` — the package's install questions; `replace` — which differing parts of `~/.config` to replace: `all`, `none` or a list such as `reaper, i3` |
 | `[motion]` | `flash_firmware` — `yes`, `no` or `ask`; `serial_port` — `auto` (found by USB ID, see {ref}`moc-serial`) or a device path |
 
-What the installer has done that the repository does not record — which
-firmware it flashed last — is in `~/.config/a3/install.state`.
+The last flashed firmware is recorded in `~/.config/a3/install.state`.
 
 ## Limits
 
 - **Debian only.**
-- It runs as the user **`aaa`**, from **`/home/aaa/a3-system`**: the systemd
-  units the parts ship name that path. Anywhere else it refuses, except with
-  `--dry-run`.
+- User **`aaa`**, checkout **`/home/aaa/a3-system`** (the units name that
+  path); elsewhere only `--dry-run`.

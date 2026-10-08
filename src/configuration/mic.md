@@ -4,10 +4,8 @@
 
 ## Hardware
 
-The desk is two computers today: a **Raspberry Pi 3B** runs `a3-mixer.py`
-(see {doc}`../development/mic`), and a **Teensy 4.1** drives the panel — it
-reads the faders, pots, encoders and keys, and lights the LEDs and the VU
-meters. The two talk over USB serial.
+Today: a **Raspberry Pi 3B** runs `a3-mixer.py` ({doc}`../development/mic`); a
+**Teensy 4.1** reads the controls and drives LEDs and VUs; USB serial between.
 
 | Part | Today | Planned |
 | :--- | :--- | :--- |
@@ -19,30 +17,23 @@ meters. The two talk over USB serial.
 | Faders | | 45 mm |
 | Front jack | 6.3 mm, headphones | |
 
-The planned board is not chosen yet. The V03 schematic draft in
-`hardware/mainboard/pcb/` still carries an earlier candidate, a WIZnet
-W5500-EVB-Pico.
-
-The parts, the multiplexer pins and the power estimate of the shipped panel
-are on {doc}`../assembly/mic`.
+The planned board is not chosen (the V03 draft still shows a WIZnet
+W5500-EVB-Pico). Parts, multiplexer pins, power: {doc}`../assembly/mic`.
 
 (mic-run)=
 
 ## Running the desk
 
-The {doc}`installer <install>` does not set up the desk yet; it is set up by
-hand on the Pi:
+Not yet in the {doc}`installer <install>`; by hand on the Pi:
 
 - The repository is checked out at **`/home/aaa/a3-mixer`**.
 - A Python venv at **`/home/aaa/.venv`**, with
   `software/scripts/requirements.txt` installed into it.
-- The system unit **`a3-mixer.service`**, from
-  `platform-config/raspianos/etc/systemd/system/`, runs
-  `software/scripts/a3-mixer.py` on that venv's Python and restarts it when
-  it fails. `a3-mixer-set-display.service` beside it runs the display
-  script. Copy both to `/etc/systemd/system/`, then
+- **`a3-mixer.service`** and **`a3-mixer-set-display.service`** from
+  `platform-config/raspianos/etc/systemd/system/` (the first runs
+  `a3-mixer.py` on the venv, restarting on failure): copy to
+  `/etc/systemd/system/`, then
   `sudo systemctl enable --now a3-mixer a3-mixer-set-display`.
 
-No addresses or ports are configured on the desk: it fetches them from Core
-(see {ref}`Addresses, ports and where the desk gets them <mic-truth>`). How to
-run its tests: {ref}`Build and test <build-commands>`.
+No addresses on the desk: it fetches them from Core ({ref}`how <mic-truth>`).
+Tests: {ref}`Build and test <build-commands>`.

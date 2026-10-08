@@ -2,28 +2,28 @@
 
 ## The A³ System
 
-- [A³ System Repository](https://github.com/a3-audio/a3-system)
+```{tip}
+**New here?** Start with A³ Motion's
+[first ten minutes](#motion-get-started), and keep
+[On stage](a3motion-on-stage.md) open before your first gig.
+```
 
-Three devices on one network. They talk to each other **exclusively over
-OSC**, never over audio cables. How they are cabled is on the
-{doc}`ports page <../ressources/ports>`; what each is made of, on its
-configuration page.
+Three devices on one network, talking **only OSC**
+({doc}`ports <../ressources/ports>`):
 
 | Device | What it is | What it does |
 | :--- | :--- | :--- |
-| [**A³ Core**](https://a3-audio.github.io/a3-doc/user/a3core.html) | the sound server | takes the analog signals, computes the 3D field, sends it out. Remote controlled; no interface of its own |
-| [**A³ Mixer**](https://a3-audio.github.io/a3-doc/user/a3mix.html) | a 4-channel DJ mixer | gain, EQ, filter, faders, cue — every control sends OSC to Core |
-| [**A³ Motion**](https://a3-audio.github.io/a3-doc/user/a3motion.html) | the motion sampler | records and plays back *where a sound is* and how it travels, like a loopstation for movement |
+| [**A³ Core**](a3core.md) | the sound server | takes the audio in, computes the 3D field, sends it out; remote controlled |
+| [**A³ Mixer**](a3mix.md) | a 4-channel DJ mixer | gain, EQ, filter, faders, cue, all as OSC |
+| [**A³ Motion**](a3motion.md) | the motion sampler | a loopstation for *where a sound is* |
 
-Your decks, headphones and the booth and main speakers connect to A³ Core's
-audio hardware. The other two devices carry no audio at all.
-
-Two programs belong to the system as well:
+All audio — decks, phones, booth, main — connects to A³ Core. Two programs
+belong too:
 
 | Program | What it is | What it does |
 | :--- | :--- | :--- |
-| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | runs on the A³ Core machine. Sends the beat every device follows and the level meters every device shows |
-| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems each, every stem on its own output — so one part of a track can move through the room while the rest stays put. Can be the tempo master when there are no CDJs |
+| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | on the Core: the beat and the level meters for every device |
+| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems, each on its own output, so one part can move alone; tempo master without CDJs |
 
 ```{tip}
 **StemDeck × A³ Motion.** Put StemDeck's four stems on A³ Motion's four
@@ -51,21 +51,18 @@ naming it when the Core starts. See
 
 ## The beat
 
-A³ Core also runs the [**Beat Analyzer**](beat-analyzer.md): it produces
-the tempo the whole system follows, together with the VU meters the other two
-devices show. Its clock can come from A³ Motion's own tempo, from listening to
-the music, or from a Pro DJ Link tempo master — a CDJ, or
-[StemDeck](stemdeck.md) when there are no CDJs — chosen on A³ Motion's clock
-key.
-
-Everything that moves on its own is counted in **bars**, off that clock. A
-figure that takes four bars keeps taking four bars when the tempo changes.
+The [**Beat Analyzer**](beat-analyzer.md) on A³ Core sends the tempo every
+device follows, and the meters they show. Its clock comes from A³ Motion's own
+tempo, from the music, or from a Pro DJ Link tempo master — a CDJ, or
+[StemDeck](stemdeck.md). Everything that moves on its own counts in **bars**,
+so a four-bar figure stays four bars when the tempo changes.
 
 ## Where to go next
 
 | Section | What is in it |
 | :--- | :--- |
 | **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
+| [**Repository**](https://github.com/a3-audio/a3-system) | the umbrella repository that carries all the others |
 | **Assembly** | prototype pictures and how the boxes go together |
 | **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
 | **Development** | building and hacking on the software |

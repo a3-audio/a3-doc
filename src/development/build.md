@@ -1,30 +1,24 @@
 # Building and testing
 
-Everything in the A³ system is built from source; there are no builds to
-download. On a machine that only has to run the system, the
-{doc}`installer <../configuration/install>` does the building. This page is
-for working on the code.
+Everything is built from source. To just run the system, use the
+{doc}`installer <../configuration/install>`; this page is for working on the
+code.
 
 (build-juce)=
 
 ## JUCE
 
-Every product that uses JUCE — A³ Motion's UI and StemDeck — builds against
-**one JUCE, 9.0.3**, the release tag. It is pinned as `JUCE_VERSION` in
-[a3-system](https://github.com/a3-audio/a3-system)'s
-`installer/roles/base.py`. The installer builds that version into
-`~/local/juce`, which is where both products look for it by default. Keep only
-the one version in that prefix: JUCE's CMake package matches exactly, and with
-two versions there a search without a version takes either.
-
-A new JUCE is bumped on purpose, in that one line, and then built and tested
-like any other change. The installer says when a newer release is out.
+A³ Motion's UI and StemDeck build against **one JUCE, 9.0.3**, pinned as
+`JUCE_VERSION` in [a3-system](https://github.com/a3-audio/a3-system)'s
+`installer/roles/base.py` and built into `~/local/juce`. Keep only that one
+version there: with two, a search without a version takes either. Bump it in
+that line on purpose; the installer says when a newer release exists.
 
 (build-commands)=
 
 ## Build and test, per repository
 
-Run each command from the root of the repository named.
+From each repository's root:
 
 | Repository | Build | Test |
 | :--- | :--- | :--- |
@@ -37,15 +31,9 @@ Run each command from the root of the repository named.
 | StemDeck | `./start.sh` builds and starts it, see {ref}`Build and start <stemdeck-build>` | `cmake -S . -B build -DSTEMDECK_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/local/juce`, `cmake --build build --target stemdeck-tests`, `ctest --test-dir build`; the Python tools: `python3 -m unittest discover -s tools/tests` |
 | a3-doc | `sphinx-build src doc` | |
 
-**A³ Motion UI: use `./test.sh`, not `ctest` on its own.** `ctest` runs the
-test binary that was built last; it does not build one, and `build.sh` builds
-only the app. `test.sh` builds the tests first, runs them against the library
-as committed (`config/` and `pattern/` of HEAD, exported into
-`build/committed/`), and prints when the runner it ran was built. The reasons
-are in `ARCHITECTURE.md` in
-[a3-motion-ui](https://github.com/a3-audio/a3-motion-ui).
-
-The same caution holds for StemDeck and the beat-analyzer: `ctest` runs what
-was built, so build the test target first.
-
-Each repository's `README.md` lists the packages its build needs.
+**`ctest` builds nothing**; it runs the last-built tests. For A³ Motion UI use
+`./test.sh`: it builds the tests, runs them against the committed library
+(HEAD's `config/` and `pattern/` in `build/committed/`) and prints the runner's
+build time (`ARCHITECTURE.md` in [a3-motion-ui](https://github.com/a3-audio/a3-motion-ui)).
+For StemDeck and the beat-analyzer, build the test target first. Build
+packages: each repository's `README.md`.

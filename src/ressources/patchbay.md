@@ -1,42 +1,27 @@
 # Patchbay — audio inputs and outputs
 
-This is the one page for every audio input and output of the system: which
-JACK port is connected to which, and what is on it. Other pages link here
-instead of repeating it.
-
-What is on this page is the JACK graph on the A³ Core: the audio interface,
-REAPER's inputs and outputs, the beat-analyzer's inputs, the network audio
-(zita) and StemDeck's ports. **REAPER's internal routing** (tracks, encoders,
-decoders) **is not on this page** and will be documented separately. The
-cables are made by the patchbay `~/.config/rncbc.org/a3-patchbay.xml`
-(QjackCtl, shipped by the a3-core package; see
-[`qjackctl.service`](#core-services)); the state described here is that file
-on 2026-10-01. The maintainer builds REAPER's routing and the patchbay
-himself; this page describes them and prescribes nothing.
+Every audio input and output on the A³ Core's JACK graph: interface, REAPER,
+beat-analyzer, zita and StemDeck. Other pages link here. REAPER's internal
+routing is not here. The cables come from `~/.config/rncbc.org/a3-patchbay.xml`
+(QjackCtl, shipped by a3-core; see [`qjackctl.service`](#core-services)), as of
+2026-10-08. The maintainer owns the routing and the patchbay; this page only
+describes them.
 
 ## The audio interface
 
-The Core's JACK server (`a3-jack.service`) runs on the USB sound card, ALSA
-device `hw:USB`, at 44.1 kHz. In JACK the card is the client `system`:
+JACK (`a3-jack.service`) runs on the USB card `hw:USB` at 44.1 kHz, client
+`system`:
 
 | Direction | Ports | Used for |
 | :--- | :--- | :--- |
 | capture | `capture_1` … `capture_12` | the A³ Mixer's channels, the phones and the aux return, see REAPER's inputs 1–12 below |
-| playback | `playback_1` … `playback_20` | the Main and the Booth outputs, see REAPER's outputs 1–20 below |
+| playback | `playback_1` … `playback_20` | Main (`playback_1` … `8`), Phones (`9`, `10`) and Booth (`11` … `18`); `19` and `20` are not cabled, see REAPER's outputs below |
 
 (core-reaper-channel-map)=
 
 ## REAPER's inputs and outputs: the channel map
 
-The inputs and outputs REAPER uses (outputs decided on 2026-09-30, inputs on
-2026-10-01). REAPER's routing
-and the JACK patchbay are rebuilt to this map; the patchbay as shipped is
-described [further down](#patchbay-shipped).
-
 ### REAPER's inputs
-
-**What REAPER receives** — two blocks, configured the same way: four stereo
-decks, one aux, one phones.
 
 | In | Block | Content |
 | :--- | :--- | :--- |
@@ -45,19 +30,16 @@ decks, one aux, one phones.
 | 11–12 | Analog | aux (the aux return's analog input, played in ANALOG mode) |
 | 13–20 | StemDeck | decks 1–4, stereo (StemDeck's buses 1–4) |
 | 21–22 | StemDeck | aux |
-| 23–24 | StemDeck | phones |
-| 25–30 | free | |
+| 23–30 | free | |
 
 ### REAPER's outputs
 
-**What REAPER sends** — the outputs come in blocks of ten:
-
 | Out | Block | Content |
 | :--- | :--- | :--- |
-| 1–10 | Main | 1 sub, 2–10 tops |
-| 11–20 | Booth | 11 sub, 12–20 tops; also metered as they are (`vu_booth_sub` … `vu_booth_top9`) |
-| 21–22 | Phones | stereo; also metered as they are (`vu_phones_L`, `vu_phones_R`) |
-| 23–24 | Rec | stereo; also metered as they are (`vu_rec_L`, `vu_rec_R`) |
+| 1–10 | Main | 1 sub, 2–10 tops; only 1–8 reach the hardware; metered on a copy (out 41–50) |
+| 11–20 | Booth | 11 sub, 12–20 tops; also metered as they are (`vu_booth_sub` … `vu_booth_top9`); only 11–18 reach the hardware |
+| 21–22 | Phones | stereo, to the hardware's phones outputs; also metered as they are (`vu_phones_L`, `vu_phones_R`) |
+| 23–24 | Rec | stereo, to the network (`zita-j2n`), StemDeck's `rec_L/R` and `bpm_1`; also metered as they are (`vu_rec_L`, `vu_rec_R`) |
 | 25–26 | Aux | the aux return's analog input (analog 11–12), to the beat-analyzer's `vu_aux_L`, `vu_aux_R` |
 | 27–30 | free | |
 | 31–50 | VU meters | the analog inputs (31–38) and the Main meters (41–50), to the beat-analyzer, see below |
@@ -65,40 +47,32 @@ decks, one aux, one phones.
 
 ## The beat-analyzer's inputs
 
-The beat-analyzer is a JACK client with one tempo input and the meter inputs.
-
 | Ports | Count | Fed from | Used for |
 | :--- | :---: | :--- | :--- |
-| `bpm_1` | 1 | REAPER's rec pair (`out7`, `out8`), the first channel of the pair only | tempo detection in clock mode EXT — intern |
+| `bpm_1` | 1 | REAPER's rec pair (`out23`, `out24`), the first channel of the pair only | tempo detection in clock mode EXT — intern |
 | `vu_analog1_L` … `vu_free70` | 40 | REAPER out 31–50 and 11–26 (see below) | the meters `/vu/1`–`/vu/40` |
 | `vu_in1_pre_L` … `vu_in4_post_R` | 16 | REAPER out 51–66 | the channel meters `/vu/51`–`/vu/66` |
-| `vu_stem_a1_L/R` … `vu_stem_b4_L/R` | 16 | StemDeck's eight stereo stems (`zita-n2j` and/or the local StemDeck) | the stem meters `/vu/41`–`/vu/48` |
+| `vu_stem_a1_L/R` … `vu_stem_b4_L/R` | 16 | StemDeck's eight stereo stems (`zita-n2j` and/or the local StemDeck); optional, off by default | the stem meters `/vu/41`–`/vu/48` |
 
-### Tempo: `bpm_1`
-
-Whatever REAPER hands `bpm_1` is what the beat-analyzer listens to in
-clock mode 1 (EXT — intern, see the
-{doc}`Beat Analyzer <../user/beat-analyzer>`). It takes one channel only.
+`bpm_1` is what the beat-analyzer listens to in EXT (one channel); see
+{doc}`Beat Analyzer <../user/beat-analyzer>`.
 
 (core-vu-map)=
 
 ### The VU meters: which REAPER out feeds which `/vu/n`
 
-The beat-analyzer meters REAPER outputs, one JACK input each, and sends each
-as `/vu/n` (peak and RMS). The StemDeck meters, `/vu/41`–`/vu/50`, come from
-StemDeck itself (below). Which REAPER out feeds `/vu/n` depends on the range:
+One JACK input per meter, sent as `/vu/n` (peak, RMS):
 
 | `/vu/n` | REAPER out |
 | :--- | :--- |
 | 1–20 | *n* + 30 (out 31–50) |
 | 21–36 | *n* − 10 (out 11–26) |
-| 41–50 | none: StemDeck sends them |
+| 41–50 | none: StemDeck sends them (`stem_a1` … `stem_b4`, `stem_aux_L/R`) |
 | 51–66 | *n* (out 51–66) |
 
-`/vu/9`–`/vu/10` and `/vu/37`–`/vu/40` are free. A port
-name without its `vu_` prefix is the meter's name in `a3-osc.json`'s
-`vu_meters` (`analog1_L`, `main_sub`, …), and the devices look their meters up
-by it:
+`/vu/9`–`/vu/10` and `/vu/37`–`/vu/40` are free placeholders, with no socket.
+A port name without `vu_` is the meter's name in `vu_meters`; devices look
+meters up by it:
 
 | REAPER out | beat-analyzer in | beat-analyzer port | OSC | Meter |
 | :--- | :--- | :--- | :--- | :--- |
@@ -115,71 +89,49 @@ by it:
 | 51–58 | – | `vu_in1_pre_L` … `vu_in4_pre_R` | `/vu/51`–`/vu/58` | the channels' inputs after TRIM/EQ, L and R |
 | 59–66 | – | `vu_in1_post_L` … `vu_in4_post_R` | `/vu/59`–`/vu/66` | the channel buses after the fader, L and R |
 
-How the ranges come about:
-
-- **Main is metered on a copy 40 outputs up:** Main sub on out 1 is metered
-  on out 41. The analog inputs are tapped onto out 31–38 (track "analog"),
-  before any channel processing.
-- **Booth, Phones, Rec and the aux return are metered as they are**, on the
-  outputs that carry them (11–26), so `/vu/21`–`/vu/36` hear out *n* − 10.
-- **The channel meters keep their number:** out 51–66 sends `/vu/51`–`/vu/66`.
-
-The meter names (`free67` … `free70`) still carry the out numbers of the
-earlier one-rule map; nothing feeds them.
-
-The beat-analyzer needs `NUM_VU_CHANNELS=40` in its `build/.env` to open all
-forty REAPER inputs (see {ref}`Beat Analyzer <beat-analyzer-config>`). It sends
-them as five OSC bundles: four of ten (inputs, Main, Booth, stereo) and a fifth
-for the stems. The port names live in its `src/audio/vu_ports.cpp`. Builds from
-before 2026-09-30 name their forty inputs `vu_1` … `vu_12` (twelve) instead.
-
-A³ Motion and the A³ Mixer follow this map since 2026-09-30, by the meters'
-names: which device shows which meter is listed under
-{ref}`The meters <osc-vu-meters>` in the OSC reference.
+The beat-analyzer needs `NUM_VU_CHANNELS=40` in `build/.env`
+({ref}`config <beat-analyzer-config>`); it sends five bundles (four of ten,
+one for stems). Port names: `src/audio/vu_ports.cpp`. Who shows which meter:
+{ref}`The meters <osc-vu-meters>`.
 
 ### The stem meters
 
-**StemDeck sends its own stem meters.** One per stem, `/vu/41`–`/vu/48`
-(deck A stems 1–4 = 41–44, deck B = 45–48), 25 Hz, peak (the louder side) and
-rms (over both channels), measured after the stem's knob and mute, before the
-fader and the buses. The beat-analyzer therefore meters no stems by default.
+**StemDeck sends its own**: `/vu/41`–`/vu/48` (deck A stems 1–4, then deck B),
+25 Hz, peak of the louder side and RMS of both, after knob and mute, before
+fader and buses; plus its AUX bus, `stem_aux_L/R` (`/vu/49`, `/vu/50`).
 
-The beat-analyzer still has 16 optional JACK inputs, `vu_stem_a1_L` …
-`vu_stem_b4_R`, for the same eight stems. They are fed from `zita-n2j` and/or
-the local StemDeck; the patchbay does not connect them. With them on, each
-stem pair is one meter (the louder side) sent as `/vu/41`–`/vu/48`, the same
-addresses StemDeck uses:
+The beat-analyzer has 16 optional inputs for the same stems (unpatched, off by
+default), one meter per pair:
 
 | beat-analyzer in | beat-analyzer ports | OSC | Meter (`vu_meters`) |
 | :--- | :--- | :--- | :--- |
 | 41–48 | `vu_stem_a1_L/R` … `vu_stem_a4_L/R` | `/vu/41`–`/vu/44` | `stem_a1` … `stem_a4` |
 | 49–56 | `vu_stem_b1_L/R` … `vu_stem_b4_L/R` | `/vu/45`–`/vu/48` | `stem_b1` … `stem_b4` |
 
-`NUM_STEM_METERS` in its `build/.env` sets how many (default 0 = off; 8 turns
-them on, which would fight with StemDeck's own meters).
-With stem meters on, a `NUM_VU_CHANNELS` above 40 is clamped to 40.
+`NUM_STEM_METERS` (default 0; 8 would fight StemDeck's meters). With them on,
+`NUM_VU_CHANNELS` is clamped to 40.
+
+(patchbay-zita)=
 
 ## Network audio: zita
 
-A StemDeck on another machine reaches the Core over the network with
-`zita-njbridge`. The units are described under
-{ref}`zita-j2n and zita-n2j <core-zita>`; the UDP ports are in
-{doc}`ports`.
+`zita-njbridge` for a StemDeck on another machine. Units:
+{ref}`zita <core-zita>`; ports: {doc}`ports`.
 
 | Unit | Machine | Direction | Channels | JACK ports | Network |
 | :--- | :--- | :--- | :---: | :--- | :--- |
 | `zita-n2j` | Core | StemDeck in | 10 | `out_1` … `out_10` | listens on `zita-n2j.audio`, 20 ms buffer |
-| `zita-j2n` | Core | REAPER's rec pair out, 24 bit | 2 | `in_1`, `in_2` | sends to `radla.zita-n2j` |
+| `zita-j2n` | Core | REAPER's rec pair (`out23`, `out24`) out, 24 bit | 2 | `in_1`, `in_2` | sends to `radla.zita-n2j` |
 | `zita-j2n` | StemDeck machine | StemDeck out | 10 | inputs 1–10, patched by hand | sends to the Core's `zita-n2j.audio` |
 | `zita-n2j` | StemDeck machine | rec pair in | 2 | outputs, patched by hand | listens for the Core's `zita-j2n` |
 
-On the StemDeck machine nothing is connected automatically, neither by
-StemDeck nor by the zita units: StemDeck's outputs go into `zita-j2n`'s
-inputs in order, once, and saved. How to set that up is under
-{ref}`StemDeck × A³ Motion <stemdeck-with-motion-setup>`.
+Nothing connects itself on the StemDeck machine. The StemDeck package ships
+`/usr/share/stemdeck/stemdeck-without-core.xml`: load and activate it once in
+QjackCtl. It cables the ten outputs to `zita-j2n` `in_1` … `in_10` and
+`zita-n2j` `out_1/2` to `rec_L/R`
+({ref}`setup <stemdeck-with-motion-remote-machine>`).
 
-The ten network channels are StemDeck's first ten outputs, and on the Core
-they belong on REAPER's inputs 13–22:
+On the Core the ten network channels land on REAPER in 13–22:
 
 | StemDeck output | Network channel | REAPER in |
 | :--- | :---: | :---: |
@@ -188,102 +140,96 @@ they belong on REAPER's inputs 13–22:
 | `deck3_L`, `deck3_R` (bus 3) | 5–6 | 17–18 |
 | `deck4_L`, `deck4_R` (bus 4) | 7–8 | 19–20 |
 | `aux_L`, `aux_R` | 9–10 | 21–22 |
-| `phones_L`, `phones_R` | – | not sent (23–24 only from a local StemDeck) |
 
 ## StemDeck's ports
 
-StemDeck is a JACK client named `StemDeck` with 12 outputs: `deck1_L` …
-`deck4_R`, `aux_L/R`, `phones_L/R` — its six buses, mixed inside StemDeck.
-
-| Ports | What is on them |
-| :--- | :--- |
-| `deck1_L`, `deck1_R` | bus 1: every stem switched to **1**, from either deck, after the fader |
-| `deck2_L`, `deck2_R` | bus 2: every stem switched to **2** |
-| `deck3_L`, `deck3_R` | bus 3: every stem switched to **3** |
-| `deck4_L`, `deck4_R` | bus 4: every stem switched to **4** |
-| `aux_L`, `aux_R` | every stem switched to **A** (AUX), from either deck, after the fader |
-| `phones_L`, `phones_R` | every stem switched to **C** and every deck on **CUE**, before the fader: StemDeck's own headphone bus, REAPER inputs 23–24 |
-
-Despite the names, `deck1` … `deck4` are the **buses**, one per desk
-channel, not the decks. Which stems are on them is set by StemDeck's bus
-switches (see {ref}`StemDeck's mixer <stemdeck-mixer>`).
+Ten outputs, its five post-fader buses (`deck1` … `deck4` are buses, not
+decks; see {ref}`StemDeck's mixer <stemdeck-mixer>`), and two inputs:
 
 | Direction | Ports | Arrives on / comes from |
 | :--- | :--- | :--- |
-| out | 12 ports above | REAPER in 13–24 |
-| in | `rec_L`, `rec_R` | REAPER's rec pair (`out7`, `out8`); feeds **REC** in StemDeck's top bar |
+| out | `deck1_L` … `deck4_R`, `aux_L/R` | REAPER in 13–22 |
+| in | `rec_L`, `rec_R` | REAPER's rec pair (`out23`, `out24`); feeds **REC** |
 
-- **StemDeck never connects anything itself**; the cables are the
-  patchbay's (on the Core) or yours (on another machine).
-- StemDeck **never starts a JACK server**: it uses the one that is running,
-  or PipeWire's JACK interface; with neither it falls back to a plain audio
-  device (ALSA). With fewer than twelve outputs there, the buses are summed
-  down onto the ones there are.
-- It takes the graph's sample rate and buffer size as they are.
+StemDeck connects nothing and starts no JACK server; see
+{ref}`Audio out <stemdeck-audio>`.
 
 (patchbay-shipped)=
 
 ## The patchbay's sockets as shipped
 
-`a3-patchbay.xml` has these sockets. A client's ports are listed as the
-file names them.
+Ports pair in order; surplus ports stay unconnected. `reaper_aux`,
+`local_stemdeck` and `zita_stemdeck` exist as both output and input sockets.
 
 **Output sockets** (what feeds the graph):
 
 | Socket | Client | Ports |
 | :--- | :--- | :--- |
-| `MPD` | Music Player Daemon | `left`, `right` |
-| `reaper_vu` | REAPER | `out21` … `out32` |
-| `reaper_rec` | REAPER | `out7`, `out8` |
-| `reaper_main` | REAPER | `out1` … `out20` |
-| `system_in` | `system` | `capture_1` … `capture_10` |
-| `StemDeck` | StemDeck | `deck1_L` … `deck4_R`, `aux_L/R`, `phones_L/R` |
+| `system_in` | `system` | `capture_1` … `capture_12` |
+| `local_stemdeck` | StemDeck | `deck1_L` … `deck4_R`, `aux_L/R` |
 | `zita_stemdeck` | `zita-n2j` | `out_1` … `out_10` |
+| `reaper_main` | REAPER | `out1` … `out10` |
+| `reaper_booth` | REAPER | `out11` … `out20` |
+| `reaper_phones` | REAPER | `out21`, `out22` |
+| `reaper_rec` | REAPER | `out23`, `out24` |
+| `reaper_aux` | REAPER | `out25`, `out26` |
+| `reaper_vu_analog` | REAPER | `out31` … `out38` |
+| `reaper_vu_main` | REAPER | `out41` … `out50` |
+| `reaper_vu_channels_pre` | REAPER | `out51` … `out58` |
+| `reaper_vu_channels_post` | REAPER | `out59` … `out66` |
 
 **Input sockets** (what takes audio):
 
 | Socket | Client | Ports |
 | :--- | :--- | :--- |
-| `reaper_deck_4` | REAPER | `in7`, `in8` |
-| `reaper-analog` | REAPER | `in1` … `in10` |
-| `reaper-stemdeck` | REAPER | `in11` … `in22` |
-| `beat_analyzer_vu` | beat-analyzer | `vu_1` … `vu_12` |
-| `beat_analyzer_bpm` | beat-analyzer | `bpm_1` |
-| `zita_rec` | `zita-j2n` | `in_1`, `in_2` |
-| `StemDeck` | StemDeck | `rec_L`, `rec_R` |
-| `system_out` | `system` | `playback_1` … `playback_20` |
+| `reaper_analog` | REAPER | `in1` … `in12` |
+| `reaper_stems` | REAPER | `in13` … `in22` |
+| `reaper_aux` | REAPER | `in9`, `in10` (no cable) |
+| `alsa-scarlett_main` | `system` | `playback_1` … `playback_8` |
+| `alsa-scarlett_phones` | `system` | `playback_9`, `playback_10` |
+| `alsa-scarlett_booth` | `system` | `playback_11` … `playback_18` |
+| `local_stemdeck` | StemDeck | `rec_L`, `rec_R` |
+| `zita_stemdeck` | `zita-j2n` | `in_1`, `in_2` |
+| `beat-analyzer_bpm` | beat-analyzer | `bpm_1` |
+| `beat_analyzer_vu_main` | beat-analyzer | `vu_main_sub`, `vu_main_top1` … `vu_main_top9` |
+| `beat_analyzer_vu_booth` | beat-analyzer | `vu_booth_sub`, `vu_booth_top1` … `vu_booth_top9` |
+| `beat-analyzer_vu_phones` | beat-analyzer | `vu_phones_L`, `vu_phones_R` |
+| `beat-analyzer_vu_rec` | beat-analyzer | `vu_rec_L`, `vu_rec_R` |
+| `beat\-analyzer_aux` | beat-analyzer | `vu_aux_L`, `vu_aux_R` |
+| `beat-analyzer_analog` | beat-analyzer | `vu_analog1_L` … `vu_analog4_R` |
+| `beat-analyzer_channels_pre` | beat-analyzer | `vu_in1_pre_L` … `vu_in4_pre_R` |
+| `beat-analyzer_channels_post` | beat-analyzer | `vu_in1_post_L` … `vu_in4_post_R` |
 
 **Cables:**
 
 | From | → To | Note |
 | :--- | :--- | :--- |
 | `system_in` (`capture_1` … `12`) | `reaper_analog` (`in1` … `in12`) | the A³ Mixer's channels, the phones and the aux return |
-| `StemDeck` (12 ports) | `reaper-stemdeck` (`in11` … `in22`) | local StemDeck |
-| `zita_stemdeck` (`out_1` … `out_10`) | `reaper-stemdeck` (`in11` … `in20`) | StemDeck on another machine |
-| `MPD` (`left`, `right`) | `reaper_deck_4` (`in7`, `in8`) | overlaps the interface's inputs 7–8 |
-| `reaper_main` (`out1` … `out20`) | `system_out` (`playback_1` … `20`) | hardware playback |
-| `reaper_rec` (`out7`, `out8`) | `zita_rec` (`in_1`, `in_2`) | the recording mix to the network |
-| `reaper_rec` (`out7`, `out8`) | `beat_analyzer_bpm` (`bpm_1`) | the first of the pair |
-| `reaper_rec` (`out7`, `out8`) | `StemDeck` (`rec_L`, `rec_R`) | |
-| `reaper_vu` (`out21` … `out32`) | `beat_analyzer_vu` (`vu_1` … `vu_12`) | twelve meters |
+| `local_stemdeck` (10 ports) | `reaper_stems` (`in13` … `in22`) | local StemDeck |
+| `zita_stemdeck` (`out_1` … `out_10`) | `reaper_stems` (`in13` … `in22`) | StemDeck on another machine |
+| `reaper_main` (`out1` … `out10`) | `alsa-scarlett_main` (`playback_1` … `8`) | `out9`, `out10` have no hardware output |
+| `reaper_booth` (`out11` … `out20`) | `alsa-scarlett_booth` (`playback_11` … `18`) | `out19`, `out20` have no hardware output |
+| `reaper_booth` | `beat_analyzer_vu_booth` | Booth meters |
+| `reaper_phones` | `alsa-scarlett_phones` (`playback_9`, `10`) | hardware phones |
+| `reaper_phones` | `beat-analyzer_vu_phones` | Phones meters |
+| `reaper_rec` (`out23`, `out24`) | `zita_stemdeck` (`zita-j2n` `in_1`, `in_2`) | the recording mix to the network |
+| `reaper_rec` | `local_stemdeck` (`rec_L`, `rec_R`) | local StemDeck |
+| `reaper_rec` | `beat-analyzer_bpm` (`bpm_1`) | the first of the pair |
+| `reaper_rec` | `beat-analyzer_vu_rec` | Rec meters |
+| `reaper_aux` (`out25`, `out26`) | `beat\-analyzer_aux` | aux return meters |
+| `reaper_vu_analog` (`out31` … `38`) | `beat-analyzer_analog` | analog input meters |
+| `reaper_vu_main` (`out41` … `50`) | `beat_analyzer_vu_main` | Main meters |
+| `reaper_vu_channels_pre` (`out51` … `58`) | `beat-analyzer_channels_pre` | channel meters before the fader |
+| `reaper_vu_channels_post` (`out59` … `66`) | `beat-analyzer_channels_post` | channel meters after the fader |
 
 ## Open points
 
-**Not yet in the patchbay, or open:**
-
-- The input layout of 2026-10-01 (analog 1–12, StemDeck 13–24) is the target;
-  the patchbay as shipped still cables the hardware to `in1` … `in10` and
-  StemDeck to `in11` … `in22`.
-- StemDeck's phones (23–24) do not travel over the network: `zita-n2j` carries
-  ten channels.
-- The beat-analyzer's VU socket has twelve ports (`vu_1` … `vu_12`) fed from
-  REAPER's `out21` … `out32`; the [channel map](#core-reaper-channel-map)
-  above has forty inputs on outputs 31–70, and its output blocks reach
-  beyond the twenty hardware playback ports the patchbay connects.
-- `reaper_main` and `reaper_rec` both list `out7`, `out8`: those two outputs
-  go to hardware playback and to the recording mix at once. The channel map
-  puts Rec on out 23–24.
+- Main `out9`, `out10` and Booth `out19`, `out20` have no hardware output;
+  the Main and Booth sockets carry ten ports, the interface sockets eight.
+- `reaper_aux` as an input socket (`in9`, `in10`) has no cable; the analog
+  phones arrive over `reaper_analog`, which overlaps it.
 - Local StemDeck and `zita-n2j` are both cabled to the same REAPER inputs;
   use one at a time.
-- The Music Player Daemon socket exists, but MPD may not be installed.
 - The `bpm_1` input takes one channel of the pair only.
+- The free meters (`/vu/9`, `/vu/10`, `/vu/37`–`/vu/40`) have no socket and no
+  cable.
