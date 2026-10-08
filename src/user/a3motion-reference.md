@@ -64,10 +64,9 @@ Top to bottom:
 | **STEMDECK** | shows [StemDeck](stemdeck.md), on the Core's screen. StemDeck has the same key, reading MOTION, at exactly the same place, so a second tap brings you back |
 | **▾** | opens the list of the Core's workspaces — MOTION, STEMDECK, REAPER, QJACKCTL, and SCARLETT while the Scarlett mixer runs; only those with a window on them. The one on the screen is highlighted; tap one to go there, beside the list to close it |
 
-The switch at the right end looks like StemDeck's keys, not like your skin:
-it belongs to the rig rather than to A³ Motion, and it is the same key in
-both apps. On REAPER, QJACKCTL and SCARLETT a bar at the top of the screen
-names the workspaces; tap MOTION there to come back.
+The switch at the right end belongs to the rig, not to your skin: it is the
+same key in both apps. The workspaces are on
+{ref}`A³ Core's screen <core-workspaces>`.
 
 #### The sphere
 
@@ -261,11 +260,9 @@ channel's colour**: the action sets it. **Two taps** on a MOTION value, or on
 **then**, hand it back to the clip (or to nothing after).
 
 ```{warning}
-**What you set here is saved into the action — for everyone.** The script
-file itself changes, a shipped one too. Every button on every channel that
-carries the same action plays the change, and so does every set that names
-it. To keep the original, make a copy first: **EDIT**, change something in
-the text (a comment will do), then **Save as** in FILES.
+**What you set here is saved into the action's script, for everyone** —
+every channel and every set that uses it, shipped ones too. To keep the
+original, copy it first: see [Fire and assign actions](#motion-howto-action).
 ```
 
 <!-- QUESTION (maintainer): Save as is lit only while the editor holds unsaved text (scriptKeysFor: saveAs = unsaved), so an unchanged file can't be copied as it is -- the page now tells the DJ to change a comment first. Should Save as copy an unchanged file? -->
@@ -384,11 +381,9 @@ MIXER again, a tab, or MENU.
 
 ![The MIXER window over the sphere](pics_user/a3-motion-ui-mixer-overlay.png)
 
-The knobs show what is really set, not what this device last did: a hand on
-the desk moves them here too, and a restart mid-evening brings them back as
-they are. That holds for the CUE and FX keys as well. The A³ Mixer has no
-motor faders: turn a knob here and the hardware one stays put, and the next
-touch on it takes over from wherever it sits.
+The knobs and the CUE and FX keys show what is really set: a hand on the desk
+moves them here too, and a restart brings them back as they are. The desk has
+no motor faders; see [Mix from the screen](#motion-howto-mix).
 
 **Four channel strips**, each with its meter on the left and, down the strip:
 
@@ -648,8 +643,7 @@ letters dim, the other keys in the skin's accent colour.
   SHIFT + encoder (freq and Q), the pots and the faders keep their jobs: the
   mix stays under your hands.
 
-This reverses the earlier rule that the pads keep playing while you type:
-open the keyboard only when you mean to type, and put it away with HIDE or
+Open the keyboard only when you mean to type, and put it away with HIDE or
 ESC before the next clip has to start.
 
 (motion-reference-panel)=
@@ -688,7 +682,6 @@ mirrored so either hand reaches them; a key is down while either side is down.
 do. **SHIFT is on the panel and on the PADS window**: the SHIFT gestures on
 this page need one of the two.
 
-**While the keyboard is up, the panel is the keyboard:** every button types,
-no pad fires and no function key does its own job; encoder 1 moves the text
-cursor. HIDE or ESC gives the panel back. See [The keyboard](#motion-keyboard).
+**While the keyboard is up, the panel types** and no pad fires; see
+[The keyboard](#motion-keyboard).
 

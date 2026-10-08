@@ -19,9 +19,7 @@
 
 ```{warning}
 **Loading a set mid-set** stops all four clips and jumps every channel's 3d,
-freq and Q to the set's values — the room hears it. A shipped set then stands
-still until you press Play; a set saved while playing starts again on the
-next downbeat.
+freq and Q to the set's values. The room hears it.
 ```
 
 <!-- GIF: howto-files-load-set.gif | region: 0,36,768,664 | recorded 2026-09-29, 9.5 s | steps: In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped. | "FILES › SETS" / "Tap a set: it only shows" / "Load: all four channels take it" / "Stopped, ready for your ▶" | a shipped set loads stopped, so it ends on "ready for your ▶"; replaced howto-load-a-set.gif -->
@@ -202,12 +200,11 @@ where it started on a bar line.
 3. **no action** at the top of the list empties the button.
 
 ```{warning}
-**Turning a value on ACTION changes the action everywhere.** What you set
-there is saved into the action's script — for every channel and every set
-that uses that action, shipped sets included. To experiment, make a copy
-first: **EDIT**, change something in the text in FILES (a comment will do —
-**Save as** stays dark until the text differs from the file), then **Save
-as**. The copy goes onto the button you came from.
+**Turning a value on ACTION changes the action everywhere**: every channel and
+every set that uses it, shipped sets included. To experiment, copy it first:
+**EDIT**, change any character in FILES (a comment will do; **Save as** stays
+dark until the text differs), then **Save as**. The copy goes onto the button
+you came from.
 ```
 
 <!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With channel 1 playing, open ACTION, tap A1, hold A in the global strip: the action moves the clip; let go and the clip comes back. | "Channel 1 plays its clip" / "ACTION: tap A1 to choose it" / "Hold A: Move Spin takes over" / "Let go: the clip is itself again" -->
