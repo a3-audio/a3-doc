@@ -66,5 +66,5 @@ Safe: deleting a file (loaded material plays on), scrolling the menu, Escape.
 | The mixer's hardware control and the screen disagree | The A³ Mixer has no motor faders. Touch the hardware control and it takes over |
 | You changed an OSC address and nothing reacts | The other side must use the same one. Put it back, or change both |
 | Silent after a start | Core not up, or REAPER restarted alone: restart `a3-main`; `gate:` lines in `journalctl --user -u a3-core` ({ref}`silent start <core-silent-start>`) |
-| Screen frozen | Restart the device; the room doesn't move |
+| Screen frozen | Switch the A³ Motion off and on with the **power switch on its back**; the room doesn't move while it is down |
 

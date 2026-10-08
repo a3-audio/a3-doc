@@ -98,7 +98,8 @@ the pot decides.
 
 Tabs **CLIP MOTION ACTION CHMIX REC**, all for the selected channel; a tab also
 closes FILES, MIXER or PADS. **Double tap a knob** to rest it: most to the
-middle, sweeps and spin to off. On a knob playing a lane, the double tap clears
+middle, sweeps and spin to off, **elv** to ear height (as near as the clips
+allow). On a knob playing a lane, the double tap clears
 the [lane](#motion-howto-lanes).
 
 #### The global strip
