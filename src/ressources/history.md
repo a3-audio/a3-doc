@@ -48,6 +48,19 @@ they look like. In order:
 
 ![The MIX page of A³ Motion](../user/pics_user/a3-motion-ui-mix-full.png)
 
+## 2024
+
+### A³ Core's screens
+
+Core as it was set up then: REAPER beside SuperCollider, Dante, and a control
+panel over VNC.
+
+![Control screen](../configuration/pics_configuration/a3_core_screen_interface.png)
+
+![Sequencer screen](../configuration/pics_configuration/a3_core_screen_sequencer.png)
+
+![Mixer screen](../configuration/pics_configuration/a3_core_screen_mixer.png)
+
 ## 2025
 ### Spatial DJ-Setup
 A³ Mixer V02 | A³ Motion V02
