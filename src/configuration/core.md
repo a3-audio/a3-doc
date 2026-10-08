@@ -140,7 +140,7 @@ Answer *no* on a machine with a screen (e.g. running A³ Motion).
 
 ### 3. The Python environment
 
-`~/.venv` with `numpy`, `python-osc`, `mido`, `FreeSimpleGUI`
+`~/.venv` with `numpy`, `python-osc`, `mido`
 (`recipes/requirements.txt`). Core runs on it.
 
 ### 4. The configuration, installed into `~/.config`

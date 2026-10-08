@@ -58,7 +58,6 @@ Replaced on every install.
 | `a3-osc-render` | the truth as text: `user` (`osc.env`, analyzer block), `network` (postinst default) |
 | `a3-bar-per-workspace.py` | i3bar per workspace |
 | `a3-wait-for-the-screen` | waits (max 1 min) for X to report the screen, so a UI starts at the right scale |
-| `a3-interface.py` | old launcher window; started by nothing |
 | `reaper` | link to `~/.local/opt/REAPER/reaper` |
 
 ## `~/.local/lib` — Core's modules
