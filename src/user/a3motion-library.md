@@ -28,17 +28,6 @@ the filter and push the 3d in one press; the mood sets are full of them. Only
 an action's description before you press it in front of a full floor: a button
 you have never used may change the mix as well as the position.
 
-What makes a movement read one way or the other is well studied:
-
-- **Speed carries energy.** Faster turns and tempo-locked cycles read as more energetic; long,
-  slow cycles as calm.
-- **Height carries lift.** Up and overhead reads as open and bright, low and under the floor as
-  heavy and dark.
-- **Coming closer raises the tension.** Sound that approaches is heard as more arousing than
-  sound that recedes, above all when it is already dark.
-- **Smooth or angular.** Circles, roses and Lissajous figures read as pleasant; corners, zigzags
-  and sudden jumps as tense.
-
 The moods are placed on the **mood meter**: energy, from calm to driving, against
 pleasantness, from dark to open. The actions name the quarter they move the room
 towards:
@@ -50,17 +39,7 @@ towards:
 | **Q3** deep | down | dark, heavy |
 | **Q4** calm | down | open, soft |
 
-And the vocabulary the shapes and actions are made from:
-
-- **Smalley's motion typology.** Rising and falling, oscillation, rotation around a centre,
-  flying out from it or into it, dilation and contraction, vortex.
-- **Rhythm cells.** The four-to-the-floor kick, the off-beat hi-hat, the tresillo (3+3+2) that EDM
-  builds its tension on, the son clave in both directions, the shuffle and the gallop. A position
-  that jumps on their sixteenths grooves in space.
-- **Dub.** The desk as instrument: throws into the delay, repeats that fall away, filter
-  sweeps, spring reverb, reversed tape.
-- **Build-up, drop, breakdown.** The build widens, rises and opens the filter; the drop releases
-  it all at once; the breakdown strips it back.
+Why a movement reads as calm or driving: {ref}`How a movement feels <motion-how-it-feels>`.
 
 ### The fourteen sets
 
@@ -108,59 +87,18 @@ weight. The four mood sets use the top two rows for their own gestures instead. 
 
 ### The four mood sets
 
-Each of these is one mood, built the way *Groove* is: four figures that belong
+Each is one mood, built the way *Groove* is: four figures that belong
 together, one per channel, and six gestures that each move several things at
-once. Any channel can take any gesture. Where a gesture says *held*, it lasts
-only while the pad is held. The first two rows are not "more" and "less" here,
-they are different gestures of the same mood.
+once. Here the top two rows are not "more" and "less" but different gestures
+of the same mood. Their clips are in the [clips table](#motion-library-clips),
+their actions in the [action tables](#motion-library-actions).
 
-**Tribal** — percussive, close to the ground, call and answer. Sits after
-*Groove*; A6 cues **Tension Siren**.
-
-- Clips: Gallop (Rhythm Gallop), Ping Pong (Rhythm Ping Pong, which answers
-  channel 1 from the opposite side), Clave (Rhythm Clave 2-3, Groove's clave turned
-  round), Zigzag (Edge Zigzag, hard corners) · spare: Echo (Rhythm Echo).
-- Actions: **Move Stomp** (held; the figure stamps round once a bar and leans to
-  the floor), **Move Call** (the figure jumps to the opposite side and answers),
-  **Width Drum Roll** (held; a fast squeeze sweep, front-back against
-  left-right), **Speed Double Gallop** (held; twice as fast, low and rolling),
-  **FX Thunder** (held; the 3d hits full and the filter goes low and dark),
-  **Cue Tension Siren**.
-
-**Tension** — circling, rising, faster. Sits after *Tribal* (or a *Build*); A6
-cues **Drop Impact**.
-
-- Clips: Siren (Orbit Circle), Vortex (Spiral Vortex), Helix (Spiral Helix),
-  Riser (Spiral Riser) · spare: Collapse (Spiral Collapse), the moment before
-  the drop.
-- Actions: **Move Siren** (held; circles once a bar, brighter as it goes),
-  **Lift Climb** (held; climbs to the ceiling while held), **Speed Accelerate**
-  (held; four times as fast and turning), **Width Tighten** (held; narrows to a
-  point and pulses), **FX Filter Rise** (held; the filter opens all the way,
-  slowly, resonance high), **Cue Drop Impact**.
-
-**Acid** — one figure turning slowly, hypnotic, with resonance. Sits after
-*Break*; A6 cues **Dub Echo**.
-
-- Clips: Loop (Loop 3-4), Infinity (Loop Infinity), Epicycle (Cycle Epi 3-1),
-  Pulse (Orbit Pulse) · spare: Hypocycle (Cycle Hypo 5-3), the long one.
-- Actions: **Move Squeeze Sweep** (held; the figure is squeezed and the squeeze
-  sweeps), **Width Inhale** (held; the spread breathes out and in, the filter with
-  it), **Move Phase Drift** (the figure slips a quarter turn and drifts out of
-  phase, at most one turn in eight bars), **Speed Double Twist** (held; twice as
-  fast and twisting), **FX Resonance Climb** (held; the acid line opens:
-  resonance high, cutoff climbing), **Cue Dub Echo**.
-
-**Ambient** — weather overhead, slow and wide. Sits after *Deep*; A6 cues
-**Float Aurora**.
-
-- Clips: Drift (Wander Drift, overhead), Wave (Wander Wave), Breath (Spiral
-  Breath), Kepler (Orbit Kepler) · spare: Ellipse (Orbit Ellipse), calm and flat.
-- Actions: **Lift Cloud** (held; the figure rises slowly into the ceiling and
-  drifts there), **Move Wind** (held; a slow turn with a pull downwards),
-  **Width Fog** (held; spreads wide and soft), **Speed Slow Tide** (held; half as
-  fast, rising and falling like a tide), **FX Rain** (held; some 3d, the cutoff
-  low, a long tail), **Cue Float Aurora**.
+| Set | Character | Sits after | A6 cues |
+| :--- | :--- | :--- | :--- |
+| **Tribal** | percussive, close to the ground, call and answer (Ping Pong answers channel 1 from the opposite side) | *Groove* | Tension Siren |
+| **Tension** | circling, rising, faster; the spare, Collapse, is the moment before the drop | *Tribal* (or a *Build*) | Drop Impact |
+| **Acid** | one figure turning slowly, hypnotic, with resonance | *Break* | Dub Echo |
+| **Ambient** | weather overhead, slow and wide | *Deep* | Float Aurora |
 
 ### Across a night
 
@@ -234,6 +172,8 @@ on the sixteenths of its rhythm:
 - **Gallop:** the sixteenth gallop, x.xx on every beat, over three points.
 - **Echo:** throws that halve, like a delay's repeats.
 
+(motion-library-clips)=
+
 ### Clips (70), by phase
 
 A clip is a shape plus everything it is played with: speed, height, width,
@@ -266,6 +206,8 @@ Some shapes turn up in several phases — Orbit Circle is a calm *Halo* in the
 warm-up, a heavy *Sub* in Deep and a *Still* at closing time. The shape is the
 path; the clip decides whether it floats overhead or rumbles under the floor.
 
+(motion-library-actions)=
+
 ### Actions (71)
 
 An action changes the clip for as long as its accent lasts, then the clip comes
@@ -297,7 +239,7 @@ towards calm and weight, and Q1–Q4 is the quarter of the mood meter it heads f
 | Move Stomp | the figure stamps round once a bar and leans to the floor | more — percussive, low; tribal (Q1) | Hold |
 | Move Call | the figure jumps to the opposite side and answers | a dialogue between channels | 1shot |
 | Move Squeeze Sweep | the figure is squeezed and the squeeze sweeps | hypnotic — one figure, kneaded; acid (Q2) | Hold |
-| Move Phase Drift | the figure slips a quarter turn and starts drifting | hypnotic — out of phase with the others; acid (Q2) | 1shot |
+| Move Phase Drift | the figure slips a quarter turn and starts drifting, at most one turn in eight bars | hypnotic — out of phase with the others; acid (Q2) | 1shot |
 | Move Wind | a slow turn with a pull downwards | less — wind through the room; ambient (Q3) | Hold |
 | Move Siren | the figure circles once a bar, brighter as it goes | more — an alarm; tension (Q2) | Hold |
 
@@ -393,19 +335,6 @@ Firing it changes nothing.
 <!-- GIF: howto-library-assign-cue.gif | region: 0,672,578,352 | recorded 2026-09-29, 7.5 s | steps: On channel 2's ACTION page tap A6, then tap Cue Dub Echo in the list: A6 carries it. | "Channel 2, ACTION" / "Tap A6: the list shows its script" / "Tap Cue Dub Echo: A6 carries it" | A6 set to Cue Drop Impact beforehand, so Cue Dub Echo sits right below it without scrolling -->
 
 ![On channel 2's ACTION page tap A6, then tap Cue Dub Echo in the list: A6 carries it.](pics_user/howto-library-assign-cue.gif)
-
-## The research behind it
-
-The research this rests on:
-
-- Russell's circumplex model of affect, and the Mood Meter built on it;
-- studies of approaching and receding sound (Tajadura-Jiménez et al., *Embodied auditory
-  perception*, 2010);
-- the mapping of pitch and height;
-- Denis Smalley's *Spectromorphology* (1997);
-- Stockhausen's work with rotating sound, which found that past about sixteen rotations a second,
-  movement stops being heard as movement at all;
-- dub and dance-music production practice.
 
 (motion-under-the-hood)=
 

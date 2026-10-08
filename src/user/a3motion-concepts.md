@@ -126,3 +126,42 @@ The screen *is* the instrument. Menus, lists and the bar are driven by touch;
 without the screen, the panel can't drive the device. Treat it like your CDJ
 screens, and keep the drinks on the other side.
 
+(motion-how-it-feels)=
+
+## How a movement feels
+
+The shipped library is built on what is known about how movement in sound is
+heard:
+
+- **Speed carries energy.** Faster turns and tempo-locked cycles read as more energetic; long,
+  slow cycles as calm.
+- **Height carries lift.** Up and overhead reads as open and bright, low and under the floor as
+  heavy and dark.
+- **Coming closer raises the tension.** Sound that approaches is heard as more arousing than
+  sound that recedes, above all when it is already dark.
+- **Smooth or angular.** Circles, roses and Lissajous figures read as pleasant; corners, zigzags
+  and sudden jumps as tense.
+
+The vocabulary the shapes and actions are made from:
+
+- **Smalley's motion typology.** Rising and falling, oscillation, rotation around a centre,
+  flying out from it or into it, dilation and contraction, vortex.
+- **Rhythm cells.** The four-to-the-floor kick, the off-beat hi-hat, the tresillo (3+3+2) that EDM
+  builds its tension on, the son clave in both directions, the shuffle and the gallop. A position
+  that jumps on their sixteenths grooves in space.
+- **Dub.** The desk as instrument: throws into the delay, repeats that fall away, filter
+  sweeps, spring reverb, reversed tape.
+- **Build-up, drop, breakdown.** The build widens, rises and opens the filter; the drop releases
+  it all at once; the breakdown strips it back.
+
+### The research behind it
+
+- Russell's circumplex model of affect, and the Mood Meter built on it;
+- studies of approaching and receding sound (Tajadura-Jiménez et al., *Embodied auditory
+  perception*, 2010);
+- the mapping of pitch and height;
+- Denis Smalley's *Spectromorphology* (1997);
+- Stockhausen's work with rotating sound, which found that past about sixteen rotations a second,
+  movement stops being heard as movement at all;
+- dub and dance-music production practice.
+
