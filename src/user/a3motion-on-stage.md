@@ -49,6 +49,7 @@ Safe: deleting a file (loaded material plays on), scrolling the menu, Escape.
 | The blob moves, the sound doesn't | Turn **3d** up. At 0 the channel is plain stereo |
 | A drag on the sphere moves nothing | Start the drag on the blob itself. Or camera mode is on: tap the small sphere to switch it off |
 | A drag on a meter moves nothing | Grab the handle, not the meter |
+| No bar, no channel row, ships instead of blobs | That is [FPV](#motion-fpv). **FULL/FPV** in the status bar brings FULL back |
 | No meters, no lightning | Nothing from Core: cable, Core running? |
 | ▶ blinks before starting | Waiting for the downbeat (up to a bar); press again to cancel |
 | Off the beat, wrong BPM | Clock key. INT: tap. EXT/PIO: check the source (no beats: last tempo) |
