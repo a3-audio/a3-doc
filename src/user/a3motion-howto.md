@@ -6,20 +6,17 @@
 
 ## Load a set or a clip
 
-1. Tap **FILES** in the global strip. It opens on top of the sphere.
-2. Tap **SETS** for a set, **CLIPS** for a clip. To load a clip, select its
-   channel first.
-3. Tap a row. **A tap only shows it** in the editor on the right; nothing on
-   the device changes yet.
-4. Tap **Load**. A set goes onto all four channels, a clip onto the selected
-   channel. The shipped sets load standing still: start them with Play\|Pause
-   or PADS › **Play all**. A set you saved while clips were playing starts
-   those clips again, together, on the next downbeat.
-5. Tap **FILES** again (or any tab) to close it.
+1. Tap **FILES** (global strip).
+2. **SETS** or **CLIPS** (for a clip, select its channel first).
+3. Tap a row: **it only shows** in the editor.
+4. **Load**: a set onto all four channels, a clip onto the selected one.
+   Shipped sets load stopped (start with Play\|Pause or PADS › **Play all**);
+   a set saved while playing restarts its clips on the next downbeat.
+5. Tap **FILES** again, or any tab, to close.
 
 ```{warning}
-**Loading a set mid-set** stops all four clips and jumps every channel's 3d,
-freq and Q to the set's values. The room hears it.
+**Loading a set mid-set** stops all four clips and jumps 3d, freq and Q to
+the set's values. The room hears it.
 ```
 
 <!-- GIF: howto-files-load-set.gif | region: 0,36,768,664 | recorded 2026-09-29, 9.5 s | steps: In FILES › SETS tap Warmup, tap Load, close FILES: all four channels carry the set, stopped. | "FILES › SETS" / "Tap a set: it only shows" / "Load: all four channels take it" / "Stopped, ready for your ▶" | a shipped set loads stopped, so it ends on "ready for your ▶"; replaced howto-load-a-set.gif -->
@@ -34,21 +31,16 @@ freq and Q to the set's values. The room hears it.
 
 ## Play and stop a clip
 
-- **Start:** press the channel's **Play\|Pause** pad, or select the channel
-  and tap **▶** in the global strip. It starts on the **next downbeat** and
-  blinks while it waits.
-- **Stop on the beat:** press **Play\|Pause** again, or tap **❚❚** (the same
-  key on the screen). The clip stops on the next downbeat.
-- **Stop now:** tap **■** on the screen, or hold **SHIFT** and press
-  **Play\|Pause** on the panel.
-- **Call off a start that is still waiting:** press Play\|Pause again while
-  it blinks.
-- **Start all four:** open **PADS** and tap **Play all** in the scene column
-  on the left: it starts every clip that is standing still. To stop all four,
-  stop each channel (■, or SHIFT + Play\|Pause); there is no Stop all.
+| To | Do | When |
+| :--- | :--- | :--- |
+| start | **Play\|Pause** pad, or **▶** | next downbeat (blinks while waiting) |
+| stop on the beat | **Play\|Pause** again, or **❚❚** | next downbeat |
+| stop now | **■**, or **SHIFT** + **Play\|Pause** | now |
+| cancel a waiting start | **Play\|Pause** while it blinks | now |
+| start all four | PADS › **Play all** (stopped clips only) | next downbeat |
 
-Every start begins at the top of the shape. A stop leaves the sound where it
-is; it doesn't jump anywhere.
+There is no Stop all. Every start begins at the top of the shape; a stop
+leaves the sound where it is.
 
 <!-- GIF: howto-transport-play-pause.gif | region: 0,626,768,398 | recorded 2026-09-29, 9.8 s | steps: Tap ▶: it blinks until the downbeat, then plays. Tap ❚❚: it pauses on the next downbeat. | "Clip stopped" / "▶ blinks: waiting for the downbeat" / "On the one: it plays" / "❚❚ waits for the downbeat too" / "Paused, right on the one" | replaced howto-play-pause.gif -->
 
@@ -66,28 +58,18 @@ is; it doesn't jump anywhere.
 
 ## Move a sound by hand
 
-1. Put a finger **on** a channel's blob on the sphere and drag. The finger has
-   to land on the blob (or right beside it): a drag that starts on empty
-   sphere moves nothing. The sound goes where your finger goes. **A drag is
-   live and doesn't wait for the beat**: the room hears every centimetre.
-2. Let go. A playing clip takes the sound back onto its shape; a stopped one
-   leaves it where you let go.
+1. Drag a blob — the finger must land **on** it. The room follows live, not
+   on the beat.
+2. Let go: a playing clip takes it back; a stopped one leaves it there.
 
-Two fingers take two blobs. The top of the sphere is the front of the room.
+Two fingers take two blobs; the top of the sphere is the front. **A dragged
+blob pushes others aside, and their sound moves too**: steer round them.
 
-**Steer round the other blobs.** A dragged blob pushes every blob it comes
-close to out of its way, and their sound moves with them. Drag straight
-through a crowd and you carry the others along.
-
-**To look from another angle without moving anything**, use camera mode:
+**Look without moving anything** (camera mode):
 
 1. Tap the small sphere in the global strip.
-2. Drag up on the sphere to lean the view towards the horizon; down brings it
-   back. Drag sideways to walk round.
-3. Double tap to go back to straight above. Tap the small sphere again to
-   leave camera mode.
-
-In camera mode no finger can move a sound.
+2. Drag up/down to lean the view, sideways to walk round.
+3. Double tap: straight above. Tap the small sphere again to leave.
 
 <!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back. | "Channel 1 plays its clip" / "Drag a blob: the sound follows" / "Let go: the clip takes it back" | the drag path goes round the other blobs, which a dragged blob pushes aside -->
 
@@ -105,21 +87,17 @@ In camera mode no finger can move a sound.
 
 ## Change the shape, the speed and the direction
 
-On the **CLIP** tab, for the selected channel:
+On **CLIP**, for the selected channel:
 
-- **Another shape, same values:** drag the **SVG** field with a thumb. Each
-  step is a new shape; speed, height and everything else stay put.
-- **Another clip, shape and values together:** drag the **CLIP** field.
-- **Faster or slower:** tap one of the four **LENGTH** keys. The number is how
-  many beats one pass takes: fewer beats, faster laps. Drag a key up or down to
-  give it another length; the key keeps it.
-- **Direction:** tap **DIRECTION** to step forwards, backwards, there and
-  back, or a random start each pass.
-- **What happens at the end of a pass:** tap **END-ACTION** to step Loop,
-  Stop, or Paus (pause).
+| To | Do |
+| :--- | :--- |
+| change the shape, keep the values | drag **SVG** |
+| change shape and values | drag **CLIP** |
+| faster / slower | tap a **LENGTH** key (beats per pass); drag a key to change its length |
+| direction | tap **DIRECTION**: forwards, backwards, there and back, random start |
+| end of a pass | tap **END-ACTION**: Loop, Stop, Paus |
 
-CLIP and SVG are separate on purpose, so browsing shapes never sneaks someone
-else's preset onto your channel mid-set.
+CLIP and SVG are separate so browsing shapes never loads a preset mid-set.
 
 <!-- GIF: howto-clip-length-tap.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.5 s | steps: With the clip playing at LENGTH 16, tap LENGTH 2, then LENGTH 1: the laps get faster. | "LENGTH 16: a lap every four bars" / "Tap 2: the same lap in two beats" / "Tap 1: fewer beats, faster laps" -->
 
@@ -147,21 +125,17 @@ else's preset onto your channel mid-set.
 
 ## Shape the movement
 
-On the **MOTION** tab every field has two knobs: **the right knob sets a
-value, the left knob moves it** in time with the bars.
+On **MOTION** each field has two knobs: **right sets, left moves it** in bars.
 
-- **Point the shape somewhere else:** `rot`. **Keep it turning:** `spin` —
-  one way or the other.
-- **Wider or tighter:** `reach`. **Breathing in and out:** `swell`.
-- **Higher or lower:** `elv`. **Rising and falling:** `sway`.
-- **A ceiling and a floor** the sound can't pass: `clip-top` and `clip-bot`
-  (the one field where both knobs set a value).
-- **Squash it** front to back or side to side: `sqzX`, `sqzY`.
-- **Lean it** forward or back: `tilt`. **Sideways:** `roll`.
-- **Back to rest:** double tap the knob.
-
-Whatever moves on its own counts in bars, never seconds, so it comes back to
-where it started on a bar line.
+| To | Knob |
+| :--- | :--- |
+| point / keep turning | `rot` / `spin` |
+| wider / breathing | `reach` / `swell` |
+| higher / rising and falling | `elv` / `sway` |
+| ceiling and floor | `clip-top`, `clip-bot` (both set values) |
+| squash front–back / side–side | `sqzX` / `sqzY` |
+| lean forward / sideways | `tilt` / `roll` |
+| back to rest | double tap |
 
 <!-- GIF: howto-motion-rotation.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.6 s | steps: On MOTION drag rot: the shape turns. Drag spin: it keeps turning. Double tap spin: it stops. | "MOTION › ROTATION" / "Drag rot: the shape turns" / "Drag spin: it keeps on turning" / "Double tap spin: off again" | channel 1 alone on Break Heartbeat (the notch shows the turn; spin 0 in the clip); spin is dragged far, since its first steps take 32 and 16 bars a turn -->
 
@@ -179,28 +153,18 @@ where it started on a bar line.
 
 ## Fire and assign actions
 
-**Fire an action:**
-
-- **From the pads:** hold one of the channel's action pads, A1–A6, on the
-  panel or on the PADS window. It fires **at once**. The ACTION page comes up
-  with that button chosen.
-- **From the screen:** on the ACTION tab, tap a button (A1–A6) to choose it —
-  a tap only chooses, it doesn't fire — then hold **A** in the global strip.
-- **Audition it privately:** hold **SHIFT** and press an action pad. It plays
-  on the screen only; the room hears nothing until you let go of the pad.
-
-**Put another action on a button:**
-
-1. Open the ACTION tab and tap the button, A1–A6.
-2. Tap a script in the list next to it. It is on the button now.
-3. **no action** at the top of the list empties the button.
+| To | Do |
+| :--- | :--- |
+| fire | hold an action pad A1–A6 (panel or PADS): **now**; ACTION opens on that button |
+| fire from the screen | ACTION: tap a button (chooses, doesn't fire), hold **A** |
+| audition privately | **SHIFT** + action pad: screen only, while held |
+| assign | ACTION: tap the button, tap a script; **no action** empties it |
 
 ```{warning}
-**Turning a value on ACTION changes the action everywhere**: every channel and
-every set that uses it, shipped sets included. To experiment, copy it first:
-**EDIT**, change any character in FILES (a comment will do; **Save as** stays
-dark until the text differs), then **Save as**. The copy goes onto the button
-you came from.
+**Turning a value on ACTION changes the action everywhere**, shipped sets
+included. To experiment, copy first: **EDIT**, change any character in FILES
+(a comment will do; **Save as** stays dark until the text differs), **Save
+as**. The copy goes onto the button you came from.
 ```
 
 <!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With channel 1 playing, open ACTION, tap A1, hold A in the global strip: the action moves the clip; let go and the clip comes back. | "Channel 1 plays its clip" / "ACTION: tap A1 to choose it" / "Hold A: Move Spin takes over" / "Let go: the clip is itself again" -->
@@ -231,31 +195,20 @@ you came from.
 
 ## Record a take, and keep it or throw it away
 
-1. Select the channel in the channel row.
-2. Tap **●**. The take is **armed**: REC opens, ● and ▶ light, and the clip
-   keeps playing. **■** or **●** again disarms it.
-3. On REC, choose the length (the lit **LENGTH** key is how long the take
-   will be) and the rec mode — **Touch** to draw a shape.
-4. Tap **▶**. The take starts on the **next downbeat**.
-5. Drag on the sphere: the first finger down writes the position, wherever it
-   lands. The line appears as you draw. Knobs you turn on MOTION are recorded
-   too, see [below](#motion-howto-lanes).
-6. Tap **●** (or **■**) to end the take. A take is always the **last full
-   pass**: stop halfway through one and that half is dropped.
-7. Tap **SAVE** (where ● was) to keep it: the shape, and a clip with every
-   value it has now. **DISCARD** (where A was) asks twice, then puts back what
-   the channel held before — stopped. Press Play to hear it again.
+1. Select the channel.
+2. Tap **●**: armed (REC opens, ● and ▶ lit, the clip plays on). **■** or **●**
+   disarms.
+3. On REC: the lit **LENGTH** is the take's length; rec mode **Touch** to draw.
+4. Tap **▶**: the take starts on the **next downbeat**.
+5. Drag on the sphere; the first finger writes. MOTION knobs record too
+   ([below](#motion-howto-lanes)).
+6. **●** or **■** ends it. A take is the **last full pass**.
+7. **SAVE** (where ● was) keeps shape and clip. **DISCARD** (where A was) asks
+   twice and restores the channel, stopped.
 
-**A take is live**: the room hears what you draw. To practise without the
-room, turn the channel's 3d down first.
-
-Nothing is lost while you decide. The take keeps playing, marked unsaved,
-until you tap SAVE or DISCARD, or something replaces it: a new take, a shape
-or a set loaded, a restart.
-
-**On the panel:** hold **REC** and press the channel's **Play\|Pause** pad.
-That skips arming; the take starts on the next downbeat. Press REC again to
-end it.
+**The room hears the take**; to practise, turn 3d down. An undecided take keeps
+playing, unsaved, until SAVE, DISCARD, a new take, a load or a restart. **Panel:**
+hold **REC** + **Play\|Pause** (no arming); REC again ends.
 
 <!-- GIF: howto-rec-take.gif | region: 0,36,768,988 | recorded 2026-09-29, 10.2 s | steps: With the clip playing tap ●, tap ▶, draw circles on the sphere from the downbeat, tap ●: the last full lap is the take. | "Channel 1 plays" / "● arms the take" / "▶ starts it on the downbeat" / "Draw on the sphere, lap after lap" / "● ends it: the last full lap stays" -->
 
@@ -273,14 +226,10 @@ end it.
 
 ## Record knob moves
 
-● opens REC, and the knobs are on MOTION: after ●, tap **MOTION** again,
-then ▶. (On REC the same spot is the CLIP field, and a drag there steps
-through clips mid-take.)
-
-During a take, turn any knob on MOTION. It is written into a **lane**, drawn
-in red while it writes, with the same rec mode as the shape. On playback the
-lane turns the knob by itself; your hand on the knob wins while it holds.
-Double tap a knob to clear its lane; the other lanes stay.
+After ●, tap **MOTION** again, then ▶ (on REC that spot is CLIP). Knobs turned
+during the take become **lanes** (red while writing, same rec mode). On
+playback the lane turns the knob; your hand wins while it holds. Double tap a
+knob to clear its lane.
 
 <!-- GIF: howto-rec-knob-lane.gif | region: 0,36,768,988 | recorded 2026-09-29, 10.2 s | steps: On MOTION tap ●, tap MOTION again, tap ▶, turn rot during the take, tap ●: rot plays back as a lane. Double tap rot: the lane is cleared. | "MOTION, channel 2" / "● arms: REC opens" / "Back to MOTION, then ▶" / "Turn rot while the take runs" / "● ends it: rot plays a lane" / "Double tap rot: lane cleared" | ● switches the bar to REC, so MOTION is tapped again before ▶; the take is left unsaved -->
 
@@ -290,19 +239,12 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 ## Keep a tweak and save your set
 
-- **Keep a clip you changed.** A warning-coloured **drift dot** on the CLIP
-  field means its values have been turned since it was loaded. Open FILES ›
-  **CLIPS**, tap **from clip**, then **Save as**. Your copy lands in your own
-  files, named after the original ("Warmup Halo 2"). The channel keeps playing
-  the original, drift dot and all: **Load** the copy to play it.
-- **Keep tonight's set.** FILES › **SETS**, tap **from set**, then
-  **Save as**. The copy is named after the row the editor showed; with no row
-  shown it is called "Action". Give it a name (below).
-- **Give it a name.** Tap the row, tap **Rename**, type, and tap **Keep** (or
-  ENTER).
-- **Clear out the library.** Tap the row, tap **Delete**, and tap it again
-  when it asks **Sure?**. Delete removes the file, not the music: whatever is
-  loaded keeps playing.
+| To | Do |
+| :--- | :--- |
+| keep a changed clip (**drift dot** on CLIP) | FILES › **CLIPS** › **from clip** › **Save as** ("Warmup Halo 2"); the channel keeps the original until you **Load** the copy |
+| keep tonight's set | FILES › **SETS** › **from set** › **Save as** (named after the row shown, else "Action"); rename it |
+| rename | row › **Rename**, type, **Keep** or ENTER |
+| delete | row › **Delete** › **Delete** again; what is loaded keeps playing |
 
 <!-- GIF: howto-files-keep-tweak.gif | region: 0,36,768,988 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), 12.2 s | steps: The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip. | "The dot: this clip was changed" / "FILES › CLIPS" / "from clip: the device as text" / "Save as: your tweak, a new clip" | the channel keeps the original clip; the copy has to be loaded -->
 
@@ -328,20 +270,13 @@ Double tap a knob to clear its lane; the other lanes stay.
 
 ## Mix from the screen
 
-- **One channel:** select it and open the **CHMIX** tab — its gain, EQ,
-  send, CUE, FX and volume.
-- **All four and the master:** tap **MIXER** in the global strip.
-- **Volume:** the meter *is* the VOL fader, and the handle on it is the fader
-  cap. Grab the **handle** and drag, one to one. A drag that starts anywhere
-  else on the meter does nothing, so a finger landing low on a loud channel
-  can't pull it down.
-- **Back to a default:** double tap a knob (EQ flat, SEND off, volume full).
-  The master fader has no double tap, on purpose.
+- **One channel:** **CHMIX** tab. **All four and master:** **MIXER**.
+- **Volume:** drag the **handle** on the meter, one to one; a drag elsewhere
+  does nothing, so a stray finger can't pull a loud channel down.
+- **Double tap** a knob: EQ flat, SEND off, volume full. Not the master.
 
-These are the A³ Mixer's own controls, and the two follow each other. The A³
-Mixer has no motor faders, though: turn something on the screen and the
-hardware control stays where it is. The next time you touch it, the level
-jumps to wherever the hardware control sits.
+The desk follows, but has no motor faders: its next touch jumps to where the
+hardware control sits.
 
 <!-- GIF: howto-chmix-volume.gif | region: 0,672,578,352 | recorded 2026-09-29, 9.9 s | steps: On CHMIX drag the handle on the meter down and up, then double tap the meter: full volume. | "The meter is the VOL fader" / "Drag the handle, one to one" / "Double tap: full volume" -->
 
@@ -363,17 +298,12 @@ jumps to wherever the hardware control sits.
 
 ## Set the tempo by hand
 
-1. Tap the clock key (top left) until it reads **INT**.
-2. Tap the beat display — the four cells beside the readout — in time with
-   the music, or press **TAP** on the panel. The first tap after a pause is
-   the one; the BPM follows your taps.
+1. Tap the clock key to **INT**.
+2. Tap the beat display (or **TAP**) in time; the first tap after a pause is
+   the one.
 
-In EXT and PIO the tempo comes from outside, and your taps are passed on to
-the beat analyser.
-
-**Stepping the clock key all the way round loses your taps.** Back on INT,
-the tempo is the one INT had the first time you left it, not the one you
-tapped since. Tap it in again.
+In EXT and PIO taps go to the beat analyser. **Stepping the clock key round
+loses your taps**: back on INT you get the tempo INT had when you first left.
 
 <!-- GIF: howto-statusbar-tap.gif | region: 0,0,500,36 | recorded 2026-10-01, quiet-indigo-2, --fuzz 0 (quantized before optimizing), --width 500 (the strip at its own size) | steps: Tap the clock key to INT, tap the beat display eight times: the BPM follows. | "The clock key says whose tempo" / "INT: the tempo is yours" / "Tap the beat display in time" / "The BPM follows your taps" -->
 
@@ -383,18 +313,12 @@ tapped since. Tap it in again.
 
 ## Change the look
 
-- **Calm the screen down:** tap **CLEAN** in the status bar. Thin lines,
-  plain blobs, no effects: easier to read in a dark booth, and lighter on the
-  machine. Tap again for your skin. The shipped default skin *is* the clean
-  look, so on it CLEAN changes nothing you can see; it matters once you have
-  chosen a richer skin.
-- **Another skin:** MENU, then double tap **Skin**. Browse with the arrow keys
-  ↑ ↓: each skin previews on the sphere, ENTER keeps it, and Escape or back
-  keeps the one you had. **A tap on a skin chooses it at once** and keeps it,
-  no preview — dragging the list only scrolls it.
-- **Your own colours and sizes:** MENU › **Skin Editor**. Opening it on the
-  shipped default skin makes a copy called **custom** as you leave, even if you
-  changed nothing, and switches to it.
+- **CLEAN** (status bar): thin lines, no effects, lighter on the machine. The
+  shipped default skin already is clean.
+- **Another skin:** MENU, double tap **Skin**; ↑ ↓ preview, ENTER keeps, Escape
+  goes back. **A tap chooses at once**, without preview.
+- **Your own:** MENU › **Skin Editor**. On the default skin, leaving saves a
+  copy called **custom** and switches to it, even unchanged.
 
 <!-- GIF: howto-statusbar-clean.gif | region: 0,0,768,626 | steps: tap CLEAN; 3 s; tap CLEAN | "CLEAN: lines and blobs only" / "Tap again: your skin is back" | round 1, no. 23 -->
 
@@ -412,19 +336,12 @@ tapped since. Tap it in again.
 
 ## Type on the device
 
-You rarely have to ask: the [on-screen keyboard](#motion-keyboard) comes up by
-itself when there is something to type — a Rename in FILES, the FILES editor,
-a value in the menu — and goes away when you're done. **KEYS** in the status
-bar shows or hides it by hand.
+The [keyboard](#motion-keyboard) comes up by itself when there is something to
+type; **KEYS** shows or hides it.
 
 (motion-howto-network)=
 
 ## Point the device at another Core
 
-**Not on the device.** A³ Motion takes every host, port and OSC address from
-Core's `a3-osc.json`, and there is no Network page in its menu. It is pointed
-at another Core by changing that file on the Core, which moves every other
-device with it. What happens on the screen when it changes is in
-{ref}`Following Core <osc-follow>`; how to change it, in
-{ref}`Where addresses and ports live <osc-truth>`.
-
+**Not on the device**: change `a3-osc.json` on the Core and every device
+follows ({ref}`Following Core <osc-follow>`, {ref}`how <osc-truth>`).
