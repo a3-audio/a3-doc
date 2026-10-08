@@ -2,7 +2,11 @@
 
 ## The A³ System
 
-- [A³ System Repository](https://github.com/a3-audio/a3-system)
+```{tip}
+**New here?** Start with A³ Motion's
+[first ten minutes](#motion-get-started), and keep
+[On stage](a3motion-on-stage.md) open before your first gig.
+```
 
 Three devices on one network. They talk to each other **exclusively over
 OSC**, never over audio cables. How they are cabled is on the
@@ -51,21 +55,18 @@ naming it when the Core starts. See
 
 ## The beat
 
-A³ Core also runs the [**Beat Analyzer**](beat-analyzer.md): it produces
-the tempo the whole system follows, together with the VU meters the other two
-devices show. Its clock can come from A³ Motion's own tempo, from listening to
-the music, or from a Pro DJ Link tempo master — a CDJ, or
-[StemDeck](stemdeck.md) when there are no CDJs — chosen on A³ Motion's clock
-key.
-
-Everything that moves on its own is counted in **bars**, off that clock. A
-figure that takes four bars keeps taking four bars when the tempo changes.
+The [**Beat Analyzer**](beat-analyzer.md) on A³ Core sends the tempo every
+device follows, and the meters they show. Its clock comes from A³ Motion's own
+tempo, from the music, or from a Pro DJ Link tempo master — a CDJ, or
+[StemDeck](stemdeck.md). Everything that moves on its own counts in **bars**,
+so a four-bar figure stays four bars when the tempo changes.
 
 ## Where to go next
 
 | Section | What is in it |
 | :--- | :--- |
 | **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
+| [**Repository**](https://github.com/a3-audio/a3-system) | the umbrella repository that carries all the others |
 | **Assembly** | prototype pictures and how the boxes go together |
 | **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
 | **Development** | building and hacking on the software |

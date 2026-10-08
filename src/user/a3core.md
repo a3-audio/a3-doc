@@ -36,16 +36,9 @@ and the network audio — is on the {doc}`Patchbay page <../ressources/patchbay>
 
 ## Clock sources
 
-The tempo the system runs on can come from three places, chosen on A³
-Motion's clock key:
-
-| Motion reads | Mode | Where the tempo comes from |
-| :--- | :--- | :--- |
-| **INT** | **a3motion** | A³ Motion's own tempo, tapped on Motion and relayed by the Beat Analyzer |
-| **EXT** | **intern** | the Beat Analyzer's own FFT/onset detection |
-| **PIO** | **pioneer** | the master beat from a Pro DJ Link network — a CDJ, or [StemDeck](stemdeck.md) as master |
-
-What each mode needs is on the [Beat Analyzer](beat-analyzer.md) page.
+The tempo comes from A³ Motion (**INT**), from the music (**EXT**) or from a
+Pro DJ Link tempo master (**PIO**), chosen on A³ Motion's clock key. What each
+mode needs: {ref}`Beat Analyzer › Clock modes <beat-analyzer-modes>`.
 
 (core-workspaces)=
 
