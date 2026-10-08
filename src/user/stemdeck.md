@@ -116,20 +116,9 @@ ports, xruns.
 
 ### Over to A³ Motion, and back
 
-StemDeck and A³ Motion share the Core's screen, each on its own workspace.
-The two keys at the right end of the top bar switch between them:
-
-- **MOTION** shows A³ Motion. A³ Motion has the same switch, reading
-  **STEMDECK**, at exactly the same place — so the key under your finger
-  stays put, and tapping twice brings you back.
-- **▾** opens a list of the rig's workspaces: MOTION, STEMDECK, REAPER,
-  QJACKCTL, and SCARLETT while the Scarlett mixer runs. Only workspaces with
-  a window on them are listed. The one on the screen is highlighted; tap
-  another to go there, or tap beside the list to close it.
-
-On REAPER, QJACKCTL and SCARLETT a bar at the top of the screen lists the
-workspaces by name; tap STEMDECK or MOTION there to come back. The two touch
-screens hide that bar, since they have their own switch.
+**MOTION** at the right end of the top bar shows A³ Motion, whose **STEMDECK**
+key sits at exactly the same place, so two taps bring you back. **▾** lists
+every workspace with a window on it. More: {ref}`A³ Core's screen <core-workspaces>`.
 
 (stemdeck-settings)=
 
