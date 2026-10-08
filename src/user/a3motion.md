@@ -89,6 +89,7 @@ That's the whole loop. Before your first gig, read
 | [How to …](a3motion-howto.md) | every task, one at a time, each with a GIF |
 | [On stage](a3motion-on-stage.md) | stopping everything now, what not to do mid-set, the pre-gig check, troubleshooting |
 | [Screen and panel](a3motion-reference.md) | every window, field, pad and key |
+| [Menu, skins and keyboard](a3motion-menu.md) | the menu and its pages, skins, the on-screen keyboard |
 | [How it thinks](a3motion-concepts.md) | the clock, start-up, how a shape sits on the sphere, rec modes, how actions play |
 | [Library and scripting](a3motion-library.md) | the shipped sets, shapes, clips and actions, and how to script your own |
 
@@ -99,6 +100,7 @@ That's the whole loop. Before your first gig, read
 a3motion-howto
 a3motion-on-stage
 a3motion-reference
+a3motion-menu
 a3motion-concepts
 a3motion-library
 ```
