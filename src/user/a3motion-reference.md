@@ -166,7 +166,7 @@ accent lasts, then the clip is itself again.
 | **EDIT** | the script in FILES › ACTIONS |
 | **Hold** / **1shot** | lasts while held, or fires and lets go |
 | **then** | the button fired after this one (`then A3`) or none (`then --`). Tap steps, two taps clear |
-| **AUDIO** tab | the accent for **3d**, **freq**, **q**: `atk` rise and `dec` fall in bars, `max` how far. `max` 0: row off |
+| **AUDIO** tab | the accent for **3d**, **freq**, **q**: `atk` rise and `dec` fall in bars, `max` how far. `max` 0: row off. An accent only ever **raises**: the channel's own value is the floor, and a `max` below it does nothing |
 | **MOTION** tab | what the action sets: every MOTION knob, plus speed, direction, end. Grey: left to the clip; coloured: set. Two taps hand it back |
 
 Coloured: carries an action; grey: empty (does nothing); thick outline:
