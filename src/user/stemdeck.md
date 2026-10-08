@@ -12,7 +12,8 @@ drums can stay put while the pads fly round the room.
 It runs on Linux, as a program with its own window, and plays into the JACK
 graph. Its four stem buses and its aux bus go to A³ Core; a stem you send to
 **aux** can be put onto a movement there and moved through the room by A³
-Motion. A sixth bus, **CUE**, is for the headphones.
+Motion. Pre-listening is the desk's cue: StemDeck has no headphone bus of its
+own.
 
 In the A³ system you can leave the screen alone: the A³ Mixer
 [remote-controls StemDeck](#stemdeck-remote) through the Core.
@@ -175,7 +176,7 @@ through the track, turn the mouse wheel to zoom.
 
 ### Mixer
 
-![The mixer: per stem a knob, M and six bus switches; channel faders, CUE and the output meters](pics_user/stemdeck-mixer.png)
+![The mixer: per stem a knob, M and the bus switches; channel faders and the output meters](pics_user/stemdeck-mixer.png)
 
 One channel strip per deck, and per stem:
 
@@ -183,7 +184,7 @@ One channel strip per deck, and per stem:
 | :--- | :--- |
 | **gain knob** | −60 to +6 dB. Double-click for 0 dB |
 | **M** | mutes the stem |
-| **1 2 3 / 4 A C** | the six buses: 1–4, **A** for AUX and **C** for CUE, the headphones. A stem plays on every bus that is lit — any number at once, none for silence |
+| **1 2 3 / 4 A** | the five buses: 1–4 and **A** for AUX. A stem plays on every bus that is lit — any number at once, none for silence |
 
 (stemdeck-start-buses)=
 
@@ -194,12 +195,11 @@ channel. Loading a set leaves the switches as they are — they belong to the
 stem position, not to the track. A saved session brings back its own switches
 (see [Session](#stemdeck-session)).
 
-Buses 1–4 and AUX are **after the channel fader**; CUE is **before** it.
-The six switches are StemDeck's own: the desk sets them through A³ Core and
-StemDeck reports every change back, so the desk and this screen always agree.
-Knob and mute act on all of them. Below the stems, the channel fader and
-**CUE**, which puts the whole deck on the cue bus. Between the two
-strips, the output meters for buses 1–4, AUX and CUE. The top segment of each
+Every bus is **after the channel fader**. The switches are StemDeck's own:
+the desk sets them through A³ Core and StemDeck reports every change back, so
+the desk and this screen always agree. Knob and mute act on every bus. Below
+the stems, the channel fader. Between the two strips, the output meters for
+buses 1–4 and AUX. The top segment of each
 is a **clip lamp**: it lights when that output goes above full scale and stays
 lit for a second, so a single peak is not missed.
 
@@ -208,7 +208,7 @@ fixed 6 dB after the stems are summed — before their meters, so the meters sho
 what leaves StemDeck. The four stems of a set add up to the full track, and in
 Core's stem return mode both decks can be on AUX at once: two full tracks, which
 would clip. The channels carry the same trim, so a stem is as loud on a channel
-as on the return. CUE is not trimmed.
+as on the return.
 
 (stemdeck-library)=
 
@@ -431,7 +431,7 @@ StemDeck's side:
 
 ## Audio out
 
-StemDeck is a JACK client named `StemDeck`. Its ports (the twelve
+StemDeck is a JACK client named `StemDeck`. Its ports (the ten
 outputs, what is on each, and the `rec_L` / `rec_R` inputs that feed **REC**
 in the top bar, which writes a 24-bit FLAC to `recordings/` next to `stems/`)
 and where they arrive on A³ Core are all on the
@@ -447,11 +447,10 @@ and where they arrive on A³ Core are all on the
   Return track.
 - StemDeck **never starts a JACK server**. It uses the one that is running,
   or PipeWire's JACK interface; with neither, it falls back to a plain audio
-  device (ALSA), chosen with **Audio**. With fewer than twelve outputs
+  device (ALSA), chosen with **Audio**. With fewer than ten outputs
   there, the buses are summed down onto the ones there are.
-- **There is one output mode:** the six stereo buses, twelve JACK ports
-  (`deck1_L` … `phones_R`). The earlier "8× stereo (external routing)" mode
-  and its setting are gone.
+- **There is one output mode:** the five stereo buses, ten JACK ports
+  (`deck1_L` … `aux_R`).
 - It takes the graph's sample rate and buffer size as they are, and resamples
   the stems itself. It asks for nothing on purpose: changing a running graph
   throws out other clients (zita-j2n, for one). If the rate matters, set it
@@ -644,8 +643,6 @@ window is there, so A³ Motion stays on the screen if it was.
 changes the audio graph, and that costs a burst of JACK xruns — audible
 clicks on everything the Core plays. Restart it between sets.
 ```
-
-Demo and promo videos are recorded with OBS Studio, outside StemDeck.
 
 (stemdeck-troubleshooting)=
 

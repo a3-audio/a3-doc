@@ -99,16 +99,9 @@ comes in on the channel:**
 return along: it carries stems or the analog return, not a deck's effects. On
 the mix side the return is always heard, like every channel.
 
-Two more things reach the headphones:
-
-- **StemDeck's own CUE bus**, through `enc_phones`. Core keeps this send always
-  open, on the cue side of the crossfade. What is on the bus is StemDeck's decision: a stem's CUE
-  switch, or a deck's PHONES/CUE button on StemDeck, which puts the whole deck
-  there before the fader. It is heard through StemDeck's headphone bus
-  (REAPER inputs 23–24). That is how you pre-listen a stem that is on no
-  channel.
-- **The analog phones** (REAPER inputs 11–12) always go to `dec_phones`, with
-  no switch.
+**The analog phones** (REAPER inputs 9–10) also reach the headphones, always,
+through `dec_phones`, with no switch. StemDeck has no cue of its own: to
+pre-listen a stem, cue the channel it is on, or the return for a stem on AUX.
 
 (a3mix-displays)=
 

@@ -69,7 +69,6 @@ spreads them over the four channels the same way:
 | `deck3_L`, `deck3_R` (bus 3) | **channel 3** | every stem switched to **3** |
 | `deck4_L`, `deck4_R` (bus 4) | **channel 4** | every stem switched to **4** |
 | `aux_L`, `aux_R` | the **Return** track, set by the **RET** pot, while the return is in STEM mode (in ANALOG mode it plays the analog inputs 11/12) | every stem switched to **A** (AUX) |
-| `phones_L`, `phones_R` | StemDeck's own headphone bus (REAPER inputs 23–24), heard on the cue side | every stem on **C**, every deck on CUE |
 
 From there a stem is just another source on its channel: it goes through
 that channel's strip — gain, EQ and fader on the A³ Mixer, 3d, freq and Q on
@@ -90,7 +89,7 @@ A few things follow from that:
   (`DUB`, `KICK`, `PADS`, `PERC`, …) numbers its stems in the order its
   endings sort — see [Stem sets](#stemdeck-stem-sets).
 - **A stem plays on every bus that is lit.** Each stem in StemDeck's mixer
-  has six switches, **1 2 3 / 4 A C**. A stem on a number is on that A³
+  has five switches, **1 2 3 / 4 A**. A stem on a number is on that A³
   channel and moves with it; a stem on **A** (AUX) only is on the Return
   track, whose level is the RET pot (on A³ Motion's MIXER, and the desk's aux
   return), and does not move. Pushing a stem onto a channel from the desk puts
