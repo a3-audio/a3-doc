@@ -143,11 +143,11 @@ There are no umlauts and no ß.
   name, and Back or Close in the Skin Editor, undo it.
 
 **From the panel: while the keyboard is up, the whole panel types.** Each of
-the 44 buttons is the key drawn in its place — the pads are the letters; on
-the left TAP is ESC and SHIFT is SHIFT, on the right TAP is DEL and SHIFT is
-HIDE — and it types **as you press** it; DEL
-and the arrows repeat while held. The pads and key LEDs show the keyboard: the
-letters dim, the other keys in the skin's accent colour.
+the 44 buttons is the key drawn in its place. The pads are the letters. On
+the left, TAP is ESC and SHIFT is SHIFT; on the right, TAP is DEL and SHIFT is
+HIDE. A button types **as you press** it; DEL and the arrows repeat while
+held. The pad LEDs show the keyboard: letters dim, the other keys in the
+skin's accent colour.
 
 - **No clip fires and no key does its own job** while you type: no pad
   starts or stops anything, TAP taps no tempo, REC, MENU and SHIFT do nothing

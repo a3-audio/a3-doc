@@ -34,12 +34,12 @@ saved in a set either.
 A³ Motion asks A³ Core where each sound already is, and takes the answer
 before it says anything itself. So switching the device on, or restarting it
 mid-evening, doesn't move the room: the blobs appear where the sound actually
-is, and the pots are where they were. Before its window appears it also
-waits up to 10 s for Core to announce the OSC address file (see
-{ref}`Where addresses and ports live <osc-truth>`), so the screen comes up
-once, with the right addresses, instead of opening and restarting. If Core
-doesn't announce within 10 s, the window opens on the file on disk; a change
-announced later still restarts it.
+is, and the pots are where they were.
+
+Before its window appears it waits up to 10 s for Core to announce the OSC
+address file, so the screen comes up once, with the right addresses. Without
+an announcement it opens on the file on disk; a change announced later
+restarts it. See {ref}`Where addresses and ports live <osc-truth>`.
 
 Loading a **set** is the other way round. That is a deliberate act, so the set
 wins: it stops what was running, sets each channel's 3d, freq and Q, and

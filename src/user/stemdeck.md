@@ -604,11 +604,10 @@ that was playing plays on.
 ### Always running on the Core
 
 On the A³ Core machine StemDeck runs as a user service and sits alone on i3
-workspace `2:STEMDECK`, filling it. The rules are in the a3-core package's
-i3 config: the main window is tiled without a border rather than put in i3's
-full screen, because every dialog StemDeck opened ended full screen; all its
-other windows — Settings, Audio, Create stems, the folder choosers, message
-boxes — float over it. The {doc}`installer <../configuration/install>` (role
+workspace `2:STEMDECK`, filling it. The a3-core package's i3 config tiles the
+main window without a border; i3's full screen would put every dialog full
+screen too. All other windows — Settings, Audio, Create stems, the folder
+choosers, message boxes — float over it. The {doc}`installer <../configuration/install>` (role
 StemDeck) builds it and sets the service up; by hand, from the StemDeck
 checkout:
 

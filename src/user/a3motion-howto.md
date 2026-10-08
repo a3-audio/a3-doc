@@ -85,11 +85,15 @@ through a crowd and you carry the others along.
 
 <!-- QUESTION (maintainer): which way is "front" in a venue? The osc reference says 0° azimuth is the front of the room; the page now says the top of the sphere is the front. A DJ needs to know where that is before dragging: the booth side, the stage, or wherever Core was set up? -->
 
-To look at the room from another angle **without moving anything**, use
-camera mode: tap the small sphere in the global strip, drag up on the sphere
-to lean the view towards the horizon (down brings it back), drag sideways to
-walk round, and double tap to go back to straight above. In camera mode no
-finger can move a sound.
+**To look from another angle without moving anything**, use camera mode:
+
+1. Tap the small sphere in the global strip.
+2. Drag up on the sphere to lean the view towards the horizon; down brings it
+   back. Drag sideways to walk round.
+3. Double tap to go back to straight above. Tap the small sphere again to
+   leave camera mode.
+
+In camera mode no finger can move a sound.
 
 <!-- GIF: howto-sphere-drag-blob.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: With channel 1 playing, drag its blob across the sphere and let go: the clip takes it back. | "Channel 1 plays its clip" / "Drag a blob: the sound follows" / "Let go: the clip takes it back" | the drag path goes round the other blobs, which a dragged blob pushes aside -->
 
