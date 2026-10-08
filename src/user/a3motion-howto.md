@@ -169,11 +169,12 @@ On **MOTION** each field has two knobs: **right sets, left moves it** in bars.
 | audition privately | **SHIFT** + action pad: screen only, while held |
 | assign | ACTION: tap the button, tap a script; **no action** empties it |
 
-```{warning}
-**Turning a value on ACTION changes the action everywhere**, shipped sets
-included. To experiment, copy first: **EDIT**, change any character in FILES
-(a comment will do; **Save as** stays dark until the text differs), **Save
-as**. The copy goes onto the button you came from.
+```{note}
+**Turning a value on ACTION changes your own action everywhere** it is used.
+A **shipped** action is never changed: the first turn makes a copy of your
+own ("Bloom 2"), and every button that had the shipped one gets the copy.
+Save the set to keep it. With Developer Mode on, shipped actions are changed
+in place, as Save in FILES does.
 ```
 
 <!-- GIF: howto-action-fire.gif | region: 0,36,768,988 | recorded 2026-09-29, 9.8 s | steps: With channel 1 playing, open ACTION, tap A1, hold A in the global strip: the action moves the clip; let go and the clip comes back. | "Channel 1 plays its clip" / "ACTION: tap A1 to choose it" / "Hold A: Move Spin takes over" / "Let go: the clip is itself again" -->
@@ -251,7 +252,7 @@ knob to clear its lane.
 | To | Do |
 | :--- | :--- |
 | keep a changed clip (**drift dot** on CLIP) | FILES › **CLIPS** › **from clip** › **Save as** ("Warmup Halo 2"); the channel keeps the original until you **Load** the copy |
-| keep tonight's set | FILES › **SETS** › **from set** › **Save as** (named after the row shown, else "Action"); rename it |
+| keep tonight's set | FILES › **SETS** › **from set** › **Save as** (named after the loaded set: "Tribal 2", then "Tribal 3"); rename it |
 | rename | row › **Rename**, type, **Keep** or ENTER |
 | delete | row › **Delete** › **Delete** again; what is loaded keeps playing |
 
@@ -259,7 +260,7 @@ knob to clear its lane.
 
 ![The CLIP field shows the drift dot. Open FILES › CLIPS, tap from clip, tap Save as: the tweak is a new clip.](pics_user/howto-files-keep-tweak.gif)
 
-<!-- GIF: howto-files-save-set.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own. | "FILES › SETS" / "from set: the device as text" / "Save as: kept as your own set" | no row shown before from set, so the copy was named "Action" -->
+<!-- GIF: howto-files-save-set.gif | region: 0,36,768,620 | recorded 2026-09-29, 9.0 s | steps: In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own. | "FILES › SETS" / "from set: the device as text" / "Save as: kept as your own set" | no row shown before from set, so the copy was named "Action"; since a3-motion-ui fix/set-copy-name it is named after the loaded set -- re-shoot -->
 
 ![In FILES › SETS tap from set, then Save as: the device's set is kept as a new set of your own.](pics_user/howto-files-save-set.gif)
 

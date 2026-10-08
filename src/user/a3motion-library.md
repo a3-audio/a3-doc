@@ -42,10 +42,10 @@ channels carry the same six actions.
 | Build | Riser, Pulse, Loop, Gallop | Vortex | Width Open / Width Close | Speed Double / Speed Half | FX Riser | Cue Peak Anthem |
 | Peak | Anthem, Festival, Carousel, Star | Euphoria | Width Full / Lift Ear Level | Move Spin Fast / Move Unwind | FX Impact | Cue Drop Impact |
 | Drop | Impact, Warehouse, Strobe, Whirlwind | Ping Pong | Speed Stutter / Speed Halt | Width Full / Width Point | FX Punch | Cue Break Standstill |
-| Break | Standstill, Collapse, Monolith, Suspend | Heartbeat | Lift Overhead / Move Freeze | Width Breathe / Width Point | FX Sweep | Cue Build Pulse |
+| Break | Standstill, Collapse, Monolith, Suspend | Heartbeat | Lift Overhead / Move Freeze | Width Open / Width Point | FX Sweep | Cue Build Pulse |
 | Dub | Echo, Pendulum, Tunnel, Kepler | Skank | Dub Spring / Dub Stitch | Dub Bounce Back / Dub Echo Throw | FX Sweep | Cue Deep Undertow |
 | Deep | Undertow, Sub, Fog, Lurk | Cellar | Lift Sway / Lift Floor | Move Rock / Lift Down | FX Resonate | Cue Float Aurora |
-| Float | Aurora, Canopy, Blossom, Lullaby | Cloud | Lift Overhead / Width Close | Width Breathe / Move Unwind | FX Swell | Cue Closing Sunset |
+| Float | Aurora, Canopy, Blossom, Lullaby | Cloud | Lift Overhead / Width Breathe | Lift Sway / Move Unwind | FX Swell | Cue Closing Sunset |
 | Closing | Sunset, Farewell, Tide, Ember | Still | Lift Up / Lift Down | Width Open / Speed Tape Stop | FX Swell | Cue Warmup Halo |
 | Tribal | Gallop, Ping Pong, Clave, Zigzag | Echo | Move Stomp / Move Call | Width Drum Roll / Speed Double Gallop | FX Thunder | Cue Tension Siren |
 | Tension | Siren, Vortex, Helix, Riser | Collapse | Move Siren / Lift Climb | Speed Accelerate / Width Tighten | FX Filter Rise | Cue Drop Impact |

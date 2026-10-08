@@ -173,9 +173,10 @@ Coloured: carries an action; grey: empty (does nothing); thick outline:
 chosen; **white: running**. An action pad brings this page up with its button
 chosen (not with SHIFT, not during a take).
 
-```{warning}
-**What you set here is saved into the script, for every channel and set** —
-shipped ones too. Copy first: see [Fire and assign actions](#motion-howto-action).
+```{note}
+**What you set here is saved into the script, for every channel and set.** A
+shipped script is copied first ("Bloom 2", onto every button that had it),
+unless Developer Mode is on. See [Fire and assign actions](#motion-howto-action).
 ```
 
 More: [How actions play](#motion-actions-play), [Scripting actions](#motion-scripting).
