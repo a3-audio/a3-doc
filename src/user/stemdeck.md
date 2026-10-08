@@ -4,110 +4,69 @@
 
 ## At a glance
 
-StemDeck is a stem player for DJs: **two decks, each playing a track split
-into four stems**, and a mixer that sends every stem to its own output. Where a
-CDJ gives A³ Core a finished stereo mix, StemDeck gives it the parts — so the
-drums can stay put while the pads fly round the room.
+![StemDeck on the Core's screen: both decks loaded, deck A playing](pics_user/stemdeck-main.png)
 
-It runs on Linux, as a program with its own window, and plays into the JACK
-graph. Its four stem buses and its aux bus go to A³ Core; a stem you send to
-**aux** can be put onto a movement there and moved through the room by A³
-Motion. A sixth bus, **CUE**, is for the headphones.
+A stem player for DJs: **two decks, each playing a track split into four
+stems**, and a mixer that sends every stem to its own output. Where a CDJ gives
+A³ Core a stereo mix, StemDeck gives it the parts.
 
-In the A³ system you can leave the screen alone: the A³ Mixer
-[remote-controls StemDeck](#stemdeck-remote) through the Core.
-
-On the A³ Core machine StemDeck is always there: a user service starts it
-on its own i3 workspace, **STEMDECK** (number 2), filling the Core's
-768 × 1024 portrait screen — see [Always running on the Core](#stemdeck-on-the-core).
-A³ Motion is one tap away, on the key at the top right.
-
-It can also be **the tempo master** of the whole system when there are no
-CDJs in the booth: its master deck's beat goes out on Pro DJ Link, the
-[beat-analyzer](beat-analyzer.md) follows it, and A³ Motion follows the
-beat-analyzer.
-
-A track you only have as a stereo file, StemDeck
-[splits into stems](#stemdeck-stem-creator) itself.
+- Four stem buses go to A³ Core's channels 1–4, the aux bus to its Return.
+  Pre-listening is the desk's cue; StemDeck has no headphone bus.
+- The A³ Mixer [remote-controls it](#stemdeck-remote) through the Core.
+- On the Core it always runs, on workspace **STEMDECK** (2);
+  see [Always running on the Core](#stemdeck-on-the-core).
+- With no CDJs it can be [the tempo master](#stemdeck-master).
+- It [splits stereo tracks into stems](#stemdeck-stem-creator) itself.
+- Linux, JUCE, JACK. Source: [stemdeck](https://github.com/rafjagger/stemdeck)
+  (outside the `a3-audio` organisation, carried by a3-system).
 
 ```{tip}
-**StemDeck is at its best with A³ Motion.** Each of its four stems arrives on
-its own A³ channel, so the drums, the bass, the synths and the vocal can each
-travel the room on their own path, in time with StemDeck's own beat. How to
-wire it and a first set: [StemDeck × A³ Motion](stemdeck-with-motion.md).
+**Best with A³ Motion**: each stem travels the room on its own path, in time
+with StemDeck's beat. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
 ```
-
-- [StemDeck repository](https://github.com/rafjagger/stemdeck) — not under the
-  `a3-audio` organisation, but carried by the a3-system repository along with
-  the rest
-- Built with JUCE
-
-![StemDeck on the Core's screen: both decks loaded, deck A playing](pics_user/stemdeck-main.png)
 
 (stemdeck-stem-sets)=
 
 ## Stem sets
 
-A **set** is exactly four audio files in one folder that share a name and
-differ only in the part after the last space, `-` or `_`:
+A **set** is exactly four audio files in one folder, the same name with a
+different ending after the last space, `-` or `_`:
 
 ```text
 Artist - Title-001.wav  …  Artist - Title-004.wav
-Artist - Title - 01.wav …  Artist - Title - 04.wav
 Artist - Title - DUB.wav, … - KICK.wav, … - PADS.wav, … - PERC.wav
 ```
 
-The endings are sorted naturally — `01` before `10`, words alphabetically —
-and give stems 1 to 4 in that order. A group of three or five files is not a
-set and does not show up.
-
-StemDeck reads WAV, AIFF, FLAC and Ogg Vorbis. WAV and AIFF are read straight
-from disk as they are needed, which makes jumping and looping instant: for a
-set you will loop, prefer those.
+Endings sort naturally (`01` before `10`, words alphabetically) into stems 1–4.
+Three or five files are not a set. Formats: WAV, AIFF, FLAC, Ogg Vorbis; WAV
+and AIFF stream from disk, so jumps and loops are instant.
 
 ### Artist, album, set
-
-Sort your stems into folders by artist and album — the library reads its
-columns from them:
 
 ```text
 stems/
 ├── Burial/
 │   └── Untrue/
-│       ├── Archangel - 01.wav … Archangel - 04.wav
-│       └── Etched Headplate - Drums.flac … Etched Headplate - Vox.flac
+│       └── Archangel - 01.wav … Archangel - 04.wav
 └── Aphex Twin/
     └── Drukqs/
         └── CD1/
             └── Avril 14th - 1.wav … Avril 14th - 4.wav
 ```
 
-The first folder under the library folder is the **artist**, the second the
-**album**. Deeper folders are added to the album (`Drukqs / CD1`) — handy for
-a double album. A set lying straight in the library folder has neither, one
-level down only an artist. Inside a folder the rule above holds: four files
-with the same beginning are one set, their endings sorted naturally
-(`1 2 3 10`, `01 … 04`) or alphabetically.
-
-The library looks through its folder and every folder below it. It starts in
-`stems/`, next to where StemDeck was started, and remembers the last folder
-you picked.
+First folder: **artist**; second: **album**; deeper folders join the album
+(`Drukqs / CD1`). The library scans its folder recursively; it starts in
+`stems/` next to where StemDeck started and remembers the last folder.
 
 (stemdeck-screen)=
 
 ## The screen
 
-Laid out for the Core's portrait screen: across the top, the scrolling
-waveforms of both decks. In the middle, deck A, the mixer and deck B. At the
-bottom, the library.
-
-The top bar holds **REC**, **AUTO DJ**, the **SYNC** source, **Audio** (the
-audio device; greyed out under JACK, where the routing is qjackctl's) and
-**Settings** (where the stem library is), and at the right end the
-workspace switch, **MOTION** and **▾** (see
-[Over to A³ Motion](#stemdeck-workspaces)). Where the width leaves room it
-also shows the audio status: JACK client, sample rate, buffer, connected
-ports, xruns.
+Top: both decks' scrolling waveforms (drag to move, wheel to zoom). Middle:
+deck A, mixer, deck B. Bottom: the library. The top bar holds **REC** (24-bit
+FLAC of the `rec_L/R` inputs into `recordings/`), **AUTO DJ**, the **SYNC**
+source, **Audio** (grey under JACK), **Settings**, the workspace switch, and,
+where there is room, the audio status.
 
 ![StemDeck's top bar](pics_user/stemdeck-topbar.png)
 
@@ -115,20 +74,8 @@ ports, xruns.
 
 ### Over to A³ Motion, and back
 
-StemDeck and A³ Motion share the Core's screen, each on its own workspace.
-The two keys at the right end of the top bar switch between them:
-
-- **MOTION** shows A³ Motion. A³ Motion has the same switch, reading
-  **STEMDECK**, at exactly the same place — so the key under your finger
-  stays put, and tapping twice brings you back.
-- **▾** opens a list of the rig's workspaces: MOTION, STEMDECK, REAPER,
-  QJACKCTL, and SCARLETT while the Scarlett mixer runs. Only workspaces with
-  a window on them are listed. The one on the screen is highlighted; tap
-  another to go there, or tap beside the list to close it.
-
-On REAPER, QJACKCTL and SCARLETT a bar at the top of the screen lists the
-workspaces by name; tap STEMDECK or MOTION there to come back. The two touch
-screens hide that bar, since they have their own switch.
+**MOTION** shows A³ Motion, whose **STEMDECK** key sits in the same place.
+**▾** lists the workspaces. See {ref}`A³ Core's screen <core-workspaces>`.
 
 (stemdeck-settings)=
 
@@ -136,9 +83,8 @@ screens hide that bar, since they have their own switch.
 
 ![Settings: the stem library folder](pics_user/stemdeck-settings.png)
 
-**Settings** holds one thing for now: the **stem library**, the folder the
-library reads. **Choose…** picks it — it is chosen, never typed, because the
-Core's touch screen has no keyboard. StemDeck remembers it.
+The **stem library** folder, picked with **Choose…** (the touch screen has no
+keyboard).
 
 (stemdeck-decks)=
 
@@ -146,69 +92,49 @@ Core's touch screen has no keyboard. StemDeck remembers it.
 
 ![Deck A playing: title, time, overview, BPM with the original tempo, CUE and PLAY, and at the foot the tempo fader with the loop, sync and grid keys](pics_user/stemdeck-deck.png)
 
-Laid out like a CDJ, without the platter: at 768 pixels a deck has no room
-for a jog wheel, and the controller's wheels do that job (see
-[The Stanton SCS.3d](#stemdeck-scs3d)).
+Like a CDJ without the platter; the [SCS.3d](#stemdeck-scs3d) is the jog.
 
 | Control | What it does |
 | :--- | :--- |
-| **CUE** | as on a CDJ. While playing: back to the cue point, and stop. While stopped: sets the cue point here — or, if you are already on it, plays for as long as you hold it |
-| **PLAY** | starts and pauses |
-| **overview waveform** | the whole track, one lane per stem. Click to jump; drag to set a loop |
+| **CUE** | playing: back to the cue point and stop. Stopped: set the cue point, or on it, play while held |
+| **PLAY** | start / pause |
+| overview | one lane per stem. Click: jump; drag: loop |
 | **LOOP OFF** | clears the loop |
-| **REPEAT** | starts the track over when it ends |
-| **VINYL** | on: the controller's platter scratches, as a record would |
-| **tempo fader** | at the deck's outer edge, with its range button, which steps ±8 / ±16 / ±50 % |
-| **BPM** | the tempo as it plays now; below it, **Original**, the track's own tempo |
-| **SYNC** | follows a leader — see [Sync](#stemdeck-sync) |
-| **MASTER** | makes this deck the Pro DJ Link tempo master — see [StemDeck as the tempo master](#stemdeck-master) |
-| **GRID** | Grid Adjust, as on a CDJ-3000, for a beat grid the analysis got wrong — see [GRID](#stemdeck-grid) |
+| **REPEAT** | restarts at the end |
+| **VINYL** | the controller's platter scratches |
+| tempo fader | range button: ±8 / ±16 / ±50 % |
+| **BPM** | current tempo; **Original** below |
+| **SYNC** | follow a leader; see [Sync](#stemdeck-sync) |
+| **MASTER** | Pro DJ Link tempo master; see [MASTER](#stemdeck-master) |
+| **GRID** | fix the beat grid; see [GRID](#stemdeck-grid) |
 
-The tempo comes from an analysis that runs in the background when a set is
-loaded. It sums the four stems and assumes the tempo does not change during
-the track. The result is kept, so each set is analysed only once.
-
-The scrolling waveforms at the top run past a fixed playhead: drag to move
-through the track, turn the mouse wheel to zoom.
+The tempo is analysed once per set in the background, over all four stems,
+assuming a constant tempo.
 
 (stemdeck-mixer)=
 
 ### Mixer
 
-![The mixer: per stem a knob, M and six bus switches; channel faders, CUE and the output meters](pics_user/stemdeck-mixer.png)
+![The mixer: per stem a knob, M and the bus switches; channel faders and the output meters](pics_user/stemdeck-mixer.png)
 
-One channel strip per deck, and per stem:
-
-| Control | What it does |
+| Per stem | What it does |
 | :--- | :--- |
-| **gain knob** | −60 to +6 dB. Double-click for 0 dB |
-| **M** | mutes the stem |
-| **1 2 3 / 4 A C** | the six buses: 1–4, **A** for AUX and **C** for CUE, the headphones. A stem plays on every bus that is lit — any number at once, none for silence |
+| gain knob | −60 to +6 dB; double-click: 0 dB |
+| **M** | mute |
+| **1 2 3 / 4 A** | buses 1–4 and AUX. A stem plays on every lit bus; none: silent |
+
+Below: the channel fader (every bus is post-fader). Between the strips: meters
+for buses 1–4 and AUX, each with a clip lamp that holds for a second. The desk
+sets the switches through Core and StemDeck reports back, so both agree.
 
 (stemdeck-start-buses)=
 
-**Where the stems start.** A fresh StemDeck starts with every stem on **AUX
-only**, on none of buses 1–4: buses 1–4 are the desk's channels, and a stem on
-one silences that channel's analog input, so a fresh StemDeck takes no
-channel. Loading a set leaves the switches as they are — they belong to the
-stem position, not to the track. A saved session brings back its own switches
-(see [Session](#stemdeck-session)).
+**Where the stems start:** on **AUX only**. A stem on bus 1–4 silences that
+desk channel's analog input, so a fresh StemDeck takes no channel. Loading a
+set keeps the switches; a session restores its own.
 
-Buses 1–4 and AUX are **after the channel fader**; CUE is **before** it.
-The six switches are StemDeck's own: the desk sets them through A³ Core and
-StemDeck reports every change back, so the desk and this screen always agree.
-Knob and mute act on all of them. Below the stems, the channel fader and
-**CUE**, which puts the whole deck on the cue bus. Between the two
-strips, the output meters for buses 1–4, AUX and CUE. The top segment of each
-is a **clip lamp**: it lights when that output goes above full scale and stays
-lit for a second, so a single peak is not missed.
-
-**The buses are 6 dB lower on purpose.** Channels 1–4 and AUX are trimmed by a
-fixed 6 dB after the stems are summed — before their meters, so the meters show
-what leaves StemDeck. The four stems of a set add up to the full track, and in
-Core's stem return mode both decks can be on AUX at once: two full tracks, which
-would clip. The channels carry the same trim, so a stem is as loud on a channel
-as on the return. CUE is not trimmed.
+**Every bus is trimmed 6 dB**, before its meter: two full tracks on AUX would
+otherwise clip, and the channels match it.
 
 (stemdeck-library)=
 
@@ -216,58 +142,40 @@ as on the return. CUE is not trimmed.
 
 ![The library: search box, Load to A and Load to B, the library folder with its set count, Create stems… and Rescan, and the sets by artist and album](pics_user/stemdeck-library.png)
 
-One row per set: **Artist | Album | Set | BPM | Stems | Length** — artist and
-album from the folders, BPM once analysed. It starts sorted artist → album →
-set; click a header to sort by that column (artist and album keep their sets
-together and in order). The search box finds sets by name, artist or album as
-you type.
-
-To load a set:
-
-- **Load to A** / **Load to B**, or
-- double-click the row, or press Return — it goes to the first deck that is
-  not playing, or
-- drag the row onto a deck or its waveform.
-
-**Rescan** looks through the folder again. The folder itself is chosen in
-[Settings](#stemdeck-settings). The line above the table shows it and how
-many sets it holds.
+Columns **Artist | Album | Set | BPM | Stems | Length**; click a header to
+sort. Search matches name, artist or album. Load with **Load to A/B**, a
+double-click or Return (first deck not playing), or drag onto a deck.
+**Rescan** reads the folder again.
 
 (stemdeck-grid)=
 
 ### GRID: correcting the beat grid
 
-**GRID** on a deck opens Grid Adjust, as on a CDJ-3000:
+Grid Adjust, as on a CDJ-3000:
 
 | Control | What it does |
 | :--- | :--- |
-| the jog | moves the whole grid; a turn is 100 ms |
-| **‹1/2** / **1/2›** | move it half a beat |
-| **SNAP** | puts the downbeat on the cue point |
-| **SET 1** | puts the downbeat on the playhead |
-| **SHIFT** | takes over a beat you aligned by ear with the jog ring |
-| **RESET** | brings back the analysed grid |
+| jog | moves the grid; a turn is 100 ms |
+| **‹1/2** / **1/2›** | half a beat |
+| **SNAP** | downbeat to the cue point |
+| **SET 1** | downbeat to the playhead |
+| **SHIFT** | takes a beat aligned by ear with the jog ring |
+| **RESET** | the analysed grid again |
 
-A corrected grid is kept in `analysis.xml` with the analyses (see
-[Build and start](#stemdeck-build)).
+Corrections are kept in `analysis.xml`.
 
 (stemdeck-autodj)=
 
 ### AUTO DJ
 
-**AUTO DJ** in the top bar plays at random from the sets the library search
-shows, each once:
+Plays the sets the search shows, at random, each once:
 
-- With nothing playing, it loads a set onto deck A and plays it from the
-  start.
-- Half a minute before the mix it loads the next set onto the other deck,
-  fader down.
-- The mix starts on a downbeat 16 bars before the end of the playing track:
-  the new track from its first downbeat, with SYNC on, and over those 16 bars
-  the faders cross at equal power. Then the old deck stops and SYNC comes off.
-- A track without a beat grid is mixed over 10 s, unsynced.
-- It never mixes out of a loop, and loads nothing onto a deck that loops: it
-  waits until the loop is off.
+- Nothing playing: loads a set on deck A and plays it.
+- 30 s before the mix: loads the next set on the other deck, fader down.
+- The mix starts on a downbeat 16 bars before the end, SYNC on, equal-power
+  crossfade over those 16 bars; then the old deck stops and SYNC goes off.
+- No beat grid: a 10 s unsynced crossfade.
+- Never mixes out of a loop or loads onto a looping deck.
 
 (stemdeck-keys)=
 
@@ -283,109 +191,78 @@ shows, each once:
 
 ### The Stanton SCS.3d
 
-Up to two Stanton SCS.3d controllers are taken up as they are plugged in, one
-per deck; the first found is deck A. `<VALUE name="scs3dSwap" val="1"/>` in
-`~/.config/StemDeck/StemDeck.settings` swaps them. The protocol follows
-Mixxx's SCS.3d mapping.
+Up to two, one per deck, taken as plugged in (first = deck A;
+`<VALUE name="scs3dSwap" val="1"/>` in `~/.config/StemDeck/StemDeck.settings`
+swaps them). Mapping follows Mixxx's.
 
 | SCS.3d | StemDeck |
 | :--- | :--- |
 | **FX EQ LOOP TRIG** | mute stem 1–4 |
-| **VINYL** | loop in; pressed again: loop out |
+| **VINYL** | loop in; again: loop out |
 | **DECK** | loop off, and on again from its start |
-| **top left / top right** of the circle | library: previous / next set |
-| tap the **centre** of the circle | load the selected set (not onto a playing deck) |
-| **GAIN** / **PITCH** slider | channel fader / tempo (relative) |
-| the **ring** of the circle | scratch: touch holds the record, turning scratches |
+| circle top left / right | previous / next set |
+| circle centre tap | load the selected set (not onto a playing deck) |
+| **GAIN** / **PITCH** | channel fader / tempo (relative) |
+| ring | scratch: touch holds, turning scratches |
 | **PLAY CUE SYNC TAP** | play, cue, SYNC, MASTER |
 
 (stemdeck-stem-creator)=
 
 ## Making stems from a stereo track
 
-Only have the finished mix? StemDeck splits it into four stems itself —
-drums, bass, other, vocals — and files the result in the library as a set.
-
 <!-- IMAGE: the "Create stems" question with its Target folder field, and the strip under the library bar showing a running job, e.g. "Stems: Title  42 %  +2 waiting". Not taken: both need files dropped on the rig's running StemDeck. -->
 
 ### Starting
 
-- Drop stereo files, or a whole folder, onto the library, or
-- press **Create stems…** in the library bar.
-
-FLAC, WAV, MP3, AIFF, OGG, M4A and Opus work.
-
-StemDeck asks once for the whole batch: the **Target folder**, relative to
-the library — typed (`Artist/Album`), picked with **Browse…**, or left empty
-for the library folder itself. It comes preset from where the files lie:
-`Artist/Album` for `…/Artist/Album/*.flac`, only `Artist` when they come
-from several of its albums. **Create** starts, **Cancel** leaves it. Every
-track of the batch lands in that one folder.
+1. Drop stereo files or a folder onto the library, or press **Create stems…**
+   (FLAC, WAV, MP3, AIFF, OGG, M4A, Opus).
+2. Set the **Target folder**, relative to the library (typed, **Browse…**, or
+   empty). It is preset from the source path (`Artist/Album`). The whole batch
+   goes there.
+3. **Create**.
 
 ### What you get
 
-Each track becomes a set in the target folder:
-
 ```text
-stems/
-└── Artist/
-    └── Album/
-        ├── Title - 1 - drums.flac
-        ├── Title - 2 - bass.flac
-        ├── Title - 3 - other.flac
-        ├── Title - 4 - vocals.flac
-        └── originals/
-            └── Title.flac
+stems/Artist/Album/
+├── Title - 1 - drums.flac
+├── Title - 2 - bass.flac
+├── Title - 3 - other.flac
+├── Title - 4 - vocals.flac
+└── originals/Title.flac
 ```
 
-- Drums are stem 1, bass stem 2, other stem 3, vocals stem 4.
-- `originals/` holds a **copy** of the file you dropped. The library does not
-  look in there, so the original never turns up as a set.
-- The title is the file name without its extension.
-- The stems keep the original's format: FLAC, WAV and AIFF at 24 bit, Ogg
-  Vorbis at quality 8. MP3, M4A and Opus become FLAC — StemDeck can't play
-  those, and FLAC loses nothing a second time. For a set you will loop,
-  WAV or AIFF are the quick kind to jump in.
-- If the album already has a track of that name, the new one is called
-  `Title (2)`.
-- When a set is done, the library scans again and selects it.
+- Stems 1–4: drums, bass, other, vocals. `originals/` holds a copy and is not
+  scanned.
+- Format: FLAC, WAV, AIFF at 24 bit; Ogg at quality 8; MP3, M4A and Opus
+  become FLAC.
+- A name already in the album becomes `Title (2)`. When done, the library
+  rescans and selects the set.
 
 ### While it works
 
-The splitting is done by [Demucs](https://github.com/adefossez/demucs)
-(`htdemucs`, 44.1 kHz). It runs in the background, one track at a time; the
-others queue up.
+[Demucs](https://github.com/adefossez/demucs) (`htdemucs`, 44.1 kHz) runs in
+the background, one track at a time, **while the decks play**: the audio
+thread owns CPU 1, the separator gets the other cores at idle CPU and disk
+priority, at most 6 GB. Fewer cores: `<VALUE name="separatorCores" val="1"/>`
+in `StemDeck.settings` (CPU 0 only: about 1.2 × the track's length).
 
-**It runs while the decks play.** StemDeck's audio thread has CPU 1 to
-itself; the separator takes every other core (`0,2-5` on six) at idle
-priority for CPU and disk, with at most 6 GB of memory. To leave it fewer
-cores, set `<VALUE name="separatorCores" val="1"/>` in
-`~/.config/StemDeck/StemDeck.settings` (1 is CPU 0 only; a track then takes
-about 1.2 × its length).
-
-The strip under the library bar shows the track, its progress and how many
-tracks wait (`+2 waiting`). If a track fails, the strip says why
-(`Stems: failed: …`), until you add the next one; the rest of the queue
-carries on.
-
-**Cancel** in the strip stops the running track and leaves nothing
-behind — no half set in the album.
+The strip under the library bar shows progress and the queue (`+2 waiting`), or
+`Stems: failed: …`. **Cancel** stops the track and leaves nothing behind.
 
 (stemdeck-stem-creator-setup)=
 
 ### Setting it up, once
 
-The separator is not part of StemDeck; it is set up once per machine and
-takes about 1 GB. In the StemDeck checkout:
+About 1 GB per machine, from the StemDeck checkout:
 
 ```sh
 sudo apt install ffmpeg python3-venv
 tools/setup-separator.sh
 ```
 
-The script installs Demucs and the CPU build of PyTorch into
-`~/.local/share/StemDeck/separator` and downloads the model. Without it, a
-job fails straight away and the strip says `separator not installed`.
+It installs Demucs and CPU PyTorch into `~/.local/share/StemDeck/separator`
+and fetches the model. Without it the strip says `separator not installed`.
 
 (stemdeck-remote)=
 
@@ -431,35 +308,18 @@ StemDeck's side:
 
 ## Audio out
 
-StemDeck is a JACK client named `StemDeck`. Its ports (the twelve
-outputs, what is on each, and the `rec_L` / `rec_R` inputs that feed **REC**
-in the top bar, which writes a 24-bit FLAC to `recordings/` next to `stems/`)
-and where they arrive on A³ Core are all on the
-{doc}`Patchbay page <../ressources/patchbay>`. Despite the names,
-`deck1` … `deck4` are the **buses**, one per desk channel, not the decks.
+A JACK client, `StemDeck`: ten outputs (`deck1_L` … `aux_R`) and the `rec_L/R`
+inputs. Ports and where they land in Core: {doc}`Patchbay <../ressources/patchbay>`.
+`deck1` … `deck4` are the **buses**, not the decks; bus N is A³ channel N, aux
+is Core's Return.
 
-- **Nothing is connected automatically.** Patch the ports yourself, in
-  qjackctl or any other patchbay. On the Core, the a3-core package's patchbay
-  does it; how to wire a StemDeck on another machine is on
-  [StemDeck × A³ Motion](#stemdeck-with-motion-map).
-- **In the A³ setup each bus is an A³ channel.** Bus N arrives on A³ Core's
-  channel N, the channel A³ Motion moves as channel N; aux arrives on Core's
-  Return track.
-- StemDeck **never starts a JACK server**. It uses the one that is running,
-  or PipeWire's JACK interface; with neither, it falls back to a plain audio
-  device (ALSA), chosen with **Audio**. With fewer than twelve outputs
-  there, the buses are summed down onto the ones there are.
-- **There is one output mode:** the six stereo buses, twelve JACK ports
-  (`deck1_L` … `phones_R`). The earlier "8× stereo (external routing)" mode
-  and its setting are gone.
-- It takes the graph's sample rate and buffer size as they are, and resamples
-  the stems itself. It asks for nothing on purpose: changing a running graph
-  throws out other clients (zita-j2n, for one). If the rate matters, set it
-  before starting — for PipeWire, until its next restart:
-
-  ```sh
-  pw-metadata -n settings 0 clock.force-rate 44100
-  ```
+- **Nothing connects by itself.** On the Core the package's patchbay does;
+  elsewhere see [StemDeck on another machine](#stemdeck-with-motion-remote-machine).
+- It **never starts a JACK server**: it uses JACK, PipeWire's JACK, or ALSA
+  (**Audio**). With fewer than ten outputs, buses are summed down.
+- It takes the graph's rate and buffer and resamples itself; changing a
+  running graph would throw out zita. Set the rate before starting, e.g.
+  `pw-metadata -n settings 0 clock.force-rate 44100`.
 
 <!-- NOTE: audio I/O (ports, REAPER inputs, zita channels) is documented once, on the Patchbay page (src/ressources/patchbay.md). The REAPER template routes the zita-n2j track: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused. -->
 
@@ -469,160 +329,107 @@ and where they arrive on A³ Core are all on the
 
 <!-- IMAGE: the top bar under SYNC: PIO, with the PIO status readout (e.g. "PIO 128.0 · CDJ 2") and the player box. Not taken: switching SYNC on the rig's running StemDeck turns off every SYNC that was on. The top bar as it is, under SYNC: DECK, is under "The screen" above. -->
 
-**SYNC** on a deck makes it follow a leader. The **SYNC: DECK | PIO** button
-in the top bar chooses which leader: the other deck, or the Pro DJ Link tempo
-master. Switching it
-turns off every SYNC that was on.
+**SYNC** on a deck follows a leader, chosen in the top bar: **DECK** (the other
+deck) or **PIO** (the Pro DJ Link tempo master). Switching it turns all SYNC
+off.
 
-Both follow by the same rules:
-
-- **Tempo:** the leader's tempo times a half, one or two — whichever needs the
-  smallest change, chosen once when SYNC goes on. The tempo fader's range
-  widens if it has to.
-- **Phase:** corrected only while both play and nobody is scratching. More
-  than 50 ms off, the deck jumps into phase; closer, it is nudged, by at most
-  2 %.
+- **Tempo:** the leader's × ½, 1 or 2, whichever is the smallest change, chosen
+  when SYNC goes on; the fader range widens if needed.
+- **Phase:** only while both play and nobody scratches. Over 50 ms off: jump;
+  closer: nudge, at most 2 %.
 
 ### DECK: one deck follows the other
 
-SYNC on deck A makes A follow B. Pressing SYNC on B hands the role over: B
-follows A. At the same tempo (a multiple of one) it lines up the **bars** as
-well as the beats: the follower's downbeat lands on the leader's, as a CDJ's
-beat sync does.
+SYNC on A follows B; SYNC on B hands over. At ×1 it also lines up **bars**.
 
 (stemdeck-pio)=
 
 ### PIO: following the Pro DJ Link tempo master
 
-SYNC follows the **Pro DJ Link tempo master**: its tempo, pitch included, and
-its beat. Both decks may follow at once, each with its own half/one/two.
+Follows the master's tempo (pitch included) and beat; both decks may follow.
 
-- StemDeck appears on the link as **player 6** and listens on the Pro DJ
-  Link ports (`prolink.*`), which it reads from the A³ system's `a3-osc.json` (see
-  {ref}`Where addresses and ports live <osc-truth>`). On the Core machine that
-  file comes from Core itself: StemDeck follows it, and when the truth changes
-  its window closes and reopens once (about 5 s) — see
-  {ref}`Following Core <osc-follow>`. Without any truth the PIO clock does not
-  start and its status line says `PIO: no a3-osc.json`.
-  It shares those ports, so it can run on the same machine as the
-  beat-analyzer (player 7), and both get the beats. If the network is not
-  up yet, it tries again every two seconds.
-- It learns who is master from the players' status packets. Some of those are
-  sent to one address only, so on a machine it shares with the beat-analyzer
-  they may not arrive. After two seconds without them the readout says **no
-  master**, and StemDeck follows the player chosen in the box beside it — by
-  default the first one it heard.
-- If the master falls silent, the tempo is held (the readout says **held**)
-  and the phase is left alone until beats come back.
-- It lines up the **beat, not the bar**: the track's grid knows beats, not
-  where the one is. Put the downbeat right with the jog, as on a CDJ.
+- StemDeck is **player 6**; it reads the Pro DJ Link ports (`prolink.*`) from
+  `a3-osc.json` ({ref}`Where addresses live <osc-truth>`). On the Core it
+  follows Core's file and restarts its window once (about 5 s) when it changes
+  ({ref}`Following Core <osc-follow>`). No file: `PIO: no a3-osc.json`.
+- It shares the ports with the beat-analyzer (player 7) on one machine;
+  retries every 2 s while the network is down.
+- No status packets for 2 s: **no master**; it follows the player picked in the
+  box (default: the first heard).
+- Master silent: tempo **held**, phase left alone.
+- It aligns the **beat, not the bar**; set the downbeat with the jog.
+- Player number: `pioDevice` in `~/.config/StemDeck/StemDeck.settings`.
 
-The player number is the setting `pioDevice` in
-`~/.config/StemDeck/StemDeck.settings`.
-
-Joining a Pro DJ Link network you do not run is at your own risk: ask the
-venue before StemDeck joins theirs.
+Ask the venue before joining their Pro DJ Link network.
 
 (stemdeck-master)=
 
 ## MASTER: StemDeck as the tempo master
 
-No CDJs on the link? Then StemDeck can be the tempo master. Each deck has a
-**MASTER** button, as on a CDJ: the master deck's beat goes out on the Pro DJ Link
-network, and whatever follows the link's tempo master follows StemDeck. In the
-A³ system that is the beat-analyzer in clock mode 2, and through it A³ Motion
-on **PIO**. The whole chain is on the beat-analyzer's page:
+With no CDJs, **MASTER** on a deck makes StemDeck the Pro DJ Link tempo master;
+the beat-analyzer (mode 2) and A³ Motion on **PIO** follow. Whole chain:
 {ref}`Playing without CDJs <beat-analyzer-without-cdjs>`.
 
-- **Press MASTER** on a deck to make it master; on the other deck, to hand
-  over; on the master, to turn MASTER off. With MASTER off and SYNC not on
-  PIO, StemDeck leaves the network.
-- **With no master chosen, the only playing deck becomes master by itself** —
-  except under SYNC: PIO, where another player may hold master and two masters
-  would pull every listener back and forth, and except after you turned
-  MASTER off by hand.
-- **What goes out**, as player 6: a **beat packet on every beat** of the
-  master deck — tempo is the track's BPM times the tempo fader, the beat in
-  the bar counted from the first beat of the grid — and a **status packet
-  every 200 ms**: master, playing or not, tempo, beat.
-- **A master that stops while the other deck plays hands MASTER over to
-  it**, as on a CDJ-3000. With neither deck playing it stays master and
-  simply sends no beats.
-- **Nothing goes out while the master deck has no tempo yet** — its analysis
-  is still running.
-- Everything goes out as **broadcast**, on the first network interface that
-  is up, can broadcast and is not the loopback. So a listener on the same
-  machine gets it, whichever program started first.
-- The beats are timed to about a millisecond, on a thread of their own, not
-  by the screen. A beat is not lost to a late wake-up, a cue on a beat sends
-  that beat when you press PLAY, a jump does not send a burst of the beats
-  skipped, and a handover never sends a beat twice.
-- The top bar reads `PIO master: A` (or B) while StemDeck sends.
+- Press MASTER to take it, on the other deck to hand over, again to drop it.
+  MASTER off and SYNC not on PIO: StemDeck leaves the network.
+- No master chosen: the only playing deck becomes master — not under SYNC: PIO
+  (two masters would fight), and not after you turned it off.
+- Sends, as player 6, a **beat packet per beat** (BPM × fader, beat counted from
+  the grid's first beat) and a **status packet every 200 ms**.
+- A master that stops while the other deck plays hands over (like a CDJ-3000).
+- Nothing goes out until the deck's tempo is analysed.
+- **Broadcast** on the first non-loopback interface that can, so a listener on
+  the same machine hears it.
+- Beats are timed to about 1 ms on their own thread: none lost, none doubled,
+  no burst after a jump.
+- Top bar: `PIO master: A` (or B).
 
-The packets are laid out the way
-[prolink-connect](https://github.com/EvanPurkhiser/prolink-connect) reads
-them, so tools built on it see StemDeck as a player on the network. This is
-an independent implementation; A³ is not affiliated with AlphaTheta or
+Packets follow [prolink-connect](https://github.com/EvanPurkhiser/prolink-connect)'s
+reading. Independent implementation; not affiliated with AlphaTheta or
 Pioneer — see {doc}`../ressources/trademarks`.
 
 (stemdeck-build)=
 
 ## Build and start
 
-StemDeck is built from source, on Linux. It needs:
+Needs CMake ≥ 3.22, a C++17 compiler, pkg-config, **JUCE** ({ref}`the A³
+version <build-juce>`, found under `~/local/juce` unless `CMAKE_PREFIX_PATH`
+says otherwise), and:
 
-- CMake 3.22 or newer, a C++17 compiler, pkg-config
-- **JUCE**, the version every A³ product builds against (see
-  {ref}`JUCE <build-juce>`), plus JUCE's own Linux build dependencies.
-  `start.sh` looks for it under `~/local/juce` unless `CMAKE_PREFIX_PATH`
-  says otherwise
-- JACK, FLAC, Vorbis and Ogg development files. On Debian:
+```sh
+apt install libjack-jackd2-dev libflac-dev libvorbis-dev libogg-dev
+```
 
-  ```sh
-  apt install libjack-jackd2-dev libflac-dev libvorbis-dev libogg-dev
-  ```
-
-- GoogleTest (`libgtest-dev`), only for the tests (how to run them:
-  {ref}`Build and test <build-commands>`)
-
-Then, in the StemDeck checkout:
+GoogleTest (`libgtest-dev`) only for {ref}`the tests <build-commands>`. Then:
 
 ```sh
 ./start.sh
 ```
 
-The first run configures a Release build in `build/`; every run after that
-rebuilds what changed and starts StemDeck — through a running JACK server,
-through PipeWire's `pw-jack` if there is no JACK server but PipeWire runs, or
-on ALSA. The program itself is `build/StemDeck_artefacts/Release/StemDeck`.
+It configures a Release build in `build/` once, rebuilds what changed and
+starts StemDeck via JACK, `pw-jack` or ALSA. Binary:
+`build/StemDeck_artefacts/Release/StemDeck`.
 
-The settings — the library folder, the SYNC source, the audio device, the
-player number — live in `~/.config/StemDeck/`, next to `analysis.xml`, the
-kept tempo analyses and corrected grids. An analysis is kept per file, size and date, so a stem
-file that changes is analysed again; to analyse everything anew, delete
-`analysis.xml` while StemDeck is closed.
+Settings live in `~/.config/StemDeck/`, with `analysis.xml` (tempo analyses and
+grids, per file, size and date). Delete it, with StemDeck closed, to analyse
+everything again.
 
 (stemdeck-session)=
 
 ### Session
 
-StemDeck writes `~/.config/StemDeck/session.xml` every two seconds while
-anything changes, and on quit. On the next start the decks, the mixer (bus
-switches included), the library and unfinished stem jobs come back, and a deck
-that was playing plays on.
+`~/.config/StemDeck/session.xml` is written every 2 s while anything changes and
+on quit. Next start restores decks, mixer and bus switches, library and stem
+jobs; a playing deck plays on.
 
 (stemdeck-on-the-core)=
 
 ### Always running on the Core
 
-On the A³ Core machine StemDeck runs as a user service and sits alone on i3
-workspace `2:STEMDECK`, filling it. The rules are in the a3-core package's
-i3 config: the main window is tiled without a border rather than put in i3's
-full screen, because every dialog StemDeck opened ended full screen; all its
-other windows — Settings, Audio, Create stems, the folder choosers, message
-boxes — float over it. The {doc}`installer <../configuration/install>` (role
-StemDeck) builds it and sets the service up; by hand, from the StemDeck
-checkout:
+A user service on i3 workspace `2:STEMDECK`. The package's i3 config tiles the
+main window borderless (i3 full screen would make every dialog full screen);
+all other windows float. The {doc}`installer <../configuration/install>` (role
+StemDeck) sets it up; by hand:
 
 ```sh
 cp .config/systemd/user/stemdeck.service ~/.config/systemd/user/
@@ -630,22 +437,14 @@ systemctl --user daemon-reload
 systemctl --user enable --now stemdeck
 ```
 
-It starts the build in `build-make/` of that checkout, so a rebuild is picked
-up by `systemctl --user restart stemdeck`.
-
-A (re)start takes the screen for a moment: JUCE builds the window more than
-once as it comes up, and the first one takes the focus. The service therefore
-runs `tools/rig-keep-the-screen.sh` around the start — it remembers the
-workspace that was showing and switches back to it once StemDeck's main
-window is there, so A³ Motion stays on the screen if it was.
+It runs the build in `build-make/`; `systemctl --user restart stemdeck` picks up
+a rebuild. `tools/rig-keep-the-screen.sh` gives the screen back to the
+workspace that showed before the start.
 
 ```{warning}
 **Do not restart StemDeck mid-set.** Its JACK client leaving and joining
-changes the audio graph, and that costs a burst of JACK xruns — audible
-clicks on everything the Core plays. Restart it between sets.
+causes xruns: clicks on everything the Core plays.
 ```
-
-Demo and promo videos are recorded with OBS Studio, outside StemDeck.
 
 (stemdeck-troubleshooting)=
 
@@ -653,13 +452,13 @@ Demo and promo videos are recorded with OBS Studio, outside StemDeck.
 
 | Symptom | What to do |
 | :--- | :--- |
-| A set is missing from the library | It needs exactly four files with one name and different endings. **Rescan** after adding files. Is the library the folder you think? See [Settings](#stemdeck-settings) |
-| The stem strip says `separator not installed` | Run the one-time setup: [Setting it up, once](#stemdeck-stem-creator-setup) |
-| Making stems is slow | It runs at idle priority on the cores StemDeck leaves it, so a busy machine slows it down. `separatorCores` sets how many it may take |
-| Nothing to hear | The ports are never connected automatically. Patch them in qjackctl |
-| The top bar says `JACK-Server wurde beendet` | JACK went away under StemDeck. Restart StemDeck once JACK is back |
-| A stem does not move | Its A³ channel's **3d** has to be up and its clip playing. A stem only on **A** (AUX) is on Core's Return track, not on a channel — load it on a channel, or light a bus number 1–4. See [StemDeck × A³ Motion](#stemdeck-with-motion-troubleshooting) |
-| MASTER is on, but A³ Motion does not follow | Wait for the deck's BPM: nothing goes out before its analysis is done. Is the deck playing? Is A³ Motion on **PIO**? |
-| The downbeat on A³ Motion is on the wrong beat | StemDeck counts the bar from the grid's first beat. Set CUE on the real first beat of a bar and press **GRID**, then **SNAP** |
-| The PIO status line says `PIO: no a3-osc.json` | StemDeck found no truth: not `$A3_OSC_TRUTH`, not the cache `~/.cache/a3/a3-osc.json`, not `/usr/share/a3/a3-osc.json`, where it reads its Pro DJ Link ports. On the Core the a3-core package installs the last one, and Core's announcement fills the cache |
-| SYNC: PIO says **no master** | The status packets don't reach StemDeck. It follows the player chosen in the box beside the readout instead |
+| A set is missing | Exactly four files, one name, different endings. **Rescan**. Right folder? [Settings](#stemdeck-settings) |
+| `separator not installed` | [Set it up once](#stemdeck-stem-creator-setup) |
+| Stems are slow to make | Idle priority on the free cores; see `separatorCores` |
+| Nothing to hear | Ports are never connected automatically; patch them |
+| `JACK-Server wurde beendet` | JACK went away. Restart StemDeck after JACK |
+| A stem does not move | Its channel's **3d** up, clip playing; a stem only on **A** is on the Return. See [StemDeck × A³ Motion](#stemdeck-with-motion-troubleshooting) |
+| A³ Motion ignores MASTER | Wait for the BPM; deck playing? Motion on **PIO**? |
+| Downbeat on the wrong beat | CUE on the real first beat of a bar, **GRID**, **SNAP** |
+| `PIO: no a3-osc.json` | No truth found: `$A3_OSC_TRUTH`, `~/.cache/a3/a3-osc.json` (filled by Core's announcement) or `/usr/share/a3/a3-osc.json` (from a3-core) |
+| SYNC: PIO says **no master** | Status packets don't arrive; it follows the player in the box |

@@ -1,174 +1,115 @@
 # OSC communication
 
-Every port on every device, in one table, is in [Ports and
-endpoints](ports.md). This page is about what the messages *mean*.
+What the messages *mean*. Every port is on [Ports and endpoints](ports.md).
 
 (osc-truth)=
 
 ## Where addresses and ports live
 
-Every OSC address, port and IP of the system is written **once**, in
-`a3-osc.json`, and nothing else carries these facts. The file has **two
-parts** with two owners:
+Every OSC address, port and IP is written **once**, in `a3-osc.json`, in two
+parts:
 
-- **The contract** — addresses, arguments, who sends and who hears, ports,
-  routes, the VU map — is the package's. The a3-core package ships it as
-  `/usr/share/a3/a3-osc.json` (source:
-  `platform-config/debian-x86_64/a3-core/usr/share/a3/a3-osc.json` in
-  [a3-core](https://github.com/a3-audio/a3-core)) and replaces it on every
-  install.
-- **The network** — `hosts` (the machines' addresses) and `network` (Core's own
-  interface, bridge, gateway, DNS) — is the maintainer's. It lives in
-  `~/.config/a3/network.json` on the Core machine. The installer creates that
-  file once, from the package's values, and never overwrites it.
+| Part | Owner | Where |
+| :--- | :--- | :--- |
+| **contract**: addresses, arguments, senders, listeners, ports, routes, VU map | the a3-core package, replaced on every install | `/usr/share/a3/a3-osc.json` (source: `platform-config/debian-x86_64/a3-core/usr/share/a3/a3-osc.json` in [a3-core](https://github.com/a3-audio/a3-core)) |
+| **network**: `hosts`, Core's own `network` | the maintainer; created once by the installer, never overwritten | `~/.config/a3/network.json` on the Core |
 
-Core **joins** the two, key by key: what `network.json` names wins, and a host
-missing from it comes from the package. A `network.json` that does not parse,
-or that lacks the `hosts` or `network` object, is **refused**: Core says why in
-its journal and uses the package's values.
+Core **joins** them key by key; `network.json` wins, missing hosts come from
+the package. A `network.json` that does not parse or lacks `hosts` or `network`
+is **refused** (reason in the journal) and the package's values are used.
 
-Core serves the joined result at `/api/truth` on its listener `core.web`
-(`http://<core>:9080/api/truth`; the ports are on {ref}`the ports page <ports-by-listener>`). The header
-`X-A3-Truth` carries its **fingerprint**, the sha256 of the canonical JSON
-(sorted keys, no spaces, UTF-8). The file has these sections:
+Core serves the result at `http://<core>:9080/api/truth` (`core.web`). Header
+`X-A3-Truth` is its **fingerprint**: sha256 of the canonical JSON (sorted keys,
+no spaces, UTF-8).
 
-| Section | What it holds |
+| Section | Holds |
 | :--- | :--- |
-| `network` | the Core machine's own network: interface, bridge, address, gateway, DNS |
-| `hosts` | every machine by name — `core`, `mixer`, `radla`, `local`, `any` |
-| `listeners` | who listens where: program, role, host, port |
+| `network` | Core's interface, bridge, address, gateway, DNS |
+| `hosts` | machines by name: `core`, `mixer`, `radla`, `local`, `any` |
+| `listeners` | program, role, host, port |
 | `routes` | who sends to which listener |
-| `addresses` | our vocabulary: pattern, argument types, who sends it, who hears it, what it means |
+| `addresses` | pattern, types, sender, hearer, meaning |
 | `vu_meters` | the forty meters by name, in `/vu/1..40` order |
-| `external` | the words we speak but do not own — REAPER's and the IEM plug-ins' |
+| `external` | REAPER's and the IEM plug-ins' words |
 
-The tables on this page and on the [ports page](ports.md) are rendered from
-that file, not written by hand.
+The tables here and on the ports page are rendered from it.
 
 ### Who reads it, and how
 
-| Device | How it gets the file |
+| Device | How it gets the truth |
 | :--- | :--- |
-| A³ Core | reads the package's contract and joins `~/.config/a3/network.json` over it (`a3_osc.py`), then serves the result |
-| A³ Motion | **fetches it from Core**, the same way as the desk, and shares the cache `~/.cache/a3/a3-osc.json` with StemDeck — see {ref}`Following Core <osc-follow>`. Its `config.json` blocks `oscSender`, `oscReceiver` and `oscAddresses` are no longer read, and the **Network** page is gone from its menu |
-| A³ Mixer | **fetches it from Core.** It listens for Core's `/core/here` on `devices.announce`, keeps the last truth in `~/.cache/a3/a3-osc.json` and restarts itself when Core announces a different fingerprint — see {ref}`the desk page <mic-truth>`. Without a truth it waits for the announcement; it does not exit |
-| StemDeck | **fetches it from Core**, like Motion, from the shared cache — see {ref}`Following Core <osc-follow>`. It reads its Pro DJ Link ports (`prolink.*`) and its `stemdeck.bus` from it. Without any truth its PIO status line says `PIO: no a3-osc.json` |
-| beat-analyzer | reads an `a3-osc` block in its `build/.env`, which the a3-core package writes at install (`a3-osc-render user`) — see {ref}`Beat Analyzer <beat-analyzer-config>` |
-| zita-j2n, zita-n2j | the units take address and port from `~/.config/a3/osc.env`, also written by `a3-osc-render user` |
-| the package's install | the "standard network" it offers comes from the package's `network` section, and it creates `~/.config/a3/network.json` from it once |
+| A³ Core | the package's contract joined with `network.json` (`a3_osc.py`); serves it |
+| A³ Motion | fetches it from Core, shared cache `~/.cache/a3/a3-osc.json`; see [Following Core](#osc-follow). No addresses in its `config.json` or menu |
+| A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
+| StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`. Without: `PIO: no a3-osc.json` |
+| beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-osc-render user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
+| zita-j2n, zita-n2j | `~/.config/a3/osc.env`, same renderer |
+| installer | offers the package's `network` and creates `network.json` from it once |
 
-**Core needs the package's file before it starts.** It reads it once, at
-start-up, and a Core without it does not come up at all. The package installs
-it, so after a package install it is there; a Core started from a checkout
-needs the package's file in place first (or `$A3_OSC_TRUTH` naming another
-one).
-
-**Core announces itself.** Every 2 seconds it broadcasts OSC `/core/here` to
-its subnet's broadcast address, on `devices.announce`, with two strings: the URL of
-`/api/truth` and the fingerprint. Broadcasts do not cross a router, so a
-device on another subnet (radla, 192.168.43.x) is given Core's URL in
-`~/.config/a3/core` instead and asks Core itself — see
-{ref}`StemDeck on radla <osc-radla>`. No copy of the file is needed there.
+- **Core will not start without the package's file** (or `$A3_OSC_TRUTH`).
+- **Core announces itself** every 2 s: `/core/here` broadcast on
+  `devices.announce`, with the `/api/truth` URL and the fingerprint. Broadcasts
+  don't cross routers; a device on another subnet uses `~/.config/a3/core`
+  ([radla](#osc-radla)).
 
 (osc-follow)=
 
 ### Following Core: StemDeck and A³ Motion
 
-StemDeck and A³ Motion run on the Core machine as user `aaa` and **share one
-cache**, `~/.cache/a3/a3-osc.json`. Each one, like the desk, listens for
-Core's `/core/here` on `devices.announce` (the two share the port). At start it takes
-the first of these: `$A3_OSC_TRUTH` if set; the cache, if it reads as a truth;
-otherwise the package's `/usr/share/a3/a3-osc.json`.
+Both run on the Core as `aaa`, share the cache and listen for `/core/here`. At
+start each takes `$A3_OSC_TRUTH`, else a valid cache, else the package file.
 
-When Core announces a fingerprint the app does not hold, it fetches
-`/api/truth` on `core.web` off the UI thread and checks that the body's
-sha256, the `X-A3-Truth` header and the announcement agree, and that the
-truth is usable: StemDeck needs `stemdeck.bus`, Motion needs every address it
-speaks. Then it writes the cache whole and **quits with exit code 1**;
-systemd (`Restart=on-failure`, 5 s) starts it again on the new truth. A
-refusal is logged once per reason and the app runs on.
+On an unknown fingerprint the app fetches `/api/truth` off the UI thread,
+checks body sha256, header and announcement agree and the truth is usable
+(StemDeck needs `stemdeck.bus`, Motion every address it speaks), writes the
+cache and **exits 1**; systemd restarts it after 5 s. A refusal is logged once
+per reason. With `$A3_OSC_TRUTH` set it does not follow.
 
-With `$A3_OSC_TRUTH` set, an app does not follow Core.
-
-**What you see:** after a Core install that changes the truth, or after
-editing `~/.config/a3/network.json` and restarting Core, StemDeck's and
-Motion's windows close and reopen once, about 5 s. With the same truth,
-nothing happens. Motion saves its state on the way out.
+**What you see:** after a truth change their windows close and reopen once,
+about 5 s. Motion saves its state first.
 
 (osc-radla)=
 
 #### StemDeck on radla
 
-radla is on another subnet, so Core's `/core/here` never reaches it. Instead:
+radla is on another subnet:
 
-1. Write Core's address into `~/.config/a3/core` on radla: one line, e.g.
-   `http://192.168.8.10:9080`. A trailing slash or the full `/api/truth` URL
-   also works; a blank file counts as not set.
+1. Write Core's address into `~/.config/a3/core`, e.g.
+   `http://192.168.8.10:9080` (a trailing slash or the full `/api/truth` URL
+   also works; empty means unset).
 2. Restart StemDeck.
 
-StemDeck then asks Core's `/api/truth` at start and every 30 s. If the
-`X-A3-Truth` header equals the truth it runs on, nothing happens. Otherwise it
-fetches, checks the body's sha256 against the header and that the truth is
-usable, writes `~/.cache/a3/a3-osc.json` whole and quits with exit code 1;
-systemd restarts it and its window reopens once. If Core cannot be reached,
-StemDeck says so once in the journal and plays on.
-
-radla's zita units (`tools/zita-from-truth.py`) read `~/.cache/a3/a3-osc.json`
-first, then `/usr/share/a3/a3-osc.json`; no hand copy in `/usr/share/a3` is
-needed. They read it only at their start, so after Core's address changes
-restart them once, after StemDeck has restarted:
-`systemctl --user restart zita-j2n zita-n2j`.
-
-On the Core machine nothing changes: StemDeck and Motion hear the broadcast,
-and there is no `~/.config/a3/core` there.
+It polls `/api/truth` at start and every 30 s; on a new header it fetches,
+checks, writes the cache and exits 1 to restart. Core unreachable: one journal
+line, it plays on. radla's zita units (`tools/zita-from-truth.py`) read the
+cache, then `/usr/share/a3/a3-osc.json`, at their start only: after a change
+restart them after StemDeck (`systemctl --user restart zita-j2n zita-n2j`).
 
 ### When a port or an address has to change
 
-**An address or host** (the network is yours):
+| Change | Do |
+| :--- | :--- |
+| address or host | edit `~/.config/a3/network.json`, restart Core; restart zita and the beat-analyzer (Core re-renders their files at start). Desk, StemDeck, Motion follow |
+| port, address or word of the contract | edit `a3-osc.json` in a3-core, reinstall, restart Core; the rest follows as above |
 
-1. Edit `~/.config/a3/network.json` on the Core machine.
-2. Restart Core. It renders the zita units' and the beat-analyzer's
-   addresses at its start (`~/.config/a3/osc.env`, the `a3-osc` block of the
-   analyzer's `.env`), so they follow with it; restart those two to pick the
-   change up. The desk sees Core's new fingerprint within seconds and
-   restarts itself; so do StemDeck and Motion, whose windows reopen once.
-
-**A port, an address or a word of the contract** (the package's):
-
-1. Edit `a3-osc.json` in a3-core and install the package again on the Core
-   machine; restart Core.
-2. Nothing to copy: the desk, StemDeck and Motion follow Core's announcement
-   (StemDeck's and Motion's windows reopen once). The beat-analyzer and zita
-   follow Core's restart, as above.
-
-Nothing is changed on a device itself: a device holding its own copy of a
-port is a second truth.
+Never set a port on a device: that is a second truth.
 
 (osc-differs)=
 
 ### "DIFFERS from Core's"
 
-With every state request, and so at every start, the A³ Mixer sends
-`/device/hello` with its name and the sha256 of its truth; StemDeck sends it
-too, hashing the cache it runs on. Core compares it
-against its own **fingerprint** (the sha256 of the joined truth it serves).
-Core's window shows one line per device under the peers:
-
-- **a3-osc.json is Core's** — the device speaks what Core speaks.
-- **a3-osc.json DIFFERS from Core's**, in red — the device's truth is not the
-  one Core serves. The desk, StemDeck and Motion fix this
-  themselves within seconds of the next announcement; if it stays red, look in
-  the device's log for a refused fetch. Until then it may be sending to an
-  address or port nobody listens on, and OSC over UDP will not say so.
+The A³ Mixer and StemDeck send `/device/hello` (name, sha256 of their truth)
+with each state request. Core's window shows per device **a3-osc.json is
+Core's**, or in red **DIFFERS from Core's**. The desk, StemDeck and Motion fix
+that within seconds; if it stays red, look for a refused fetch in the device's
+log — until then it may send where nobody listens.
 
 (osc-addresses)=
 
 ## Addresses
 
-Every address that is ours, as `a3-osc.json` states it. `{ch}` counts
-**1–4** — the channel number on the wire, the same as on the panel. "Core
-passes it on" means Core relays or announces it to those devices, after
-acting on it itself.
+Every address of ours. `{ch}` is **1–4**, as on the panel. "Core passes it on":
+Core acts on it, then relays or announces it.
 
 <!-- a3-osc:addresses -->
 | Address | Types | From | To | Meaning |
@@ -218,74 +159,46 @@ acting on it itself.
 | `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, radla | peak, rms (linear) of VU channel n. REAPER out per range: 1-20 = out n + 30, 21-36 = out n - 10, 51-66 = out n; 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (REAPER track "analog" = system:capture_1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the return's analog input, L and R (REAPER track "analog" channels 11-12 = system:capture_11-12, shown under the return's ANALOG whatever the return plays); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, after knob and mute); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the analyzer's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
-### Renamed on 2026-09-30
+### Renamed addresses
 
-The vocabulary was straightened on the day the file was introduced. Anything
-written against the old words has to follow:
+Code written against old words must follow:
 
-| Before | Since 2026-09-30 |
+| Old | Now |
 | :--- | :--- |
-| `/channel/0..3/…` | `/channel/1..4/…` — channels count from 1 on the wire |
-| `/fx/frequency`, `/fx/resonance`, `/fx/mode`, `/fx/led` | `/filter/frequency`, `/filter/resonance`, `/filter/mode`, `/filter/led` |
+| `/channel/0..3/…` | `/channel/1..4/…` |
+| `/fx/frequency`, `/fx/resonance`, `/fx/mode`, `/fx/led` | `/filter/…` |
 | `/channel/{ch}/fx` | `/channel/{ch}/filter` |
-| `/channel/{ch}/led/pfl` | `/channel/{ch}/pfl/led` |
+| `/channel/{ch}/led/pfl`, `/channel/{ch}/pfl`, `/channel/{ch}/pfl/led` | `/channel/{ch}/cue`, `/channel/{ch}/cue/led` |
 | `/channel/{ch}/led/fx` | `/channel/{ch}/filter/led` |
-| `/channel/{ch}/pot_1`, `/channel/{ch}/pot_2` | `/channel/{ch}/filter/frequency`, `/channel/{ch}/filter/q` |
-| `/master/phones_mix`, `/master/phones_volume` | `/master/phones-mix`, `/master/phones-volume` |
-| `/master/return` | `/master/fx-return` (since 2026-10-01 `/master/aux-return`) |
+| `/channel/{ch}/pot_1`, `pot_2` | `/channel/{ch}/filter/frequency`, `/filter/q` |
+| `/master/phones_mix`, `phones_volume` | `/master/phones-mix`, `phones-volume` |
+| `/master/return`, `/master/fx-return` | `/master/aux-return` |
 | `/vu/0..39` | `/vu/1..40` |
+| `/channel/{ch}/stem/menu` (ii) | `/channel/{ch}/stem/cursor` (i): 0–7 stems, 8 = **A** (analog input) |
+| `/stem/cue`, `/stem/cue/led` | dropped |
 
-On **2026-10-01** PFL became cue, on the wire too: `/channel/{ch}/pfl` is now
-`/channel/{ch}/cue`, `/channel/{ch}/pfl/led` is now `/channel/{ch}/cue/led`.
-
-Later the same day StemDeck joined the wire: the desk switches its buses
-through Core (`/stemdeck/...`), `/channel/{ch}/stem` became a bit mask of the
-stems on a channel, and `/stem/cue` and `/stem/cue/led` were dropped again;
-the aux-return display has no C field any more. StemDeck also sends its own
-stem meters, `/vu/41`–`/vu/48`.
-
-On **2026-10-02** the desk's stem displays became a selector: turning only
-moves a selection, a push loads it. New are `/channel/{ch}/stem/push` and
-`/channel/{ch}/stem/selected`; `/channel/{ch}/stem/turn` and
-`/aux-return/stem/turn` move a selection and switch nothing;
-`/aux-return/stem/push` puts the selected stem on the return, and
-`/aux-return/stem` now carries the return's selection (0 = the empty field)
-before the eight flags. The channel's push no longer toggles the cue.
-
-On **2026-10-04** each channel's encoder became an input selector:
-`/channel/{ch}/stem/menu` (ii) is now `/channel/{ch}/stem/cursor` (i), 0–7
-the eight stems, 8 = A. Later the same day 8 became the STEM toggle, which takes the
-channel's stem off and brings it back. See {ref}`the desk's input selectors <a3mix-displays>`.
-
-On **2026-10-07** position 8 is **A**, the analog input, again: a push there takes a
-playing stem off the channel, and changes nothing while the analog input already plays.
-Core no longer remembers a last stem. The addresses stay as they are.
-
-`/device/hello` is new; see [above](#osc-differs).
+`/channel/{ch}/stem` is a bit mask of the stems on a channel. On the desk,
+turning only moves a selection (`…/stem/turn`, `/aux-return/stem/turn`) and a
+push loads it (`…/stem/push`, `/aux-return/stem/push`; `…/stem/selected`).
+`/aux-return/stem` carries the return's selection (0 = empty) before eight
+flags. Cursor 8 pushed takes a playing stem off; Core remembers no last stem.
+See {ref}`the desk's input selectors <a3mix-displays>`.
 
 (osc-vu-meters)=
 
 ## The meters
 
-The beat-analyzer sends forty meters, `/vu/1` to `/vu/40`, each with a peak
-and an RMS value (linear, 0–1). `/vu/n` is REAPER out 30 + *n*: the whole
-wiring is the {ref}`REAPER channel map <core-vu-map>`.
-
-**A device looks a meter up by its name** in the file's `vu_meters`, not by
-its number:
+The beat-analyzer sends `/vu/n` with peak and RMS (linear, 0–1); `/vu/n` is
+REAPER out 30 + *n* ({ref}`REAPER channel map <core-vu-map>`). **Devices find a
+meter by name** in `vu_meters`, not by number:
 
 | Device | Shows |
 | :--- | :--- |
-| A³ Motion | each channel's input, in stereo, the louder side shown (the corona round its blob, its meter on the MIXER pages): `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); the sphere's glow: `main_sub` (`/vu/11`); the towers: `main_top1` … `main_top4` (`/vu/12`–`/vu/15`); the MIXER page's master column, **ten** meters: `main_sub` and `main_top1` … `main_top9` (`/vu/11`–`/vu/20`) |
-| A³ Mixer | its four input meters, in stereo, the louder side shown: `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); its eight output meters: `main_sub` and `main_top1` … `main_top7` (`/vu/11`–`/vu/18`); on the channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and, under A, the channel's analog input `analog1_L`/`_R` … `analog4_L`/`_R` (`/vu/1`–`/vu/8`, the louder side), whatever plays; on the return display `stem_aux_L`/`stem_aux_R` (`/vu/49`–`/vu/50`) and `aux_L`/`aux_R` (`/vu/35`–`/vu/36`) |
+| A³ Motion | channel inputs `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`, louder side); sphere glow `main_sub` (`/vu/11`); towers `main_top1`–`4` (`/vu/12`–`/vu/15`); MIXER master `main_sub`, `main_top1`–`9` (`/vu/11`–`/vu/20`) |
+| A³ Mixer | inputs `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); outputs `main_sub`, `main_top1`–`7` (`/vu/11`–`/vu/18`); channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and under A `analog1_L` … `analog4_R` (`/vu/1`–`/vu/8`); return `stem_aux_L/R` (`/vu/49`–`/vu/50`) and `aux_L/R` (`/vu/35`–`/vu/36`) |
 
-**`/vu/1`–`/vu/8` are the analog inputs**, `analog1_L` … `analog4_R`: each
-channel's two analog input channels (REAPER's "analog" track, the sound card's
-captures 1–8), before any channel processing. They read the analog input
-whatever the channel plays, so the desk can show under its **A** that something
-arrives there while a stem is on the channel. Until 2026-10-07 these slots were
-the mono channel meters `in1_pre` … `in4_post`, which the stereo meters
-`/vu/51`–`/vu/66` replaced.
+`/vu/1`–`/vu/8` are the analog inputs before any processing, whatever the
+channel plays.
 
 <!-- a3-osc:vu -->
 | Address | Meter |
@@ -362,27 +275,20 @@ the mono channel meters `in1_pre` … `in4_post`, which the stereo meters
 
 ## A³ Core
 
-A³ Core listens on **three** ports, and which one a message arrives at
-decides what it means. Their numbers are on the {ref}`ports page
-<ports-by-listener>`:
+Three listeners ({ref}`ports <ports-by-listener>`); the port decides the meaning:
 
-| Listener | What arrives | Why it is its own port |
-| :--- | :--- | :--- |
-| `core.osc` | Commands from A³ Mixer, A³ Motion, StemDeck and the beat-analyzer | The room talking to Core |
-| `core.reaper-feedback` | REAPER's feedback | REAPER reports what Core itself set. One port for both would have Core reading REAPER's reports as commands and answering them — a loop on a rig that makes sound |
-| `core.web` | HTTP, not OSC — the {doc}`window <../development/core>` and `/api/truth` | A browser page, no OSC at all |
+| Listener | Receives |
+| :--- | :--- |
+| `core.osc` | commands from Mixer, Motion, StemDeck, beat-analyzer |
+| `core.reaper-feedback` | REAPER's reports. Separate, so Core never takes a report for a command and answers it: a feedback loop |
+| `core.web` | HTTP: the {doc}`window <../development/core>` and `/api/truth` |
 
 (osc-everyone)=
 
 ### Everything goes to everyone
 
-**There is no list of recipients.** Every A³-shaped message Core produces goes
-to every subscriber, always — the A³ Mixer, A³ Motion, and whatever else is
-plugged in.
-
-A per-message recipient list goes stale without failing: a message nobody is
-told to send is an absence, not an error, and OSC over UDP has no way of
-reporting one.
+Every A³ message Core produces goes to **every subscriber**; there is no
+recipient list (a missing recipient fails silently over UDP).
 
 ```
       what comes in                        what goes out
@@ -402,113 +308,66 @@ reporting one.
        /DualDelay/…        IEM DualDelay    dualdelay.osc
 ```
 
-A new department is a command-line argument rather than a change to the
-source: see {ref}`Adding a department <core-subscriber>` on the Core's
-configuration page.
+New subscriber: {ref}`Adding a department <core-subscriber>`.
 
-```{note}
-**The engine is not a subscriber.** REAPER, the IEM MultiEncoders and the
-DualDelay each speak their own vendor's language — `/track/…`,
-`/MultiEncoder/…`, `/DualDelay/…` — and each is addressed by the one handler
-that has something to say to it.
-
-**The lamps are broadcast too**, because a lamp shows a status and a status
-belongs to whoever shows one. `/channel/{ch}/cue/led`, `/channel/{ch}/filter/led` and `/filter/led` therefore reach every subscriber,
-alongside the flag itself on `/channel/{ch}/cue` — two vocabularies for one
-fact: a lamp is a light, a flag is a setting. A lamp address carries the lamp
-as it is: lit is lit.
-
-Nothing is sent unless the status moved. A flag is announced only where it
-actually changed, and a value already passed on is dropped — five identical
-state messages produce one round of lamps, not five.
-```
+- The engine is not a subscriber: REAPER, the MultiEncoders and the DualDelay
+  each get their own language from one handler.
+- **Lamps are broadcast too** (`/channel/{ch}/cue/led`,
+  `/channel/{ch}/filter/led`, `/filter/led`), beside the flags: a lamp is a
+  light, a flag a setting.
+- Only changes are sent; a value already passed on is dropped.
 
 ### What the address table does not say
 
-The [table above](#osc-addresses) says who sends what. What Core does with it, where
-that is not obvious:
+- **Values are 0–1**, except `azimuth` −180…180 and `elevation` −90…90,
+  clamped; the clamped value is replayed.
+- **gain, EQ, volume, `aux-send`** return to all devices when REAPER reports
+  them ([The way back](#osc-way-back)).
+- **`cue`, `filter`** take [two spellings](#osc-two-spellings); Core sends the
+  state back as a number.
+- **`3d`**: see [/channel/{ch}/3d](#osc-3d).
+- **`/master/phones-mix`** goes out unbent, as a track volume.
+- **`/master/aux-return`** drives PurestGain on track 28 "Return"; full travel
+  is 0 dB.
+- **`/filter/mode`**: `high_pass`/`low_pass` or a number (1 = high pass); sent
+  as a number, the word goes to the desk on `/filter/led`.
+- **`/beat`**: only the tempo is used, for the [delay](#osc-beat-delay).
+- **`/vu/{n}`** comes from the beat-analyzer.
+- `/channel/{ch}/reverb`, `/width`, `/order`: no handler; counted as
+  unrecognised.
 
-- **Values are 0–1**, except the position: `azimuth` −180…180 and `elevation`
-  −90…90 degrees. The position is clamped, and the **clamped** value is what a
-  recall replays.
-- **gain, the EQ bands, volume and `aux-send`** go back to every device when
-  REAPER reports them — see *The way back* below.
-- **`/channel/{ch}/cue` and `/channel/{ch}/filter`** take two spellings, see
-  below, and Core **sends** the resulting state back on the same address,
-  always as a number.
-- **`/channel/{ch}/3d`** is how much of the channel's isolated band moves in
-  the 3D field. Core sets the band's gain from it — the steady rest stays at
-  0 dB — and replays it on a recall.
-- **`/master/phones-mix`** is the one value that goes out unbent, as a plain
-  track volume.
-- **`/master/aux-return`** is the desk's aux return pot. It drives the
-  PurestGain on REAPER track 28 "Return"; full travel is 0 dB.
-- **`/filter/mode`** arrives as the word (`high_pass`, `low_pass`) or as a
-  number, 1 for high pass. Core **sends** it as a number; the word goes to the
-  desk on `/filter/led`.
-- **`/beat`**: only the tempo is used here, and only to drive the delay on the
-  FX bus.
-- **`/vu/{n}`** is sent by the beat-analyzer, not by `a3-core.py`.
-
-`/channel/{ch}/reverb`, `/width` and `/order` have no handler in
-`a3-core.py`; a value sent to one of them is counted as unrecognised and
-dropped.
+(osc-two-spellings)=
 
 ### The two spellings of a button
 
-The difference between a string and a number on `cue`, `filter` and
-`/filter/mode` is not sloppiness — it is the difference between the devices.
-The A³ Mixer passes on the serial line of a momentary button, so it sends the
-**edge** `"1"` when the finger goes down and `"0"` when it comes off. A³
-Motion shows a **state** on a screen and sends that state as a number. Core
-resolves both, by the *type* of the argument.
-
-This matters when changing either end: make `a3-mixer.py` send `int(value)`
-and every button press becomes a state, so the cue key on the desk turns into a
-momentary — on only while the finger rests on it. No test in any of the repos
-catches that.
+The A³ Mixer sends a button's **edge** as a string (`"1"` down, `"0"` up); A³
+Motion sends a **state** as a number. Core tells them apart by type. Make
+`a3-mixer.py` send `int(value)` and the desk's cue becomes momentary — and no
+test catches it.
 
 (osc-recall)=
 
 ### /state/recall
 
-Sent by a device that has just come up and knows nothing about the room.
-Core answers with **the ordinary messages** — every value in exactly the form
-it would have arrived in — so nothing new has to be understood at the other
-end, and each value goes to the device it belongs to rather than back to
-whoever asked.
+A device that just started asks; Core answers with **the ordinary messages**,
+each to the device it belongs to:
 
-What comes back, in this order:
+1. **Lamps**: Core's own flags, from its state file.
+2. **Position and 3d** per channel, held by Core because nobody else can be
+   asked (positions go straight to the IEM plug-ins; `3d` can't be read back
+   below −40 dB).
+3. **Continuous values**: what REAPER last reported.
 
-1. **The lamps** — Core's own flags, read off its state file, complete even
-   on a cold start.
-2. **The position and the 3D value** — `azimuth`, `elevation` and `3d` per
-   channel. Core holds these because nobody else can be asked: the position
-   goes straight to the IEM plugins on their own port, so REAPER never
-   reports it back, and `3d` reaches REAPER as a gain that cannot be read
-   back below its −40 dB floor.
-3. **The continuous values** — what REAPER last reported. Core relays these
-   rather than holding an opinion of its own.
-
-**A cold Core asks.** REAPER reports on change and does not know Core went
-away, so at its own start Core asks REAPER to report everything (action
-41743 — the same request is a key in Core's window) and plays the evening
-back once REAPER has finished. Until that report arrives, a recall answers
-with less. A value Core has never seen is left
-**out** rather than sent as zero — zero degrees is the front of the room, a
-real position, and answering it would move the sound while claiming to
-report where it already is.
+**A cold Core asks REAPER** for everything (action 41743, also a key in the
+window) and replays once the report is in. A value never seen is **left out**,
+not sent as zero: zero degrees is a real position.
 
 (osc-way-back)=
 
 ### The way back: what REAPER reports
 
-A hand on REAPER's own mixer has to reach the devices, or the room and the
-control surfaces disagree with nobody able to tell. So Core reads REAPER's
-feedback on its own port (`core.reaper-feedback`), bends the value back
-through the curve it went out on, and broadcasts it. The left column is
-REAPER's vocabulary, which the truth lists under `external` without spelling
-out the track numbers:
+Core reads REAPER's feedback on `core.reaper-feedback`, bends it back through
+its curve and broadcasts it:
 
 | REAPER reports | comes back as |
 | :--- | :--- |
@@ -524,37 +383,19 @@ out the track numbers:
 | `/track/8/volume` | `/master/phones-mix` |
 | `/track/28/fx/1/fxparam/1/value` | `/master/aux-return` |
 
-The filter is one control written to all four input tracks, so it is
-**reported on a channel's track and answered globally**. A value already
-passed on is dropped, which is what keeps one knob from becoming eight
-identical messages — a gain plug-in holds its value across eight parameters.
+The filter is reported per track and answered globally; duplicates are dropped.
 
 ```{warning}
-**Not everything may be relayed, and the rule is exact: can an action script
-drive it?**
-
-If it can — `3d`, `freq` and `Q` — REAPER holds the base value *plus* the
-running accent envelope while the device holds only the base. Writing the one
-into the other makes every accent's peak the new base, so the value ratchets
-up and never comes down. These are not relayed.
-
-If it cannot — gain, the EQ bands, volume, `aux-send` — REAPER's value **is**
-the device's value and there is nothing to ratchet.
+**Relay only what no action script can drive.** `3d`, `freq` and `Q` carry the
+accent envelope in REAPER; writing that back as the base would ratchet them up.
+Gain, EQ, volume and `aux-send` are safe.
 ```
 
-**The desk does not use these values.** `a3-mixer.py` listens for the meters,
-the lamps, `/beat` and its input selectors' state; everything above arrives
-there and is dropped. Its pots are analog, so a returned value could only be
-displayed, not set.
+The desk ignores these values: its pots are analog.
 
 (osc-beat-delay)=
 
 ### /beat, and the delay that follows it
-
-The beat-analyzer has listed Core as one of its OSC targets all along; Core
-simply had nowhere to put the message. It now takes the tempo out of it and
-hands it to the **IEM DualDelay** on the FX bus, on its own port
-(`dualdelay.osc` in `a3-osc.json`):
 
 ```
 beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)
@@ -562,200 +403,116 @@ beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)
                                        └──/DualDelay/delayBPML,R──▶  DualDelay (dualdelay.osc)
 ```
 
-Not every beat. A delay is the one effect where chasing a tempo is audible —
-rewriting a delay line's length shifts the pitch of whatever is still in it —
-so a reading has to do two things before it is passed on: **hold still for a
-whole bar**, and differ from what the delay already has by at least 0.1 BPM.
-
-Both delay lines get the same tempo. They keep their own multipliers, which
-is what makes the two sides a ping-pong rather than one echo, and the
-multiplier is set in the plug-in rather than from here.
-
-The plug-in's OSC receiver has to be opened by hand and its `Sync` switched
-off; see {ref}`REAPER: the template, the plug-ins <core-reaper>`. Going
-through REAPER's project tempo instead does not hold: the plug-in takes a new
-project tempo only when the transport starts.
+Core passes the tempo to the IEM DualDelay on the FX bus only when it has held
+still **a whole bar** and differs by **≥ 0.1 BPM** (a changing delay shifts
+pitch). Both lines get the same tempo; their multipliers stay in the plug-in.
+The plug-in's OSC receiver must be opened and `Sync` off; see
+{ref}`REAPER <core-reaper>`. REAPER's project tempo can't be used: the plug-in
+reads it only on transport start.
 
 ### The aux send
-
-The desk's aux send knob drives the channel's send to the aux bus:
 
 ```
 /channel/{ch}/aux-send  ──▶  /track/{1,5,9,13}/send/1/volume   (normalised 0..1)
 ```
 
-Send **1** of the channel bus reaches `enc_fx`, the aux bus. The number is the
-position among the *sending* track's sends, which REAPER derives from the
-order its receivers appear in the project — and the cue and mix sends to
-`enc_phones` (3 and 4) are among them. It lives in Core's `layout.json` rather
-than in the source, so a send that moves in the REAPER project can be found by
-reading one file.
-
-The desk has no 3D control. 3D is A³ Motion's pot, on
-`/channel/{ch}/3d`, and only that.
+Send **1** reaches `enc_fx`. The number is the send's position on the sending
+track (the `enc_phones` sends are 3 and 4); it lives in Core's `layout.json`.
+3D is A³ Motion's alone (`/channel/{ch}/3d`).
 
 ## A³ Motion
 
-A³ Motion listens on three ports, all three from `a3-osc.json`: `motion.osc`
-for Core's relays and `/beat`, `motion.vu` for the beat-analyzer's meters,
-and `motion.energy` for the IEM EnergyVisualizer — so neither the high-rate VU stream nor the energy grid
-shares a socket with the beat clock. All three are served by the same handler,
-so the split is a convention, not a restriction.
+Three listeners: `motion.osc` (Core's relays, `/beat`), `motion.vu` (meters),
+`motion.energy` (IEM EnergyVisualizer), so high-rate streams don't share the
+clock's socket. One handler serves all three.
 
-What the [address table](#osc-addresses) does not say about Motion:
+- **Position** (`azimuth`, `elevation`) is sent while a blob moves.
+- **`3d`** from the pot; **`filter/frequency`**, **`filter/q`** from the
+  channel row and the encoders.
+- **The MIX pages** send the A³ Mixer's addresses and receive Core's relays;
+  `cue` and `filter` as states, `/filter/mode` as a number.
+- **`/state/recall`** once at start-up.
+- **`/beat`** sent in INT, received in EXT and PIO (syncs tempo and phase);
+  floats are truncated.
+- **`/tap`**, **`/clockmode`** go to the beat-analyzer.
 
-- **The position** — `/channel/{ch}/azimuth` and `/elevation` — is sent while
-  a blob moves, and Core puts the blob back where the sound already is on a
-  recall.
-- **`/channel/{ch}/3d`** comes from the channel's pot; **`/channel/{ch}/filter/frequency`**
-  and **`/channel/{ch}/filter/q`** are the `freq` and `Q` rows of the
-  channel-value strip, and the left and right hardware encoders.
-- **The channel strip, the master section and the shared filter** on the MIX
-  pages send the same addresses the A³ Mixer sends, and are **received**
-  back: Core relays what REAPER reports. `cue` and `filter` go
-  both ways as the **state**, not an edge; `/filter/mode` as a number, 1 for
-  high pass.
-- **`/state/recall`** is sent once at start-up: *tell me what is already
-  sounding*.
-- **`/beat`** is **sent** in INT clock mode and **received** in EXT and PIO.
-  It always updates the status bar readout; received, it also syncs playback
-  tempo and phase. Float arguments are accepted and truncated to int.
-- **`/tap`** and **`/clockmode`** go to the beat-analyzer, not to Core.
-
-Two words it speaks are not ours, and are listed under `external` in the file:
-
-| Address | Direction | What |
+| External address | Direction | What |
 | :--- | :--- | :--- |
-| `/EnergyVisualizer/RMS` | received, on `motion.energy` | Energy arriving from each direction, 426 floats, one per point of the IEM EnergyVisualizer's sphere — lights the sphere itself |
-| `/StereoEncoder/azimuth`, `/StereoEncoder/elevation` | sent | The alternative backend, straight into an IEM plug-in chain instead of into Core |
+| `/EnergyVisualizer/RMS` | received, `motion.energy` | energy per direction lighting the sphere; see [below](#osc-energy) |
+| `/StereoEncoder/azimuth`, `/elevation` | sent | alternative backend: straight into an IEM chain |
 
-```{note}
-**Nothing about addresses and ports is set on the device any more.** A³
-Motion reads them from `a3-osc.json`; the `oscSender`, `oscReceiver` and
-`oscAddresses` blocks of its `config/config.json` are no longer read, and the
-**Network** page is gone from its menu. To change one, change the file — see
-[Where addresses and ports live](#osc-truth).
-```
+Addresses and ports come only from `a3-osc.json`. A meter's meaning exists
+only in the file: the analyzer sends one meter per JACK input in port order.
 
-The meaning of a meter's number exists only in the file — senders do not
-carry it. The `beat-analyzer` emits `NUM_VU_CHANNELS` (40) meters, one per
-JACK input, in port order; which physical signal ends up on which number is
-decided by the JACK patching alone. The A³ setup follows the
-{ref}`REAPER channel map <core-vu-map>`: `/vu/n` is REAPER out 30 + *n*, and
-A³ Motion and the A³ Mixer find their meters by name — see
-[The meters](#osc-vu-meters).
+(osc-3d)=
 
 ### /channel/{ch}/3d
 
-A third per-channel value beside `filter/frequency` and `filter/q`, sent
-whenever the channel's potentiometer moves. Each channel is split in REAPER:
-`n-multi-enc` carries the steady signal; `n-stereo-enc` carries two Airwindows
-Isolator3 — FX 2 cuts the band that moves, FX 3 cuts the same band from a
-phase-inverted copy of the steady signal and so takes it out of the steady
-bed. `filter/frequency` and `filter/q` go to both, with the same value.
+Each channel is split in REAPER: `n-multi-enc` carries the steady signal;
+`n-stereo-enc` carries two Airwindows Isolator3 — FX 2 isolates the moving
+band, FX 3 removes the same band from a phase-inverted copy of the steady
+signal. `filter/frequency` and `filter/q` go to both.
 
-`3d` is the band's level, read as an amplitude: Core sets the gain container
-on `n-stereo-enc` (FX 1, parameters 1 and 15) to 20·log10(3d) dB, with
-PurestGain's −40 dB floor at 3d ≤ 0.01. The steady gain on `n-multi-enc`
-(FX 1, parameter 1) stays at 0 dB for every value. Because the moving band
-and the subtracted band share the one gain, band and rest add up to the
-input at every 3d, frequency and Q: turning 3d moves sound, it does not make
-the channel louder or quieter. (Until 2026-10-06 this was a crossfade that
-also lowered the steady gain above 3d 0.5, and the channel was not
-level-neutral.)
+`3d` sets the gain on `n-stereo-enc` (FX 1, parameters 1 and 15) to
+20·log10(3d) dB, floored at −40 dB for 3d ≤ 0.01; `n-multi-enc` stays at 0 dB.
+Band and rest always sum to the input: **3d moves sound without changing the
+level**. It is continuous.
 
-It is continuous; no device sends it as a switch.
+(osc-energy)=
 
 ### /EnergyVisualizer/RMS
 
-Sent by the [IEM EnergyVisualizer](https://plugins.iem.at/docs/energyvisualizergrid/) from version
-1.0.0 on, once its "OSC send" is switched on in the lower left of the plug-in. One message carries
-**426 float32 arguments**, one per point of the plug-in's own sphere grid, in the plug-in's order —
-roughly 9 messages a second. Values are linear, not dB.
-
-Which direction each index stands for comes from the plug-in's coordinate file, mirrored in the
-A³ Motion UI as `resources/EnergyVisualizerGrid.json`. A message of any other length is discarded
-rather than partly applied, because a short one would leave the rest of the map holding energy that
-is no longer there.
-
-Unlike the VU meters, this carries **elevation** as well as azimuth: it is the ambisonic field
-itself rather than a per-loudspeaker level.
-
-### The MIX page
-
-A³ Motion's software channel strip — GAIN, HIGH, MID, LOW, VOL, SEND, CUE and
-FX per channel, and a second page for the summing section and the shared
-filter — sends the same addresses the A³ Mixer sends, so Core cannot tell the
-two apart and does not have to. The controls themselves are on
-{ref}`MIXER <motion-mixer>`.
+From the [IEM EnergyVisualizer](https://plugins.iem.at/docs/energyvisualizergrid/)
+≥ 1.0.0, with "OSC send" on: **426 float32** per message, one per point of its
+grid, about 9 a second, linear. Directions come from
+`resources/EnergyVisualizerGrid.json` in the A³ Motion UI. Any other length is
+discarded. Unlike the VU meters it carries elevation.
 
 ### Total recall at start-up
 
-At start-up A³ Motion sends `/state/recall` and holds its own output until the
-answer arrives, or a short grace period passes. What Core replays lands on the
-blobs, the pots and the encoders, and only then does the device start
-talking. Who wins:
-
-- **At start-up, Core wins.** It is the one that knows what is audible.
-- **When a set is loaded, the set wins.** Loading a set is an explicit act.
-
-A reverse path that **asks** once is right; one that **reports** continuously
-is a loop for values an action can drive (see *The way back* above).
+Motion sends `/state/recall` and stays silent until the answer (or a short
+grace period). **At start-up Core wins; when a set is loaded the set wins.**
+Asking once is safe; reporting continuously would loop (see
+[The way back](#osc-way-back)).
 
 (osc-beat-analyzer)=
 
 ## beat-analyzer
 
-The beat clock and the meters. It listens on **one** OSC port,
-`beat-analyzer.clock` in `a3-osc.json`, which reaches it as
-`OSC_PORT_A3MOTION` in the `a3-osc` block of its `.env`, and on the three Pro
-DJ Link ports (`prolink.*`), which carry no OSC at all. What it sends goes to
-every target in that block; see {ref}`Beat Analyzer <beat-analyzer-config>`.
+Listens on `beat-analyzer.clock` (`OSC_PORT_A3MOTION` in its `.env`) and the
+Pro DJ Link ports (`prolink.*`, not OSC); sends to every target in its
+`a3-osc` block ({ref}`config <beat-analyzer-config>`).
 
-What the [address table](#osc-addresses) does not say about it:
+- **`/beat`** (beat 1–4, bar, bpm): sent in every mode to every target (mode 0:
+  not to `motion`). Received and relayed only in mode 0; beats outside 1–4
+  dropped. Mode 2: bar always 0.
+- **`/vu/{n}`**: one per JACK input `vu_analog1_L` … `vu_free70` (REAPER out
+  31–70), four bundles of ten, 25 per second, to `OSC_VU_*` if set, else
+  `OSC_HOST_*`.
+- **`/clockmode`**: 0 a3motion, 1 intern, 2 pioneer; clamped; not stored
+  (starts in 1).
+- **`/tap`**: mode 1 only; always sets the beat to 1.
 
-- **`/beat`** (beat 1–4, bar, bpm) is **sent** in every clock mode, to every
-  target — in mode 0 except the target named `motion`. It is **received** on
-  the clock port and relayed only in mode 0; ints and floats are both
-  accepted, and a beat outside 1–4 is dropped. In mode 2 the bar is always 0.
-- **`/vu/{n}`**: one meter per JACK input `vu_analog1_L` … `vu_free70` (REAPER
-  out 31–70), as four bundles, one per block of ten (inputs, Main, Booth,
-  stereo), 25 times a second. Sent to a target's `OSC_VU_*` entry where one is
-  set, else to its `OSC_HOST_*` entry.
-- **`/clockmode`**: 0 a3motion, 1 intern, 2 pioneer, int or float, clamped to
-  0–2. Not stored: it starts in 1 every time.
-- **`/tap`**: counted only in mode 1. A number, if one comes with it, is
-  logged and otherwise unused — a tap always sets the beat to 1.
-
-The clock modes, and which A³ Motion clock key sends which, are explained on
-the {ref}`Beat Analyzer <beat-analyzer-modes>` page.
+Modes: {ref}`Beat Analyzer <beat-analyzer-modes>`.
 
 ## IP and Port
 
-Every listener, with its host and port, is on the [ports page](ports.md),
-rendered from `a3-osc.json`. Two ports are set **inside a plug-in** rather
-than read from the file, and have to match it by hand: the IEM DualDelay's
-(`dualdelay.osc`, which only listens once opened in the plug-in) and the IEM
-MultiEncoders' (`iem.multiencoder-1..3`, set in the REAPER project).
+All listeners: [ports page](ports.md). Two ports are set **in a plug-in** and
+must match the file by hand: the IEM DualDelay's (`dualdelay.osc`) and the
+MultiEncoders' (`iem.multiencoder-1..3`, in the REAPER project).
 
 ### Known inconsistencies
 
-Worth knowing before chasing a silent link.
-
-- **A truth that has not followed.** A device on an older truth than Core's
-  shows as *DIFFERS from Core's* in Core's window — see
-  [above](#osc-differs). The desk, StemDeck and Motion follow by themselves.
-- **A target written by hand** into the beat-analyzer's `.env`, outside the
-  `a3-osc` block, is commented out (`# was: …`) at the next install: it would
-  be a second truth.
+- A device on an older truth shows *DIFFERS from Core's* ([above](#osc-differs)).
+- A target hand-written into the beat-analyzer's `.env` outside the block is
+  commented out (`# was: …`) at the next install.
 
 ## The register: which addresses exist at all
 
-A³ Core ships a **register** of every address the system can speak, built
-from `a3-osc.json` — one row per address shape and device. Core's window holds that register against the
-traffic it has actually seen, so it can say the one thing a message log never
-could: **an address that exists and has never arrived is a dead wire.**
+Core's window holds the **register** — every address the system can speak,
+from `a3-osc.json` — against the traffic it has seen. **An address that exists
+and never arrived is a dead wire.**
 
 ![The register, filtered to the A³ Mixer](../development/pics_development/a3core-window-register-mixer.png)
 
-Everything marked *nie* in that column has never been heard from. See {doc}`../development/core` for the window itself.
+*nie* in that column: never heard. The window: {doc}`../development/core`.
