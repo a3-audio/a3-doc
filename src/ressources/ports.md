@@ -67,6 +67,7 @@ truth — the A³ Mixer, StemDeck and A³ Motion — listens there. A host of `a
 | iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
 | zita-n2j | audio | any (0.0.0.0) | 65100 | network audio from radla (10 channels, not OSC) |
+| x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
 | radla | vu | radla (192.168.43.96) | 9001 | /vu |
 | radla | zita-n2j | radla (192.168.43.96) | 55100 | network audio from Core (zita-j2n, 2 channels, not OSC) |
