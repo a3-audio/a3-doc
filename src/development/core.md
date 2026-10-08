@@ -14,7 +14,9 @@ turns OSC into DSP settings.
 
 All names and addresses come from `/usr/share/a3/a3-osc.json` joined with
 `~/.config/a3/network.json` by `lib/a3_osc.py` ({ref}`truth <osc-truth>`,
-{doc}`ports <../ressources/ports>`). Value curves are pure functions in
+{doc}`ports <../ressources/ports>`): `hosts`, `network` and, when present,
+`meters`, key by key; a `meters` block that fails `Truth.meters()`'s checks is
+dropped alone and named in `meters_problem`. Value curves are pure functions in
 `lib/a3_core_curves.py`.
 
 | Topic | Code | Rule |

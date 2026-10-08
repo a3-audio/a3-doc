@@ -17,14 +17,30 @@ headless X config, `~/.venv`, `~/.config/a3/osc.env`, the beat-analyzer's
 **Edit the package, not the machine**, except where noted: a replaced file
 loses local edits.
 
+(core-the-one-truth)=
+
 ## The one truth: `/usr/share/a3/a3-osc.json` and `~/.config/a3/network.json`
 
 | File | Owner | Edit |
 | :--- | :--- | :--- |
 | `/usr/share/a3/a3-osc.json` | the package: the contract | never on the machine; change a3-core and reinstall |
-| `~/.config/a3/network.json` | you: `hosts`, `network`; created once | edit, then restart Core |
+| `~/.config/a3/network.json` | you: `hosts`, `network`, optional `meters`; created once | edit, then restart Core |
 
 How they join and propagate: {ref}`Where addresses and ports live <osc-truth>`.
+
+**Tuning the meters on the rig:** a `meters` block joins key by key over the
+package's {ref}`ballistics <osc-meter-ballistics>`, so this changes the hold
+and nothing else:
+
+```json
+{ "hosts": {"...": "..."}, "network": {"...": "..."}, "meters": { "peak_hold_seconds": 2.5 } }
+```
+
+Keys: `attack_ms` (≥ 0), `release_db_per_second` (> 0), `peak_hold_seconds`
+(≥ 0). Restart Core; the new fingerprint makes the desk, A³ Motion and
+StemDeck refetch and restart. A wrong type, out-of-range value or unknown key
+refuses the whole block: Core logs `network.json's meters refused, the
+package's are used: …` and keeps hosts and network.
 
 (core-etc)=
 

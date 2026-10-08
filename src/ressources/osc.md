@@ -271,6 +271,30 @@ channel plays.
 | `/vu/66` | in4_post_R |
 <!-- /a3-osc:vu -->
 
+(osc-meter-ballistics)=
+
+### How a meter moves
+
+**Sources send raw peaks; every display applies the same ballistics** (decided
+2026-10-07): the desk's displays and LEDs, StemDeck's strips, A³ Motion's
+meters. Per tick a source sends the highest peak since the last, no fall, no
+hold. Each display, on its own clock: attack (0 = at once), release in dB/s,
+and a hold of the highest recent peak before it falls; a higher peak restarts
+the hold.
+
+The numbers are the truth's `meters` block: devices read it from Core and
+restart on a new fingerprint; a truth without the block reads as the package
+values below. Tune them on the rig in `network.json`
+({ref}`The one truth <core-the-one-truth>`).
+
+<!-- a3-osc:meters -->
+| Key | Value |
+| --- | --- |
+| `attack_ms` | 0 |
+| `release_db_per_second` | 20 |
+| `peak_hold_seconds` | 1.5 |
+<!-- /a3-osc:meters -->
+
 (osc-core)=
 
 ## A³ Core
