@@ -37,7 +37,6 @@ Conffiles: dpkg keeps a version you changed.
 | `/etc/default/grub` | 1 s menu; `threadirqs cpufreq.default_governor=performance reboot=cold` (prioritisable IRQ threads, full CPU speed, cold reboot) |
 | `/etc/lightdm/lightdm.conf.d/99-a3-core.conf` | autologin `aaa` into `i3`; `logind-check-graphical=false` |
 | `/etc/security/limits.d/audio.conf` | `audio` group: RT up to 95, unlimited memlock, nice −19 (managed by `dpkg-reconfigure jackd2`) |
-| `/etc/rtirq.conf` | IRQ priorities for `snd-usb-audio`, `usb`, `xhci_hcd` (90, −5 steps, lowest 51); for `rtirq`, not a dependency |
 | `/etc/systemd/system/*.service` | the three [system units](#core-system-units) |
 
 Written by the postinst, not shipped:

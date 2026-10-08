@@ -166,12 +166,20 @@ python3 tools/config-status.py --install PATH   # repo -> machine, one file
 
 `--install` shows the diff and keeps the old file.
 
-### 5. Ownership and permissions
+### 5. An ssh key (optional)
+
+**"Public ssh key allowed to log in as aaa"** (`a3-core/ssh-key`, default
+empty). One public-key line is appended to `~/.ssh/authorized_keys`, once;
+empty adds nothing, anything else is refused. The answer is forgotten
+afterwards, so an upgrade never puts back a removed key. The package ships no
+`authorized_keys` of its own.
+
+### 6. Ownership and permissions
 
 `~/.local`, `~/.config` → `aaa`; directories in `~/.config` `0755`, files
 `0664`.
 
-### 6. Rendering the one truth: `a3-osc-render user`
+### 7. Rendering the one truth: `a3-osc-render user`
 
 As `aaa`, for programs that can't read JSON:
 
@@ -184,19 +192,19 @@ As `aaa`, for programs that can't read JSON:
 A failure is reported (zita would lack addresses). Core re-renders both at
 its own start; run it by hand only to refresh without a restart.
 
-### 7. System services
+### 8. System services
 
 Enables `x11vnc.service` and `set_irq_prio.service`
 ([System units](#core-system-units)).
 
-### 8. User services and the REAPER installation
+### 9. User services and the REAPER installation
 
 `loginctl enable-linger aaa`, `systemctl --user daemon-reload`, **start**
 `a3-user-install.service` (next section); linger off again. `a3-main`, both
 zita units and `a3-bar-per-workspace` start at boot through the shipped
 `default.target.wants` links.
 
-### 9. The boot loader
+### 10. The boot loader
 
 `update-grub`, for the kernel command line in `/etc/default/grub`
 ([Under /etc](#core-etc)). The postinst ends with:
