@@ -27,7 +27,11 @@ analyzer. No special mode: three programs, wired together.
 - **One clock from the music.** The master deck's beat, tempo fader included,
   drives the room.
 - **The channel is the part, not the deck.** Keep the drums on channel 1 and
-  channel 1 stays "the drums" across decks and tracks.
+  channel 1 stays "the drums" across decks and tracks. {ref}`AUTO DJ <stemdeck-autodj>`
+  keeps this rule: it hands each stem over to the next deck on its own channel.
+- **The panel can play it.** On the StemDeck machine, the A³ Motion panel
+  {ref}`drives StemDeck <stemdeck-panel>` while A³ Motion itself is not
+  using it.
 
 (stemdeck-with-motion-map)=
 

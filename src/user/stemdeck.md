@@ -84,7 +84,7 @@ where there is room, the audio status.
 ![Settings: the stem library folder](pics_user/stemdeck-settings.png)
 
 The **stem library** folder, picked with **Choose…** (the touch screen has no
-keyboard).
+keyboard), and the [AUTO DJ](#stemdeck-autodj) overlap.
 
 (stemdeck-decks)=
 
@@ -104,6 +104,7 @@ Like a CDJ without the platter; the [SCS.3d](#stemdeck-scs3d) is the jog.
 | **VINYL** | the controller's platter scratches |
 | tempo fader | range button: ±8 / ±16 / ±50 % |
 | **BPM** | current tempo; **Original** below |
+| **KEY** | key lock; see [KEY](#stemdeck-key) |
 | **SYNC** | follow a leader; see [Sync](#stemdeck-sync) |
 | **MASTER** | Pro DJ Link tempo master; see [MASTER](#stemdeck-master) |
 | **GRID** | fix the beat grid; see [GRID](#stemdeck-grid) |
@@ -164,18 +165,76 @@ Grid Adjust, as on a CDJ-3000:
 
 Corrections are kept in `analysis.xml`.
 
+(stemdeck-downbeats)=
+
+#### Where the bar's one is
+
+The tempo analysis finds the beats. StemDeck then decides which beat is the
+**one** of the bar, from the stems: drums and bass coming back after a break
+or stopping for one, chord changes, the arrangement changing at a bar line.
+Four beats a bar are assumed.
+
+- Tracks analysed before are corrected **once**, when you load them.
+- Your own corrections (**◀1 / 1▶**, **SNAP**, **SET 1**) always win; StemDeck
+  never moves a grid you set.
+
+(stemdeck-key)=
+
+### KEY: key lock
+
+**KEY** sits at the foot of the deck's tile, with the tempo controls. Off, the
+pitch follows the tempo fader as on a turntable. On, the tempo changes and the
+**key stays**, like a CDJ's Master Tempo.
+
+- Scratching stays pitched: a scratch is pitch by nature, so KEY lets go while
+  the platter is touched.
+- It is kept in the [session](#stemdeck-session).
+- It costs CPU while it is on. Leave it off on decks that run at their own
+  tempo.
+
 (stemdeck-autodj)=
 
 ### AUTO DJ
 
-Plays the sets the search shows, at random, each once:
+Plays the sets the search shows, at random, each once, and mixes them the way
+a DJ with a stem player would: **nothing fades**. It hands the stems over from
+one deck to the other, one by one, on downbeats.
+
+While AUTO DJ runs, desk channels 1–4 carry **drums, bass, other and vocals**
+of one deck at a time, and their analog inputs are off. The faders stay where
+they are; AUTO DJ never touches a mute.
 
 - Nothing playing: loads a set on deck A and plays it.
-- 30 s before the mix: loads the next set on the other deck, fader down.
-- The mix starts on a downbeat 16 bars before the end, SYNC on, equal-power
-  crossfade over those 16 bars; then the old deck stops and SYNC goes off.
-- No beat grid: a 10 s unsynced crossfade.
+- 30 s before the mix: loads the next set on the other deck.
+- **Overlap:** about 20 s, in whole bars of the playing track, SYNC on. The
+  new track starts on a downbeat of its own.
+- **Drums first.** At the start of the overlap the new drums take channel 1.
+- **Bass, then other,** one at a time, each at the downbeat where the change is
+  least heard. AUTO DJ looks 8 s around each downbeat: the old stem is quiet
+  just after it, the new one was quiet just before it.
+- **Vocals last.** The old vocals sing to the end of the old track; the new
+  ones come in on the first downbeat after it. Then the old deck stops and SYNC
+  goes off.
+- A stem that is not playing is on no channel and not on AUX.
+- **Where a track is heard.** AUTO DJ reads the stems' levels: silence at the
+  start and the end of a file is ignored. A track that starts with a pickup
+  (a few notes before the bar's one) starts on the downbeat before it, so the
+  pickup is heard whole.
+- **No beat grid:** four steps over 10 s, unsynced, the same order: drums, bass,
+  other, vocals.
 - Never mixes out of a loop or loads onto a looping deck.
+- **Next / Prev** on the playing deck mixes at once, from the next downbeat.
+- Switching AUTO DJ off leaves the routing as it is. It is yours to carry on.
+
+**Your switches win.** Put a stem on another channel or on AUX (AUX is
+allowed while AUTO DJ runs; only you can put a stem there), and AUTO DJ leaves
+it alone. The stem stays yours until its deck stops or gets a new track. A
+stem of the old deck that you put on a desk channel is handed over normally
+when that channel changes over. Turning AUX off gives the stem back at once.
+
+The length of the overlap is **AUTO DJ overlap** in [Settings](#stemdeck-settings)
+(default ≈ 20 s; or a number of bars). Tracks without a grid use a time in
+seconds (default 10 s). A new value applies to the next mix.
 
 (stemdeck-keys)=
 
@@ -304,6 +363,41 @@ StemDeck's side:
   after the bus and its 6 dB trim, i.e. what goes to the aux return. The desk shows it as STEM
   beside the analog return, ANALOG.
 
+(stemdeck-panel)=
+
+## The A³ Motion panel as StemDeck's controller
+
+The A³ Motion hardware panel can drive StemDeck: on the machine that runs
+StemDeck, plug the panel in by USB. StemDeck finds it by its USB ID, not by a
+port name, and picks it up again after you replug it.
+
+The panel splits down the middle. The **left half is deck A, the right half deck
+B**. Each half is a small mixer for its deck.
+
+| Control | What it does |
+| :--- | :--- |
+| outer column, top | **CUE** |
+| outer column, below it | **PLAY** |
+| outer column, next four | **AUX** for stems 1–4 |
+| inner pads | a stem's bus **1–4**: a row per stem, a pad per bus |
+| encoders | turn: that stem's gain. Push: mute |
+| inner pot | the deck's fader |
+| outer pots | not used |
+
+A pad switches its stem onto that bus or off it, as a click on the screen
+does. The order matches the [mixer](#stemdeck-mixer) on the screen: knob, AUX,
+1–4, M for deck A, mirrored for deck B, so AUX is always on the outer side.
+
+**Lights.** Every key glows dim in its deck's colour, so the halves read as A
+and B. A pad lights in the stem's colour while the stem is on that bus, at a
+quarter while it is muted. CUE is amber, PLAY green.
+
+```{warning}
+**One program at a time.** A³ Motion and StemDeck never drive the panel
+together. Whichever has the panel holds it exclusively; the other finds it
+busy. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
+```
+
 (stemdeck-audio)=
 
 ## Audio out
@@ -397,8 +491,15 @@ version <build-juce>`, found under `~/local/juce` unless `CMAKE_PREFIX_PATH`
 says otherwise), and:
 
 ```sh
-apt install libjack-jackd2-dev libflac-dev libvorbis-dev libogg-dev
+apt install libjack-jackd2-dev libflac-dev libvorbis-dev libogg-dev librubberband-dev
 ```
+
+`librubberband-dev` is for [key lock](#stemdeck-key); a built StemDeck needs
+`librubberband3` to run. Key lock uses the
+[Rubber Band Library](https://breakfastquay.com/rubberband/)
+(GPL-2.0-or-later, used under GPL-3.0-or-later). Stem splitting uses
+[Demucs](https://github.com/adefossez/demucs).
+
 
 GoogleTest (`libgtest-dev`) only for {ref}`the tests <build-commands>`. Then:
 
@@ -419,7 +520,7 @@ everything again.
 ### Session
 
 `~/.config/StemDeck/session.xml` is written every 2 s while anything changes and
-on quit. Next start restores decks, mixer and bus switches, library and stem
+on quit. Next start restores decks, key lock, mixer and bus switches, library and stem
 jobs; a playing deck plays on.
 
 (stemdeck-on-the-core)=
