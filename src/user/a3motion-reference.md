@@ -9,6 +9,7 @@
 | Window | For | Opens with | Closes with |
 | :--- | :--- | :--- | :--- |
 | **Main screen** | room, channels, selected clip | always there | — |
+| **FPV** | the room and four strips, for playing; see [FPV](a3motion-fpv.md) | **FULL/FPV**, status bar | **FULL/FPV** again |
 | **CLIP**, **MOTION**, **ACTION**, **CHMIX**, **REC** | the selected channel's clip, movement, actions, strip, takes | its tab in the bar (REC also with ●) | another tab |
 | **FILES** | sets, clips, shapes, actions on disk | FILES, global strip | FILES again; MIXER or PADS (swaps); any tab; MENU; PAGE on the panel |
 | **MIXER** | four strips and the master | MIXER, global strip | as FILES |
@@ -41,6 +42,8 @@ Top to bottom: **status bar**, **sphere**, **channel row**, then the **bar**
 | Part | What it does |
 | :--- | :--- |
 | **clock key** | tap: INT → EXT → PIO; see [Clock modes](#motion-clock) |
+| **FULL/FPV** | the view: FULL (this page) or [FPV](#motion-fpv); lit in FPV. Kept over a restart |
+| **BREATH** | ORBIT ships stand still on beat 4 of every bar; on at every start. See [the breath](#motion-fpv-breath) |
 | **BPM** | the tempo. Read only |
 | **readout** | what was last done, e.g. `-- REC ARMED` |
 | **beat display** | four cells, one per beat. **Tap it to tap the tempo** (INT); in EXT and PIO taps go to the beat analyser |
@@ -299,6 +302,8 @@ screen work as on the panel.
 
 - **PAGE** on another channel selects it; on the selected one it steps the
   tabs (SHIFT: backwards) and closes FILES, MIXER or PADS.
+  In [FPV](#motion-fpv-controls) it switches its channel between CLIP and
+  ORBIT instead.
 - A pad press selects its channel.
 - **Play all** starts only stopped clips. No Stop all; no A2/A4/A6 across
   channels.
@@ -333,6 +338,7 @@ else is on the touchscreen.
 | :--- | :--- |
 | encoder | turns the field above it (table below) |
 | SHIFT + encoder | upper: **freq**, lower: **Q**, on any page |
+| encoder in [FPV](#motion-fpv-controls) | as with SHIFT: **freq** / **Q** of its column; a press does nothing |
 | pot | **3d**: down is plain stereo, up follows the blob |
 | pads | see [PADS](#motion-pads) |
 | clock, recmode | step their value, as on the screen |

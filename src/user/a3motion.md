@@ -45,6 +45,8 @@ quiet-indigo-2. The recording plan is kept outside this repository. -->
 | **3d** | how much of a channel is in the room: down is plain stereo |
 | **bar**, **global strip** | the bottom of the screen: five tabs and their page (left), a column of keys (right) |
 | **LENGTH** | beats per pass: 16 is four bars |
+| **FULL**, **FPV** | the two views: FULL edits, [FPV](a3motion-fpv.md) is for playing the floor |
+| **ORBIT** | in FPV, a channel flying the big path round the room instead of its clip |
 
 (motion-get-started)=
 
@@ -76,6 +78,7 @@ That's the whole loop. Before your first gig, read
 | Page | What is in it |
 | :--- | :--- |
 | [How to …](a3motion-howto.md) | every task, one at a time, each with a GIF |
+| [FPV: play the floor](a3motion-fpv.md) | the second view: ships, guest groups, ORBIT, the breath |
 | [On stage](a3motion-on-stage.md) | stopping everything now, what not to do mid-set, the pre-gig check, troubleshooting |
 | [Screen and panel](a3motion-reference.md) | every window, field, pad and key |
 | [Menu, skins and keyboard](a3motion-menu.md) | the menu and its pages, skins, the on-screen keyboard |
@@ -87,6 +90,7 @@ That's the whole loop. Before your first gig, read
 :titlesonly:
 
 a3motion-howto
+a3motion-fpv
 a3motion-on-stage
 a3motion-reference
 a3motion-menu
