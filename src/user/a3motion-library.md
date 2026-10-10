@@ -2,14 +2,14 @@
 
 ## Sets and moods
 
-The library: **50 shapes, 70 clips, 71 actions, 14 sets**, along the arc of a
+The library: **50 shapes, 70 clips, 81 actions, 14 sets** and the FPV Games set, along the arc of a
 night. Names start with a prefix, so related files sort together in FILES:
 
 | Kind | Prefix | Example |
 | :--- | :--- | :--- |
 | Sets | the phase | `Peak` |
 | Clips | the phase | `Peak Anthem` |
-| Actions | **Move**, **Lift**, **Width**, **Speed**, **Dub**, **FX**, **Cue** | `Lift Up` |
+| Actions | **Move**, **Lift**, **Width**, **Speed**, **Dub**, **FX**, **Cue**, **Pilot** | `Lift Up` |
 | Shapes | the family | `Flower Rose 5` |
 
 Main arc: `Warmup · Groove · Build · Peak · Drop · Break · Dub · Deep · Float · Closing`.
@@ -224,9 +224,30 @@ four for the set, one spare. Each clip says what it is for in its own file
 
 **Default** (no shape) is the fallback for a channel without a clip.
 
+(motion-library-fpv-games)=
+
+### The FPV Games set
+
+A set for trying the pilots' [games](#motion-fpv-games). Every channel plays
+a groove clip (Four Floor, Tresillo, Clave, Offbeat) with the same six
+actions:
+
+| Button | Action | What it does in FPV |
+| :--- | :--- | :--- |
+| A1 | Pilot Fake-out | the ship heads for the nearest group, veers off a bar before the drop, hits it on the one |
+| A2 | Pilot Formation | every free ship lines up during the build and bursts outward on the one |
+| A3 | Pilot Hide and Seek | the ship slips away to one side and reappears opposite on the next one |
+| A4 | Pilot Call and Response | this ship and the nearest free one answer each other across the room, a bar each |
+| A5 | FX Riser | four bars of build: spread, spin, filter |
+| A6 | FX Impact | the drop: everything at once, then a long fall |
+
+Put a group or two on the floor, put the channels in ORBIT, and set
+**PILOTS** to HINT: the pad that fits the music pulses. In FULL the four
+Pilot actions do nothing; the riser and the impact work in both views.
+
 (motion-library-actions)=
 
-### Actions (71)
+### Actions (81)
 
 **Hold**: acts while held. **1shot**: fires and lets go. FX actions always
 change the sound; the others mostly move it.
@@ -336,6 +357,15 @@ change the sound; the others mostly move it.
 | Cue Dub Echo | Dub Echo | — the dub escape |
 | Cue Closing Still | Closing Still | — the emergency calm |
 | Cue Tension Siren | Tension Siren | Tribal |
+
+**Pilot** — start a [game](#motion-fpv-games) in FPV (FULL ignores them):
+
+| Action | Does | Fits |
+| :--- | :--- | :--- |
+| Pilot Fake-out | heads for the nearest group, veers off before the drop, hits it on the one | a build |
+| Pilot Formation | every free ship lines up, then bursts outward on the one | a build |
+| Pilot Hide and Seek | slips away to one side, comes back opposite | a breakdown |
+| Pilot Call and Response | this ship and the nearest free one answer each other, a bar each | a groove |
 
 **README** in the ACTIONS list is the scripting manual, not an action.
 

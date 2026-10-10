@@ -30,7 +30,7 @@ announcement: the file on disk; a later change restarts it;
 
 **Loading a set is the opposite**: the set wins. It stops everything, sets 3d,
 freq and Q, and restarts what the set says was playing, together, on the next
-**downbeat**. Shipped sets say nothing was playing; PADS › Play all starts them.
+**downbeat**. Shipped sets say nothing was playing; **PLAY all** starts them.
 
 (motion-shape-on-sphere)=
 

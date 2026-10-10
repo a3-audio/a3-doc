@@ -10,7 +10,7 @@
 2. **SETS** or **CLIPS** (for a clip, select its channel first).
 3. Tap a row: **it only shows** in the editor.
 4. **Load**: a set onto all four channels, a clip onto the selected one.
-   Shipped sets load stopped (start with Play\|Pause or PADS › **Play all**);
+   Shipped sets load stopped (start with Play\|Pause or **PLAY all**);
    a set saved while playing restarts its clips on the next downbeat.
 5. Tap **FILES** again, or any tab, to close.
 
@@ -38,9 +38,11 @@ the set's values. The room hears it.
 | stop, back to the top | **SHIFT** + **Play\|Pause**, or **■** | now |
 | start from the top, now | **SHIFT** + **Play\|Pause** on a still clip | now |
 | cancel a waiting start | **Play\|Pause** while it blinks | now |
-| start all four | PADS › **Play all** (stopped clips only) | next downbeat |
+| start all four | **PLAY all** (panel end column, or PADS), when nothing plays | next downbeat |
+| pause all that play | **PLAY all** while something plays | next downbeat |
 
-There is no Stop all. A pause keeps the place: the next start goes on from
+**PLAY all** is one key: it pauses what plays, or starts what stands still; a
+double tap sends the channels it reached back to the top. A pause keeps the place: the next start goes on from
 where it stood, on a downbeat, so it lands on the music's bars again. While
 paused, **▶** and the pad blink slowly, two beats on, two off. **SHIFT** or
 **■** forgets the place, and the next start begins at the top of the shape.

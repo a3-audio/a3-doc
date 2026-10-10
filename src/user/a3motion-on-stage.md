@@ -9,12 +9,31 @@
 | You want | Do this |
 | :--- | :--- |
 | one channel still | its **Play\|Pause** (pauses on the downbeat, keeps the place), or **SHIFT** + its **Play\|Pause** / **■** (now, back to the top) |
-| all four still | the same on each channel; there is no Stop all |
+| all four paused | **PLAY all** while something plays: pauses what plays, on the downbeat. There is no Stop all; for a stop now, **SHIFT** + each **Play\|Pause** |
 | plain stereo | **3d** pot down: still in the mix, no longer in the room |
 | a chain to end | Play\|Pause, ■ or another action pad on that channel |
 | a bad take gone | **■**, then **DISCARD** twice: the old clip, stopped |
 
 A stop leaves the sound where it is. A restart doesn't move the room either.
+
+(motion-stage-end-keys)=
+
+## The panel's end keys
+
+The outer columns are the same on both sides ([full table](#motion-end-columns)).
+Under the thumbs:
+
+| Key | Does | With **SHIFT** held first |
+| :--- | :--- | :--- |
+| **TAP** (row 1) | taps the tempo (INT) | **CLOCK** |
+| **SHIFT** (row 2) | the modifier | – |
+| **PLAY all** (row 3) | pauses what plays, or starts what stands still; double tap: back to the top | **REC** while both are held |
+| **A1 / A2** (row 4) | that action on all four channels | **REC MODE** |
+| **A3 / A4** (row 5) | that action on all four channels | nothing |
+| **A5 / A6** (row 6) | that action on all four channels | **MENU** |
+
+SHIFT first, then the key: a key already down keeps its plain job. Mind the
+whole-room actions on stage: A5 and A6 on every channel at once is a lot.
 
 (motion-not-mid-set)=
 
@@ -50,6 +69,7 @@ Safe: deleting a file (loaded material plays on), scrolling the menu, Escape.
 | A drag on the sphere moves nothing | Start the drag on the blob itself. Or camera mode is on: tap the small sphere to switch it off |
 | A drag on a meter moves nothing | Grab the handle, not the meter |
 | No bar, no channel row, ships instead of blobs | That is [FPV](#motion-fpv). **FULL/FPV** in the status bar brings FULL back |
+| A pad pulses by itself in FPV | **PILOTS** is at HINT: that pad starts the game that fits the music. At FLY the pilots start games on their own; tap **PILOTS** to step it back |
 | No meters, no lightning | Nothing from Core: cable, Core running? |
 | ▶ blinks before starting | Waiting for the downbeat (up to a bar); press again to cancel |
 | Off the beat, wrong BPM | Clock key. INT: tap. EXT/PIO: check the source (no beats: last tempo) |

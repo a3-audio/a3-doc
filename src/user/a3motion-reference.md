@@ -44,6 +44,7 @@ Top to bottom: **status bar**, **sphere**, **channel row**, then the **bar**
 | **clock key** | tap: INT → EXT → PIO; see [Clock modes](#motion-clock) |
 | **FULL/FPV** | the view: FULL (this page) or [FPV](#motion-fpv); lit in FPV. Kept over a restart |
 | **BREATH** | ORBIT ships stand still on beat 4 of every bar; on at every start. See [the breath](#motion-fpv-breath) |
+| **PILOTS** | FPV only, left of CLEAN: **OFF → HINT → FLY**, how much the pilots play on their own. Kept over a restart. See [Pilots and games](#motion-fpv-games) |
 | **BPM** | the tempo. Read only |
 | **readout** | what was last done, e.g. `-- REC ARMED` |
 | **beat display** | four cells, one per beat. **Tap it to tap the tempo** (INT); in EXT and PIO taps go to the beat analyser |
@@ -221,7 +222,8 @@ Steps: [Record a take](#motion-howto-take).
 | **LENGTH** × 4 | **the lit key is the take's length** |
 | **GAP-CONNECTOR** | `fade`: length of the closing move that smooths the loop join. `bias`: where an unwritten gap leads. If in doubt, leave both |
 
-On the panel, REC alone only ends a running take.
+On the panel, REC is SHIFT and PLAY all held together; alone it only ends a
+running take.
 
 (motion-files)=
 
@@ -292,11 +294,10 @@ Per channel, as on the panel:
 | row 2–4 | **A1**, **A3**, **A5** | **A2**, **A4**, **A6** |
 
 The window is the panel key for key: 44 keys, ten columns by six rows.
-Channels in the middle (top two rows empty, where the pots are); right column
-**TAP clock REC recmode MENU SHIFT**; left column **TAP**, **clock**, then the
-**scene column**: **Play all**, **A1**, **A3**, **A5** on every channel
-(screen only). A screen key is held while touched; SHIFT or REC held on the
-screen work as on the panel.
+Channels in the middle (top two rows empty, where the pots are); the two
+outer columns are the panel's [end columns](#motion-end-columns), left and
+right. A screen key is held while touched; SHIFT held on the screen works as
+on the panel, and the end keys show the shifted layer while it is.
 
 ![The PADS window](pics_user/a3-motion-ui-pads.png)
 
@@ -305,8 +306,8 @@ screen work as on the panel.
   In [FPV](#motion-fpv-controls) it switches its channel between CLIP and
   ORBIT instead.
 - A pad press selects its channel.
-- **Play all** starts only stopped clips. No Stop all; no A2/A4/A6 across
-  channels.
+- **PLAY all** is a toggle, see [the end columns](#motion-end-columns).
+  There is no separate Stop all.
 - Lights: Play\|Pause lit while playing, blinking while waiting, blinking
   slowly (two beats on, two off) while paused; action pads
   dim when assigned, dark when empty, **white while running**; PAGE lit on the
@@ -330,9 +331,11 @@ screen work as on the panel.
 
 ## The panel
 
-Per channel: two encoders, a **3d** pot and eight pads. Six function keys —
-TAP, clock, REC, recmode, MENU, SHIFT — stand mirrored at both ends. Everything
-else is on the touchscreen.
+Per channel: two encoders, a **3d** pot and eight pads. Beside them stand the
+two [end columns](#motion-end-columns): TAP, SHIFT, PLAY all and the action
+keys A1–A6 across all channels. The other functions (clock, REC, REC MODE,
+MENU) are the SHIFT layer of those keys. Everything else is on the
+touchscreen.
 
 | Control | What it does |
 | :--- | :--- |
@@ -341,7 +344,7 @@ else is on the touchscreen.
 | encoder in [FPV](#motion-fpv-controls) | as with SHIFT: **freq** / **Q** of its column; a press does nothing |
 | pot | **3d**: down is plain stereo, up follows the blob |
 | pads | see [PADS](#motion-pads) |
-| clock, recmode | step their value, as on the screen |
+| end keys | see [the end columns](#motion-end-columns) |
 
 | Page | Upper encoders | Lower encoders | Press |
 | :--- | :--- | :--- | :--- |
@@ -353,3 +356,43 @@ else is on the touchscreen.
 
 The bar marks which of two knobs an encoder drives; the choice is kept. While
 the [keyboard](#motion-keyboard) is up, the panel types and no pad fires.
+
+(motion-end-columns)=
+
+### The end columns
+
+The outer column on each side of the panel, six keys tall, is the same on
+both sides. Both sides of **TAP**, **SHIFT** and **PLAY all** do the same
+thing; each action key has one place, A1, A3 and A5 on the left and A2, A4
+and A6 on the right.
+
+| Row | Left | Right | With **SHIFT** held first |
+| :--- | :--- | :--- | :--- |
+| 1 | **TAP** | **TAP** | **CLOCK**: steps INT → EXT → PIO |
+| 2 | **SHIFT** | **SHIFT** | – |
+| 3 | **PLAY all** | **PLAY all** | **REC**, for as long as SHIFT and PLAY all are both held |
+| 4 | **A1** on every channel | **A2** on every channel | **REC MODE**: steps Touch → Latch → Write |
+| 5 | **A3** on every channel | **A4** on every channel | nothing |
+| 6 | **A5** on every channel | **A6** on every channel | **MENU**: opens or closes it |
+
+- **SHIFT first, then the key.** That is the shifted function and nothing
+  else. A key already down when you press SHIFT keeps its plain meaning.
+- **SHIFT + TAP never taps the tempo.**
+- **REC** lasts while you hold SHIFT and PLAY all together; let go of either
+  and it ends. With REC held, a channel's Play\|Pause records onto that
+  channel. Pressed alone, REC only ends a running take.
+- **PLAY all** is one key for both jobs. If any clip is playing, it pauses
+  what plays, on the next downbeat. If nothing plays, it starts every clip
+  that stands still. A **double tap** sends the channels the first tap
+  reached back to the top.
+- **A1–A6 across the columns** press that action on all four channels at
+  once. SHIFT with them does nothing.
+- SHIFT with a channel's own pads keeps its meanings (see
+  [PADS](#motion-pads)).
+- **Lights.** TAP, SHIFT and PLAY all light on both sides, each action key on
+  its own. While SHIFT is held the end columns show the shifted layer
+  instead of the plain one.
+- **On the screen** CLOCK and MENU are in the status bar, REC MODE is on the
+  REC page and REC is the transport's ● key. The PADS page shows both
+  columns too.
+- While the [keyboard](#motion-keyboard) is up, these keys type instead.
