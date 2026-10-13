@@ -126,8 +126,13 @@ JACK ports appear in the graph as a client named after the stream.
 
 | Stream | Sent by | Carries | JACK ports |
 | :--- | :--- | :--- | :--- |
-| `AES67 <hostname> out` | Core | 12 channels; the rec pair (REAPER `out23`, `out24`) on `send_CH1`, `send_CH2` | `send_CH1` … `send_CH12` |
+| `AES67 <hostname> out` | Core | 12 channels; one stereo pair cabled, the rec pair (REAPER `out23`, `out24`) on `send_CH1`, `send_CH2` | `send_CH1` … `send_CH12` |
 | `AES67 <hostname> stems` | StemDeck machine | its buses: 10 stem channels and the cue pair | `receive_D1L` … `receive_AUXR`, `receive_CUEL`, `receive_CUER` |
+
+Only one stereo pair goes onto the Core's stream: the rec pair, which a remote
+StemDeck records and OBS streams. Any other pair can go in its place or beside
+it — booth or main, for example — by cabling it to `send_CH3` … `send_CH12` in
+the patchbay; the other machine takes it from its `receive_CH…` ports.
 
 Nothing connects itself on the StemDeck machine. The StemDeck package ships
 `/usr/share/stemdeck/stemdeck-without-core.xml`: load and activate it once in
@@ -195,7 +200,7 @@ Ports pair in order; surplus ports stay unconnected. `reaper_aux`,
 | `alsa-scarlett_booth` | `system` | `playback_11` … `playback_18` |
 | `local_stemdeck` | StemDeck | `rec_L`, `rec_R` |
 | `reaper_cue` | REAPER | `in23`, `in24` |
-| `aes67_rec_to_stemdeck` | `AES67 <hostname> out` | `send_CH1`, `send_CH2` |
+| `aes67_rec` | `AES67 <hostname> out` | `send_CH1`, `send_CH2` |
 | `beat-analyzer_bpm` | beat-analyzer | `bpm_1` |
 | `beat_analyzer_vu_main` | beat-analyzer | `vu_main_sub`, `vu_main_top1` … `vu_main_top9` |
 | `beat_analyzer_vu_booth` | beat-analyzer | `vu_booth_sub`, `vu_booth_top1` … `vu_booth_top9` |
@@ -219,7 +224,7 @@ Ports pair in order; surplus ports stay unconnected. `reaper_aux`,
 | `reaper_booth` | `beat_analyzer_vu_booth` | Booth meters |
 | `reaper_phones` | `alsa-scarlett_phones` (`playback_9`, `10`) | hardware phones |
 | `reaper_phones` | `beat-analyzer_vu_phones` | Phones meters |
-| `reaper_rec` (`out23`, `out24`) | `aes67_rec_to_stemdeck` (`send_CH1`, `send_CH2`) | the recording mix to the audio network |
+| `reaper_rec` (`out23`, `out24`) | `aes67_rec` (`send_CH1`, `send_CH2`) | the recording mix to the audio network, for a remote StemDeck and OBS |
 | `reaper_rec` | `local_stemdeck` (`rec_L`, `rec_R`) | local StemDeck |
 | `reaper_rec` | `beat-analyzer_bpm` (`bpm_1`) | the first of the pair |
 | `reaper_rec` | `beat-analyzer_vu_rec` | Rec meters |
