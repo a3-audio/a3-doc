@@ -89,6 +89,10 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
 | prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
+| aes67 | stream | aes67-core (239.69.150.243) | 5004 | the Core's 12 channels as AES67 (RTP, L24, 44.1 kHz, 0.5 ms packets), multicast on the audio socket; not OSC |
+| aes67 | sap | sap (239.255.255.255) | 9875 | AES67 stream announcements (SAP/SDP), multicast on the audio socket, every sender and receiver; not OSC |
+| ptp4l | event | ptp (224.0.1.129) | 319 | PTP event messages; the Core is master on the audio socket; not OSC |
+| ptp4l | general | ptp (224.0.1.129) | 320 | PTP general messages (announce, follow-up); not OSC |
 <!-- /a3-osc:ports -->
 
 (ports-routes)=
