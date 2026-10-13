@@ -13,7 +13,7 @@ The usual route is the a3-system {doc}`installer <install>` (role Core).
 | :--- | :--- |
 | OS | Debian testing, realtime kernel |
 | Window manager | i3, named workspaces ([The screen](#core-config-screen)) |
-| Audio | JACK and REAPER, IEM plug-in suite |
+| Audio | PipeWire (with JACK compatibility), REAPER, IEM plug-in suite |
 | VU metering | the beat-analyzer ({ref}`VU map <core-vu-map>`) |
 | OSC router | `~/.local/bin/a3-core.py`, a `systemd --user` service |
 
@@ -61,8 +61,7 @@ wget -qO- "https://raw.githubusercontent.com/a3-audio/a3-core/main/platform-conf
 It runs non-interactively, so answer the questions afterwards:
 
 ```sh
-sudo dpkg-reconfigure a3-core     # network, bridge, headless screen
-sudo dpkg-reconfigure jackd2      # realtime priorities for JACK
+sudo dpkg-reconfigure a3-core     # network, audio network, headless screen
 ```
 
 Updates: `sudo apt update && sudo apt install a3-core`.
@@ -79,7 +78,7 @@ next version.
 
 | Purpose | Packages |
 | :--- | :--- |
-| Realtime and audio | `linux-image-rt-amd64`, `jackd2`, `libjack-jackd2-dev`, `jack-example-tools`, `qjackctl`, `zita-ajbridge`, `zita-njbridge`, `libsamplerate0-dev` |
+| Realtime and audio | `linux-image-rt-amd64`, `pipewire`, `pipewire-jack`, `wireplumber`, `linuxptp`, `libjack-jackd2-dev` (headers only, for building), `jack-example-tools`, `qjackctl`, `libsamplerate0-dev` |
 | 3D audio | `iem-plugin-suite-vst3` |
 | Screen | `lightdm`, `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `xserver-xorg-video-amdgpu`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm`, `dex`, `unclutter-xfixes`, `maim`, `xclip`, `brightnessctl` |
 | Python (Core) | `python3`, `python3-pip`, `python3-venv`, `python3-rtmidi` |
@@ -106,25 +105,30 @@ most steps leave existing things alone.
 *no*: nothing touched). With *yes*:
 
 - `a3-core/install-default-network` *yes* (preseed only, e.g.
-  `debconf-set-selections`): interface, address, gateway, DNS and bridge come
+  `debconf-set-selections`): interface, address, gateway, DNS and audio socket come
   from the truth's `network` section (`a3-osc-render network`).
 - Otherwise it asks **address**/prefix, **gateway**, **DNS**, pre-filled (an
   answer on the pre-September-2026 network is reset to the default), and the
   **interface** (priority *medium*, hidden; default `eno1`).
-- **Bridge** (`a3-core/bridge-with`): a second socket (e.g. `enp5s0`) joined
-  with the first as `br0`, so the A³ Mixer can hang on the Core. Empty: one
-  socket. First asked pre-filled with the other wired socket; later the stored
-  answer stands.
+- **Audio network** (`a3-core/audio-port`, `a3-core/audio-address`): a second
+  socket (e.g. `enp5s0`) for AES67 and PTP, on a subnet of its own. First asked
+  pre-filled with the other wired socket; empty means one socket only. The
+  address defaults to `192.168.9.10/24`; there is no gateway and no DNS on it.
+  There is no bridge: the A³ Mixer reaches the Core over the first network.
 
 Written to `/etc/systemd/network/`:
 
 | Answer | Files |
 | :--- | :--- |
-| no bridge | `a3.network` |
-| bridge | `10-a3-bridge.netdev` (`br0`, **STP on**), `20-a3-bridge-ports.network`, `30-a3-bridge-address.network` (address on `br0`, also without a cable) |
+| first socket | `10-a3.network`: address, gateway (`192.168.8.1`), DNS |
+| audio socket | `20-a3-aes67.network`: address on `192.168.9.0/24`, no gateway, no DNS |
 
-Each variant removes the other's files. STP prevents a broadcast storm if both
-cables reach one switch; it costs about 30 s at boot. The interfaces' lines in
+Each file is replaced only when its content changes, and the old one is kept
+beside it as `<name>.bak-<time>`. An upgrade retires the former single
+`a3.network` and the bridge files (`10-a3-bridge.netdev`,
+`20-a3-bridge-ports.network`, `30-a3-bridge-address.network`) the same way.
+Without a second socket the AES67 sender and PTP are not enabled
+({ref}`a3-aes67 <core-aes67>`). The interfaces' lines in
 `/etc/network/interfaces` are commented out (`# a3-core: networkd owns …`).
 `systemd-networkd` is enabled, not started: the network changes at next boot.
 
@@ -186,25 +190,26 @@ afterwards, so an upgrade never puts back a removed key. The package ships no
 
 As `aaa`, for programs that can't read JSON:
 
-- `~/.config/a3/osc.env`: the [zita units'](#core-zita) targets.
+- `~/.config/pipewire/pipewire-aes67.conf`: the AES67 sender, from the truth's audio socket (only with one).
 - the `# >>> a3-osc` … `# <<< a3-osc` block in
   `~/a3-system/beat-analyzer/build/.env` (if present): targets, clock port,
   OSC words, Pro DJ Link ports. The rest of the file is yours; truth keys found
   outside the block are commented out.
 
-A failure is reported (zita would lack addresses). Core re-renders both at
+A failure is reported. Core re-renders both at
 its own start; run it by hand only to refresh without a restart.
 
 ### 8. System services
 
 Enables `x11vnc.service` and `set_irq_prio.service`
-([System units](#core-system-units)).
+([System units](#core-system-units)), and, with an audio socket,
+`ptp4l@<socket>.service` ({ref}`the audio network <core-aes67>`).
 
 ### 9. User services and the REAPER installation
 
 `loginctl enable-linger aaa`, `systemctl --user daemon-reload`, **start**
-`a3-user-install.service` (next section); linger off again. `a3-main`, both
-zita units and `a3-bar-per-workspace` start at boot through the shipped
+`a3-user-install.service` (next section); linger off again. `a3-main`, `a3-aes67`
+and `a3-bar-per-workspace` start at boot through the shipped
 `default.target.wants` links.
 
 ### 10. The boot loader
@@ -215,7 +220,6 @@ zita units and `a3-bar-per-workspace` start at boot through the shipped
 ```text
 use 'systemctl --user status a3-user-install.service' to check status
 use 'dpkg-reconfigure a3-core' to configure network and the headless screen
-use 'dpkg-reconfigure jackd2' to enable rt-priority
 Please Reboot or manage a3-core manually with 'systemctl --user start a3-main.service'
 ```
 
@@ -249,7 +253,7 @@ once emptied REAPER under a running REAPER).
 ### Removing the package: `postrm`
 
 `apt purge a3-core` removes `/etc/systemd/network/a3.network`, disables
-`systemd-networkd`, reloads systemd. Bridge files, commented ifupdown lines,
+`systemd-networkd`, reloads systemd. Commented ifupdown lines,
 the headless X config and the home directory stay.
 
 ```{toctree}

@@ -24,7 +24,7 @@ no spaces, UTF-8).
 
 | Section | Holds |
 | :--- | :--- |
-| `network` | Core's interface, bridge, address, gateway, DNS |
+| `network` | Core's interface, address, gateway, DNS, and the audio socket (`audio_port`) with its address (`audio_address`) |
 | `hosts` | machines by name: `core`, `mixer`, `radla`, `local`, `any` |
 | `listeners` | program, role, host, port |
 | `routes` | who sends to which listener |
@@ -43,7 +43,7 @@ The tables here and on the ports page are rendered from it.
 | A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
 | StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`, and `stemdeck.ahead` if the truth has it (its preview of the music). Without: `PIO: no a3-osc.json` |
 | beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-osc-render user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
-| zita-j2n, zita-n2j | `~/.config/a3/osc.env`, same renderer |
+| AES67 sender | `~/.config/pipewire/pipewire-aes67.conf`, rendered from `network.audio_port`; no file without a second socket |
 | installer | offers the package's `network` and creates `network.json` from it once |
 
 - **Core will not start without the package's file** (or `$A3_OSC_TRUTH`).
@@ -81,15 +81,14 @@ radla is on another subnet:
 
 It polls `/api/truth` at start and every 30 s; on a new header it fetches,
 checks, writes the cache and exits 1 to restart. Core unreachable: one journal
-line, it plays on. radla's zita units (`tools/zita-from-truth.py`) read the
-cache, then `/usr/share/a3/a3-osc.json`, at their start only: after a change
-restart them after StemDeck (`systemctl --user restart zita-j2n zita-n2j`).
+line, it plays on. The audio network needs no
+OSC address from it: the AES67 streams find each other by SAP.
 
 ### When a port or an address has to change
 
 | Change | Do |
 | :--- | :--- |
-| address or host | edit `~/.config/a3/network.json`, restart Core; restart zita and the beat-analyzer (Core re-renders their files at start). Desk, StemDeck, Motion follow |
+| address or host | edit `~/.config/a3/network.json`, restart Core; restart the beat-analyzer (Core re-renders its file at start). Desk, StemDeck, Motion follow |
 | port, address or word of the contract | edit `a3-osc.json` in a3-core, reinstall, restart Core; the rest follows as above |
 
 Never set a port on a device: that is a second truth.

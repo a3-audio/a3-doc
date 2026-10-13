@@ -23,7 +23,7 @@ Any combination, installed in this order:
 | Role | What it installs | Submodules it checks out |
 | :--- | :--- | :--- |
 | **Core** | the {ref}`a3-core package <core-package>` from this version, its questions asked up front, then held against `apt upgrade`; its {ref}`user installer <core-user-install>` builds the beat-analyzer | `a3-core`, `beat-analyzer` |
-| **StemDeck** | builds {doc}`StemDeck <../user/stemdeck>`, enables `stemdeck.service`; without Core also the two zita units (JACK is then the machine's own) | `stemdeck` |
+| **StemDeck** | builds {doc}`StemDeck <../user/stemdeck>`, enables `stemdeck.service`; without Core the machine's own PipeWire carries its audio, and the AES67 link to a Core is set up by hand ({ref}`StemDeck on another machine <stemdeck-with-motion-remote-machine>`) | `stemdeck` |
 | **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `ui`) |
 | **Mixer** | not installable yet: {ref}`by hand <mic-run>` | `a3-mixer` |
 
@@ -57,7 +57,7 @@ next time. Copy it and run `install --config <file>` to clone a setup.
 | :--- | :--- |
 | `[system]` | `version` — a tag, or empty for what is checked out |
 | `[roles]` | `core`, `stemdeck`, `motion`, `mixer` — `yes` or `no` |
-| `[core]` | `configure_network`, `interface`, `address`, `gateway`, `dns`, `bridge_with`, `headless` — the package's install questions; `replace` — which differing parts of `~/.config` to replace: `all`, `none` or a list such as `reaper, i3` |
+| `[core]` | `configure_network`, `interface`, `address`, `gateway`, `dns`, `audio_port`, `audio_address`, `headless` — the package's install questions; `replace` — which differing parts of `~/.config` to replace: `all`, `none` or a list such as `reaper, i3` |
 | `[motion]` | `flash_firmware` — `yes`, `no` or `ask`; `serial_port` — `auto` (found by USB ID, see {ref}`moc-serial`) or a device path |
 
 The last flashed firmware is recorded in `~/.config/a3/install.state`.

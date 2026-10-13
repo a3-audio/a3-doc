@@ -12,6 +12,36 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### 2026-10-14
+
+**A³ Core (`a3-core`)**
+
+- **PipeWire replaces jackd.** PipeWire and wireplumber are the audio server; JACK programs
+  use PipeWire's `libjack` system-wide. 44.1 kHz, quantum 128 (2.9 ms), the Scarlett drives
+  the graph. The `a3-jack` unit is gone, and an upgrade retires the old units. See
+  {ref}`PipeWire <core-services>`.
+- **zita is gone** (`zita-j2n`, `zita-n2j` and Core's zita return logic). The return source
+  switch (analog or StemDeck AUX) stays; it is REAPER sends.
+- **AES67 and PTP.** With a second socket the Core sends its 12 channels as the multicast
+  stream `AES67 <hostname> out` (packet time 0.5 ms, announced by SAP) and runs the PTP master
+  on that socket. A StemDeck on another machine can send its buses over AES67 too. See
+  {ref}`the audio network <ports-audio-network>` and {ref}`a3-aes67 <core-aes67>`.
+- **No bridge any more.** The first socket keeps the Core's address, gateway and DNS
+  (`10-a3.network`); the second carries the audio network on `192.168.9.0/24` without gateway
+  (`20-a3-aes67.network`). The install questions `bridge-with` became `audio-port` and
+  `audio-address`; the truth's `network` block has `audio_port` and `audio_address` instead of
+  `bridge`, `bridge_ports` and `stp`. The mixer reaches the Core over the first network. An
+  upgrade retires the bridge files.
+- **REAPER's realtime priority** comes from a small preload shim, because pipewire-jack
+  returns a wrong value; the audio workers run at RT 76.
+- **REAPER's OSC surface may send fast:** Core's feedback port has a 4 MB receive buffer, so
+  packets of 8192 bytes at 1 ms are not dropped. Restarting REAPER and Core takes about 7 s
+  instead of about 34 s.
+
+**The installer (`a3-system`)**
+
+- The installer dialog is in English.
+
 ### 2026-10-06 and 2026-10-07
 
 **A³ Mixer (`a3-mixer`)**

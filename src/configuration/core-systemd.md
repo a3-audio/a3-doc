@@ -8,21 +8,21 @@
 `/bin/true`, `RemainAfterExit=yes`). It *wants* the components; each is
 `PartOf=a3-main.service`.
 
-- **Start** `a3-main`: starts `a3-jack`, `qjackctl`, `a3-reaper`, `a3-core`,
+- **Start** `a3-main`: starts `qjackctl`, `a3-reaper`, `a3-core`,
   `beat-analyzer`, `a3-motion`.
-- **Stop/restart** `a3-main`: stops/restarts all its parts, zita included.
+- **Stop/restart** `a3-main`: stops/restarts all its parts. The audio server is not one of them: PipeWire belongs to the user session and runs whether `a3-main` does or not.
 - **One component** can stop or fail alone: `Wants=`, not `Requires=` (which
-  made `stop a3-core` take JACK and REAPER down too).
+  made `stop a3-core` take REAPER down too).
 - `a3-motion` is not shipped here; where Motion has its own machine the name
   matches nothing, harmlessly.
 
 ```text
-a3-jack  (waits for the USB sound card)
+pipewire + wireplumber  (the user session's audio server, JACK via libjack)
  ├─ a3-core          (before REAPER)
  ├─ a3-reaper        (waits until JACK accepts clients)
  ├─ beat-analyzer
  ├─ qjackctl         (waits until JACK accepts clients, connects the patchbay)
- └─ zita-j2n, zita-n2j
+ └─ a3-aes67         (only with an audio socket)
 ```
 
 ```sh
@@ -41,29 +41,38 @@ keeping CPU 0 free.
 | Unit | Starts | Part of `a3-main` | After | Restarts | Scheduling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `a3-main` | the umbrella | — | `graphical.target` | — | — |
-| `a3-jack` | `jackd` on the USB card | yes | `sound.target` | no | RT 85, CPUs 1–3 |
-| `qjackctl` | QjackCtl, A³ patchbay | yes | JACK, REAPER, beat-analyzer | on failure | RT 83, CPUs 1–3 |
-| `a3-reaper` | REAPER, A³ template | yes | `graphical.target`, JACK | no | RT 75, CPUs 1–3 |
-| `a3-core` | `a3-core.py` | yes | JACK; before REAPER | no | normal, every CPU |
-| `beat-analyzer` | tempo, meters | yes | JACK | no | RT 65, CPUs 1–3 |
-| `zita-j2n` | network audio out | stopped with it, not started | JACK | always, 2 s | RT 64, CPUs 1–3 |
-| `zita-n2j` | network audio in | stopped with it, not started | JACK | always, 2 s | RT 64, CPUs 1–3 |
+| `qjackctl` | QjackCtl, A³ patchbay | yes | PipeWire, REAPER, beat-analyzer | on failure | RT 83, CPUs 1–3 |
+| `a3-reaper` | REAPER, A³ template | yes | `graphical.target`, PipeWire | no | normal, CPUs 1–3; audio workers RT 76 by the preload below |
+| `a3-core` | `a3-core.py` | yes | PipeWire; before REAPER | no | normal, every CPU |
+| `beat-analyzer` | tempo, meters | yes | PipeWire | no | RT 65, CPUs 1–3 |
+| `a3-aes67` | AES67 sender, PTP clock reading | no | PipeWire | always, 2 s | PipeWire's own |
 | `a3-bar-per-workspace` | i3bar on/off | no | `graphical.target` | always, 2 s | normal |
 | `a3-user-install` | `user_install.sh` | no | — | no | normal |
 
-The zita units and `a3-bar-per-workspace` start at login through shipped
+`a3-aes67` and `a3-bar-per-workspace` start at login through shipped
 `default.target.wants` links. All are `WantedBy=default.target`.
 
-## `a3-jack.service` — the JACK server
+## PipeWire — the audio server
 
-`jackd`, RT 19, ALSA `hw:USB`, 44.1 kHz, 256 frames. Waits for
-`/proc/asound/USB` (`jackd` fails if the card is late; `sound.target` is not
-enough).
+`jackd` and `a3-jack.service` are gone (2026-10-14): **PipeWire** with
+wireplumber is the audio server, and JACK programs use PipeWire's `libjack`,
+system-wide through `/etc/ld.so.conf.d/pipewire-jack-x86_64-linux-gnu.conf`.
+The Scarlett (pro-audio profile) drives the graph. Shipped settings under
+`~/.config/pipewire/`:
+
+- `pipewire.conf.d/10-a3-rate.conf`: 44.1 kHz only, quantum 128 (2.9 ms),
+  never lower: the AES67 nodes would otherwise pull the graph down to 32
+  samples.
+- `jack.conf.d/10-a3.conf`: the default device answers as the JACK client
+  `system`, so the patchbay's `system:playback_N` and `system:capture_N` stay.
+
+Look at it with `wpctl status` and `pw-top`; the JACK tools
+(`jack_lsp`, `jack_connect`) talk to PipeWire.
 
 ## `qjackctl.service` — the patchbay
 
 QjackCtl with `~/.config/rncbc.org/a3-patchbay.xml`, connecting clients as they
-appear. Waits for JACK (`jack_wait -w`). Restarts on failure.
+appear. Waits for the JACK interface (`jack_wait -w`). Restarts on failure.
 
 ## `a3-reaper.service` — the audio engine
 
@@ -73,6 +82,11 @@ REAPER (no splash, no error dialogs) on the template
 template on disk. Core's recall restores what Core controls; anything changed
 **only in REAPER** (a plug-in setting, a route) is lost unless saved into the
 template. Listens on `reaper.osc`, reports to `core.reaper-feedback`.
+
+Core's feedback port has a **4 MB receive buffer**, so REAPER's OSC surface may
+send fast (packets of 8192 bytes, 1 ms apart) without the kernel dropping
+reports. That cuts a joint restart of REAPER and Core to about 7 s (it took
+about 34 s with the default buffer).
 
 (core-silent-start)=
 
@@ -103,7 +117,7 @@ journalctl --user -u a3-core | grep 'gate:'
 commands on `core.osc`, drives REAPER and the IEM plug-ins, relays REAPER's
 reports to every subscriber.
 
-- **After JACK, before REAPER**: one state burst instead of two (Core also asks
+- **After PipeWire, before REAPER**: one state burst instead of two (Core also asks
   REAPER for everything once bound, so either order works).
 - **Every CPU** (`a3-core.service.d/cpu.conf`): pinned to CPU 0, it starved
   whenever the Motion UI peaked there, and OSC was dropped.
@@ -156,15 +170,35 @@ configured by `build/.env` (OSC targets in the [rendered block](#core-postinst),
 the rest {ref}`its own <beat-analyzer-config>`). Sends `/beat` to Core, the
 controllers and `radla`, and the forty `/vu/n` ({ref}`VU map <core-vu-map>`).
 
-(core-zita)=
+(core-aes67)=
 
-## `zita-j2n.service` and `zita-n2j.service` — network audio
+## `a3-aes67.service` and `ptp4l` — the audio network
 
-For a StemDeck on another machine: `zita-j2n` sends 2 channels (24 bit) to
-`radla.zita-n2j`; `zita-n2j` receives 10 on `zita-n2j.audio`, 20 ms buffer.
-Addresses from `~/.config/a3/osc.env`. Restart 2 s after any exit (zita may
-exit 0), never give up (`StartLimitIntervalSec=0`). Channels:
+Only on a Core with a second socket ({ref}`install <core-postinst>`,
+`audio-port`); otherwise `a3-aes67` has no config and does not start.
+
+- `ptp4l@<socket>.service` (linuxptp, system unit, enabled by the postinst):
+  the PTP clock on the second socket. The Core is master unless a better
+  clock is on the network.
+- `a3-aes67.service` (user unit): a second PipeWire instance running
+  `~/.config/pipewire/pipewire-aes67.conf`, rendered by `a3-osc-render` from
+  the truth's `network.audio_port`. It sends the Core's 12 channels as the
+  multicast stream `AES67 <hostname> out` (44.1 kHz, 24 bit, packet time
+  0.5 ms), announces it by SAP and receives the streams of other machines.
+  The Scarlett drives it, not the PTP clock, so the samples go out
+  unconverted. Restarts 2 s after any exit.
+
+Network, streams and cabling: {ref}`ports <ports-audio-network>`,
 {doc}`Patchbay <../ressources/patchbay>`.
+
+## REAPER and the realtime priority
+
+pipewire-jack answers REAPER's question for the audio workers' priority wrongly.
+`a3-reaper.service` therefore preloads a small shim,
+`~/.local/lib/a3/libjack-rt-priority.so` (built by the postinst from
+`~/.local/share/a3-core/src/jack-rt-priority.c`); the workers then run at RT 76,
+under PipeWire's own data loop. The unit sets no `CPUScheduling`: raising the
+whole process puts REAPER's GUI and OSC threads above the audio threads.
 
 ## `a3-bar-per-workspace.service` — i3bar on the tool workspaces
 

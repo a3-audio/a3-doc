@@ -52,14 +52,14 @@ Conffiles: dpkg keeps a version you changed.
 | :--- | :--- |
 | `/etc/default/grub` | 1 s menu; `threadirqs cpufreq.default_governor=performance reboot=cold` (prioritisable IRQ threads, full CPU speed, cold reboot) |
 | `/etc/lightdm/lightdm.conf.d/99-a3-core.conf` | autologin `aaa` into `i3`; `logind-check-graphical=false` |
-| `/etc/security/limits.d/audio.conf` | `audio` group: RT up to 95, unlimited memlock, nice −19 (managed by `dpkg-reconfigure jackd2`) |
+| `/etc/security/limits.d/audio.conf` | `audio` group: RT up to 95, unlimited memlock, nice −19 (shipped by the package) |
 | `/etc/systemd/system/*.service` | the three [system units](#core-system-units) |
 
 Written by the postinst, not shipped:
 
 | File | When |
 | :--- | :--- |
-| `/etc/systemd/network/a3.network`, or the three `*-a3-bridge*` files | network answered *yes* (see [step 1](#core-postinst)) |
+| `/etc/systemd/network/10-a3.network`, and `20-a3-aes67.network` with an audio socket | network answered *yes* (see [step 1](#core-postinst)) |
 | `/etc/network/interfaces` | lines for the configured interfaces commented out |
 | `/etc/X11/xorg.conf.d/10-headless.conf` | headless answered *yes*; renamed to `.off` on *no* |
 
