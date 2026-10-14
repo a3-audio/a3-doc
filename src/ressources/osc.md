@@ -48,7 +48,8 @@ The tables here and on the ports page are rendered from it.
 
 - **Core will not start without the package's file** (or `$A3_OSC_TRUTH`).
 - **Core announces itself** every 2 s: `/core/here` broadcast on
-  `devices.announce`, with the `/api/truth` URL and the fingerprint. Broadcasts
+  `devices.announce`, with the `/api/truth` URL, the fingerprint and a boot id
+  (new with every Core start, so a device notices even a very quick restart). Broadcasts
   don't cross routers; a device on another subnet uses `~/.config/a3/core`
   ([radla](#osc-radla)).
 
@@ -151,7 +152,7 @@ Core acts on it, then relays or announces it.
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
 | `/stemdeck/ahead` | ssif | stemdeck | core (Core passes it on to motion) | StemDeck's preview of the music on the audible deck (the MASTER deck when both are heard): the current bar's section (groove, build, drop, breakdown; none: no deck is heard, or it is not analysed yet), the next section (end: no change before the set ends), the bars until it (-1: a loop turns back before it) and the bar's energy 0-1 against the set's loud bars. On every downbeat and on a load, jump, loop, pitch or deck change; Core passes it on to the Motion it follows, unchanged, and never replays it |
 | `/device/hello` | ss | mixer, stemdeck, motion | core | a device names itself and the sha256 of its copy of this file, at start and every 30 s; Core's window shows whether it is Core's own. Core follows the StemDeck and the Motion that arrived last (one of each), a remote Motion instead of the rig's own, and forgets one silent for a minute |
-| `/core/here` | ss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth and its fingerprint (sha256 of the canonical JSON) |
+| `/core/here` | sss | core | mixer, motion, stemdeck, radla | Core, every 2 s by broadcast: the URL of the joined truth, its fingerprint (sha256 of the canonical JSON) and a boot id, a random token that is new with every Core start (a changed boot id means a new Core, even one restarted within seconds); readers also accept the older two-string form |
 | `/state/recall` | i | motion | core | say the state again; the answer is the ordinary messages |
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, motion | beat-analyzer | a tap on the beat |
