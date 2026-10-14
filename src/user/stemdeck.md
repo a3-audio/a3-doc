@@ -412,10 +412,10 @@ is Core's Return.
 - It **never starts a JACK server**: it uses JACK, PipeWire's JACK, or ALSA
   (**Audio**). With fewer than ten outputs, buses are summed down.
 - It takes the graph's rate and buffer and resamples itself; changing a
-  running graph would throw out zita. Set the rate before starting, e.g.
+  running graph would disturb the AES67 stream. Set the rate before starting, e.g.
   `pw-metadata -n settings 0 clock.force-rate 44100`.
 
-<!-- NOTE: audio I/O (ports, REAPER inputs, zita channels) is documented once, on the Patchbay page (src/ressources/patchbay.md). The REAPER template routes the zita-n2j track: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused. -->
+<!-- NOTE: audio I/O (ports, REAPER inputs, AES67 channels) is documented once, on the Patchbay page (src/ressources/patchbay.md). The REAPER template routes the network-stems track: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused. -->
 
 (stemdeck-sync)=
 

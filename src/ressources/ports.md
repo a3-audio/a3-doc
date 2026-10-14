@@ -12,19 +12,48 @@ Motion runs **on the Core**, hence `127.0.0.1`; on its own machine
 
 ## Cabling
 
-The router has one free port, so the A³ Mixer hangs on the Core's **second
-socket**, bridged with the first:
+The Core has two network sockets, each on a network of its own:
 
 ```text
-router 192.168.8.1 ───── eno1   ┐
-                                ├─ br0  A³ Core 192.168.8.10
-A³ Mixer 192.168.8.11 ── enp5s0 ┘
+router 192.168.8.1 ───── eno1    A³ Core 192.168.8.10/24    control network
+A³ Mixer 192.168.8.11 ── router or switch, same network
+
+StemDeck machine ─────── enp5s0  A³ Core 192.168.9.10/24    audio network (AES67, PTP)
 ```
 
-- The address is on `br0` (`networkctl`: `br0` *routable*, sockets *enslaved*).
-- STP on: forwarding starts about **30 s** after boot.
-- **Core off, Mixer offline.**
-- Written by the package ({ref}`install <core-postinst>`).
+- **First socket** (`eno1`): the Core's address, the gateway and the DNS
+  server (`192.168.8.1`), file `10-a3.network`. OSC, the web window and the
+  desk run here. The A³ Mixer reaches the Core over this network through the
+  switch or router; the Core no longer sits between them.
+- **Second socket** (`enp5s0`, optional): the audio network, file
+  `20-a3-aes67.network`. Its own subnet `192.168.9.0/24`, Core
+  `192.168.9.10/24`, **no gateway and no DNS**: the only way out is the first
+  socket, and a reply always leaves by the socket it came in on.
+- There is no `br0` bridge and no spanning tree any more (until 2026-10-14 the
+  second socket was bridged with the first); a cable drop on one socket does
+  not touch the other.
+- Written by the package ({ref}`install <core-postinst>`); an upgrade retires
+  the old bridge files.
+
+(ports-audio-network)=
+
+## The audio network: AES67 and PTP
+
+Audio between machines runs on the second socket, apart from OSC:
+
+| What | Detail |
+| :--- | :--- |
+| Socket, subnet | the second socket, `192.168.9.0/24`, Core `192.168.9.10/24` |
+| Clock | PTP: `ptp4l` on the second socket, the Core as master unless a better clock is on the network |
+| Core sends | **12 channels**, stream `AES67 <hostname> out`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.150.243`, port 5004) |
+| Announcement | SAP on `239.255.255.255`, port 9875; receivers find the stream by its name |
+| Who drives the stream | the audio interface, like REAPER: the samples leave unconverted and REAPER is never pulled onto the PTP clock |
+| Other machines | a StemDeck on its own machine sends its buses as a stream of its own and receives the Core's ({ref}`setup <stemdeck-with-motion-remote-machine>`) |
+
+PTP and the AES67 sender start only when a second socket is configured
+(`audio-port`); without one the Core has neither and uses one network. The
+streams are audio, not OSC, so they are not in the port tables below. Unit:
+{ref}`a3-aes67 <core-aes67>`; ports in the graph: {doc}`patchbay`.
 
 (ports-by-listener)=
 
@@ -54,14 +83,16 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
-| zita-n2j | audio | any (0.0.0.0) | 65100 | network audio from radla (10 channels, not OSC) |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
 | radla | vu | radla (192.168.43.96) | 9001 | /vu |
-| radla | zita-n2j | radla (192.168.43.96) | 55100 | network audio from Core (zita-j2n, 2 channels, not OSC) |
 | prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
 | prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
+| aes67 | stream | aes67-core (239.69.150.243) | 5004 | the Core's 12 channels as AES67 (RTP, L24, 44.1 kHz, 0.5 ms packets), multicast on the audio socket; not OSC |
+| aes67 | sap | sap (239.255.255.255) | 9875 | AES67 stream announcements (SAP/SDP), multicast on the audio socket, every sender and receiver; not OSC |
+| ptp4l | event | ptp (224.0.1.129) | 319 | PTP event messages; the Core is master on the audio socket; not OSC |
+| ptp4l | general | ptp (224.0.1.129) | 320 | PTP general messages (announce, follow-up); not OSC |
 <!-- /a3-osc:ports -->
 
 (ports-routes)=
@@ -99,8 +130,6 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | beat-analyzer | `mixer.osc` | vu |
 | beat-analyzer | `radla.vu` | /vu |
 | iem | `motion.energy` | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
-| zita-j2n | `radla.zita-n2j` | network audio from Core (zita-j2n, 2 channels, not OSC) |
-| radla | `zita-n2j.audio` | network audio from radla (10 channels, not OSC) |
 | stemdeck | `prolink.announce` | Pro DJ Link keep-alives (broadcast, not OSC) |
 | stemdeck | `prolink.status` | Pro DJ Link status packets (broadcast, not OSC) |
 | stemdeck | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |

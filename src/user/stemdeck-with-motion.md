@@ -126,34 +126,26 @@ bring it back on the one: it re-enters already in motion.
 
 ## StemDeck on another machine
 
-Ten outputs travel to the Core as zita audio. The Core needs nothing: its
-package runs zita-n2j, patched into REAPER, with addresses from
-`~/.config/a3/osc.env`.
+The machine's buses travel to the Core as an **AES67** stream on the audio
+network ({ref}`ports <ports-audio-network>`). Core and StemDeck machine need
+a cable between their second sockets (or a switch) and an address each on
+`192.168.9.0/24`; the Core's is `192.168.9.10/24`. The Core's package runs the
+PTP clock and its own AES67 sender, and its patchbay cables the StemDeck
+stream into REAPER (13–22, the cue pair on 23–24); the Core needs nothing else.
 
-StemDeck's repository ships two user units (`.config/systemd/user/`):
-`zita-j2n` sends the 10 channels to the Core's `zita-n2j.audio`; `zita-n2j`
-receives REAPER's 2-channel rec bus on `radla.zita-n2j`. Both run
-`tools/zita-from-truth.py`, which takes address and ports from the truth
-StemDeck fetched ({ref}`StemDeck on radla <osc-radla>`; ports:
-{doc}`../ressources/ports`), and restart 2 s after any drop-out.
+On the StemDeck machine, PipeWire runs the AES67 stream; set it up once:
 
 1. Tell StemDeck where Core is: `~/.config/a3/core`
    ({ref}`StemDeck on radla <osc-radla>`).
-2. Install the units (or let the {doc}`installer <../configuration/install>`,
-   role StemDeck, do it); repeat after a StemDeck update:
-
-   ```sh
-   cp .config/systemd/user/zita-*.service ~/.config/systemd/user/
-   systemctl --user daemon-reload
-   systemctl --user enable --now zita-j2n zita-n2j
-   ```
-
-3. Patch StemDeck's outputs into `zita-j2n` **in order** (`deck1_L` → 1 …
-   `aux_R` → 10) and `zita-n2j` where you want it — once, saved; or load the
-   StemDeck package's `stemdeck-without-core.xml`
-   ({ref}`patchbay <patchbay-zita>`). Nothing connects itself.
-4. Set the sample rate **before** StemDeck starts: a change on a running graph
-   throws zita out for 2 s.
+2. Give the machine's second socket its address on the audio network, and let
+   PipeWire send and receive AES67 on it with PTP as a client of the Core's
+   clock (the machine's own PipeWire configuration, not part of StemDeck).
+3. Load and activate the StemDeck package's `stemdeck-without-core.xml` in
+   QjackCtl once ({ref}`patchbay <patchbay-aes67>`). It cables StemDeck's
+   buses to the machine's stream and the Core's stream to the rec input.
+   Nothing connects itself.
+4. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
+   carry 44.1 kHz.
 
 (stemdeck-with-motion-troubleshooting)=
 
@@ -161,9 +153,9 @@ StemDeck fetched ({ref}`StemDeck on radla <osc-radla>`; ports:
 
 | Symptom | What to do |
 | :--- | :--- |
-| A³ Motion's meters stay still | Stems don't reach REAPER. On the Core: StemDeck → REAPER in qjackctl's patchbay ({doc}`Patchbay <../ressources/patchbay>`). Elsewhere: patched into zita-j2n, reaching the Core? |
-| Drums on the vocal channel | Outputs patched out of order: `deck1_L` → 1, `aux_R` → 10 |
+| A³ Motion's meters stay still | Stems don't reach REAPER. On the Core: StemDeck → REAPER in qjackctl's patchbay ({doc}`Patchbay <../ressources/patchbay>`). Elsewhere: is the AES67 stream announced and cabled, and is PTP locked? |
+| Drums on the vocal channel | Outputs cabled out of order: `deck1_L` → 1, `aux_R` → 10 |
 | A stem plays but doesn't move | **3d** down, clip not playing, or the stem is only on **A** (Return) |
 | No tempo follow | BPM shown? Deck playing, `PIO master`? A³ Motion on **PIO**? Core on StemDeck's network? |
 | Movements a beat off the bar | CUE on the real first beat of a bar, **GRID**, **SNAP** |
-| Stems stop after an audio-settings change | zita restarts within ~2 s; else `systemctl --user status zita-j2n`. Set the rate before starting |
+| Stems stop after an audio-settings change | Set the rate before starting StemDeck; check that the AES67 stream is still announced on the audio network |
