@@ -83,6 +83,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| engine | osc | local (127.0.0.1) | 9004 | a3-engine-bench: the /channel/{ch}/... controls of the four engine strips (not yet routed by Core) |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
 | radla | vu | radla (192.168.43.96) | 9001 | /vu |
