@@ -87,7 +87,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
 | engine | osc | local (127.0.0.1) | 9004 | a3-engine-bench: the /channel/{ch}/... controls of the four engine strips (not yet routed by Core) |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
-| screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS for OBS (listener, not OSC) |
+| screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS, several viewers on one encode (OBS, the pro-DJ apps) (listener, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
 | radla | vu | radla (192.168.43.96) | 9001 | /vu |
 | prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
@@ -114,6 +114,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | mixer | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | desk | `core.osc` | every controller's messages, and /beat from the analyzer |
 | desk | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
+| prodj | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | core | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
