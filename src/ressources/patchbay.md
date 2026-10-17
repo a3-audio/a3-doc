@@ -13,7 +13,7 @@ The audio server is **PipeWire** with wireplumber (since 2026-10-14; `jackd`
 and `a3-jack.service` are gone). JACK programs (REAPER, beat-analyzer,
 StemDeck, QjackCtl) use PipeWire's `libjack`, system-wide through
 `/etc/ld.so.conf.d`, so a program started by hand finds it too. The USB card
-(Scarlett, pro-audio profile) drives the graph at 44.1 kHz, quantum 128
+(Scarlett, pro-audio profile) drives the graph at 44.1 kHz, quantum 64
 (2.9 ms), and appears as the JACK client `system`:
 
 | Direction | Ports | Used for |
