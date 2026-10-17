@@ -38,6 +38,12 @@ In `~/.config/systemd/user/` ({ref}`the tree <core-config-tree>`). RT =
 `CPUSchedulingPolicy=rr` at that priority; CPUs 1–3 = `CPUAffinity=1 2 3`,
 keeping CPU 0 free.
 
+CPU 0 is where the screen lives: x11vnc (`x11vnc.service.d/cpu.conf`) and Xorg
+(`~/.xserverrc`, installed by the package, runs the server under `taskset -c 0`)
+are pinned there. With a VNC client connected Xorg took most of CPU 1 on the rig
+(2026-10-17). Only the X server is pinned, not the login session, so i3 and the
+programs it starts keep their own CPUs.
+
 | Unit | Starts | Part of `a3-main` | After | Restarts | Scheduling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `a3-main` | the umbrella | — | `graphical.target` | — | — |
@@ -219,7 +225,7 @@ In `/etc/systemd/system/`, dpkg conffiles.
 
 | Unit | What it does | Enabled |
 | :--- | :--- | :--- |
-| `x11vnc.service` | `x11vnc` as `aaa` on `:0`, 5 s after `graphical.target`, `-shared -forever`, restart on failure; port on its command line, not in `a3-osc.json` | yes |
+| `x11vnc.service` | `x11vnc` as `aaa` on `:0`, 5 s after `graphical.target`, `-shared -forever`, restart on failure; CPU 0 only (`x11vnc.service.d/cpu.conf`); port on its command line, not in `a3-osc.json` | yes |
 | `set_irq_prio.service` | at boot, the USB controller's IRQ threads (`irq/…-xhci_hcd`) to FIFO 95, so the sound card comes first | yes |
 | `vnc-display.service` | `recipes/vnc-display.sh`: a monitor on HDMI/DP moves `10-headless.conf` aside to `.bak`, none moves it back | no, shipped only |
 
