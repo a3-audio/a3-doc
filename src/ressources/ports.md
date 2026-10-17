@@ -115,6 +115,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | desk | `core.osc` | every controller's messages, and /beat from the analyzer |
 | desk | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | prodj | `core.osc` | every controller's messages, and /beat from the analyzer |
+| prodj | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | core | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
