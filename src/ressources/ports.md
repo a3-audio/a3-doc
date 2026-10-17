@@ -69,7 +69,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | --- | --- | --- | --- | --- |
 | core | osc | any (0.0.0.0) | 9000 | every controller's messages, and /beat from the analyzer |
 | core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
-| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's /vu bundles, forwarded unchanged to a remote Motion while one is followed (the analyzer needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's conf.d, 50-a3-osc.env) |
+| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's and StemDeck's /vu bundles, forwarded unchanged to the remote Motion followed and to every desk followed (the analyzer needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's conf.d, 50-a3-osc.env) |
 | core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
 | motion | osc | any (0.0.0.0) | 7771 | Core's relays (StemDeck's preview among them), /beat |
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
@@ -77,6 +77,8 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them |
 | devices | announce | any (0.0.0.0) | 7790 | Core's /core/here broadcast: where every device fetches the truth |
 | mixer | osc | mixer (192.168.8.11) | 7772 | Core's relays and lamps, /beat, /vu |
+| desk | osc | any (0.0.0.0) | 7773 | Core's relays, lamps and stems, /beat -- every virtual desk Core follows (four at most) |
+| desk | vu | any (0.0.0.0) | 7774 | the analyzer's and StemDeck's /vu bundles, forwarded unchanged by Core (core.vu-relay) |
 | beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | reaper | osc | local (127.0.0.1) | 9001 | Core's /track/... control |
 | iem | multiencoder-1 | local (127.0.0.1) | 1337 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
@@ -110,11 +112,15 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | --- | --- | --- |
 | mixer | `core.osc` | every controller's messages, and /beat from the analyzer |
 | mixer | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
+| desk | `core.osc` | every controller's messages, and /beat from the analyzer |
+| desk | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | core | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
 | core | `motion.vu` | the analyzer's /vu bundles |
 | core | `mixer.osc` | Core's relays and lamps, /beat, /vu |
+| core | `desk.osc` | Core's relays, lamps and stems, /beat -- every virtual desk Core follows (four at most) |
+| core | `desk.vu` | vu |
 | core | `reaper.osc` | Core's /track/... control |
 | core | `iem.multiencoder-1` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | core | `iem.multiencoder-2` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
@@ -137,6 +143,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | stemdeck | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
 | stemdeck | `core.osc` | every controller's messages, and /beat from the analyzer |
 | stemdeck | `mixer.osc` | vu |
+| stemdeck | `core.vu-relay` | vu |
 | prolink | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
 <!-- /a3-osc:routes -->
 
