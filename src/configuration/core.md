@@ -132,6 +132,9 @@ Without a second socket the AES67 sender and PTP are not enabled
 `/etc/network/interfaces` are commented out (`# a3-core: networkd owns …`).
 `systemd-networkd` is enabled, not started: the network changes at next boot.
 
+Energy Efficient Ethernet is switched off on every wired port by a drop-in to the stock link file,
+`/etc/systemd/network/99-default.link.d/a3-eee.conf` (needs systemd 258 or newer): with EEE active the audio port dropped its link every minute or two, each time a three-second hole in the AES67 stream.
+
 ### 2. The headless screen
 
 **"Draw to a dummy screen?"** (`a3-core/headless-display`, default *no*), for a
