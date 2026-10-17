@@ -65,6 +65,66 @@ crossfades them.
 - StemDeck has no cue: cue the channel a stem is on, or the return for a stem
   on AUX.
 
+(a3mix-virtual)=
+
+## The virtual desk
+
+The **A³ Desk** is the A³ Mixer on a screen. It looks like the panel and
+sends the same OSC to Core. Use it as a second operator beside the hardware,
+or as a stand-in when the hardware is not there.
+
+### Install and open
+
+Install it with the installer's role **desk** (on any Debian machine with a
+screen). Then start `a3-desk` from a terminal, or **A3 Desk** from the
+launcher.
+
+### What it shows
+
+All pots, keys, the channel LEDs, the five displays and the meters, as on the
+panel. The values come from Core, so the desk shows what the room is doing,
+not what it last sent.
+
+### The ring
+
+A value you set on the desk carries a small **ring**. It means: *this value
+was set here; the hardware knob probably stands elsewhere.* The ring goes
+away when Core reports a different value for that control.
+
+The mixer has no motor faders. When someone touches the hardware knob next,
+it sends its own position and the value **jumps** to it. Watch the ring
+before you hand a control back to the hardware.
+
+### LOCK
+
+**LOCK** holds **MASTER**, **BOOTH** and **PHONES** level. While it is lit,
+the desk ignores these three pots, and the status bar says *master locked*.
+Press LOCK again to release them.
+
+### Keyboard
+
+| Key | Does |
+| :--- | :--- |
+| 1 – 4 | CUE of channel 1 – 4 (phones only) |
+| Space | TAP |
+
+Nothing on the keyboard changes the PA. Ctrl, Alt and Cmd combinations are
+left alone.
+
+### Limits
+
+- **Core follows four desks.** A fifth is refused.
+- **One desk per machine.** A second one says *another desk runs on this
+  machine*.
+- **The desk is dim until Core answers.** It stays dim and ignores input
+  while it says *waiting for Core's answer*.
+- **Core silent:** no sign of life from Core for 5 seconds. The desk dims
+  again and takes no input until Core is back.
+- ***Core serves another truth*:** Core's OSC table differs from the one the
+  desk was built with. Install the desk from the same version as Core.
+  The desk does not say hello to a stale Core.
+- Core drops a desk that has been silent for a minute, which frees its place.
+
 (a3mix-displays)=
 
 ## The input selectors
