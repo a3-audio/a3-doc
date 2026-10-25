@@ -66,7 +66,7 @@ system-wide through `/etc/ld.so.conf.d/pipewire-jack-x86_64-linux-gnu.conf`.
 The Scarlett (pro-audio profile) drives the graph. Shipped settings under
 `~/.config/pipewire/`:
 
-- `pipewire.conf.d/10-a3-rate.conf`: 44.1 kHz only, quantum 64 (1.45 ms),
+- `pipewire.conf.d/10-a3-rate.conf`: 44.1 kHz only, quantum 128 (2.9 ms),
   never lower: the AES67 nodes would otherwise pull the graph down to 32
   samples.
 - `jack.conf.d/10-a3.conf`: the default device answers as the JACK client
