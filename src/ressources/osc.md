@@ -146,6 +146,15 @@ Core acts on it, then relays or announces it.
 | `/aux-return/stem/push` | i | mixer, desk, prodj | core | the aux return's encoder pushed: switches the return to the mode under the cursor; on CUE it toggles the return's cue and switches no mode |
 | `/aux-return/stem` | iiiiiiiii | core | mixer, desk, motion | the aux return's cursor (0 = analog, 1 = stem, 2 = cue), then pairs 1-8: 1 = on StemDeck's AUX bus, i.e. on no channel (heard on the return in stem mode only) |
 | `/aux-return/stem/mode` | i | core | mixer, desk, motion | the aux return's mode, which chooses its source: 1 = stem (StemDeck's AUX bus plays on the return; analog 11/12 is shut), 0 = analog (analog inputs 11/12 play on the return; StemDeck's AUX is shut). Never both. In either mode every stem on no channel is on StemDeck's AUX |
+| `/channel/{ch}/source` | i | core | engine, desk, motion | the channel's source in engine mode: 0 = analog, k = deck k (1 = A, 2 = B); from Core's deck selector, to the engine as its switch and to the desk and Motion as the channel-source report |
+| `/aux-return/source` | i | core | engine | the aux return's source in engine mode: 0 = analog 11/12, k = deck k's AUX pair; never both |
+| `/aux-return/cue` | i | core | engine | the aux return's cue in engine mode, 1 = on, 0 = off |
+| `/delay/bpm` | f | core | engine | the delay's tempo for both lines in engine mode, 20-400 (Core's tempo follower) |
+| `/engine/open` | i | core | engine | 1 opens main, booth and phones (a 1 s ramp to the calibrated level), 0 closes them |
+| `/engine/hello` | s | engine | core | the engine's boot id, every 2 s; a new id makes Core replay its state and open the outputs |
+| `/stemdeck/{deck}/3d` | f | core | stemdeck | deck k's 3D, 0-1: the desk's 3D of the channel holding deck k, 1 (neutral) while it is on no channel |
+| `/stemdeck/{deck}/present` | i | core | desk, motion | 1 while deck k's hello is fresh (5 s at most), else 0 |
+| `/stemdeck/{deck}/hello` | s | stemdeck | core | a StemDeck instance names the deck it plays (host), at start and every 2 s; device.hello carries no deck number |
 | `/aux-return/cue/led` | f | core | mixer, desk, motion | the aux return's cue lamp, 1 = on |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX (StemDeck's own cue bus 6 is gone since 2026-10-07: a channel is cued through its own bus); stem N reaches only bus N and 5 (AUX): StemDeck and Core refuse a switch onto another bus |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
