@@ -401,11 +401,13 @@ stem's encoder over the pads: turn for gain, push for mute (the same as the
 A **n** or **AUX** pad switches its stem onto that channel or off it, as a click
 on the screen does. **CUE** toggles the stem's cue, **M** mutes it.
 
-**Lights.** Every key glows dim in its deck's colour, so the halves read as A
-and B. A channel or AUX pad lights in the stem's colour while the stem is on that bus,
-dimmer while it is muted. A **CUE** pad lights amber while the stem is cued, an
-**M** pad in the mute colour while it is muted, as the screen keys do. The
-transport CUE is amber, PLAY green.
+**Lights.** A stem's pads light exactly like the screen keys of its row. Off,
+they show the screen key's dim grey. On, the channel pad takes the stem's
+colour, the **AUX** pad violet, the **CUE** pad amber while the stem is cued
+and the **M** pad red while it is muted. A muted stem does not dim its channel
+or AUX pad. Only the transport **CUE** and **PLAY** keys rest dim in their
+deck's colour, so the halves still read as A and B; CUE lights amber, PLAY
+green.
 
 ```{warning}
 **One program at a time.** A³ Motion and StemDeck never drive the panel
