@@ -122,7 +122,7 @@ assuming a constant tempo.
 | :--- | :--- |
 | gain knob | −60 to +6 dB; double-click: 0 dB |
 | **M** | mute |
-| **n**, **A** | stem **n** plays on its own channel **n**; **A** is AUX. Deck A: knob, **CUE**, **A**, **n**, **M**; deck B mirrored: knob, **n**, **A**, **CUE**, **M**. Both off: silent |
+| **n**, **A** | stem **n** plays on its own channel **n**; **A** is AUX. Deck B reads **n**, knob, **A**, **CUE**, **M** left to right; deck A is mirrored: **M**, **CUE**, **A**, knob, **n**. Both off: silent |
 
 A stem can only be on its own channel, on AUX or off; a switch onto another
 channel is refused. A channel carries one deck's stem **n** at most: switching
@@ -393,9 +393,9 @@ B**. Each half is a small mixer for its deck.
 
 A pad switches its stem onto that channel or off it, as a click on the screen
 does. In each row only that pad and **AUX** act; the other three pads do
-nothing. The order matches the [mixer](#stemdeck-mixer) on the screen: knob,
-AUX, the stem's channel, M for deck A, mirrored for deck B, so AUX is always on
-the outer side.
+nothing. The pads keep AUX on the deck's outer side; the [mixer](#stemdeck-mixer)
+on the screen puts the knob between the stem's channel and AUX (see above), so
+the two orders differ.
 
 **Lights.** Every key glows dim in its deck's colour, so the halves read as A
 and B. A pad lights in the stem's colour while the stem is on that channel, at a
