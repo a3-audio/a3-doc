@@ -130,36 +130,40 @@ left alone.
 ## The input selectors
 
 The desk switches [StemDeck](stemdeck.md)'s stems through Core. Each of the 8
-stems (2 decks × 4) has bus switches 1–4 (desk channels 1–4) and AUX (the
-return). **StemDeck owns the switches**; Core relays requests and reports.
-Five OLED displays with encoders: channels 1–4 and the return.
+stems (2 decks × 4) can play on **its own channel** (stem N on channel N) or on
+AUX (the return). **StemDeck owns the switches**; Core relays requests and
+reports. Five OLED displays with encoders: channels 1–4 and the return.
 
-**The rule:** a channel plays **one input**, a stem or its analog input; a stem
-plays on **one channel** at most. A stem on a channel shuts its analog input.
+**The rule:** a channel plays **one input**: deck 1's stem N, deck 2's stem N,
+or its analog input. A stem plays on its own channel only; nothing moves
+between channels. A stem on a channel shuts its analog input.
 
 ### A channel
 
-![A channel's selector: eight meters under D1 and D2, music on six of them, the bracket over deck 1's stem 2, which plays on the channel; the cursor is a small arrow pointing down at deck 1's stem 3, which is silent; at the right, behind a thin line, A with a low bar, the analog input; short ticks beside the bars mark -9 and -3 dBFS](pics_user/a3-mix-input-selector.png)
+![A channel's selector: meters under D1 and D2, music on both, the bracket over one stem, which plays on the channel; the cursor is a small arrow pointing down at the other deck's stem, which is silent; at the right, behind a thin line, A with a low bar, the analog input; short ticks beside the bars mark -9 and -3 dBFS](pics_user/a3-mix-input-selector.png)
 
-*Bracket: deck 1 stem 2 plays. Arrow: cursor on deck 1 stem 3 (silent). A: a
-little analog level. Ticks: −9 and −3 dBFS, the LED scale.*
+*Bracket: the stem that plays. Arrow: the cursor, on the other deck's stem
+(silent). A: a little analog level. Ticks: −9 and −3 dBFS, the LED scale. The
+picture still shows the older nine-meter selector.*
 
-Nine meters under **D1 | D2 | A**: deck 1 stems 1–4, deck 2 stems 1–4, and
+Three meters under **D1 | D2 | A**: deck 1's stem N, deck 2's stem N, and
 **A**, the channel's analog input (always metered, louder side of
 `analog<N>_L/R`, `/vu/1`–`/vu/8`). Not StemDeck's A switch. The **bracket**
-marks what plays; the **arrow** is the cursor.
+marks what plays; the **arrow** is the cursor. On the virtual desk, tapping a
+meter turns the cursor there.
 
 | Action | Result |
 | :--- | :--- |
-| turn | moves the cursor round the ring of nine; switches nothing |
-| push a stem | it becomes the only input; taken from any other channel, which goes back to analog |
+| turn | moves the cursor round the ring of three; switches nothing |
+| push a stem | it becomes the only input; the other deck's stem N goes to the return (AUX) |
 | push the stem that plays | off; the channel plays analog (STEM mode: the stem goes to the return) |
 | push **A** while a stem plays | same as above |
 | push **A** while analog plays | nothing |
 
-Core remembers no last stem; the cursor stays after a push. Several stems on
-one channel (old sessions): Core keeps the lowest, about 0.3 s after
-StemDeck's reports settle.
+Core remembers no last stem; the cursor stays after a push. A stored cursor
+that is not on the ring comes back on A. Several stems on one channel, or a
+stem on another channel (older StemDecks): Core keeps the lowest and puts a
+foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
 
 ### The aux return
 

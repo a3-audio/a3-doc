@@ -42,7 +42,7 @@ REAPER project spreads it the same way (ports: {doc}`Patchbay <../ressources/pat
 
 | StemDeck output | Arrives on | What is on it |
 | :--- | :--- | :--- |
-| `deck1_L/R` … `deck4_L/R` (buses 1–4) | **channels 1–4** | stems switched to that number |
+| `deck1_L/R` … `deck4_L/R` (buses 1–4) | **channels 1–4** | stem N of either deck, switched to that number |
 | `aux_L/R` | the **Return**, at the **RET** pot, in STEM mode (ANALOG mode plays analog 11/12) | stems switched to **A** |
 
 A stem then runs through its channel's strip like any deck: gain, EQ and fader
@@ -55,10 +55,11 @@ on the desk; 3d, freq and Q on A³ Motion.
 - **Nothing is on a channel at first**: stems start on AUX only
   ([Where the stems start](#stemdeck-start-buses)). Custom stem names sort
   into 1–4 by ending ([Stem sets](#stemdeck-stem-sets)).
-- **A stem plays on every lit bus** (**1 2 3 / 4 A**). On a number it moves
-  with that channel; on **A** only it is on the Return and does not move.
-  Pushing it onto a channel from the desk takes its AUX away
-  ({ref}`remote control <stemdeck-remote>`).
+- **Stem N plays only on channel N**, or on **A** (the Return). On its number
+  it moves with that channel; on **A** only it is on the Return and does not
+  move. A switch to another channel is refused. Pushing it onto its channel
+  from the desk takes its AUX away, and the other deck's stem N goes to the
+  Return ({ref}`remote control <stemdeck-remote>`).
 
 (stemdeck-with-motion-setup)=
 
@@ -101,7 +102,8 @@ The **MOTION** / **STEMDECK** key at the far right of each top bar switches
 between the two ([workspaces](#stemdeck-workspaces)).
 
 1. **Load a track you know** and put its stems on channels 1–4: push each on
-   the desk, or light bus 1 on drums, 2 bass, 3 other, 4 vocals. A³ Motion's
+   the desk, or light switch 1 on drums, 2 bass, 3 other, 4 vocals (each stem
+   can only go to its own channel). A³ Motion's
    channel meters move.
 2. **StemDeck as clock**: PLAY, `PIO master: A`, A³ Motion on **PIO**.
 3. **Load a set** on A³ Motion: FILES › SETS › *Warmup* › **Load**.

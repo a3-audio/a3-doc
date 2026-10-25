@@ -12,6 +12,35 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### 2026-10-25
+
+**StemDeck (`stemdeck`)**
+
+- **Stem N plays only on channel N**, on AUX or off. Each deck's stem N has one channel switch
+  and AUX; the other three are gone from the deck A/B views.
+- **Switches onto another channel are refused**, on the screen, the panel and over OSC. A
+  channel carries one deck's stem N at most; switching the other deck's stem N onto it moves
+  the first to AUX.
+- **Old sessions** with a stem on another channel load with that stem on AUX.
+- **The panel**: in rows 2-5 only the pad of the stem's own channel and AUX act and light; the
+  other three stay dark.
+- **AUTO DJ** no longer has the "stem held on another bus" case; it still never mutes.
+- **Install order**: install A³ Core before or together with StemDeck. An older Core pushing
+  another channel's stem would empty a channel against the new StemDeck.
+
+**A³ Core (`a3-core`)**
+
+- **The channel selector is a ring of three**: deck 1's stem N, deck 2's stem N, A. Pushing a
+  stem makes it the channel's only input and sends the other deck's stem N to the return. A
+  stored cursor outside the ring comes back on A. A stem an older StemDeck reports on another
+  channel is put on AUX. The aux-return selector is unchanged.
+
+**A³ Mixer (`a3-mixer`)**
+
+- **Three meters under D1 | D2 | A** on the hardware display and the virtual desk. The arrow
+  marks the cursor, the bracket what plays. On the virtual desk, tapping a meter turns the
+  cursor there.
+
 ### 2026-10-14
 
 **A³ Core (`a3-core`)**
