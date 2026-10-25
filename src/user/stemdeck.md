@@ -116,13 +116,17 @@ assuming a constant tempo.
 
 ### Mixer
 
-![The mixer: per stem a knob, M and the bus switches; channel faders and the output meters](pics_user/stemdeck-mixer.png)
+![The mixer: per stem a knob, M, the stem's own channel switch and AUX; channel faders and the output meters. The picture still shows the older four switches per stem](pics_user/stemdeck-mixer.png)
 
 | Per stem | What it does |
 | :--- | :--- |
 | gain knob | −60 to +6 dB; double-click: 0 dB |
 | **M** | mute |
-| **1 2 3 / 4 A** | buses 1–4 and AUX. A stem plays on every lit bus; none: silent |
+| **n**, **A** | stem **n** plays on its own channel **n**; **A** is AUX. Deck A: knob, **CUE**, **A**, **n**, **M**; deck B mirrored: knob, **n**, **A**, **CUE**, **M**. Both off: silent |
+
+A stem can only be on its own channel, on AUX or off; a switch onto another
+channel is refused. A channel carries one deck's stem **n** at most: switching
+the other deck's stem **n** onto it moves the first to AUX.
 
 Below: the channel fader (every bus is post-fader). Between the strips: meters
 for buses 1–4 and AUX, each with a clip lamp that holds for a second. The desk
@@ -132,7 +136,8 @@ sets the switches through Core and StemDeck reports back, so both agree.
 
 **Where the stems start:** on **AUX only**. A stem on bus 1–4 silences that
 desk channel's analog input, so a fresh StemDeck takes no channel. Loading a
-set keeps the switches; a session restores its own.
+set keeps the switches; a session restores its own. An older session with a
+stem on another channel loads with that stem on AUX.
 
 **Every bus is trimmed 6 dB**, before its meter: two full tracks on AUX would
 otherwise clip, and the channels match it.
@@ -226,11 +231,11 @@ they are; AUTO DJ never touches a mute.
 - **Next / Prev** on the playing deck mixes at once, from the next downbeat.
 - Switching AUTO DJ off leaves the routing as it is. It is yours to carry on.
 
-**Your switches win.** Put a stem on another channel or on AUX (AUX is
-allowed while AUTO DJ runs; only you can put a stem there), and AUTO DJ leaves
-it alone. The stem stays yours until its deck stops or gets a new track. A
-stem of the old deck that you put on a desk channel is handed over normally
-when that channel changes over. Turning AUX off gives the stem back at once.
+**Your switches win.** Put a stem on AUX (allowed while AUTO DJ runs; only
+you can put a stem there), and AUTO DJ leaves it alone. The stem stays yours
+until its deck stops or gets a new track. A stem of the old deck that you put
+on its channel is handed over normally when that channel changes over. Turning
+AUX off gives the stem back at once.
 
 The length of the overlap is **AUTO DJ overlap** in [Settings](#stemdeck-settings)
 (default ≈ 20 s; or a number of bars). Tracks without a grid use a time in
@@ -336,10 +341,11 @@ StemDeck's side:
 - **StemDeck keeps the truth.** Core only relays the desk's request to switch a
   bus and asks StemDeck for all switches when it hears StemDeck for the first
   time. A click on a bus switch here also shows on the desk.
-- **One stem per channel.** A channel plays at most one stem, and a stem
-  plays on one channel at most. If a session shows several stems on one bus,
-  Core keeps the lowest and switches the others off, about 0.3 s after your
-  reports settle.
+- **Stem N only on channel N.** A stem plays on its own channel or on AUX,
+  nothing else; a switch to another channel is refused (screen, panel and OSC).
+  A channel plays at most one stem. If a session shows several stems on one
+  bus, or a stem on another channel, Core keeps the lowest and puts the others
+  on AUX, about 0.3 s after your reports settle.
 - **Every stem no channel plays is on AUX.** Its **A** is lit in either
   return mode, and Core switches a free stem's A back on if you click it off.
   A stem pushed onto a channel loses its A. The return's mode only chooses
@@ -379,17 +385,19 @@ B**. Each half is a small mixer for its deck.
 | outer column, top | **CUE** |
 | outer column, below it | **PLAY** |
 | outer column, next four | **AUX** for stems 1–4 |
-| inner pads | a stem's bus **1–4**: a row per stem, a pad per bus |
+| inner pads | a row per stem; only the pad of the stem's own channel **1–4** acts and lights, the other three stay dark |
 | encoders | turn: that stem's gain. Push: mute |
 | inner pot | the deck's fader |
 | outer pots | not used |
 
-A pad switches its stem onto that bus or off it, as a click on the screen
-does. The order matches the [mixer](#stemdeck-mixer) on the screen: knob, AUX,
-1–4, M for deck A, mirrored for deck B, so AUX is always on the outer side.
+A pad switches its stem onto that channel or off it, as a click on the screen
+does. In each row only that pad and **AUX** act; the other three pads do
+nothing. The order matches the [mixer](#stemdeck-mixer) on the screen: knob,
+AUX, the stem's channel, M for deck A, mirrored for deck B, so AUX is always on
+the outer side.
 
 **Lights.** Every key glows dim in its deck's colour, so the halves read as A
-and B. A pad lights in the stem's colour while the stem is on that bus, at a
+and B. A pad lights in the stem's colour while the stem is on that channel, at a
 quarter while it is muted. CUE is amber, PLAY green.
 
 ```{warning}
