@@ -122,7 +122,7 @@ assuming a constant tempo.
 | :--- | :--- |
 | gain knob | −60 to +6 dB; double-click: 0 dB |
 | **M** | mute |
-| **n**, **A** | stem **n** plays on its own channel **n**; **A** is AUX. Deck B reads **n**, knob, **A**, **CUE**, **M** left to right; deck A is mirrored: **M**, **CUE**, **A**, knob, **n**. Both off: silent |
+| **n**, **A** | stem **n** plays on its own channel **n**; **A** is AUX. Deck B reads **n**, **A**, **CUE**, **M**, knob left to right, the knob on the deck's outer side; deck A is mirrored: knob, **M**, **CUE**, **A**, **n**. Both off: silent |
 
 A stem can only be on its own channel, on AUX or off; a switch onto another
 channel is refused. A channel carries one deck's stem **n** at most: switching
@@ -385,21 +385,27 @@ B**. Each half is a small mixer for its deck.
 | :--- | :--- |
 | outer column, top | **CUE** |
 | outer column, below it | **PLAY** |
-| outer column, next four | **AUX** for stems 1–4 |
-| inner pads | a row per stem; only the pad of the stem's own channel **1–4** acts and lights, the other three stay dark |
+| pad rows 2–5 | a row per stem, in the screen's order (below) |
 | encoders | turn: that stem's gain. Push: mute |
 | inner pot | the deck's fader |
 | outer pots | not used |
 
-A pad switches its stem onto that channel or off it, as a click on the screen
-does. In each row only that pad and **AUX** act; the other three pads do
-nothing. The pads keep AUX on the deck's outer side; the [mixer](#stemdeck-mixer)
-on the screen puts the knob between the stem's channel and AUX (see above), so
-the two orders differ.
+A stem's row on the panel reads like its row on the [screen](#stemdeck-mixer),
+column for column. Deck B, left to right: the stem's own channel **n**, **AUX**,
+**CUE**, **M**, and a dark pad; deck A is mirrored: a dark pad, **M**, **CUE**,
+**AUX**, **n**. The dark pad sits where the screen row has its knob, on the
+deck's outer side; it does nothing and stays unlit. The knob itself is the
+stem's encoder over the pads: turn for gain, push for mute (the same as the
+**M** pad).
+
+A **n** or **AUX** pad switches its stem onto that channel or off it, as a click
+on the screen does. **CUE** toggles the stem's cue, **M** mutes it.
 
 **Lights.** Every key glows dim in its deck's colour, so the halves read as A
-and B. A pad lights in the stem's colour while the stem is on that channel, at a
-quarter while it is muted. CUE is amber, PLAY green.
+and B. A channel or AUX pad lights in the stem's colour while the stem is on that bus,
+dimmer while it is muted. A **CUE** pad lights amber while the stem is cued, an
+**M** pad in the mute colour while it is muted, as the screen keys do. The
+transport CUE is amber, PLAY green.
 
 ```{warning}
 **One program at a time.** A³ Motion and StemDeck never drive the panel
