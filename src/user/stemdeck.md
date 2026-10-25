@@ -343,9 +343,10 @@ StemDeck's side:
   time. A click on a bus switch here also shows on the desk.
 - **Stem N only on channel N.** A stem plays on its own channel or on AUX,
   nothing else; a switch to another channel is refused (screen, panel and OSC).
-  A channel plays at most one stem. If a session shows several stems on one
-  bus, or a stem on another channel, Core keeps the lowest and puts the others
-  on AUX, about 0.3 s after your reports settle.
+  A channel plays at most one stem. StemDeck itself loads a stem from an old
+  session on AUX when it sat on another channel. Core only tidies the reports
+  of an older StemDeck: it keeps the lowest stem on a bus and puts the others
+  on AUX.
 - **Every stem no channel plays is on AUX.** Its **A** is lit in either
   return mode, and Core switches a free stem's A back on if you click it off.
   A stem pushed onto a channel loses its A. The return's mode only chooses

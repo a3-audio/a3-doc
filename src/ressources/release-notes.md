@@ -25,6 +25,8 @@ On `main` since `v03.0`, not tagged yet.
 - **The panel**: in rows 2-5 only the pad of the stem's own channel and AUX act and light; the
   other three stay dark.
 - **AUTO DJ** no longer has the "stem held on another bus" case; it still never mutes.
+- **Install order**: install A³ Core before or together with StemDeck. An older Core pushing
+  another channel's stem would empty a channel against the new StemDeck.
 
 **A³ Core (`a3-core`)**
 
