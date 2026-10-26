@@ -3,9 +3,10 @@
 # The audio engine
 
 `a3-engine` is the program that does A³ Core's audio: channel strips, the 3D
-encoding, the effects, main, booth, phones and rec. It replaces REAPER and
-IEM's plug-ins as the thing that makes sound. Core still routes the OSC;
-the engine only receives Core's words on `engine.osc` ({doc}`ports <../ressources/ports>`).
+encoding, the effects, main, booth, phones and rec. It replaces REAPER as the thing that makes sound; the IEM code it uses
+(encoder, decoders, DualDelay) is compiled into it from source. Core still
+routes the OSC: the engine receives Core's words on `engine.osc` and says
+`/engine/hello` to Core on `core.osc` ({doc}`ports <../ressources/ports>`).
 Source: [a3-engine](https://github.com/a3-audio/a3-engine).
 
 ## Engine or REAPER
@@ -84,7 +85,8 @@ weights), so nothing clicks.
 In engine mode {ref}`StemDeck <stemdeck-at-a-glance>`'s decks arrive as
 **16-channel B-format**, straight into Core: StemDeck does the encoding and
 the engine does not encode the deck again. Deck k listens on
-`stemdeck.osc` + (k − 1): deck A on 7780, deck B on 7781.
+`stemdeck.osc` + (k − 1), so deck B uses 7781. The decks are separate
+StemDeck instances, started by the installer, not by `a3-engine`.
 
 - **A channel takes analog or a deck**, never both. Analog ↔ deck crossfades
   over 10 ms; deck ↔ deck dips out and in.
@@ -92,8 +94,9 @@ the engine does not encode the deck again. Deck k listens on
   StemDeck's instance with letter k.
 - On the A³ Mixer the source ring shows **AN | A | B** in engine mode.
 - On a deck channel, **A³ Motion shows "deck A" or "deck B"** and sends no
-  positions, 3D, FREQ or Q for it: the 3D you set on the desk is the deck's own 3D
-  (the stems' B-format positions). Echoes keep the stems' positions: the deck's
+  positions, 3D, FREQ or Q for it. The desk's 3D of the channel that holds deck k
+  is relayed by Core to that StemDeck (`/stemdeck/{deck}/3d`); the engine applies
+  no 3D to a deck channel. Echoes keep the stems' positions: the deck's
   AUX send takes all 16 channels.
 - **Stem cue.** Each deck's cue pair goes into the phones, weighted by the
   CUE↔MIX knob alone, whether or not the deck is on a channel, so you can
@@ -118,7 +121,7 @@ a3-engine [--config FILE] [--spatial DIR] [--truth FILE]
 | `--no-window` | no window, for a unit without a screen |
 | `--service` | closing the window only hides it |
 | `--no-connect` | the engine makes no JACK link; see below |
-| `--timing` | developer option, timing output |
+| `--timing` | prints the backend's load and xruns at exit |
 
 **`--no-connect`** is for a hand test next to REAPER only. The engine refuses
 to connect at all while a JACK client named REAPER exists. Never run the

@@ -78,7 +78,7 @@ Look at it with `wpctl status` and `pw-top`; the JACK tools
 
 (core-engine-units)=
 
-## `a3-engine.service` — the audio engine
+## `a3-engine.service` — the audio engine (a3-engine)
 
 The engine ({doc}`user page <../user/audio-engine>`) and REAPER are two ways to
 make the sound; **one** of them starts, decided at each start of `a3-main`:
@@ -112,7 +112,7 @@ journalctl --user -u a3-engine -f
 QjackCtl with `~/.config/rncbc.org/a3-patchbay.xml`, connecting clients as they
 appear. Waits for the JACK interface (`jack_wait -w`). Restarts on failure.
 
-## `a3-reaper.service` — the audio engine
+## `a3-reaper.service` — REAPER
 
 REAPER (no splash, no error dialogs) on the template
 `~/.config/REAPER/ProjectTemplates/a3-reaper.RPP`, after `jack_wait -w`.
