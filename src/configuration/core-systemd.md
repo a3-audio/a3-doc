@@ -8,7 +8,8 @@
 `/bin/true`, `RemainAfterExit=yes`). It *wants* the components; each is
 `PartOf=a3-main.service`.
 
-- **Start** `a3-main`: starts `qjackctl`, `a3-reaper`, `a3-core`,
+- **Start** `a3-main`: starts `qjackctl`, `a3-reaper` or `a3-engine` (only one of
+  them, {ref}`see below <core-engine-units>`), `a3-core`,
   `beat-analyzer`, `a3-motion`.
 - **Stop/restart** `a3-main`: stops/restarts all its parts. The audio server is not one of them: PipeWire belongs to the user session and runs whether `a3-main` does or not.
 - **One component** can stop or fail alone: `Wants=`, not `Requires=` (which
@@ -74,6 +75,37 @@ The Scarlett (pro-audio profile) drives the graph. Shipped settings under
 
 Look at it with `wpctl status` and `pw-top`; the JACK tools
 (`jack_lsp`, `jack_connect`) talk to PipeWire.
+
+(core-engine-units)=
+
+## `a3-engine.service` — the audio engine
+
+The engine ({doc}`user page <../user/audio-engine>`) and REAPER are two ways to
+make the sound; **one** of them starts, decided at each start of `a3-main`:
+
+| Unit | Condition | What it runs |
+| :--- | :--- | :--- |
+| `a3-engine` | `ExecCondition=/home/aaa/.local/bin/a3-engine-runs` | `/usr/bin/a3-engine --service` |
+| `a3-reaper` | drop-in `a3-reaper.service.d/audio-engine.conf`: `ExecCondition=/home/aaa/.local/bin/a3-engine-runs --reaper` | REAPER, the unit itself untouched |
+
+`a3-engine-runs` exits 0 when the engine is installed and
+`a3-engine --check-config` passes, and the `--reaper` form is its inverse; the
+reason REAPER runs goes to stderr (the journal) and to Core's status. Should
+the helper itself fail, REAPER runs: the one unwanted outcome is that neither
+starts. An `ExecCondition` that fails only *skips* a unit, it is not a failure.
+
+`a3-main` has `Wants=a3-engine.service` beside `a3-reaper.service`; on a machine
+without the engine package the name matches nothing, harmlessly. Everything
+else in the group is as above.
+
+The patchbay file is unchanged and never names the engine: none of its sockets
+is exclusive, so QjackCtl cannot disconnect the links the engine makes.
+
+```sh
+systemctl --user status a3-engine
+journalctl --user -u a3-engine -f
+/usr/bin/a3-engine --check-config      # ok, or the reason
+```
 
 ## `qjackctl.service` — the patchbay
 
