@@ -85,7 +85,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
-| engine | osc | local (127.0.0.1) | 9004 | a3-engine-bench: the /channel/{ch}/... controls of the four engine strips (not yet routed by Core) |
+| engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS, several viewers on one encode (OBS, the pro-DJ apps) (listener, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
@@ -128,8 +128,10 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | core | `iem.multiencoder-2` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | core | `iem.multiencoder-3` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | core | `dualdelay.osc` | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
 | core | `stemdeck.osc` | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
+| engine | `core.osc` | every controller's messages, and /beat from the analyzer |
 | reaper | `core.reaper-feedback` | REAPER's own OSC feedback |
 | beat-analyzer | `core.osc` | every controller's messages, and /beat from the analyzer |
 | beat-analyzer | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
