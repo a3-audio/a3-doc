@@ -146,9 +146,9 @@ Core acts on it, then relays or announces it.
 | `/aux-return/stem/push` | i | mixer, desk, prodj | core | the aux return's encoder pushed: switches the return to the mode under the cursor; on CUE it toggles the return's cue and switches no mode |
 | `/aux-return/stem` | iiiiiiiii | core | mixer, desk, motion | the aux return's cursor (0 = analog, 1 = stem, 2 = cue), then pairs 1-8: 1 = on StemDeck's AUX bus, i.e. on no channel (heard on the return in stem mode only) |
 | `/aux-return/stem/mode` | i | core | mixer, desk, motion | the aux return's mode, which chooses its source: 1 = stem (StemDeck's AUX bus plays on the return; analog 11/12 is shut), 0 = analog (analog inputs 11/12 play on the return; StemDeck's AUX is shut). Never both. In either mode every stem on no channel is on StemDeck's AUX |
-| `/channel/{ch}/source` | i | core | engine, mixer, desk, motion | the channel's source in engine mode: 0 = analog, k = deck k (1 = A, 2 = B); from Core's deck selector, to the engine as its switch and to the desk and Motion as the channel-source report |
-| `/channel/{ch}/source/cursor` | i | core | mixer, desk, motion | engine mode: the channel's selector cursor over its ring, 0 = analog, k = deck k (1 = A, 2 = B); moves on channel.stem.turn, becomes the source on channel.stem.push |
-| `/aux-return/source` | i | core | engine | the aux return's source in engine mode: 0 = analog 11/12, k = deck k's AUX pair; never both |
+| `/channel/{ch}/source` | i | core | engine, mixer, desk, motion | the channel's source in engine mode: 0 = analog, k = deck k (1 = A ... 4 = D); from Core's deck selector, to the engine as its switch and to the desk and Motion as the channel-source report |
+| `/channel/{ch}/source/cursor` | i | core | mixer, desk, motion | engine mode: the channel's selector cursor over its ring, 0 = analog, k = deck k (1 = A ... 4 = D); moves on channel.stem.turn, becomes the source on channel.stem.push |
+| `/aux-return/source` | i | core | engine | the aux return's source in engine mode: 0 = analog 11/12, k = deck k's AUX pair (1 = A ... 4 = D); never both |
 | `/aux-return/cue` | i | core | engine | the aux return's cue in engine mode, 1 = on, 0 = off |
 | `/delay/bpm` | f | core | engine | the delay's tempo for both lines in engine mode, 20-400 (Core's tempo follower) |
 | `/engine/open` | i | core | engine | 1 opens main, booth and phones (a 1 s ramp to the calibrated level), 0 closes them |
