@@ -74,7 +74,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | motion | osc | any (0.0.0.0) | 7771 | Core's relays (StemDeck's preview among them), /beat |
 | motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
 | motion | energy | any (0.0.0.0) | 7777 | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
-| stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them |
+| stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | devices | announce | any (0.0.0.0) | 7790 | Core's /core/here broadcast: where every device fetches the truth |
 | mixer | osc | mixer (192.168.8.11) | 7772 | Core's relays and lamps, /beat, /vu |
 | desk | osc | any (0.0.0.0) | 7773 | Core's relays, lamps and stems, /beat -- every virtual desk Core follows (four at most) |
@@ -128,7 +128,7 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | core | `iem.multiencoder-2` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | core | `iem.multiencoder-3` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
 | core | `dualdelay.osc` | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
-| core | `stemdeck.osc` | Core's bus switches and its request for all of them |
+| core | `stemdeck.osc` | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
 | reaper | `core.reaper-feedback` | REAPER's own OSC feedback |
 | beat-analyzer | `core.osc` | every controller's messages, and /beat from the analyzer |
