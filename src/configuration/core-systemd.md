@@ -8,12 +8,12 @@
 `/bin/true`, `RemainAfterExit=yes`). It *wants* the components; each is
 `PartOf=a3-main.service`.
 
-- **Start** `a3-main`: starts `qjackctl`, `a3-engine`, `a3-core`,
-  `beat-analyzer`, `a3-motion`, StemDeck's deck A. (`a3-reaper` is in the list
-  too, but REAPER is frozen and never starts, {ref}`see below <core-engine-units>`.)
+- **Start** `a3-main`: starts `a3-engine`, `a3-core`, `a3-core-window`,
+  `beat-analyzer`, `a3-motion`, StemDeck's deck A. (`qjackctl` and `a3-reaper`
+  were in the list until REAPER and the patchbay were removed, {ref}`see below <core-engine-units>`.)
 - **Stop/restart** `a3-main`: stops/restarts all its parts. The audio server is not one of them: PipeWire belongs to the user session and runs whether `a3-main` does or not.
 - **One component** can stop or fail alone: `Wants=`, not `Requires=` (which
-  made `stop a3-core` take REAPER down too).
+  made `stop a3-core` take the others down too).
 - `a3-motion` is not shipped here; where Motion has its own machine the name
   matches nothing, harmlessly.
 
@@ -22,7 +22,6 @@ pipewire + wireplumber  (the user session's audio server, JACK via libjack)
  ├─ a3-core          (the core role of the a3-core program)
  ├─ a3-engine        (the engine role; waits until JACK accepts clients)
  ├─ beat-analyzer    (the beat clock only)
- ├─ qjackctl         (waits until JACK accepts clients, connects the patchbay)
  └─ a3-aes67         (only with an audio socket)
 ```
 
@@ -48,18 +47,17 @@ programs it starts keep their own CPUs.
 | Unit | Starts | Part of `a3-main` | After | Restarts | Scheduling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `a3-main` | the umbrella | — | `graphical.target` | — | — |
-| `qjackctl` | QjackCtl, A³ patchbay | yes | PipeWire, a3-reaper, beat-analyzer | on failure | RT 83, CPUs 1–3 |
 | `a3-engine` | `a3-core --role engine` | yes | PipeWire | on failure, 1 s (5 in 60 s) | normal, CPUs 1–3; audio threads RT by the preload below |
 | `a3-core` | `a3-core --role core` | yes | PipeWire | no | normal, every CPU |
 | `beat-analyzer` | the beat clock | yes | PipeWire | no | RT 65, CPUs 1–3 |
-| `a3-reaper` | *(never starts: frozen)* | yes, in name | `graphical.target`, PipeWire | — | — |
 | `a3-screencast` | `a3-core --role screencast-fanout` and ffmpeg | no (each machine opts in) | `graphical.target` | always, 2 s | encoder niced, one core |
 | `a3-aes67` | AES67 sender, PTP clock reading | no | PipeWire | always, 2 s | PipeWire's own |
 | `a3-bar-per-workspace` | `a3-core --role i3-bar`: i3bar on/off | no | `graphical.target` | always, 2 s | normal |
-| `a3-user-install` | `user_install.sh` | no | — | no | normal |
 
 `a3-aes67` and `a3-bar-per-workspace` start at login through shipped
-`default.target.wants` links. All are `WantedBy=default.target`.
+`default.target.wants` links. All are `WantedBy=default.target`. The window
+(`a3-core-window`, the `a3-core` program with a screen) is the package's too,
+beside `a3-engine`.
 
 ## PipeWire — the audio server
 
@@ -73,7 +71,7 @@ The Scarlett (pro-audio profile) drives the graph. Shipped settings under
   never lower: the AES67 nodes would otherwise pull the graph down to 32
   samples.
 - `jack.conf.d/10-a3.conf`: the default device answers as the JACK client
-  `system`, so the patchbay's `system:playback_N` and `system:capture_N` stay.
+  `system`, so the engine's `system:playback_N` and `system:capture_N` stay.
 
 Look at it with `wpctl status` and `pw-top`; the JACK tools
 (`jack_lsp`, `jack_connect`) talk to PipeWire.
@@ -83,20 +81,22 @@ Look at it with `wpctl status` and `pw-top`; the JACK tools
 ## `a3-engine.service` — the audio engine
 
 The engine ({doc}`user page <../user/audio-engine>`) makes the sound. The unit
-belongs to the `a3-engine` package (`/usr/lib/systemd/user/`), not to the a3-core
-configuration, and runs `/usr/bin/a3-core --role engine` after `jack_wait -w`.
+keeps the name of the role: `a3-engine.service` is shipped in
+`/usr/lib/systemd/user/` and runs `/usr/bin/a3-core --role engine` after
+`jack_wait -w`. Its JACK client is `a3-engine` too.
 
 - **No `Conflicts=` and no condition.** The engine always starts; there is no
   fallback. It restarts after 1 s on failure, five times in a minute, then stops
   visibly.
-- **REAPER and the old StemDeck stay off through a3-core's drop-ins**:
-  `a3-reaper.service.d/audio-engine.conf` and `stemdeck.service.d/audio-engine.conf`
-  carry `ExecCondition=…/a3-engine-runs --reaper`, and the helper answers "REAPER
-  does not run" every time. An `ExecCondition` that fails only *skips* a unit, it
-  is not a failure. **REAPER is frozen and never started**; its unit and files
-  stay untouched.
-- The patchbay file never names the engine: none of its sockets is exclusive,
-  so QjackCtl cannot disconnect the links the engine makes.
+- **The old two-deck StemDeck stays off through a drop-in**:
+  `stemdeck.service.d/two-deck-off.conf` has `ExecCondition=/bin/false`. A
+  failing `ExecCondition` only *skips* a unit, it is not a failure. (No
+  `Conflicts=`: a conflict dropped start jobs.) `stemdeck@.service`, the
+  B-format decks, runs unconditioned.
+- **REAPER, its units and QjackCtl are gone.** The upgrade moves a machine's old
+  `a3-reaper`, `qjackctl` and `a3-user-install` units and the patchbay aside
+  ({ref}`step 9 <core-postinst>`). The engine makes its own JACK links
+  ({ref}`the I/O map <audio-engine-io>`).
 - The audio threads get their real-time priority from a preload shim
   (`libjack-rt-priority.so`), not from the unit: raising the whole process would
   put its GUI and OSC threads above JACK's.
@@ -107,18 +107,6 @@ journalctl --user -u a3-engine -f
 a3-core --role engine --check-config      # ok, or the reason
 ```
 
-## `qjackctl.service` — the patchbay
-
-QjackCtl with `~/.config/rncbc.org/a3-patchbay.xml`, connecting clients as they
-appear. Waits for the JACK interface (`jack_wait -w`). Restarts on failure.
-
-## `a3-reaper.service` — REAPER, frozen
-
-Shipped untouched and never started (see above). Its template and plug-in
-setup stay on the machine for the day it is needed again; nothing in the
-running system listens for it, and the silent start and the OSC meters are the
-engine's and Core's now.
-
 (core-silent-start)=
 
 ### The silent start
@@ -126,7 +114,7 @@ engine's and Core's now.
 Main, booth and phones are **closed** (exact silence) from the start of the
 engine until Core has replayed the evening and sent `/engine/open 1`; then each
 output ramps up to its trim over 1 s. This is the engine's gate
-({doc}`The audio engine <../user/audio-engine>`), not REAPER's muted tracks.
+({doc}`The audio engine <../user/audio-engine>`).
 
 - **Silent after a start:** Core is not up, or the engine restarted alone and has
   not been told yet. Restarting `a3-core` is enough once the engine runs.
@@ -138,8 +126,7 @@ journalctl --user -u a3-core | grep 'gate:'
 
 ## `a3-core.service` — the core role
 
-`/usr/bin/a3-core --role core` (shipped by the `a3-engine` package), private
-`/tmp`. It takes commands on `core.osc`, relays state and the engine's meters to
+`/usr/bin/a3-core --role core`, private `/tmp`. It takes commands on `core.osc`, relays state and the engine's meters to
 every subscriber, and serves the HTTP API on `core.web`
 ({ref}`Core's HTTP API <osc-http>`). **No Python.**
 
@@ -207,8 +194,7 @@ package; updates don't touch them.
 configured by `build/.env` (OSC targets in the [rendered block](#core-postinst),
 the rest {ref}`its own <beat-analyzer-config>`). Sends `/beat` to Core, the
 controllers and `radla`. **It is the beat clock only**: it sends no `/vu`
-(the engine measures the meters) and the patchbay's `beat-analyzer:vu_*` sockets
-are dead.
+(the engine measures the meters).
 
 ## `a3-screencast.service` — the screen as a stream
 
@@ -239,8 +225,8 @@ Only on a Core with a second socket ({ref}`install <core-postinst>`,
   The Scarlett drives it, not the PTP clock, so the samples go out
   unconverted. Restarts 2 s after any exit.
 
-Network, streams and cabling: {ref}`ports <ports-audio-network>`,
-{doc}`Patchbay <../ressources/patchbay>`.
+Network and streams: {ref}`ports <ports-audio-network>`; the cabling is the
+engine's ({ref}`the I/O map <audio-engine-io>`).
 
 ## The engine and the realtime priority
 
@@ -257,11 +243,6 @@ the audio threads.
 bar on workspace 3 and up, hides it on 1 and 2 ([The screen](#core-config-screen));
 restarts whenever it ends (an i3 restart ends the event stream).
 
-## `a3-user-install.service` — the user-side installer
-
-Runs `user_install.sh` once (`bash -e`) on every install; see
-[a3-user-install.service](#core-user-install).
-
 (core-system-units)=
 
 ## System units
@@ -274,6 +255,6 @@ In `/etc/systemd/system/`, dpkg conffiles.
 | `set_irq_prio.service` | at boot, the USB controller's IRQ threads (`irq/…-xhci_hcd`) to FIFO 95, so the sound card comes first | yes |
 | `vnc-display.service` | `recipes/vnc-display.sh`: a monitor on HDMI/DP moves `10-headless.conf` aside to `.bak`, none moves it back | no, shipped only |
 
-Over VNC: QjackCtl, REAPER's arrangement and mixer. Debian's own: the postinst
+Debian's own: the postinst
 enables `systemd-networkd` (when configuring the network); LightDM logs `aaa`
 into i3 ([Under /etc](#core-etc)).

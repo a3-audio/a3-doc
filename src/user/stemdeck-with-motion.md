@@ -38,7 +38,7 @@ analyzer. No special mode: three programs, wired together.
 ## Which stem goes where
 
 StemDeck plays on the Core (workspace STEMDECK) or from another machine; the
-REAPER project spreads it the same way (ports: {doc}`Patchbay <../ressources/patchbay>`):
+engine spreads it the same way (ports: {ref}`the I/O map <audio-engine-io>`):
 
 | StemDeck output | Arrives on | What is on it |
 | :--- | :--- | :--- |
@@ -48,8 +48,8 @@ REAPER project spreads it the same way (ports: {doc}`Patchbay <../ressources/pat
 A stem then runs through its channel's strip like any deck: gain, EQ and fader
 on the desk; 3d, freq and Q on A³ Motion.
 
-- **A stem replaces the analog input.** Core shuts the channel's analog input
-  (REAPER's `analog` send to `N-input`) while a stem is on it. Choose on the
+- **A stem replaces the analog input.** Core switches the channel's source in the
+  engine from its analog pair to the stem while a stem is on it. Choose on the
   desk: turn the channel's encoder to the stem and push; push **A** to go back
   to analog ({ref}`input selectors <a3mix-displays>`).
 - **Nothing is on a channel at first**: stems start on AUX only
@@ -70,8 +70,8 @@ is optional (A³ Motion's MIXER has the same controls).
 
 ### 1. The audio: StemDeck into A³ Core
 
-On the Core itself, nothing to wire: the package's patchbay connects StemDeck
-to REAPER and a user service keeps it running
+On the Core itself, nothing to wire: the engine connects StemDeck's ports and a
+user service keeps it running
 ([Always running on the Core](#stemdeck-on-the-core)). On another machine:
 [StemDeck on another machine](#stemdeck-with-motion-remote-machine).
 
@@ -132,8 +132,9 @@ The machine's buses travel to the Core as an **AES67** stream on the audio
 network ({ref}`ports <ports-audio-network>`). Core and StemDeck machine need
 a cable between their second sockets (or a switch) and an address each on
 `192.168.9.0/24`; the Core's is `192.168.9.10/24`. The Core's package runs the
-PTP clock and its own AES67 sender, and its patchbay cables the StemDeck
-stream into REAPER (13–22, the cue pair on 23–24); the Core needs nothing else.
+PTP clock and its own AES67 sender, and the engine's I/O map ({ref}`I/O map <audio-engine-io>`) is where the
+StemDeck stream's ports are connected on the Core. The shipped map names no
+AES67 port yet: connect them on the I/O page and **Save**.
 
 On the StemDeck machine, PipeWire runs the AES67 stream; set it up once:
 
@@ -143,9 +144,9 @@ On the StemDeck machine, PipeWire runs the AES67 stream; set it up once:
    PipeWire send and receive AES67 on it with PTP as a client of the Core's
    clock (the machine's own PipeWire configuration, not part of StemDeck).
 3. Load and activate the StemDeck package's `stemdeck-without-core.xml` in
-   QjackCtl once ({ref}`patchbay <patchbay-aes67>`). It cables StemDeck's
-   buses to the machine's stream and the Core's stream to the rec input.
-   Nothing connects itself.
+   QjackCtl **on the StemDeck machine** once (a StemDeck tool; the Core has no
+   QjackCtl). It cables StemDeck's buses to the machine's stream and the Core's
+   stream to the rec input. Nothing connects itself.
 4. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
    carry 44.1 kHz.
 
@@ -155,7 +156,7 @@ On the StemDeck machine, PipeWire runs the AES67 stream; set it up once:
 
 | Symptom | What to do |
 | :--- | :--- |
-| A³ Motion's meters stay still | Stems don't reach REAPER. On the Core: StemDeck → REAPER in qjackctl's patchbay ({doc}`Patchbay <../ressources/patchbay>`). Elsewhere: is the AES67 stream announced and cabled, and is PTP locked? |
+| A³ Motion's meters stay still | Stems don't reach the engine. On the Core: StemDeck's ports against the engine's peers on the I/O page ({ref}`I/O map <audio-engine-io>`). Elsewhere: is the AES67 stream announced and cabled, and is PTP locked? |
 | Drums on the vocal channel | Outputs cabled out of order: `deck1_L` → 1, `aux_R` → 10 |
 | A stem plays but doesn't move | **3d** down, clip not playing, or the stem is only on **A** (Return) |
 | No tempo follow | BPM shown? Deck playing, `PIO master`? A³ Motion on **PIO**? Core on StemDeck's network? |

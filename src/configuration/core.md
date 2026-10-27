@@ -1,7 +1,9 @@
 # A³ Core Configuration
 
-A³ Core is one Debian package, `a3-core` (the installation), whose program
-`a3-core` comes from the `a3-engine` package it depends on. In order:
+A³ Core is one Debian package, `a3-core`: the program `a3-core` (the OSC
+router, the audio engine, the window) and the installation around it, built from
+one repository. It replaces the earlier pair of packages `a3-core` and
+`a3-engine` (`Conflicts`/`Replaces: a3-engine`). In order:
 
 1. [The Debian package](#core-package): what it is, how to install, what it needs.
 2. [What the installation does](#core-postinst): the install script, step by step.
@@ -14,8 +16,8 @@ The usual route is the a3-system {doc}`installer <install>` (role Core).
 | :--- | :--- |
 | OS | Debian testing, realtime kernel |
 | Window manager | i3, named workspaces ([The screen](#core-config-screen)) |
-| Audio | PipeWire (with JACK compatibility); the engine ({doc}`user page <../user/audio-engine>`) with the IEM code compiled in. REAPER is installed but frozen and never started |
-| The program | `/usr/bin/a3-core` (package `a3-engine`): the core role (OSC router, HTTP API), the engine role, the window; no Python at runtime |
+| Audio | PipeWire (with JACK compatibility); the engine ({doc}`user page <../user/audio-engine>`) with the IEM code compiled in. REAPER, its patchbay and QjackCtl are not part of the package |
+| The program | `/usr/bin/a3-core`: the core role (OSC router, HTTP API), the engine role, the window; no Python at runtime |
 | Services | `a3-core.service`, `a3-engine.service`, both `systemd --user` ({ref}`services <core-services>`) |
 | Beat clock | the beat-analyzer (`/beat` only; the engine measures the meters, {ref}`where <core-meters>`) |
 
@@ -29,7 +31,8 @@ listeners (`core.osc`, `motion.energy`, …), the file says where they are.
 
 ## 1. The Debian package
 
-Built from [a3-core](https://github.com/a3-audio/a3-core), whose tree
+Built from [a3-core](https://github.com/a3-audio/a3-core): the C++ program is
+compiled from its source (`packaging/stage`), and its tree
 `platform-config/debian-x86_64/a3-core/` mirrors the target paths
 (`home/aaa/.local/bin/` → `/home/aaa/.local/bin/`). Built for one user,
 **`aaa`**.
@@ -72,24 +75,36 @@ Updates: `sudo apt update && sudo apt install a3-core`.
 
 A GitHub workflow rebuilds the archive on every push to `main`. Version: last
 `v*` tag plus commits since (`v03.0` + 63 = `03.0+63`), written into
-`DEBIAN/control` at build. The checked-in `1.0.0` is for hand builds and is
-older than anything published. `python3 tools/package_version.py` prints the
-next version.
+`packaging/DEBIAN/control` at build. The checked-in `0` is a placeholder: a hand
+build stamps it. `python3 tools/package_version.py` prints the next version. The
+history of the old `a3-engine` repository is part of a3-core's now, so the
+number counts it too and is above every earlier `a3-core` version, and apt
+upgrades normally.
+
+By hand, from a clean checkout with JUCE installed, use the umbrella's builder:
+
+```sh
+python3 <a3-system>/installer/package.py <a3-core checkout> --out <dir> --juce ~/local/juce
+```
 
 ### What it depends on
 
 | Purpose | Packages |
 | :--- | :--- |
-| Realtime and audio | `linux-image-rt-amd64`, `pipewire`, `pipewire-jack`, `wireplumber`, `linuxptp`, `libjack-jackd2-dev` (headers only, for building), `jack-example-tools`, `qjackctl`, `libsamplerate0-dev` |
-| 3D audio | `iem-plugin-suite-vst3` |
-| Screen | `lightdm`, `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `xserver-xorg-video-amdgpu`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm`, `dex`, `unclutter-xfixes`, `maim`, `xclip`, `brightnessctl` |
+| Realtime and audio | `linux-image-rt-amd64`, `pipewire`, `pipewire-jack`, `wireplumber`, `linuxptp`, `libjack-jackd2-dev` (headers only, for building), `jack-example-tools`, `libsamplerate0-dev` |
+| Screen | `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `xserver-xorg-video-amdgpu`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm`, `dex`, `unclutter-xfixes`, `maim`, `xclip`, `brightnessctl` |
 | Build tools | `build-essential`, `cmake`, `pkg-config`, `git` |
-| Tools | `systemd`, `sudo`, `openssh-server`, `curl`, `wget`, `gpg`, `unzip`, `liblo-tools`, `net-tools`, `htop`, `vim`, `tree` |
+| Tools | `systemd`, `sudo`, `openssh-server`, `curl`, `wget`, `gpg`, `liblo-tools`, `net-tools`, `htop`, `vim`, `tree`, `ffmpeg` |
+
+The shared libraries the program links come from the build (`${shlibs:Depends}`).
+The 3D code is IEM's, compiled into the program, so there is no
+`iem-plugin-suite-vst3`; `qjackctl` and `unzip` went with REAPER.
 
 It **recommends** `beat-analyzer`, its own package; apt installs it along unless
 Recommends are switched off.
 
-It **conflicts with and removes**: `network-manager`, `wpasupplicant`,
+It **conflicts with and removes**: `a3-engine` (the former package of the
+program), `network-manager`, `wpasupplicant`,
 `modemmanager`, `dhcpcd-base`, `bluetooth`, `bluez`, `bluez-obexd`, `blueman`,
 `plymouth`, `cron`, `gnome-keyring` and GNOME themes, `gvfs*`, `i3lock`.
 
@@ -162,12 +177,11 @@ file by file:
 - missing → installed; same → left;
 - **differs** → replaced only if its part is ticked in
   `a3-core/replace-config` (only differing parts offered, all ticked;
-  unattended takes all). Parts: `reaper`, `i3`, `systemd`, `qjackctl`, `iem`,
-  `other`.
+  unattended takes all). Parts: `i3`, `systemd`, `pipewire`, `other`.
 - Replaced files are first copied to `~/.config/a3-replaced/<date_time>/`;
   kept ones are named.
 
-The install never restarts REAPER: **after an upgrade, restart `a3-main`**
+The install never restarts the rig: **after an upgrade, restart `a3-main`**
 when you can, not mid-set. One file at a time, from an a3-core checkout:
 
 ```sh
@@ -209,12 +223,21 @@ Enables `x11vnc.service` and `set_irq_prio.service`
 ([System units](#core-system-units)), and, with an audio socket,
 `ptp4l@<socket>.service` ({ref}`the audio network <core-aes67>`).
 
-### 9. User services and the REAPER installation
+### 9. User services, and what REAPER left
 
-`loginctl enable-linger aaa`, `systemctl --user daemon-reload`, **start**
-`a3-user-install.service` (next section); linger off again. `a3-main`, `a3-aes67`
-and `a3-bar-per-workspace` start at boot through the shipped
-`default.target.wants` links.
+`loginctl enable-linger aaa`, `systemctl --user daemon-reload`, stop the retired
+units, enable the rig and (with an audio socket) AES67; linger off again.
+`a3-main`, `a3-aes67` and `a3-bar-per-workspace` start at boot through the
+shipped `default.target.wants` links.
+
+**On a machine that ran REAPER** the upgrade retires what it needs
+(`retire_reaper_files`): it stops and disables `qjackctl.service`,
+`a3-reaper.service` and `a3-user-install.service`, and moves them with their
+drop-in folders, every drop-in that calls the removed helper `a3-engine-runs`,
+and `~/.config/rncbc.org/a3-patchbay.xml` and `QjackCtl.conf` into the backup
+folder (`~/.config/a3-replaced/<date_time>/`), naming each one. Nothing is
+deleted. **Never touched:** `~/.config/REAPER`, `~/.local/opt/REAPER`,
+`~/.local/vst`, `~/.local/clap` are yours to delete by hand.
 
 ### 10. The boot loader
 
@@ -222,37 +245,10 @@ and `a3-bar-per-workspace` start at boot through the shipped
 ([Under /etc](#core-etc)). The postinst ends with:
 
 ```text
-use 'systemctl --user status a3-user-install.service' to check status
+use 'systemctl --user status a3-main.service' to check the rig
 use 'dpkg-reconfigure a3-core' to configure network and the headless screen
 Please Reboot or manage a3-core manually with 'systemctl --user start a3-main.service'
 ```
-
-(core-user-install)=
-
-### `a3-user-install.service`: REAPER, the plug-ins, the beat-analyzer
-
-`recipes/user_install.sh` installs what Debian lacks. It runs on every upgrade,
-on a live rig, so **each step runs only when its file is missing** (refetching
-once emptied REAPER under a running REAPER).
-
-| Step | What it does | Skipped when |
-| :--- | :--- | :--- |
-| REAPER | current Linux x86_64 release into `~/.local/opt/REAPER`, link `~/.local/bin/reaper` | `~/.local/opt/REAPER/reaper` exists |
-| plug-in paths | sets `vstpath` (`~/.local/vst/`, `/usr/lib/vst3/`) and `clap_path_linux-x86_64` (`~/.local/clap`, `/usr/lib/clap`) in `reaper.ini`, or writes a stub | never; only these two keys |
-| TAL-Filter-2 | `~/.local/vst/TAL-Filter-2.vst3` | it exists |
-| Airwindows Consolidated | latest `DAWPlugin` Linux build → `~/.local/clap/airwindows.clap` | it exists |
-| beat-analyzer | `./build.sh` in `~/a3-system/beat-analyzer`; `cp -n .env.example build/.env` | no checkout, or `build/beat-analyzer` exists |
-
-- `reaper.ini` is the machine's; the package sets only those two keys. IEM
-  comes from Debian.
-- The beat-analyzer is built from the a3-system checkout (a submodule), not
-  cloned; without it the step is skipped — clone a3-system ({doc}`install`)
-  and start the service again. An existing `build/.env` is never overwritten.
-- Fetch REAPER and the plug-ins again (REAPER is stopped meanwhile):
-
-  ```sh
-  A3_REINSTALL=1 bash ~/.local/share/a3-core/recipes/user_install.sh
-  ```
 
 ### Removing the package: `postrm`
 

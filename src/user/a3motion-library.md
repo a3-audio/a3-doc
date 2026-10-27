@@ -406,7 +406,7 @@ and addresses come from `a3-osc.json` ([another Core](#motion-howto-network)).
 | :--- | :--- |
 | positions | azimuth and elevation to Core while a blob moves; asked back at [start-up](#motion-start-up) |
 | 3d | crossfades the channel between its stereo and multichannel encoder in Core; freq and Q are its filter |
-| CHMIX, MIXER | the A³ Mixer's messages; Core relays what REAPER reports |
+| CHMIX, MIXER | the A³ Mixer's messages; Core relays what the engine reports |
 | meters, lightning | levels from Core: four channels, sub, four speakers |
 | clock | INT sends `/beat`; EXT follows the analyser's `/beat`; taps send `/tap` always |
 | SHIFT + action | plays with messages to Core held back |

@@ -20,7 +20,7 @@ the desk's addresses, so Core can't tell them apart.
 
 ![The MIX page](../user/pics_user/a3-motion-ui-mix.png)
 
-- **It listens too.** Core relays REAPER's reports; the pages adopt them via
+- **It listens too.** Core relays the engine's reports; the pages adopt them via
   `MixerState::setChannelFromPeer`, which sets **without sending** — sending
   would rebuild the echo loop out of Core's reach.
 - Three handlers, `onMixerChannelValue`, `onMasterValue`, `onFilterValue`,

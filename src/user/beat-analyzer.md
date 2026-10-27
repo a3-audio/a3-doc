@@ -35,8 +35,8 @@ Each tap on A³ Motion's clock key steps INT → EXT → PIO and sends `/clockmo
 and the analyzer relays it to every target **except `motion`**. Its own clock
 pauses; `/tap` does nothing.
 
-**EXT — intern.** Music on its input (patched in the
-{doc}`Patchbay <../ressources/patchbay>`). It finds onsets and a tempo; its
+**EXT — intern.** Music on its input (`bpm_1`, which the
+engine connects to the rec pair: {ref}`the I/O map <audio-engine-io>`). It finds onsets and a tempo; its
 clock counts on between beats, and at the last tempo when music stops. Taps:
 
 - The first tap after a 2 s pause sets **the one** (beat 1, tempo kept).
@@ -113,9 +113,6 @@ measures every `/vu` point and Core forwards it; where each number is measured:
 {ref}`Where the meters come from <core-meters>`, the names:
 {ref}`The meters <osc-vu-meters>`.
 
-The patchbay's `beat-analyzer:vu_*` sockets are therefore dead; they connect to
-nothing and are harmless.
-
 (beat-analyzer-config)=
 
 ## Where it runs and where its settings live
@@ -170,7 +167,7 @@ Ports: [Ports and endpoints](../ressources/ports.md). Messages:
 | Symptom | What to do |
 | :--- | :--- |
 | Motion on PIO/EXT, tempo from the wrong source | The analyzer restarted into mode 1. Step Motion's clock key once round |
-| EXT: no beat | Service running? `bpm_1` patched ({doc}`Patchbay <../ressources/patchbay>`)? Music reaching it? |
+| EXT: no beat | Service running? `bpm_1` connected (`jack_lsp -c`; the engine makes the link, {ref}`I/O map <audio-engine-io>`)? Music reaching it? |
 | EXT: half or double tempo | `BPM_MIN`–`BPM_MAX` one octave around the music, e.g. 70–140 |
 | EXT: tempo stopped following | You tapped: it follows again 16 bars after the last tap (`TAP_LOCK_BARS`) |
 | PIO: nothing arrives | Core on the players' network, ports free? Log: `Pioneer Receiver konnte nicht gestartet werden` |
