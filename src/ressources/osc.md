@@ -18,7 +18,7 @@ Core **joins** them key by key; `network.json` wins, missing hosts come from
 the package. A `network.json` that does not parse or lacks `hosts` or `network`
 is **refused** (reason in the journal) and the package's values are used.
 
-Core serves the result at `http://<core>:9080/api/truth` (`core.web`). Header
+Core serves the result at `http://<core>:9080/api/truth` (`core.web`, {ref}`HTTP API <osc-http>`). Header
 `X-A3-Truth` is its **fingerprint**: sha256 of the canonical JSON (sorted keys,
 no spaces, UTF-8).
 
@@ -42,7 +42,7 @@ The tables here and on the ports page are rendered from it.
 | A³ Motion | fetches it from Core, shared cache `~/.cache/a3/a3-osc.json`; see [Following Core](#osc-follow). No addresses in its `config.json` or menu |
 | A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
 | StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`, and `stemdeck.ahead` if the truth has it (its preview of the music). Without: `PIO: no a3-osc.json` |
-| beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-osc-render user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
+| beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-core --render-truth user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | AES67 sender | `~/.config/pipewire/pipewire-aes67.conf`, rendered from `network.audio_port`; no file without a second socket |
 | installer | offers the package's `network` and creates `network.json` from it once |
 
@@ -203,8 +203,12 @@ See {ref}`the desk's input selectors <a3mix-displays>`.
 
 ## The meters
 
-The beat-analyzer sends `/vu/n` with peak and RMS (linear, 0–1); `/vu/n` is
-REAPER out 30 + *n* ({ref}`REAPER channel map <core-vu-map>`). **Devices find a
+The **audio engine** measures each `/vu/n` (peak and RMS, linear, 0–1) at its
+meter points, sends them 25 times a second to Core's `core.vu-relay` on
+loopback, and **Core forwards them unchanged** to every route that carries `vu`
+and to the followed remote devices. The beat-analyzer sends no `/vu`; StemDeck
+sends its own 41–50. Where each number is measured:
+{ref}`Where the meters come from <core-meters>`. **Devices find a
 meter by name** in `vu_meters`, not by number:
 
 | Device | Shows |
@@ -314,13 +318,44 @@ values below. Tune them on the rig in `network.json`
 
 ## A³ Core
 
-Three listeners ({ref}`ports <ports-by-listener>`); the port decides the meaning:
+Three listeners ({ref}`ports <ports-by-listener>`); the port decides the meaning.
+The engine has its own, `engine.osc`, and the window reaches it on
+`engine.control` (loopback):
 
 | Listener | Receives |
 | :--- | :--- |
 | `core.osc` | commands from Mixer, Motion, StemDeck, beat-analyzer |
-| `core.reaper-feedback` | REAPER's reports. Separate, so Core never takes a report for a command and answers it: a feedback loop |
-| `core.web` | HTTP: the {doc}`window <../development/core>` and `/api/truth` |
+| `core.reaper-feedback` | REAPER's reports. REAPER is frozen and never started, so nothing arrives here; the port stays so a report would never be taken for a command |
+| `core.web` | HTTP: the {ref}`API <osc-http>` the window and `curl` use, and `/api/truth` |
+
+(osc-http)=
+
+### Core's HTTP API
+
+`core.web` (9080) is plain HTTP and JSON, for the `a3-core` window, for
+devices fetching the truth, and for `curl` on a Core without a screen. There is
+**no web page**: `GET /` answers 404 with a short text that names `/api/…` and
+the `a3-core` window. Refusals are plain English sentences.
+
+| Request | Answers |
+| :--- | :--- |
+| `GET /api/status` | what Core says about itself: peers, state, problems |
+| `GET /api/rig` | the rig state: the engine, its gate, who is there |
+| `GET /api/devices` | the devices and the truth each speaks, with Core's fingerprint |
+| `GET /api/traffic` | every address seen: count, rate, last value, peer |
+| `GET /api/unknown` | the addresses Core did not understand |
+| `GET /api/register` | the catalogue of addresses that can exist, against the traffic |
+| `GET /api/truth` | the joined truth; `X-A3-Truth` is its fingerprint |
+| `GET /api/stream` | the live values, streamed |
+| `POST /api/send` | one OSC message from the bench: JSON `{"to": …, "address": "/…", "value": …}` with `to` one of `self`, `mixer`, `motion` |
+
+```sh
+curl http://<core>:9080/api/rig
+curl -d '{"to":"self","address":"/master/volume","value":0.5}' http://<core>:9080/api/send
+```
+
+There is no login: bind Core to the machine (`--web-bind`) to keep it local.
+The window asks Core only while its OSC MONITOR switch is on.
 
 (osc-everyone)=
 
@@ -349,8 +384,9 @@ recipient list (a missing recipient fails silently over UDP).
 
 New subscriber: {ref}`Adding a department <core-subscriber>`.
 
-- The engine is not a subscriber: REAPER, the MultiEncoders and the DualDelay
-  each get their own language from one handler.
+- The engine is not a subscriber: it has its own words (`/engine/…`) on
+  `engine.osc`. REAPER, the MultiEncoders and the DualDelay are the older
+  languages; REAPER is frozen and never started.
 - **Lamps are broadcast too** (`/channel/{ch}/cue/led`,
   `/channel/{ch}/filter/led`, `/filter/led`), beside the flags: a lamp is a
   light, a flag a setting.
@@ -525,9 +561,8 @@ Pro DJ Link ports (`prolink.*`, not OSC); sends to every target in its
 - **`/beat`** (beat 1–4, bar, bpm): sent in every mode to every target (mode 0:
   not to `motion`). Received and relayed only in mode 0; beats outside 1–4
   dropped. Mode 2: bar always 0.
-- **`/vu/{n}`**: one per JACK input `vu_analog1_L` … `vu_free70` (REAPER out
-  31–70), four bundles of ten, 25 per second, to `OSC_VU_*` if set, else
-  `OSC_HOST_*`.
+- **No `/vu/{n}`**: the beat-analyzer no longer measures or sends meters,
+  whatever `ENABLE_VU` says; the engine does ({ref}`meters <osc-vu-meters>`).
 - **`/clockmode`**: 0 a3motion, 1 intern, 2 pioneer; clamped; not stored
   (starts in 1).
 - **`/tap`**: mode 1 only; always sets the beat to 1.

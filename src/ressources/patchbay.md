@@ -65,6 +65,13 @@ StemDeck, QjackCtl) use PipeWire's `libjack`, system-wide through
 
 ### The VU meters: which REAPER out feeds which `/vu/n`
 
+```{note}
+These `vu_*` sockets are **dead**. The beat-analyzer no longer measures
+meters: the audio engine measures every point inside its own audio callback
+and Core forwards them ({ref}`Where the meters come from <core-meters>`). The
+table records which signal each number stands for; it is no longer wiring.
+```
+
 One JACK input per meter, sent as `/vu/n` (peak, RMS):
 
 | `/vu/n` | REAPER out |

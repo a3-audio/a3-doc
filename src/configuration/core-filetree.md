@@ -11,7 +11,7 @@ How a file arrives decides what an update does to it:
 | **postinst, file by file** | `~/.local/share/a3-core/config/*` → `~/.config/` | new files arrive; a differing file is replaced only if its part is chosen, after a backup (see [step 4](#core-postinst)) |
 
 Written rather than copied: network files, `~/.config/a3/network.json` (once),
-headless X config, `~/.venv`, `~/.config/a3/osc.env`, the beat-analyzer's
+headless X config, `~/.config/a3/osc.env`, the beat-analyzer's
 `.env` block, REAPER and plug-ins.
 
 **Edit the package, not the machine**, except where noted: a replaced file
@@ -69,40 +69,31 @@ Replaced on every install.
 
 | Program | What it is |
 | :--- | :--- |
-| `a3-core.py` | the OSC router, run by `a3-core.service` |
-| `a3-osc-render` | the truth as text: `user` (`osc.env`, analyzer block), `network` (postinst default) |
-| `a3-bar-per-workspace.py` | i3bar per workspace |
+| `a3-engine-runs` | internal: the units' start condition; `--reaper` always answers "REAPER does not run" ({ref}`why <core-engine-units>`) |
+| `a3-screencast` | the ffmpeg command behind `a3-screencast.service` |
 | `a3-wait-for-the-screen` | waits (max 1 min) for X to report the screen, so a UI starts at the right scale |
-| `reaper` | link to `~/.local/opt/REAPER/reaper` |
 
-## `~/.local/lib` — Core's modules
+## `~/.local/lib` — no modules any more
 
-Imported by `a3-core.py` and `a3-osc-render`; replaced on install.
+Core is the compiled `a3-core` program (`/usr/bin/a3-core`, from the `a3-engine`
+package): there are **no Python modules** on the machine, and no `~/.venv` is
+needed. Only the real-time priority shim for the audio threads,
+`~/.local/lib/a3/libjack-rt-priority.so`, is built here by the postinst.
 
-| Module | What it does |
+## What the a3-core program keeps
+
+Written by the program, outside the package; an update never touches them.
+
+| Path | What it is |
 | :--- | :--- |
-| `a3_osc.py` | reads the one truth |
-| `a3_osc_render.py` | writes the one truth out for what cannot read JSON |
-| `a3_core_layout.py` | where the OSC addresses and REAPER track numbers live (`layout.json`) |
-| `a3_core_reaper.py` | what Core asks REAPER to do beyond setting values |
-| `a3_core_reverse.py` | turns REAPER's feedback back into an A³ message |
-| `a3_core_curves.py` | turns a REAPER value back into the A³ value that produced it |
-| `a3_core_crossfade.py` | how much of a channel moves: the 3D law (the band's gain; the steady rest stays at 0 dB) and the filter messages for both Isolators |
-| `a3_core_buttons.py` | what a button message asks for, when two senders mean two things |
-| `a3_core_echo.py` | tells Core's own echo apart from news |
-| `a3_core_tempo.py` | passes the tempo on, but not every flicker |
-| `a3_core_subscribers.py` | who gets told, and how a new one is added |
-| `a3_core_devices.py` | which truth each device speaks, and whether it is Core's own |
-| `a3_core_state.py` | what only Core knows, kept across a restart |
-| `a3_core_evening.py` | the evening as Core saw it, for the next start |
-| `a3_core_snapshot.py` | saves in between, so a power cut does not cost the evening |
-| `a3_core_gate.py` | opens main, booth, phones and the main meter's track after the start-up recall, with a 1 s fade. See [the silent start](#core-silent-start) |
-| `a3_core_recall.py` | Core saying its state again |
-| `a3_core_startup.py` | what Core has to say at start-up so everyone means the same |
-| `a3_core_seen.py` | the addresses Core has seen, kept across a restart |
-| `a3_core_register.py` | the catalogue of addresses the system can speak, held against the traffic |
-| `a3_core_traffic.py` | what went past Core, counted |
-| `a3_core_web.py` | the window onto what Core is passing about |
+| `~/.local/state/a3-core/state.json` | what only Core knows (positions, 3D), for the next start |
+| `~/.local/state/a3-core/evening.json` | every continuous value Core passed on, replayed after a restart |
+| `~/.local/state/a3-core/seen.json` | the addresses the OSC monitor has seen (not values, not history) |
+| `~/.config/a3/engine/engine.json` | the engine's settings, written by the window's **Save** |
+| `~/.config/a3/core/window.settings` | the OSC MONITOR switch, written only when flipped |
+| `~/.config/a3/screencast.env` | optional encoder settings for the screencast |
+
+`$XDG_STATE_HOME` replaces `~/.local/state` where set.
 
 ## `~/.local/share/a3-core` — the package's own data
 
@@ -110,14 +101,12 @@ Replaced on every install. Not meant to be edited on the machine.
 
 | Path | What it is |
 | :--- | :--- |
-| `layout.json` | A³ channel ↔ REAPER: tracks, FX slots, parameters (`gain_params`, `fx_params`), plug-in addresses. Replaced **on purpose**, to match the shipped template |
-| `curves-golden.json` | recorded value curves, to turn REAPER values back into A³ values |
+| `layout.json` | A³ channel ↔ REAPER: tracks, FX slots, parameters. Kept for the frozen REAPER template; Core does not read it |
+| `curves-golden.json` | recorded value curves of the REAPER template; the compiled Core's tests read them |
 | `osc-register.json` | all addresses, generated by `tools/osc_register.py`; never hand-edited |
-| `web/index.html` | Core's window onto the OSC traffic |
 | `x11/10-headless.conf` | the dummy-screen X config the headless question copies to `/etc/X11/xorg.conf.d/` |
 | `docs/channelmap.ods` | a channel-map spreadsheet |
 | `recipes/user_install.sh` | the [user-side installer](#core-user-install) |
-| `recipes/requirements.txt` | the Python packages for `~/.venv` |
 | `recipes/vnc-display.sh` | the script behind `vnc-display.service` |
 | `recipes/a3vnc.sh` | opens a VNC viewer on the Core, from another machine |
 | `recipes/clear_home.sh` | **deletes** `~/.config/REAPER`, `~/.local`, `~/.config/rncbc.org`, `~/.config/systemd`, `~/beat-analyzer`. Run by nothing |
