@@ -1,6 +1,7 @@
 # A³ Core Configuration
 
-A³ Core is one Debian package, `a3-core`. In order:
+A³ Core is one Debian package, `a3-core` (the installation), whose program
+`a3-core` comes from the `a3-engine` package it depends on. In order:
 
 1. [The Debian package](#core-package): what it is, how to install, what it needs.
 2. [What the installation does](#core-postinst): the install script, step by step.
@@ -13,9 +14,10 @@ The usual route is the a3-system {doc}`installer <install>` (role Core).
 | :--- | :--- |
 | OS | Debian testing, realtime kernel |
 | Window manager | i3, named workspaces ([The screen](#core-config-screen)) |
-| Audio | PipeWire (with JACK compatibility), REAPER, IEM plug-in suite |
-| VU metering | the beat-analyzer ({ref}`VU map <core-vu-map>`) |
-| OSC router | `~/.local/bin/a3-core.py`, a `systemd --user` service |
+| Audio | PipeWire (with JACK compatibility); the engine ({doc}`user page <../user/audio-engine>`) with the IEM code compiled in. REAPER is installed but frozen and never started |
+| The program | `/usr/bin/a3-core` (package `a3-engine`): the core role (OSC router, HTTP API), the engine role, the window; no Python at runtime |
+| Services | `a3-core.service`, `a3-engine.service`, both `systemd --user` ({ref}`services <core-services>`) |
+| Beat clock | the beat-analyzer (`/beat` only; the engine measures the meters, {ref}`where <core-meters>`) |
 
 ```{note}
 **No addresses or ports here.** They are in `a3-osc.json`
@@ -81,7 +83,6 @@ next version.
 | Realtime and audio | `linux-image-rt-amd64`, `pipewire`, `pipewire-jack`, `wireplumber`, `linuxptp`, `libjack-jackd2-dev` (headers only, for building), `jack-example-tools`, `qjackctl`, `libsamplerate0-dev` |
 | 3D audio | `iem-plugin-suite-vst3` |
 | Screen | `lightdm`, `i3`, `i3status`, `xinit`, `xserver-xorg-video-dummy`, `xserver-xorg-video-amdgpu`, `x11vnc`, `x11-utils`, `x11-xserver-utils`, `libgtk2.0-0`, `pcmanfm`, `dex`, `unclutter-xfixes`, `maim`, `xclip`, `brightnessctl` |
-| Python (Core) | `python3`, `python3-pip`, `python3-venv`, `python3-rtmidi` |
 | Build tools | `build-essential`, `cmake`, `pkg-config`, `git` |
 | Tools | `systemd`, `sudo`, `openssh-server`, `curl`, `wget`, `gpg`, `unzip`, `liblo-tools`, `net-tools`, `htop`, `vim`, `tree` |
 
@@ -106,7 +107,7 @@ most steps leave existing things alone.
 
 - `a3-core/install-default-network` *yes* (preseed only, e.g.
   `debconf-set-selections`): interface, address, gateway, DNS and audio socket come
-  from the truth's `network` section (`a3-osc-render network`).
+  from the truth's `network` section (`a3-core --render-truth network`).
 - Otherwise it asks **address**/prefix, **gateway**, **DNS**, pre-filled (an
   answer on the pre-September-2026 network is reset to the default), and the
   **interface** (priority *medium*, hidden; default `eno1`).
@@ -148,10 +149,10 @@ Core used only over VNC.
 
 Answer *no* on a machine with a screen (e.g. running A³ Motion).
 
-### 3. The Python environment
+### 3. No Python environment
 
-`~/.venv` with `numpy`, `python-osc`, `mido`
-(`recipes/requirements.txt`). Core runs on it.
+The package builds none: Core and the engine are the compiled `a3-core`
+program. (An old `~/.venv` on an upgraded machine is harmless and unused.)
 
 ### 4. The configuration, installed into `~/.config`
 
@@ -189,7 +190,7 @@ afterwards, so an upgrade never puts back a removed key. The package ships no
 `~/.local`, `~/.config` → `aaa`; directories in `~/.config` `0755`, files
 `0664`.
 
-### 7. Rendering the one truth: `a3-osc-render user`
+### 7. Rendering the one truth: `a3-core --render-truth user`
 
 As `aaa`, for programs that can't read JSON:
 

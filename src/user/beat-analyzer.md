@@ -4,13 +4,13 @@
 
 ## At a glance
 
-The system's **beat clock** and **level meters**: a program on the A³ Core,
-on the same JACK graph as REAPER, with no screen.
+The system's **beat clock**: a program on the A³ Core, on the same JACK graph
+as the audio engine, with no screen. **It is the beat clock only.** It used to
+measure the level meters too; the engine does that now
+({ref}`The meters <beat-analyzer-meters>`).
 
 - **The beat:** `/beat` (beat in bar, bar, tempo) to every device. A³ Motion
   follows it in **EXT** and **PIO**; the desk's tap keys blink with it.
-- **The meters:** peak/RMS, 25 a second: A³ Motion's coronas, glow and
-  lightning, and the desk's VU meters.
 
 You choose the beat's source on A³ Motion's clock key. Source:
 [beat-analyzer](https://github.com/rafjagger/beat-analyzer) (outside the
@@ -35,7 +35,7 @@ Each tap on A³ Motion's clock key steps INT → EXT → PIO and sends `/clockmo
 and the analyzer relays it to every target **except `motion`**. Its own clock
 pauses; `/tap` does nothing.
 
-**EXT — intern.** Music on its input (patched from REAPER,
+**EXT — intern.** Music on its input (patched in the
 {doc}`Patchbay <../ressources/patchbay>`). It finds onsets and a tempo; its
 clock counts on between beats, and at the last tempo when music stops. Taps:
 
@@ -106,26 +106,32 @@ A³ Motion on PIO, A³ Mixer's tap keys, every other /beat target
 
 ## The meters
 
-Forty JACK inputs, each sent as peak and RMS (0–1), in four bundles of ten.
-**Which signal is on which meter is decided by the JACK patching alone**:
-{ref}`VU meter map <core-vu-map>`. `NUM_VU_CHANNELS=40` opens all forty.
-Devices look meters up by name ({ref}`The meters <osc-vu-meters>`).
+**The analyzer sends no meters any more.** Its level-meter thread and its
+`vu_*` JACK ports are not started, whatever `ENABLE_VU` says in an old `.env`
+(a user file with `ENABLE_VU=1` does not bring them back). The audio engine
+measures every `/vu` point and Core forwards it; where each number is measured:
+{ref}`Where the meters come from <core-meters>`, the names:
+{ref}`The meters <osc-vu-meters>`.
+
+The patchbay's `beat-analyzer:vu_*` sockets are therefore dead; they connect to
+nothing and are harmless.
 
 (beat-analyzer-config)=
 
 ## Where it runs and where its settings live
 
 `beat-analyzer.service`, part of `a3-main`; the a3-core package installs the
-unit and builds the program from the a3-system checkout.
+unit and builds the program from the a3-system checkout. It runs beside the
+engine and does not depend on it.
 
 Settings: a **`.env`** in its working directory `build/`. First found of
 `build/.env`, `../.env`, `.env.example`. Template: `cp .env.example build/.env`.
 
-**Targets and ports are rendered**, not hand-written: `a3-osc-render user`
+**Targets and ports are rendered**, not hand-written: `a3-core --render-truth user`
 writes a block at the end of `build/.env` from `a3-osc.json`:
 
 ```sh
-# >>> a3-osc: rendered from a3-osc.json by a3-osc-render -- edit the truth, not this
+# >>> a3-osc: rendered from a3-osc.json by a3-core --render-truth -- edit the truth, not this
 OSC_HOST_core=127.0.0.1:9000
 …
 # <<< a3-osc
@@ -138,18 +144,13 @@ missing. To change one, change `a3-osc.json`
 
 | Setting | What it does |
 | :--- | :--- |
-| `OSC_HOST_<name>` *(block)* | a `/beat` target (and meters, unless `OSC_VU_<name>`). `motion` gets no relayed beat in INT |
-| `OSC_VU_<name>` *(block)* | a separate meter port for that target |
+| `OSC_HOST_<name>` *(block)* | a `/beat` target. `motion` gets no relayed beat in INT |
 | `OSC_PORT_A3MOTION` *(block)* | where `/beat`, `/clockmode`, `/tap` arrive |
-| `OSC_ADDRESS_BEAT`, `_TAP`, `_CLOCKMODE`, `_VU` *(block)* | its addresses |
+| `OSC_ADDRESS_BEAT`, `_TAP`, `_CLOCKMODE` *(block)* | its addresses |
 | `PIONEER_PORT_ANNOUNCE`, `_BEAT`, `_STATUS` *(block)* | Pro DJ Link ports |
 | `BPM_MIN`, `BPM_MAX` | tempo range; outside it, doubled or halved in |
 | `TAP_LOCK_BARS` | bars a tapped tempo holds before the analysis takes over (default 16, 0 = until restart) |
 | `PIONEER_DEVICE_NUM` | player number, 7 |
-| `NUM_VU_CHANNELS` | meters: 40 (max 64) |
-| `NUM_STEM_METERS` | 0; 8 would fight StemDeck's own stem meters |
-| `OSC_SEND_RATE` | meter rate, 25 |
-| `VU_RMS_ATTACK`, `VU_RMS_RELEASE`, `VU_PEAK_FALLOFF` | meter ballistics |
 | `DEBUG_BEAT_CONSOLE`, `DEBUG_PIONEER_CONSOLE` | log every beat / Pro DJ Link beat (with tempo, offset, player, master) |
 
 Read at start; restart after a change. The clock mode is **not** a setting:
@@ -169,12 +170,12 @@ Ports: [Ports and endpoints](../ressources/ports.md). Messages:
 | Symptom | What to do |
 | :--- | :--- |
 | Motion on PIO/EXT, tempo from the wrong source | The analyzer restarted into mode 1. Step Motion's clock key once round |
-| EXT: no beat | Service running? `bpm_1` patched ({doc}`Patchbay <../ressources/patchbay>`)? Music in REAPER? |
+| EXT: no beat | Service running? `bpm_1` patched ({doc}`Patchbay <../ressources/patchbay>`)? Music reaching it? |
 | EXT: half or double tempo | `BPM_MIN`–`BPM_MAX` one octave around the music, e.g. 70–140 |
 | EXT: tempo stopped following | You tapped: it follows again 16 bars after the last tap (`TAP_LOCK_BARS`) |
 | PIO: nothing arrives | Core on the players' network, ports free? Log: `Pioneer Receiver konnte nicht gestartet werden` |
 | PIO: wrong player | It follows whoever says master while playing |
-| Meters one channel across | JACK patching off by one |
-| Meters still | Service running? `build/.env` ends with the `a3-osc` block? Else `a3-osc-render user`, restart |
+| No beat targets | `build/.env` ends with the `a3-osc` block? Else `a3-core --render-truth user`, restart |
+| Meters still or wrong | Not the analyzer's: look at the engine ({ref}`A³ Core services <core-engine-units>`) and Core |
 
 Log: `journalctl --user -u beat-analyzer -f`.

@@ -2,9 +2,27 @@
 
 Where the sound is: it takes the analog inputs, computes the 3D/ambisonics
 field and sends it out, **with no interface of its own** — A³ Mixer, A³ Motion
-and anything speaking the same OSC control it. It also runs the
-[**Beat Analyzer**](beat-analyzer.md) (tempo and meters). Linux, remote
-desktop over VNC. Source: [a3-core](https://github.com/a3-audio/a3-core).
+and anything speaking the same OSC control it. Linux, remote desktop over VNC.
+Source: [a3-core](https://github.com/a3-audio/a3-core) (the installation) and
+[a3-engine](https://github.com/a3-audio/a3-engine) (the program).
+
+## One program: `a3-core`
+
+A³ Core is **one C++ program, `a3-core`** (`/usr/bin/a3-core`). It has no Python
+and no REAPER at runtime. The same binary plays several **roles**, each its own
+process:
+
+| Role | What it does | On the rig |
+| :--- | :--- | :--- |
+| `--role core` | the OSC router: takes commands, relays state, serves the HTTP API | `a3-core.service` |
+| `--role engine` | the {doc}`audio engine <audio-engine>`: channel strips, 3D, effects, outputs, meters | `a3-engine.service` |
+| *(no role, or `--role window`)* | the **window**: shows both, edits the engine | run on the screen |
+| `--headless` | a supervisor: Core and the engine as children, no window | a laptop without a screen |
+
+The beat clock is separate: {doc}`beat-analyzer` measures nothing any more, it
+only keeps time. The meters are the engine's ({ref}`below <core-meters>`).
+Which unit runs what, and how to start any role by hand:
+{ref}`A³ Core services <core-services>`.
 
 ![A³ Core numbered](pics_user/a3-core-icon_light_numbered.png)
 
@@ -39,30 +57,87 @@ The portrait touch screen (768 × 1024) shows one workspace at a time:
 | :--- | :--- |
 | **MOTION** (1) | [A³ Motion](a3motion.md)'s touch screen |
 | **STEMDECK** (2) | [StemDeck](stemdeck.md), always running |
-| **REAPER** (3) | the audio engine |
+| **ENGINE** (3) | the `a3-core` window (i3 sends it here by its window class `a3-core`): the engine's pages and Core's OSC monitor |
 | **QJACKCTL** (4) | the JACK patching |
 | **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
 
 - **Between the touch apps**: the key at the far right of the top bar
   (STEMDECK in A³ Motion, MOTION in StemDeck), in the same spot in both. **▾**
   lists workspaces that have a window.
-- **On REAPER, QJACKCTL, SCARLETT**: tap MOTION or STEMDECK in the bar at the
+- **On ENGINE, QJACKCTL, SCARLETT**: tap MOTION or STEMDECK in the bar at the
   top (hidden on the touch apps, which fill the screen).
+
+(core-window)=
 
 ## The window
 
-**`http://<core>:9080`** from anywhere on the network shows what the devices
-actually say to each other — the answer to *"cable, setting, or me?"*, since
-over UDP a control nobody hears looks like one that works.
+Run **`a3-core`** on the screen (workspace ENGINE). The window attaches to Core
+and the engine over their local ports; it has no audio of its own. Its pages
+are the {doc}`engine's pages <audio-engine>` (AUDIO, STATUS, CHANNELS, ZONES,
+I/O, CALIBRATION, FILTER) and, below them, the **OSC MONITOR**: what the
+devices actually say to each other, the answer to *"cable, setting, or me?"*,
+since over UDP a control nobody hears looks like one that works.
 
-![The window, showing the traffic](pics_user/a3-core-window.png)
-
-- **Top**: the peers, each with a last-heard dot; per device, *a3-osc.json is
+- **The OSC MONITOR switch** sits at the bottom of the page list. Off, the
+  window asks Core nothing. Your choice is remembered
+  (`~/.config/a3/core/window.settings`, written only when you flip it).
+- **TRAFFIC**: one row per address — count, rate, last value, device; filter
+  by address or device, *only active* hides what is older than 6 s.
+- **TRUTH & DEVICES**: Core's fingerprint, and per device *a3-osc.json is
   Core's* or, red, *DIFFERS from Core's* (an older truth;
   {ref}`what to do <osc-differs>` — desk, StemDeck and Motion fix themselves
   within seconds).
-- **Rows**: one per address — count, rate, last value, device.
-- **Verkehr / Register**: what went past, or every address that *can* exist;
-  *nur tote Drähte* shows those that never arrived.
-- The address list survives a Core restart; values and history don't. It
-  only looks, it never controls.
+- **REGISTER**: every address that *can* exist; *only dead wires* shows those
+  that never arrived. **NOT UNDERSTOOD** lists what Core did not recognise.
+- **BENCH**: send one value to Core itself, the mixer or Motion. It only
+  looks otherwise, it never controls.
+- The address list survives a Core restart; values and history don't.
+
+### On a laptop
+
+Without the rig's units, the window **starts what is missing**: it asks Core
+and the engine whether they answer, and starts a role that does not (and whose
+unit is not enabled) as its own child. Closing asks once, *"Stop Core and the
+engine too?"*, naming only the roles it started. On the rig, where the units run
+them, the window starts and stops nothing.
+
+`a3-core --headless` does the same without a window: Core and the engine as
+children, restarted if they fail, ended on Ctrl-C.
+
+### Without a screen: `curl`
+
+Everything the monitor shows is also on Core's HTTP port
+(`http://<core>:9080/api/…`), so a Core with no screen can be examined from any
+terminal:
+
+```sh
+curl http://<core>:9080/api/status      # what Core says about itself
+curl http://<core>:9080/api/rig         # the rig state: engine, gate, peers
+curl http://<core>:9080/api/devices     # who is there, and whose truth they speak
+curl http://<core>:9080/api/traffic     # every address seen: count, rate, value
+```
+
+The full list: {ref}`Core's HTTP API <osc-http>`. There is no web page any
+more: `http://<core>:9080/` answers with a short text that points here.
+
+(core-meters)=
+
+## Where the meters come from
+
+Every `/vu/n` number is **measured by the engine**, inside its audio callback,
+at the engine's own meter points: the analog inputs
+(`/vu/1`–`/vu/8`, and the return's pair 35–36) raw; the main, booth, phones and
+rec outputs as they leave (11–34); each channel before and after its fader
+(51–66). The engine sends them 25 times a second to **Core, which forwards them**
+to Motion, the desk and the other listeners; StemDeck still sends its own
+stem meters (41–50). Free numbers (9–10, 37–40) are sent as 0. The map by
+name: {ref}`The meters <osc-vu-meters>`.
+
+## Screencast
+
+`a3-screencast.service` shows this machine's screen as one MPEG-TS stream for
+OBS and the pro-DJ app: several viewers, one encode, started with the first
+viewer and stopped 10 s after the last. Its fan-out is another role of the same
+program, `a3-core --role screencast-fanout`. It is off until a machine opts in
+(`systemctl --user enable --now a3-screencast`); its settings (cores, frame rate
+and quality for the encoder) are in `~/.config/a3/screencast.env`.
