@@ -24,6 +24,7 @@ Contact
 
    user/user
    user/a3core
+   user/audio-engine
    user/a3motion
    user/a3mix
    user/beat-analyzer
