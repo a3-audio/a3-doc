@@ -48,7 +48,7 @@ programs it starts keep their own CPUs.
 | Unit | Starts | Part of `a3-main` | After | Restarts | Scheduling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `a3-main` | the umbrella | — | `graphical.target` | — | — |
-| `qjackctl` | QjackCtl, A³ patchbay | yes | PipeWire, beat-analyzer | on failure | RT 83, CPUs 1–3 |
+| `qjackctl` | QjackCtl, A³ patchbay | yes | PipeWire, a3-reaper, beat-analyzer | on failure | RT 83, CPUs 1–3 |
 | `a3-engine` | `a3-core --role engine` | yes | PipeWire | on failure, 1 s (5 in 60 s) | normal, CPUs 1–3; audio threads RT by the preload below |
 | `a3-core` | `a3-core --role core` | yes | PipeWire | no | normal, every CPU |
 | `beat-analyzer` | the beat clock | yes | PipeWire | no | RT 65, CPUs 1–3 |

@@ -10,7 +10,7 @@ around it: units, drop-ins, i3, the truth, the postinst. The Python Core is gone
 there is no Python on the rig.
 
 ```text
-a3-core                                  the window (attaches to Core and the engine)
+a3-core [--role window]                  the window (attaches to Core and the engine)
 a3-core --headless                       supervisor: Core and the engine as children
 a3-core --role core    [--ip …] [--port N] [--mixer H:P] [--motion H:P]
                        [--subscriber NAME=H:P]... [--print-osc] [--web-bind H:P] [--no-web]

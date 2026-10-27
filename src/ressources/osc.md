@@ -38,7 +38,7 @@ The tables here and on the ports page are rendered from it.
 
 | Device | How it gets the truth |
 | :--- | :--- |
-| A³ Core | the package's contract joined with `network.json` (`a3_osc.py`); serves it |
+| A³ Core | the package's contract joined with `network.json`, read and joined by the program; serves it |
 | A³ Motion | fetches it from Core, shared cache `~/.cache/a3/a3-osc.json`; see [Following Core](#osc-follow). No addresses in its `config.json` or menu |
 | A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
 | StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`, and `stemdeck.ahead` if the truth has it (its preview of the music). Without: `PIO: no a3-osc.json` |
@@ -370,7 +370,7 @@ recipient list (a missing recipient fails silently over UDP).
    A³ Mixer                                   A³ Mixer
    A³ Motion            ──▶   A³ Core   ──▶   A³ Motion
    beat-analyzer             core.osc         light    (--subscriber)
-   REAPER                    core.reaper-     video    (--subscriber)
+   REAPER (unused)           core.reaper-     video    (--subscriber)
                              feedback
 
    One message in, the same message out to every subscriber:
@@ -424,6 +424,10 @@ test catches it.
 
 ### /state/recall
 
+```{note}
+The recall and the way back below describe REAPER's path (`core.reaper-feedback`). REAPER is frozen and never starts, so this path is unused now.
+```
+
 A device that just started asks; Core answers with **the ordinary messages**,
 each to the device it belongs to:
 
@@ -440,6 +444,10 @@ not sent as zero: zero degrees is a real position.
 (osc-way-back)=
 
 ### The way back: what REAPER reports
+
+```{note}
+This is REAPER's path. REAPER no longer starts, so nothing arrives here now.
+```
 
 Core reads REAPER's feedback on `core.reaper-feedback`, bends it back through
 its curve and broadcasts it:

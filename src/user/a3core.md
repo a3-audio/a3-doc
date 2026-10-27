@@ -16,7 +16,7 @@ process:
 | :--- | :--- | :--- |
 | `--role core` | the OSC router: takes commands, relays state, serves the HTTP API | `a3-core.service` |
 | `--role engine` | the {doc}`audio engine <audio-engine>`: channel strips, 3D, effects, outputs, meters | `a3-engine.service` |
-| *(no role)* | the **window**: shows both, edits the engine | run on the screen |
+| *(no role, or `--role window`)* | the **window**: shows both, edits the engine | run on the screen |
 | `--headless` | a supervisor: Core and the engine as children, no window | a laptop without a screen |
 
 The beat clock is separate: {doc}`beat-analyzer` measures nothing any more, it
@@ -57,7 +57,7 @@ The portrait touch screen (768 × 1024) shows one workspace at a time:
 | :--- | :--- |
 | **MOTION** (1) | [A³ Motion](a3motion.md)'s touch screen |
 | **STEMDECK** (2) | [StemDeck](stemdeck.md), always running |
-| **ENGINE** (3) | the `a3-core` window: the audio engine's pages and Core's OSC monitor |
+| **ENGINE** (3) | the `a3-core` window (i3 sends it here by its window class `a3-core`): the engine's pages and Core's OSC monitor |
 | **QJACKCTL** (4) | the JACK patching |
 | **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
 
@@ -125,7 +125,7 @@ more: `http://<core>:9080/` answers with a short text that points here.
 ## Where the meters come from
 
 Every `/vu/n` number is **measured by the engine**, inside its audio callback,
-at the point the patchbay used to feed the old analyzer: the analog inputs
+at the engine's own meter points: the analog inputs
 (`/vu/1`–`/vu/8`, and the return's pair 35–36) raw; the main, booth, phones and
 rec outputs as they leave (11–34); each channel before and after its fader
 (51–66). The engine sends them 25 times a second to **Core, which forwards them**
