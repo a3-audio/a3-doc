@@ -44,7 +44,7 @@ One filter for all channels; a strip's **FX** key sends it through.
 | 15 | **CUE/MIX** | cue (left) to mix (right), constant power | |
 | 16 | **BOOTH** | monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | PA outputs | −inf … 0 dB |
-| – | **AUX RETURN** | the fifth stereo input: analog 11/12 or StemDeck's AUX, as [its display](#a3mix-displays) selects (REAPER's *Return* gain) | 0 dB at full travel |
+| – | **AUX RETURN** | the fifth stereo input: analog 11/12 or StemDeck's AUX, as [its display](#a3mix-displays) selects | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM, work in progress | |
 | 19 | **OUTPUT VU** | `main_sub`, `main_top1` … `main_top7`, one 32-row column each | |
 
@@ -52,16 +52,15 @@ One filter for all channels; a strip's **FX** key sends it through.
 
 ## The cue
 
-Each channel bus sends to `enc_phones` twice in REAPER: send 3 **pre-fader**
-(cue, open only while CUE is on) and send 4 **post-fader** (mix). **CUE/MIX**
-crossfades them.
+Each channel feeds the phones bus (`enc_phones`) twice in the engine: a
+**pre-fader** tap (cue, open only while CUE is on) and a **post-fader** tap
+(mix). **CUE/MIX** crossfades them.
 
 - A channel's cue is its **CUE** key (desk or A³ Motion), nothing else.
 - It is always the channel's own cue, analog or stem, with its filter and EQ:
   push another stem on and the cue follows.
 - **The return has its own cue** (CUE field on [its display](#a3mix-displays));
   on the mix side it is always heard.
-- **Analog phones** (REAPER in 9–10) always reach the phones via `dec_phones`.
 - StemDeck has no cue: cue the channel a stem is on, or the return for a stem
   on AUX.
 
@@ -172,7 +171,7 @@ foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
 *Bracket: STEM plays. ANALOG quiet. CUE filled: the return is cued.*
 
 The return plays **STEM** (StemDeck's AUX bus) or **ANALOG** (analog 11/12),
-never both; Core opens one in REAPER and shuts the other. Meters: **STEM**
+never both; Core opens one in the engine and shuts the other. Meters: **STEM**
 (louder side of the AUX bus; older StemDecks: the loudest stem on the return),
 **ANALOG** (`aux_L/R`), and the **CUE** field (filled while cued). Turn:
 STEM → ANALOG → CUE. Push:

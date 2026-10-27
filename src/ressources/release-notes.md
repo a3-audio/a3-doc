@@ -12,6 +12,22 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### 2026-10-27
+
+**The whole system**
+
+- **a3-engine moved into a3-core.** The C++ program (Core, audio engine, window) is built from the
+  `a3-core` repository, with a3-engine's history; the `a3-engine` repository is archived.
+- **One package.** `a3-core` carries the program and the deployment; the package `a3-engine` is
+  replaced by it (`Conflicts`/`Replaces`). The engine keeps its names as a role: `a3-engine.service`,
+  the JACK client `a3-engine`, `/usr/share/a3-engine/`, `~/.config/a3/engine/`.
+- **REAPER, the patchbay and qjackctl are removed.** The package ships no REAPER project, no
+  patchbay, no QjackCtl unit or settings, no `iem-plugin-suite-vst3` and no `user_install.sh`;
+  `a3-reaper`, `qjackctl` and `a3-user-install` are gone from the units. The engine makes its own JACK
+  links. An upgrade moves a machine's old units and the patchbay into
+  `~/.config/a3-replaced/` and never touches REAPER's own files.
+- **Open:** A³ Motion's energy view has no sender since REAPER went; its listener stays open.
+
 ### 2026-10-25
 
 **StemDeck (`stemdeck`)**

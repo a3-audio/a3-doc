@@ -420,11 +420,11 @@ busy. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
 ## Audio out
 
 A JACK client, `StemDeck`: ten outputs (`deck1_L` … `aux_R`) and the `rec_L/R`
-inputs. Ports and where they land in Core: {doc}`Patchbay <../ressources/patchbay>`.
+inputs. Ports and where they land in Core: {ref}`the engine's I/O map <audio-engine-io>`.
 `deck1` … `deck4` are the **buses**, not the decks; bus N is A³ channel N, aux
 is Core's Return.
 
-- **Nothing connects by itself.** On the Core the package's patchbay does;
+- **Nothing connects by itself.** On the Core the engine's I/O map does;
   elsewhere see [StemDeck on another machine](#stemdeck-with-motion-remote-machine).
 - It **never starts a JACK server**: it uses JACK, PipeWire's JACK, or ALSA
   (**Audio**). With fewer than ten outputs, buses are summed down.
@@ -432,7 +432,7 @@ is Core's Return.
   running graph would disturb the AES67 stream. Set the rate before starting, e.g.
   `pw-metadata -n settings 0 clock.force-rate 44100`.
 
-<!-- NOTE: audio I/O (ports, REAPER inputs, AES67 channels) is documented once, on the Patchbay page (src/ressources/patchbay.md). The REAPER template routes the network-stems track: pairs 1-2 .. 7-8 -> 1-input .. 4-input, 9-10 -> Return, 11-12 unused. -->
+<!-- NOTE: audio I/O (ports, AES67 channels) is documented once, in the audio engine page (src/user/audio-engine.md, the I/O map). -->
 
 (stemdeck-sync)=
 

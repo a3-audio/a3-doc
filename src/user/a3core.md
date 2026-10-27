@@ -3,13 +3,13 @@
 Where the sound is: it takes the analog inputs, computes the 3D/ambisonics
 field and sends it out, **with no interface of its own** — A³ Mixer, A³ Motion
 and anything speaking the same OSC control it. Linux, remote desktop over VNC.
-Source: [a3-core](https://github.com/a3-audio/a3-core) (the installation) and
-[a3-engine](https://github.com/a3-audio/a3-engine) (the program).
+Source: [a3-core](https://github.com/a3-audio/a3-core): the program and the
+installation around it, one repository, one package.
 
 ## One program: `a3-core`
 
 A³ Core is **one C++ program, `a3-core`** (`/usr/bin/a3-core`). It has no Python
-and no REAPER at runtime. The same binary plays several **roles**, each its own
+and no REAPER (REAPER and its patchbay are gone). The same binary plays several **roles**, each its own
 process:
 
 | Role | What it does | On the rig |
@@ -39,7 +39,9 @@ Nothing here controls audio:
 
 ## Audio in and out
 
-All of it: {doc}`Patchbay <../ressources/patchbay>`.
+The engine connects its ports to the sound card itself; the shipped map and how
+to change it: {ref}`The I/O map <audio-engine-io>`. Between machines, audio goes
+over AES67: {ref}`The audio network <ports-audio-network>`.
 
 ## Clock sources
 
@@ -58,13 +60,13 @@ The portrait touch screen (768 × 1024) shows one workspace at a time:
 | **MOTION** (1) | [A³ Motion](a3motion.md)'s touch screen |
 | **STEMDECK** (2) | [StemDeck](stemdeck.md), always running |
 | **ENGINE** (3) | the `a3-core` window (i3 sends it here by its window class `a3-core`): the engine's pages and Core's OSC monitor |
-| **QJACKCTL** (4) | the JACK patching |
+| **4** | nothing assigned; free for a tool |
 | **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
 
 - **Between the touch apps**: the key at the far right of the top bar
   (STEMDECK in A³ Motion, MOTION in StemDeck), in the same spot in both. **▾**
   lists workspaces that have a window.
-- **On ENGINE, QJACKCTL, SCARLETT**: tap MOTION or STEMDECK in the bar at the
+- **On ENGINE, 4, SCARLETT**: tap MOTION or STEMDECK in the bar at the
   top (hidden on the touch apps, which fill the screen).
 
 (core-window)=

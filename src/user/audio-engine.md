@@ -5,11 +5,14 @@
 The engine is the part of the `a3-core` program that does A³ Core's audio:
 channel strips, the 3D encoding, the effects, main, booth, phones and rec. It
 is `a3-core --role engine`, a process of its own, run by `a3-engine.service`.
-It replaces REAPER as the thing that makes sound; the IEM code it uses
-(encoder, decoders, DualDelay) is compiled into it from source. Core still
+It is the thing that makes sound (REAPER did before it, and is gone); the IEM
+code it uses (encoder, decoders, DualDelay) is compiled into it from source. Core still
 routes the OSC: the engine receives Core's words on `engine.osc` and says
 `/engine/hello` to Core on `core.osc` ({doc}`ports <../ressources/ports>`).
-Source: [a3-engine](https://github.com/a3-audio/a3-engine).
+Source: [a3-core](https://github.com/a3-audio/a3-core), the same repository and
+the same package as the Core (its `PROGRAM.md`, {doc}`development page <../development/core>`). The
+repository `a3-engine` it grew in is archived; the name lives on as the engine
+**role**, its unit `a3-engine.service` and its JACK client `a3-engine`.
 
 ## The engine always runs
 
@@ -18,11 +21,13 @@ There is **no switch and no fallback**. `a3-engine.service` has no
 If it cannot open its sound device it restarts five times in a minute and then
 stops, visibly (`systemctl --user status a3-engine`), rather than looping.
 
-**REAPER is frozen and never started.** Its files stay on the machine, but
-`a3-reaper.service` and the old two-deck `stemdeck.service` are kept off by
-drop-ins from the a3-core package, which ask a small helper,
-`a3-engine-runs --reaper`; it always answers "no". You never run the helper
-yourself.
+**REAPER is gone**, and so are its patchbay and QjackCtl: the package ships
+none of them. On a machine that ran REAPER the upgrade moves the retired units
+and the patchbay aside (named in the install output); REAPER's own files in
+`~/.config/REAPER` and `~/.local/opt/REAPER` are never touched, deleting them is
+yours. The old two-deck `stemdeck.service` stays off by a drop-in of the
+package (`stemdeck.service.d/two-deck-off.conf`); the decks are the
+`stemdeck@A` instances.
 
 ```{note}
 After installing a new engine, restart it: `systemctl --user restart a3-engine`.
@@ -54,15 +59,35 @@ every change, and the old setting is opened again if the new one does not open.
 
 The FILTER page is the one exception: it acts at once and needs no Save.
 
-### I/O replaces the patchbay
+(audio-engine-io)=
+
+### The I/O map: the engine does the patching
 
 The **I/O map** decides what is connected to what; the engine
-makes those JACK links itself and removes only links it made. The QjackCtl
-patchbay ({doc}`Patchbay <../ressources/patchbay>`) is built so that it cannot
-fight the engine (no socket is exclusive, none names the engine). Its
-`beat-analyzer:vu_*` sockets are dead: the analyzer has no meter ports any
-more, the engine measures the meters itself. The page shows, per engine port, its JACK peers (editable)
-and the live peers the map does not name ("foreign": shown, never edited).
+makes those JACK links itself and removes only links it made. There is no
+patchbay and no QjackCtl on the Core. The beat-analyzer has no meter ports any
+more, the engine measures the meters itself. The page shows, per engine port,
+its JACK peers (editable) and the live peers the map does not name ("foreign":
+shown, never edited).
+
+The shipped map (`/usr/share/a3-engine/engine.json`, `io.jack`). The audio
+interface is the JACK client `system` (PipeWire, 44.1 kHz, quantum 128):
+
+| Engine port | Connected to |
+| :--- | :--- |
+| `analog_1` … `analog_8` | `system:capture_1` … `capture_8`: the A³ Mixer's four channels, stereo |
+| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: the aux return's analog input |
+| `main_sub`, `main_top_1` … `main_top_4` | `system:playback_1` … `playback_5` |
+| `phones_L`, `phones_R` | `system:playback_9`, `playback_10` |
+| `booth_sub`, `booth_top_1` … `booth_top_4` | `system:playback_11` … `playback_15` |
+| `rec_L` | `StemDeck:rec_L` and `beat-analyzer:bpm_1` (the beat-analyzer's tempo input in clock mode EXT, the first channel of the pair only) |
+| `rec_R` | `StemDeck:rec_R` |
+| `deckA_1` … `deckA_16`, `deckA_cue_L/R`, `deckA_aux_L/R` | `StemDeck-A:bformat_1` … `bformat_16`, `cue_L/R`, `aux_L/R` |
+| `deckB_…` | the same for `StemDeck-B` |
+
+A StemDeck on another machine reaches the Core over AES67; its ports appear in
+the graph as a client named after the stream ({ref}`network audio
+<ports-audio-network>`).
 
 ## Calibration and the gate
 
