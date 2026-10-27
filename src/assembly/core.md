@@ -1,16 +1,16 @@
 # A³ Core Assembly
 
-A³ Core is not a particular computer: it is an install — REAPER, the beat-analyzer
-and an OSC routing script — on a machine with enough audio hardware. It has run
+A³ Core is not a particular computer: it is an install — the `a3-core` program (OSC routing, audio engine,
+window), the beat-analyzer and PipeWire — on a machine with enough audio hardware. It has run
 on a tower, a Mac and a NUC.
 
 ## What it runs
 
 | Layer | What it is |
 | :--- | :--- |
-| Audio backend | REAPER |
-| VU metering | the beat-analyzer, audio to OSC |
-| OSC I/O | a Python script |
+| Audio backend | the audio engine of the `a3-core` program, on PipeWire |
+| Beat clock | the beat-analyzer, audio to OSC |
+| VU metering, OSC I/O | the `a3-core` program: the engine measures, the core role routes |
 | OS | any Linux (tested on Debian), or macOS |
 | Audio hardware | tested with Focusrite, RME, Digigram, Motu |
 

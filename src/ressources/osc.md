@@ -18,7 +18,7 @@ Core **joins** them key by key; `network.json` wins, missing hosts come from
 the package. A `network.json` that does not parse or lacks `hosts` or `network`
 is **refused** (reason in the journal) and the package's values are used.
 
-Core serves the result at `http://<core>:9080/api/truth` (`core.web`). Header
+Core serves the result at `http://<core>:9080/api/truth` (`core.web`, {ref}`HTTP API <osc-http>`). Header
 `X-A3-Truth` is its **fingerprint**: sha256 of the canonical JSON (sorted keys,
 no spaces, UTF-8).
 
@@ -30,7 +30,7 @@ no spaces, UTF-8).
 | `routes` | who sends to which listener |
 | `addresses` | pattern, types, sender, hearer, meaning |
 | `vu_meters` | the forty meters by name, in `/vu/1..40` order |
-| `external` | REAPER's and the IEM plug-ins' words |
+| `external` | the IEM plug-ins' words |
 
 The tables here and on the ports page are rendered from it.
 
@@ -38,11 +38,11 @@ The tables here and on the ports page are rendered from it.
 
 | Device | How it gets the truth |
 | :--- | :--- |
-| A³ Core | the package's contract joined with `network.json` (`a3_osc.py`); serves it |
+| A³ Core | the package's contract joined with `network.json`, read and joined by the program; serves it |
 | A³ Motion | fetches it from Core, shared cache `~/.cache/a3/a3-osc.json`; see [Following Core](#osc-follow). No addresses in its `config.json` or menu |
 | A³ Mixer | fetches it from Core on `/core/here`, cache as above, restarts on a new fingerprint; waits without one; see {ref}`the desk <mic-truth>` |
 | StemDeck | like Motion; reads `prolink.*` and `stemdeck.bus`, and `stemdeck.ahead` if the truth has it (its preview of the music). Without: `PIO: no a3-osc.json` |
-| beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-osc-render user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
+| beat-analyzer | the `a3-osc` block in `build/.env`, written by `a3-core --render-truth user`; see {ref}`Beat Analyzer <beat-analyzer-config>` |
 | AES67 sender | `~/.config/pipewire/pipewire-aes67.conf`, rendered from `network.audio_port`; no file without a second socket |
 | installer | offers the package's `network` and creates `network.json` from it once |
 
@@ -131,7 +131,7 @@ Core acts on it, then relays or announces it.
 | `/channel/{ch}/elevation` | f | motion | core (Core passes it on to prodj) | the channel's height, degrees; live only to the pro-DJ apps followed; a recall replays the last one to everyone, as before |
 | `/channel/{ch}/stem/turn` | i | mixer, desk, prodj | core | the channel's encoder turned by this many clicks (signed): moves its selector's cursor over the channel's three positions in a ring -- on channel N: deck 1's stem N, deck 2's stem N, then A, the analog input; left from deck 1's stem N is A; switches nothing |
 | `/channel/{ch}/stem` | i | core | mixer, desk, motion | what the channel plays: while its source is STEM, the stems on its bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input, sent whenever its source is ANALOG, whatever is on its bus; on channel N only bit N-1 (deck 1's stem N) or bit N+3 (deck 2's stem N) |
-| `/channel/{ch}/stem/push` | i | mixer, desk, prodj | core | the channel's encoder pushed: on A, the channel's source becomes ANALOG -- REAPER opens its analog send and shuts its stems send, StemDeck is not asked and the stem on its bus stays there, unheard; on a stem (deck 1's or deck 2's stem N on channel N), the source becomes STEM and the stem the channel's only input -- the other deck's stem N goes to the return (AUX); on the stem already on its bus nothing moves; without StemDeck a stem push switches nothing, A still does |
+| `/channel/{ch}/stem/push` | i | mixer, desk, prodj | core | the channel's encoder pushed: on A, the channel's source becomes ANALOG -- the engine crossfades the channel from its deck input to its analog input (10 ms), StemDeck is not asked and the stem on its bus stays there, unheard; on a stem (deck 1's or deck 2's stem N on channel N), the source becomes STEM and the stem the channel's only input -- the other deck's stem N goes to the return (AUX); on the stem already on its bus nothing moves; without StemDeck a stem push switches nothing, A still does |
 | `/channel/{ch}/stem/cursor` | i | core | mixer, desk, motion | the channel's selector cursor: on channel N one of N-1 (deck 1's stem N), N+3 (deck 2's stem N) and 8 = A, the analog input; a stored cursor outside these comes back as 8 |
 | `/filter/frequency` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the master filter's resonance (was /fx/resonance) |
@@ -172,7 +172,7 @@ Core acts on it, then relays or announces it.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, desk, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, desk, prodj, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | beat-analyzer, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n. REAPER out per range: 1-20 = out n + 30, 21-36 = out n - 10, 51-66 = out n; 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (REAPER track "analog" = system:capture_1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the return's analog input, L and R (REAPER track "analog" channels 11-12 = system:capture_11-12, shown under the return's ANALOG whatever the return plays); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the analyzer's from Core (core.vu-relay), unchanged |
+| `/vu/{n}` | ff | engine, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n, measured by the engine at its meter points and sent to Core, which forwards them. 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (the engine's analog inputs 1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the return's analog input, L and R (the engine's analog inputs 11-12, its returnAnalogPair, shown under the return's ANALOG whatever the return plays); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the engine's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
 ### Renamed addresses
@@ -204,8 +204,12 @@ See {ref}`the desk's input selectors <a3mix-displays>`.
 
 ## The meters
 
-The beat-analyzer sends `/vu/n` with peak and RMS (linear, 0–1); `/vu/n` is
-REAPER out 30 + *n* ({ref}`REAPER channel map <core-vu-map>`). **Devices find a
+The **audio engine** measures each `/vu/n` (peak and RMS, linear, 0–1) at its
+meter points, sends them 25 times a second to Core's `core.vu-relay` on
+loopback, and **Core forwards them unchanged** to every route that carries `vu`
+and to the followed remote devices. The beat-analyzer sends no `/vu`; StemDeck
+sends its own 41–50. Where each number is measured:
+{ref}`Where the meters come from <core-meters>`. **Devices find a
 meter by name** in `vu_meters`, not by number:
 
 | Device | Shows |
@@ -315,13 +319,44 @@ values below. Tune them on the rig in `network.json`
 
 ## A³ Core
 
-Three listeners ({ref}`ports <ports-by-listener>`); the port decides the meaning:
+Three listeners ({ref}`ports <ports-by-listener>`); the port decides the meaning.
+The engine has its own, `engine.osc`, and the window reaches it on
+`engine.control` (loopback):
 
 | Listener | Receives |
 | :--- | :--- |
 | `core.osc` | commands from Mixer, Motion, StemDeck, beat-analyzer |
-| `core.reaper-feedback` | REAPER's reports. Separate, so Core never takes a report for a command and answers it: a feedback loop |
-| `core.web` | HTTP: the {doc}`window <../development/core>` and `/api/truth` |
+| `core.vu-relay` | the engine's and StemDeck's `/vu` bundles (loopback), forwarded unchanged |
+| `core.web` | HTTP: the {ref}`API <osc-http>` the window and `curl` use, and `/api/truth` |
+
+(osc-http)=
+
+### Core's HTTP API
+
+`core.web` (9080) is plain HTTP and JSON, for the `a3-core` window, for
+devices fetching the truth, and for `curl` on a Core without a screen. There is
+**no web page**: `GET /` answers 404 with a short text that names `/api/…` and
+the `a3-core` window. Refusals are plain English sentences.
+
+| Request | Answers |
+| :--- | :--- |
+| `GET /api/status` | what Core says about itself: peers, state, problems |
+| `GET /api/rig` | the rig state: the engine, its gate, who is there |
+| `GET /api/devices` | the devices and the truth each speaks, with Core's fingerprint |
+| `GET /api/traffic` | every address seen: count, rate, last value, peer |
+| `GET /api/unknown` | the addresses Core did not understand |
+| `GET /api/register` | the catalogue of addresses that can exist, against the traffic |
+| `GET /api/truth` | the joined truth; `X-A3-Truth` is its fingerprint |
+| `GET /api/stream` | the live values, streamed |
+| `POST /api/send` | one OSC message from the bench: JSON `{"to": …, "address": "/…", "value": …}` with `to` one of `self`, `mixer`, `motion` |
+
+```sh
+curl http://<core>:9080/api/rig
+curl -d '{"to":"self","address":"/master/volume","value":0.5}' http://<core>:9080/api/send
+```
+
+There is no login: bind Core to the machine (`--web-bind`) to keep it local.
+The window asks Core only while its OSC MONITOR switch is on.
 
 (osc-everyone)=
 
@@ -336,22 +371,21 @@ recipient list (a missing recipient fails silently over UDP).
    A³ Mixer                                   A³ Mixer
    A³ Motion            ──▶   A³ Core   ──▶   A³ Motion
    beat-analyzer             core.osc         light    (--subscriber)
-   REAPER                    core.reaper-     video    (--subscriber)
-                             feedback
+                                              video    (--subscriber)
 
    One message in, the same message out to every subscriber:
        /channel/*    /master/*    /filter/*    /state/recall
 
    And, each in its own language, to exactly one:
-       /track/…            REAPER           reaper.osc
-       /MultiEncoder/…     IEM encoders     iem.multiencoder-1..3
-       /DualDelay/…        IEM DualDelay    dualdelay.osc
+       /engine/…           the engine       engine.osc
 ```
 
 New subscriber: {ref}`Adding a department <core-subscriber>`.
 
-- The engine is not a subscriber: REAPER, the MultiEncoders and the DualDelay
-  each get their own language from one handler.
+- The engine is not a subscriber: it has its own words on `engine.osc` (the
+  channel, master and send words in its own spelling, and `/engine/open`).
+  REAPER and the IEM plug-ins' own OSC receivers are gone: the IEM code is
+  compiled into the engine.
 - **Lamps are broadcast too** (`/channel/{ch}/cue/led`,
   `/channel/{ch}/filter/led`, `/filter/led`), beside the flags: a lamp is a
   light, a flag a setting.
@@ -361,18 +395,18 @@ New subscriber: {ref}`Adding a department <core-subscriber>`.
 
 - **Values are 0–1**, except `azimuth` −180…180 and `elevation` −90…90,
   clamped; the clamped value is replayed.
-- **gain, EQ, volume, `aux-send`** return to all devices when REAPER reports
-  them ([The way back](#osc-way-back)).
+- **gain, EQ, volume, `aux-send`** go out to all devices when Core passes them
+  on, never from the engine: nothing is read back ([The way back](#osc-way-back)).
 - **`cue`, `filter`** take [two spellings](#osc-two-spellings); Core sends the
   state back as a number.
 - **`3d`**: see [/channel/{ch}/3d](#osc-3d).
 - **`/master/phones-mix`** goes out unbent, as a track volume.
-- **`/master/aux-return`** drives PurestGain on track 28 "Return"; full travel
+- **`/master/aux-return`** is the return's level in the engine; full travel
   is 0 dB.
 - **`/filter/mode`**: `high_pass`/`low_pass` or a number (1 = high pass); sent
   as a number, the word goes to the desk on `/filter/led`.
 - **`/beat`**: only the tempo is used, for the [delay](#osc-beat-delay).
-- **`/vu/{n}`** comes from the beat-analyzer.
+- **`/vu/{n}`** comes from the engine (StemDeck's 41–50), through Core.
 - `/channel/{ch}/reverb`, `/width`, `/order`: no handler; counted as
   unrecognised.
 
@@ -394,44 +428,30 @@ each to the device it belongs to:
 
 1. **Lamps**: Core's own flags, from its state file.
 2. **Position and 3d** per channel, held by Core because nobody else can be
-   asked (positions go straight to the IEM plug-ins; `3d` can't be read back
-   below −40 dB).
-3. **Continuous values**: what REAPER last reported.
+   asked (the engine reports nothing back).
+3. **Continuous values**: what Core last passed on, kept in its evening file.
 
-**A cold Core asks REAPER** for everything (action 41743, also a key in the
-window) and replays once the report is in. A value never seen is **left out**,
-not sent as zero: zero degrees is a real position.
+A cold Core, with no evening yet, answers short. A value never seen is **left
+out**, not sent as zero: zero degrees is a real position. The engine is not
+asked: when it says `/engine/hello` with a new boot id, Core replays the evening
+into it and then opens the outputs.
 
 (osc-way-back)=
 
-### The way back: what REAPER reports
+### The way back: there is none
 
-Core reads REAPER's feedback on `core.reaper-feedback`, bends it back through
-its curve and broadcasts it:
-
-| REAPER reports | comes back as |
-| :--- | :--- |
-| `/track/{12,16,20,24}/fx/1/fxparam/1/value` | `/channel/{ch}/gain` |
-| `/track/{12,16,20,24}/fx/2/fxparam/{1,2,3}/value` | `/channel/{ch}/eq/{high,mid,low}` |
-| `/track/{9,13,17,21}/fx/1/fxparam/*` | `/channel/{ch}/volume` |
-| `/track/{9,13,17,21}/send/3/volume` | `/channel/{ch}/aux-send` |
-| `/track/{12,16,20,24}/fx/3/fxparam/7/value` | `/filter/frequency` |
-| `/track/{12,16,20,24}/fx/3/fxparam/6/value` | `/filter/resonance` |
-| `/track/1/fx/1/fxparam/*` | `/master/volume` |
-| `/track/2/fx/1/fxparam/*` | `/master/booth` |
-| `/track/3/fx/2/fxparam/1/value` | `/master/phones-volume` |
-| `/track/8/volume` | `/master/phones-mix` |
-| `/track/28/fx/1/fxparam/1/value` | `/master/aux-return` |
-
-The filter is reported per track and answered globally; duplicates are dropped.
+REAPER used to report its track values, and Core bent them back through their
+curves and broadcast them. REAPER is gone, and the engine sends Core nothing but
+`/engine/hello` and `/vu`. What the devices see of a value is what Core passed
+on, so Core's evening file is the only record of it.
 
 ```{warning}
-**Relay only what no action script can drive.** `3d`, `freq` and `Q` carry the
-accent envelope in REAPER; writing that back as the base would ratchet them up.
-Gain, EQ, volume and `aux-send` are safe.
+**Relay back only what no action script can drive.** `3d`, `freq` and `Q` carry
+an accent envelope; writing that back as the base would ratchet them up. If a
+return path is built again, gain, EQ, volume and `aux-send` are the safe ones.
 ```
 
-The desk ignores these values: its pots are analog.
+The desk ignores returned values anyway: its pots are analog.
 
 (osc-beat-delay)=
 
@@ -440,30 +460,28 @@ The desk ignores these values: its pots are analog.
 ```
 beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)
                                        │
-                                       └──/DualDelay/delayBPML,R──▶  DualDelay (dualdelay.osc)
+                                       └──delay.bpm──▶  the engine's DualDelay (engine.osc)
 ```
 
-Core passes the tempo to the IEM DualDelay on the FX bus only when it has held
+Core passes the tempo to the DualDelay on the FX bus only when it has held
 still **a whole bar** and differs by **≥ 0.1 BPM** (a changing delay shifts
-pitch). Both lines get the same tempo; their multipliers stay in the plug-in.
-The plug-in's OSC receiver must be opened and `Sync` off; see
-{ref}`REAPER <core-reaper>`. REAPER's project tempo can't be used: the plug-in
-reads it only on transport start.
+pitch). Both lines get the same tempo; their multipliers stay in the engine.
+The delay is IEM's, compiled into the engine, so there is no plug-in receiver
+to open and no `Sync` switch.
 
 ### The aux send
 
 ```
-/channel/{ch}/aux-send  ──▶  /track/{1,5,9,13}/send/1/volume   (normalised 0..1)
+/channel/{ch}/aux-send  ──▶  Core  ──aux-send──▶  the engine (engine.osc)   (0..1)
 ```
 
-Send **1** reaches `enc_fx`. The number is the send's position on the sending
-track (the `enc_phones` sends are 3 and 4); it lives in Core's `layout.json`.
-3D is A³ Motion's alone (`/channel/{ch}/3d`).
+The send reaches the FX bus (`enc_fx`); the phones bus (`enc_phones`) has its own
+cue and mix taps. 3D is A³ Motion's alone (`/channel/{ch}/3d`).
 
 ## A³ Motion
 
 Three listeners: `motion.osc` (Core's relays, `/beat`), `motion.vu` (meters),
-`motion.energy` (IEM EnergyVisualizer), so high-rate streams don't share the
+`motion.energy` (the IEM EnergyVisualizer's frames; nothing sends them since REAPER went, see [below](#osc-energy)), so high-rate streams don't share the
 clock's socket. One handler serves all three.
 
 - **Position** (`azimuth`, `elevation`) is sent while a blob moves.
@@ -488,19 +506,22 @@ only in the file: the analyzer sends one meter per JACK input in port order.
 
 ### /channel/{ch}/3d
 
-Each channel is split in REAPER: `n-multi-enc` carries the steady signal;
-`n-stereo-enc` carries two Airwindows Isolator3 — FX 2 isolates the moving
-band, FX 3 removes the same band from a phase-inverted copy of the steady
-signal. `filter/frequency` and `filter/q` go to both.
-
-`3d` sets the gain on `n-stereo-enc` (FX 1, parameters 1 and 15) to
-20·log10(3d) dB, floored at −40 dB for 3d ≤ 0.01; `n-multi-enc` stays at 0 dB.
-Band and rest always sum to the input: **3d moves sound without changing the
+Each analog channel is split in the engine: the steady part feeds the shared
+bed, the moving part the channel's own encoder source. `filter/frequency` and
+`filter/q` set the band that is split off. `3d` is how much of it moves; band
+and rest always sum to the input, so **3d moves sound without changing the
 level**. It is continuous.
 
 (osc-energy)=
 
 ### /EnergyVisualizer/RMS
+
+```{note}
+**Nothing sends this now.** The frames came from the IEM EnergyVisualizer plug-in
+inside REAPER. The engine does not send them, so Motion's listener stays open
+and stays silent; this is an open issue, not a setting. What follows is the
+format Motion expects.
+```
 
 From the [IEM EnergyVisualizer](https://plugins.iem.at/docs/energyvisualizergrid/)
 ≥ 1.0.0, with "OSC send" on: **426 float32** per message, one per point of its
@@ -526,9 +547,8 @@ Pro DJ Link ports (`prolink.*`, not OSC); sends to every target in its
 - **`/beat`** (beat 1–4, bar, bpm): sent in every mode to every target (mode 0:
   not to `motion`). Received and relayed only in mode 0; beats outside 1–4
   dropped. Mode 2: bar always 0.
-- **`/vu/{n}`**: one per JACK input `vu_analog1_L` … `vu_free70` (REAPER out
-  31–70), four bundles of ten, 25 per second, to `OSC_VU_*` if set, else
-  `OSC_HOST_*`.
+- **No `/vu/{n}`**: the beat-analyzer no longer measures or sends meters,
+  whatever `ENABLE_VU` says; the engine does ({ref}`meters <osc-vu-meters>`).
 - **`/clockmode`**: 0 a3motion, 1 intern, 2 pioneer; clamped; not stored
   (starts in 1).
 - **`/tap`**: mode 1 only; always sets the beat to 1.
@@ -537,9 +557,8 @@ Modes: {ref}`Beat Analyzer <beat-analyzer-modes>`.
 
 ## IP and Port
 
-All listeners: [ports page](ports.md). Two ports are set **in a plug-in** and
-must match the file by hand: the IEM DualDelay's (`dualdelay.osc`) and the
-MultiEncoders' (`iem.multiencoder-1..3`, in the REAPER project).
+All listeners: [ports page](ports.md). Every port comes from `a3-osc.json`; none
+is set inside a plug-in any more.
 
 ### Known inconsistencies
 

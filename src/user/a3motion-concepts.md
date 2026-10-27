@@ -61,7 +61,7 @@ mode (in its own colour) says how much a pass replaces — as in DAW automation:
 pass. A take is the **last finished pass**; lanes use the same mode. While you
 record, the old path stays drawn faintly underneath.
 
-**Coming from REAPER**: Touch is REAPER's Touch, without a glide back on
+**Coming from the DAW REAPER** (not part of the rig any more): Touch is REAPER's Touch, without a glide back on
 release. Latch is REAPER's Latch with *reset latch on loop* on. Write differs:
 REAPER wipes every pass; Motion wipes only the first, so a forgotten take is
 never erased down to one spot.

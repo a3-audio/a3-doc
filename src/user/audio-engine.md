@@ -2,38 +2,43 @@
 
 # The audio engine
 
-`a3-engine` is the program that does A³ Core's audio: channel strips, the 3D
-encoding, the effects, main, booth, phones and rec. It replaces REAPER as the thing that makes sound; the IEM code it uses
-(encoder, decoders, DualDelay) is compiled into it from source. Core still
+The engine is the part of the `a3-core` program that does A³ Core's audio:
+channel strips, the 3D encoding, the effects, main, booth, phones and rec. It
+is `a3-core --role engine`, a process of its own, run by `a3-engine.service`.
+It is the thing that makes sound (REAPER did before it, and is gone); the IEM
+code it uses (encoder, decoders, DualDelay) is compiled into it from source. Core still
 routes the OSC: the engine receives Core's words on `engine.osc` and says
 `/engine/hello` to Core on `core.osc` ({doc}`ports <../ressources/ports>`).
-Source: [a3-engine](https://github.com/a3-audio/a3-engine).
+Source: [a3-core](https://github.com/a3-audio/a3-core), the same repository and
+the same package as the Core (its `PROGRAM.md`, {doc}`development page <../development/core>`). The
+repository `a3-engine` it grew in is archived; the name lives on as the engine
+**role**, its unit `a3-engine.service` and its JACK client `a3-engine`.
 
-## Engine or REAPER
+## The engine always runs
 
-There is **no switch to flip**. At boot the system asks one question:
+There is **no switch and no fallback**. `a3-engine.service` has no
+`Conflicts=` and no start condition: when `a3-main` starts, the engine starts.
+If it cannot open its sound device it restarts five times in a minute and then
+stops, visibly (`systemctl --user status a3-engine`), rather than looping.
 
-- **Is `a3-engine` installed, and does `a3-engine --check-config` pass?** Then
-  the engine runs and REAPER does not start.
-- **Otherwise** REAPER starts, set up exactly as before. Core's status says
-  why (not installed, or what the config check said).
-
-The question is asked by a small internal helper, `a3-engine-runs`, which both
-units call; you never run it yourself. The units are described in
-{ref}`A³ Core services <core-engine-units>`.
-
-REAPER is **frozen**: it keeps working as it is, but it gets no new features.
-Everything below is about the engine.
+**REAPER is gone**, and so are its patchbay and QjackCtl: the package ships
+none of them. On a machine that ran REAPER the upgrade moves the retired units
+and the patchbay aside (named in the install output); REAPER's own files in
+`~/.config/REAPER` and `~/.local/opt/REAPER` are never touched, deleting them is
+yours. The old two-deck `stemdeck.service` stays off by a drop-in of the
+package (`stemdeck.service.d/two-deck-off.conf`); the decks are the
+`stemdeck@A` instances.
 
 ```{note}
-The engine is decided at start. After installing it, or after fixing a broken
-config, run `systemctl --user restart a3-main`.
+After installing a new engine, restart it: `systemctl --user restart a3-engine`.
 ```
 
 ## The window
 
-The engine shows a window (hidden when it runs as a service and you close
-it). One page per job, a **Save** bar below:
+The window is the `a3-core` program run without a role (on the rig, on the
+screen's ENGINE workspace). It reaches the engine over its local control port
+(`engine.control`), so closing it never stops the sound. One page per job, a
+**Save** bar below:
 
 | Page | What it is for |
 | :--- | :--- |
@@ -54,14 +59,35 @@ every change, and the old setting is opened again if the new one does not open.
 
 The FILTER page is the one exception: it acts at once and needs no Save.
 
-### I/O replaces the patchbay
+(audio-engine-io)=
 
-In engine mode the **I/O map** decides what is connected to what; the engine
-makes those JACK links itself and removes only links it made. The QjackCtl
-patchbay ({doc}`Patchbay <../ressources/patchbay>`) stays for REAPER mode and
-is built so that it cannot fight the engine (no socket is exclusive, none
-names the engine). The page shows, per engine port, its JACK peers (editable)
-and the live peers the map does not name ("foreign": shown, never edited).
+### The I/O map: the engine does the patching
+
+The **I/O map** decides what is connected to what; the engine
+makes those JACK links itself and removes only links it made. There is no
+patchbay and no QjackCtl on the Core. The beat-analyzer has no meter ports any
+more, the engine measures the meters itself. The page shows, per engine port,
+its JACK peers (editable) and the live peers the map does not name ("foreign":
+shown, never edited).
+
+The shipped map (`/usr/share/a3-engine/engine.json`, `io.jack`). The audio
+interface is the JACK client `system` (PipeWire, 44.1 kHz, quantum 128):
+
+| Engine port | Connected to |
+| :--- | :--- |
+| `analog_1` … `analog_8` | `system:capture_1` … `capture_8`: the A³ Mixer's four channels, stereo |
+| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: the aux return's analog input |
+| `main_sub`, `main_top_1` … `main_top_4` | `system:playback_1` … `playback_5` |
+| `phones_L`, `phones_R` | `system:playback_9`, `playback_10` |
+| `booth_sub`, `booth_top_1` … `booth_top_4` | `system:playback_11` … `playback_15` |
+| `rec_L` | `StemDeck:rec_L` and `beat-analyzer:bpm_1` (the beat-analyzer's tempo input in clock mode EXT, the first channel of the pair only) |
+| `rec_R` | `StemDeck:rec_R` |
+| `deckA_1` … `deckA_16`, `deckA_cue_L/R`, `deckA_aux_L/R` | `StemDeck-A:bformat_1` … `bformat_16`, `cue_L/R`, `aux_L/R` |
+| `deckB_…` | the same for `StemDeck-B` |
+
+A StemDeck on another machine reaches the Core over AES67; its ports appear in
+the graph as a client named after the stream ({ref}`network audio
+<ports-audio-network>`).
 
 ## Calibration and the gate
 
@@ -102,27 +128,36 @@ StemDeck instances, started by the installer, not by `a3-engine`.
   CUE↔MIX knob alone, whether or not the deck is on a channel, so you can
   pre-listen before you bring a deck in.
 - The return can be the analog return pair or a deck's AUX pair.
-- **Two decks need engine mode.** REAPER mode keeps the old two-deck StemDeck
-  as it was.
+- **The decks are StemDeck's B-format instances** (`stemdeck@A`, and one per
+  further deck); the old two-deck StemDeck unit is kept off.
 
 ## Starting it by hand
 
+On the rig the units start everything. By hand, the same program plays every
+role:
+
 ```sh
-a3-engine [--config FILE] [--spatial DIR] [--truth FILE]
-          [--no-connect] [--no-window] [--service] [--timing] [--check-config]
+a3-core                       # the window (starts what is missing on a laptop)
+a3-core --headless            # Core and the engine as children, no window
+a3-core --role core           # just Core
+a3-core --role engine [--config FILE] [--spatial DIR] [--truth FILE]
+                      [--no-connect] [--timing] [--check-config]
 ```
 
-| Flag | What it does |
+| Flag (engine role) | What it does |
 | :--- | :--- |
-| `--check-config` | prints `ok` or `<file>: <reason>`, exit 0 or 1, opens nothing; this is what the boot question uses |
+| `--check-config` | prints `ok` or `<file>: <reason>`, exit 0 or 1, opens nothing |
 | `--config FILE` | else `~/.config/a3/engine/engine.json`, else the installed default. Save writes to the file the app started with |
 | `--spatial DIR` | the speaker layouts |
 | `--truth FILE` | the OSC truth (default `/usr/share/a3/a3-osc.json`) |
-| `--no-window` | no window, for a unit without a screen |
-| `--service` | closing the window only hides it |
 | `--no-connect` | the engine makes no JACK link; see below |
 | `--timing` | prints the backend's load and xruns at exit |
 
-**`--no-connect`** is for a hand test next to REAPER only. The engine refuses
-to connect at all while a JACK client named REAPER exists. Never run the
-engine and REAPER on the rig at the same time.
+Each role takes only its own flags; a flag of another role, an unknown one or a
+missing value prints the usage and exits with 2. `a3-core --truth host NAME`
+and `a3-core --truth port PROGRAM ROLE` print one fact from the OSC truth for a
+script; `a3-core --render-truth user|network-file|network` is what the installer
+uses to write the files programs read the truth from.
+
+**`--no-connect`** is for a hand test only, on a machine whose JACK graph you
+share with something else. Never start a second engine next to the rig's.

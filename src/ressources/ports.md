@@ -47,13 +47,13 @@ Audio between machines runs on the second socket, apart from OSC:
 | Clock | PTP: `ptp4l` on the second socket, the Core as master unless a better clock is on the network |
 | Core sends | **12 channels**, stream `AES67 <hostname> out`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.150.243`, port 5004) |
 | Announcement | SAP on `239.255.255.255`, port 9875; receivers find the stream by its name |
-| Who drives the stream | the audio interface, like REAPER: the samples leave unconverted and REAPER is never pulled onto the PTP clock |
+| Who drives the stream | the audio interface: the samples leave unconverted and the engine is never pulled onto the PTP clock |
 | Other machines | a StemDeck on its own machine sends its buses as a stream of its own and receives the Core's ({ref}`setup <stemdeck-with-motion-remote-machine>`) |
 
 PTP and the AES67 sender start only when a second socket is configured
 (`audio-port`); without one the Core has neither and uses one network. The
 streams are audio, not OSC, so they are not in the port tables below. Unit:
-{ref}`a3-aes67 <core-aes67>`; ports in the graph: {doc}`patchbay`.
+{ref}`a3-aes67 <core-aes67>`; the engine's JACK links: {ref}`I/O map <audio-engine-io>`.
 
 (ports-by-listener)=
 
@@ -68,23 +68,18 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | Program | Role | Host | Port | Carries |
 | --- | --- | --- | --- | --- |
 | core | osc | any (0.0.0.0) | 9000 | every controller's messages, and /beat from the analyzer |
-| core | reaper-feedback | local (127.0.0.1) | 9002 | REAPER's own OSC feedback |
-| core | vu-relay | local (127.0.0.1) | 9003 | the analyzer's and StemDeck's /vu bundles, forwarded unchanged to the remote Motion followed and to every desk followed (the analyzer needs OSC_VU_core=127.0.0.1:9003; Core renders it into the analyzer's conf.d, 50-a3-osc.env) |
+| core | vu-relay | local (127.0.0.1) | 9003 | the engine's and StemDeck's /vu bundles, forwarded unchanged to Motion, the mixer, radla, the remote Motion followed and every desk followed |
 | core | web | any (0.0.0.0) | 9080 | the traffic window (HTTP, not OSC); every interface, decided 2026-09-30 |
 | motion | osc | any (0.0.0.0) | 7771 | Core's relays (StemDeck's preview among them), /beat |
-| motion | vu | any (0.0.0.0) | 7772 | the analyzer's /vu bundles |
+| motion | vu | any (0.0.0.0) | 7772 | Core's /vu bundles (the engine's meters, forwarded) |
 | motion | energy | any (0.0.0.0) | 7777 | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
 | stemdeck | osc | any (0.0.0.0) | 7780 | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | devices | announce | any (0.0.0.0) | 7790 | Core's /core/here broadcast: where every device fetches the truth |
 | mixer | osc | mixer (192.168.8.11) | 7772 | Core's relays and lamps, /beat, /vu |
 | desk | osc | any (0.0.0.0) | 7773 | Core's relays, lamps and stems, /beat -- every virtual desk Core follows (four at most) |
-| desk | vu | any (0.0.0.0) | 7774 | the analyzer's and StemDeck's /vu bundles, forwarded unchanged by Core (core.vu-relay) |
+| desk | vu | any (0.0.0.0) | 7774 | the engine's and StemDeck's /vu bundles, forwarded unchanged by Core (core.vu-relay) |
 | beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
-| reaper | osc | local (127.0.0.1) | 9001 | Core's /track/... control |
-| iem | multiencoder-1 | local (127.0.0.1) | 1337 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| iem | multiencoder-2 | local (127.0.0.1) | 1338 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| iem | multiencoder-3 | local (127.0.0.1) | 1339 | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| dualdelay | osc | local (127.0.0.1) | 1340 | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| engine | control | local (127.0.0.1) | 9005 | the a3-core window's view of the engine (HTTP JSON, loopback only; not OSC) |
 | engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS, several viewers on one encode (OBS, the pro-DJ apps) (listener, not OSC) |
@@ -105,7 +100,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 ## Who sends where
 
 The file's `routes`, rendered. *Carries*: the route's mark (`vu`: meters), else
-what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
+what the listener takes. Sender `iem` is the IEM EnergyVisualizer, which no longer runs (see below);
 `prolink`: any Pro DJ Link player; StemDeck as master has its own rows.
 
 <!-- a3-osc:routes -->
@@ -120,28 +115,21 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | motion | `core.osc` | every controller's messages, and /beat from the analyzer |
 | motion | `beat-analyzer.clock` | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | core | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
-| core | `motion.vu` | the analyzer's /vu bundles |
+| core | `motion.vu` | Core's /vu bundles (the engine's meters, forwarded) |
 | core | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | core | `desk.osc` | Core's relays, lamps and stems, /beat -- every virtual desk Core follows (four at most) |
 | core | `desk.vu` | vu |
-| core | `reaper.osc` | Core's /track/... control |
-| core | `iem.multiencoder-1` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| core | `iem.multiencoder-2` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| core | `iem.multiencoder-3` | /MultiEncoder/... (receiver set inside the plug-in, in the REAPER project) |
-| core | `dualdelay.osc` | /DualDelay/delayBPML\|R (receiver set inside the plug-in, in the REAPER project) |
+| core | `mixer.osc` | vu |
+| core | `radla.vu` | /vu |
 | core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
 | core | `stemdeck.osc` | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
 | engine | `core.osc` | every controller's messages, and /beat from the analyzer |
-| reaper | `core.reaper-feedback` | REAPER's own OSC feedback |
+| engine | `core.vu-relay` | vu |
 | beat-analyzer | `core.osc` | every controller's messages, and /beat from the analyzer |
 | beat-analyzer | `motion.osc` | Core's relays (StemDeck's preview among them), /beat |
 | beat-analyzer | `mixer.osc` | Core's relays and lamps, /beat, /vu |
 | beat-analyzer | `radla.osc` | /beat |
-| beat-analyzer | `motion.vu` | the analyzer's /vu bundles |
-| beat-analyzer | `core.vu-relay` | vu |
-| beat-analyzer | `mixer.osc` | vu |
-| beat-analyzer | `radla.vu` | /vu |
 | iem | `motion.energy` | the IEM EnergyVisualizer's /EnergyVisualizer/RMS |
 | stemdeck | `prolink.announce` | Pro DJ Link keep-alives (broadcast, not OSC) |
 | stemdeck | `prolink.status` | Pro DJ Link status packets (broadcast, not OSC) |
@@ -152,10 +140,12 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 | prolink | `prolink.beat` | Pro DJ Link beat packets (broadcast, not OSC) |
 <!-- /a3-osc:routes -->
 
-- **REAPER → A³ Motion directly**: `/EnergyVisualizer/RMS` bypasses Core
-  (`aside` in the register).
-- **Core has two receive ports** so it never answers REAPER's reports as
-  commands; **Motion three** (control, 25 Hz meters, 426-float energy frames).
+- **Motion's energy listener has no sender.** `/EnergyVisualizer/RMS` came
+  straight from the EnergyVisualizer plug-in inside REAPER, bypassing Core
+  (`aside` in the register). REAPER is gone and the engine does not send it,
+  so the listener stays open and nothing arrives (an open issue).
+- **Core has two receive ports**: commands on `core.osc`, meters on
+  `core.vu-relay`; **Motion three** (control, 25 Hz meters, 426-float energy frames).
 - **`/tap` goes straight to the beat-analyzer**: timing wants no relay.
 - **`radla`** is off this subnet, via the gateway: beat, meters, network audio.
 - **Read a port with its host**: 7772 is both Motion's and the Mixer's meter
@@ -164,13 +154,13 @@ what the listener takes. Sender `iem`: the EnergyVisualizer in REAPER;
 ## The numbering, and what would be better
 
 The numbers grew: `7771`, `7772`, `7775`, `7777` have three owners and two
-gaps; `9000`–`9002` interleave Core and REAPER; no number names its owner.
+gaps; `9000`–`9005` interleave Core and the engine; no number names its owner.
 **Proposal** — the block names the owner:
 
 | Block | Owner |
 | :--- | :--- |
 | `9000–9009` | A³ Core |
-| `9010–9019` | REAPER, as Core's engine |
+| `9010–9019` | Core's engine |
 | `7700–7709` | A³ Motion |
 | `7710–7719` | A³ Mixer |
 | `7720–7729` | beat-analyzer |
@@ -178,5 +168,4 @@ gaps; `9000`–`9002` interleave Core and REAPER; no number names its owner.
 with fixed offsets: `+0` control, `+1` VU, `+2` energy, `+5` beat clock.
 
 **Not the current state.** The devices follow one edit of `a3-osc.json`, but
-ports set inside REAPER and its plug-ins must follow by hand, and a half-done
-renumbering is silent. The tables above are what the rig does today.
+a half-done renumbering is silent. The tables above are what the rig does today.

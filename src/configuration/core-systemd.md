@@ -8,27 +8,26 @@
 `/bin/true`, `RemainAfterExit=yes`). It *wants* the components; each is
 `PartOf=a3-main.service`.
 
-- **Start** `a3-main`: starts `qjackctl`, `a3-reaper` or `a3-engine` (only one of
-  them, {ref}`see below <core-engine-units>`), `a3-core`,
-  `beat-analyzer`, `a3-motion`.
+- **Start** `a3-main`: starts `a3-engine`, `a3-core`, `a3-core-window`,
+  `beat-analyzer`, `a3-motion`, StemDeck's deck A. (`qjackctl` and `a3-reaper`
+  were in the list until REAPER and the patchbay were removed, {ref}`see below <core-engine-units>`.)
 - **Stop/restart** `a3-main`: stops/restarts all its parts. The audio server is not one of them: PipeWire belongs to the user session and runs whether `a3-main` does or not.
 - **One component** can stop or fail alone: `Wants=`, not `Requires=` (which
-  made `stop a3-core` take REAPER down too).
+  made `stop a3-core` take the others down too).
 - `a3-motion` is not shipped here; where Motion has its own machine the name
   matches nothing, harmlessly.
 
 ```text
 pipewire + wireplumber  (the user session's audio server, JACK via libjack)
- ├─ a3-core          (before REAPER)
- ├─ a3-reaper        (waits until JACK accepts clients)
- ├─ beat-analyzer
- ├─ qjackctl         (waits until JACK accepts clients, connects the patchbay)
+ ├─ a3-core          (the core role of the a3-core program)
+ ├─ a3-engine        (the engine role; waits until JACK accepts clients)
+ ├─ beat-analyzer    (the beat clock only)
  └─ a3-aes67         (only with an audio socket)
 ```
 
 ```sh
 systemctl --user start a3-main          # the whole group
-systemctl --user restart a3-reaper      # one component
+systemctl --user restart a3-engine      # one component
 systemctl --user status a3-core
 journalctl --user -u a3-core -f
 ```
@@ -48,16 +47,17 @@ programs it starts keep their own CPUs.
 | Unit | Starts | Part of `a3-main` | After | Restarts | Scheduling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `a3-main` | the umbrella | — | `graphical.target` | — | — |
-| `qjackctl` | QjackCtl, A³ patchbay | yes | PipeWire, REAPER, beat-analyzer | on failure | RT 83, CPUs 1–3 |
-| `a3-reaper` | REAPER, A³ template | yes | `graphical.target`, PipeWire | no | normal, CPUs 1–3; audio workers RT 76 by the preload below |
-| `a3-core` | `a3-core.py` | yes | PipeWire; before REAPER | no | normal, every CPU |
-| `beat-analyzer` | tempo, meters | yes | PipeWire | no | RT 65, CPUs 1–3 |
+| `a3-engine` | `a3-core --role engine` | yes | PipeWire | on failure, 1 s (5 in 60 s) | normal, CPUs 1–3; audio threads RT by the preload below |
+| `a3-core` | `a3-core --role core` | yes | PipeWire | no | normal, every CPU |
+| `beat-analyzer` | the beat clock | yes | PipeWire | no | RT 65, CPUs 1–3 |
+| `a3-screencast` | `a3-core --role screencast-fanout` and ffmpeg | no (each machine opts in) | `graphical.target` | always, 2 s | encoder niced, one core |
 | `a3-aes67` | AES67 sender, PTP clock reading | no | PipeWire | always, 2 s | PipeWire's own |
-| `a3-bar-per-workspace` | i3bar on/off | no | `graphical.target` | always, 2 s | normal |
-| `a3-user-install` | `user_install.sh` | no | — | no | normal |
+| `a3-bar-per-workspace` | `a3-core --role i3-bar`: i3bar on/off | no | `graphical.target` | always, 2 s | normal |
 
 `a3-aes67` and `a3-bar-per-workspace` start at login through shipped
-`default.target.wants` links. All are `WantedBy=default.target`.
+`default.target.wants` links. All are `WantedBy=default.target`. The window
+(`a3-core-window`, the `a3-core` program with a screen) is the package's too,
+beside `a3-engine`.
 
 ## PipeWire — the audio server
 
@@ -71,98 +71,85 @@ The Scarlett (pro-audio profile) drives the graph. Shipped settings under
   never lower: the AES67 nodes would otherwise pull the graph down to 32
   samples.
 - `jack.conf.d/10-a3.conf`: the default device answers as the JACK client
-  `system`, so the patchbay's `system:playback_N` and `system:capture_N` stay.
+  `system`, so the engine's `system:playback_N` and `system:capture_N` stay.
 
 Look at it with `wpctl status` and `pw-top`; the JACK tools
 (`jack_lsp`, `jack_connect`) talk to PipeWire.
 
 (core-engine-units)=
 
-## `a3-engine.service` — the audio engine (a3-engine)
+## `a3-engine.service` — the audio engine
 
-The engine ({doc}`user page <../user/audio-engine>`) and REAPER are two ways to
-make the sound; **one** of them starts, decided at each start of `a3-main`:
+The engine ({doc}`user page <../user/audio-engine>`) makes the sound. The unit
+keeps the name of the role: `a3-engine.service` is shipped in
+`/usr/lib/systemd/user/` and runs `/usr/bin/a3-core --role engine` after
+`jack_wait -w`. Its JACK client is `a3-engine` too.
 
-| Unit | Condition | What it runs |
-| :--- | :--- | :--- |
-| `a3-engine` | `ExecCondition=/home/aaa/.local/bin/a3-engine-runs` | `/usr/bin/a3-engine --service` |
-| `a3-reaper` | drop-in `a3-reaper.service.d/audio-engine.conf`: `ExecCondition=/home/aaa/.local/bin/a3-engine-runs --reaper` | REAPER, the unit itself untouched |
-
-`a3-engine-runs` exits 0 when the engine is installed and
-`a3-engine --check-config` passes, and the `--reaper` form is its inverse; the
-reason REAPER runs goes to stderr (the journal) and to Core's status. Should
-the helper itself fail, REAPER runs: the one unwanted outcome is that neither
-starts. An `ExecCondition` that fails only *skips* a unit, it is not a failure.
-
-`a3-main` has `Wants=a3-engine.service` beside `a3-reaper.service`; on a machine
-without the engine package the name matches nothing, harmlessly. Everything
-else in the group is as above.
-
-The patchbay file is unchanged and never names the engine: none of its sockets
-is exclusive, so QjackCtl cannot disconnect the links the engine makes.
+- **No `Conflicts=` and no condition.** The engine always starts; there is no
+  fallback. It restarts after 1 s on failure, five times in a minute, then stops
+  visibly.
+- **The old two-deck StemDeck stays off through a drop-in**:
+  `stemdeck.service.d/two-deck-off.conf` has `ExecCondition=/bin/false`. A
+  failing `ExecCondition` only *skips* a unit, it is not a failure. (No
+  `Conflicts=`: a conflict dropped start jobs.) `stemdeck@.service`, the
+  B-format decks, runs unconditioned.
+- **REAPER, its units and QjackCtl are gone.** The upgrade moves a machine's old
+  `a3-reaper`, `qjackctl` and `a3-user-install` units and the patchbay aside
+  ({ref}`step 9 <core-postinst>`). The engine makes its own JACK links
+  ({ref}`the I/O map <audio-engine-io>`).
+- The audio threads get their real-time priority from a preload shim
+  (`libjack-rt-priority.so`), not from the unit: raising the whole process would
+  put its GUI and OSC threads above JACK's.
 
 ```sh
 systemctl --user status a3-engine
 journalctl --user -u a3-engine -f
-/usr/bin/a3-engine --check-config      # ok, or the reason
+a3-core --role engine --check-config      # ok, or the reason
 ```
-
-## `qjackctl.service` — the patchbay
-
-QjackCtl with `~/.config/rncbc.org/a3-patchbay.xml`, connecting clients as they
-appear. Waits for the JACK interface (`jack_wait -w`). Restarts on failure.
-
-## `a3-reaper.service` — REAPER
-
-REAPER (no splash, no error dialogs) on the template
-`~/.config/REAPER/ProjectTemplates/a3-reaper.RPP`, after `jack_wait -w`.
-**Stopping saves nothing** (`reaper -closeall:nosave`): every start opens the
-template on disk. Core's recall restores what Core controls; anything changed
-**only in REAPER** (a plug-in setting, a route) is lost unless saved into the
-template. Listens on `reaper.osc`, reports to `core.reaper-feedback`.
-
-Core's feedback port has a **4 MB receive buffer**, so REAPER's OSC surface may
-send fast (packets of 8192 bytes, 1 ms apart) without the kernel dropping
-reports. That cuts a joint restart of REAPER and Core to about 7 s (it took
-about 34 s with the default buffer).
 
 (core-silent-start)=
 
 ### The silent start
 
-The template starts with main, booth, phones and `main_vu` (the main meter's
-track) **muted**. About 0.2 s after the recall, Core pulls each fader to
-minimum, unmutes and fades to the template level over 1 s.
+Main, booth and phones are **closed** (exact silence) from the start of the
+engine until Core has replayed the evening and sent `/engine/open 1`; then each
+output ramps up to its trim over 1 s. This is the engine's gate
+({doc}`The audio engine <../user/audio-engine>`).
 
-- **Only outputs REAPER reports muted are opened.** A Core restart mid-set
-  changes nothing — except a track you muted by hand, which Core can't tell
-  apart and opens too.
-- **Silent after a start:** Core is not up, REAPER never answered (no `gate:`
-  line; look for `startup: REAPER does not answer yet`), or REAPER restarted
-  alone. Restarting `a3-core` is enough once REAPER runs. A gated track with no
-  reported state stays shut, noted in the journal.
+- **Silent after a start:** Core is not up, or the engine restarted alone and has
+  not been told yet. Restarting `a3-core` is enough once the engine runs.
 - **Rec stays open**, so the beat analyzer has its input.
-- The desk's meters stay dark until the fade; the main meter still measures
-  programme level, independent of the main fader.
 
 ```sh
 journalctl --user -u a3-core | grep 'gate:'
 ```
 
-## `a3-core.service` — the OSC router
+## `a3-core.service` — the core role
 
-`a3-core.py` on `~/.venv/bin/python3`, `Type=idle`, private `/tmp`. Takes
-commands on `core.osc`, drives REAPER and the IEM plug-ins, relays REAPER's
-reports to every subscriber.
+`/usr/bin/a3-core --role core`, private `/tmp`. It takes commands on `core.osc`, relays state and the engine's meters to
+every subscriber, and serves the HTTP API on `core.web`
+({ref}`Core's HTTP API <osc-http>`). **No Python.**
 
-- **After PipeWire, before REAPER**: one state burst instead of two (Core also asks
-  REAPER for everything once bound, so either order works).
+- **The program is chosen by a drop-in**, `a3-core.service.d/program.conf`: it
+  resets `ExecStart=` and sets `/usr/bin/a3-core --role core`. The package's
+  postinst installs the file when it is missing and never overwrites an existing
+  unit, which is why this is a drop-in and not an edit of the unit.
+  `a3-bar-per-workspace.service.d/program.conf` does the same for
+  `a3-core --role i3-bar`.
+- **The rig's own hand drop-in** `a3-core.service.d/override.conf` is
+  **overridden by `program.conf`** (it sorts before it, and the empty
+  `ExecStart=` drops its line too). Leave it or delete it; either way the new
+  program runs.
+- **Some shipped unit comments still say `a3-osc-render`** (or describe the
+  Python Core). They are left as they are on purpose, so that an upgrade
+  raises no conffile prompt. The program that renders the truth is
+  `a3-core --render-truth`.
 - **Every CPU** (`a3-core.service.d/cpu.conf`): pinned to CPU 0, it starved
   whenever the Motion UI peaked there, and OSC was dropped.
 - **Needs the truth**: `/usr/share/a3/a3-osc.json` (or `$A3_OSC_TRUTH`), joined
   with `network.json`, served on `core.web`, announced every 2 s
   ({ref}`truth <osc-truth>`).
-- No `Restart=`.
+- No `Restart=`; a stop with SIGTERM writes the state files first.
 
 ### Its arguments
 
@@ -170,15 +157,12 @@ None by default; a drop-in can point any default elsewhere (useful on a bench).
 
 | Argument | Default / meaning |
 | :--- | :--- |
-| `--ip`, `--port` | `core.osc` |
-| `--feedback-port` | `core.reaper-feedback`, separate so reports are never commands |
-| `--web-bind` | `core.web`, every interface. The window can send OSC with no login; bind locally to keep it to the machine |
-| `--mixer`, `--motion` | `mixer.osc`, `motion.osc` |
-| `--reaper`, `--dualdelay` | `reaper.osc`, `dualdelay.osc` |
+| `--ip`, `--port` | the truth's `any`, `core.osc` |
+| `--mixer HOST:PORT`, `--motion HOST:PORT` | their `osc` listeners |
 | `--subscriber NAME=HOST:PORT` | another department; repeatable |
+| `--web-bind HOST:PORT` | `core.web`, every interface. The API can send OSC with no login; bind locally to keep it to the machine |
+| `--no-web` | no HTTP API |
 | `--print-osc` | log every message (off: 300,000 lines an hour on one address) |
-| `--no-web` | no window |
-| `--save-project` | ask REAPER to save every few minutes (off: a template has no file, and saving opens a dialog) |
 
 (core-subscriber)=
 
@@ -187,8 +171,10 @@ None by default; a drop-in can point any default elsewhere (useful on a bench).
 A light or video desk: one argument each, in a drop-in:
 
 ```
-a3-core.py --subscriber light=HOST:PORT \
-           --subscriber video=HOST:PORT
+ExecStart=
+ExecStart=/usr/bin/a3-core --role core \
+          --subscriber light=HOST:PORT \
+          --subscriber video=HOST:PORT
 ```
 
 It gets every A³ message exactly as Mixer and Motion do; the name shows in the
@@ -198,15 +184,28 @@ desk that silently hears nothing. What arrives: {doc}`OSC reference <../ressourc
 ### What it keeps across a restart
 
 `~/.local/state/a3-core/` (or `$XDG_STATE_HOME/a3-core/`): `state.json` (what
-only Core knows) and `evening.json` (every continuous value passed on). Outside
-the package; updates don't touch them.
+only Core knows), `evening.json` (every continuous value passed on) and
+`seen.json` (the list of addresses the OSC monitor has seen). Outside the
+package; updates don't touch them.
 
-## `beat-analyzer.service` — tempo and meters
+## `beat-analyzer.service` — the beat clock
 
 `~/a3-system/beat-analyzer/build/beat-analyzer`, `Type=idle`, 3 s after start,
 configured by `build/.env` (OSC targets in the [rendered block](#core-postinst),
 the rest {ref}`its own <beat-analyzer-config>`). Sends `/beat` to Core, the
-controllers and `radla`, and the forty `/vu/n` ({ref}`VU map <core-vu-map>`).
+controllers and `radla`. **It is the beat clock only**: it sends no `/vu`
+(the engine measures the meters).
+
+## `a3-screencast.service` — the screen as a stream
+
+`a3-screencast` runs ffmpeg on the CPU (never VAAPI, which hung in a GPU reset
+on the rig) niced and on one core the audio units leave free, writing MPEG-TS to
+`a3-core --role screencast-fanout`, which copies it to every viewer; the encoder
+starts with the first viewer and stops 10 s after the last. No sound (OBS takes it from
+AES67). The port is the truth's, from `~/.config/a3/osc.env`; encoder settings
+(`A3_SCREENCAST_CPUS`, `_FPS`, `_CRF`) in the optional
+`~/.config/a3/screencast.env`. The package does not enable it: each machine
+opts in.
 
 (core-aes67)=
 
@@ -219,35 +218,30 @@ Only on a Core with a second socket ({ref}`install <core-postinst>`,
   the PTP clock on the second socket. The Core is master unless a better
   clock is on the network.
 - `a3-aes67.service` (user unit): a second PipeWire instance running
-  `~/.config/pipewire/pipewire-aes67.conf`, rendered by `a3-osc-render` from
+  `~/.config/pipewire/pipewire-aes67.conf`, rendered by `a3-core --render-truth` from
   the truth's `network.audio_port`. It sends the Core's 12 channels as the
   multicast stream `AES67 <hostname> out` (44.1 kHz, 24 bit, packet time
   0.5 ms), announces it by SAP and receives the streams of other machines.
   The Scarlett drives it, not the PTP clock, so the samples go out
   unconverted. Restarts 2 s after any exit.
 
-Network, streams and cabling: {ref}`ports <ports-audio-network>`,
-{doc}`Patchbay <../ressources/patchbay>`.
+Network and streams: {ref}`ports <ports-audio-network>`; the cabling is the
+engine's ({ref}`the I/O map <audio-engine-io>`).
 
-## REAPER and the realtime priority
+## The engine and the realtime priority
 
-pipewire-jack answers REAPER's question for the audio workers' priority wrongly.
-`a3-reaper.service` therefore preloads a small shim,
+pipewire-jack answers a program's question for the audio threads' priority
+wrongly. `a3-engine.service` therefore preloads a small shim,
 `~/.local/lib/a3/libjack-rt-priority.so` (built by the postinst from
-`~/.local/share/a3-core/src/jack-rt-priority.c`); the workers then run at RT 76,
-under PipeWire's own data loop. The unit sets no `CPUScheduling`: raising the
-whole process puts REAPER's GUI and OSC threads above the audio threads.
+`~/.local/share/a3-core/src/jack-rt-priority.c`). The unit sets no
+`CPUScheduling`: raising the whole process puts its GUI and OSC threads above
+the audio threads.
 
 ## `a3-bar-per-workspace.service` — i3bar on the tool workspaces
 
-`a3-bar-per-workspace.py` on `:0`, after `a3-wait-for-the-screen`. Shows the
+`a3-core --role i3-bar` on `:0`, after `a3-wait-for-the-screen`. Shows the
 bar on workspace 3 and up, hides it on 1 and 2 ([The screen](#core-config-screen));
 restarts whenever it ends (an i3 restart ends the event stream).
-
-## `a3-user-install.service` — the user-side installer
-
-Runs `user_install.sh` once (`bash -e`) on every install; see
-[a3-user-install.service](#core-user-install).
 
 (core-system-units)=
 
@@ -261,6 +255,6 @@ In `/etc/systemd/system/`, dpkg conffiles.
 | `set_irq_prio.service` | at boot, the USB controller's IRQ threads (`irq/…-xhci_hcd`) to FIFO 95, so the sound card comes first | yes |
 | `vnc-display.service` | `recipes/vnc-display.sh`: a monitor on HDMI/DP moves `10-headless.conf` aside to `.bak`, none moves it back | no, shipped only |
 
-Over VNC: QjackCtl, REAPER's arrangement and mixer. Debian's own: the postinst
+Debian's own: the postinst
 enables `systemd-networkd` (when configuring the network); LightDM logs `aaa`
 into i3 ([Under /etc](#core-etc)).
