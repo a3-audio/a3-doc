@@ -184,7 +184,7 @@ and StemDeck's AUX bus. The return has no source to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.
-- **Meter**: one bar under **FX RTN**, the delay's output after the RETURN
+- **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
   pot (`aux_L/R`).
 - **CUE**: push the return's encoder (on the virtual desk, or tap the CUE
   field). The field is filled while the cue is on. The cue is pre-fader: you
