@@ -480,7 +480,7 @@ by its lock file (Settings, "panel: this deck").
 
 ### Deck host: what the installer sets up
 
-On the deck's machine (a3nuc2 for deck B; likewise for C and D) the installer's **deck-host** role
+On the deck's machine (a3nuc2 for deck B today; C and D can run on any deck host, one letter per host) the installer's **deck-host** role
 does the wiring; it asks for the deck letter, the path latency and the audio
 socket. It enables the deck instance, the AES67 base (`stemdeck-aes67.service`:
 PTP client and receiver) and the deck's sender (`a3-aes67-deck@<letter>`),
@@ -610,7 +610,7 @@ Ask the venue before joining their Pro DJ Link network.
 
 ## MASTER: StemDeck as the tempo master
 
-With no CDJs, **MASTER** on a deck makes StemDeck the Pro DJ Link tempo master. The delay follows the MASTER deck's tempo too when no beat clock runs ({ref}`delay tempo <osc-beat-delay>`);
+With no CDJs, **MASTER** on a deck makes StemDeck the Pro DJ Link tempo master. The delay follows the tempo of the playing MASTER deck too when no beat clock runs ({ref}`delay tempo <osc-beat-delay>`);
 the beat-analyzer (mode 2) and A³ Motion on **PIO** follow. Whole chain:
 {ref}`Playing without CDJs <beat-analyzer-without-cdjs>`.
 

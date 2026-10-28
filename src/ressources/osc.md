@@ -466,8 +466,8 @@ applies wins:
 1. **A live beat clock**: a `/beat` with a tempo arrived within the last
    **3.0 s** (three beats at 60 BPM). The tempo must have held still for a
    steady **4 beats** before it is used.
-2. **The MASTER deck**: the deck that reports itself MASTER in
-   `/stemdeck/{deck}/tempo`, if that report is no older than **5.0 s** (the
+2. **The MASTER deck**: the *playing* deck that reports itself MASTER (with a
+   valid BPM, 20-400) in `/stemdeck/{deck}/tempo`, if that report is no older than **5.0 s** (the
    window of a deck's hello). A deck's tempo is exact, so there is no wait.
 3. **A playing deck**: the deck that reports playing. With several playing, the
    one on the desk channel with the **highest fader** wins; a playing deck on

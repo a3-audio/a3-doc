@@ -18,7 +18,7 @@ On `main` since `v03.0`, not tagged yet.
 
 - **Stem AUX goes straight into the delay.** A deck's AUX bus no longer passes the channel's AUX pot;
   the pot sends only the channel's own signal (analog, or the deck's main output). The FX Return is unchanged.
-- **The delay's tempo follows the decks.** Order: a live beat clock, else the MASTER deck, else the
+- **The delay's tempo follows the decks.** Order: a live beat clock, else the playing deck that is MASTER, else the
   playing deck on the channel with the highest fader, else hold. New word `stemdeck.tempo`
   (`/stemdeck/{deck}/tempo`, `fii`); `/api/rig` shows `tempo_source`.
 - **Decks A to D.** The engine's deck count comes from `engine.json` `"decks"` if named, else from the

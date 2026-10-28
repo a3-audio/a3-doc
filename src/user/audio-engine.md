@@ -106,8 +106,10 @@ rewritten). If it does not, the engine takes the deck range of the OSC truth
 engine: slot ports are named `deckA_…`, `deckB_…` and on (after Z comes `AA`,
 `AB`, …), and the I/O page, the default links and the deck-audio report follow
 the count. The limit is the hardware: every slot is 41 more channels to mix.
-Four decks cost the engine no more than two did on a four-channel desk
-(measured on the bench).
+CPU: measured offline on a3nuc2 with the four-channel desk, where two decks
+already fill every channel, four decks cost the engine no more than two. The
+JACK port cost (94 to 176 inputs) is not in that number; the check on the rig
+measures it.
 
 When the engine loads the file at start, **every slot whose ports the file
 links nowhere gets the default links to its local `StemDeck-<letter>`**, whether
@@ -152,7 +154,8 @@ started by the installer, not by `a3-engine`.
 - **A channel takes analog or a deck**, never both. Analog ↔ deck crossfades
   over 10 ms; deck ↔ deck dips out and in.
 - **Decks are numbered 1…4 on the wire and lettered A…D on screen**; slot k is
-  StemDeck's instance with letter k. The deck meters `/vu/37`–`/vu/40` cover
+  StemDeck's instance with letter k. The engine's own count has no cap; the OSC
+  words carry the truth's deck range (1–4 today). The deck meters `/vu/37`–`/vu/40` cover
   slots 1–4; a slot beyond the fourth has no meter, which the engine says once
   at start and on STATUS.
 - On the A³ Mixer the source ring shows **AN** and one entry per deck in engine
