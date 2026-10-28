@@ -146,9 +146,9 @@ between channels. A stem on a channel shuts its analog input.
 (silent). A: a little analog level. Ticks: −9 and −3 dBFS, the LED scale. The
 picture still shows the older nine-meter selector.*
 
-Three meters under **D1 | D2 | A**: deck 1's stem N, deck 2's stem N, and
-**A**, the channel's analog input (always metered, louder side of
-`analog<N>_L/R`, `/vu/1`–`/vu/8`). Not StemDeck's A switch. The **bracket**
+Three meters under **A | B | ST**: deck A's stem N, deck B's stem N, and
+**ST**, the channel's analog input (always metered, louder side of
+`analog<N>_L/R`, `/vu/1`–`/vu/8`). The **bracket**
 marks what plays; the **arrow** is the cursor. On the virtual desk, tapping a
 meter turns the cursor there.
 
@@ -157,8 +157,8 @@ meter turns the cursor there.
 | turn | moves the cursor round the ring of three; switches nothing |
 | push a stem | it becomes the only input; the other deck's stem N goes to StemDeck's AUX bus (the delay's send) |
 | push the stem that plays | off; the channel plays analog |
-| push **A** while a stem plays | same as above |
-| push **A** while analog plays | nothing |
+| push **ST** while a stem plays | same as above |
+| push **ST** while analog plays | nothing |
 
 Core remembers no last stem; the cursor stays after a push. A stored cursor
 that is not on the ring comes back on A. Several stems on one channel, or a

@@ -23,7 +23,7 @@ What they show: {ref}`the desk's input selectors <a3mix-displays>`. Two parts:
 - **`a3-mixer-set-display/display_panel.py`**, pure and tested without a Pi:
   display ↔ multiplexer channel (`PANELS`), reading Core's announcements,
   meter movement, layout. `channel_picture()` turns a cursor, nine levels and
-  the stem mask into headings D1 | D2 | A, nine bars, dividers, the arrow and
+  the stem mask into headings A | B | ST, nine bars, dividers, the arrow and
   the bracket (playing stem = lowest mask bit, else A = `ANALOG_INPUT`, 8). The
   ninth slot is `LAST_SLOT_METERS` (2) wide, so bars keep 10 of 11 pixels on
   128 px; A's bar is centred in it, and the return's CUE field uses the same
