@@ -351,8 +351,8 @@ StemDeck's side:
   on AUX.
 - **Every stem no channel plays is on AUX.** Its **A** is lit, and Core
   switches a free stem's A back on if you click it off. A stem pushed onto a
-  channel loses its A. The AUX bus feeds the delay; you hear it through the
-  FX Return.
+  channel loses its A. The AUX bus feeds the delay directly; you hear it
+  through the FX Return.
 - **The C switches are yours.** A stem's **C** puts it on StemDeck's CUE bus,
   for pre-listening here, e.g. a stem no channel plays yet. Core does not set
   them: a desk channel's cue goes through the channel itself (see
@@ -421,8 +421,9 @@ busy. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
 ## One deck per instance: the Core's rig
 
 On the rig every deck is its own StemDeck instance, `-bformat --deck A` (unit
-`stemdeck@A`; B is `stemdeck@B`). Deck A runs on the Core, deck B on the
-second machine beside A³ Motion. The instance plays one deck and sends
+`stemdeck@A`; B is `stemdeck@B`, and so on to `stemdeck@D`). Deck A runs on the
+Core, deck B on the second machine beside A³ Motion; decks C and D are
+hosts of their own (any machine with the deck-host role, letter C or D). The instance plays one deck and sends
 **B-format** to the Core's engine; the two-deck screens above are the older
 mode, kept as a fallback. What an instance sends (41 channels):
 
@@ -445,8 +446,11 @@ until you ask). It is a send taken after the stem's GAIN, MUTE and 3D, so a
 muted stem sends nothing. The four knobs of a stem sit in a 2 × 2 block: **GAIN
 and 3D** above, **AUX and WIDTH** below. A stem that is sent shows "AUX" in its
 state line. The deck's AUX meter shows the aux bus. Only the sent stems reach
-the delay, not the whole deck; the desk's **AUX pot** on the deck's channel
-scales all of it ({ref}`the engine <audio-engine>`).
+the delay, not the whole deck. The AUX bus goes **straight into the delay**
+after the channel's input-select fade and VOLUME; the desk's **AUX pot** on the
+deck's channel does not scale it (it scales the deck's main output, the
+channel's own signal). A pulled fader, or a deck on no channel, sends nothing
+({ref}`the engine <audio-engine-decks>`).
 
 ### The panel's pots
 
@@ -476,7 +480,7 @@ by its lock file (Settings, "panel: this deck").
 
 ### Deck host: what the installer sets up
 
-On the deck's machine (a3nuc2 for deck B) the installer's **deck-host** role
+On the deck's machine (a3nuc2 for deck B; likewise for C and D) the installer's **deck-host** role
 does the wiring; it asks for the deck letter, the path latency and the audio
 socket. It enables the deck instance, the AES67 base (`stemdeck-aes67.service`:
 PTP client and receiver) and the deck's sender (`a3-aes67-deck@<letter>`),
@@ -586,7 +590,9 @@ SYNC on A follows B; SYNC on B hands over. At ×1 it also lines up **bars**.
 
 Follows the master's tempo (pitch included) and beat; both decks may follow.
 
-- StemDeck is **player 6**; it reads the Pro DJ Link ports (`prolink.*`) from
+- StemDeck is a Pro DJ Link **player** whose number follows its deck: **A is
+  player 6, B 5, C 4, D 3** (the beat-analyzer is 7). A deck beyond D has no
+  player number and says so. It reads the Pro DJ Link ports (`prolink.*`) from
   `a3-osc.json` ({ref}`Where addresses live <osc-truth>`). On the Core it
   follows Core's file and restarts its window once (about 5 s) when it changes
   ({ref}`Following Core <osc-follow>`). No file: `PIO: no a3-osc.json`.
@@ -596,7 +602,7 @@ Follows the master's tempo (pitch included) and beat; both decks may follow.
   box (default: the first heard).
 - Master silent: tempo **held**, phase left alone.
 - It aligns the **beat, not the bar**; set the downbeat with the jog.
-- Player number: `pioDevice` in `~/.config/StemDeck/StemDeck.settings`.
+- Player number: by deck as above; `pioDevice` in `~/.config/StemDeck/StemDeck.settings`.
 
 Ask the venue before joining their Pro DJ Link network.
 
@@ -604,7 +610,7 @@ Ask the venue before joining their Pro DJ Link network.
 
 ## MASTER: StemDeck as the tempo master
 
-With no CDJs, **MASTER** on a deck makes StemDeck the Pro DJ Link tempo master;
+With no CDJs, **MASTER** on a deck makes StemDeck the Pro DJ Link tempo master. The delay follows the MASTER deck's tempo too when no beat clock runs ({ref}`delay tempo <osc-beat-delay>`);
 the beat-analyzer (mode 2) and A³ Motion on **PIO** follow. Whole chain:
 {ref}`Playing without CDJs <beat-analyzer-without-cdjs>`.
 
@@ -612,7 +618,7 @@ the beat-analyzer (mode 2) and A³ Motion on **PIO** follow. Whole chain:
   MASTER off and SYNC not on PIO: StemDeck leaves the network.
 - No master chosen: the only playing deck becomes master — not under SYNC: PIO
   (two masters would fight), and not after you turned it off.
-- Sends, as player 6, a **beat packet per beat** (BPM × fader, beat counted from
+- Sends, as the deck's player (A 6, B 5, C 4, D 3), a **beat packet per beat** (BPM × fader, beat counted from
   the grid's first beat) and a **status packet every 200 ms**.
 - A master that stops while the other deck plays hands over (like a CDJ-3000).
 - Nothing goes out until the deck's tempo is analysed.
@@ -620,7 +626,7 @@ the beat-analyzer (mode 2) and A³ Motion on **PIO** follow. Whole chain:
   the same machine hears it.
 - Beats are timed to about 1 ms on their own thread: none lost, none doubled,
   no burst after a jump.
-- Top bar: `PIO master: A` (or B).
+- Top bar: `PIO master: A` (or B, C, D).
 
 Packets follow [prolink-connect](https://github.com/EvanPurkhiser/prolink-connect)'s
 reading. Independent implementation; not affiliated with AlphaTheta or

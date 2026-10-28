@@ -153,6 +153,7 @@ Core acts on it, then relays or announces it.
 | `/stemdeck/{deck}/3d` | f | core | stemdeck | deck k's 3D, 0-1: the desk's 3D of the channel holding deck k, 1 (neutral) while it is on no channel |
 | `/stemdeck/{deck}/present` | i | core | mixer, desk, motion | 1 while deck k's hello is fresh (5 s at most) and the engine does not report its audio missing (engine.deck-audio), else 0 |
 | `/stemdeck/{deck}/hello` | s | stemdeck | core | a StemDeck instance names the deck it plays (host), at start and every 2 s; device.hello carries no deck number |
+| `/stemdeck/{deck}/tempo` | fii | stemdeck | core | deck k's tempo as it plays in BPM (the track's tempo times its pitch; 0 with no track loaded), whether it plays (1/0) and whether it is MASTER (1/0); on every change of one of them and with every deck hello (2 s) |
 | `/aux-return/cue/led` | f | core | mixer, desk, motion | the FX Return's cue lamp, 1 = on |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX (StemDeck's own cue bus 6 is gone since 2026-10-07: a channel is cued through its own bus); stem N reaches only bus N and 5 (AUX): StemDeck and Core refuse a switch onto another bus |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
@@ -401,7 +402,8 @@ New subscriber: {ref}`Adding a department <core-subscriber>`.
   output into main, booth and rec; full travel is 0 dB.
 - **`/filter/mode`**: `high_pass`/`low_pass` or a number (1 = high pass); sent
   as a number, the word goes to the desk on `/filter/led`.
-- **`/beat`**: only the tempo is used, for the [delay](#osc-beat-delay).
+- **`/beat`**: only the tempo is used, for the [delay](#osc-beat-delay), which
+  also follows the decks' `/stemdeck/{deck}/tempo` when no beat clock is running.
 - **`/vu/{n}`** comes from the engine (StemDeck's 41–50), through Core.
 - `/channel/{ch}/reverb`, `/width`, `/order`: no handler; counted as
   unrecognised.
@@ -451,19 +453,42 @@ The desk ignores returned values anyway: its pots are analog.
 
 (osc-beat-delay)=
 
-### /beat, and the delay that follows it
+### /beat, the decks' tempo, and the delay that follows them
 
 ```
-beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)
-                                       │
-                                       └──delay.bpm──▶  the engine's DualDelay (engine.osc)
+beat-analyzer  ──/beat b bar bpm──▶  A³ Core (core.osc)  ──delay.bpm──▶  the engine's DualDelay (engine.osc)
+StemDeck k     ──/stemdeck/k/tempo f i i──▶  ▲
 ```
 
-Core passes the tempo to the DualDelay on the FX bus only when it has held
-still **a whole bar** and differs by **≥ 0.1 BPM** (a changing delay shifts
-pitch). Both lines get the same tempo; their multipliers stay in the engine.
-The delay is IEM's, compiled into the engine, so there is no plug-in receiver
-to open and no `Sync` switch.
+Core chooses the delay's tempo from four sources, in this order; the first that
+applies wins:
+
+1. **A live beat clock**: a `/beat` with a tempo arrived within the last
+   **3.0 s** (three beats at 60 BPM). The tempo must have held still for a
+   steady **4 beats** before it is used.
+2. **The MASTER deck**: the deck that reports itself MASTER in
+   `/stemdeck/{deck}/tempo`, if that report is no older than **5.0 s** (the
+   window of a deck's hello). A deck's tempo is exact, so there is no wait.
+3. **A playing deck**: the deck that reports playing. With several playing, the
+   one on the desk channel with the **highest fader** wins; a playing deck on
+   no channel ranks last, and equal ranks go to the lower deck number. A deck
+   on a channel whose fader Core has not heard yet counts as fader 0 (still
+   above a deck on no channel); this lasts a moment after a Core start.
+4. **Hold**: otherwise the delay keeps the last tempo.
+
+The tempo changes only when it differs by **≥ 0.1 BPM** (a changing delay
+shifts pitch). Core re-evaluates on every input and once a second, so the
+choice also moves when a beat clock stops (after 3.0 s) or a report goes stale
+(after 5.0 s). A deck reports its tempo as the track's tempo times its pitch,
+and 0 with no track loaded. Both lines get the same tempo; their multipliers
+stay in the engine. The delay is IEM's, compiled into the engine, so there is
+no plug-in receiver to open and no `Sync` switch.
+
+Core's `/api/rig` shows the source in use as `tempo_source`: `beat`,
+`master deck k`, `deck k` or `held`. In beat-analyzer clock mode 1 (intern) the
+analyzer always sends beats, so the beat clock wins there; the decks' tempo
+matters in the other modes when no beats arrive, for example with StemDeck as
+the only source.
 
 ### The aux send
 
@@ -472,7 +497,10 @@ to open and no `Sync` switch.
 ```
 
 The send reaches the FX bus (`enc_fx`); the phones bus (`enc_phones`) has its own
-cue and mix taps. 3D is A³ Motion's alone (`/channel/{ch}/3d`).
+cue and mix taps. It scales only the channel's **own signal**: the analog
+input, or the deck's main 16 channels when a deck is on the channel, taken
+after the fader. A deck's AUX bus (the stems sent with StemDeck's AUX knobs)
+does not pass through it; see {ref}`Decks <audio-engine-decks>`. 3D is A³ Motion's alone (`/channel/{ch}/3d`).
 
 ## A³ Motion
 
