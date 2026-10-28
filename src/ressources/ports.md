@@ -50,11 +50,13 @@ Audio between machines runs on the second socket, apart from OSC:
 | Who drives the stream | the audio interface: the samples leave unconverted and the engine is never pulled onto the PTP clock |
 | Deck streams | one per deck, sent by the machine that runs the deck: **41 channels** (MAIN1–16, AUX1–16, CUE1–9), stream `AES67 deck <X>`, 44.1 kHz, 24 bit, packet time **0.25 ms** (1393 bytes on the wire, so every packet fits a 1500-byte frame), **multicast**, one group per deck (`239.69.150.244` deck A, `.245` deck B), port 5004 |
 | Receive rule | the Core receives deck streams **outside** the PTP clock: the sound card stays the Core's clock and the stream is resampled into it, so a deck stream never pulls the engine. The receiver needs an MTU of 1500 |
-| Deck host | a machine that runs a deck (a3nuc2 for deck B) runs its own sender, unit `a3-aes67-deck@<X>`, which the StemDeck package ships; it joins the host's PTP clock as a client and sends unconverted. It also receives the Core's stream, channels 1 and 2 of which are the REC bus |
+| Deck host | a machine that runs a deck (a3nuc2 for deck B) runs its own sender, unit `a3-aes67-deck@<X>`, which the StemDeck package ships. The sender needs the package's base unit `stemdeck-aes67.service` (PTP client and receiver), which stays off where a3-core's own AES67 unit exists, and the audio socket from `STEMDECK_AUDIO_PORT`; the installer's deck-host role sets both up ({ref}`StemDeck <stemdeck-one-deck>`). The sender sends unconverted. It also receives the Core's stream, channels 1 and 2 of which are the REC bus |
 | Latency | a deck on another machine arrives about 18 ms later than a local one (calculated, not measured). StemDeck's *path latency* setting ({ref}`StemDeck <stemdeck-one-deck>`) makes up for it |
 
 **EEE is off** on the audio socket of every machine that has one, a deck host
-included: with it on the link drops every minute or two. PTP and the AES67 sender start only when a second socket is configured
+included: with it on the link drops every minute or two.
+
+PTP and the AES67 sender start only when a second socket is configured
 (`audio-port`); without one the Core has neither and uses one network. The
 streams are audio, not OSC, so they are not in the port tables below. Unit:
 {ref}`a3-aes67 <core-aes67>`; the engine's JACK links: {ref}`I/O map <audio-engine-io>`.

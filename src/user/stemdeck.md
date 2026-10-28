@@ -461,14 +461,36 @@ never jumps. The encoders and pads are unchanged.
 
 ### The panel follows the workspace
 
-With **`STEMDECK_PANEL_WORKSPACE`** set (for example `2:STEMDECK`; A³ Motion has `A3_MOTION_PANEL_WORKSPACE`, for
-example `1:MOTION`), the
-program whose workspace is in front holds the panel. The other lets go at
-once. A program takes the panel only after its workspace has been in front for
-three quarters of a second, so a short visit changes nothing and the two
-never read the port together. A workspace of neither program changes nothing.
-Without the variable the older rule holds: A³ Motion keeps the panel, and
-StemDeck takes it by its lock file ("panel: this deck").
+On a shared screen the program whose workspace is in front holds the panel.
+The other lets go within about half a second. A program takes the panel only
+after its workspace has been in front for three quarters of a second, so a
+short visit changes nothing and the two never read the port together. A
+workspace of neither program changes nothing. The deck-host role (below) sets
+this up; by hand it is `STEMDECK_PANEL_WORKSPACE` (for example `2:STEMDECK`)
+for StemDeck and `A3_MOTION_PANEL_WORKSPACE` (for example `1:MOTION`) for A³
+Motion.
+
+In this mode StemDeck never opens the panel at start, and the Settings row
+**Panel follows workspace** is greyed out: the workspace decides. Without the
+variable the older rule holds: A³ Motion keeps the panel, and StemDeck takes it
+by its lock file (Settings, "panel: this deck").
+
+### Deck host: what the installer sets up
+
+On the deck's machine (a3nuc2 for deck B) the installer's **deck-host** role
+does the wiring; it asks for the deck letter, the path latency and the audio
+socket. It enables the deck instance, the AES67 base (`stemdeck-aes67.service`:
+PTP client and receiver) and the deck's sender (`a3-aes67-deck@<letter>`),
+points the instance at the shipped link map, sets the path latency and the
+panel workspaces (StemDeck and, beside it, A³ Motion), and tells the sender
+which socket is the audio network. Where a3-core's own AES67 setup is left over,
+the role moves it aside (not deleted; leaving puts it back), because two PTP
+drivers must not run: the base stays off while such a unit exists. Without
+the role, none of this happens by itself; the package alone links nothing.
+
+The settings are environment variables in the units' drop-ins, named here once:
+`STEMDECK_LINK_MAP`, `STEMDECK_PATH_LATENCY_MS`, `STEMDECK_PANEL_WORKSPACE`,
+`A3_MOTION_PANEL_WORKSPACE` and `STEMDECK_AUDIO_PORT`.
 
 ### Links on a deck host
 
@@ -476,20 +498,26 @@ Deck A needs no links: the engine makes them. On a machine without an
 engine the instance links its own ports from a **link map**, in the same
 format and with the same code as the engine's map, and never removes a link it
 did not make. It reads `~/.config/StemDeck/links-<letter>.json`, else the file
-named by `STEMDECK_LINK_MAP` (`{X}` is the letter), else nothing. The package
-ships `/usr/share/stemdeck/links-aes67.json`: the 41 outputs to the instance's
-AES67 sender, and the REC bus (the Core's stream, channels 1 and 2) to
-`rec_L/R`. A port name the instance does not have is refused.
+named by `STEMDECK_LINK_MAP` (`{X}` in that name is the letter), else it links
+nothing. The package ships `/usr/share/stemdeck/links-aes67.json`, but it is
+only used where `STEMDECK_LINK_MAP` points at it, which the role does. If the
+variable names a missing or unreadable file, StemDeck logs "no links" and
+links nothing. The shipped map links the 41 outputs to the instance's AES67
+sender, and the REC bus (the Core's stream, channels 1 and 2) to `rec_L/R`. A
+port name the instance does not have is refused. The map names the Core's
+sender (`AES67 a3nuc1 out`): if the Core has another host name, edit it there
+too, together with the engine's map.
 
-The package also ships the sender, `a3-aes67-deck@<letter>` (it renders its
-PipeWire file from the same truth StemDeck already holds; it needs no a3-core
-on that machine) and turns EEE off on the audio port.
+The sender renders its PipeWire file from the host's own audio socket
+(`STEMDECK_AUDIO_PORT`, set by the role) rather than the Core's truth, which
+on this machine is only a copy of the Core's. It needs no a3-core. The package
+also turns EEE off on the audio port.
 
 ### Path latency
 
-A deck on another machine is heard about 18 ms later. Set
-**`STEMDECK_PATH_LATENCY_MS`** (0 to 200, default 0; deck A leaves it at 0) in
-the instance's unit drop-in. StemDeck then counts a beat from when it is
+A deck on another machine is heard about 18 ms later. The role asks for
+**`STEMDECK_PATH_LATENCY_MS`** (0 to 200, default 0; deck A leaves it at 0).
+StemDeck then counts a beat from when it is
 *heard*: the Pro DJ Link beats it sends as master go out when the beat reaches
 the PA, and it follows a master by its audible position. Two synced decks then
 land on the same beat at the PA. Measure the value, with the reference click,
@@ -499,19 +527,25 @@ not the audio network.
 ### Recording
 
 The recorder always records the Core's **REC bus**, never a separate mix, on
-every deck host. A **USB stick** (or disk) with a filesystem is mounted at
-`/media/a3-usb` when plugged in and unmounted after it has been idle; takes go
-to `A3-recordings/` on it, otherwise to the local recordings folder. The
-record button shows **USB** or **LOCAL**, before and during a take. Pulling
-the stick mid-take stops the take with a message, and what was written stays
-a playable FLAC. The **local folder is capped at 100 GB**: a take does not
-start at the cap and a running one stops cleanly when it reaches it, with a
-message. Nothing is ever deleted for you. The stick has no cap but its free
-space.
+every deck host. A **USB stick** (vfat, exFAT or NTFS) is
+mounted at `/media/a3-usb` when plugged in and unmounted after it has been idle;
+takes go to `A3-recordings/` on it, otherwise to the local recordings folder.
+The record button shows where the take goes: **USB**, **LOCAL**, or **USB RO**
+when a stick is in but read-only (the take then goes LOCAL, so you can see it
+did not land on the stick). Problems show on the button's face, not in a
+popup: **STICK GONE** if the stick is pulled mid-take (what was written stays
+a playable FLAC), **WRITE ERR** if writing fails, **100 GB FULL** when the
+**local folder is capped at 100 GB**: a take does not start at the cap and a
+running one stops cleanly when it reaches it. Nothing is ever deleted for you.
+The stick has no cap but its free space.
 
 (stemdeck-audio)=
 
 ## Audio out
+
+This section describes the older single-instance, ten-output mode, which stays
+as the fallback; a deck over AES67 has the 41 channels described
+[above](#stemdeck-one-deck).
 
 A JACK client, `StemDeck`: ten outputs (`deck1_L` … `aux_R`) and the `rec_L/R`
 inputs. Ports and where they land in Core: {ref}`the engine's I/O map <audio-engine-io>`.

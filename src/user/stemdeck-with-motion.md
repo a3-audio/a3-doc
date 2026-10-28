@@ -147,8 +147,12 @@ Set up once:
 2. Give the machine's second socket its address on the audio network.
 3. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
    carry 44.1 kHz.
-4. Set the deck's path latency, and on the shared screen the workspace for the
-   panel ({ref}`path latency <stemdeck-one-deck>`).
+4. Run the installer's **deck-host** role and answer its three questions: the
+   deck letter, the path latency (0 until you have measured it) and the audio
+   socket. It starts the deck with its sender, link map and clock, and sets the
+   panel to follow the workspace
+   ({ref}`what the role does <stemdeck-one-deck>`). Without the role, nothing
+   is linked and the deck is silent on the Core.
 
 On this one screen the panel follows the workspace in front, A³ Motion or the
 deck.
