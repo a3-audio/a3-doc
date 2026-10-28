@@ -498,8 +498,8 @@ Deck A needs no links: the engine makes them. On a machine without an
 engine the instance links its own ports from a **link map**, in the same
 format and with the same code as the engine's map, and never removes a link it
 did not make. It reads `~/.config/StemDeck/links-<letter>.json`, else the file
-named by `STEMDECK_LINK_MAP` (`{X}` in that name is the letter), else it links
-nothing. The package ships `/usr/share/stemdeck/links-aes67.json`, but it is
+named by `STEMDECK_LINK_MAP`, else it links nothing; `{X}` in the map's peer
+names stands for the letter, so one file serves every deck. The package ships `/usr/share/stemdeck/links-aes67.json`, but it is
 only used where `STEMDECK_LINK_MAP` points at it, which the role does. If the
 variable names a missing or unreadable file, StemDeck logs "no links" and
 links nothing. The shipped map links the 41 outputs to the instance's AES67

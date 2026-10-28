@@ -94,7 +94,7 @@ another machine reaches the Core as one AES67 stream per deck, 41 channels
 ({ref}`network audio <ports-audio-network>`). On the **I/O** page each deck has
 a **source** chooser, *Local StemDeck* or *AES67 stream*; it rewrites that
 deck's 41 links in the map, and **Save** applies it. A deck whose links are
-only partly one or the other shows neither. The map stays plain text, so hand
+only partly one or the other shows *Incomplete - pick a source*. The map stays plain text, so hand
 edits remain possible. The engine never picks a source by itself.
 
 The Core's map names the Core's own AES67 sender (`AES67 <hostname> out`), so
