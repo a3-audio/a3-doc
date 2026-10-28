@@ -155,7 +155,7 @@ Core acts on it, then relays or announces it.
 | `/engine/hello` | s | engine | core | the engine's boot id, every 2 s; a new id makes Core replay its state and open the outputs |
 | `/engine/deck/{deck}/audio` | i | engine | core | 1 = every map link of this deck slot is live, 0 = any missing; sent with each hello (every 2 s) and on change. Core counts a deck as present while its hello is fresh and the engine does not report 0 (an engine that never reports counts as 1) |
 | `/stemdeck/{deck}/3d` | f | core | stemdeck | deck k's 3D, 0-1: the desk's 3D of the channel holding deck k, 1 (neutral) while it is on no channel |
-| `/stemdeck/{deck}/present` | i | core | mixer, desk, motion | 1 while deck k's hello is fresh (5 s at most), else 0 |
+| `/stemdeck/{deck}/present` | i | core | mixer, desk, motion | 1 while deck k's hello is fresh (5 s at most) and the engine does not report its audio missing (engine.deck-audio), else 0 |
 | `/stemdeck/{deck}/hello` | s | stemdeck | core | a StemDeck instance names the deck it plays (host), at start and every 2 s; device.hello carries no deck number |
 | `/aux-return/cue/led` | f | core | mixer, desk, motion | the aux return's cue lamp, 1 = on |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX (StemDeck's own cue bus 6 is gone since 2026-10-07: a channel is cued through its own bus); stem N reaches only bus N and 5 (AUX): StemDeck and Core refuse a switch onto another bus |
