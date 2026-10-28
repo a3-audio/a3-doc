@@ -164,31 +164,32 @@ that is not on the ring comes back on A. Several stems on one channel, or a
 stem on another channel (older StemDecks): Core keeps the lowest and puts a
 foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
 
-### The aux return
+### The FX Return
 
-![The return's selector: STEM at the left with a loud bar and the bracket over it, because stem mode plays; ANALOG in the middle with a low bar; at the right, behind a thin line, the CUE field, filled because the return is cued, with the cursor arrow over it](pics_user/a3-mix-return-selector.png)
+![The FX Return's selector (this picture is from before the rename and still reads STEM where the desk now shows FX RTN): FX RTN at the left with a loud bar and the bracket over it, because stem mode plays; ANALOG in the middle with a low bar; at the right, behind a thin line, the CUE field, filled because the return is cued, with the cursor arrow over it](pics_user/a3-mix-return-selector.png)
 
-*Bracket: STEM plays. ANALOG quiet. CUE filled: the return is cued.*
+*Bracket: FX RTN plays. ANALOG quiet. CUE filled: the return is cued.*
 
-The return plays **STEM** (StemDeck's AUX bus) or **ANALOG** (analog 11/12),
-never both; Core opens one in the engine and shuts the other. Meters: **STEM**
+The FX Return plays StemDeck's AUX bus (the left choice, **FX RTN**) or
+**ANALOG** (analog 11/12), never both; Core opens one in the engine
+and shuts the other. Meters: **FX RTN**
 (louder side of the AUX bus; older StemDecks: the loudest stem on the return),
 **ANALOG** (`aux_L/R`), and the **CUE** field (filled while cued). Turn:
-STEM → ANALOG → CUE. Push:
+FX RTN → ANALOG → CUE. Push:
 
 - **CUE:** return cue on/off, on the cue side of CUE/MIX.
-- **STEM, stem mode:** the return plays StemDeck's AUX bus; analog 11/12 is
+- **FX RTN, stem mode:** the FX Return plays StemDeck's AUX bus; analog 11/12 is
   shut. Every stem that no channel plays goes to the return
   (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
   a stem a channel lets go returns to it. If you switch a free stem's **A**
   off in StemDeck, Core undoes it after about 0.3 s.
 - **ANALOG, analog mode:** the return plays the analog inputs 11/12; StemDeck's
-  AUX is shut. The free stems stay on AUX, unheard, so switching back to STEM
-  brings them back at once; the STEM meter keeps showing them.
+  AUX is shut. The free stems stay on AUX, unheard, so switching back to FX RTN
+  brings them back at once; the FX RTN meter keeps showing them.
 
 ```{note}
-In engine mode the left choice is **DELAY**, not STEM: the return plays the
-delay's output, scaled by the return knob ({ref}`the engine <audio-engine>`).
+In engine mode the left choice is still the **FX Return** (**FX RTN** on the
+display), but it plays the delay's output, scaled by the return knob ({ref}`the engine <audio-engine>`).
 Which stems feed the delay is set per stem in StemDeck (AUX), not by the
 return. ANALOG is unchanged.
 ```
