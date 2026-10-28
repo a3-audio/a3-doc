@@ -6,8 +6,8 @@ Source: [a3-mixer](https://github.com/a3-audio/a3-mixer).
 
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
-The drawing predates the V02 panel: **AUX SEND** and **AUX RETURN** exist but
-have no number.
+The drawing predates the V02 panel: **AUX SEND** and **FX RETURN** (printed
+AUX RETURN) exist but have no number.
 
 ## The channel strip
 
@@ -44,7 +44,7 @@ One filter for all channels; a strip's **FX** key sends it through.
 | 15 | **CUE/MIX** | cue (left) to mix (right), constant power | |
 | 16 | **BOOTH** | monitor outputs | −inf … 0 dB |
 | 17 | **MASTER** | PA outputs | −inf … 0 dB |
-| – | **AUX RETURN** | the fifth stereo input: analog 11/12 or StemDeck's AUX, as [its display](#a3mix-displays) selects | 0 dB at full travel |
+| – | **FX RETURN** | the master of the delay channel: the delay's output into PA, booth and recording | 0 dB at full travel |
 | 18 | **DISPLAY** | BPM, work in progress | |
 | 19 | **OUTPUT VU** | `main_sub`, `main_top1` … `main_top7`, one 32-row column each | |
 
@@ -59,8 +59,9 @@ Each channel feeds the phones bus (`enc_phones`) twice in the engine: a
 - A channel's cue is its **CUE** key (desk or A³ Motion), nothing else.
 - It is always the channel's own cue, analog or stem, with its filter and EQ:
   push another stem on and the cue follows.
-- **The return has its own cue** (CUE field on [its display](#a3mix-displays));
-  on the mix side it is always heard.
+- **The FX Return has its own cue**, pre-fader like a channel's (CUE field on
+  {ref}`its display <a3mix-fx-return>`); on the mix side the phones get it after the
+  RETURN pot.
 - StemDeck has no cue: cue the channel a stem is on, or the return for a stem
   on AUX.
 
@@ -145,46 +146,54 @@ between channels. A stem on a channel shuts its analog input.
 (silent). A: a little analog level. Ticks: −9 and −3 dBFS, the LED scale. The
 picture still shows the older nine-meter selector.*
 
-Three meters under **D1 | D2 | A**: deck 1's stem N, deck 2's stem N, and
-**A**, the channel's analog input (always metered, louder side of
-`analog<N>_L/R`, `/vu/1`–`/vu/8`). Not StemDeck's A switch. The **bracket**
+Three meters under **A | B | ST**: deck A's stem N, deck B's stem N, and
+**ST**, the channel's analog input (always metered, louder side of
+`analog<N>_L/R`, `/vu/1`–`/vu/8`). The **bracket**
 marks what plays; the **arrow** is the cursor. On the virtual desk, tapping a
 meter turns the cursor there.
+
+In engine mode the display has one bar per slot, **A B C D ST**. The bar of
+the deck that plays on the channel shows that deck's **W**, the omni channel
+of its B-format signal (the louder side of `in<N>_pre_L/R`,
+`/vu/51`–`/vu/58`), with the same scale and ballistics as the others. That
+meter sits after the channel's trim and fader, so the bar follows the fader.
+The other deck bars keep showing the stem levels, and **ST** the analog
+input. While **ST** plays, nothing changes.
 
 | Action | Result |
 | :--- | :--- |
 | turn | moves the cursor round the ring of three; switches nothing |
-| push a stem | it becomes the only input; the other deck's stem N goes to the return (AUX) |
-| push the stem that plays | off; the channel plays analog (STEM mode: the stem goes to the return) |
-| push **A** while a stem plays | same as above |
-| push **A** while analog plays | nothing |
+| push a stem | it becomes the only input; the other deck's stem N goes to StemDeck's AUX bus (the delay's send) |
+| push the stem that plays | off; the channel plays analog |
+| push **ST** while a stem plays | same as above |
+| push **ST** while analog plays | nothing |
 
 Core remembers no last stem; the cursor stays after a push. A stored cursor
 that is not on the ring comes back on A. Several stems on one channel, or a
 stem on another channel (older StemDecks): Core keeps the lowest and puts a
 foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
 
-### The aux return
+(a3mix-fx-return)=
 
-![The return's selector: STEM at the left with a loud bar and the bracket over it, because stem mode plays; ANALOG in the middle with a low bar; at the right, behind a thin line, the CUE field, filled because the return is cued, with the cursor arrow over it](pics_user/a3-mix-return-selector.png)
+### The FX Return
 
-*Bracket: STEM plays. ANALOG quiet. CUE filled: the return is cued.*
+The FX Return is the master of the delay channel. Everything that reaches the
+delay gets there through a send: each channel's **AUX** pot (an analog
+channel's input is encoded at its position, so the echo keeps its direction)
+and StemDeck's AUX bus. The return has no source to choose.
 
-The return plays **STEM** (StemDeck's AUX bus) or **ANALOG** (analog 11/12),
-never both; Core opens one in the engine and shuts the other. Meters: **STEM**
-(louder side of the AUX bus; older StemDecks: the loudest stem on the return),
-**ANALOG** (`aux_L/R`), and the **CUE** field (filled while cued). Turn:
-STEM → ANALOG → CUE. Push:
+- **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
+  level into PA, booth and recording. At zero the delay is silent there.
+- **Meter**: one bar under **FX RTN**, the delay's output after the RETURN
+  pot (`aux_L/R`).
+- **CUE**: push the return's encoder (on the virtual desk, or tap the CUE
+  field). The field is filled while the cue is on. The cue is pre-fader: you
+  hear the delay in the phones even with the RETURN pot down, on the cue side
+  of CUE/MIX. On the mix side the phones get the delay after RETURN, like any
+  channel.
 
-- **CUE:** return cue on/off, on the cue side of CUE/MIX.
-- **STEM, stem mode:** the return plays StemDeck's AUX bus; analog 11/12 is
-  shut. Every stem that no channel plays goes to the return
-  (StemDeck's **A** on that stem). A stem a channel takes leaves the return,
-  a stem a channel lets go returns to it. If you switch a free stem's **A**
-  off in StemDeck, Core undoes it after about 0.3 s.
-- **ANALOG, analog mode:** the return plays the analog inputs 11/12; StemDeck's
-  AUX is shut. The free stems stay on AUX, unheard, so switching back to STEM
-  brings them back at once; the STEM meter keeps showing them.
+Turning the return's encoder does nothing. The analog inputs 11/12 are no
+longer a return; nothing plays them.
 
 ### How the meters move
 
@@ -193,8 +202,8 @@ the bar is **hatched** for a second; a clean full bar stays solid.
 
 ### Without StemDeck
 
-- Core keeps each cursor and the return's mode and cue across restarts; a
-  cursor starts on A.
+- Core keeps each cursor and the return's cue across restarts; a cursor
+  starts on A.
 - Without StemDeck, turning works, pushing switches nothing, all channels play
   analog. A fresh StemDeck takes no channel (stems start on AUX).
 - A click on StemDeck's own bus switch moves the bracket too.

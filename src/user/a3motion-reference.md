@@ -276,7 +276,7 @@ shut; double tap shuts it), **CUE**, **FX** — as on [CHMIX](#motion-chmix).
 | **BTH** | booth level |
 | **MIX** | phones blend, cue ↔ master. Double tap: middle |
 | **PHN** | phones level |
-| **RET** | FX return. Double tap: none |
+| **FX RTN** | the FX Return, the delay's master. Double tap: none |
 | **FX FREQ**, **FX RES** | the shared filter. Double tap: FREQ middle, RES none |
 | **FX MODE** | **HPF** / **LPF** |
 

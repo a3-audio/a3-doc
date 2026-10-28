@@ -43,10 +43,10 @@ screen's ENGINE workspace). It reaches the engine over its local control port
 | Page | What it is for |
 | :--- | :--- |
 | **AUDIO** | the sound device. On JACK the rate and quantum are read-only: the server owns them |
-| **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened |
+| **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
 | **CHANNELS** | how many channels (1–128), with the load beside it |
-| **ZONES** | which speaker layout (spatial data) is used. There is no layout editor |
-| **I/O** | where each engine port connects, see below |
+| **ZONES** | which speaker layout (spatial data) is used. There is no layout editor. Also **PHONES HEADPHONE EQ**: off, or the correction of one headphone model, applied to the phones only (rec has none) |
+| **I/O** | where each engine port connects, and for each deck its source, see below |
 | **CALIBRATION** | the trim of each output zone |
 | **FILTER** | the DJ filter type, SVF or Ladder |
 
@@ -76,18 +76,30 @@ interface is the JACK client `system` (PipeWire, 44.1 kHz, quantum 128):
 | Engine port | Connected to |
 | :--- | :--- |
 | `analog_1` … `analog_8` | `system:capture_1` … `capture_8`: the A³ Mixer's four channels, stereo |
-| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: the aux return's analog input |
+| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: linked, but nothing plays them since the FX Return became the delay's master |
 | `main_sub`, `main_top_1` … `main_top_4` | `system:playback_1` … `playback_5` |
 | `phones_L`, `phones_R` | `system:playback_9`, `playback_10` |
 | `booth_sub`, `booth_top_1` … `booth_top_4` | `system:playback_11` … `playback_15` |
-| `rec_L` | `StemDeck:rec_L` and `beat-analyzer:bpm_1` (the beat-analyzer's tempo input in clock mode EXT, the first channel of the pair only) |
-| `rec_R` | `StemDeck:rec_R` |
-| `deckA_1` … `deckA_16`, `deckA_cue_L/R`, `deckA_aux_L/R` | `StemDeck-A:bformat_1` … `bformat_16`, `cue_L/R`, `aux_L/R` |
-| `deckB_…` | the same for `StemDeck-B` |
+| `rec_L` | `StemDeck-A:rec_L`, the Core's AES67 channel 1 and `beat-analyzer:bpm_1` (the beat-analyzer's tempo input in clock mode EXT, the first channel of the pair only) |
+| `rec_R` | `StemDeck-A:rec_R` and the Core's AES67 channel 2 |
+| `deckA_1` … `deckA_16`, `deckA_aux_1` … `16`, `deckA_cue_1` … `9` | `StemDeck-A:bformat_1` … `16`, `aux_1` … `16`, `cue_1` … `9` |
+| `deckB_…` | the same 41 ports, from the AES67 stream of deck B: `AES67 deck B:receive_MAIN1` … `receive_CUE9` |
 
-A StemDeck on another machine reaches the Core over AES67; its ports appear in
-the graph as a client named after the stream ({ref}`network audio
-<ports-audio-network>`).
+The **REC bus is the only recording source**: it feeds the deck recorders
+(StemDeck's `rec_L/R`) and AES67 channels 1 and 2, which a deck on another
+machine records from. Nothing else is linked to a recorder.
+
+**Deck A is local, deck B comes over the network** by default: a StemDeck on
+another machine reaches the Core as one AES67 stream per deck, 41 channels
+({ref}`network audio <ports-audio-network>`). On the **I/O** page each deck has
+a **source** chooser, *Local StemDeck* or *AES67 stream*; it rewrites that
+deck's 41 links in the map, and **Save** applies it. A deck whose links are
+only partly one or the other shows *Incomplete - pick a source*. The map stays plain text, so hand
+edits remain possible. The engine never picks a source by itself.
+
+The Core's map names the Core's own AES67 sender (`AES67 <hostname> out`), so
+another host copies the file to `~/.config/a3/engine/engine.json` and edits the
+host name.
 
 ## Calibration and the gate
 
@@ -108,11 +120,12 @@ weights), so nothing clicks.
 
 ## Decks
 
-In engine mode {ref}`StemDeck <stemdeck-at-a-glance>`'s decks arrive as
-**16-channel B-format**, straight into Core: StemDeck does the encoding and
-the engine does not encode the deck again. Deck k listens on
-`stemdeck.osc` + (k − 1), so deck B uses 7781. The decks are separate
-StemDeck instances, started by the installer, not by `a3-engine`.
+In engine mode {ref}`StemDeck <stemdeck-one-deck>`'s decks arrive as
+**41 channels each**: 16 main (B-format, third order), 16 aux (B-format) and 9
+cue (B-format, second order). StemDeck does the encoding and the engine does
+not encode a deck again. Deck k listens on `stemdeck.osc` + (k − 1), so deck B
+uses 7781. The decks are separate StemDeck instances, started by the
+installer, not by `a3-engine`.
 
 - **A channel takes analog or a deck**, never both. Analog ↔ deck crossfades
   over 10 ms; deck ↔ deck dips out and in.
@@ -122,14 +135,39 @@ StemDeck instances, started by the installer, not by `a3-engine`.
 - On a deck channel, **A³ Motion shows "deck A" or "deck B"** and sends no
   positions, 3D, FREQ or Q for it. The desk's 3D of the channel that holds deck k
   is relayed by Core to that StemDeck (`/stemdeck/{deck}/3d`); the engine applies
-  no 3D to a deck channel. Echoes keep the stems' positions: the deck's
-  AUX send takes all 16 channels.
-- **Stem cue.** Each deck's cue pair goes into the phones, weighted by the
-  CUE↔MIX knob alone, whether or not the deck is on a channel, so you can
-  pre-listen before you bring a deck in.
-- The return can be the analog return pair or a deck's AUX pair.
+  no 3D to a deck channel.
+- **Aux is per stem.** Only the stems you send in StemDeck (their AUX knobs)
+  are on the deck's aux bus, at their positions. The bus goes through the
+  channel's own TRIM, EQ, filter and VOLUME and then the desk's **AUX pot**,
+  which scales the whole deck aux, into the delay. The deck's main 16 channels
+  never reach the delay. A deck on no channel feeds no delay.
+- **Stem cue.** Each deck's 9 cue channels go into the phones before the
+  phones decoder, weighted by the CUE↔MIX knob alone, whether or not the deck is
+  on a channel, so you can pre-listen before you bring a deck in. The cue
+  shares the decoder, the headphone EQ and PHONES with the desk's cue; StemDeck
+  has no decoder of its own on the rig. The cue is second order, so it is spatially as sharp as second order.
+- **The FX Return is the master of the delay channel.** Its input is the
+  delay's output; nothing else reaches it. Every analog channel feeds the
+  delay through its AUX send, encoded at the channel's position (B-format), and
+  every deck through its aux bus. RETURN scales the delay into main, booth and
+  rec; at 0 it is silent there. The phones take the return like a channel:
+  after RETURN times MIX, plus a pre-fader cue (the return's CUE) at the cue
+  weight. Its meter, `aux_L/R` (`/vu/35`–`/vu/36`), is the delay's output after
+  RETURN, its W on both sides. There is no return source any more: analog
+  11/12 plays nowhere.
+- **An old `engine.json` with `returnAnalogPair`** loads: the key is ignored,
+  listed once (`ignored retired key engine.returnAnalogPair`) and not written
+  again. Pair 6 can carry a channel now.
+- **A deck that is missing** (stream gone, StemDeck not running) is silent and
+  listed on STATUS. The engine tells Core within about 2 s; Core then marks the
+  deck absent on the desk and Motion, and the channel stays on the deck. When
+  the stream returns the engine links it again by itself.
 - **The decks are StemDeck's B-format instances** (`stemdeck@A`, and one per
   further deck); the old two-deck StemDeck unit is kept off.
+- **An old `engine.json`** may still hold the retired links `deck<X>_cue_L/R`
+  and `deck<X>_aux_L/R`. They are dropped on load, one line each on STATUS, and
+  never make the file invalid. The new aux and cue links are not guessed: the
+  deck shows them missing until its source is chosen on the I/O page.
 
 ## Starting it by hand
 

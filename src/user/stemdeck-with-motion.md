@@ -43,7 +43,7 @@ engine spreads it the same way (ports: {ref}`the I/O map <audio-engine-io>`):
 | StemDeck output | Arrives on | What is on it |
 | :--- | :--- | :--- |
 | `deck1_L/R` … `deck4_L/R` (buses 1–4) | **channels 1–4** | stem N of either deck, switched to that number |
-| `aux_L/R` | the **Return**, at the **RET** pot, in STEM mode (ANALOG mode plays analog 11/12) | stems switched to **A** |
+| `aux_L/R` | the **delay**, and through it the **FX Return** (the **FX RTN** pot) | stems switched to **A** |
 
 A stem then runs through its channel's strip like any deck: gain, EQ and fader
 on the desk; 3d, freq and Q on A³ Motion.
@@ -128,27 +128,34 @@ bring it back on the one: it re-enters already in motion.
 
 ## StemDeck on another machine
 
-The machine's buses travel to the Core as an **AES67** stream on the audio
-network ({ref}`ports <ports-audio-network>`). Core and StemDeck machine need
-a cable between their second sockets (or a switch) and an address each on
-`192.168.9.0/24`; the Core's is `192.168.9.10/24`. The Core's package runs the
-PTP clock and its own AES67 sender, and the engine's I/O map ({ref}`I/O map <audio-engine-io>`) is where the
-StemDeck stream's ports are connected on the Core. The shipped map names no
-AES67 port yet: connect them on the I/O page and **Save**.
+On the rig, deck B runs on the second machine, beside A³ Motion. Its deck
+travels to the Core as one **AES67** stream of 41 channels on the audio network
+({ref}`ports <ports-audio-network>`); the Core's REC bus comes back on
+channels 1 and 2 for the recorder. Both machines need a cable between their
+second sockets (or a switch) and an address each on `192.168.9.0/24`; the
+Core's is `192.168.9.10/24`. The Core's engine takes the stream from its I/O
+map (deck B's source is *AES67 stream* by default,
+{ref}`I/O map <audio-engine-io>`), and the Core receives it outside the PTP
+clock.
 
-On the StemDeck machine, PipeWire runs the AES67 stream; set it up once:
+The deck machine needs only the StemDeck package, no a3-core: it ships the
+deck's sender and link map ({ref}`one deck per instance <stemdeck-one-deck>`).
+Set up once:
 
 1. Tell StemDeck where Core is: `~/.config/a3/core`
    ({ref}`StemDeck on radla <osc-radla>`).
-2. Give the machine's second socket its address on the audio network, and let
-   PipeWire send and receive AES67 on it with PTP as a client of the Core's
-   clock (the machine's own PipeWire configuration, not part of StemDeck).
-3. Load and activate the StemDeck package's `stemdeck-without-core.xml` in
-   QjackCtl **on the StemDeck machine** once (a StemDeck tool; the Core has no
-   QjackCtl). It cables StemDeck's buses to the machine's stream and the Core's
-   stream to the rec input. Nothing connects itself.
-4. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
+2. Give the machine's second socket its address on the audio network.
+3. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
    carry 44.1 kHz.
+4. Run the installer's **deck-host** role and answer its three questions: the
+   deck letter, the path latency (0 until you have measured it) and the audio
+   socket. It starts the deck with its sender, link map and clock, and sets the
+   panel to follow the workspace
+   ({ref}`what the role does <stemdeck-one-deck>`). Without the role, nothing
+   is linked and the deck is silent on the Core.
+
+On this one screen the panel follows the workspace in front, A³ Motion or the
+deck.
 
 (stemdeck-with-motion-troubleshooting)=
 

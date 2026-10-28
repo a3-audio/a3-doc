@@ -48,7 +48,13 @@ Audio between machines runs on the second socket, apart from OSC:
 | Core sends | **12 channels**, stream `AES67 <hostname> out`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.150.243`, port 5004) |
 | Announcement | SAP on `239.255.255.255`, port 9875; receivers find the stream by its name |
 | Who drives the stream | the audio interface: the samples leave unconverted and the engine is never pulled onto the PTP clock |
-| Other machines | a StemDeck on its own machine sends its buses as a stream of its own and receives the Core's ({ref}`setup <stemdeck-with-motion-remote-machine>`) |
+| Deck streams | one per deck, sent by the machine that runs the deck: **41 channels** (MAIN1–16, AUX1–16, CUE1–9), stream `AES67 deck <X>`, 44.1 kHz, 24 bit, packet time **0.25 ms** (1393 bytes on the wire, so every packet fits a 1500-byte frame), **multicast**, one group per deck (`239.69.150.244` deck A, `.245` deck B), port 5004 |
+| Receive rule | the Core receives deck streams **outside** the PTP clock: the sound card stays the Core's clock and the stream is resampled into it, so a deck stream never pulls the engine. The receiver needs an MTU of 1500 |
+| Deck host | a machine that runs a deck (a3nuc2 for deck B) runs its own sender, unit `a3-aes67-deck@<X>`, which the StemDeck package ships. The sender needs the package's base unit `stemdeck-aes67.service` (PTP client and receiver), which stays off where a3-core's own AES67 unit exists, and the audio socket from `STEMDECK_AUDIO_PORT`; the installer's deck-host role sets both up ({ref}`StemDeck <stemdeck-one-deck>`). The sender sends unconverted. It also receives the Core's stream, channels 1 and 2 of which are the REC bus |
+| Latency | a deck on another machine arrives about 18 ms later than a local one (calculated, not measured). StemDeck's *path latency* setting ({ref}`StemDeck <stemdeck-one-deck>`) makes up for it |
+
+**EEE is off** on the audio socket of every machine that has one, a deck host
+included: with it on the link drops every minute or two.
 
 PTP and the AES67 sender start only when a second socket is configured
 (`audio-port`); without one the Core has neither and uses one network. The
@@ -80,7 +86,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | desk | vu | any (0.0.0.0) | 7774 | the engine's and StemDeck's /vu bundles, forwarded unchanged by Core (core.vu-relay) |
 | beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | engine | control | local (127.0.0.1) | 9005 | the a3-core window's view of the engine (HTTP JSON, loopback only; not OSC) |
-| engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
+| engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.cue, delay.bpm, engine.open |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS, several viewers on one encode (OBS, the pro-DJ apps) (listener, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
@@ -89,6 +95,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
 | aes67 | stream | aes67-core (239.69.150.243) | 5004 | the Core's 12 channels as AES67 (RTP, L24, 44.1 kHz, 0.5 ms packets), multicast on the audio socket; not OSC |
+| aes67 | deck | aes67-deck-{deck} (239.69.150.244, 239.69.150.245) | 5004 | one deck's 41 channels: MAIN1-16, AUX1-16, CUE1-9 (L24, 44.1 kHz, ptime 0.25 ms), sess.name "AES67 deck <X>"; the receiver needs net.mtu = 1500 (the default 1280 truncates the 1365-byte RTP packet); not OSC |
 | aes67 | sap | sap (239.255.255.255) | 9875 | AES67 stream announcements (SAP/SDP), multicast on the audio socket, every sender and receiver; not OSC |
 | ptp4l | event | ptp (224.0.1.129) | 319 | PTP event messages; the Core is master on the audio socket; not OSC |
 | ptp4l | general | ptp (224.0.1.129) | 320 | PTP general messages (announce, follow-up); not OSC |
@@ -120,7 +127,7 @@ what the listener takes. Sender `iem` is the IEM EnergyVisualizer, which no long
 | core | `desk.vu` | vu |
 | core | `mixer.osc` | vu |
 | core | `radla.vu` | /vu |
-| core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
+| core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.cue, delay.bpm, engine.open |
 | core | `stemdeck.osc` | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
 | engine | `core.osc` | every controller's messages, and /beat from the analyzer |
