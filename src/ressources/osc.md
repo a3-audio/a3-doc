@@ -168,7 +168,7 @@ Core acts on it, then relays or announces it.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, desk, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, desk, prodj, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | engine, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n, measured by the engine at its meter points and sent to Core, which forwards them. 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (the engine's analog inputs 1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the FX Return: the delay's output after RETURN, its W on both sides (L and R read the same; analog inputs 11-12 feed no return); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the engine's from Core (core.vu-relay), unchanged |
+| `/vu/{n}` | ff | engine, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n, measured by the engine at its meter points and sent to Core, which forwards them. 41-50 come from StemDeck, 9-10 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (the engine's analog inputs 1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the FX Return: the delay's output after RETURN, its W on both sides (L and R read the same; analog inputs 11-12 feed no return); 37-40 deck_a ... deck_d each deck's W as it reaches the engine (deck slots 1-4, before any channel), whatever channel plays it -- the desk's deck bars; 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the engine's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
 ### Renamed addresses
@@ -255,10 +255,10 @@ channel plays.
 | `/vu/34` | rec_R |
 | `/vu/35` | aux_L |
 | `/vu/36` | aux_R |
-| `/vu/37` | free67 |
-| `/vu/38` | free68 |
-| `/vu/39` | free69 |
-| `/vu/40` | free70 |
+| `/vu/37` | deck_a |
+| `/vu/38` | deck_b |
+| `/vu/39` | deck_c |
+| `/vu/40` | deck_d |
 | `/vu/41` | stem_a1 |
 | `/vu/42` | stem_a2 |
 | `/vu/43` | stem_a3 |
