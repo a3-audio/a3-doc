@@ -152,6 +152,14 @@ Three meters under **A | B | ST**: deck A's stem N, deck B's stem N, and
 marks what plays; the **arrow** is the cursor. On the virtual desk, tapping a
 meter turns the cursor there.
 
+In engine mode the display has one bar per slot, **A B C D ST**. The bar of
+the deck that plays on the channel shows that deck's **W**, the omni channel
+of its B-format signal (the louder side of `in<N>_pre_L/R`,
+`/vu/51`–`/vu/58`), with the same scale and ballistics as the others. That
+meter sits after the channel's trim and fader, so the bar follows the fader.
+The other deck bars keep showing the stem levels, and **ST** the analog
+input. While **ST** plays, nothing changes.
+
 | Action | Result |
 | :--- | :--- |
 | turn | moves the cursor round the ring of three; switches nothing |
