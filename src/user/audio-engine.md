@@ -76,7 +76,7 @@ interface is the JACK client `system` (PipeWire, 44.1 kHz, quantum 128):
 | Engine port | Connected to |
 | :--- | :--- |
 | `analog_1` … `analog_8` | `system:capture_1` … `capture_8`: the A³ Mixer's four channels, stereo |
-| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: the aux return's analog input |
+| `analog_11`, `analog_12` | `system:capture_11`, `capture_12`: linked, but nothing plays them since the FX Return became the delay's master |
 | `main_sub`, `main_top_1` … `main_top_4` | `system:playback_1` … `playback_5` |
 | `phones_L`, `phones_R` | `system:playback_9`, `playback_10` |
 | `booth_sub`, `booth_top_1` … `booth_top_4` | `system:playback_11` … `playback_15` |
@@ -146,13 +146,18 @@ installer, not by `a3-engine`.
   on a channel, so you can pre-listen before you bring a deck in. The cue
   shares the decoder, the headphone EQ and PHONES with the desk's cue; StemDeck
   has no decoder of its own on the rig. The cue is second order, so it is spatially as sharp as second order.
-- **The FX Return is analog or the delay.** Source **ANALOG** is the analog
-  pair 11/12, with the delay at unity as before. The other source plays the
-  delay's output instead, scaled by RETURN, wherever the return goes (main,
-  booth, rec, phones), and shuts the analog pair. The change between them
-  takes 10 ms. The return's CUE key does not touch the delay. The desk calls
-  the return the FX Return in every mode (on its narrow display: FX RTN); it
-  no longer says STEM or DELAY.
+- **The FX Return is the master of the delay channel.** Its input is the
+  delay's output; nothing else reaches it. Every analog channel feeds the
+  delay through its AUX send, encoded at the channel's position (B-format), and
+  every deck through its aux bus. RETURN scales the delay into main, booth and
+  rec; at 0 it is silent there. The phones take the return like a channel:
+  after RETURN times MIX, plus a pre-fader cue (the return's CUE) at the cue
+  weight. Its meter, `aux_L/R` (`/vu/35`–`/vu/36`), is the delay's output after
+  RETURN, its W on both sides. There is no return source any more: analog
+  11/12 plays nowhere.
+- **An old `engine.json` with `returnAnalogPair`** loads: the key is ignored,
+  listed once (`ignored retired key engine.returnAnalogPair`) and not written
+  again. Pair 6 can carry a channel now.
 - **A deck that is missing** (stream gone, StemDeck not running) is silent and
   listed on STATUS. The engine tells Core within about 2 s; Core then marks the
   deck absent on the desk and Motion, and the channel stays on the deck. When

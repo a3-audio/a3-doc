@@ -8,7 +8,7 @@
 | :--- | :--- |
 | panel → script (USB serial) | buttons, faders, encoders |
 | script → Core (OSC) | the same, as A³ addresses |
-| Core, beat-analyzer → script | input meters `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`, louder side); analog inputs `analog1_L` … `analog4_R` (`/vu/1`–`/vu/8`); outputs `main_sub`, `main_top1`–`7` (`/vu/11`–`/vu/18`); lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`); `/beat`; selector state (`/channel/{ch}/stem…`, `/aux-return/stem…`); display meters `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`), `stem_aux_L/R` (`/vu/49`–`/vu/50`), `aux_L/R` |
+| Core, beat-analyzer → script | input meters `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`, louder side); analog inputs `analog1_L` … `analog4_R` (`/vu/1`–`/vu/8`); outputs `main_sub`, `main_top1`–`7` (`/vu/11`–`/vu/18`); lamps (`/channel/{ch}/cue/led`, `/channel/{ch}/filter/led`, `/filter/led`); `/beat`; selector state (`/channel/{ch}/stem…`, the FX Return's `/aux-return/cue/led`); display meters `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`), the FX Return `aux_L/R` |
 | script → panel (USB serial) | LEDs and VU meters |
 | script → displays (I2C) | five OLEDs, below |
 
@@ -27,8 +27,8 @@ What they show: {ref}`the desk's input selectors <a3mix-displays>`. Two parts:
   the bracket (playing stem = lowest mask bit, else A = `ANALOG_INPUT`, 8). The
   ninth slot is `LAST_SLOT_METERS` (2) wide, so bars keep 10 of 11 pixels on
   128 px; A's bar is centred in it, and the return's CUE field uses the same
-  slot. `return_picture()` draws STEM and ANALOG bars, bracket, CUE field and
-  arrow. `_bands()` gives three row bands: headings, arrow (`ARROW_ROWS` 5,
+  slot. `return_picture()` draws the FX Return: one bar under FX RTN and the
+  CUE field, no arrow and no bracket. `_bands()` gives three row bands: headings, arrow (`ARROW_ROWS` 5,
   dark row above and below), meters to the bottom (rows 19–63 of 64). Any
   display size.
 - **`a3_mixer_displays.py`** draws it with PIL onto the SSD1306s via the
@@ -51,7 +51,7 @@ How:
   side.
 - **`Ballistics`**: instant rise, `METER_FALL_DB_PER_SECOND` (20) over 48 dB,
   time-based; no peak marks.
-- **STEM** uses `stem_aux_L/R` once heard, else the loudest stem on the return.
+- **FX RTN** is `aux_L/R`, the FX Return after RETURN.
 - **Redraw only on pixel change** (`pixel_key()`: bars, cursor, CUE state,
   bracket, headings). `show_channel()` posts only when the playing stem
   changes. About 17 draws/s instead of 50.

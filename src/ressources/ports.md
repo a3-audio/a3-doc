@@ -86,7 +86,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | desk | vu | any (0.0.0.0) | 7774 | the engine's and StemDeck's /vu bundles, forwarded unchanged by Core (core.vu-relay) |
 | beat-analyzer | clock | any (0.0.0.0) | 7775 | /tap, /clockmode, and /beat from Motion in clock mode 0 |
 | engine | control | local (127.0.0.1) | 9005 | the a3-core window's view of the engine (HTTP JSON, loopback only; not OSC) |
-| engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
+| engine | osc | local (127.0.0.1) | 9004 | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.cue, delay.bpm, engine.open |
 | x11vnc | vnc | any (0.0.0.0) | 5901 | the Core's screen (VNC, not OSC) |
 | screencast | stream | any (0.0.0.0) | 9930 | the screen's picture as MPEG-TS, several viewers on one encode (OBS, the pro-DJ apps) (listener, not OSC) |
 | radla | osc | radla (192.168.43.96) | 9000 | /beat |
@@ -127,7 +127,7 @@ what the listener takes. Sender `iem` is the IEM EnergyVisualizer, which no long
 | core | `desk.vu` | vu |
 | core | `mixer.osc` | vu |
 | core | `radla.vu` | /vu |
-| core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.source/cue, delay.bpm, engine.open |
+| core | `engine.osc` | a3-engine: Core's words in engine mode -- channel.gain/eq.*/volume/3d/filter.frequency/filter.q/aux-send/cue/filter/azimuth/elevation/source, filter.frequency/resonance/mode, master.*, aux-return.cue, delay.bpm, engine.open |
 | core | `stemdeck.osc` | Core's bus switches and its request for all of them; a one-deck instance k (--deck A..D) listens on this port + (k - 1): A 7780, B 7781, C 7782, D 7783 (Core's deck relay sends deck k there); the two-deck StemDeck keeps 7780 |
 | core | `devices.announce` | Core's /core/here broadcast: where every device fetches the truth |
 | engine | `core.osc` | every controller's messages, and /beat from the analyzer |

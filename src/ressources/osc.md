@@ -131,7 +131,7 @@ Core acts on it, then relays or announces it.
 | `/channel/{ch}/elevation` | f | motion | core (Core passes it on to prodj) | the channel's height, degrees; live only to the pro-DJ apps followed; a recall replays the last one to everyone, as before |
 | `/channel/{ch}/stem/turn` | i | mixer, desk, prodj | core | the channel's encoder turned by this many clicks (signed): moves its selector's cursor over the channel's three positions in a ring -- on channel N: deck 1's stem N, deck 2's stem N, then A, the analog input; left from deck 1's stem N is A; switches nothing |
 | `/channel/{ch}/stem` | i | core | mixer, desk, motion | what the channel plays: while its source is STEM, the stems on its bus as a bit mask of pairs 1-8 (bit 0 = pair 1 = deck A stem 1); 0 = the analog input, sent whenever its source is ANALOG, whatever is on its bus; on channel N only bit N-1 (deck 1's stem N) or bit N+3 (deck 2's stem N) |
-| `/channel/{ch}/stem/push` | i | mixer, desk, prodj | core | the channel's encoder pushed: on A, the channel's source becomes ANALOG -- the engine crossfades the channel from its deck input to its analog input (10 ms), StemDeck is not asked and the stem on its bus stays there, unheard; on a stem (deck 1's or deck 2's stem N on channel N), the source becomes STEM and the stem the channel's only input -- the other deck's stem N goes to the return (AUX); on the stem already on its bus nothing moves; without StemDeck a stem push switches nothing, A still does |
+| `/channel/{ch}/stem/push` | i | mixer, desk, prodj | core | the channel's encoder pushed: on A, the channel's source becomes ANALOG -- the engine crossfades the channel from its deck input to its analog input (10 ms), StemDeck is not asked and the stem on its bus stays there, unheard; on a stem (deck 1's or deck 2's stem N on channel N), the source becomes STEM and the stem the channel's only input -- the other deck's stem N goes to StemDeck's AUX bus, the delay's send; on the stem already on its bus nothing moves; without StemDeck a stem push switches nothing, A still does |
 | `/channel/{ch}/stem/cursor` | i | core | mixer, desk, motion | the channel's selector cursor: on channel N one of N-1 (deck 1's stem N), N+3 (deck 2's stem N) and 8 = A, the analog input; a stored cursor outside these comes back as 8 |
 | `/filter/frequency` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the master filter's cutoff (was /fx/frequency) |
 | `/filter/resonance` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the master filter's resonance (was /fx/resonance) |
@@ -141,15 +141,11 @@ Core acts on it, then relays or announces it.
 | `/master/booth` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the booth outputs |
 | `/master/phones-mix` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | cue <-> main in the headphones |
 | `/master/phones-volume` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the headphone level |
-| `/master/aux-return` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | the aux return, the fifth stereo input (was /master/return) |
-| `/aux-return/stem/turn` | i | mixer, desk, prodj | core | the aux return's encoder turned by this many clicks (signed): moves its cursor in a ring along the display, STEM (1) -> ANALOG (0) -> CUE (2) -> STEM; switches nothing |
-| `/aux-return/stem/push` | i | mixer, desk, prodj | core | the aux return's encoder pushed: switches the return to the mode under the cursor; on CUE it toggles the return's cue and switches no mode |
-| `/aux-return/stem` | iiiiiiiii | core | mixer, desk, motion | the aux return's cursor (0 = analog, 1 = stem, 2 = cue), then pairs 1-8: 1 = on StemDeck's AUX bus, i.e. on no channel (heard on the return in stem mode only) |
-| `/aux-return/stem/mode` | i | core | mixer, desk, motion | the FX Return's mode, which chooses its source: 1 = stem (REAPER mode: StemDeck's AUX bus plays on the return; analog 11/12 is shut; engine mode: the delay's output plays on the return), 0 = analog (analog inputs 11/12 play on the return; StemDeck's AUX is shut). Never both. In either mode every stem on no channel is on StemDeck's AUX |
+| `/master/aux-return` | f | mixer, desk, prodj, motion | core (Core passes it on to mixer, desk, motion) | RETURN: the FX Return's level, the master of the delay channel -- it scales the delay's output into main, booth and rec (was /master/return) |
+| `/aux-return/stem/push` | i | mixer, desk, prodj | core | the FX Return's encoder pushed: toggles the FX Return's cue; Core answers with aux-return.cue.led and tells the engine aux-return.cue. Its turn does nothing |
 | `/channel/{ch}/source` | i | core | engine, mixer, desk, motion | the channel's source in engine mode: 0 = analog, k = deck k (1 = A ... 4 = D); from Core's deck selector, to the engine as its switch and to the desk and Motion as the channel-source report |
 | `/channel/{ch}/source/cursor` | i | core | mixer, desk, motion | engine mode: the channel's selector cursor over its ring, 0 = analog, k = deck k (1 = A ... 4 = D); moves on channel.stem.turn, becomes the source on channel.stem.push |
-| `/aux-return/source` | i | core | engine | the aux return's source in engine mode: 0 = analog 11/12 (the delay at unity), 1 = the delay (RETURN scales the delay's output, analog 11/12 is shut); never both |
-| `/aux-return/cue` | i | core | engine | the aux return's cue in engine mode, 1 = on, 0 = off |
+| `/aux-return/cue` | i | core | engine | the FX Return's cue in engine mode, 1 = on, 0 = off: a PFL, the delay's output before RETURN in the phones, at the cue weight of PHONES MIX |
 | `/delay/bpm` | f | core | engine | the delay's tempo for both lines in engine mode, 20-400 (Core's tempo follower) |
 | `/engine/open` | i | core | engine | 1 opens main, booth and phones (a 1 s ramp to the calibrated level), 0 closes them |
 | `/engine/hello` | s | engine | core | the engine's boot id, every 2 s; a new id makes Core replay its state and open the outputs |
@@ -157,7 +153,7 @@ Core acts on it, then relays or announces it.
 | `/stemdeck/{deck}/3d` | f | core | stemdeck | deck k's 3D, 0-1: the desk's 3D of the channel holding deck k, 1 (neutral) while it is on no channel |
 | `/stemdeck/{deck}/present` | i | core | mixer, desk, motion | 1 while deck k's hello is fresh (5 s at most) and the engine does not report its audio missing (engine.deck-audio), else 0 |
 | `/stemdeck/{deck}/hello` | s | stemdeck | core | a StemDeck instance names the deck it plays (host), at start and every 2 s; device.hello carries no deck number |
-| `/aux-return/cue/led` | f | core | mixer, desk, motion | the aux return's cue lamp, 1 = on |
+| `/aux-return/cue/led` | f | core | mixer, desk, motion | the FX Return's cue lamp, 1 = on |
 | `/stemdeck/{deck}/{stem}/bus/{bus}` | i | core | stemdeck | set one bus switch of a stem, 1 on 0 off; bus 1-4 the desk channels, 5 AUX (StemDeck's own cue bus 6 is gone since 2026-10-07: a channel is cued through its own bus); stem N reaches only bus N and 5 (AUX): StemDeck and Core refuse a switch onto another bus |
 | `/stemdeck/{deck}/{stem}/buses` | i | stemdeck | core | a stem's bus switches as a bit mask (bit 0 = bus 1), after every change and for all 8 stems after /stemdeck/recall |
 | `/stemdeck/recall` | i | core | stemdeck | report every stem's buses once; Core asks when StemDeck's hello is news |
@@ -172,7 +168,7 @@ Core acts on it, then relays or announces it.
 | `/beat` | iif | beat-analyzer, motion | core, motion, mixer, desk, radla, beat-analyzer | beat in bar, bar, tempo -- the clock (Motion sends it only in clock mode 0) |
 | `/tap` | i | mixer, desk, prodj, motion | beat-analyzer | a tap on the beat |
 | `/clockmode` | i | motion | beat-analyzer | 0 a3motion, 1 intern, 2 pioneer |
-| `/vu/{n}` | ff | engine, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n, measured by the engine at its meter points and sent to Core, which forwards them. 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (the engine's analog inputs 1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the return's analog input, L and R (the engine's analog inputs 11-12, its returnAnalogPair, shown under the return's ANALOG whatever the return plays); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the engine's from Core (core.vu-relay), unchanged |
+| `/vu/{n}` | ff | engine, stemdeck | motion, mixer, desk, radla | peak, rms (linear) of VU channel n, measured by the engine at its meter points and sent to Core, which forwards them. 41-50 come from StemDeck, 9-10 and 37-40 are free. 1-8 analog1_L ... analog4_R the four channels' analog inputs, L and R each (the engine's analog inputs 1-8, before any channel processing, shown under the desk's A even while a stem plays); 11-20 main_sub, main_top1 ... main_top9 the main outputs; 21-30 booth_sub, booth_top1 ... booth_top9 the booth outputs; 31-34 phones_L, phones_R, rec_L, rec_R the phones and the recording bus; 35-36 aux_L, aux_R the FX Return: the delay's output after RETURN, its W on both sides (L and R read the same; analog inputs 11-12 feed no return); 41-48 StemDeck's stems, one each (stem_a1 ... stem_b4: peak of the louder side, rms over both, as the stem leaves StemDeck on a bus: after knob, mute, deck fader and the bus trim -- so a stem alone on a channel reads as that channel's in{n}_pre; a stem on no bus shows what it would send); 49-50 StemDeck's AUX bus, L and R: peak and rms of each side after the bus; 51-66 the channels in stereo, L and R each: 51-58 in1_pre_L ... in4_pre_R (input after TRIM/EQ, post-fader), 59-66 in1_post_L ... in4_post_R (channel bus post-fader, moving + steady); see vu_meters. A remote Motion gets the engine's from Core (core.vu-relay), unchanged |
 <!-- /a3-osc:addresses -->
 
 ### Renamed addresses
@@ -194,10 +190,10 @@ Code written against old words must follow:
 | `/stem/cue`, `/stem/cue/led` | dropped |
 
 `/channel/{ch}/stem` is a bit mask of the stems on a channel. On the desk,
-turning only moves a selection (`…/stem/turn`, `/aux-return/stem/turn`) and a
-push loads it (`…/stem/push`, `/aux-return/stem/push`; `…/stem/selected`).
-`/aux-return/stem` carries the return's selection (0 = empty) before eight
-flags. Cursor 8 pushed takes a playing stem off; Core remembers no last stem.
+turning only moves a selection (`…/stem/turn`) and a push loads it
+(`…/stem/push`; `…/stem/selected`). The FX Return has no selection: its push,
+`/aux-return/stem/push`, toggles its cue. Cursor 8 pushed takes a playing stem
+off; Core remembers no last stem.
 See {ref}`the desk's input selectors <a3mix-displays>`.
 
 (osc-vu-meters)=
@@ -215,7 +211,7 @@ meter by name** in `vu_meters`, not by number:
 | Device | Shows |
 | :--- | :--- |
 | A³ Motion | channel inputs `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`, louder side); sphere glow `main_sub` (`/vu/11`); towers `main_top1`–`4` (`/vu/12`–`/vu/15`); MIXER master `main_sub`, `main_top1`–`9` (`/vu/11`–`/vu/20`) |
-| A³ Mixer | inputs `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); outputs `main_sub`, `main_top1`–`7` (`/vu/11`–`/vu/18`); channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and under A `analog1_L` … `analog4_R` (`/vu/1`–`/vu/8`); return `stem_aux_L/R` (`/vu/49`–`/vu/50`) and `aux_L/R` (`/vu/35`–`/vu/36`) |
+| A³ Mixer | inputs `in1_pre_L` … `in4_pre_R` (`/vu/51`–`/vu/58`); outputs `main_sub`, `main_top1`–`7` (`/vu/11`–`/vu/18`); channel displays `stem_a1` … `stem_b4` (`/vu/41`–`/vu/48`) and under A `analog1_L` … `analog4_R` (`/vu/1`–`/vu/8`); the FX Return `aux_L/R` (`/vu/35`–`/vu/36`) |
 
 `/vu/1`–`/vu/8` are the analog inputs before any processing, whatever the
 channel plays.
@@ -401,8 +397,8 @@ New subscriber: {ref}`Adding a department <core-subscriber>`.
   state back as a number.
 - **`3d`**: see [/channel/{ch}/3d](#osc-3d).
 - **`/master/phones-mix`** goes out unbent, as a track volume.
-- **`/master/aux-return`** is the return's level in the engine; full travel
-  is 0 dB.
+- **`/master/aux-return`** is RETURN, the FX Return's level: the delay's
+  output into main, booth and rec; full travel is 0 dB.
 - **`/filter/mode`**: `high_pass`/`low_pass` or a number (1 = high pass); sent
   as a number, the word goes to the desk on `/filter/led`.
 - **`/beat`**: only the tempo is used, for the [delay](#osc-beat-delay).

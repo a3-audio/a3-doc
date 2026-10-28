@@ -349,11 +349,10 @@ StemDeck's side:
   session on AUX when it sat on another channel. Core only tidies the reports
   of an older StemDeck: it keeps the lowest stem on a bus and puts the others
   on AUX.
-- **Every stem no channel plays is on AUX.** Its **A** is lit in either
-  return mode, and Core switches a free stem's A back on if you click it off.
-  A stem pushed onto a channel loses its A. The return's mode only chooses
-  what the return plays: in stem mode the AUX bus, in analog mode the analog
-  inputs 11/12, and then the stems on AUX are not heard.
+- **Every stem no channel plays is on AUX.** Its **A** is lit, and Core
+  switches a free stem's A back on if you click it off. A stem pushed onto a
+  channel loses its A. The AUX bus feeds the delay; you hear it through the
+  FX Return.
 - **The C switches are yours.** A stem's **C** puts it on StemDeck's CUE bus,
   for pre-listening here, e.g. a stem no channel plays yet. Core does not set
   them: a desk channel's cue goes through the channel itself (see
@@ -369,8 +368,8 @@ StemDeck's side:
   and the buses.
 - **AUX bus meter.** StemDeck also meters its AUX bus as a stereo pair,
   `/vu/49` (L) and `/vu/50` (R), at the same rate: peak and rms of each side
-  after the bus and its 6 dB trim, i.e. what goes to the aux return. The desk shows it as STEM
-  beside the analog return, ANALOG.
+  after the bus and its 6 dB trim, i.e. what goes to the delay. The desk no
+  longer shows it: its return meter is the FX Return after RETURN.
 
 (stemdeck-panel)=
 
