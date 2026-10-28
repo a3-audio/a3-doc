@@ -48,9 +48,13 @@ Audio between machines runs on the second socket, apart from OSC:
 | Core sends | **12 channels**, stream `AES67 <hostname> out`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.150.243`, port 5004) |
 | Announcement | SAP on `239.255.255.255`, port 9875; receivers find the stream by its name |
 | Who drives the stream | the audio interface: the samples leave unconverted and the engine is never pulled onto the PTP clock |
-| Other machines | a StemDeck on its own machine sends its buses as a stream of its own and receives the Core's ({ref}`setup <stemdeck-with-motion-remote-machine>`) |
+| Deck streams | one per deck, sent by the machine that runs the deck: **41 channels** (MAIN1–16, AUX1–16, CUE1–9), stream `AES67 deck <X>`, 44.1 kHz, 24 bit, packet time **0.25 ms** (1393 bytes on the wire, so every packet fits a 1500-byte frame), **multicast**, one group per deck (`239.69.150.244` deck A, `.245` deck B), port 5004 |
+| Receive rule | the Core receives deck streams **outside** the PTP clock: the sound card stays the Core's clock and the stream is resampled into it, so a deck stream never pulls the engine. The receiver needs an MTU of 1500 |
+| Deck host | a machine that runs a deck (a3nuc2 for deck B) runs its own sender, unit `a3-aes67-deck@<X>`, which the StemDeck package ships; it joins the host's PTP clock as a client and sends unconverted. It also receives the Core's stream, channels 1 and 2 of which are the REC bus |
+| Latency | a deck on another machine arrives about 18 ms later than a local one (calculated, not measured). StemDeck's *path latency* setting ({ref}`StemDeck <stemdeck-one-deck>`) makes up for it |
 
-PTP and the AES67 sender start only when a second socket is configured
+**EEE is off** on the audio socket of every machine that has one, a deck host
+included: with it on the link drops every minute or two. PTP and the AES67 sender start only when a second socket is configured
 (`audio-port`); without one the Core has neither and uses one network. The
 streams are audio, not OSC, so they are not in the port tables below. Unit:
 {ref}`a3-aes67 <core-aes67>`; the engine's JACK links: {ref}`I/O map <audio-engine-io>`.

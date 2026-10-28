@@ -186,6 +186,13 @@ STEM → ANALOG → CUE. Push:
   AUX is shut. The free stems stay on AUX, unheard, so switching back to STEM
   brings them back at once; the STEM meter keeps showing them.
 
+```{note}
+In engine mode the left choice is **DELAY**, not STEM: the return plays the
+delay's output, scaled by the return knob ({ref}`the engine <audio-engine>`).
+Which stems feed the delay is set per stem in StemDeck (AUX), not by the
+return. ANALOG is unchanged.
+```
+
 ### How the meters move
 
 10 updates a second; instant rise, 20 dB/s fall, no peak marks. Over 0 dBFS

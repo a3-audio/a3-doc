@@ -10,6 +10,8 @@ A stem player for DJs: **two decks, each playing a track split into four
 stems**, and a mixer that sends every stem to its own output. Where a CDJ gives
 A³ Core a stereo mix, StemDeck gives it the parts.
 
+- On the rig each deck is its own instance that sends B-format to the Core,
+  see [One deck per instance](#stemdeck-one-deck).
 - Four stem buses go to A³ Core's channels 1–4, the aux bus to its Return.
   Pre-listening is the desk's cue; StemDeck has no headphone bus.
 - The A³ Mixer [remote-controls it](#stemdeck-remote) through the Core.
@@ -414,6 +416,98 @@ green.
 together. Whichever has the panel holds it exclusively; the other finds it
 busy. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
 ```
+
+(stemdeck-one-deck)=
+
+## One deck per instance: the Core's rig
+
+On the rig every deck is its own StemDeck instance, `-bformat --deck A` (unit
+`stemdeck@A`; B is `stemdeck@B`). Deck A runs on the Core, deck B on the
+second machine beside A³ Motion. The instance plays one deck and sends
+**B-format** to the Core's engine; the two-deck screens above are the older
+mode, kept as a fallback. What an instance sends (41 channels):
+
+| Ports | Channels | What |
+| :--- | :--- | :--- |
+| `bformat_1` … `16` | 16 | the deck's main signal, third order |
+| `aux_1` … `16` | 16 | the deck's aux bus: only the stems you send, at their positions |
+| `cue_1` … `9` | 9 | the stem cue, second order |
+| `phones_L/R` | 2 | local only, never on the network |
+| `rec_L/R` (inputs) | 2 | the recorder |
+
+The jack client is `StemDeck-<letter>`. The stereo cue and aux pairs of the old
+mode are gone, and so is the cue's own decoder: the Core decodes the cue with
+the same headphone sound as everything else.
+
+### AUX per stem
+
+Each stem has an **AUX** knob (0 to 1, default 0: nothing reaches the delay
+until you ask). It is a send taken after the stem's GAIN, MUTE and 3D, so a
+muted stem sends nothing. The four knobs of a stem sit in a 2 × 2 block: **GAIN
+and 3D** above, **AUX and WIDTH** below. A stem that is sent shows "AUX" in its
+state line. The deck's AUX meter shows the aux bus. Only the sent stems reach
+the delay, not the whole deck; the desk's **AUX pot** on the deck's channel
+scales all of it ({ref}`the engine <audio-engine>`).
+
+### The panel's pots
+
+On an A³ Motion panel the four **pots** are the AUX of stems 1 to 4. A pot
+works with **pickup**: after a load, a session restore, a set load or when the
+panel comes back to this deck, a pot does nothing until it has passed the
+stored value (or comes within 1 % of an end). Until then the knob on the
+screen shows the pot's position as a small mark. If you move the stored value
+with the touch screen, the pot waits again until you cross it. So the send
+never jumps. The encoders and pads are unchanged.
+
+### The panel follows the workspace
+
+With **`STEMDECK_PANEL_WORKSPACE`** set (for example `2:STEMDECK`; A³ Motion has `A3_MOTION_PANEL_WORKSPACE`, for
+example `1:MOTION`), the
+program whose workspace is in front holds the panel. The other lets go at
+once. A program takes the panel only after its workspace has been in front for
+three quarters of a second, so a short visit changes nothing and the two
+never read the port together. A workspace of neither program changes nothing.
+Without the variable the older rule holds: A³ Motion keeps the panel, and
+StemDeck takes it by its lock file ("panel: this deck").
+
+### Links on a deck host
+
+Deck A needs no links: the engine makes them. On a machine without an
+engine the instance links its own ports from a **link map**, in the same
+format and with the same code as the engine's map, and never removes a link it
+did not make. It reads `~/.config/StemDeck/links-<letter>.json`, else the file
+named by `STEMDECK_LINK_MAP` (`{X}` is the letter), else nothing. The package
+ships `/usr/share/stemdeck/links-aes67.json`: the 41 outputs to the instance's
+AES67 sender, and the REC bus (the Core's stream, channels 1 and 2) to
+`rec_L/R`. A port name the instance does not have is refused.
+
+The package also ships the sender, `a3-aes67-deck@<letter>` (it renders its
+PipeWire file from the same truth StemDeck already holds; it needs no a3-core
+on that machine) and turns EEE off on the audio port.
+
+### Path latency
+
+A deck on another machine is heard about 18 ms later. Set
+**`STEMDECK_PATH_LATENCY_MS`** (0 to 200, default 0; deck A leaves it at 0) in
+the instance's unit drop-in. StemDeck then counts a beat from when it is
+*heard*: the Pro DJ Link beats it sends as master go out when the beat reaches
+the PA, and it follows a master by its audible position. Two synced decks then
+land on the same beat at the PA. Measure the value, with the reference click,
+rather than guessing it. The Pro DJ Link beats go out on the control network,
+not the audio network.
+
+### Recording
+
+The recorder always records the Core's **REC bus**, never a separate mix, on
+every deck host. A **USB stick** (or disk) with a filesystem is mounted at
+`/media/a3-usb` when plugged in and unmounted after it has been idle; takes go
+to `A3-recordings/` on it, otherwise to the local recordings folder. The
+record button shows **USB** or **LOCAL**, before and during a take. Pulling
+the stick mid-take stops the take with a message, and what was written stays
+a playable FLAC. The **local folder is capped at 100 GB**: a take does not
+start at the cap and a running one stops cleanly when it reaches it, with a
+message. Nothing is ever deleted for you. The stick has no cap but its free
+space.
 
 (stemdeck-audio)=
 
