@@ -27,7 +27,7 @@ What they show: {ref}`the desk's input selectors <a3mix-displays>`. Two parts:
   the bracket (playing stem = lowest mask bit, else A = `ANALOG_INPUT`, 8). The
   ninth slot is `LAST_SLOT_METERS` (2) wide, so bars keep 10 of 11 pixels on
   128 px; A's bar is centred in it, and the return's CUE field uses the same
-  slot. `return_picture()` draws the FX Return: one bar under AUX-RTN and the
+  slot. `return_picture()` draws the FX Return: one bar under DELAY and the
   CUE field, no arrow and no bracket. `_bands()` gives three row bands: headings, arrow (`ARROW_ROWS` 5,
   dark row above and below), meters to the bottom (rows 19–63 of 64). Any
   display size.

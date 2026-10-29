@@ -188,7 +188,7 @@ to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.
-- **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
+- **Meter**: one bar under **DELAY** on the desk display, the delay's output after the RETURN
   pot (`aux_L/R`).
 - **CUE**: on the hardware desk, it is the last row of the return's list
   (see below). On the virtual desk, push the return's encoder or tap the CUE
@@ -202,8 +202,9 @@ The analog inputs 11/12 are no longer a return; nothing plays them.
 
 #### Shaping the delay
 
-This is the hardware desk; the virtual desk has no delay rows. Under the
-**AUX-RTN** heading, beside the meter, the display lists five rows with their
+This is the hardware desk; the virtual desk has no delay rows. (The return's
+display, once headed AUX-RTN, now reads DELAY.) Under the
+**DELAY** heading, beside the meter, the display lists five rows with their
 values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**, **CUE** (ON or OFF).
 
 The encoder has two states, and a **push** switches between them:
