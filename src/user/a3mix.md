@@ -159,6 +159,8 @@ of its B-format signal (the louder side of `in<N>_pre_L/R`,
 meter sits after the channel's trim and fader, so the bar follows the fader.
 The other deck bars keep showing the stem levels, and **ST** the analog
 input. While **ST** plays, nothing changes.
+A deck that is not connected (say deck D) keeps its letter and the
+yellow and red scale marks; its bar stays empty.
 
 | Action | Result |
 | :--- | :--- |
@@ -188,16 +190,56 @@ to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.
-- **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
-  pot (`aux_L/R`).
-- **CUE**: push the return's encoder (on the virtual desk, or tap the CUE
-  field). The field is filled while the cue is on. The cue is pre-fader: you
-  hear the delay in the phones even with the RETURN pot down, on the cue side
-  of CUE/MIX. On the mix side the phones get the delay after RETURN, like any
-  channel.
+- **Meter**: the return's display has two sections with a vertical divider.
+  On the left, under **AUX**, is the return's VU meter: the delay's output
+  after the RETURN pot (`aux_L/R`). On the right, under **DELAY**, are the five
+  rows (see below).
+- **CUE**: on the hardware desk, it is the last row of the return's list
+  (see below). On the virtual desk, push the return's encoder or tap the CUE
+  field: it toggles the cue at once. The field is filled while the cue is on. The
+  cue is pre-fader: you hear the delay in the phones even with the RETURN pot
+  down, on the cue side of CUE/MIX. On the mix side the phones get the delay
+  after RETURN, like any channel.
+- **Encoder**: on the hardware desk it sets the delay (see below).
 
-Turning the return's encoder does nothing. The analog inputs 11/12 are no
-longer a return; nothing plays them.
+The analog inputs 11/12 are no longer a return; nothing plays them.
+
+#### Shaping the delay
+
+This is the hardware desk; the virtual desk has no delay rows. (The return's
+display, once headed AUX-RTN, now reads DELAY.) The right
+section, headed **DELAY**, lists five rows with their
+values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**, **CUE** (ON or OFF).
+
+The encoder has two states, and a **push** switches between them:
+
+- **Select**: the whole row is lit. Turning moves the light from row to row; it
+  stops at BEAT and at CUE.
+- **Edit**: only the value is lit. Turning changes it, and the change is heard
+  at once. On **CUE**, turn right for ON, left for OFF.
+
+After about 4 seconds without a touch, edit goes back to select by itself;
+the lit row stays where it was.
+
+| Row | What it sets | Values | At start |
+| :--- | :--- | :--- | :--- |
+| **BEAT** | delay time, tied to the tempo | 1/8, 1/4, 1/2, 3/4, 1, 2 beats | 1/4 |
+| **FEEDBK** | how many repeats | 0 to 95 % in 5 % steps (never 100 %) | 70 % |
+| **COLOR** | a filter in the repeats | HP 10 … HP 1, 0, LP 1 … LP 10 | 0 |
+| **SPREAD** | how far each repeat turns around the room | 0 to 180° in 15° steps | 60° |
+
+- **BEAT**: a change jumps to the new time, like a DJM, with a 20 ms
+  crossfade: no pitch sweep, no click. A tempo jump (a deck change) crossfades
+  the same way; small drift of the beat clock still glides gently. **2** needs
+  92 BPM or more; below that it plays **1** and the display shows **1**. Your
+  choice of **2** is kept and comes back when the tempo rises.
+- **COLOR**: left of 0 is a high-pass (thinner), right of 0 a low-pass
+  (darker). Higher numbers cut more. Turning across the centre stops on 0.
+- **SPREAD**: each repeat is rotated further around the room, the left line
+  one way, the right line the other. 0 keeps the repeats where they were.
+- Core keeps the four values and restores them after a restart; the desk only
+  shows them. With an older Core that lacks these words, nothing changes: a
+  push toggles the cue at once.
 
 ### How the meters move
 
