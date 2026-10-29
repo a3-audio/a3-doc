@@ -45,8 +45,8 @@ compiled from its source (`packaging/stage`), and its tree
 
 ### Installing
 
-With the {doc}`installer <install>`, or the newest package from a3-core's
-`main`, as `aaa`:
+With the {doc}`installer <install>`, or the package the umbrella builds
+from its pinned a3-core, as `aaa`:
 
 ```sh
 wget -qO- "https://raw.githubusercontent.com/a3-audio/a3-core/main/platform-config/debian-x86_64/a3-core_install.sh" | sudo bash
@@ -55,9 +55,10 @@ wget -qO- "https://raw.githubusercontent.com/a3-audio/a3-core/main/platform-conf
 `a3-core_install.sh` (as root):
 
 1. Installs `wget`, `gnupg`, `ca-certificates`.
-2. Installs the archive key as `/usr/share/keyrings/a3-core-archive-keyring.gpg`.
-3. Adds `/etc/apt/sources.list.d/a3-core.sources` →
-   `https://a3-audio.github.io/a3-core/`.
+2. Installs the archive key as `/usr/share/keyrings/a3-audio.gpg`.
+3. Adds `/etc/apt/sources.list.d/a3-audio.sources` →
+   `https://a3-audio.github.io/a3-system` (suite `forky`, component `main`),
+   and removes the old `a3-core.sources` and keyring if present.
 4. **Switches to Debian testing**: moves `/etc/apt/sources.list` to
    `.bck`, writes `debian.sources` (`testing`, `testing-security`,
    `testing-updates`; `main`, `non-free-firmware`), then `apt full-upgrade -y`,
@@ -73,7 +74,11 @@ Updates: `sudo apt update && sudo apt install a3-core`.
 
 ### The version
 
-A GitHub workflow rebuilds the archive on every push to `main`. Version: last
+The umbrella's workflow rebuilds one signed archive with every package from
+the pins, on every push to a3-system `main` and on tags. By hand, the source is
+`deb [signed-by=/usr/share/keyrings/a3-audio.gpg] https://a3-audio.github.io/a3-system <suite> main`,
+with suite `forky` on Debian testing (amd64) and `trixie` on Raspberry Pi OS
+(arm64); the key is `https://a3-audio.github.io/a3-system/KEY.gpg`. Version: last
 `v*` tag plus commits since (`v03.0` + 63 = `03.0+63`), written into
 `packaging/DEBIAN/control` at build. The checked-in `0` is a placeholder: a hand
 build stamps it. `python3 tools/package_version.py` prints the next version. The

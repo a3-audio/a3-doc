@@ -27,6 +27,11 @@ Any combination, installed in this order:
 | **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `ui`) |
 | **Mixer** | not installable yet: {ref}`by hand <mic-run>` | `a3-mixer` |
 
+By default the apps (Core, StemDeck, the UIs, the desk) are installed as
+packages from the apt archive: no JUCE build and no source checkout beyond the
+configuration. `install --from-source` builds them from the pinned submodules
+as before.
+
 Only the needed submodules are checked out, at this version's commits; local
 changes in one stop the update. StemDeck and Motion use the pinned
 {ref}`JUCE <build-juce>`, built into `~/local/juce` if missing.
@@ -38,7 +43,8 @@ changes in one stop the update. StemDeck and Motion use the pinned
 | Command | What it does |
 | :--- | :--- |
 | `install` | asks: version, roles, their settings |
-| `install --update [VERSION]` | no questions: the stored roles and settings, at `VERSION` (default: the newest tag) |
+| `install --update [VERSION]` | no questions: the stored roles and settings, at `VERSION` (default: the newest tag); a `VERSION` needs `--from-source`, the archive holds only the newest packages |
+| `install --from-source` | builds the apps from the pins instead of installing packages, e.g. `install --from-source --update v03.0` |
 | `install --config FILE` | no questions: the roles and settings in `FILE`, which is not saved over the stored ones |
 | `install --dry-run` | shows every command and runs none |
 | `install --flash-firmware` | flashes the Motion panel even if its firmware is unchanged |
@@ -55,7 +61,7 @@ next time. Copy it and run `install --config <file>` to clone a setup.
 
 | Section | Keys |
 | :--- | :--- |
-| `[system]` | `version` — a tag, or empty for what is checked out |
+| `[system]` | `version` — a tag, or empty for what is checked out; `archive` — `public` (GitHub archive) or `lan` (the rig's own apt source); `public` on a fresh machine, but an installed machine must set it once, else the installer stops before any change |
 | `[roles]` | `core`, `stemdeck`, `motion`, `mixer` — `yes` or `no` |
 | `[core]` | `configure_network`, `interface`, `address`, `gateway`, `dns`, `audio_port`, `audio_address`, `headless` — the package's install questions; `replace` — which differing parts of `~/.config` to replace: `all`, `none` or a list such as `pipewire, i3` |
 | `[motion]` | `flash_firmware` — `yes`, `no` or `ask`; `serial_port` — `auto` (found by USB ID, see {ref}`moc-serial`) or a device path |
