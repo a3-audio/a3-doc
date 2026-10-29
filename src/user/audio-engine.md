@@ -106,10 +106,11 @@ rewritten). If it does not, the engine takes the deck range of the OSC truth
 engine: slot ports are named `deckA_…`, `deckB_…` and on (after Z comes `AA`,
 `AB`, …), and the I/O page, the default links and the deck-audio report follow
 the count. The limit is the hardware: every slot is 41 more channels to mix.
-CPU: measured offline on a3nuc2 with the four-channel desk, where two decks
-already fill every channel, four decks cost the engine no more than two. The
-JACK port cost (94 to 176 inputs) is not in that number; the check on the rig
-measures it.
+CPU: measured offline on a3nuc2 at 128 frames and 48 kHz, two decks on two
+channels with the other two on analog cost the engine 0.78 ms per block (29 %
+of one core); four decks on all four channels cost 0.85 ms (32 %), about
+0.07 ms or 9 % more. The JACK port cost (94 to 176 inputs) is not in these
+numbers; the check on the rig measures it.
 
 When the engine loads the file at start, **every slot whose ports the file
 links nowhere gets the default links to its local `StemDeck-<letter>`**, whether
