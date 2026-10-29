@@ -208,15 +208,16 @@ without a touch the display returns to BEAT.
 
 | Page | What it sets | Values | At start |
 | :--- | :--- | :--- | :--- |
-| **BEAT** | delay time, tied to the tempo | 1/8, 1/4, 1/2, 3/4, 1, 2, 4 beats | 1/4 |
+| **BEAT** | delay time, tied to the tempo | 1/8, 1/4, 1/2, 3/4, 1, 2 beats | 1/4 |
 | **FEEDBK** | how many repeats | 0 to 95 % in 5 % steps (never 100 %) | 70 % |
 | **COLOR** | a filter in the repeats | HP 10 … HP 1, 0, LP 1 … LP 10 | 0 |
 | **SPREAD** | how far each repeat turns around the room | 0 to 180° in 15° steps | 60° |
 
-- **BEAT**: when you change it, the echo glides to the new time over about a
-  second instead of jumping. The delay line holds 1.3 seconds, so below 184
-  BPM **4** plays as **2**, and below 92 BPM **2** plays as **1**. The display
-  keeps showing what you chose.
+- **BEAT**: a change jumps to the new time, like a DJM, with a 20 ms
+  crossfade: no pitch sweep, no click. A tempo jump (a deck change) crossfades
+  the same way; small drift of the beat clock still glides gently. **2** needs
+  92 BPM or more; below that it plays **1** and the display shows **1**. Your
+  choice of **2** is kept and comes back when the tempo rises.
 - **COLOR**: left of 0 is a high-pass (thinner), right of 0 a low-pass
   (darker). Higher numbers cut more. Turning across the centre stops on 0.
 - **SPREAD**: each repeat is rotated further around the room, the left line
