@@ -44,7 +44,7 @@ screen's ENGINE workspace). It reaches the engine over its local control port
 | :--- | :--- |
 | **AUDIO** | the sound device. On JACK the rate and quantum are read-only: the server owns them |
 | **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
-| **CHANNELS** | how many channels (1–128), with the load beside it |
+| **CHANNELS** | how many channels (1–128), with the load beside it, and how many decks (1–26), with the count that runs |
 | **ZONES** | which speaker layout (spatial data) is used. There is no layout editor. Also **PHONES HEADPHONE EQ**: off, or the correction of one headphone model, applied to the phones only (rec has none) |
 | **I/O** | where each engine port connects, and for each deck its source, see below |
 | **CALIBRATION** | the trim of each output zone |
@@ -117,8 +117,18 @@ links nowhere gets the default links to its local `StemDeck-<letter>`**, whether
 or not the file names `"decks"`. A slot the file links anywhere is left as it
 is. A file posted from the I/O page is never filled this way, so a slot you
 emptied there stays empty until the next start. An `engine.json` that still
-says `"decks": 2` keeps two slots: to bring decks C and D up, set `"decks": 4`
-or remove the line.
+says `"decks": 2` keeps two slots: to bring decks C and D up, set **Decks** to 4
+on the CHANNELS page and press Save (or remove the `"decks"` line by hand). The
+engine says so at start, on STATUS and in `--check-config` when the file names
+fewer decks than the truth.
+
+**Setting the deck count.** The CHANNELS page has a **Decks** box below the
+channel count, 1 to 26 (one letter a slot, A to Z; the engine itself has no
+cap, so a larger count can still be written by hand). A count set there is
+written to `engine.json` as `"decks"`. Fewer decks drop the removed slots' links
+from the map; more decks give each new slot the default links to its local
+`StemDeck-<letter>`, and leave the other slots as they are. **Save** restarts the
+engine session, as for the channel count.
 
 The Core's map names the Core's own AES67 sender (`AES67 <hostname> out`), so
 another host copies the file to `~/.config/a3/engine/engine.json` and edits the
