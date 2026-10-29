@@ -178,9 +178,13 @@ foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
 ### The FX Return
 
 The FX Return is the master of the delay channel. Everything that reaches the
-delay gets there through a send: each channel's **AUX** pot (an analog
-channel's input is encoded at its position, so the echo keeps its direction)
-and StemDeck's AUX bus. The return has no source to choose.
+delay gets there by one of two routes: each channel's **AUX** pot (it scales
+the channel's own signal, an analog input or the deck's main output; an analog
+input is encoded at its position, so the echo keeps its direction), and
+StemDeck's AUX bus, which goes **straight into the delay** and is not scaled by
+any AUX pot. A deck's AUX bus still follows the channel that holds the deck: a
+pulled fader, or a deck on no channel, sends nothing. The return has no source
+to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.

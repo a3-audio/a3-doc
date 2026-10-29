@@ -12,6 +12,18 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.0`, not tagged yet.
 
+### 2026-10-29
+
+**The whole system**
+
+- **Stem AUX goes straight into the delay.** A deck's AUX bus no longer passes the channel's AUX pot;
+  the pot sends only the channel's own signal (analog, or the deck's main output). The FX Return is unchanged.
+- **The delay's tempo follows the decks.** Order: a live beat clock, else the playing deck that is MASTER, else the
+  playing deck on the channel with the highest fader, else hold. New word `stemdeck.tempo`
+  (`/stemdeck/{deck}/tempo`, `fii`); `/api/rig` shows `tempo_source`.
+- **Decks A to D.** The engine's deck count comes from `engine.json` `"decks"` if named, else from the
+  OSC truth (four). Deck meters `/vu/37`-`/vu/40`; Pro DJ Link players A 6, B 5, C 4, D 3.
+
 ### 2026-10-27
 
 **The whole system**

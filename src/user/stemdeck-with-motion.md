@@ -43,7 +43,7 @@ engine spreads it the same way (ports: {ref}`the I/O map <audio-engine-io>`):
 | StemDeck output | Arrives on | What is on it |
 | :--- | :--- | :--- |
 | `deck1_L/R` … `deck4_L/R` (buses 1–4) | **channels 1–4** | stem N of either deck, switched to that number |
-| `aux_L/R` | the **delay**, and through it the **FX Return** (the **FX RTN** pot) | stems switched to **A** |
+| `aux_L/R` | the **delay**, straight in (no AUX pot in between), and through it the **FX Return** (the **FX RTN** pot) | stems switched to **A** |
 
 A stem then runs through its channel's strip like any deck: gain, EQ and fader
 on the desk; 3d, freq and Q on A³ Motion.
@@ -128,7 +128,7 @@ bring it back on the one: it re-enters already in motion.
 
 ## StemDeck on another machine
 
-On the rig, deck B runs on the second machine, beside A³ Motion. Its deck
+On the rig, deck B (and C and D, when you run them) runs on the second machine, beside A³ Motion. Its deck
 travels to the Core as one **AES67** stream of 41 channels on the audio network
 ({ref}`ports <ports-audio-network>`); the Core's REC bus comes back on
 channels 1 and 2 for the recorder. Both machines need a cable between their
