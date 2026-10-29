@@ -159,6 +159,8 @@ of its B-format signal (the louder side of `in<N>_pre_L/R`,
 meter sits after the channel's trim and fader, so the bar follows the fader.
 The other deck bars keep showing the stem levels, and **ST** the analog
 input. While **ST** plays, nothing changes.
+A deck that is not connected (say deck D) keeps its letter and the
+yellow and red scale marks; its bar stays empty.
 
 | Action | Result |
 | :--- | :--- |
@@ -188,8 +190,10 @@ to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.
-- **Meter**: one bar under **DELAY** on the desk display, the delay's output after the RETURN
-  pot (`aux_L/R`).
+- **Meter**: the return's display has two sections with a vertical divider.
+  On the left, under **AUX**, is the return's VU meter: the delay's output
+  after the RETURN pot (`aux_L/R`). On the right, under **DELAY**, are the five
+  rows (see below).
 - **CUE**: on the hardware desk, it is the last row of the return's list
   (see below). On the virtual desk, push the return's encoder or tap the CUE
   field: it toggles the cue at once. The field is filled while the cue is on. The
@@ -203,8 +207,8 @@ The analog inputs 11/12 are no longer a return; nothing plays them.
 #### Shaping the delay
 
 This is the hardware desk; the virtual desk has no delay rows. (The return's
-display, once headed AUX-RTN, now reads DELAY.) Under the
-**DELAY** heading, beside the meter, the display lists five rows with their
+display, once headed AUX-RTN, now reads DELAY.) The right
+section, headed **DELAY**, lists five rows with their
 values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**, **CUE** (ON or OFF).
 
 The encoder has two states, and a **push** switches between them:
