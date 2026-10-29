@@ -190,24 +190,33 @@ to choose.
   level into PA, booth and recording. At zero the delay is silent there.
 - **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
   pot (`aux_L/R`).
-- **CUE**: on the hardware desk, **hold** the return's encoder for half a
-  second. On the virtual desk, push the return's encoder or tap the CUE
+- **CUE**: on the hardware desk, it is the last row of the return's list
+  (see below). On the virtual desk, push the return's encoder or tap the CUE
   field: it toggles the cue at once. The field is filled while the cue is on. The
   cue is pre-fader: you hear the delay in the phones even with the RETURN pot
   down, on the cue side of CUE/MIX. On the mix side the phones get the delay
   after RETURN, like any channel.
-- **Encoder**: sets the delay, one parameter at a time (see below).
+- **Encoder**: on the hardware desk it sets the delay (see below).
 
 The analog inputs 11/12 are no longer a return; nothing plays them.
 
 #### Shaping the delay
 
-This is the hardware desk; the virtual desk has no delay pages. The display
-shows one parameter large, with its value. Turn the encoder to change it; the change is heard at once. A **short push** steps to the next
-page: BEAT, FEEDBK, COLOR, SPREAD, and back to BEAT. After about 4 seconds
-without a touch the display returns to BEAT.
+This is the hardware desk; the virtual desk has no delay rows. Under the
+**AUX-RTN** heading, beside the meter, the display lists five rows with their
+values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**, **CUE** (ON or OFF).
 
-| Page | What it sets | Values | At start |
+The encoder has two states, and a **push** switches between them:
+
+- **Select**: the whole row is lit. Turning moves the light from row to row; it
+  stops at BEAT and at CUE.
+- **Edit**: only the value is lit. Turning changes it, and the change is heard
+  at once. On **CUE**, turn right for ON, left for OFF.
+
+After about 4 seconds without a touch, edit goes back to select by itself;
+the lit row stays where it was.
+
+| Row | What it sets | Values | At start |
 | :--- | :--- | :--- | :--- |
 | **BEAT** | delay time, tied to the tempo | 1/8, 1/4, 1/2, 3/4, 1, 2 beats | 1/4 |
 | **FEEDBK** | how many repeats | 0 to 95 % in 5 % steps (never 100 %) | 70 % |
@@ -224,8 +233,8 @@ without a touch the display returns to BEAT.
 - **SPREAD**: each repeat is rotated further around the room, the left line
   one way, the right line the other. 0 keeps the repeats where they were.
 - Core keeps the four values and restores them after a restart; the desk only
-  shows them. An older Core without these words leaves the encoder as it was:
-  a push toggles the cue at once.
+  shows them. With an older Core that lacks these words, nothing changes: a
+  push toggles the cue at once.
 
 ### How the meters move
 
