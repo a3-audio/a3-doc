@@ -190,14 +190,40 @@ to choose.
   level into PA, booth and recording. At zero the delay is silent there.
 - **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
   pot (`aux_L/R`).
-- **CUE**: push the return's encoder (on the virtual desk, or tap the CUE
-  field). The field is filled while the cue is on. The cue is pre-fader: you
-  hear the delay in the phones even with the RETURN pot down, on the cue side
-  of CUE/MIX. On the mix side the phones get the delay after RETURN, like any
-  channel.
+- **CUE**: **hold** the return's encoder for half a second (on the virtual
+  desk, or tap the CUE field). The field is filled while the cue is on. The
+  cue is pre-fader: you hear the delay in the phones even with the RETURN pot
+  down, on the cue side of CUE/MIX. On the mix side the phones get the delay
+  after RETURN, like any channel.
+- **Encoder**: sets the delay, one parameter at a time (see below).
 
-Turning the return's encoder does nothing. The analog inputs 11/12 are no
-longer a return; nothing plays them.
+The analog inputs 11/12 are no longer a return; nothing plays them.
+
+#### Shaping the delay
+
+The display shows one parameter large, with its value. Turn the encoder to
+change it; the change is heard at once. A **short push** steps to the next
+page: BEAT, FEEDBK, COLOR, SPREAD, and back to BEAT. After about 4 seconds
+without a touch the display returns to BEAT.
+
+| Page | What it sets | Values | At start |
+| :--- | :--- | :--- | :--- |
+| **BEAT** | delay time, tied to the tempo | 1/8, 1/4, 1/2, 3/4, 1, 2, 4 beats | 1/4 |
+| **FEEDBK** | how many repeats | 0 to 95 % in 5 % steps (never 100 %) | 70 % |
+| **COLOR** | a filter in the repeats | HP 10 … HP 1, 0, LP 1 … LP 10 | 0 |
+| **SPREAD** | how far each repeat turns around the room | 0 to 180° in 15° steps | 60° |
+
+- **BEAT**: when you change it, the echo glides to the new time over about a
+  second instead of jumping. The delay line holds 1.3 seconds, so below 184
+  BPM **4** plays as **2**, and below 92 BPM **2** plays as **1**. The display
+  keeps showing what you chose.
+- **COLOR**: left of 0 is a high-pass (thinner), right of 0 a low-pass
+  (darker). Higher numbers cut more. Turning across the centre stops on 0.
+- **SPREAD**: each repeat is rotated further around the room, the left line
+  one way, the right line the other. 0 keeps the repeats where they were.
+- Core keeps the four values and restores them after a restart; the desk only
+  shows them. An older Core without these words leaves the encoder as it was:
+  a push toggles the cue at once.
 
 ### How the meters move
 
