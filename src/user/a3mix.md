@@ -190,8 +190,9 @@ to choose.
   level into PA, booth and recording. At zero the delay is silent there.
 - **Meter**: one bar under **AUX-RTN** on the desk display, the delay's output after the RETURN
   pot (`aux_L/R`).
-- **CUE**: **hold** the return's encoder for half a second (on the virtual
-  desk, or tap the CUE field). The field is filled while the cue is on. The
+- **CUE**: on the hardware desk, **hold** the return's encoder for half a
+  second. On the virtual desk, push the return's encoder or tap the CUE
+  field: it toggles the cue at once. The field is filled while the cue is on. The
   cue is pre-fader: you hear the delay in the phones even with the RETURN pot
   down, on the cue side of CUE/MIX. On the mix side the phones get the delay
   after RETURN, like any channel.
@@ -201,8 +202,8 @@ The analog inputs 11/12 are no longer a return; nothing plays them.
 
 #### Shaping the delay
 
-The display shows one parameter large, with its value. Turn the encoder to
-change it; the change is heard at once. A **short push** steps to the next
+This is the hardware desk; the virtual desk has no delay pages. The display
+shows one parameter large, with its value. Turn the encoder to change it; the change is heard at once. A **short push** steps to the next
 page: BEAT, FEEDBK, COLOR, SPREAD, and back to BEAT. After about 4 seconds
 without a touch the display returns to BEAT.
 
