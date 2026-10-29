@@ -45,8 +45,8 @@ compiled from its source (`packaging/stage`), and its tree
 
 ### Installing
 
-With the {doc}`installer <install>`, or the newest package from a3-core's
-`main`, as `aaa`:
+With the {doc}`installer <install>`, or the package the umbrella builds
+from its pinned a3-core, as `aaa`:
 
 ```sh
 wget -qO- "https://raw.githubusercontent.com/a3-audio/a3-core/main/platform-config/debian-x86_64/a3-core_install.sh" | sudo bash
