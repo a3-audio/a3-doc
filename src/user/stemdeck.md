@@ -4,7 +4,7 @@
 
 ## At a glance
 
-![StemDeck on the Core's screen: both decks loaded, deck A playing](pics_user/stemdeck-main.png)
+![StemDeck's one-deck screen: a track playing, the four stems with their actions running, AUX and WIDTH beside the stems](pics_user/stemdeck-one-deck-playing.png)
 
 A stem player for DJs: **two decks, each playing a track split into four
 stems**, and a mixer that sends every stem to its own output. Where a CDJ gives
