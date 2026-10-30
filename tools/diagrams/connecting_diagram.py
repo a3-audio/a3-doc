@@ -4,9 +4,10 @@
 
 The picture was drawn in Figma (src/user/pics_user/grafic_design/A3-Webseite Assets.fig)
 and only exists as a PNG here. This script edits that PNG rather than
-redrawing it: it paints the V03 A3 Motion over the old one and adds StemDeck
-beside A3 Core, in the same ink, paper, line weight and typeface (XXII Aven,
-from the homepage's src/style/font/).
+redrawing it: it paints the V03 A3 Motion over the old one, adds StemDeck
+(up to four decks, over AES67) beside A3 Core and drops PoE from the OSC
+labels, in the same ink, paper, line weight and typeface (XXII Aven, from the
+homepage's src/style/font/).
 
 Run from the repository root, once, on the old picture:
   FONTCONFIG_FILE=<a fonts.conf that adds the homepage's font folder> \\
@@ -61,6 +62,7 @@ def add_stemdeck(ctx):
     ctx.close_path()
     ctx.fill()
     draw_text(ctx, 204, 275, "StemDeck", 14, INK, align="center", family=FONT)
+    draw_text(ctx, 204, 292, "up to 4", 12, INK, align="center", family=FONT)
 
     # into A3 Core
     ctx.set_line_width(2)
@@ -68,7 +70,20 @@ def add_stemdeck(ctx):
     ctx.line_to(318, 238)
     ctx.stroke()
     open_arrow_head(ctx, 319, 238, 0)
-    draw_text(ctx, 287, 224, "Audio", 14, INK, align="center", family=FONT)
+    draw_text(ctx, 287, 224, "AES67", 14, INK, align="center", family=FONT)
+
+
+def drop_poe(ctx):
+    # the switch powers nothing that matters to the picture; the labels say OSC only
+    for centre in (308, 491):
+        ctx.set_source_rgb(*PAPER)
+        ctx.rectangle(centre - 44, 103, 88, 21)
+        ctx.fill()
+        draw_text(ctx, centre, 113, "OSC", 14, INK, align="center", family=FONT)
+    # and the lightning bolt over the switch
+    ctx.set_source_rgb(*PAPER)
+    ctx.rectangle(387, 90, 28, 26)
+    ctx.fill()
 
 
 def main():
@@ -76,6 +91,7 @@ def main():
     ctx = cairo.Context(surface)
     replace_motion(ctx)
     add_stemdeck(ctx)
+    drop_poe(ctx)
     surface.write_to_png(PATH)
     print(PATH)
 
