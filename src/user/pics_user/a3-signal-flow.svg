@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 A3 Audio <contact@a3-audio.com> -->
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="790" viewBox="0 0 960 790"
+     font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="14" fill="#1d2330">
+  <title>A³ signal flow: from the players to the speakers</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3a4152"/>
+    </marker>
+  </defs>
+  <style>
+    .box { stroke: #3a4152; stroke-width: 1.5; }
+    .head { font-weight: bold; font-size: 15px; }
+    .small { font-size: 12.5px; }
+    .line { stroke: #3a4152; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    .dash { stroke: #3a4152; stroke-width: 2; fill: none; stroke-dasharray: 6 4; marker-end: url(#arrow); }
+    .label { font-size: 12px; font-style: italic; fill: #3a4152; }
+    .step { font-size: 12px; font-weight: bold; fill: #6b7280; }
+  </style>
+
+  <rect x="0" y="0" width="960" height="790" fill="#ffffff"/>
+
+  <!-- 1 sources -->
+  <text class="step" x="20" y="16">1  WHAT PLAYS</text>
+  <rect class="box" x="20" y="24" width="280" height="72" rx="8" fill="#eef1f5"/>
+  <text class="head" x="160" y="48" text-anchor="middle">Players</text>
+  <text class="small" x="160" y="67" text-anchor="middle">CDJ, turntable, laptop</text>
+  <text class="small" x="160" y="84" text-anchor="middle">into the audio interface, in stereo</text>
+
+  <rect class="box" x="340" y="24" width="280" height="72" rx="8" fill="#eef1f5"/>
+  <text class="head" x="480" y="48" text-anchor="middle">StemDeck deck A</text>
+  <text class="small" x="480" y="67" text-anchor="middle">on the Core itself</text>
+  <text class="small" x="480" y="84" text-anchor="middle">one track as four stems</text>
+
+  <rect class="box" x="660" y="24" width="280" height="72" rx="8" fill="#eef1f5"/>
+  <text class="head" x="800" y="48" text-anchor="middle">StemDeck decks B, C, D</text>
+  <text class="small" x="800" y="67" text-anchor="middle">on other machines,</text>
+  <text class="small" x="800" y="84" text-anchor="middle">over the network (AES67)</text>
+
+  <path class="line" d="M160,96 L160,134"/>
+  <path class="line" d="M480,96 L480,134"/>
+  <path class="line" d="M800,96 L800,134"/>
+
+  <!-- 2 the desk -->
+  <text class="step" x="20" y="132">2  THE DESK</text>
+  <rect class="box" x="20" y="138" width="920" height="80" rx="8" fill="#e3ecfa"/>
+  <text class="head" x="480" y="162" text-anchor="middle">A³ desk: four channels</text>
+  <text class="small" x="480" y="182" text-anchor="middle">INPUT picks what a channel plays: ST (the stereo input) or a deck A to D</text>
+  <text class="small" x="480" y="201" text-anchor="middle">TRIM, EQ, FX filter, fader   ·   SEND to the delay   ·   CUE to the headphones</text>
+
+  <path class="line" d="M245,218 L245,256"/>
+  <path class="line" d="M715,218 L715,256"/>
+
+  <!-- 3 into 3D -->
+  <text class="step" x="20" y="252">3  INTO 3D</text>
+  <rect class="box" x="20" y="260" width="450" height="96" rx="8" fill="#fdebd3"/>
+  <text class="head" x="245" y="284" text-anchor="middle">Stereo channel (ST)</text>
+  <text class="small" x="245" y="304" text-anchor="middle">3D, FREQ and Q cut out one band of the sound.</text>
+  <text class="small" x="245" y="322" text-anchor="middle">That band moves on A³ Motion's path;</text>
+  <text class="small" x="245" y="340" text-anchor="middle">the rest stays where it is, all around.</text>
+
+  <rect class="box" x="490" y="260" width="450" height="96" rx="8" fill="#d9f1ee"/>
+  <text class="head" x="715" y="284" text-anchor="middle">Deck channel (A to D)</text>
+  <text class="small" x="715" y="304" text-anchor="middle">StemDeck has already placed the four stems.</text>
+  <text class="small" x="715" y="322" text-anchor="middle">A stem rests all around until an action</text>
+  <text class="small" x="715" y="340" text-anchor="middle">(ORBIT, PING, RISE, SCAT) sends it through the room.</text>
+
+  <path class="line" d="M245,356 L245,394"/>
+  <path class="line" d="M600,356 L380,394"/>
+  <path class="dash" d="M880,356 L880,394"/>
+  <text class="label" x="888" y="380">SEND,</text>
+  <text class="label" x="888" y="394">AUX</text>
+
+  <!-- 4 the engine's buses -->
+  <text class="step" x="20" y="390">4  THE ENGINE MIXES</text>
+  <rect class="box" x="20" y="400" width="450" height="80" rx="8" fill="#ece6f7"/>
+  <text class="head" x="245" y="424" text-anchor="middle">Room mix</text>
+  <text class="small" x="245" y="444" text-anchor="middle">every sound with its direction (B-format):</text>
+  <text class="small" x="245" y="462" text-anchor="middle">not yet tied to any speaker</text>
+
+  <rect class="box" x="510" y="400" width="190" height="80" rx="8" fill="#f7e3ec"/>
+  <text class="head" x="605" y="424" text-anchor="middle">FX RETURN</text>
+  <text class="small" x="605" y="444" text-anchor="middle">how loud the</text>
+  <text class="small" x="605" y="462" text-anchor="middle">echoes come back</text>
+
+  <rect class="box" x="740" y="400" width="200" height="80" rx="8" fill="#f7e3ec"/>
+  <text class="head" x="840" y="424" text-anchor="middle">Delay</text>
+  <text class="small" x="840" y="444" text-anchor="middle">echoes in time</text>
+  <text class="small" x="840" y="462" text-anchor="middle">with the beat</text>
+
+  <path class="line" d="M740,440 L704,440"/>
+  <path class="line" d="M510,440 L474,440"/>
+
+  <path class="line" d="M127,480 L127,538"/>
+  <path class="line" d="M245,480 L362,538"/>
+  <path class="line" d="M400,480 L597,538"/>
+
+  <!-- 5 the outputs -->
+  <text class="step" x="20" y="530">5  OUTPUTS</text>
+  <rect class="box" x="20" y="544" width="215" height="84" rx="8" fill="#e8f3e1"/>
+  <text class="head" x="127" y="568" text-anchor="middle">MASTER</text>
+  <text class="small" x="127" y="588" text-anchor="middle">main decoder:</text>
+  <text class="small" x="127" y="606" text-anchor="middle">the mix for the PA</text>
+
+  <rect class="box" x="255" y="544" width="215" height="84" rx="8" fill="#e8f3e1"/>
+  <text class="head" x="362" y="568" text-anchor="middle">BOOTH</text>
+  <text class="small" x="362" y="588" text-anchor="middle">booth decoder:</text>
+  <text class="small" x="362" y="606" text-anchor="middle">the mix for the DJ booth</text>
+
+  <rect class="box" x="490" y="544" width="215" height="84" rx="8" fill="#e8f3e1"/>
+  <text class="head" x="597" y="568" text-anchor="middle">REC</text>
+  <text class="small" x="597" y="588" text-anchor="middle">the room folded into</text>
+  <text class="small" x="597" y="606" text-anchor="middle">headphone stereo</text>
+
+  <rect class="box" x="725" y="544" width="215" height="84" rx="8" fill="#e8f3e1"/>
+  <text class="head" x="832" y="568" text-anchor="middle">PHONES</text>
+  <text class="small" x="832" y="588" text-anchor="middle">cue and mix, folded</text>
+  <text class="small" x="832" y="606" text-anchor="middle">into headphone stereo</text>
+
+  <path class="dash" d="M940,178 L952,178 L952,520 L880,520 L880,540"/>
+  <text class="label" x="896" y="512">CUE</text>
+
+  <path class="line" d="M127,628 L127,666"/>
+  <path class="line" d="M362,628 L362,666"/>
+  <path class="line" d="M597,628 L597,666"/>
+  <path class="line" d="M832,628 L832,666"/>
+
+  <!-- 6 where it is heard -->
+  <text class="step" x="20" y="662">6  SPEAKERS</text>
+  <rect class="box" x="20" y="670" width="215" height="72" rx="8" fill="#f4f4f4"/>
+  <text class="head" x="127" y="694" text-anchor="middle">PA speakers</text>
+  <text class="small" x="127" y="714" text-anchor="middle">sub and tops around</text>
+  <text class="small" x="127" y="730" text-anchor="middle">the dance floor</text>
+
+  <rect class="box" x="255" y="670" width="215" height="72" rx="8" fill="#f4f4f4"/>
+  <text class="head" x="362" y="694" text-anchor="middle">Booth speakers</text>
+  <text class="small" x="362" y="714" text-anchor="middle">around the DJ</text>
+
+  <rect class="box" x="490" y="670" width="215" height="72" rx="8" fill="#f4f4f4"/>
+  <text class="head" x="597" y="694" text-anchor="middle">Recording</text>
+  <text class="small" x="597" y="714" text-anchor="middle">StemDeck's REC key,</text>
+  <text class="small" x="597" y="730" text-anchor="middle">to USB stick or disk</text>
+
+  <rect class="box" x="725" y="670" width="215" height="72" rx="8" fill="#f4f4f4"/>
+  <text class="head" x="832" y="694" text-anchor="middle">Headphones</text>
+  <text class="small" x="832" y="714" text-anchor="middle">the DJ's pre-listening</text>
+
+  <text class="small" x="480" y="772" text-anchor="middle" fill="#6b7280">Solid: the sound you hear. Dashed: the sends, to the delay and to the headphones.</text>
+</svg>

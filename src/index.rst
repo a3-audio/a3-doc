@@ -23,6 +23,7 @@ Contact
    :hidden:
 
    user/user
+   user/how-it-sounds
    user/a3core
    user/audio-engine
    user/a3motion
