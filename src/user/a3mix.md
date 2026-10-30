@@ -142,11 +142,10 @@ between channels. A stem on a channel shuts its analog input.
 
 ### A channel
 
-![A channel's selector: meters under D1 and D2, music on both, the bracket over one stem, which plays on the channel; the cursor is a small arrow pointing down at the other deck's stem, which is silent; at the right, behind a thin line, A with a low bar, the analog input; short ticks beside the bars mark -9 and -3 dBFS](pics_user/a3-mix-input-selector.png)
+![Three channel selectors of the virtual desk: one bar per deck, A B C D, and ST for the stereo input behind a thin line; the arrow over a bar is the cursor, the bracket marks what plays](pics_user/a3-desk-input-selectors.png)
 
-*Bracket: the stem that plays. Arrow: the cursor, on the other deck's stem
-(silent). A: a little analog level. Ticks: −9 and −3 dBFS, the LED scale. The
-picture still shows the older nine-meter selector.*
+*The selectors of channels 1 to 3 on the virtual desk: one bar per deck, A to
+D, and **ST**, the stereo input. Arrow: the cursor. Bracket: what plays.*
 
 Three meters under **A | B | ST**: deck A's stem N, deck B's stem N, and
 **ST**, the channel's analog input (always metered, louder side of
