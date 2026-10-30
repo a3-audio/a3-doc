@@ -2,11 +2,7 @@
 
 (motion-at-a-glance)=
 
-## At a glance
-
-<!-- GIF: howto-hero-sphere.gif | region: 0,36,768,624 | recorded 2026-09-29, 5.8 s | steps: A set playing on all four channels; no interaction. | "Four channels, one room" | bonus -->
-
-![A set playing on all four channels; no interaction.](pics_user/howto-hero-sphere.gif)
+## A³ Motion UI
 
 ![A³ Motion's screen: the sphere with four channels moving](pics_user/a3-motion-ui-sphere.png)
 
@@ -19,8 +15,6 @@ Think of each channel as a deck. It has one **clip** loaded (a shape, plus how
 fast, wide and high it runs) and six **action pads** for accents you play by
 hand. A **set** loads all four channels at once. Everything counts in bars off
 the beat clock, so a four-bar shape stays four bars when the tempo changes.
-
-![A³ Motion](pics_user/a3-motion-icon_light.png)
 
 A panel of encoders, pots and pads beside a 7" multi-touch screen; it talks
 OSC only. Source: [a3-motion](https://github.com/a3-audio/a3-motion).
