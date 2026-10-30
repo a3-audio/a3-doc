@@ -4,160 +4,129 @@
 
 ## At a glance
 
-![Two StemDecks (A, B), the A³ Desk, A³ Motion, and two more StemDecks (C, D) side by side](pics_user/stemdeck-desk-motion-overview.png)
+![Two StemDecks (A, B), the virtual desk, A³ Motion, and two more StemDecks (C, D) side by side](pics_user/stemdeck-desk-motion-overview.png)
 
-Move a stereo mix and the whole track moves, like a speaker on a trolley.
-[StemDeck](stemdeck.md) sends **four stems** — drums, bass, other, vocals — to
-**A³ Core's four channels**, the ones [A³ Motion](a3motion.md) moves. So each
-part gets its own path: drums hold the floor, the vocal circles overhead, the
-pads breathe wall to wall, the bass stays put.
+The drop comes. On deck A the vocal rises over the crowd and comes back down
+on the one. On the CDJ beside it the hi-hats circle the floor. The kick and
+the bass of both hold the ground. Two instruments did that, each on its own
+kind of source, and both landed on the same bar because they share one
+clock.
 
-And it runs **in time with the track**: StemDeck is the tempo master on Pro DJ
-Link, the [Beat Analyzer](beat-analyzer.md) follows, A³ Motion follows the
-analyzer. No special mode: three programs, wired together.
+| | Moves | How you play it |
+| :--- | :--- | :--- |
+| [**StemDeck**](stemdeck.md) | its own stems, one at a time | the action pads **ORBIT**, **PING**, **RISE**, **SCAT** on a stem, from the next bar |
+| [**A³ Motion**](a3motion.md) | the stereo channels (**ST**): a CDJ, a turntable, a laptop | a clip per channel; **3d**, **FREQ** and **Q** pick the band that moves |
+| [**The desk**](a3mix.md) | nothing: it picks what plays | each channel's **INPUT** knob: **A** to **D** for a deck, **ST** for the stereo input |
 
-<!-- GIF: the room view on A³ Motion with a StemDeck track playing: four blobs on four different clips, and StemDeck's four stem meters beside it (split screen or two recordings side by side) -->
+- **A deck is one source on the desk.** Turn a channel's INPUT to the deck's
+  letter and push. The channel's fader, EQ and filter then act on the whole
+  deck.
+- **A³ Motion does not move a deck.** On a deck channel its screen says
+  **DECK A** (or B, C, D) and it sends no movement for that channel. The
+  stems move by StemDeck's actions.
+- **One clock** for both: see [Who is the clock](#first-set-clock).
+
+<!-- GIF: the room view on A³ Motion with a CDJ on ST moving, beside StemDeck's deck A with RISE running on the vocal -->
 
 (stemdeck-with-motion-why)=
 
 ## Why it works so well
 
-- **One moving part over a steady rest** reads as a gesture; a moving full mix
-  smears.
-- **A stem per channel.** Bus N arrives on channel N. The stem creator always
-  makes drums, bass, other, vocals as stems 1–4, so one choice fits every track.
-- **One clock from the music.** The master deck's beat, tempo fader included,
-  drives the room.
-- **The channel is the part, not the deck.** Keep the drums on channel 1 and
-  channel 1 stays "the drums" across decks and tracks. {ref}`AUTO DJ <stemdeck-autodj>`
-  keeps this rule: it hands each stem over to the next deck on its own channel.
-- **The panel can play it.** On the StemDeck machine, the A³ Motion panel
-  {ref}`drives StemDeck <stemdeck-panel>` while A³ Motion itself is not
-  using it.
-
-(stemdeck-with-motion-map)=
-
-## Which stem goes where
-
-StemDeck plays on the Core (workspace STEMDECK) or from another machine; the
-engine spreads it the same way (ports: {ref}`the I/O map <audio-engine-io>`):
-
-| StemDeck output | Arrives on | What is on it |
-| :--- | :--- | :--- |
-| `deck1_L/R` … `deck4_L/R` (buses 1–4) | **channels 1–4** | stem N of either deck, switched to that number |
-| `aux_L/R` | the **delay**, straight in (no AUX pot in between), and through it the **FX Return** (the **FX RTN** pot) | stems switched to **A** |
-
-A stem then runs through its channel's strip like any deck: gain, EQ and fader
-on the desk; 3d, freq and Q on A³ Motion.
-
-- **A stem replaces the analog input.** Core switches the channel's source in the
-  engine from its analog pair to the stem while a stem is on it. Choose on the
-  desk: turn the channel's encoder to the stem and push; push **A** to go back
-  to analog ({ref}`input selectors <a3mix-displays>`).
-- **Nothing is on a channel at first**: stems start on AUX only
-  ([Where the stems start](#stemdeck-start-buses)). Custom stem names sort
-  into 1–4 by ending ([Stem sets](#stemdeck-stem-sets)).
-- **Stem N plays only on channel N**, or on **A** (the Return). On its number
-  it moves with that channel; on **A** only it is on the Return and does not
-  move. A switch to another channel is refused. Pushing it onto its channel
-  from the desk takes its AUX away, and the other deck's stem N goes to the
-  Return ({ref}`remote control <stemdeck-remote>`).
+- **One moving part over a steady rest** reads as a gesture; a moving full
+  mix smears. Both instruments follow this rule: A³ Motion lifts one band
+  out of a stereo channel, StemDeck lifts one stem out of four.
+- **At rest a stem sits all around the room**, with the rest of its track.
+  Only while an action runs does it come loose, then it goes back.
+- **The two never fight over a channel.** A channel plays either a deck or
+  its ST input; Motion moves only ST channels, StemDeck moves only its own
+  stems.
+- **One beat.** StemDeck's actions start on the next bar of its own grid; A³
+  Motion's clips count bars from the beat clock. With one clock for both,
+  the bar lines agree.
 
 (stemdeck-with-motion-setup)=
 
 ## Setting it up
 
-You need StemDeck, A³ Core with the Beat Analyzer, and A³ Motion; the A³ Mixer
-is optional (A³ Motion's MIXER has the same controls).
+You need StemDeck and A³ Core with the Beat Analyzer. For the stereo side you
+also need A³ Motion (the hardware, or its screen alone, by touch or mouse) and a
+player on an ST input. The A³ Mixer hardware is optional: the
+{ref}`virtual desk <a3mix-virtual>` and A³ Motion's MIXER pages have the same
+controls.
 
 ### 1. The audio: StemDeck into A³ Core
 
-On the Core itself, nothing to wire: the engine connects StemDeck's ports and a
-user service keeps it running
-([Always running on the Core](#stemdeck-on-the-core)). On another machine:
-[StemDeck on another machine](#stemdeck-with-motion-remote-machine).
+On the Core itself there is nothing to wire: the engine connects deck A, and
+a user service keeps it running
+({ref}`Always running on the Core <stemdeck-on-the-core>`). A deck on another
+machine: [StemDeck on another machine](#stemdeck-with-motion-remote-machine).
 
-### 2. The clock: StemDeck as master
+### 2. The desk: a deck on a channel
+
+Turn the channel's **INPUT** knob to the deck's letter and push; push **ST**
+to go back to the stereo input. A deck plays on one channel at most: pushing
+it on a second channel puts the first channel back on ST. The rules are on
+{ref}`the desk's input selectors <a3mix-displays>`.
+
+### 3. The clock
+
+Pick one clock for the evening: [Who is the clock](#first-set-clock). With no
+CDJs, StemDeck is the master:
 
 1. Load a set and **wait for the BPM** (no beats before the analysis is done).
 2. Press **MASTER**, or just **PLAY**: the only playing deck becomes master.
-   The top bar reads `PIO master: A`.
-3. On A³ Motion, tap the clock key to **PIO** (sets the analyzer to mode 2).
-   The BPM follows StemDeck.
+3. On A³ Motion, tap the clock key to **PIO**. The BPM follows StemDeck.
 
 StemDeck **broadcasts** on its own network; the Core must be in it (always,
 on one machine). Chain: {ref}`Playing without CDJs <beat-analyzer-without-cdjs>`.
 Ask before joining a venue's Pro DJ Link ({doc}`../ressources/trademarks`).
 
-<!-- IMAGE: StemDeck's top bar with "PIO master: A" next to A³ Motion's clock key reading PIO and the same BPM -->
-
-### 3. The room: 3d up
-
-Turn **3d** up on the channels to move (pot above the pads, or **3D** in the
-channel row). At 0 a channel is plain stereo.
+<!-- IMAGE: StemDeck's top bar sending as master next to A³ Motion's clock key reading PIO and the same BPM -->
 
 (stemdeck-with-motion-first-set)=
 
 ## Your first set
 
+Step by step, with a CDJ on ST and a deck beside it: [First set](first-set.md).
+
 The **MOTION** / **STEMDECK** key at the far right of each top bar switches
-between the two ([workspaces](#stemdeck-workspaces)).
-
-1. **Load a track you know** and put its stems on channels 1–4: push each on
-   the desk, or light switch 1 on drums, 2 bass, 3 other, 4 vocals (each stem
-   can only go to its own channel). A³ Motion's
-   channel meters move.
-2. **StemDeck as clock**: PLAY, `PIO master: A`, A³ Motion on **PIO**.
-3. **Load a set** on A³ Motion: FILES › SETS › *Warmup* › **Load**.
-4. **One part at a time**: 3d up on **channel 4** (vocal), press its
-   **Play\|Pause**; then channel 3, then channel 1.
-5. **Leave the bass** low and slow: low end is hard to place and a moving
-   bassline makes the room seasick.
-6. **Hold A1** on the vocal for a lift; let go and it returns.
-7. **Mix the next track** on the other deck onto the same channels; hand over
-   MASTER and A³ Motion follows the new tempo.
-8. **Walk the night on**: A6 cues a channel into the next phase; load the next
-   set for all four.
-
-<!-- GIF: first set, step 4: channel 4's 3d going up and its Play|Pause starting the clip on the downbeat, the blob leaving the centre -->
-
-<!-- GIF: first set, step 6: holding A1 on channel 4 while channel 1 keeps its own clip, then letting go -->
-
-**Try:** mute a stem (**M**, or `1`–`4` for deck A) while its clip runs, and
-bring it back on the one: it re-enters already in motion.
+between the two screens ({ref}`workspaces <stemdeck-workspaces>`).
 
 (stemdeck-with-motion-remote-machine)=
 
 ## StemDeck on another machine
 
-On the rig, deck B (and C and D, when you run them) runs on the second machine, beside A³ Motion. Its deck
-travels to the Core as one **AES67** stream of 41 channels on the audio network
-({ref}`ports <ports-audio-network>`); the Core's REC bus comes back on
-channels 1 and 2 for the recorder. Both machines need a cable between their
-second sockets (or a switch) and an address each on `192.168.9.0/24`; the
-Core's is `192.168.9.10/24`. The Core's engine takes the stream from its I/O
-map (deck B's source is *AES67 stream* by default,
-{ref}`I/O map <audio-engine-io>`), and the Core receives it outside the PTP
-clock.
+Deck A runs on the Core. Every further deck can run on a machine of its own,
+a **deck host**, one deck letter per host. The shipped I/O map expects deck B
+from another machine; on the I/O page each deck's source can be switched
+between *Local StemDeck* and *AES67 stream*
+({ref}`the I/O map <audio-engine-io>`).
 
-The deck machine needs only the StemDeck package, no a3-core: it ships the
+A deck host sends its deck to the Core as one **AES67** stream of 41 channels
+on the audio network ({ref}`ports <ports-audio-network>`); the Core's REC bus
+comes back on channels 1 and 2 for the recorder. Both machines need a cable
+between their second sockets (or a switch) and an address each on
+`192.168.9.0/24`; the Core's is `192.168.9.10/24`. The Core receives the
+stream outside the PTP clock.
+
+The deck host needs only the StemDeck package, no a3-core: it ships the
 deck's sender and link map ({ref}`one deck per instance <stemdeck-one-deck>`).
 Set up once:
 
 1. Tell StemDeck where Core is: `~/.config/a3/core`
    ({ref}`StemDeck on radla <osc-radla>`).
 2. Give the machine's second socket its address on the audio network.
-3. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67 streams
-   carry 44.1 kHz.
+3. Set the sample rate to 44.1 kHz **before** StemDeck starts; the AES67
+   streams carry 44.1 kHz.
 4. Run the installer's **deck-host** role and answer its three questions: the
    deck letter, the path latency (0 until you have measured it) and the audio
-   socket. It starts the deck with its sender, link map and clock, and sets the
-   panel to follow the workspace
+   socket. It starts the deck with its sender, link map and clock, and sets
+   the panel to follow the workspace
    ({ref}`what the role does <stemdeck-one-deck>`). Without the role, nothing
    is linked and the deck is silent on the Core.
 
-On this one screen the panel follows the workspace in front, A³ Motion or the
-deck.
+On a deck host with A³ Motion beside it, the panel follows the workspace in
+front, A³ Motion or the deck.
 
 (stemdeck-with-motion-troubleshooting)=
 
@@ -165,9 +134,10 @@ deck.
 
 | Symptom | What to do |
 | :--- | :--- |
-| A³ Motion's meters stay still | Stems don't reach the engine. On the Core: StemDeck's ports against the engine's peers on the I/O page ({ref}`I/O map <audio-engine-io>`). Elsewhere: is the AES67 stream announced and cabled, and is PTP locked? |
-| Drums on the vocal channel | Outputs cabled out of order: `deck1_L` → 1, `aux_R` → 10 |
-| A stem plays but doesn't move | **3d** down, clip not playing, or the stem is only on **A** (Return) |
-| No tempo follow | BPM shown? Deck playing, `PIO master`? A³ Motion on **PIO**? Core on StemDeck's network? |
-| Movements a beat off the bar | CUE on the real first beat of a bar, **GRID**, **SNAP** |
+| The deck is silent on the desk | Is the channel's INPUT on the deck's letter (bracket over it) and the fader up? On the Core: deck A's ports against the engine's peers on the I/O page ({ref}`I/O map <audio-engine-io>`). Elsewhere: is the AES67 stream announced and cabled, and is PTP locked? |
+| A³ Motion says **DECK A** and nothing moves | Right: Motion does not move a deck. Tap an action on a stem in StemDeck, or put the channel on **ST** for Motion |
+| A stem plays but doesn't move | Stems move only while an action runs: tap ORBIT, PING, RISE or SCAT and wait for the next bar |
+| An ST channel doesn't move | **3d** down, the clip not playing, or FREQ and Q on a band where the track has little |
+| No tempo follow | BPM shown? Deck playing as master? A³ Motion on **PIO**? Core on StemDeck's network? |
+| Movements a beat off the bar | StemDeck: CUE on the real first beat of a bar, **GRID**, **SNAP** |
 | Stems stop after an audio-settings change | Set the rate before starting StemDeck; check that the AES67 stream is still announced on the audio network |
