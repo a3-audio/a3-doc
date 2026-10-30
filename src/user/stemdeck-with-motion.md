@@ -4,6 +4,8 @@
 
 ## At a glance
 
+![Two StemDecks (A, B), the A³ Desk, A³ Motion, and two more StemDecks (C, D) side by side](pics_user/stemdeck-desk-motion-overview.png)
+
 Move a stereo mix and the whole track moves, like a speaker on a trolley.
 [StemDeck](stemdeck.md) sends **four stems** — drums, bass, other, vocals — to
 **A³ Core's four channels**, the ones [A³ Motion](a3motion.md) moves. So each

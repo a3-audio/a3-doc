@@ -69,6 +69,8 @@ Each channel feeds the phones bus (`enc_phones`) twice in the engine: a
 
 ## The virtual desk
 
+![The A³ Desk with four channels playing](pics_user/a3-desk-playing.png)
+
 The **A³ Desk** is the A³ Mixer on a screen. It looks like the panel and
 sends the same OSC to Core. Use it as a second operator beside the hardware,
 or as a stand-in when the hardware is not there.

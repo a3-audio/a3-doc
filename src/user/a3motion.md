@@ -8,6 +8,8 @@
 
 ![A set playing on all four channels; no interaction.](pics_user/howto-hero-sphere.gif)
 
+![A³ Motion's screen: the sphere with four channels moving](pics_user/a3-motion-ui-sphere.png)
+
 A³ Motion moves up to four mixer channels through the room, in time with the
 music. Each channel's sound travels along a **shape** — a circle, a rose, a
 zigzag, a jump on every beat. A³ Motion makes no sound itself: it tells A³ Core
