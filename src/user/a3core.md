@@ -75,8 +75,8 @@ The portrait touch screen (768 × 1024) shows one workspace at a time:
 
 Run **`a3-core`** on the screen (workspace ENGINE). The window attaches to Core
 and the engine over their local ports; it has no audio of its own. Its pages
-are the {doc}`engine's pages <audio-engine>` (AUDIO, STATUS, CHANNELS, ZONES,
-I/O, CALIBRATION, FILTER) and, below them, the **OSC MONITOR**: what the
+are the {doc}`engine's pages <audio-engine>` (AUDIO, CHANNELS, ZONES, SPEAKERS,
+I/O, CALIBRATION, FILTER, STATUS) and, below them, the **OSC MONITOR**: what the
 devices actually say to each other, the answer to *"cable, setting, or me?"*,
 since over UDP a control nobody hears looks like one that works.
 
