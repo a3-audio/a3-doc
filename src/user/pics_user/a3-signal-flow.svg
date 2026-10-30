@@ -47,7 +47,7 @@
   <rect class="box" x="20" y="138" width="920" height="80" rx="8" fill="#e3ecfa"/>
   <text class="head" x="480" y="162" text-anchor="middle">A³ desk: four channels</text>
   <text class="small" x="480" y="182" text-anchor="middle">INPUT picks what a channel plays: ST (the stereo input) or a deck A to D</text>
-  <text class="small" x="480" y="201" text-anchor="middle">TRIM, EQ, FX filter, fader   ·   SEND to the delay   ·   CUE to the headphones</text>
+  <text class="small" x="480" y="201" text-anchor="middle">TRIM, EQ, FX filter, fader   ·   AUX-Send to the delay   ·   CUE to the headphones</text>
 
   <path class="line" d="M245,218 L245,256"/>
   <path class="line" d="M715,218 L715,256"/>
@@ -56,7 +56,7 @@
   <text class="step" x="20" y="252">3  INTO 3D</text>
   <rect class="box" x="20" y="260" width="450" height="96" rx="8" fill="#fdebd3"/>
   <text class="head" x="245" y="284" text-anchor="middle">Stereo channel (ST)</text>
-  <text class="small" x="245" y="304" text-anchor="middle">3D, FREQ and Q cut out one band of the sound.</text>
+  <text class="small" x="245" y="304" text-anchor="middle">3d, FREQ and Q cut out one band of the sound.</text>
   <text class="small" x="245" y="322" text-anchor="middle">That band moves on A³ Motion's path;</text>
   <text class="small" x="245" y="340" text-anchor="middle">the rest stays where it is, all around.</text>
 
@@ -69,8 +69,7 @@
   <path class="line" d="M245,356 L245,394"/>
   <path class="line" d="M600,356 L380,394"/>
   <path class="dash" d="M880,356 L880,394"/>
-  <text class="label" x="888" y="380">SEND,</text>
-  <text class="label" x="888" y="394">AUX</text>
+  <text class="label" x="888" y="388">AUX-Sends</text>
 
   <!-- 4 the engine's buses -->
   <text class="step" x="20" y="390">4  THE ENGINE MIXES</text>

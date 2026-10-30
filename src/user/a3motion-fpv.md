@@ -16,7 +16,7 @@ move, and the device wakes up in the view it was left in.
 | :--- | :--- |
 | **status bar** | as in FULL, plus **FULL/FPV**, **BREATH** and **PILOTS** |
 | **sphere** (top two thirds) | the room; each playing clip is a **ship**, a small craft pointing where it is going. The guest groups are marked on its **dance floor** |
-| **strips** (bottom third) | one per channel: `CH n` and **CLIP** (hollow) or **ORBIT** (filled), the clip name with ▶ or ❚❚, the **3D**, **FREQ** and **Q** bars and a level meter. In ORBIT the clip row says **PATROL** or **→ G2**. The strips are to read; they take no touch |
+| **strips** (bottom third) | one per channel: `CH n` and **CLIP** (hollow) or **ORBIT** (filled), the clip name with ▶ or ❚❚, the **3d**, **FREQ** and **Q** bars and a level meter. In ORBIT the clip row says **PATROL** or **→ G2**. The strips are to read; they take no touch |
 
 The strip's meter is the same LED meter StemDeck shows: green up to about
 −12 dB, yellow above it, red near full scale, and a short line that holds the

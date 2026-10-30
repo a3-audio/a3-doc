@@ -83,7 +83,7 @@ Safe: deleting a file (loaded material plays on), scrolling the menu, Escape.
 | A Cue says `-- NO SUCH CLIP` | Its clip was deleted or renamed |
 | A Cue says `-- SAVE THE TAKE FIRST` | Tap SAVE or DISCARD on the take |
 | **CLEAN** is greyed out | The device has no clean skin installed |
-| A double tap on **3D** does nothing | The panel is attached, and its pot decides. Turn the pot |
+| A double tap on **3d** does nothing | The panel is attached, and its pot decides. Turn the pot |
 | The mixer's hardware control and the screen disagree | The A³ Mixer has no motor faders. Touch the hardware control and it takes over |
 | You changed an OSC address and nothing reacts | The other side must use the same one. Put it back, or change both |
 | Silent after a start | Core not up, or the engine restarted alone: restart `a3-main`; `gate:` lines in `journalctl --user -u a3-core` ({ref}`silent start <core-silent-start>`) |

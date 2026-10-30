@@ -13,9 +13,9 @@ the way from the deck to the speakers, and what you touch to make it move.
 A³ is a DJ setup for a room with speakers **all around** the crowd, not just
 in front of it. You mix on a four-channel desk as on any club mixer, and
 **A³ Motion** or **StemDeck** decides where each part of the music is in the
-room, in time with the beat. A computer, **A³ Core**, runs the **audio
-engine**: it takes everything you play, places it in the room, and feeds every
-speaker exactly its share.
+room, in time with the beat. A computer, **A³ Core**, runs **the Engine**:
+it takes everything you play, places it in the room, and feeds every speaker
+exactly its share.
 
 ## Two ways to play: stereo and stems
 
@@ -30,8 +30,8 @@ turntable on channel 1 and a StemDeck on channel 2.
 | **A track is** | one stereo signal | four stems: drums, bass, other, vocals |
 | **What moves** | one band you pick (FREQ, Q) | one stem, while its action runs |
 | **What stays** | the rest of the track | the other stems |
-| **Who steers** | A³ Motion: its clip and 3D | StemDeck: ORBIT, PING, RISE, SCAT |
-| **You touch** | the desk, and 3D, FREQ, Q | the desk, the pads, GAIN, WIDTH, AUX |
+| **Who steers** | A³ Motion: its clip and 3d | StemDeck: ORBIT, PING, RISE, SCAT |
+| **You touch** | the desk, and 3d, FREQ, Q | the desk, the pads, GAIN, WIDTH, AUX-Send |
 
 (how-it-sounds-stereo)=
 
@@ -44,13 +44,13 @@ cuts **one band** out of it and moves only that band.
 - **FREQ** picks where the band sits, from the bass up to the hi-hats.
 - **Q** sets how wide the band is: narrow takes a single sound, wide takes a
   lot of the track.
-- **3D** sets how much of that band leaves the rest. At **0** nothing moves:
+- **3d** sets how much of that band leaves the rest. At **0** nothing moves:
   the channel is plain stereo, spread around the room. Turn it up and the band
   comes loose and follows A³ Motion's path.
 - Everything outside the band stays where it is, so the kick holds the floor.
 
 **Try it:** play a track with a clear hi-hat. On A³ Motion, start a clip on its
-channel, turn FREQ high and Q narrow, then turn 3D up. The hats start to
+channel, turn FREQ high and Q narrow, then turn 3d up. The hats start to
 circle; the kick does not.
 
 See [A³ Motion](a3motion.md) for clips, paths and actions.
@@ -70,7 +70,7 @@ the room by StemDeck itself, before the sound reaches the desk.
   stem goes back to its place and sinks into the rest again.
 - **WIDTH** sets how wide a moving stem is: a narrow point or a broad wall.
 - **GAIN** is the stem's level; a push on its knob mutes it.
-- **AUX** sends the stem to the beat delay (see [The extras](#how-it-sounds-extras)).
+- **AUX** is the stem's AUX-Send to the beat delay (see [The extras](#how-it-sounds-extras)).
 - On the A³ Motion panel, the four pots are the AUX of the four stems, the
   upper encoders GAIN, the lower ones WIDTH.
 
@@ -91,7 +91,7 @@ A³ Motion does not move a deck: on a deck channel its screen says **DECK A**
 ## From the deck to the speakers
 
 ```{figure} pics_user/a3-signal-flow.svg
-:alt: The A³ signal flow in six rows. 1, what plays: players into the audio interface, StemDeck deck A on the Core, decks B to D over the network. 2, the desk: four channels, INPUT picks ST or a deck. 3, into 3D: a stereo channel moves one band, a deck channel moves its stems with actions. 4, the engine mixes: everything into one room mix; SEND and AUX go to the delay, whose echoes come back through FX RETURN. 5, outputs: MASTER, BOOTH, REC and PHONES. 6, where it is heard: PA speakers, booth speakers, the recording, the headphones.
+:alt: The A³ signal flow in six rows. 1, what plays: players into the audio interface, StemDeck deck A on the Core, decks B to D over the network. 2, the desk: four channels, INPUT picks ST or a deck. 3, into 3D: a stereo channel moves one band, a deck channel moves its stems with actions. 4, the Engine mixes: everything into one room mix; the AUX-Sends go to the delay, whose echoes come back through FX RETURN. 5, outputs: MASTER, BOOTH, REC and PHONES. 6, where it is heard: PA speakers, booth speakers, the recording, the headphones.
 
 The way of the sound, top to bottom.
 ```
@@ -133,10 +133,10 @@ track alone. The headphones get the same 3D sound, folded to two ears.
 
 **Delay (echo).** A³ has one beat-synced delay, a tape-style echo whose time
 follows the tempo.
-- A channel's **SEND** knob on the desk sends that channel into it, from where
+- A channel's **AUX-Send** on the desk sends that channel into it, from where
   the channel sits in the room, so the echo comes from the same side.
-- A stem's **AUX** knob in StemDeck sends just that stem, for example only the
-  vocal.
+- A stem's AUX-Send (its **AUX** knob in StemDeck) sends just that stem, for
+  example only the vocal.
 - **FX RETURN** on the desk sets how loud the echoes are in the room. At zero
   the delay is silent on the PA.
 - A pulled fader sends nothing: an echo only starts from a channel that plays.
@@ -149,16 +149,22 @@ otherwise on the disk.
 
 ## Words used here
 
+One name per thing: every page uses these.
+
 | Word | In plain words |
 | :--- | :--- |
-| **3D** | how much of a channel's sound moves through the room. 0: none, it stays spread around |
+| **3d** | how much of a channel's sound moves through the room. 0: none, it stays spread around. Printed **3D** on A³ Motion's screen |
 | **AES67** | a standard way to send many audio channels over an ordinary network cable. A StemDeck on another computer reaches A³ Core this way |
-| **AUX**, **SEND** | a second way out of a channel or a stem, here into the delay. The normal way out (the fader) stays as it is |
+| **A³ Core** | the hardware: the computer with its audio interface that everything plugs into |
+| **AUX-Send** | a second way out of a channel or a stem, into the delay. The normal way out (the fader) stays as it is. Printed **AUX SEND** on the A³ Mixer, **SEND** on the virtual desk and A³ Motion, **AUX** on a StemDeck stem |
 | **B-format** | sound stored as "what comes from which direction", not as "what plays on which speaker". It fits any speaker setup; a decoder turns it into speaker signals |
 | **bus** | a mix that several sources go into, like the room mix or the headphone mix |
 | **cue** | pre-listening in the headphones, before the crowd hears it |
 | **decoder** | the step that turns B-format into one signal for each speaker of a room. The PA and the booth each have their own |
+| **desk** | the four-channel mixer you play on: the **A³ Mixer** is the hardware panel, the **virtual desk** the same mixer in software, on a screen |
+| **ST** | a desk channel's stereo input, for a CDJ, a turntable or a laptop. (**A** to **D** are the StemDeck decks) |
 | **stem** | one part of a track: drums, bass, other or vocals. StemDeck plays four of them together |
+| **the Engine** | the audio backend: the software on A³ Core (the program `a3-core`) that places every sound in the room and feeds the speakers. Its window is the Core window |
 | **zone** | one set of speakers with its own decoder: **MAIN** (the PA) and **BOOTH** |
 
 ## Where to go next
@@ -166,4 +172,6 @@ otherwise on the disk.
 - **A³ Motion**, to make stereo channels move: [first ten minutes](#motion-get-started).
 - **StemDeck**, to play stems: [StemDeck](stemdeck.md).
 - **The desk**: [A³ Mixer](a3mix.md).
-- **Setting up the room**, speakers and levels: [The audio engine](audio-engine.md).
+- **What you need**, speakers or headphones: [What you need](what-you-need.md).
+- **Setting up the room**, speakers and levels: [The Engine](audio-engine.md).
+- **Your first set**: [First set](first-set.md).

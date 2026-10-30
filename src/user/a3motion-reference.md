@@ -82,10 +82,10 @@ turns the view instead. No finger moves a blob; the view survives a restart.
 
 #### The channel row
 
-One field per channel, channel 1 left: **meter**, **3D**, **FREQ**, **Q**
+One field per channel, channel 1 left: **meter**, **3d**, **FREQ**, **Q**
 (drag to turn), and a progress bar with the clip's name. **Tap a field to
 select the channel**; touching one of its knobs selects it too. Double tap:
-3D and FREQ to twelve o'clock, Q closed — unless the panel is attached, then
+3d and FREQ to twelve o'clock, Q closed — unless the panel is attached, then
 the pot decides.
 
 ![The channel row: four channels, each with its clip's name](pics_user/a3-motion-ui-channel-row.png)
@@ -280,7 +280,7 @@ shut; double tap shuts it), **CUE**, **FX** — as on [CHMIX](#motion-chmix).
 | **FX FREQ**, **FX RES** | the shared filter. Double tap: FREQ middle, RES none |
 | **FX MODE** | **HPF** / **LPF** |
 
-3D, FREQ and Q are in the channel row.
+3d, FREQ and Q are in the channel row.
 
 (motion-pads)=
 

@@ -151,7 +151,7 @@ One column per stem, its colour on top. The knobs sit as on the
 
 **At rest a stem has no direction of its own**: it sounds all around, with
 the rest of the track. Only while an action runs does it come loose and move.
-A running pad shows its beat count (`ORBIT 28/32`). There is no 3D knob per
+A running pad shows its beat count (`ORBIT 28/32`). There is no 3d knob per
 stem.
 
 (stemdeck-transport)=

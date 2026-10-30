@@ -29,7 +29,7 @@ The whole graph in one block (source: `src/a3-engine/Engine.h` in a3-core).
 All buses are third-order B-format, 16 channels:
 
 ```text
-channel      analog pair -> TRIM -> EQ -> [FX filter] -> band split by 3D, FREQ, Q
+channel      analog pair -> TRIM -> EQ -> [FX filter] -> band split by 3d, FREQ, Q
                (moving + steady) -> VOLUME
              or deck k (16-ch B-format) -> TRIM -> EQ -> [FX filter, always SVF] -> VOLUME
                (no band split, no positions: StemDeck has placed the stems)
@@ -173,7 +173,7 @@ host name.
   `/engine/open 1`. Then each output ramps up to its trim over **1 s**.
   Closing takes 10 ms. **Rec is never gated**, so the beat analyzer always
   has its input.
-- **Silence is silence.** Every gain control at its minimum (3D, VOLUME,
+- **Silence is silence.** Every gain control at its minimum (3d, VOLUME,
   TRIM/GAIN, MASTER, BOOTH, RETURN, PHONES, the sends) is exactly zero, not a
   very quiet signal.
 
@@ -201,9 +201,9 @@ started by the installer, not by `a3-engine`.
 - On the desk the source ring shows one entry per deck and **ST** for the
   channel's stereo input (**A B C D ST** with four decks).
 - On a deck channel, **A³ Motion shows "deck A" … "deck D"** and sends no
-  positions, 3D, FREQ or Q for it. The desk's 3D of the channel that holds deck k
+  positions, 3d, FREQ or Q for it. The desk's 3d of the channel that holds deck k
   is relayed by Core to that StemDeck (`/stemdeck/{deck}/3d`); the engine applies
-  no 3D to a deck channel.
+  no 3d to a deck channel.
 - **Aux is per stem and goes straight into the delay.** Only the stems you send
   in StemDeck (their AUX knobs) are on the deck's aux bus, at their positions.
   The bus goes through the channel's input-select fade and VOLUME and then
