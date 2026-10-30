@@ -2,6 +2,135 @@
 
 # The audio engine
 
+The engine is what you hear. Everything you play on the desk, every stem and
+every echo goes through it, and it feeds each speaker exactly its share of
+the room. You set it up **once per room**: tell it where the cables go, check
+every speaker, set a safe level. During the set you never touch it. For what
+it does to the sound, read [How A³ sounds](how-it-sounds.md) first.
+
+## What it does, in short
+
+- It takes the **inputs**: the stereo inputs of the audio interface (CDJs,
+  turntables, a laptop) and the StemDecks, from the Core itself or over the
+  network.
+- It runs the **four desk channels**: TRIM, EQ, the FX filter, the fader,
+  and for a stereo channel the band that moves (3D, FREQ, Q).
+- It **places every sound in the room** and adds everything into one room
+  mix, plus the beat delay and its FX RETURN.
+- It **decodes** that mix for each set of speakers (a **zone**): the PA
+  (MAIN) and the BOOTH. It folds it into stereo for the headphones (PHONES)
+  and the recording (REC).
+- It **measures** every meter the desk and A³ Motion show.
+
+The engine is part of the program `a3-core` on A³ Core. It starts by itself
+with the Core; there is nothing to switch on.
+
+(audio-engine-window)=
+
+## The Core window
+
+The engine's settings live in the **Core window**: on A³ Core's own screen
+it is the workspace **ENGINE** (3); on a laptop, run `a3-core`. Closing the
+window never stops the sound.
+
+```{figure} pics_user/a3-signal-flow.svg
+:alt: The A³ signal flow: players and StemDecks, the desk, the 3D placement, the room mix with the delay, the four outputs MASTER, BOOTH, REC, PHONES and where each is heard
+:width: 70%
+
+What the engine does, from the inputs to the speakers.
+```
+
+The pages along the top, one per job:
+
+| Page | What it is for | Do you need it? |
+| :--- | :--- | :--- |
+| **AUDIO** | the sound device: its sample rate and buffer, and the estimated delay from input to output | rarely. On the rig the audio server decides; the page only shows it |
+| **CHANNELS** | how many desk channels and how many StemDecks (A, B, C, D, …) the engine runs | only when you add a deck |
+| **ZONES** | which speaker layout the PA (MAIN) and the BOOTH use, and an optional EQ for your headphone model (PHONES) | yes, in a new room |
+| **SPEAKERS** | the speakers of one zone: where each one stands, a test noise for each, and which output is the sub | yes, in a new room |
+| **I/O** | the cables: what feeds each channel (INPUT), and which interface output each zone uses (OUTPUT) | yes, once per audio interface |
+| **CALIBRATION** | the level of each zone: MAIN, BOOTH, PHONES | yes, in a new room |
+| **FILTER** | the sound of the desk's FX filter: SVF (clean) or Ladder (warmer, it bites) | when you like |
+| **STATUS** | what runs now: the engine, the connection to the rest of the system, the load, what is missing | when something is silent |
+
+Below them, **OSC MONITOR** shows what the devices say to each other
+({ref}`A³ Core › The window <core-window>`).
+
+**Nothing changes until you press Save.** The bar at the bottom says
+*not saved* while you have a change waiting. **Save** restarts the engine with
+the new setting: the sound drops for a moment and fades back in over a
+second. So set up before the doors open, not during the set. If the new
+setting does not work, the old one comes back and the window says why. The
+**FILTER** page is the one exception: it acts at once.
+
+(audio-engine-setup)=
+
+## Setting up a room: three steps
+
+```{warning}
+**Start quiet.** Turn the desk's **MASTER** and **BOOTH** down before you
+begin, and bring them up slowly. A wrong cable or a wrong trim can be loud.
+```
+
+### 1. The cables: I/O
+
+Open **I/O**.
+
+- **INPUT**: for each desk channel, which interface input is its left and
+  its right. Your CDJ on inputs 1 and 2 belongs to channel 1, say. Below that,
+  for each deck, where it comes from: **Local StemDeck** (on this computer)
+  or **AES67 stream** (from another computer on the network).
+- **OUTPUT**: for each zone (**MAIN**, **BOOTH**, **PHONES**, **REC**), which
+  interface output each of its channels goes to. MAIN has the sub first, then
+  the tops. An output that another channel already uses is marked.
+
+Press **Save**. A shipped A³ Core comes with this already done for its own
+interface; see [the I/O map](#audio-engine-io) for what it connects.
+
+### 2. The speakers: ZONES and SPEAKERS
+
+Open **ZONES** and pick the layout of MAIN and of BOOTH. The shipped one is a
+square of four tops with one sub (4.1). Pick a layout in the list to see its
+speakers.
+
+Then open **SPEAKERS** and choose the zone. The table lists each speaker:
+its output channel and its direction (**azimuth**: the angle around you, 0 is
+straight ahead; **elevation**: the angle up). Now check them one by one:
+
+1. Bring **MASTER** (for MAIN) or **BOOTH** up a little: the test noise
+   goes through that knob.
+2. Press a speaker's **NOISE** button: one second of pink noise comes out of
+   *that* speaker. Is it the right box, in the right place?
+3. Hold **Alt** and press **NOISE**: the noise now comes *from that direction*
+   through the whole layout. It should sound from where the speaker stands.
+
+If your room is different, change the table (where the speakers stand, which
+output is the sub, the crossover to the sub), press **SAVE TO ZONE**, then
+**Save**. Your layout is saved as a variant of your own; the shipped files
+stay as they are.
+
+### 3. The level: CALIBRATION
+
+Open **CALIBRATION**. Each zone has a trim, from −90 to +6 dB: the level
+the zone has with its desk knob fully open. Moving a slider only *proposes* a
+value; a question names the old and the new value before anything changes.
+
+- Play a track, desk knobs fully open, and raise the trim until the room is
+  as loud as it may ever get. Then the desk can never go louder than that.
+- The shipped MAIN and BOOTH trims are low on purpose (−30.88 dB).
+- A zone without a trim stays silent.
+
+That is it. From now on the engine starts with these settings every time.
+
+(audio-engine-in-depth)=
+
+## In depth
+
+The rest of this page is for whoever looks after the machine: what runs, the
+shipped connections, the decks, and how to start the engine by hand.
+
+### What it is
+
 The engine is the part of the `a3-core` program that does A³ Core's audio:
 channel strips, the 3D encoding, the effects, main, booth, phones and rec. It
 is `a3-core --role engine`, a process of its own, run by `a3-engine.service`.
@@ -14,7 +143,53 @@ the same package as the Core (its `PROGRAM.md`, {doc}`development page <../devel
 repository `a3-engine` it grew in is archived; the name lives on as the engine
 **role**, its unit `a3-engine.service` and its JACK client `a3-engine`.
 
-## The engine always runs
+### The signal path
+
+The whole graph in one block (source: `src/a3-engine/Engine.h` in a3-core).
+All buses are third-order B-format, 16 channels:
+
+```text
+channel      analog pair -> TRIM -> EQ -> [FX filter] -> band split by 3D, FREQ, Q
+               (moving + steady) -> VOLUME
+             or deck k (16-ch B-format) -> TRIM -> EQ -> [FX filter, always SVF] -> VOLUME
+               (no band split, no positions: StemDeck has placed the stems)
+main bus     analog: moving share encoded at the channel's position, steady share on a
+             four-point bed (front and back, left and right); deck: added as it is
+fx bus       every channel x its AUX send, after the fader
+             + every deck's stem-AUX bus, after the fader, at unity -> DualDelay
+FX RETURN    DualDelay output x RETURN, added to main, booth and rec
+phones bus   pre-fader x cue weight (CUE on) + post-fader x mix weight
+             + the delay + every deck's stem cue (second order) x cue weight
+MAIN, BOOTH  main bus + FX RETURN -> zone decoder (IEM SimpleDecoder, sub by crossover)
+             -> MASTER / BOOTH -> trim and gate -> speakers
+REC          main bus + FX RETURN -> binaural decoder x rec trim -> recorders,
+             AES67 channels 1-2, beat-analyzer (never gated)
+PHONES       phones bus -> binaural decoder (+ headphone EQ) -> PHONES -> trim and gate
+```
+
+### The pages in detail
+
+| Page | What it is for |
+| :--- | :--- |
+| **AUDIO** | the sound device. On JACK the rate and quantum are read-only: the server owns them |
+| **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
+| **CHANNELS** | how many channels (1–128), with the load beside it, and how many decks (1–26), with the count that runs |
+| **ZONES** | which speaker layout (spatial data) MAIN and BOOTH use; your own variants can be renamed and deleted there. Also **PHONES HEADPHONE EQ**: off, or the correction of one headphone model, applied to the phones only (rec has none) |
+| **SPEAKERS** | IEM's AllRADecoder editor for one zone: the speaker table, a 1 s pink-noise burst per speaker (−20 dBFS RMS, after the zone's decoder and before MASTER/BOOTH and the gate, so a closed gate keeps it silent; with Alt from that direction into the decoder), the 3D view and energy map, the sub channel and crossover. **SAVE TO ZONE** writes a user variant under `~/.config/a3/engine/spatial/` |
+| **I/O** | two sub-pages. INPUT: each channel's L and R, each deck's source, the direct links. OUTPUT: per zone the playback port of each channel, and every engine port with its peers, see below |
+| **CALIBRATION** | the trim of each output zone |
+| **FILTER** | the DJ filter type, SVF or Ladder |
+
+Changes are **pending** until you press **Save** ("not saved" shows while the
+edit differs from what runs). Save checks the file the way a start would and
+refuses a bad one, leaving the old file in place. Then it writes
+`~/.config/a3/engine/engine.json` and **restarts the engine session**: a new
+engine, which says hello to Core, which replays what it knows. That holds for
+every change, and the old setting is opened again if the new one does not open.
+
+The FILTER page is the one exception: it acts at once and needs no Save.
+
+### The engine always runs
 
 There is **no switch and no fallback**. `a3-engine.service` has no
 `Conflicts=` and no start condition: when `a3-main` starts, the engine starts.
@@ -32,32 +207,6 @@ package (`stemdeck.service.d/two-deck-off.conf`); the decks are the
 ```{note}
 After installing a new engine, restart it: `systemctl --user restart a3-engine`.
 ```
-
-## The window
-
-The window is the `a3-core` program run without a role (on the rig, on the
-screen's ENGINE workspace). It reaches the engine over its local control port
-(`engine.control`), so closing it never stops the sound. One page per job, a
-**Save** bar below:
-
-| Page | What it is for |
-| :--- | :--- |
-| **AUDIO** | the sound device. On JACK the rate and quantum are read-only: the server owns them |
-| **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
-| **CHANNELS** | how many channels (1–128), with the load beside it, and how many decks (1–26), with the count that runs |
-| **ZONES** | which speaker layout (spatial data) is used. There is no layout editor. Also **PHONES HEADPHONE EQ**: off, or the correction of one headphone model, applied to the phones only (rec has none) |
-| **I/O** | where each engine port connects, and for each deck its source, see below |
-| **CALIBRATION** | the trim of each output zone |
-| **FILTER** | the DJ filter type, SVF or Ladder |
-
-Changes are **pending** until you press **Save** ("not saved" shows while the
-edit differs from what runs). Save checks the file the way a start would and
-refuses a bad one, leaving the old file in place. Then it writes
-`~/.config/a3/engine/engine.json` and **restarts the engine session**: a new
-engine, which says hello to Core, which replays what it knows. That holds for
-every change, and the old setting is opened again if the new one does not open.
-
-The FILTER page is the one exception: it acts at once and needs no Save.
 
 (audio-engine-io)=
 
@@ -134,7 +283,7 @@ The Core's map names the Core's own AES67 sender (`AES67 <hostname> out`), so
 another host copies the file to `~/.config/a3/engine/engine.json` and edits the
 host name.
 
-## Calibration and the gate
+### Calibration and the gate
 
 - **Trim** per zone, -90 to +6 dB. A slider only *proposes*: a dialog names
   the old and the new value before anything changes. A zone without a trim
@@ -153,7 +302,7 @@ weights), so nothing clicks.
 
 (audio-engine-decks)=
 
-## Decks
+### Decks
 
 In engine mode {ref}`StemDeck <stemdeck-one-deck>`'s decks arrive as
 **41 channels each**: 16 main (B-format, third order), 16 aux (B-format) and 9
@@ -212,7 +361,7 @@ started by the installer, not by `a3-engine`.
   never make the file invalid. The new aux and cue links are not guessed: the
   deck shows them missing until its source is chosen on the I/O page.
 
-## Starting it by hand
+### Starting it by hand
 
 On the rig the units start everything. By hand, the same program plays every
 role:
