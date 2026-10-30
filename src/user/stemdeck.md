@@ -6,15 +6,24 @@
 
 ![StemDeck's one-deck screen: a track playing, the four stems with their actions running, AUX and WIDTH beside the stems](pics_user/stemdeck-one-deck-playing.png)
 
-A stem player for DJs: **two decks, each playing a track split into four
-stems**, and a mixer that sends every stem to its own output. Where a CDJ gives
-A³ Core a stereo mix, StemDeck gives it the parts.
+For the moment when one part of a track should take the room: the vocal
+rises over the crowd on the drop, the hats circle the floor, and the drums and
+the bass hold the ground. StemDeck plays a track as **four stems** — drums,
+bass, other, vocals — and moves each one on its own, in time with the beat.
+Where a CDJ gives A³ Core a stereo mix, StemDeck gives it the parts, already
+placed in the room. New to A³? Read [How A³ sounds](how-it-sounds.md) first.
 
-- On the rig each deck is its own instance that sends B-format to the Core,
-  see [One deck per instance](#stemdeck-one-deck).
-- Four stem buses go to A³ Core's channels 1–4, the aux bus to its Return.
-  Pre-listening is the desk's cue; StemDeck has no headphone bus.
-- The A³ Mixer [remote-controls it](#stemdeck-remote) through the Core.
+- **One deck per program.** On the rig up to four StemDecks run, deck **A** to
+  **D**, each with its own screen. Deck A runs on A³ Core, the others on the
+  Core or on machines of their own; see
+  [One deck per instance](#stemdeck-one-deck).
+- **Per stem**: GAIN, WIDTH, an AUX send to the delay, four actions that move
+  the stem (ORBIT, PING, RISE, SCAT), CUE and MUTE; see [The stems](#stemdeck-stems).
+- **On the desk** a deck is one source: turn a channel's INPUT knob to its
+  letter and push. The channel's fader, EQ and filter act on the whole deck
+  ({ref}`the desk <a3mix-displays>`).
+- **Pre-listening**: a stem's CUE key puts it in the headphones, whether the
+  deck is on a channel or not.
 - On the Core it always runs, on workspace **STEMDECK** (2);
   see [Always running on the Core](#stemdeck-on-the-core).
 - With no CDJs it can be [the tempo master](#stemdeck-master).
@@ -23,8 +32,9 @@ A³ Core a stereo mix, StemDeck gives it the parts.
   (outside the `a3-audio` organisation, carried by a3-system).
 
 ```{tip}
-**Best with A³ Motion**: each stem travels the room on its own path, in time
-with StemDeck's beat. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
+**With A³ Motion**: StemDeck moves its stems, A³ Motion moves the stereo
+channels beside them, and both follow one beat. See
+[StemDeck × A³ Motion](stemdeck-with-motion.md).
 ```
 
 (stemdeck-stem-sets)=
@@ -64,13 +74,18 @@ First folder: **artist**; second: **album**; deeper folders join the album
 
 ## The screen
 
-Top: both decks' scrolling waveforms (drag to move, wheel to zoom). Middle:
-deck A, mixer, deck B. Bottom: the library. The top bar holds **REC** (24-bit
-FLAC of the `rec_L/R` inputs into `recordings/`), **AUTO DJ**, the **SYNC**
-source, **Audio** (grey under JACK), **Settings**, the workspace switch, and,
-where there is room, the audio status.
+One deck, top to bottom: the **top bar**; the stems' scrolling waveforms
+(drag to move, wheel to zoom) and the overview of the whole track; the
+[deck tile](#stemdeck-decks) on the left and the [four stems](#stemdeck-stems)
+beside it; the [transport band](#stemdeck-transport); the
+[library](#stemdeck-library) at the bottom.
 
-![StemDeck's top bar](pics_user/stemdeck-topbar.png)
+![StemDeck's top bar: the deck's letter, REC with where the take goes, AUTO DJ, the SYNC source, the audio status, Settings, MOTION and the workspace list](pics_user/stemdeck-one-deck-topbar.png)
+
+The top bar holds the deck's letter, **REC** (it records the Core's REC mix;
+the key shows where the take goes, see [Recording](#stemdeck-one-deck)),
+**AUTO DJ**, the **SYNC** source, the audio status, **Settings**, and the
+workspace switch.
 
 (stemdeck-workspaces)=
 
@@ -92,31 +107,74 @@ keyboard), and the [AUTO DJ](#stemdeck-autodj) overlap.
 
 ### Decks
 
-![Deck A playing: title, time, overview, BPM with the original tempo, CUE and PLAY, and at the foot the tempo fader with the loop, sync and grid keys](pics_user/stemdeck-deck.png)
+![The deck tile: title, elapsed and remaining time, REPEAT, CONTINUE, SYNC, MASTER, VINYL, GRID, the BPM with the original tempo, the tempo fader with its range, KEY and SHIFT](pics_user/stemdeck-one-deck-tile.png)
 
 Like a CDJ without the platter; the [SCS.3d](#stemdeck-scs3d) is the jog.
 
 | Control | What it does |
 | :--- | :--- |
-| **CUE** | playing: back to the cue point and stop. Stopped: set the cue point, or on it, play while held |
-| **PLAY** | start / pause |
-| overview | one lane per stem. Click: jump; drag: loop |
-| **LOOP OFF** | clears the loop |
-| **REPEAT** | restarts at the end |
-| **VINYL** | the controller's platter scratches |
-| tempo fader | range button: ±8 / ±16 / ±50 % |
-| **BPM** | current tempo; **Original** below |
-| **KEY** | key lock; see [KEY](#stemdeck-key) |
+| **REPEAT** | restarts the track at its end |
+| **CONTINUE** | at the end, goes on with the next set of the library list |
 | **SYNC** | follow a leader; see [Sync](#stemdeck-sync) |
-| **MASTER** | Pro DJ Link tempo master; see [MASTER](#stemdeck-master) |
+| **MASTER** | the network's tempo master; see [MASTER](#stemdeck-master) |
+| **VINYL** | the controller's platter scratches |
 | **GRID** | fix the beat grid; see [GRID](#stemdeck-grid) |
+| **BPM** | current tempo; **Original** below |
+| tempo fader | range button: ±8 / ±16 / ±50 % |
+| **KEY** | key lock; see [KEY](#stemdeck-key) |
+| **SHIFT** | the next action pad starts at once, not on the next bar |
+| overview | one lane per stem. Click: jump; drag: loop |
 
 The tempo is analysed once per set in the background, over all four stems,
 assuming a constant tempo.
 
+(stemdeck-stems)=
+
+### The stems
+
+![The four stems, three of them running an action: per stem AUX, WIDTH and GAIN, the viewer with the stem's place, the pads ORBIT, PING, RISE, SCAT, CUE and MUTE, and the action's length](pics_user/stemdeck-one-deck-stems.png)
+
+One column per stem, its colour on top. The knobs sit as on the
+[A³ Motion panel](#stemdeck-panel-one-deck):
+
+| Per stem | What it does |
+| :--- | :--- |
+| **AUX** | send to the beat delay, 0 to 1 (default 0); see [AUX per stem](#stemdeck-aux) |
+| **WIDTH** | how wide the stem is while it moves: a point or a wall |
+| **GAIN** | the stem's level |
+| viewer | the room seen from above: the stem's place (drag it) and, while an action runs, where it is |
+| **ORBIT**, **PING**, **RISE**, **SCAT** | an action: the stem leaves the rest and moves (circles, jumps side to side, rises, scatters), from the next bar, then goes back |
+| **CUE** | the stem in the headphones |
+| **MUTE** | silences the stem |
+| **‹ length ›** | how long an action runs: ½, 1, 2, 4 or 8 bars |
+
+**At rest a stem has no direction of its own**: it sounds all around, with
+the rest of the track. Only while an action runs does it come loose and move.
+A running pad shows its beat count (`ORBIT 28/32`). There is no 3D knob per
+stem.
+
+(stemdeck-transport)=
+
+### The transport band
+
+![The transport band: LOOP with IN and OUT, previous and next set, CUE, PLAY, and the MAIN, AUX and CUE meters](pics_user/stemdeck-one-deck-transport.png)
+
+| Control | What it does |
+| :--- | :--- |
+| **CUE** | playing: back to the cue point and stop. Stopped: set the cue point, or on it, play while held. Hold CUE and press **PLAY**: plays on without a gap, as on a CDJ-3000 |
+| **PLAY** | start / pause |
+| **IN**, **OUT** | loop in and loop out, on the beat grid; OUT while looping leaves the loop |
+| **LOOP** | leaves a running loop, or goes back into the last one; lit while looping |
+| **\|◀**, **▶\|** | the previous / next set in the folder |
+| meters | the deck's MAIN, AUX and CUE outputs |
+
 (stemdeck-mixer)=
 
-### Mixer
+### Mixer (the older two-deck mode)
+
+The two-deck screen, kept as a fallback (see
+[One deck per instance](#stemdeck-one-deck)), has a mixer instead of the stem
+columns. On the rig you do not see it.
 
 ![The mixer: per stem a knob, M, the stem's own channel switch and AUX; channel faders and the output meters. The picture still shows the older four switches per stem](pics_user/stemdeck-mixer.png)
 
@@ -148,11 +206,12 @@ otherwise clip, and the channels match it.
 
 ### Library
 
-![The library: search box, Load to A and Load to B, the library folder with its set count, Create stems… and Rescan, and the sets by artist and album](pics_user/stemdeck-library.png)
+![The library: search box, Load, the folder tree with its set counts, Create stems… and Rescan, and the sets by artist and album](pics_user/stemdeck-one-deck-library.png)
 
 Columns **Artist | Album | Set | BPM | Stems | Length**; click a header to
-sort. Search matches name, artist or album. Load with **Load to A/B**, a
-double-click or Return (first deck not playing), or drag onto a deck.
+sort. Search matches name, artist or album. **FOLDERS** shows the folder
+tree. Load with **Load**, or drag a set onto the deck or its waveform. (The
+two-deck screen has **Load to A/B**, a double-click or Return.)
 **Rescan** reads the folder again.
 
 (stemdeck-grid)=
@@ -375,6 +434,10 @@ StemDeck's side:
 
 ## The A³ Motion panel as StemDeck's controller
 
+On the rig, with one deck per instance, the panel works as in
+[The panel on one deck](#stemdeck-panel-one-deck). This section is the
+older two-deck mode.
+
 The A³ Motion hardware panel can drive StemDeck: on the machine that runs
 StemDeck, plug the panel in by USB. StemDeck finds it by its USB ID, not by a
 port name, and picks it up again after you replug it.
@@ -439,28 +502,39 @@ The jack client is `StemDeck-<letter>`. The stereo cue and aux pairs of the old
 mode are gone, and so is the cue's own decoder: the Core decodes the cue with
 the same headphone sound as everything else.
 
+(stemdeck-aux)=
+
 ### AUX per stem
 
 Each stem has an **AUX** knob (0 to 1, default 0: nothing reaches the delay
-until you ask). It is a send taken after the stem's GAIN, MUTE and 3D, so a
-muted stem sends nothing. The four knobs of a stem sit in a 2 × 2 block: **GAIN
-and 3D** above, **AUX and WIDTH** below. A stem that is sent shows "AUX" in its
-state line. The deck's AUX meter shows the aux bus. Only the sent stems reach
-the delay, not the whole deck. The AUX bus goes **straight into the delay**
-after the channel's input-select fade and VOLUME; the desk's **AUX pot** on the
-deck's channel does not scale it (it scales the deck's main output, the
-channel's own signal). A pulled fader, or a deck on no channel, sends nothing
+until you ask). It is a send taken after the stem's GAIN and MUTE, so a
+muted stem sends nothing; a moving stem is sent from where it is. The deck's
+AUX meter shows the aux bus. Only the sent stems reach the delay, not the
+whole deck. The AUX bus goes **straight into the delay** after the channel's
+input-select fade and VOLUME; the desk's **AUX pot** on the deck's channel does
+not scale it (it scales the deck's main output, the channel's own signal). A
+pulled fader, or a deck on no channel, sends nothing
 ({ref}`the engine <audio-engine-decks>`).
 
-### The panel's pots
+(stemdeck-panel-one-deck)=
 
-On an A³ Motion panel the four **pots** are the AUX of stems 1 to 4. A pot
-works with **pickup**: after a load, a session restore, a set load or when the
-panel comes back to this deck, a pot does nothing until it has passed the
-stored value (or comes within 1 % of an end). Until then the knob on the
-screen shows the pot's position as a small mark. If you move the stored value
-with the touch screen, the pot waits again until you cross it. So the send
-never jumps. The encoders and pads are unchanged.
+### The panel on one deck
+
+An A³ Motion panel on a deck's machine plays that one deck. The stems stand
+under their encoders, one stem per pair of pad columns, left to right:
+
+| Control | What it does |
+| :--- | :--- |
+| pot (one per stem) | **AUX** of that stem. Absolute: the pot's position is the value at once |
+| upper encoder | **GAIN**. Push: mute; two quick pushes: GAIN back to its default |
+| lower encoder | **WIDTH** (its push does nothing) |
+| pads, per stem | **ORBIT PING** / **RISE SCAT** / **CUE MUTE** / **‹ ›** (the action's length), in rows 3 to 6 |
+| left column | **CUE**, **PLAY**, **LOOP**, **LOOP IN**, **LOOP OUT**, **CONTINUE** |
+| right column | **SHIFT** (held): the next action starts at once |
+
+The panel wins over the screen: turn a pot and the stem's AUX on the screen
+follows, whatever it showed before. A stem's pads light in its colour; a
+running action blinks while it waits for the bar.
 
 ### The panel follows the workspace
 
@@ -708,7 +782,7 @@ causes xruns: clicks on everything the Core plays.
 | Stems are slow to make | Idle priority on the free cores; see `separatorCores` |
 | Nothing to hear | Ports are never connected automatically; patch them |
 | `JACK-Server wurde beendet` | JACK went away. Restart StemDeck after JACK |
-| A stem does not move | Its channel's **3d** up, clip playing; a stem only on **A** is on the Return. See [StemDeck × A³ Motion](#stemdeck-with-motion-troubleshooting) |
+| A stem does not move | Stems only move while an action runs: tap ORBIT, PING, RISE or SCAT and wait for the next bar. Is the deck on a desk channel (INPUT on its letter) with the fader up? |
 | A³ Motion ignores MASTER | Wait for the BPM; deck playing? Motion on **PIO**? |
 | Downbeat on the wrong beat | CUE on the real first beat of a bar, **GRID**, **SNAP** |
 | `PIO: no a3-osc.json` | No truth found: `$A3_OSC_TRUTH`, `~/.cache/a3/a3-osc.json` (filled by Core's announcement) or `/usr/share/a3/a3-osc.json` (from a3-core) |
