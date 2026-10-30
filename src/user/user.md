@@ -98,7 +98,7 @@ so a four-bar figure stays four bars when the tempo changes.
 ## Support A³
 
 A³ is open source and made by one artist and its contributors, in their own time. If it moves your
-room, you can support the work with any amount — no account needed beyond PayPal's own checkout:
+room, you can support the work with any amount:
 **[Support A³ via PayPal](https://www.paypal.com/paypalme/RaphaelEismann)**.
 
 ![](pics_user/a3-motion-icon_light.png)
