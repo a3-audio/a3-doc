@@ -67,8 +67,8 @@ Each channel feeds the phones bus (`enc_phones`) twice in the engine: a
 - A channel's cue is its **CUE** key (desk or A³ Motion), nothing else.
 - It is always the channel's own cue, ST or deck, with its filter and EQ:
   push another source on and the cue follows.
-- **The FX Return has its own cue**, pre-fader like a channel's (CUE field on
-  {ref}`its display <a3mix-fx-return>`); on the mix side the phones get it after the
+- **The FX Return has its own cue**, pre-fader like a channel's (the **DELAY CUE** key,
+  {ref}`see the FX Return <a3mix-fx-return>`); on the mix side the phones get it after the
   RETURN pot.
 - **A StemDeck stem has its own CUE key**, in StemDeck: it puts that stem
   in the phones, on the cue side of CUE/MIX, whether or not its deck is on a
