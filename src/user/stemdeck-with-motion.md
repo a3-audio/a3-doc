@@ -74,7 +74,7 @@ Pick one clock for the evening: [Who is the clock](#first-set-clock). With no
 CDJs, StemDeck is the master:
 
 1. Load a set and **wait for the BPM** (no beats before the analysis is done).
-2. Press **MASTER**, or just **PLAY**: the only playing deck becomes master.
+2. Press **MASTER** on the deck: its top bar reads `LINK master: A`.
 3. On A³ Motion, tap the clock key to **PIO**. The BPM follows StemDeck.
 
 StemDeck **broadcasts** on its own network; the Core must be in it (always,

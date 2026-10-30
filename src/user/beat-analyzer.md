@@ -80,7 +80,7 @@ With no CDJs, [StemDeck](stemdeck.md) drives the clock:
 ```text
 StemDeck, deck with MASTER on
    │  Pro DJ Link: a beat packet on every beat, a status packet every 200 ms,
-   │  as player 6, sent as broadcast on UDP 50001 / 50002
+   │  as its player (deck A: 6), sent as broadcast on UDP 50001 / 50002
    ▼
 beat-analyzer, clock mode 2 (pioneer), player 7
    │  takes StemDeck as the tempo master: it says master, and it plays
@@ -90,9 +90,9 @@ A³ Motion on PIO, A³ Mixer's tap keys, every other /beat target
 ```
 
 1. Load a set in StemDeck and wait for its BPM (nothing is sent before).
-2. Press **MASTER**, or PLAY: the only playing deck becomes master (not
-   under **SYNC: PIO**, not after you turned MASTER off). Top bar:
-   `PIO master: A`.
+2. Press **MASTER** on the deck that leads. Its top bar reads
+   `LINK master: A` (or B, C, D). The newest press wins: MASTER on another
+   deck takes it over.
 3. Tap A³ Motion's clock key to **PIO**. Its BPM follows the master deck,
    tempo fader included.
 
