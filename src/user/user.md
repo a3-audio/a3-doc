@@ -8,6 +8,12 @@
 The full set: four StemDecks, the A³ desk and A³ Motion.
 ```
 
+```{tip}
+**New to A³? Read [How A³ sounds](how-it-sounds.md) first.** Five minutes:
+what the system does, stereo mode and stem mode side by side, and the way of
+the sound from your deck to the speakers.
+```
+
 Four [StemDecks](stemdeck.md), A to D, each play their own track as four
 stems — drums, bass, other, vocals — and every stem can move on its own path.
 In the middle sits the [A³ desk](#a3mix-virtual), which picks what plays on
@@ -39,13 +45,13 @@ belong too:
 | Program | What it is | What it does |
 | :--- | :--- | :--- |
 | [**Beat Analyzer**](beat-analyzer.md) | the beat clock | on the Core: the beat and the level meters for every device |
-| [**StemDeck**](stemdeck.md) | a stem player | two decks of four stems, each on its own output, so one part can move alone; tempo master without CDJs |
+| [**StemDeck**](stemdeck.md) | a stem player | one deck per instance, A to D, each a track as four stems that move on their own; tempo master without CDJs |
 
 ```{tip}
-**StemDeck × A³ Motion.** Put StemDeck's four stems on A³ Motion's four
-channels and let the drums, the bass, the synths and the vocal each travel the
-room on their own path — in time with the track, because StemDeck is the
-clock. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
+**StemDeck × A³ Motion.** StemDeck moves its own stems: fire an action on
+the vocal and only the vocal travels the room. A³ Motion moves the stereo
+channels beside it — a turntable, a CDJ — and both run in time, because
+StemDeck can be the clock. See [StemDeck × A³ Motion](stemdeck-with-motion.md).
 ```
 
 ![Connection Diagram](pics_user/a3-connecting-diagram.png)
