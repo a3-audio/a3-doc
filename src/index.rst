@@ -4,7 +4,7 @@ Introduction
 
 Thanks for your interest in the A³ system.
 
-The first section is the `User <https://a3-audio.github.io/a3-doc/user/user.html>`_ section, where you will find an overview of basic functions.
+New to A³? Start on the `Welcome <https://a3-audio.github.io/a3-doc/user/user.html>`_ page: it has one way in, from how A³ sounds to your first set.
 
 The other sections contain pictures and explanations of assembly, configuration and development.
 To set a machine up as a part of the system, start with `Installing the system <https://a3-audio.github.io/a3-doc/configuration/install.html>`_.
@@ -24,13 +24,15 @@ Contact
 
    user/user
    user/how-it-sounds
+   user/what-you-need
+   user/a3motion
+   user/stemdeck
+   user/a3mix
+   user/stemdeck-with-motion
    user/a3core
    user/audio-engine
-   user/a3motion
-   user/a3mix
+   user/first-set
    user/beat-analyzer
-   user/stemdeck
-   user/stemdeck-with-motion
 
 .. toctree::
    :titlesonly:

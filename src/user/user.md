@@ -3,40 +3,44 @@
 (welcome-setup)=
 
 ```{figure} pics_user/stemdeck-desk-motion-overview.png
-:alt: Four StemDecks around the A³ desk and A³ Motion: decks A and B on the left, the desk and A³ Motion in the middle, decks C and D on the right
+:alt: Four StemDecks around the virtual desk and A³ Motion: decks A and B on the left, the desk and A³ Motion in the middle, decks C and D on the right
 
-The full set: four StemDecks, the A³ desk and A³ Motion.
+The full set: four StemDecks, the virtual desk and A³ Motion.
 ```
 
+(welcome-start)=
+
 ```{tip}
-**New to A³? Read [How A³ sounds](how-it-sounds.md) first.** Five minutes:
-what the system does, stereo mode and stem mode side by side, and the way of
-the sound from your deck to the speakers.
+**Start here.** One way in, in this order:
+
+1. [How A³ sounds](how-it-sounds.md): what happens to your music, in five minutes.
+2. [What you need](what-you-need.md): the computer, the speakers (or just
+   headphones), and what is optional.
+3. The devices: [A³ Motion](a3motion.md), [StemDeck](stemdeck.md),
+   [A³ Mixer](a3mix.md).
+4. [The audio engine](audio-engine.md): setting up a room.
+5. [First set](first-set.md): your first twenty minutes.
+6. [On stage](a3motion-on-stage.md): before your first gig.
 ```
 
 Four [StemDecks](stemdeck.md), A to D, each play their own track as four
-stems — drums, bass, other, vocals — and every stem can move on its own path.
-In the middle sits the [A³ desk](#a3mix-virtual), which picks what plays on
-each of its four channels; beside it, [A³ Motion](a3motion.md) steers how those
-channels move through the room. Everything goes into the
-[3D engine](audio-engine.md) on A³ Core, which places each sound on the
-speakers.
+stems (drums, bass, other, vocals) and move each stem on its own with their
+actions. In the middle sits the desk, the [A³ Mixer](a3mix.md) or the
+{ref}`virtual desk <a3mix-virtual>` on a screen, which picks what plays on
+each of its four channels: a deck, or **ST**, the stereo input for a CDJ or a
+turntable. Beside it, [A³ Motion](a3motion.md) moves the stereo channels
+through the room. Everything goes into the [Engine](audio-engine.md) on A³
+Core, which places each sound on the speakers.
 
 ## The A³ System
-
-```{tip}
-**New here?** Start with A³ Motion's
-[first ten minutes](#motion-get-started), and keep
-[On stage](a3motion-on-stage.md) open before your first gig.
-```
 
 Three devices on one network, talking **only OSC**
 ({doc}`ports <../ressources/ports>`):
 
 | Device | What it is | What it does |
 | :--- | :--- | :--- |
-| [**A³ Core**](a3core.md) | the sound server | takes the audio in, computes the 3D field, sends it out; remote controlled |
-| [**A³ Mixer**](a3mix.md) | a 4-channel DJ mixer | gain, EQ, filter, faders, cue, all as OSC |
+| [**A³ Core**](a3core.md) | the hardware everything plugs into | runs the Engine, the audio backend: takes the audio in, computes the 3D field, sends it out; remote controlled |
+| [**A³ Mixer**](a3mix.md) | a 4-channel DJ mixer, hardware | gain, EQ, filter, faders, cue, all as OSC; the virtual desk is the same on a screen |
 | [**A³ Motion**](a3motion.md) | the motion sampler | a loopstation for *where a sound is* |
 
 All audio — decks, phones, booth, main — connects to A³ Core. Two programs
@@ -83,7 +87,7 @@ so a four-bar figure stays four bars when the tempo changes.
 
 | Section | What is in it |
 | :--- | :--- |
-| **User** | the three devices, control by control — start here — and the beat analyzer and StemDeck |
+| **User** | the way in ([above](#welcome-start)), then the devices, control by control |
 | [**Repository**](https://github.com/a3-audio/a3-system) | the umbrella repository that carries all the others |
 | **Assembly** | prototype pictures and how the boxes go together |
 | **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
