@@ -1,5 +1,21 @@
 # Welcome
 
+(welcome-setup)=
+
+```{figure} pics_user/stemdeck-desk-motion-overview.png
+:alt: Four StemDecks around the A³ desk and A³ Motion: decks A and B on the left, the desk and A³ Motion in the middle, decks C and D on the right
+
+The full set: four StemDecks, the A³ desk and A³ Motion.
+```
+
+Four [StemDecks](stemdeck.md), A to D, each play their own track as four
+stems — drums, bass, other, vocals — and every stem can move on its own path.
+In the middle sits the [A³ desk](#a3mix-virtual), which picks what plays on
+each of its four channels; beside it, [A³ Motion](a3motion.md) steers how those
+channels move through the room. Everything goes into the
+[3D engine](audio-engine.md) on A³ Core, which places each sound on the
+speakers.
+
 ## The A³ System
 
 ```{tip}
