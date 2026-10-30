@@ -10,7 +10,7 @@ measure the level meters too; the engine does that now
 ({ref}`The meters <beat-analyzer-meters>`).
 
 - **The beat:** `/beat` (beat in bar, bar, tempo) to every device. A³ Motion
-  follows it in **EXT** and **PIO**; the desk's tap keys blink with it.
+  follows it in **EXT** and **PIO**; the desk's TAP key (strip 4) blinks with it.
 
 You choose the beat's source on A³ Motion's clock key. Source:
 [beat-analyzer](https://github.com/rafjagger/beat-analyzer) (outside the
@@ -86,7 +86,7 @@ beat-analyzer, clock mode 2 (pioneer), player 7
    │  takes StemDeck as the tempo master: it says master, and it plays
    │  /beat  beat-in-bar, 0, bpm
    ▼
-A³ Motion on PIO, A³ Mixer's tap keys, every other /beat target
+A³ Motion on PIO, A³ Mixer's TAP key, every other /beat target
 ```
 
 1. Load a set in StemDeck and wait for its BPM (nothing is sent before).

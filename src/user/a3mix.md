@@ -26,7 +26,7 @@ Four strips, in signal order:
 | 1 | **TRIM** | input level | −inf … 0 dB |
 | 2–4 | **EQ HIGH / MID / LOW** | a three-band isolator (crossovers at 200 Hz and 4 kHz), as on a DJM in isolator mode | full kill at the left stop, flat at the centre, +6 dB fully right |
 | 5 | **INPUT VU** | pre-fader peak, 8 LEDs at −36, −24, −18, −12, −9, −6, −3, 0 dBFS (4 green, 2 yellow, 2 red); red is −3 dBFS and clipping. Louder side of `in<N>_pre_L/R` ({ref}`meters <osc-vu-meters>`) | |
-| 6 | **TAP** | taps the tempo on the press; all four do the same and flash red on the beat. Goes straight to the beat-analyzer, not via Core | |
+| 6 | **TAP** / **DELAY CUE** | the key row under the strips has two jobs. **Strip 4** is **TAP**: it taps the tempo and flashes on the beat (straight to the beat-analyzer, not via Core). **Strip 3** is **DELAY CUE**: it cues the delay return to the phones and is lit while cued ([The FX Return](#a3mix-fx-return)). Strips 1 and 2 have no function there | |
 | 7 | **FADER** | output level | −inf … 0 dB |
 | 8 | **FX** | channel through the shared filter; green while on | |
 | 9 | **CUE** | pre-fader cue to the phones; blue while on. See [The cue](#a3mix-cue) | |
@@ -106,11 +106,19 @@ The mixer has no motor faders. When someone touches the hardware knob next,
 it sends its own position and the value **jumps** to it. Watch the ring
 before you hand a control back to the hardware.
 
-### LOCK
+### Full screen, workspaces and layout
 
-**LOCK** holds **MASTER**, **BOOTH** and **PHONES** level. While it is lit,
-the desk ignores these three pots, and the status bar says *master locked*.
-Press LOCK again to release them.
+The desk opens full screen by itself. Its status line has a workspace switch
+at the right end, as StemDeck and the Motion UI have: the **STEMDECK** key and
+a **▾** list of workspaces, so you can reach another program without a
+keyboard. There is no LOCK.
+
+**MASTER** and **BOOTH** sit at the top, above the master VU. In the lower
+master card, **PHONES** (CUE/MIX and level) is on top, then **FREQ** and
+**RES**, then **HPF** and **LPF**. Every pot needs the same finger travel
+for its full range, the big ones too.
+
+At start the desk asks Core for the whole state, so every value shows at once.
 
 ### Keyboard
 
@@ -189,33 +197,29 @@ to choose.
 
 - **RETURN pot** (**FX RTN** where the full name does not fit): the delay's
   level into PA, booth and recording. At zero the delay is silent there.
-- **Meter**: the return's display has two sections with a vertical divider.
-  On the left, under **AUX**, is the return's VU meter: the delay's output
-  after the RETURN pot (`aux_L/R`). On the right, under **DELAY**, are the five
-  rows (see below).
-- **CUE**: on the hardware desk, it is the last row of the return's list
-  (see below). On the virtual desk, push the return's encoder or tap the CUE
-  field: it toggles the cue at once. The field is filled while the cue is on. The
+- **Display**: headed **DELAY**, with the four rows (see below). The return's
+  VU meter, the delay's output after the RETURN pot (`aux_L/R`), uses the
+  display's full height.
+- **CUE**: the **DELAY CUE** key on strip 3's key row (hardware and virtual
+  desk alike). It toggles the cue and is lit while cued. The
   cue is pre-fader: you hear the delay in the phones even with the RETURN pot
   down, on the cue side of CUE/MIX. On the mix side the phones get the delay
   after RETURN, like any channel.
-- **Encoder**: on the hardware desk it sets the delay (see below).
+- **Encoder**: sets the delay (see below).
 
 The analog inputs 11/12 are no longer a return; nothing plays them.
 
 #### Shaping the delay
 
-This is the hardware desk; the virtual desk has no delay rows. (The return's
-display, once headed AUX-RTN, now reads DELAY.) The right
-section, headed **DELAY**, lists five rows with their
-values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**, **CUE** (ON or OFF).
+The A³ Mixer and the virtual desk work the same way. The display lists four
+rows with their values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**.
 
 The encoder has two states, and a **push** switches between them:
 
-- **Select**: the whole row is lit. Turning moves the light from row to row; it
-  stops at BEAT and at CUE.
-- **Edit**: only the value is lit. Turning changes it, and the change is heard
-  at once. On **CUE**, turn right for ON, left for OFF.
+- **Pick a row**: the whole row is lit. Turn **left** to move **down** the
+  list, **right** to move **up**; it stops at both ends.
+- **Edit**: only the value is lit. Turning changes it (right = more), and the
+  change is heard at once.
 
 After about 4 seconds without a touch, edit goes back to select by itself;
 the lit row stays where it was.
@@ -237,8 +241,8 @@ the lit row stays where it was.
 - **SPREAD**: each repeat is rotated further around the room, the left line
   one way, the right line the other. 0 keeps the repeats where they were.
 - Core keeps the four values and restores them after a restart; the desk only
-  shows them. With an older Core that lacks these words, nothing changes: a
-  push toggles the cue at once.
+  shows them. With an older Core that lacks these words, the delay rows stay
+  as they were and a push of the encoder toggles the cue.
 
 ### How the meters move
 
