@@ -125,7 +125,12 @@ most steps leave existing things alone.
 ### 1. The network (optional)
 
 **"Configure networking for a3-core?"** (`a3-core/configure-network`, default
-*no*: nothing touched). With *yes*:
+*no*: nothing touched). It is asked **once**, on the first install; the
+postinst then records `a3-core/network-asked`, and a machine that already has
+`/etc/systemd/network/10-a3.network` counts as asked. To be asked again, run
+`sudo dpkg-reconfigure a3-core`. The a3-system installer asks the same
+questions itself on its first run (and with `install --network`) and hands
+the answers over. With *yes*:
 
 - `a3-core/install-default-network` *yes* (preseed only, e.g.
   `debconf-set-selections`): interface, address, gateway, DNS and audio socket come
@@ -184,7 +189,8 @@ file by file:
 - missing → installed; same → left;
 - **differs** → replaced only if its part is ticked in
   `a3-core/replace-config` (only differing parts offered, all ticked;
-  unattended takes all). Parts: `i3`, `systemd`, `pipewire`, `other`.
+  unattended takes all). Parts: `i3`, `pipewire`, `other` (the user units
+  are no longer part of it: they ship under `/usr/lib/systemd/user/`).
 - Replaced files are first copied to `~/.config/a3-replaced/<date_time>/`;
   kept ones are named.
 
@@ -234,8 +240,13 @@ Enables `x11vnc.service` and `set_irq_prio.service`
 
 `loginctl enable-linger aaa`, `systemctl --user daemon-reload`, stop the retired
 units, enable the rig and (with an audio socket) AES67; linger off again.
-`a3-main`, `a3-aes67` and `a3-bar-per-workspace` start at boot through the
-shipped `default.target.wants` links.
+`a3-main`, `a3-bar-per-workspace` and (with an audio socket) `a3-aes67` and
+`a3-clock` are enabled for `aaa` and start at login.
+
+**Old unit copies in `~/.config/systemd/user/`** are moved aside to
+`<name>.before-one-place` when an earlier version put them there unchanged, and
+their `.wants` links follow the packaged unit; a hand-changed one stays and is
+named ({ref}`where the units live <core-units-one-place>`).
 
 **On a machine that ran REAPER** the upgrade retires what it needs
 (`retire_reaper_files`): it stops and disables `qjackctl.service`,

@@ -101,7 +101,7 @@ Replaced on every install; not edited on the machine.
 | Path | What it is |
 | :--- | :--- |
 | `/usr/bin/a3-core` | the program: window, Core, engine |
-| `/usr/lib/systemd/user/a3-engine.service`, `a3-core-window.service` | the program's units; the unit keeps the engine role's name |
+| `/usr/lib/systemd/user/` | every A³ user unit: `a3-engine`, `a3-core`, `a3-core-window`, `a3-clock` from `a3-core-app`; `a3-main`, `a3-aes67`, `a3-screencast`, `a3-bar-per-workspace` and the drop-ins on StemDeck's and the analyzer's units from `a3-core` ([where the units live](#core-units-one-place)) |
 | `/usr/share/a3-engine/engine.json`, `spatial/` | the engine's default settings and the speaker layouts with the IEM data. `~/.config/a3/engine/engine.json` (written by the window's Save) overrides the settings |
 | `/usr/share/a3/a3-osc.json` | the one truth ([above](#core-the-one-truth)) |
 | `/usr/share/doc/a3-core/copyright` | the licence texts |
@@ -133,7 +133,7 @@ rig**; an install replaces a tuned file when its part is chosen (backup in
 | :--- | :--- |
 | `i3/config` | the window manager — see [The screen](#core-config-screen) |
 | `pipewire/` | `pipewire.conf.d/10-a3-rate.conf`, `jack.conf.d/10-a3.conf`, `pipewire-aes67.conf.d/10-a3-rate.conf`: rate, quantum and the AES67 instance |
-| `systemd/user/*.service` | the [user units](#core-services), with their `.service.d/` drop-ins (`a3-core.service.d/cpu.conf`, `program.conf`, `stemdeck.service.d/two-deck-off.conf`, …) |
+| `systemd/user/` | nothing shipped: only this machine's own drop-ins ([where the units live](#core-units-one-place)) |
 
 Written, not copied: `a3/osc.env`.
 
