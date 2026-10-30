@@ -125,7 +125,12 @@ most steps leave existing things alone.
 ### 1. The network (optional)
 
 **"Configure networking for a3-core?"** (`a3-core/configure-network`, default
-*no*: nothing touched). With *yes*:
+*no*: nothing touched). It is asked **once**, on the first install; the
+postinst then records `a3-core/network-asked`, and a machine that already has
+`/etc/systemd/network/10-a3.network` counts as asked. To be asked again, run
+`sudo dpkg-reconfigure a3-core`. The a3-system installer asks the same
+questions itself on its first run (and with `install --network`) and hands
+the answers over. With *yes*:
 
 - `a3-core/install-default-network` *yes* (preseed only, e.g.
   `debconf-set-selections`): interface, address, gateway, DNS and audio socket come

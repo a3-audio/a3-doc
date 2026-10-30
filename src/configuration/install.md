@@ -55,6 +55,7 @@ changes in one stop the update. StemDeck and Motion use the pinned
 | Command | What it does |
 | :--- | :--- |
 | `install` | asks: version, roles, their settings |
+| `install --network` | asks the Core's network questions again; a plain `install` asks them only the first time, afterwards the stored answers stand |
 | `install --update [VERSION]` | no questions: the stored roles and settings, at `VERSION` (default: the newest tag); a `VERSION` needs `--from-source`, the archive holds only the newest packages |
 | `install --from-source` | builds the apps from the pins instead of installing packages, e.g. `install --from-source --update v03.0` |
 | `install --config FILE` | no questions: the roles and settings in `FILE`, which is not saved over the stored ones |
