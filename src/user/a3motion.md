@@ -57,7 +57,8 @@ quiet-indigo-2. The recording plan is kept outside this repository. -->
 ## Get started: your first ten minutes
 
 You need A³ Motion, A³ Core and the A³ Mixer on the A³ switch, and music on a
-mixer channel.
+channel set to **ST**. No panels yet? The Motion UI alone works by touch or
+mouse, beside the virtual desk ([First set](#first-set-no-hardware)).
 
 1. **Plug in** to the A³ switch (power comes over the cable). Ready when the
    sphere and four channel fields show; the meters move with the music (else
@@ -65,7 +66,7 @@ mixer channel.
 2. **Check the clock** (top left): tap to **PIO** for CDJs on Pro DJ Link,
    **EXT** for the beat analyser, **INT** to tap yourself. The BPM should match.
 3. **Load a set**: **FILES** › **SETS** › *Warmup* › **Load**; **FILES** closes.
-4. **Turn 3d up** on your track's channel (its pot, or **3D** in the channel
+4. **Turn 3d up** on your track's channel (its pot, or **3d** in the channel
    row). **At 3d = 0 you hear no movement.**
 5. **Press Play\|Pause** (top left of its pads): it blinks, then starts on the
    downbeat.

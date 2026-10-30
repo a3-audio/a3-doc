@@ -1,8 +1,11 @@
 # A³ Core
 
-Where the sound is: it takes the analog inputs, computes the 3D/ambisonics
-field and sends it out, **with no interface of its own** — A³ Mixer, A³ Motion
-and anything speaking the same OSC control it. Linux, remote desktop over VNC.
+**A³ Core is the hardware** everything plugs into: a Linux PC (today an Intel
+NUC on Debian) with a multichannel audio interface and a portrait touch
+screen. **The Engine**, its audio backend, takes the ST inputs and the
+StemDecks, computes the 3D/ambisonics field and sends it to the speakers. You
+play it from the desk and A³ Motion, over OSC; its own screen is for setting
+up, not for playing ([What you need](what-you-need.md)).
 Source: [a3-core](https://github.com/a3-audio/a3-core): the program and the
 installation around it, one repository, one package.
 
