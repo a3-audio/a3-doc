@@ -9,6 +9,8 @@ one repository. It replaces the earlier pair of packages `a3-core` and
 2. [What the installation does](#core-postinst): the install script, step by step.
 3. {doc}`The services <core-systemd>`: every systemd unit.
 4. {doc}`The files <core-filetree>`: every file, and whether to edit it.
+5. {doc}`The audio engine in depth <core-engine>`: the signal path, the I/O
+   map, the decks, starting it by hand.
 
 The usual route is the a3-system {doc}`installer <install>` (role Core).
 
@@ -16,7 +18,7 @@ The usual route is the a3-system {doc}`installer <install>` (role Core).
 | :--- | :--- |
 | OS | Debian testing, realtime kernel |
 | Window manager | i3, named workspaces ([The screen](#core-config-screen)) |
-| Audio | PipeWire (with JACK compatibility); the engine ({doc}`user page <../user/audio-engine>`) with the IEM code compiled in. REAPER, its patchbay and QjackCtl are not part of the package |
+| Audio | PipeWire (with JACK compatibility); the engine ({doc}`user page <../user/audio-engine>`, {doc}`in depth <core-engine>`) with the IEM code compiled in. REAPER, its patchbay and QjackCtl are not part of the package |
 | The program | `/usr/bin/a3-core`: the core role (OSC router, HTTP API), the engine role, the window; no Python at runtime |
 | Services | `a3-core.service`, `a3-engine.service`, both `systemd --user` ({ref}`services <core-services>`) |
 | Beat clock | the beat-analyzer (`/beat` only; the engine measures the meters, {ref}`where <core-meters>`) |
@@ -266,4 +268,5 @@ the headless X config and the home directory stay.
 
 core-systemd
 core-filetree
+core-engine
 ```
