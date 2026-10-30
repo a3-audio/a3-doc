@@ -214,6 +214,8 @@ The analog inputs 11/12 are no longer a return; nothing plays them.
 The A³ Mixer and the virtual desk work the same way. The display lists four
 rows with their values: **BEAT**, **FEEDBK**, **COLOR**, **SPREAD**.
 
+![The delay display: DELAY over the four rows BEAT, FEEDBK, COLOR and SPREAD with their values, the return's meter on the right; the picked row is lit](pics_user/a3-mix-delay-display.png)
+
 The encoder has two states, and a **push** switches between them:
 
 - **Pick a row**: the whole row is lit. Turn **left** to move **down** the
