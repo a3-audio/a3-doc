@@ -95,6 +95,12 @@ so a four-bar figure stays four bars when the tempo changes.
 | [**History**](https://a3-audio.github.io/a3-doc/ressources/history.html) | project impressions |
 | [**OSC reference**](https://a3-audio.github.io/a3-doc/ressources/osc.html) | every address the system speaks |
 
+## Support A³
+
+A³ is open source and made by one artist and its contributors, in their own time. If it moves your
+room, you can support the work with any amount — no account needed beyond PayPal's own checkout:
+**[Support A³ via PayPal](https://www.paypal.com/paypalme/RaphaelEismann)**.
+
 ![](pics_user/a3-motion-icon_light.png)
 
 ![](pics_user/a3-mix-icon_light.png)
