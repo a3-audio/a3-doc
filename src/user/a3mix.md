@@ -1,8 +1,15 @@
 # A³ Mixer
 
-A four-channel DJ mixer that makes no sound: every control sends OSC to A³
-Core, which does the audio. A³ Motion's MIX pages show the same values.
-Source: [a3-mixer](https://github.com/a3-audio/a3-mixer).
+Four channels, each with an INPUT knob that picks what plays: a StemDeck
+deck (**A** to **D**) or **ST**, the stereo input for a CDJ or a turntable.
+Then TRIM, an isolator EQ, the fader, a cue and an AUX-Send to the beat
+delay, as on a club mixer. The A³ Mixer makes no sound itself: every control
+sends OSC to A³ Core, whose Engine does the audio. A³ Motion's MIX pages show
+the same values.
+
+**The A³ Mixer is the hardware panel; the virtual desk is the same mixer in
+software**, on a screen ([The virtual desk](#a3mix-virtual)). "The desk"
+means either. Source: [a3-mixer](https://github.com/a3-audio/a3-mixer).
 
 ![A³ Mixer numbered](pics_user/a3-mix-icon_light_numbered.png)
 
@@ -15,20 +22,21 @@ Four strips, in signal order:
 
 | № | Control | What it does | Range |
 | :--- | :--- | :--- | :--- |
-| – | **AUX SEND** | to the beat-synced tape delay on the FX bus | −inf … 0 dB |
+| – | **AUX SEND** | the channel's AUX-Send: to the beat-synced tape delay on the FX bus (**SEND** on the virtual desk) | −inf … 0 dB |
 | 1 | **TRIM** | input level | −inf … 0 dB |
-| 2–4 | **EQ HIGH / MID / LOW** | 24 kHz / 1 kHz / 20 Hz | −inf … 0 dB |
+| 2–4 | **EQ HIGH / MID / LOW** | a three-band isolator (crossovers at 200 Hz and 4 kHz), as on a DJM in isolator mode | full kill at the left stop, flat at the centre, +6 dB fully right |
 | 5 | **INPUT VU** | pre-fader peak, 8 LEDs at −36, −24, −18, −12, −9, −6, −3, 0 dBFS (4 green, 2 yellow, 2 red); red is −3 dBFS and clipping. Louder side of `in<N>_pre_L/R` ({ref}`meters <osc-vu-meters>`) | |
 | 6 | **TAP** | taps the tempo on the press; all four do the same and flash red on the beat. Goes straight to the beat-analyzer, not via Core | |
 | 7 | **FADER** | output level | −inf … 0 dB |
 | 8 | **FX** | channel through the shared filter; green while on | |
 | 9 | **CUE** | pre-fader cue to the phones; blue while on. See [The cue](#a3mix-cue) | |
 
-3D is A³ Motion's pot, not the desk's.
+3d is A³ Motion's pot, not the desk's.
 
 ## The filter section
 
-One filter for all channels; a strip's **FX** key sends it through.
+One filter for all channels; a strip's **FX** key sends it through, like a
+Color FX knob that several channels share.
 
 | № | Control | What it does |
 | :--- | :--- | :--- |
@@ -57,22 +65,23 @@ Each channel feeds the phones bus (`enc_phones`) twice in the engine: a
 (mix). **CUE/MIX** crossfades them.
 
 - A channel's cue is its **CUE** key (desk or A³ Motion), nothing else.
-- It is always the channel's own cue, analog or stem, with its filter and EQ:
-  push another stem on and the cue follows.
+- It is always the channel's own cue, ST or deck, with its filter and EQ:
+  push another source on and the cue follows.
 - **The FX Return has its own cue**, pre-fader like a channel's (CUE field on
   {ref}`its display <a3mix-fx-return>`); on the mix side the phones get it after the
   RETURN pot.
-- StemDeck has no cue: cue the channel a stem is on, or the return for a stem
-  on AUX.
+- **A StemDeck stem has its own CUE key**, in StemDeck: it puts that stem
+  in the phones, on the cue side of CUE/MIX, whether or not its deck is on a
+  channel ({ref}`the stems <stemdeck-stems>`).
 
 (a3mix-virtual)=
 
 ## The virtual desk
 
-![The A³ Desk with four channels playing](pics_user/a3-desk-playing.png)
+![The virtual desk with four channels playing](pics_user/a3-desk-playing.png)
 
-The **A³ Desk** is the A³ Mixer on a screen. It looks like the panel and
-sends the same OSC to Core. Use it as a second operator beside the hardware,
+The **virtual desk** (the program `a3-desk`) is the A³ Mixer on a screen. It
+looks like the panel and sends the same OSC to Core. Use it as a second operator beside the hardware,
 or as a stand-in when the hardware is not there.
 
 ### Install and open
@@ -131,61 +140,50 @@ left alone.
 
 ## The input selectors
 
-The desk switches [StemDeck](stemdeck.md)'s stems through Core. Each of the 8
-stems (2 decks × 4) can play on **its own channel** (stem N on channel N) or on
-AUX (the return). **StemDeck owns the switches**; Core relays requests and
-reports. Five OLED displays with encoders: channels 1–4 and the return.
-
-**The rule:** a channel plays **one input**: deck 1's stem N, deck 2's stem N,
-or its analog input. A stem plays on its own channel only; nothing moves
-between channels. A stem on a channel shuts its analog input.
-
-### A channel
+Each channel's **INPUT** knob picks what plays on it, from a ring of five:
+**A B C D ST**. A to D are the StemDeck decks, ST is the channel's own
+stereo input. On the hardware the knob is the encoder at the channel's
+display; on the virtual desk it is the display itself.
 
 ![Three channel selectors of the virtual desk: one bar per deck, A B C D, and ST for the stereo input behind a thin line; the arrow over a bar is the cursor, the bracket marks what plays](pics_user/a3-desk-input-selectors.png)
 
 *The selectors of channels 1 to 3 on the virtual desk: one bar per deck, A to
 D, and **ST**, the stereo input. Arrow: the cursor. Bracket: what plays.*
 
-Three meters under **A | B | ST**: deck A's stem N, deck B's stem N, and
-**ST**, the channel's analog input (always metered, louder side of
-`analog<N>_L/R`, `/vu/1`–`/vu/8`). The **bracket**
-marks what plays; the **arrow** is the cursor. On the virtual desk, tapping a
-meter turns the cursor there.
-
-In engine mode the display has one bar per slot, **A B C D ST**. The bar of
-the deck that plays on the channel shows that deck's **W**, the omni channel
-of its B-format signal (the louder side of `in<N>_pre_L/R`,
-`/vu/51`–`/vu/58`), with the same scale and ballistics as the others. That
-meter sits after the channel's trim and fader, so the bar follows the fader.
-The other deck bars keep showing the stem levels, and **ST** the analog
-input. While **ST** plays, nothing changes.
-A deck that is not connected (say deck D) keeps its letter and the
-yellow and red scale marks; its bar stays empty.
-
 | Action | Result |
 | :--- | :--- |
-| turn | moves the cursor round the ring of three; switches nothing |
-| push a stem | it becomes the only input; the other deck's stem N goes to StemDeck's AUX bus (the delay's send) |
-| push the stem that plays | off; the channel plays analog |
-| push **ST** while a stem plays | same as above |
-| push **ST** while analog plays | nothing |
+| turn | moves the cursor (the arrow) round the ring; switches nothing |
+| push on a deck | the channel plays that deck; the bracket moves there |
+| push on **ST** | the channel plays its stereo input |
+| push on what already plays | nothing |
+| tap a bar (virtual desk) | moves the cursor there |
 
-Core remembers no last stem; the cursor stays after a push. A stored cursor
-that is not on the ring comes back on A. Several stems on one channel, or a
-stem on another channel (older StemDecks): Core keeps the lowest and puts a
-foreign stem on AUX, about 0.3 s after StemDeck's reports settle.
+- **A deck plays on one channel at most.** Push deck A on channel 3 while it
+  plays on channel 2, and channel 2 goes back to ST.
+- **A channel plays one source**: a deck or ST, never both. The change is
+  smoothed, so nothing clicks.
+- **The bars**: each deck bar shows that deck's own level (`deck_a` …
+  `deck_d`, `/vu/37`–`/vu/40`), whichever channel plays it; ST shows the
+  channel's stereo input (`/vu/1`–`/vu/8`). A deck that is not running (say
+  deck D) keeps its letter and the scale marks; its bar stays empty.
+- **A deck that drops out stays on its channel**, silent, and comes back by
+  itself when it returns; nothing switches over on its own.
+- **Core remembers** each channel's source across restarts. A fresh Core
+  starts every channel on ST.
+- On a deck channel, **A³ Motion shows DECK A** (or B, C, D) and moves
+  nothing: the deck moves its own stems
+  ({doc}`StemDeck × A³ Motion <stemdeck-with-motion>`).
 
 (a3mix-fx-return)=
 
 ### The FX Return
 
 The FX Return is the master of the delay channel. Everything that reaches the
-delay gets there by one of two routes: each channel's **AUX** pot (it scales
-the channel's own signal, an analog input or the deck's main output; an analog
-input is encoded at its position, so the echo keeps its direction), and
-StemDeck's AUX bus, which goes **straight into the delay** and is not scaled by
-any AUX pot. A deck's AUX bus still follows the channel that holds the deck: a
+delay gets there by one of two routes: each channel's **AUX-Send** (it scales
+the channel's own signal, an ST input or the deck's main output; an ST input
+is encoded at its position, so the echo keeps its direction), and the
+AUX-Sends of StemDeck's stems, whose bus goes **straight into the delay** and
+is not scaled by the channel's AUX-Send. A deck's AUX bus still follows the channel that holds the deck: a
 pulled fader, or a deck on no channel, sends nothing. The return has no source
 to choose.
 
@@ -249,13 +247,9 @@ the bar is **hatched** for a second; a clean full bar stays solid.
 
 ### Without StemDeck
 
-- Core keeps each cursor and the return's cue across restarts; a cursor
-  starts on A.
-- Without StemDeck, turning works, pushing switches nothing, all channels play
-  analog. A fresh StemDeck takes no channel (stems start on AUX).
-- A click on StemDeck's own bus switch moves the bracket too.
-- StemDeck says hello every 30 s. Silent for a minute: Core takes all stems
-  off the channels (noticed at the next hello of any device, so up to ~90 s).
+Without any StemDeck running, every deck bar stays empty and the channels
+play ST. Core keeps each channel's source, each cursor and the return's cue
+across restarts.
 
 ## Connectors
 
