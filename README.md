@@ -1,6 +1,8 @@
 # A³ Documentation
 Interact live with 3D Audio
 
+![Four StemDecks around the A³ desk and A³ Motion, each deck playing its own track](docs/a3-setup.jpg)
+
 ## System
 - A³ Motion: 4-Channel Motion Sampler (OSC Controller)
 - A³ Mixer: 4-Channel DJ Mixer (OSC Controller)
