@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 A3 Audio <contact@a3-audio.com>
+# SPDX-FileCopyrightText: 2026 Raphael Eismann
 # SPDX-License-Identifier: CC-BY-SA-4.0
 """Brings src/user/pics_user/a3-connecting-diagram.png up to date, in place.
 

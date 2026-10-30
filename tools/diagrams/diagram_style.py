@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 A3 Audio <contact@a3-audio.com>
+# SPDX-FileCopyrightText: 2026 Raphael Eismann
 # SPDX-License-Identifier: CC-BY-SA-4.0
 """Shared drawing style for the A3 docs diagrams, drawn with pycairo.
 

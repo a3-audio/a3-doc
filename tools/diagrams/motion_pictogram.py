@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2026 A3 Audio <contact@a3-audio.com>
+# SPDX-FileCopyrightText: 2026 Raphael Eismann
 # SPDX-License-Identifier: CC-BY-SA-4.0
 """Draws the A3 Motion pictogram for hardware revision V03.
 
