@@ -89,6 +89,7 @@ Written by the program, outside the package; an update never touches them.
 | `~/.local/state/a3-core/seen.json` | the addresses the OSC monitor has seen (not values, not history) |
 | `~/.config/a3/engine/engine.json` | the engine's settings, written by the window's **Save** |
 | `~/.config/a3/core/window.settings` | the OSC MONITOR switch, written only when flipped |
+| `~/.config/a3/core/departments.json` | the departments (light, video desks), written by the window's DEPARTMENTS page ([adding one](#core-subscriber)) |
 | `~/.config/a3/screencast.env` | optional encoder settings for the screencast |
 
 `$XDG_STATE_HOME` replaces `~/.local/state` where set.

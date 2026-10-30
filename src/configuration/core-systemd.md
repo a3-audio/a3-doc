@@ -168,7 +168,18 @@ None by default; a drop-in can point any default elsewhere (useful on a bench).
 
 ### Adding a department
 
-A light or video desk: one argument each, in a drop-in:
+A department is a light or video desk that gets every A³ message exactly as
+Mixer and Motion do. What arrives: {doc}`OSC reference <../ressources/osc>`.
+
+**The normal way is the window**: page **DEPARTMENTS**, **ADD**, then name,
+host (an IPv4 address or a host name) and port, **SAVE LIST**. Core applies the
+list at once, no restart; each row says whether messages go out (how many, the
+last how long ago). An entry is checked as you type and Core checks that the
+host resolves, so a wrong one is never saved — and never stops Core. The list
+is Core's own config, `~/.config/a3/core/departments.json`, outside the
+package.
+
+The alternative is a drop-in, one argument each:
 
 ```
 ExecStart=
@@ -177,9 +188,10 @@ ExecStart=/usr/bin/a3-core --role core \
           --subscriber video=HOST:PORT
 ```
 
-It gets every A³ message exactly as Mixer and Motion do; the name shows in the
-window. **An unparsable subscriber stops Core from starting** — better than a
-desk that silently hears nothing. What arrives: {doc}`OSC reference <../ressources/osc>`.
+These show in the window as *service file, read-only*. **An unparsable
+subscriber stops Core from starting** — better than a desk that silently hears
+nothing. **A name in both: the drop-in wins**; the window keeps its entry,
+marks it *not used*, and Core sends only to the drop-in's address.
 
 ### What it keeps across a restart
 
