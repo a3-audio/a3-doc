@@ -572,7 +572,7 @@ On `main` since `v03.0`, not tagged yet.
   both decks on the stem return no longer clip and a stem is as loud on a channel as on the
   return; CUE is not trimmed. The
   output meters light a **clip lamp** above full scale, held for a second. See
-  {ref}`Mixer <stemdeck-mixer>`.
+  {ref}`Mixer <stemdeck-two-deck>`.
 
 - **StemDeck joins the system.** The stem player — two decks of four stems, each stem on its
   own output bus, any of them switchable to aux — is carried by the a3-system repository as a
