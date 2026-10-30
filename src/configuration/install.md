@@ -89,3 +89,30 @@ The last flashed firmware is recorded in `~/.config/a3/install.state`.
   **laptop**: the units name that path; elsewhere only `--dry-run`. This is a
   current limit, not a design choice: the units are to name no user and no
   path.
+
+(install-audio-network)=
+
+## The audio network: EEE
+
+Energy Efficient Ethernet (EEE) must be off on every audio socket. The a3-core
+package switches it off on the Core; the stemdeck package does it on every deck
+host (a udev rule, for every systemd version) — right at install, no reboot.
+
+**Symptoms when it is on:** ptp4l logs `timed out while polling for tx
+timestamp` and goes to `FAULTY`; a deck on another machine is silent or
+crackles; the link drops every minute or two.
+
+**Check** (on the machine, its audio socket, e.g. `eth0` or `enp5s0`):
+
+```
+ethtool --show-eee eth0
+```
+
+`EEE status: disabled` is right. **Switch it off by hand** if it says enabled:
+
+```
+sudo ethtool --set-eee eth0 eee off
+```
+
+A deck that crackles while its PTP is fine is usually the switch, not EEE: see
+{ref}`what-you-need-audio-network`.
