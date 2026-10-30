@@ -32,11 +32,76 @@ systemctl --user status a3-core
 journalctl --user -u a3-core -f
 ```
 
+(core-units-one-place)=
+
+## Where the units live
+
+Every A³ user unit ships in a package under **`/usr/lib/systemd/user/`**, each
+unit once. **`~/.config/systemd/user/` holds only this machine's own
+drop-ins.** (Until 2026-10-31 the deployment copied its units into `~/.config`,
+where they hid the packaged ones.)
+
+| Unit or drop-in | Package | Enabled by |
+| :--- | :--- | :--- |
+| `a3-engine.service` | `a3-core-app` | the postinst, for every user |
+| `a3-core.service` | `a3-core-app` | nothing: `a3-main` wants it |
+| `a3-core-window.service` | `a3-core-app` | nothing: `a3-main` wants it |
+| `a3-clock.service` | `a3-core-app` | the postinst, with an audio socket |
+| `a3-main.service` | `a3-core` | the postinst |
+| `a3-bar-per-workspace.service` | `a3-core` | the postinst |
+| `a3-aes67.service` | `a3-core` | the postinst, with an audio socket |
+| `a3-screencast.service` | `a3-core` | each machine by hand |
+| `beat-analyzer.service.d/a3-core.conf` | `a3-core` | drop-in on the analyzer's own unit |
+| `stemdeck.service.d/a3-core.conf`, `two-deck-off.conf` | `a3-core` | drop-ins on StemDeck's own unit |
+
+An update replaces the files in `/usr/lib`; don't edit them.
+
+### Changing one line on this machine
+
+Write a drop-in with only that line, then reload:
+
+```sh
+systemctl --user edit a3-core      # opens ~/.config/systemd/user/a3-core.service.d/override.conf
+systemctl --user daemon-reload     # when you wrote the file by hand instead
+systemctl --user cat a3-core       # what runs: the unit, then every drop-in
+```
+
+```ini
+# ~/.config/systemd/user/a3-core.service.d/bench.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/a3-core --role core --print-osc
+```
+
+- `ExecStart=` needs the empty line first; most other settings simply replace
+  the unit's value.
+- Drop-ins apply in file-name order, from `/usr/lib` and `~/.config` together.
+  One in `~/.config` with **the same file name** as a packaged one replaces it.
+- Never copy a whole unit into `~/.config`: it hides every later change the
+  package makes to it.
+
+### What the upgrade does with old copies
+
+The postinst (step 9 of {ref}`the installation <core-postinst>`) looks at
+every unit and drop-in in `~/.config/systemd/user/` that an earlier version
+put there:
+
+- **unchanged** (its checksum is one the package once shipped) → renamed to
+  `<name>.before-one-place`, never deleted; a `default.target.wants` link that
+  pointed at it now points at `/usr/lib/systemd/user/<name>`, so what was
+  enabled stays enabled;
+- **changed by hand** → left in place and named in the output
+  (`kept the hand-changed …`). It still hides the package's unit: move it aside
+  and put the one changed line into a drop-in;
+- a drop-in in `a3-core.service.d/` that still starts the old Core script
+  `a3-core.py` → moved to `~/.config/a3-replaced/<date_time>/`.
+
+Everything else in `~/.config/systemd/user/` is left alone.
+
 ## User units at a glance
 
-In `~/.config/systemd/user/` ({ref}`the tree <core-config-tree>`). RT =
-`CPUSchedulingPolicy=rr` at that priority; CPUs 1–3 = `CPUAffinity=1 2 3`,
-keeping CPU 0 free.
+RT = `CPUSchedulingPolicy=rr` at that priority; CPUs 1–3 =
+`CPUAffinity=1 2 3`, keeping CPU 0 free.
 
 CPU 0 is where the screen lives: x11vnc (`x11vnc.service.d/cpu.conf`) and Xorg
 (`~/.xserverrc`, installed by the package, runs the server under `taskset -c 0`)
@@ -54,10 +119,10 @@ programs it starts keep their own CPUs.
 | `a3-aes67` | AES67 sender, PTP clock reading | no | PipeWire | always, 2 s | PipeWire's own |
 | `a3-bar-per-workspace` | `a3-core --role i3-bar`: i3bar on/off | no | `graphical.target` | always, 2 s | normal |
 
-`a3-aes67` and `a3-bar-per-workspace` start at login through shipped
-`default.target.wants` links. All are `WantedBy=default.target`. The window
-(`a3-core-window`, the `a3-core` program with a screen) is the package's too,
-beside `a3-engine`.
+`a3-main`, `a3-aes67` and `a3-bar-per-workspace` are enabled by the postinst
+and start at login; `a3-screencast` waits until a machine enables it. The window
+(`a3-core-window`, the `a3-core` program with a screen) has no `[Install]`:
+`a3-main` wants it.
 
 ## PipeWire — the audio server
 
@@ -130,21 +195,10 @@ journalctl --user -u a3-core | grep 'gate:'
 every subscriber, and serves the HTTP API on `core.web`
 ({ref}`Core's HTTP API <osc-http>`). **No Python.**
 
-- **The program is chosen by a drop-in**, `a3-core.service.d/program.conf`: it
-  resets `ExecStart=` and sets `/usr/bin/a3-core --role core`. The package's
-  postinst installs the file when it is missing and never overwrites an existing
-  unit, which is why this is a drop-in and not an edit of the unit.
-  `a3-bar-per-workspace.service.d/program.conf` does the same for
-  `a3-core --role i3-bar`.
-- **The rig's own hand drop-in** `a3-core.service.d/override.conf` is
-  **overridden by `program.conf`** (it sorts before it, and the empty
-  `ExecStart=` drops its line too). Leave it or delete it; either way the new
-  program runs.
-- **Some shipped unit comments still say `a3-osc-render`** (or describe the
-  Python Core). They are left as they are on purpose, so that an upgrade
-  raises no conffile prompt. The program that renders the truth is
-  `a3-core --render-truth`.
-- **Every CPU** (`a3-core.service.d/cpu.conf`): pinned to CPU 0, it starved
+- **One unit for every machine**, `a3-core-app`'s, in `/usr/lib/systemd/user/`.
+  The `program.conf` and `cpu.conf` drop-ins that switched the deployment's old
+  copy over are gone; the upgrade moves them aside ({ref}`above <core-units-one-place>`).
+- **Every CPU**: the unit sets no `CPUAffinity`. Pinned to CPU 0, Core starved
   whenever the Motion UI peaked there, and OSC was dropped.
 - **Needs the truth**: `/usr/share/a3/a3-osc.json` (or `$A3_OSC_TRUTH`), joined
   with `network.json`, served on `core.web`, announced every 2 s
@@ -251,7 +305,7 @@ the audio threads.
 
 ## `a3-bar-per-workspace.service` — i3bar on the tool workspaces
 
-`a3-core --role i3-bar` on `:0`, after `a3-wait-for-the-screen`. Shows the
+`a3-core --role i3-bar` on `:0`, after `/usr/lib/a3-core/a3-wait-for-the-screen`. Shows the
 bar on workspace 3 and up, hides it on 1 and 2 ([The screen](#core-config-screen));
 restarts whenever it ends (an i3 restart ends the event stream).
 
