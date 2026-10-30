@@ -105,6 +105,25 @@ housings print on a 3D printer ({doc}`Assembly <../assembly/moc>`).
   its deck as one AES67 stream
   ({ref}`StemDeck on another machine <stemdeck-with-motion-remote-machine>`).
 
+(what-you-need-audio-network)=
+
+## The audio network
+
+Decks on other machines only sound clean if every packet arrives. Two decks send
+about 100 Mbit/s to the Core, without a pause, for the whole set.
+
+- **Its own gigabit switch.** Put the Core's audio socket and every deck host's
+  audio socket on a gigabit switch of their own, not on the house router. On a
+  router's built-in switch, two decks lost about one packet in thirteen: a
+  constant crackle on both decks. A small dedicated gigabit switch fixed it.
+- **Energy Efficient Ethernet off.** Many small switches save power by putting
+  the line to sleep between packets (EEE, "Green Ethernet"). For audio that is
+  fatal: the clock sync (PTP) times out, a deck goes silent or crackles, links
+  drop. A³'s packages switch EEE off on the Core and on every deck host, so you
+  do nothing — the check is in {ref}`install-audio-network`.
+- **IGMP snooping** helps on a managed switch shared with other devices. With
+  only the A³ machines on the audio switch it is not needed.
+
 (what-you-need-effort)=
 
 ## Effort
