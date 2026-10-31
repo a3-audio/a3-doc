@@ -10,9 +10,19 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 ## Unreleased
 
-On `main` since `v03.1`, not tagged yet.
+On `main` since `v03.2`, not tagged yet.
+
+## v03.2 (2026-10-31)
+
+v03.2 gives the system its final shape and its face. Every repository sits under the one it
+belongs to, under its own a3-audio name; the a3-core window opens on **ABOUT**, the project's
+own page: the A³ logo, and PUBLISHED — every repository and part with its version and licence,
+and every third-party work A³ is built on, with the version and licence its authors set. The
+Debian packages of a release are now attached to the release page, and the first piece of the
+rig updater is in: the `a3-update` package with a signed, checked install path.
 
 ### The whole system
+
 
 - **Each repository sits under the one it belongs to, at its own name.** The virtual desk is
   its own repository, [a3-mixer-ui](https://github.com/a3-audio/a3-mixer-ui), a submodule of
@@ -22,6 +32,35 @@ On `main` since `v03.1`, not tagged yet.
   the `a3-audio` organisation as a3-beat-analyzer, a3-stemdeck and a3-stem-separator; the
   packages keep their names. A checkout follows with `git submodule sync --recursive` and
   `git submodule update --init --recursive`.
+- The hardware parts carry their revision (`REVISION`, v03.1 for boards and housings) and the
+  firmware is GPL-3.0-or-later; boards and 3D-print files stay CERN-OHL-S-2.0.
+- No KiCad or FreeCAD backups or caches in the hardware repositories any more.
+- The pro-DJ knowledge — best practice, gear, playing on 3D systems, the movement lab — lives in
+  [a3-pro-dj](https://github.com/a3-audio/a3-pro-dj); manufacturer manuals only as links.
+
+### a3-core (`a3-core`)
+
+- **ABOUT** is its own page behind the A³ key and the window opens on it: the logo with
+  "Spatial DJ setup", the PUBLISHED tree (system, repositories, pcb/housing/firmware with
+  "rev …", a3-kicad-lib under the boards, one third-party node with each author's licence,
+  JUCE's version compiled in), the links with Support A³ and the copyright.
+- **STATUS** is one page: info and clock as "Label: value" rows; the Core row asks Core's API
+  instead of counting quiet seconds; the delay note moved to MONITOR.
+- **RIG** folds a3-core's services into one summary line; grey only for a unit that should run.
+- The ABOUT tree lists every submodule at any depth; a repository already listed is not shown
+  twice.
+
+### a3-mixer (`a3-mixer`)
+
+- Laid out like a3-motion: `firmware/`, `hardware/pcb/`, `hardware/housing/`, and the virtual
+  desk as the submodule `a3-mixer-ui`.
+
+### a3-system (`a3-system`)
+
+- The release workflow attaches every built `.deb` with a signed `SHA256SUMS` to the release.
+- `a3-update`: a package on every machine with a root helper that installs only signed A³
+  release packages (one sudoers line, set once by hand), and the update service Core will call.
+- The installer asks for the network once; `install --network` asks again.
 
 ## v03.1 (2026-10-31)
 
