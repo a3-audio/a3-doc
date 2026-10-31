@@ -1,4 +1,4 @@
-# Playing A³: DJ knowledge
+# DJ Knowledge
 
 What a DJ or live act needs to know to play A³: the booth, preparing and
 structuring a set, moving sound in 3D, and how A³ relates to the gear a DJ

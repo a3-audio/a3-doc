@@ -1,0 +1,14 @@
+{# SPDX-FileCopyrightText: 2026 Raphael Eismann and contributors #}
+{# SPDX-License-Identifier: CC-BY-SA-4.0 #}
+{# The logo at the top left leads to the website, not to the docs' start page. #}
+{% extends "!layout.html" %}
+{%- block sidebartitle %}
+  {%- set _logo_url = logo_url|default(pathto('_static/' + (logo or ""), 1)) %}
+  <a href="https://a3-audio.github.io/"{% if not theme_logo_only %} class="icon icon-home"{% endif %}>
+    {% if not theme_logo_only %}{{ project }}{% endif %}
+    {%- if logo or logo_url %}
+      <img src="{{ _logo_url }}" class="logo" alt="A³ website"/>
+    {%- endif %}
+  </a>
+  {%- include "searchbox.html" %}
+{%- endblock %}
