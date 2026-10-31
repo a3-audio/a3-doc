@@ -28,8 +28,8 @@ placed in the room. New to A³? Read [How A³ sounds](how-it-sounds.md) first.
   see [Always running on the Core](#stemdeck-on-the-core).
 - With no CDJs it can be [the tempo master](#stemdeck-master).
 - It [splits stereo tracks into stems](#stemdeck-stem-creator) itself.
-- Linux, JUCE, JACK. Source: [stemdeck](https://github.com/rafjagger/stemdeck)
-  (outside the `a3-audio` organisation, carried by a3-system).
+- Linux, JUCE, JACK. Source: [a3-stemdeck](https://github.com/a3-audio/a3-stemdeck)
+  (carried by a3-system; a3-stem-separator is its submodule).
 
 ```{tip}
 **With A³ Motion**: StemDeck moves its stems, A³ Motion moves the stereo

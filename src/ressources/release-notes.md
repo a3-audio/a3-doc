@@ -12,6 +12,17 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 On `main` since `v03.1`, not tagged yet.
 
+### The whole system
+
+- **Each repository sits under the one it belongs to, at its own name.** The virtual desk is
+  its own repository, [a3-mixer-ui](https://github.com/a3-audio/a3-mixer-ui), a submodule of
+  a3-mixer as a3-motion-ui is of a3-motion (whose `ui` is now `a3-motion-ui`);
+  a3-beat-analyzer is a3-core's submodule, a3-stem-separator a3-stemdeck's and part of the
+  release, and a3-prodj joins the umbrella. beat-analyzer, stemdeck and stemseparator moved to
+  the `a3-audio` organisation as a3-beat-analyzer, a3-stemdeck and a3-stem-separator; the
+  packages keep their names. A checkout follows with `git submodule sync --recursive` and
+  `git submodule update --init --recursive`.
+
 ## v03.1 (2026-10-31)
 
 v03.1 is the first version without REAPER: A³ Core runs one program, **a3-core**, which

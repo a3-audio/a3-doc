@@ -3,7 +3,7 @@
 ## A³ Motion Controller UI
 
 A JUCE / C++17 app drawing the sphere in OpenGL:
-[a3-motion-ui](https://github.com/a3-audio/a3-motion-ui), the `ui` submodule of
+[a3-motion-ui](https://github.com/a3-audio/a3-motion-ui), the submodule `a3-motion-ui` of
 [a3-motion](https://github.com/a3-audio/a3-motion). It records motion from the
 touchscreen, stores it as ticks, plays it back on the beat clock, and speaks
 OSC to A³ Core. Build and test (`./build.sh`, `./test.sh`, JUCE version):

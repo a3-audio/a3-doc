@@ -135,7 +135,7 @@ answers that.
 
 ## Beat-Analyzer
 
-[beat-analyzer](https://github.com/rafjagger/beat-analyzer), a C++/CMake
-service on the same JACK graph: **the beat clock only**, with no meter code
+[a3-beat-analyzer](https://github.com/a3-audio/a3-beat-analyzer), a3-core's submodule
+`a3-beat-analyzer` (since 2026-10-31), a C++/CMake service on the same JACK graph: **the beat clock only**, with no meter code
 and no `vu_*` ports. Use:
 {doc}`../user/beat-analyzer`; build: {doc}`build`.

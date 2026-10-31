@@ -31,11 +31,11 @@ Any combination, installed in this order:
 
 | Role | What it installs | Submodules it checks out |
 | :--- | :--- | :--- |
-| **Core** | the {ref}`a3-core package <core-package>` from this version, its questions asked up front, then held against `apt upgrade`; the `beat-analyzer` package comes with it as a recommendation | `a3-core`, `beat-analyzer` |
-| **StemDeck** | installs {doc}`StemDeck <../user/stemdeck>`. On a Core, deck A runs as `stemdeck@A` with the Core, and the package's two-deck unit `stemdeck.service` stays off. On a machine without the Core the role enables `stemdeck.service`, the {ref}`older two-deck app <stemdeck-two-deck>`; for a deck that plays into a Core use **deck host** | `stemdeck` |
-| **deck host** | one StemDeck deck on a machine without the Core: asks the deck letter, the path latency and the audio socket, starts `stemdeck@<letter>` with its AES67 sender and PTP clock ({ref}`StemDeck on another machine <stemdeck-with-motion-remote-machine>`). Not beside Core or StemDeck | `stemdeck` |
-| **desk** | the {ref}`virtual desk <a3mix-virtual>` (`a3-desk`), on any machine with a screen | `a3-mixer` |
-| **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `ui`) |
+| **Core** | the {ref}`a3-core package <core-package>` from this version, its questions asked up front, then held against `apt upgrade`; the `beat-analyzer` package comes with it as a recommendation | `a3-core` (with `a3-beat-analyzer`) |
+| **StemDeck** | installs {doc}`StemDeck <../user/stemdeck>`. On a Core, deck A runs as `stemdeck@A` with the Core, and the package's two-deck unit `stemdeck.service` stays off. On a machine without the Core the role enables `stemdeck.service`, the {ref}`older two-deck app <stemdeck-two-deck>`; for a deck that plays into a Core use **deck host** | `a3-stemdeck` |
+| **deck host** | one StemDeck deck on a machine without the Core: asks the deck letter, the path latency and the audio socket, starts `stemdeck@<letter>` with its AES67 sender and PTP clock ({ref}`StemDeck on another machine <stemdeck-with-motion-remote-machine>`). Not beside Core or StemDeck | `a3-stemdeck` |
+| **desk** | the {ref}`virtual desk <a3mix-virtual>` (`a3-desk`), on any machine with a screen | `a3-mixer` (with `a3-mixer-ui`) |
+| **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `a3-motion-ui`) |
 | **Mixer** | the A³ Mixer hardware's own computer: not installable yet, {ref}`by hand <mic-run>` | `a3-mixer` |
 | **laptop** | the whole rig on one machine: a3-core (Core and its audio backend), the StemDecks, the desk, the Motion UI and the beat-analyzer, packages only, no AES67. The Engine plays the binaural mix on the laptop's output. New, still being tested. Excludes every other role | none |
 

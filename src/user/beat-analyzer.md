@@ -12,8 +12,8 @@ level meters are the engine's ({ref}`Where the meters come from <core-meters>`).
   follows it in **EXT** and **PIO**; the desk's TAP key (strip 4) blinks with it.
 
 You choose the beat's source on A³ Motion's clock key. Source:
-[beat-analyzer](https://github.com/rafjagger/beat-analyzer) (outside the
-`a3-audio` organisation, versioned with the system), tempo detection by
+[a3-beat-analyzer](https://github.com/a3-audio/a3-beat-analyzer) (a3-core's
+submodule `a3-beat-analyzer`, versioned with the system), tempo detection by
 [BTrack](https://github.com/adamstark/BTrack).
 
 (beat-analyzer-modes)=
