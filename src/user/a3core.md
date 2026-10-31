@@ -1,5 +1,12 @@
 # A³ Core
 
+```{figure} https://a3-audio.github.io/img/a3-core-about.jpg
+:name: a3core-picture
+:alt: a3-core's ABOUT page: the A³ logo, the tree of every A³ repository with versions and licences, and the third-party software
+
+a3-core's ABOUT page: the A³ logo, the tree of every A³ repository with versions and licences, and the third-party software
+```
+
 **A³ Core is the hardware** everything plugs into: a Linux PC (today an Intel
 NUC on Debian) with a multichannel audio interface and a portrait touch
 screen. **a3-core**, the program on it (audio backend included), takes the

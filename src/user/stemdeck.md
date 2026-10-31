@@ -1,5 +1,12 @@
 # A³ StemDeck
 
+```{figure} https://a3-audio.github.io/img/a3-stemdeck-screen.jpg
+:name: stemdeck-picture
+:alt: StemDeck: one deck playing, its four stems on their own paths
+
+StemDeck: one deck playing, its four stems on their own paths
+```
+
 (stemdeck-at-a-glance)=
 
 ## StemDeck

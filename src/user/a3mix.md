@@ -1,5 +1,12 @@
 # A³ Mixer
 
+```{figure} https://a3-audio.github.io/img/a3-desk-screen.jpg
+:name: a3mix-picture
+:alt: A³ Mixer: the desk with four channels playing
+
+A³ Mixer: the desk with four channels playing
+```
+
 Four channels, each with an INPUT knob that picks what plays: a StemDeck
 deck (**A** to **D**) or **ST**, the stereo input for a CDJ or a turntable.
 Then TRIM, an isolator EQ, the fader, a cue and an AUX-Send to the beat

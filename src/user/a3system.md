@@ -1,6 +1,11 @@
 # A³ System
 
-![The A³ setup as a DJ plays it: two StemDecks, the desk, A³ Motion, two StemDecks](https://a3-audio.github.io/img/a3-setup.jpg)
+```{figure} https://a3-audio.github.io/img/a3-setup.jpg
+:name: a3system-picture
+:alt: The A³ setup as a DJ plays it: four StemDecks, the desk and A³ Motion
+
+The A³ setup as a DJ plays it: four StemDecks, the desk and A³ Motion
+```
 
 A³ is a live-performance sound system for DJs and live acts: three networked
 devices and a set of programs that play and move music in the room. **A³ Core**

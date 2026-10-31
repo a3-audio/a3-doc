@@ -1,5 +1,12 @@
 # A³ Motion
 
+```{figure} https://a3-audio.github.io/img/a3-motion-screen.jpg
+:name: a3motion-picture
+:alt: A³ Motion: the sphere with four channels moving
+
+A³ Motion: the sphere with four channels moving
+```
+
 (motion-at-a-glance)=
 
 ## A³ Motion UI
