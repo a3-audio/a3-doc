@@ -14,6 +14,7 @@ has its own page in the sidebar.
 how-it-sounds
 what-you-need
 stemdeck-with-motion
+stem-separator
 audio-engine
 first-set
 beat-analyzer
