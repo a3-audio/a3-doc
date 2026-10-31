@@ -91,6 +91,39 @@ The last flashed firmware is recorded in `~/.config/a3/install.state`.
   current limit, not a design choice: the units are to name no user and no
   path.
 
+(install-updates)=
+
+## Updates from the Core: a3-update
+
+Every role also installs **`a3-update`**, a small package with one user
+service on each machine. The Core asks it, over the control network, to
+install a **release** of a3-system: it downloads that release's packages for
+its own machine, checks them against the release's signed `SHA256SUMS`,
+installs them and restarts the A³ services they belong to. It answers the
+Core's address only; its port is the listener `update.control`
+({ref}`ports <ports-by-listener>`).
+
+Installing needs root, and a3-update gets exactly one right for it: the root
+helper `/usr/lib/a3-update/a3-root` with the verb `install-release`, which
+takes only packages signed with the A³ key. **Once per machine** (Core, every
+deck host, the Motion machine), as the user `aaa`, write that line, let
+`visudo` check it, then put it in place:
+
+```sh
+echo 'aaa ALL=(root) NOPASSWD: /usr/lib/a3-update/a3-root install-release *' > /tmp/a3-update
+sudo visudo -cf /tmp/a3-update
+sudo install -m 0440 -o root -g root /tmp/a3-update /etc/sudoers.d/a3-update
+```
+
+`visudo -cf` must say `parsed OK`; otherwise do not install the file. The
+installer prints these three lines when it installs a3-update and never
+writes the file itself. Without it an update from the Core fails on that machine
+with "the one-time line in /etc/sudoers.d/a3-update is missing", and nothing
+is changed there.
+
+To see what a machine runs and what its last update did:
+`systemctl --user status a3-update` and `journalctl --user -u a3-update`.
+
 (install-audio-network)=
 
 ## The audio network: EEE
