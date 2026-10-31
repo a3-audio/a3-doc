@@ -5,9 +5,8 @@
 ## At a glance
 
 The system's **beat clock**: a program on the A³ Core, on the same JACK graph
-as the audio engine, with no screen. **It is the beat clock only.** It used to
-measure the level meters too; the engine does that now
-({ref}`The meters <beat-analyzer-meters>`).
+as the audio engine, with no screen. **It is the beat clock only**; the
+level meters are the engine's ({ref}`Where the meters come from <core-meters>`).
 
 - **The beat:** `/beat` (beat in bar, bar, tempo) to every device. A³ Motion
   follows it in **EXT** and **PIO**; the desk's TAP key (strip 4) blinks with it.
@@ -102,17 +101,6 @@ A³ Motion on PIO, A³ Mixer's TAP key, every other /beat target
 - On one machine both share the Pro DJ Link ports; broadcast reaches both
   whatever started first.
 
-(beat-analyzer-meters)=
-
-## The meters
-
-**The analyzer sends no meters any more.** Its level-meter thread and its
-`vu_*` JACK ports are not started, whatever `ENABLE_VU` says in an old `.env`
-(a user file with `ENABLE_VU=1` does not bring them back). The audio engine
-measures every `/vu` point and Core forwards it; where each number is measured:
-{ref}`Where the meters come from <core-meters>`, the names:
-{ref}`The meters <osc-vu-meters>`.
-
 (beat-analyzer-config)=
 
 ## Where it runs and where its settings live
@@ -173,6 +161,5 @@ Ports: [Ports and endpoints](../ressources/ports.md). Messages:
 | PIO: nothing arrives | Core on the players' network, ports free? Log: `Pioneer Receiver konnte nicht gestartet werden` |
 | PIO: wrong player | It follows whoever says master while playing |
 | No beat targets | `build/.env` ends with the `a3-osc` block? Else `a3-core --render-truth user`, restart |
-| Meters still or wrong | Not the analyzer's: look at the engine ({ref}`A³ Core services <core-engine-units>`) and Core |
 
 Log: `journalctl --user -u beat-analyzer -f`.

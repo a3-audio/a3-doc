@@ -138,6 +138,6 @@ answers that.
 ## Beat-Analyzer
 
 [beat-analyzer](https://github.com/rafjagger/beat-analyzer), a C++/CMake
-service on the same JACK graph: **the beat clock only**. Its meter thread and
-`vu_*` ports are not started; the VU source files stay in its tree. Use:
+service on the same JACK graph: **the beat clock only**, with no meter code
+and no `vu_*` ports. Use:
 {doc}`../user/beat-analyzer`; build: {doc}`build`.

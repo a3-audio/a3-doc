@@ -48,7 +48,7 @@ belong too:
 
 | Program | What it is | What it does |
 | :--- | :--- | :--- |
-| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | on the Core: the beat and the level meters for every device |
+| [**Beat Analyzer**](beat-analyzer.md) | the beat clock | on the Core: the beat for every device |
 | [**StemDeck**](stemdeck.md) | a stem player | one deck per instance, A to D, each a track as four stems that move on their own; tempo master without CDJs |
 
 ```{tip}
