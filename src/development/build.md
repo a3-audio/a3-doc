@@ -24,7 +24,8 @@ From each repository's root:
 | :--- | :--- | :--- |
 | a3-core | `cd platform-config/debian-x86_64 && dpkg-deb --build --root-owner-group a3-core` (normally the GitHub workflow builds the package, see {ref}`The Debian package <core-package>`) | `~/.venv/bin/python3 -m unittest discover -s tools/tests` — with the venv's Python; the system `python3` lacks packages and skips tests |
 | a3-mixer | — (Python) | `A3_OSC_TRUTH=<path to a3-osc.json> python3 -m unittest discover -s software/tests` |
-| a3-mixer panel firmware | `pio run` in `hardware/mainboard/firmware/` | |
+| a3-mixer panel firmware | `pio run` in `firmware/` | |
+| a3-mixer virtual desk | built by `./test.sh` in `ui/` (CMake, against `~/local/juce`); its package recipe is `ui/packaging/` | `./test.sh` in `ui/` |
 | a3-motion panel firmware | `pio run` in `firmware/`; `pio run -t upload` flashes it (the port is found by USB ID, see {ref}`moc-serial`) | `pio test -e native` and `python3 -m unittest test_host` in `firmware/` |
 | a3-motion-ui | `./build.sh` (`-d` for Debug) | `./test.sh` |
 | beat-analyzer | `git submodule update --init`, then `./build.sh` | `cd build && ctest` |

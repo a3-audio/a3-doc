@@ -6,7 +6,7 @@
 | :--- | :--- |
 | [a3-system](https://github.com/a3-audio/a3-system) | The umbrella: carries the others as submodules, and the {doc}`installer <../configuration/install>` |
 | [a3-core](https://github.com/a3-audio/a3-core) | The sound server — the `a3-core` C++ program (Core, audio engine, window), its Debian package tree and the one package `a3-core` |
-| [a3-mixer](https://github.com/a3-audio/a3-mixer) | The DJ mixer: control scripts and KiCad hardware |
+| [a3-mixer](https://github.com/a3-audio/a3-mixer) | The DJ mixer: control scripts (`software/`), panel firmware (`firmware/`), KiCad board and housing (`hardware/`) and the virtual desk (`ui/`) |
 | [a3-motion](https://github.com/a3-audio/a3-motion) | The motion sampler: ESP32-S3 panel firmware and hardware |
 | [a3-motion-ui](https://github.com/a3-audio/a3-motion-ui) | The JUCE/C++ touchscreen UI, also a submodule of a3-motion |
 | [a3-engine](https://github.com/a3-audio/a3-engine) | **Archived.** The audio engine's former repository; its code moved into a3-core and its package `a3-engine` is replaced by `a3-core`. The name lives on as the engine role and its unit `a3-engine.service` |

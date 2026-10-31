@@ -90,7 +90,7 @@ shown, and how to show a disagreement is undecided
 
 ## Panel firmware
 
-PlatformIO, [`hardware/mainboard/firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/mainboard/firmware),
+PlatformIO, [`firmware/`](https://github.com/a3-audio/a3-mixer/tree/main/firmware),
 for the controller on {ref}`A³ Mixer hardware <mic-hardware>`; build: {doc}`build`.
 
 - **Input VUs**: 8 LEDs (1–4 green, 5–6 yellow, 7–8 red). The script sends the
