@@ -225,7 +225,7 @@ None by default; a drop-in can point any default elsewhere (useful on a bench).
 A department is a light or video desk that gets every A³ message exactly as
 Mixer and Motion do. What arrives: {doc}`OSC reference <../ressources/osc>`.
 
-**The normal way is the window**: page **DEPARTMENTS**, **ADD**, then name,
+**The normal way is the window**: page **I/O › DEPARTMENTS**, **ADD**, then name,
 host (an IPv4 address or a host name) and port, **SAVE LIST**. Core applies the
 list at once, no restart; each row says whether messages go out (how many, the
 last how long ago). An entry is checked as you type and Core checks that the

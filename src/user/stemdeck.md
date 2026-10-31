@@ -294,7 +294,7 @@ On the rig every deck is its own StemDeck instance, `-bformat --deck A` (unit
 `stemdeck@A`; B is `stemdeck@B`, and so on to `stemdeck@D`). Deck A runs on the
 Core, deck B on the second machine beside A³ Motion; decks C and D are
 hosts of their own (any machine with the deck-host role, letter C or D). The instance plays one deck and sends
-**B-format** to the Core's Engine. What an instance sends (41 channels):
+**B-format** to a3-core on the Core. What an instance sends (41 channels):
 
 | Ports | Channels | What |
 | :--- | :--- | :--- |
@@ -307,7 +307,7 @@ hosts of their own (any machine with the deck-host role, letter C or D). The ins
 The jack client is `StemDeck-<letter>`. The Core decodes the cue with the same
 headphone sound as everything else; StemDeck has no decoder of its own.
 
-- **Nothing to patch by hand.** On the Core the Engine's I/O map connects the
+- **Nothing to patch by hand.** On the Core a3-core's I/O map connects the
   deck; on a deck host the instance links itself from its
   [link map](#stemdeck-links).
 - It **never starts a JACK server**: it uses JACK or PipeWire's JACK.
@@ -506,7 +506,7 @@ Pioneer — see {doc}`../ressources/trademarks`.
 Started without `-bformat`, StemDeck is the older **two-deck app**: decks A
 and B in one window, a stereo mixer with a bus switch per stem (stem N on desk
 channel N, or on AUX), **AUTO DJ**, SYNC to the other deck, keyboard keys and
-up to two Stanton SCS.3d controllers. It predates the Engine. On a Core its
+up to two Stanton SCS.3d controllers. It predates a3-core's audio backend. On a Core its
 unit `stemdeck.service` is kept off, and these pages describe only the
 one-deck StemDeck.
 
@@ -578,7 +578,7 @@ causes xruns: clicks on everything the Core plays.
 | A set is missing | Exactly four files, one name, different endings. **Rescan**. Right folder? [Settings](#stemdeck-settings) |
 | `separator not installed` | [Set it up once](#stemdeck-stem-creator-setup) |
 | Stems are slow to make | Idle priority on the free cores; see `separatorCores` |
-| Nothing to hear | Is the deck on a desk channel (INPUT on its letter) with the fader up? On the Core: the deck's links on the Engine's I/O page. On a deck host: the [link map](#stemdeck-links) |
+| Nothing to hear | Is the deck on a desk channel (INPUT on its letter) with the fader up? On the Core: the deck's links on the a3-core window's I/O page. On a deck host: the [link map](#stemdeck-links) |
 | `JACK-Server wurde beendet` | JACK went away. Restart StemDeck after JACK |
 | A stem does not move | Stems only move while an action runs: tap ORBIT, PING, RISE or SCAT and wait for the next bar. Is the deck on a desk channel (INPUT on its letter) with the fader up? |
 | A³ Motion ignores MASTER | Wait for the BPM; deck playing, top bar `LINK master`? Motion on **PIO**? |

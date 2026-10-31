@@ -5,9 +5,9 @@
 # The audio engine in depth
 
 For whoever looks after the machine: what runs, the signal path, the shipped
-connections, the decks, and how to start the Engine by hand. Setting up a
+connections, the decks, and how to start a3-core by hand. Setting up a
 room (cables, speakers, level) is on the user page,
-{doc}`The audio engine <../user/audio-engine>`.
+{doc}`Setting up a room <../user/audio-engine>`.
 
 ## What it is
 
@@ -49,16 +49,23 @@ PHONES       phones bus -> binaural decoder (+ headphone EQ) -> PHONES -> trim a
 
 ## The pages in detail
 
+Pictures of every page: {ref}`Setting up a room <audio-engine-window>`.
+
 | Page | What it is for |
 | :--- | :--- |
-| **AUDIO** | the sound device. On JACK the rate and quantum are read-only: the server owns them |
-| **STATUS** | what runs now: mode, Core's last word, the gate, load, xruns, missing peers, the meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
-| **CHANNELS** | how many channels (1–128), with the load beside it, and how many decks (1–26), with the count that runs |
-| **ZONES** | which speaker layout (spatial data) MAIN and BOOTH use; your own variants can be renamed and deleted there. Also **PHONES HEADPHONE EQ**: off, or the correction of one headphone model, applied to the phones only (rec has none) |
-| **SPEAKERS** | IEM's AllRADecoder editor for one zone: the speaker table, a 1 s pink-noise burst per speaker (−20 dBFS RMS, after the zone's decoder and before MASTER/BOOTH and the gate, so a closed gate keeps it silent; with Alt held, from that direction into the decoder; Alt needs a keyboard), the 3D view and energy map, the sub channel and crossover. **SAVE TO ZONE** writes a user variant under `~/.config/a3/engine/spatial/` |
-| **I/O** | two sub-pages. INPUT: each channel's L and R, each deck's source, the direct links. OUTPUT: per zone the playback port of each channel, and every engine port with its peers, see below |
-| **CALIBRATION** | the trim of each output zone |
-| **FILTER** | the DJ filter type, SVF or Ladder |
+| **AUDIO** | DRIVER: the sound device. On PipeWire the rate is the server's; **Block** and **Periods** are set by the engine (a change asks first; a Periods change stops the audio for about 2 s), **REVERT** goes back to the previous pair. STEREO CHANNELS AND STEMDECKS: how many channels and how many decks (1–26, A–Z), each with the count that runs. MEASURE: the round trip, measured over the digital loop chosen on I/O, or once over an analog test cable. CLOCK: the clock master (the Scarlett, with the PTP clock steered to it by `a3-clock.service`) |
+| **SPEAKERS › SPEAKERS** | IEM's AllRADecoder editor for one zone, scaled into the page: the speaker table, a 1 s pink-noise burst per speaker (−20 dBFS RMS, after the zone's decoder and before MASTER/BOOTH and the gate, so a closed gate keeps it silent; with Alt held, from that direction into the decoder; Alt needs a keyboard), the 3D view and energy map, the **Sub** channel and **Crossover**. **SAVE TO ZONE** writes a user variant under `~/.config/a3/engine/spatial/` |
+| **SPEAKERS › ZONES** | which speaker layout (spatial data) MAIN and BOOTH use, and what each plays. **LOAD** applies the choice at once; **RENAME** and **DELETE** act on your own variants. **PHONES**: off, or the EQ of one headphone model, applied to the phones only (rec has none) |
+| **I/O › INPUT** | each channel's L and R, each deck's source (Local StemDeck or AES67 stream), and the MEASURE card: the digital loop and the analog test pair for the round trip |
+| **I/O › OUTPUT** | per zone the playback port of each channel |
+| **I/O › DEPARTMENTS** | the light and video desks Core tells everything ({ref}`adding one <core-subscriber>`); applied live, no Save |
+| **CALIBRATION** | the trim of each output zone (MAIN, BOOTH, PHONES, REC), and the **FILTER** card: the DJ filter type, SVF or LADDER |
+| **RIG** | every program of the rig, its state, host and version; **Start all**, **Stop all** in the rig's order. Asks the machine only while shown |
+| **STATUS › A³ CORE** | what runs now: mode, Core's last word, the gate, audio, load, xruns, the estimated and measured latency, the AES67 receive buffer, the clock, the output meters. Says **NO ENGINE RUNNING** when nothing could be opened. Missing peers are grouped by client ("AES67 deck B (41), system (1)"), not listed one by one |
+| **STATUS › ABOUT** | the published version of each repository, the licences, the links |
+
+The footer carries **KEYS** (the on-screen keyboard), **MONITOR** (Core's OSC
+monitor as a second key row), the clock's state in one word and **Save**.
 
 Changes are **pending** until you press **Save** ("not saved" shows while the
 edit differs from what runs). Save checks the file the way a start would and
@@ -67,7 +74,7 @@ refuses a bad one, leaving the old file in place. Then it writes
 engine, which says hello to Core, which replays what it knows. That holds for
 every change, and the old setting is opened again if the new one does not open.
 
-The FILTER page is the one exception: it acts at once and needs no Save.
+The FILTER card is the exception: it acts at once and needs no Save.
 
 ## The engine always runs
 
@@ -95,9 +102,8 @@ After installing a new engine, restart it: `systemctl --user restart a3-engine`.
 The **I/O map** decides what is connected to what; the engine
 makes those JACK links itself and removes only links it made. There is no
 patchbay and no QjackCtl on the Core. The beat-analyzer has no meter ports any
-more, the engine measures the meters itself. The page shows, per engine port,
-its JACK peers (editable) and the live peers the map does not name ("foreign":
-shown, never edited).
+more, the engine measures the meters itself. The I/O page shows what the
+engine links, nothing beside it.
 
 The shipped map (`/usr/share/a3-engine/engine.json`, `io.jack`). The audio
 interface is the JACK client `system` (PipeWire, 44.1 kHz, quantum 128):
@@ -147,11 +153,11 @@ or not the file names `"decks"`. A slot the file links anywhere is left as it
 is. A file posted from the I/O page is never filled this way, so a slot you
 emptied there stays empty until the next start. An `engine.json` that still
 says `"decks": 2` keeps two slots: to bring decks C and D up, set **Decks** to 4
-on the CHANNELS page and press Save (or remove the `"decks"` line by hand). The
+on the AUDIO page and press Save (or remove the `"decks"` line by hand). The
 engine says so at start, on STATUS and in `--check-config` when the file names
 fewer decks than the truth.
 
-**Setting the deck count.** The CHANNELS page has a **Decks** box below the
+**Setting the deck count.** The AUDIO page has a **StemDecks** box below the
 channel count, 1 to 26 (one letter a slot, A to Z; the engine itself has no
 cap, so a larger count can still be written by hand). A count set there is
 written to `engine.json` as `"decks"`. Fewer decks drop the removed slots' links

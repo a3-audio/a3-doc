@@ -37,7 +37,7 @@ Any combination, installed in this order:
 | **desk** | the {ref}`virtual desk <a3mix-virtual>` (`a3-desk`), on any machine with a screen | `a3-mixer` |
 | **Motion** | builds {doc}`the UI <moc>`, enables `a3-motion.service`, adds the user to `dialout`, flashes the panel when its firmware changed | `a3-motion` (with `ui`) |
 | **Mixer** | the A³ Mixer hardware's own computer: not installable yet, {ref}`by hand <mic-run>` | `a3-mixer` |
-| **laptop** | the whole rig on one machine: Core and the Engine, the StemDecks, the desk, the Motion UI and the beat-analyzer, packages only, no AES67. The Engine plays the binaural mix on the laptop's output. New, still being tested. Excludes every other role | none |
+| **laptop** | the whole rig on one machine: a3-core (Core and its audio backend), the StemDecks, the desk, the Motion UI and the beat-analyzer, packages only, no AES67. The Engine plays the binaural mix on the laptop's output. New, still being tested. Excludes every other role | none |
 
 By default the apps (Core, StemDeck, the UIs, the desk) are installed as
 packages from the apt archive: no JUCE build and no source checkout beyond the

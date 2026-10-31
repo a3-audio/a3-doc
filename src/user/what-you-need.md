@@ -10,7 +10,7 @@ either has a software stand-in or is optional.
 
 | Part | What it is | Do you need it? |
 | :--- | :--- | :--- |
-| **A³ Core** | the computer everything plugs into; it runs **the Engine**, the 3D audio | **yes** |
+| **A³ Core** | the computer everything plugs into; it runs **a3-core**, the 3D audio | **yes** |
 | **Audio interface** | on the Core: the stereo inputs (**ST**) and one output per speaker | **yes** |
 | **Speakers** | around the crowd, a sub if you have one | **at least 4**, or headphones only |
 | **Headphones** | on the PHONES output: cue, and the whole room folded to two ears | yes |
@@ -30,14 +30,14 @@ published with the Kickstarter campaign.
 
 ## A³ Core and the audio interface
 
-**A³ Core is the hardware**: the box everything plugs into. **The Engine is
-its audio backend**, the program `a3-core` running on it, which places every
-sound in the room and feeds each speaker
-([The audio engine](audio-engine.md)).
+**A³ Core is the hardware**: the box everything plugs into. **a3-core is the
+program running on it**, audio backend included, which places every sound in
+the room and feeds each speaker
+([Setting up a room](audio-engine.md)).
 
 - **The computer**: a PC on Debian testing with a realtime kernel. The rig
   runs on an Intel NUC (NUC8i7HNK) with a portrait touch screen, which shows
-  the Engine's window and StemDeck deck A. Earlier Cores ran on a tower and a
+  the a3-core window and StemDeck deck A. Earlier Cores ran on a tower and a
   Mac ({doc}`assembly <../assembly/core>`).
 - **The interface**: the rig uses a Focusrite Scarlett 18i20. The shipped I/O
   map uses:
@@ -50,7 +50,7 @@ sound in the room and feeds each speaker
   | BOOTH: sub and four tops | outputs 11–15 |
 
   So the shipped map needs an interface with **15 outputs**. A smaller one
-  works too: assign the outputs you have on the Engine's **I/O** page
+  works too: assign the outputs you have on the a3-core window's **I/O** page
   (four tops and the phones are 6 outputs; the booth is optional).
 - **Inputs**: one stereo pair per ST channel you want to use. With StemDeck
   only, you need none.
@@ -61,7 +61,7 @@ sound in the room and feeds each speaker
 
 - **At least four speakers around the crowd.** The shipped layout is a
   square of four tops with one sub (4.1). Another layout, more speakers or
-  different angles, is set on the Engine's ZONES and SPEAKERS pages.
+  different angles, is set on the a3-core window's SPEAKERS page (ZONES and SPEAKERS).
 - **Or just headphones.** The PHONES output carries the whole room in
   binaural stereo: turn **CUE/MIX** to MIX and every movement is in your
   ears. The REC output is the same binaural mix, for the recording. This is
@@ -132,7 +132,7 @@ about 100 Mbit/s to the Core, without a pause, for the whole set.
   ({doc}`Installing the system <../configuration/install>`). Packages by
   default, nothing to compile.
 - **Setting up a room**: cables, speakers, level, once per room
-  ([Setting up a room](#audio-engine-setup)). After that the Engine starts
+  ([Setting up a room](#audio-engine-setup)). After that a3-core starts
   with your settings.
 - **Making stems**: StemDeck splits a stereo track into four stems
   ([Making stems](#stemdeck-stem-creator)). Do it before the gig, best on

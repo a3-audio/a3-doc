@@ -29,7 +29,7 @@ actions. In the middle sits the desk, the [A³ Mixer](a3mix.md) or the
 {ref}`virtual desk <a3mix-virtual>` on a screen, which picks what plays on
 each of its four channels: a deck, or **ST**, the stereo input for a CDJ or a
 turntable. Beside it, [A³ Motion](a3motion.md) moves the stereo channels
-through the room. Everything goes into the [Engine](audio-engine.md) on A³
+through the room. Everything goes into [a3-core](audio-engine.md) on A³
 Core, which places each sound on the speakers.
 
 ## The A³ System
@@ -39,7 +39,7 @@ Three devices on one network, talking **only OSC**
 
 | Device | What it is | What it does |
 | :--- | :--- | :--- |
-| [**A³ Core**](a3core.md) | the hardware everything plugs into | runs the Engine, the audio backend: takes the audio in, computes the 3D field, sends it out; remote controlled |
+| [**A³ Core**](a3core.md) | the hardware everything plugs into | runs a3-core, the program with the audio backend: takes the audio in, computes the 3D field, sends it out; remote controlled |
 | [**A³ Mixer**](a3mix.md) | a 4-channel DJ mixer, hardware | gain, EQ, filter, faders, cue, all as OSC; the virtual desk is the same on a screen |
 | [**A³ Motion**](a3motion.md) | the motion sampler | a loopstation for *where a sound is* |
 

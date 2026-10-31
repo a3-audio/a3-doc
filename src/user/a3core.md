@@ -2,8 +2,9 @@
 
 **A³ Core is the hardware** everything plugs into: a Linux PC (today an Intel
 NUC on Debian) with a multichannel audio interface and a portrait touch
-screen. **The Engine**, its audio backend, takes the ST inputs and the
-StemDecks, computes the 3D/ambisonics field and sends it to the speakers. You
+screen. **a3-core**, the program on it (audio backend included), takes the
+ST inputs and the StemDecks, computes the 3D/ambisonics field and sends it to
+the speakers. You
 play it from the desk and A³ Motion, over OSC; its own screen is for setting
 up, not for playing ([What you need](what-you-need.md)).
 Source: [a3-core](https://github.com/a3-audio/a3-core): the program and the
@@ -18,12 +19,13 @@ process:
 | Role | What it does | On the rig |
 | :--- | :--- | :--- |
 | `--role core` | the OSC router: takes commands, relays state, serves the HTTP API | `a3-core.service` |
-| `--role engine` | the {doc}`audio engine <audio-engine>`: channel strips, 3D, effects, outputs, meters | `a3-engine.service` |
-| *(no role, or `--role window`)* | the **window**: shows both, edits the engine | run on the screen |
-| `--headless` | a supervisor: Core and the engine as children, no window | a laptop without a screen |
+| `--role engine` | the {doc}`audio backend <audio-engine>`: channel strips, 3D, effects, outputs, meters | `a3-engine.service` |
+| `--role clock` | locks the network's PTP clock to the Scarlett, so decks over AES67 run on the sound card's clock | `a3-clock.service` |
+| *(no role, or `--role window`)* | the **a3-core window**: shows both, edits the audio settings | run on the screen |
+| `--headless` | a supervisor: Core and the audio backend as children, no window | a laptop without a screen |
 
 The beat clock is separate: {doc}`beat-analyzer` measures nothing any more, it
-only keeps time. The meters are the engine's ({ref}`below <core-meters>`).
+only keeps time. The meters are a3-core's ({ref}`below <core-meters>`).
 Which unit runs what, and how to start any role by hand:
 {ref}`A³ Core services <core-services>`.
 
@@ -42,7 +44,7 @@ Nothing here controls audio:
 
 ## Audio in and out
 
-The engine connects its ports to the sound card itself; the shipped map and how
+a3-core connects its ports to the sound card itself; the shipped map and how
 to change it: {ref}`The I/O map <audio-engine-io>`. Between machines, audio goes
 over AES67: {ref}`The audio network <ports-audio-network>`.
 
@@ -62,32 +64,42 @@ The portrait touch screen (768 × 1024) shows one workspace at a time:
 | :--- | :--- |
 | **MOTION** (1) | [A³ Motion](a3motion.md)'s touch screen |
 | **STEMDECK** (2) | [StemDeck](stemdeck.md), always running |
-| **ENGINE** (3) | the `a3-core` window (i3 sends it here by its window class `a3-core`): the engine's pages and Core's OSC monitor |
+| **ENGINE** (3) | the a3-core window (i3 sends it here by its window class `a3-core`): its pages and the monitor |
 | **4** | nothing assigned; free for a tool |
 | **SCARLETT** (5) | the Scarlett interface's mixer, when it is open |
 
-- **Between the touch apps**: the key at the far right of the top bar
-  (STEMDECK in A³ Motion, MOTION in StemDeck), in the same spot in both. **▾**
-  lists workspaces that have a window.
-- **On ENGINE, 4, SCARLETT**: tap MOTION or STEMDECK in the bar at the
-  top (hidden on the touch apps, which fill the screen).
+- **Between the touch apps and the a3-core window**: the key at the far right
+  of the top bar (STEMDECK in A³ Motion and in the a3-core window, MOTION in
+  StemDeck), in the same spot in all three. **▾** lists workspaces that have a
+  window.
+- **On 4, SCARLETT**: tap MOTION or STEMDECK in the bar at the top (hidden
+  on the touch apps, which fill the screen).
 
 (core-window)=
 
 ## The window
 
-Run **`a3-core`** on the screen (workspace ENGINE). The window attaches to Core
-and the engine over their local ports; it has no audio of its own. Its pages
-are the {doc}`engine's pages <audio-engine>` (AUDIO, CHANNELS, ZONES, SPEAKERS,
-I/O, CALIBRATION, FILTER, STATUS), **DEPARTMENTS** (the light and video desks
-Core tells everything, {ref}`how <core-subscriber>`) and, below them, the
-**OSC MONITOR**: what the
+Run **`a3-core`** on the screen (workspace ENGINE). The a3-core window attaches
+to Core and the audio backend over their local ports; it has no audio of its
+own. Its pages are AUDIO, SPEAKERS (SPEAKERS, ZONES), I/O (INPUT, OUTPUT,
+DEPARTMENTS), CALIBRATION, RIG and STATUS (A³ CORE, ABOUT), each with a picture
+on {doc}`Setting up a room <audio-engine>`. DEPARTMENTS lists the light and
+video desks Core tells everything ({ref}`how <core-subscriber>`).
+
+**MONITOR**, in the bar at the bottom, adds a second row of keys: what the
 devices actually say to each other, the answer to *"cable, setting, or me?"*,
 since over UDP a control nobody hears looks like one that works.
 
-- **The OSC MONITOR switch** sits at the bottom of the page list. Off, the
-  window asks Core nothing. Your choice is remembered
-  (`~/.config/a3/core/window.settings`, written only when you flip it).
+```{figure} pics_user/a3-core-window-monitor.png
+:alt: The a3-core window with MONITOR ticked: below the page keys a second row TRAFFIC, TRUTH & DEVICES, NOT UNDERSTOOD, REGISTER and BENCH
+:width: 50%
+
+MONITOR ticked: the second row of keys.
+```
+
+- **The MONITOR switch**: off, the window asks Core nothing. Your choice is
+  remembered (`~/.config/a3/core/window.settings`, written only when you flip
+  it).
 - **TRAFFIC**: one row per address — count, rate, last value, device; filter
   by address or device, *only active* hides what is older than 6 s.
 - **TRUTH & DEVICES**: Core's fingerprint, and per device *a3-osc.json is
@@ -103,12 +115,12 @@ since over UDP a control nobody hears looks like one that works.
 ### On a laptop
 
 Without the rig's units, the window **starts what is missing**: it asks Core
-and the engine whether they answer, and starts a role that does not (and whose
+and the audio backend whether they answer, and starts a role that does not (and whose
 unit is not enabled) as its own child. Closing asks once, *"Stop Core and the
 engine too?"*, naming only the roles it started. On the rig, where the units run
 them, the window starts and stops nothing.
 
-`a3-core --headless` does the same without a window: Core and the engine as
+`a3-core --headless` does the same without a window: Core and the audio backend as
 children, restarted if they fail, ended on Ctrl-C.
 
 ### Without a screen: `curl`
@@ -131,13 +143,14 @@ more: `http://<core>:9080/` answers with a short text that points here.
 
 ## Where the meters come from
 
-Every `/vu/n` number is **measured by the engine**, inside its audio callback,
-at the engine's own meter points: the analog inputs
+Every `/vu/n` number is **measured by a3-core**, inside its audio callback,
+at its own meter points: the analog inputs
 (`/vu/1`–`/vu/8`, and the return's pair 35–36) raw; the main, booth, phones and
-rec outputs as they leave (11–34); each channel before and after its fader
-(51–66). The engine sends them 25 times a second to **Core, which forwards them**
-to Motion, the desk and the other listeners; StemDeck still sends its own
-stem meters (41–50). Free numbers (9–10, 37–40) are sent as 0. The map by
+rec outputs as they leave (11–34); each deck as it arrives (37–40); each
+channel before and after its fader (51–66). The audio backend sends them 25
+times a second to **Core, which forwards them** to Motion, the desk and the
+other listeners; StemDeck still sends its own stem meters (41–50). The free
+numbers 9–10 are sent as 0. The map by
 name: {ref}`The meters <osc-vu-meters>`.
 
 ## Screencast

@@ -13,7 +13,7 @@ the way from the deck to the speakers, and what you touch to make it move.
 A³ is a DJ setup for a room with speakers **all around** the crowd, not just
 in front of it. You mix on a four-channel desk as on any club mixer, and
 **A³ Motion** or **StemDeck** decides where each part of the music is in the
-room, in time with the beat. A computer, **A³ Core**, runs **the Engine**:
+room, in time with the beat. A computer, **A³ Core**, runs **a3-core**:
 it takes everything you play, places it in the room, and feeds every speaker
 exactly its share.
 
@@ -91,7 +91,7 @@ A³ Motion does not move a deck: on a deck channel its screen says **DECK A**
 ## From the deck to the speakers
 
 ```{figure} pics_user/a3-signal-flow.svg
-:alt: The A³ signal flow in six rows. 1, what plays: players into the audio interface, StemDeck deck A on the Core, decks B to D over the network. 2, the desk: four channels, INPUT picks ST or a deck. 3, into 3D: a stereo channel moves one band, a deck channel moves its stems with actions. 4, the Engine mixes: everything into one room mix; the AUX-Sends go to the delay, whose echoes come back through FX RETURN. 5, outputs: MASTER, BOOTH, REC and PHONES. 6, where it is heard: PA speakers, booth speakers, the recording, the headphones.
+:alt: The A³ signal flow in six rows. 1, what plays: players into the audio interface, StemDeck deck A on the Core, decks B to D over the network. 2, the desk: four channels, INPUT picks ST or a deck. 3, into 3D: a stereo channel moves one band, a deck channel moves its stems with actions. 4, a3-core mixes: everything into one room mix; the AUX-Sends go to the delay, whose echoes come back through FX RETURN. 5, outputs: MASTER, BOOTH, REC and PHONES. 6, where it is heard: PA speakers, booth speakers, the recording, the headphones.
 
 The way of the sound, top to bottom.
 ```
@@ -164,7 +164,7 @@ One name per thing: every page uses these.
 | **desk** | the four-channel mixer you play on: the **A³ Mixer** is the hardware panel, the **virtual desk** the same mixer in software, on a screen |
 | **ST** | a desk channel's stereo input, for a CDJ, a turntable or a laptop. (**A** to **D** are the StemDeck decks) |
 | **stem** | one part of a track: drums, bass, other or vocals. StemDeck plays four of them together |
-| **the Engine** | the audio backend: the software on A³ Core (the program `a3-core`) that places every sound in the room and feeds the speakers. Its window is the Core window |
+| **a3-core** | the program on A³ Core, audio backend included, that places every sound in the room and feeds the speakers. Its settings are in the a3-core window |
 | **zone** | one set of speakers with its own decoder: **MAIN** (the PA) and **BOOTH** |
 
 ## Where to go next
@@ -173,5 +173,5 @@ One name per thing: every page uses these.
 - **StemDeck**, to play stems: [StemDeck](stemdeck.md).
 - **The desk**: [A³ Mixer](a3mix.md).
 - **What you need**, speakers or headphones: [What you need](what-you-need.md).
-- **Setting up the room**, speakers and levels: [The Engine](audio-engine.md).
+- **Setting up the room**, speakers and levels: [Setting up a room](audio-engine.md).
 - **Your first set**: [First set](first-set.md).

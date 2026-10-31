@@ -83,20 +83,20 @@ read the OSC contract run against the committed truth, not the live one.
 
 ## The window
 
-The window is the `a3-core` program run without a role. Its OSC MONITOR pages
+The window is the `a3-core` program run without a role. Its MONITOR pages
 show what actually crosses the wire — because over UDP every silent link looks
 the same. The data comes from Core's HTTP API ({ref}`osc-http`), so a Core with
 no screen can be examined with `curl http://<core>:9080/api/…`.
 
-![The traffic view of Core's window](pics_development/a3core-window-traffic.png)
+![MONITOR › TRAFFIC in the a3-core window: a filter box, only active, a device list, and one row per address with direction, address, peer, count, rate, last value and age; the history below](pics_development/a3-core-monitor-traffic.png)
 
-One row per address: count, rate, last value, peer, age, direction; a dot per
-peer says when it was last heard. The monitor is a switch (the OSC MONITOR
-switch, remembered in `~/.config/a3/core/window.settings`); while it is off the
+One row per address: direction, peer, count, rate, last value, age; the
+HISTORY below lists the last messages. The monitor is a switch (the MONITOR
+switch in the window's footer, remembered in `~/.config/a3/core/window.settings`); while it is off the
 window asks Core nothing.
 
-- **The filter is applied on the server**: hiding rows in the browser while
-  streaming everything can freeze the browser's machine.
+- **The filter is applied on the server**: Core sends only the rows asked
+  for, never the whole stream.
 - **Stream and query are separate**: live values stream, the big table is
   fetched on demand.
 - **The window never blocks Core's start**: a broken state file, odd register
@@ -118,12 +118,10 @@ and device, direction from Core's side (`in`, `out`, `both`, `aside`);
 the IEM plug-ins' words as `both`. `tools/tests/test_osc_register.py` keeps it
 in step.
 
-![The register, filtered by device](pics_development/a3core-window-register.png)
+![MONITOR › REGISTER filtered to Motion: FETCH, only dead wires, a device list, and one row per address shape with direction, device, count, source and note](pics_development/a3-core-monitor-register.png)
 
-Filter by device and tick *nur tote Drähte*: every address that exists and
+Filter by device and tick *only dead wires*: every address that exists and
 never arrived.
-
-![The register filtered to the mixer](pics_development/a3core-window-register-mixer.png)
 
 ### The address list survives a restart
 
