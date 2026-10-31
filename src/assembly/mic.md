@@ -3,7 +3,11 @@
 ![](pics_assembly/v02/a3mix_v02_displays.jpg)
 
 ## PCB V02
-![a3mix-pcb-v02](pics_assembly/v01/a3mix-pcb-v02.jpg)
+
+The mainboard of the A³ Mixer V02 is **rev v0.2**, as printed on the board. The KiCad files in
+`a3-mixer/hardware/pcb/` hold the next board, the V03 draft (title block 3.0.0).
+
+![The A³ Mixer mainboard, rev v0.2](pics_assembly/v01/a3mix-pcb-v02.jpg)
 
 ![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
 
