@@ -585,3 +585,9 @@ causes xruns: clicks on everything the Core plays.
 | Downbeat on the wrong beat | CUE on the real first beat of a bar, **GRID**, **SNAP** |
 | SYNC and MASTER greyed out | No Pro DJ Link ports: no truth found, or an old one. It looks in `$A3_OSC_TRUTH`, `~/.cache/a3/a3-osc.json` (filled by Core's announcement) or `/usr/share/a3/a3-osc.json` (from a3-core) |
 | `LINK –` while a master plays | Its packets don't arrive: same network? Is the master's deck playing? |
+
+```{toctree}
+:titlesonly:
+
+stem-separator
+```

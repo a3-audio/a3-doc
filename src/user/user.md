@@ -18,7 +18,7 @@ The full set: four StemDecks, the virtual desk and A³ Motion.
    headphones), and what is optional.
 3. The devices: [A³ Motion](a3motion.md), [StemDeck](stemdeck.md),
    [A³ Mixer](a3mix.md).
-4. [The audio engine](audio-engine.md): setting up a room.
+4. [Speaker Setup](audio-engine.md): setting up a room for your speakers.
 5. [First set](first-set.md): your first twenty minutes.
 6. [On stage](a3motion-on-stage.md): before your first gig.
 ```

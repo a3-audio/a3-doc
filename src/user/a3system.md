@@ -59,8 +59,6 @@ installed checkout, on the a3-core window's ABOUT page.
 how-it-sounds
 what-you-need
 stemdeck-with-motion
-stem-separator
 audio-engine
 first-set
-beat-analyzer
 ```

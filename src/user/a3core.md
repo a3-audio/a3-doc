@@ -161,3 +161,9 @@ viewer and stopped 10 s after the last. Its fan-out is another role of the same
 program, `a3-core --role screencast-fanout`. It is off until a machine opts in
 (`systemctl --user enable --now a3-screencast`); its settings (cores, frame rate
 and quality for the encoder) are in `~/.config/a3/screencast.env`.
+
+```{toctree}
+:titlesonly:
+
+beat-analyzer
+```

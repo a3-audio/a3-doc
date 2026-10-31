@@ -1,6 +1,6 @@
 (audio-engine)=
 
-# a3-core: setting up a room
+# Speaker Setup
 
 Before the doors open, once per room: the cables, every speaker checked, a
 level the room can never exceed. Then you never touch it during the set.
