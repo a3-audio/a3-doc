@@ -32,6 +32,14 @@ Contact
 .. toctree::
    :titlesonly:
    :maxdepth: 1
+   :caption: Playing A³
+   :hidden:
+
+   pro-dj
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
    :caption: Assembly
    :hidden:
 

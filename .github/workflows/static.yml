@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Checkout a3-pro-dj (DJ knowledge section)
+        uses: actions/checkout@v7
+        with:
+          repository: a3-audio/a3-pro-dj
+          path: a3-pro-dj
       - name: Setup Python
         uses: actions/setup-python@v7
         with:
@@ -38,6 +43,8 @@ jobs:
       - name: Install dependencies
         run: pip install sphinx==8.2.3 sphinx_rtd_theme myst_parser sphinxcontrib-video
       - name: Sphinx build
+        env:
+          A3_PRO_DJ: ${{ github.workspace }}/a3-pro-dj
         run: sphinx-build src doc
       - name: Setup Pages
         uses: actions/configure-pages@v6
