@@ -32,7 +32,7 @@ rig updater is in: the `a3-update` package with a signed, checked install path.
   the `a3-audio` organisation as a3-beat-analyzer, a3-stemdeck and a3-stem-separator; the
   packages keep their names. A checkout follows with `git submodule sync --recursive` and
   `git submodule update --init --recursive`.
-- The hardware parts carry their revision (`REVISION`, v03.1 for boards and housings) and the
+- The hardware parts carry their revision (`REVISION`: a board the revision printed on it, the A³ Mixer mainboard rev v0.2; housings v03.2) and the
   firmware is GPL-3.0-or-later; boards and 3D-print files stay CERN-OHL-S-2.0.
 - No KiCad or FreeCAD backups or caches in the hardware repositories any more.
 - The pro-DJ knowledge — best practice, gear, playing on 3D systems, the movement lab — lives in
