@@ -1,4 +1,4 @@
-# StemDeck
+# A³ StemDeck
 
 (stemdeck-at-a-glance)=
 
