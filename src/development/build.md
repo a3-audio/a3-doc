@@ -32,6 +32,11 @@ From each repository's root:
 | StemDeck | `./start.sh` builds and starts it, see {ref}`Build and start <stemdeck-build>` | `cmake -S . -B build -DSTEMDECK_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/local/juce`, `cmake --build build --target stemdeck-tests`, `ctest --test-dir build`; the Python tools: `python3 -m unittest discover -s tools/tests` |
 | a3-doc | `sphinx-build src doc` | |
 
+The hardware repositories keep every board revision side by side, one folder per revision
+under `hardware/pcb/` (a3-mixer: `v0_2`, `v3_1`; a3-motion: `v0_1`, `v3_1`), each with a
+`REVISION` file that A³ Core's ABOUT page shows. Open a revision's `.kicad_pro` in KiCad
+from inside its folder; the Mixer's shared part library is `hardware/pcb/library/`.
+
 **`ctest` builds nothing**; it runs the last-built tests. For A³ Motion UI use
 `./test.sh`: it builds the tests, runs them against the committed library
 (HEAD's `config/` and `pattern/` in `build/committed/`) and prints the runner's

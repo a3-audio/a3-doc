@@ -7,7 +7,7 @@
 | [a3-system](https://github.com/a3-audio/a3-system) | The umbrella: carries the others as submodules, and the {doc}`installer <../configuration/install>`. Every submodule sits at its repository's name; a3-beat-analyzer, a3-mixer-ui, a3-motion-ui and a3-stem-separator inside the repository that pins them |
 | [a3-core](https://github.com/a3-audio/a3-core) | The sound server — the `a3-core` C++ program (Core, audio engine, window), its Debian package tree and the one package `a3-core` |
 | [a3-beat-analyzer](https://github.com/a3-audio/a3-beat-analyzer) | The beat clock (package `beat-analyzer`), a submodule of a3-core. Runs on the Core, on the same JACK graph. See [Beat Analyzer](../user/beat-analyzer.md) |
-| [a3-mixer](https://github.com/a3-audio/a3-mixer) | The DJ mixer: control scripts (`software/`), panel firmware (`firmware/`), KiCad board and housing (`hardware/`) and the virtual desk (the submodule a3-mixer-ui) |
+| [a3-mixer](https://github.com/a3-audio/a3-mixer) | The DJ mixer: control scripts (`software/`), panel firmware (`firmware/`), KiCad boards, one folder per revision, and housing (`hardware/`) and the virtual desk (the submodule a3-mixer-ui) |
 | [a3-mixer-ui](https://github.com/a3-audio/a3-mixer-ui) | The virtual desk (`a3-desk`), JUCE/C++, a submodule of a3-mixer |
 | [a3-motion](https://github.com/a3-audio/a3-motion) | The motion sampler: ESP32-S3 panel firmware and hardware |
 | [a3-motion-ui](https://github.com/a3-audio/a3-motion-ui) | The JUCE/C++ touchscreen UI, also a submodule of a3-motion |

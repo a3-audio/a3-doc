@@ -4,8 +4,10 @@
 
 ## PCB V02
 
-The mainboard of the A³ Mixer V02 is **rev v0.2**, as printed on the board. The KiCad files in
-`a3-mixer/hardware/pcb/` hold the next board, the V03 draft (title block 3.0.0).
+The mainboard of the A³ Mixer V02 is **rev v0.2**, as printed on the board. Every board
+revision has a folder of its own in `a3-mixer/hardware/pcb/`: `v0_2/` holds the built board
+(KiCad files and PDFs, restored from the repository's history) and `v3_1/` the next board, the
+V03 draft (rev v3.1, title block 3.0.0). The part library they share is `pcb/library/`.
 
 ![The A³ Mixer mainboard, rev v0.2](pics_assembly/v01/a3mix-pcb-v02.jpg)
 

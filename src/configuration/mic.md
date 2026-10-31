@@ -11,7 +11,7 @@ Today: a **Raspberry Pi 3B** runs `a3-mixer.py` ({doc}`../development/mic`); a
 | :--- | :--- | :--- |
 | Computer | Raspberry Pi 3B, Raspberry Pi OS | one small, cheap microcontroller board with Ethernet (Olimex-style, e.g. an ESP32 board with LAN), replacing both the Pi and the Teensy |
 | Panel controller | Teensy 4.1 (`firmware/`, PlatformIO) | |
-| Mainboard PCB | rev v0.2, printed on the board | V03 (KiCad draft in `hardware/pcb/`, title block 3.0.0) |
+| Mainboard PCB | rev v0.2, printed on the board | V03 (KiCad draft in `hardware/pcb/v3_1/`, rev v3.1; the built board is in `hardware/pcb/v0_2/`) |
 | Power | PoE | |
 | Connector | | USB-C |
 | Faders | | 45 mm |

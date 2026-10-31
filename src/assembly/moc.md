@@ -80,6 +80,12 @@ how it reaches the UI: {ref}`A³ Motion hardware <moc-hardware>`.
 ![](pics_assembly/v02/a3motion_v02_newSoftware.jpg)
 
 ## PCB's
+
+Every board revision has a folder of its own in `a3-motion/hardware/pcb/`: `v3_1/` is the
+current board (rev v3.1, with its sub-projects `enc_pot` and `led_but`), `v0_1/` the V02
+controller below (mainboard and button matrix, title block rev v0.1, restored from the
+repository's history).
+
 ### Mainboard PCB V01
 | front                                             | back                                             |
 | ------------------------------------------------- | ------------------------------------------------ |
