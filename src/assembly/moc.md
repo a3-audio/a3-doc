@@ -1,6 +1,6 @@
 # A³ Motion Assembly
 
-## V03
+## V03 (current board v3_1, housing rev v03.2)
 
 Drawn, printed, populated, and running — in that order.
 
@@ -77,32 +77,36 @@ how it reaches the UI: {ref}`A³ Motion hardware <moc-hardware>`.
 ![The screen and the pads lit](pics_assembly/v03/a3motion_v03_assembled_02.jpg)
 
 ## V02
-![](pics_assembly/v02/a3motion_v02_newSoftware.jpg)
+![The A³ Motion V02 running the new software](pics_assembly/v02/a3motion_v02_newSoftware.jpg)
 
-## PCB's
+## PCBs
 
-Every board revision has a folder of its own in `a3-motion/hardware/pcb/`: `v3_1/` is the
-current board (rev v3.1, with its sub-projects `enc_pot` and `led_but`), `v0_1/` the V02
-controller below (mainboard and button matrix, title block rev v0.1, restored from the
-repository's history).
+Every board revision has a folder of its own in `a3-motion/hardware/pcb/`:
 
-### Mainboard PCB V01
+| Folder | Boards | Rev |
+| :--- | :--- | :--- |
+| [`v1/`](https://github.com/a3-audio/a3-motion/tree/main/hardware/pcb/v1) | A³ Motion pcb v1: mainboard and button matrix (KiCad files and PDFs, restored from the repository's history) | v1 |
+| [`v3_1/`](https://github.com/a3-audio/a3-motion/tree/main/hardware/pcb/v3_1) | the current board, with its sub-projects `enc_pot` and `led_but` | v3.1 |
+
+### A³ Motion pcb v1, mainboard
+
 | front                                             | back                                             |
 | ------------------------------------------------- | ------------------------------------------------ |
-| ![](pics_assembly/v01/a3motion-pcb-v01-front.jpg) | ![](pics_assembly/v01/a3motion-pcb-v01-back.jpg) |
+| ![The pcb v1 mainboard, front](pics_assembly/v01/a3motion-pcb-v01-front.jpg) | ![The pcb v1 mainboard, back](pics_assembly/v01/a3motion-pcb-v01-back.jpg) |
 
-![](pics_assembly/v01/a3motion-schematic.jpg)
+![The schematic of the pcb v1 mainboard](pics_assembly/v01/a3motion-schematic.jpg)
 
-![](pics_assembly/v01/a3motion-pcb-design.jpg)
+![PCB layout of the pcb v1 mainboard](pics_assembly/v01/a3motion-pcb-design.jpg)
 
-### Buttonmatrix PCB V02 
-front | back | action
+### A³ Motion pcb v1, button matrix
+
+front | back | LEDs lit
 ---|---|---
-![](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg) | ![](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
+![The pcb v1 button matrix, front](pics_assembly/v01/a3motion-button-matrix-pcb-front.jpg) | ![The pcb v1 button matrix, back](pics_assembly/v01/a3motion-button-matrix-pcb-back.jpg) | ![The pcb v1 button matrix with its LEDs lit](pics_assembly/v01/a3motion-button-matrix-leds.jpg)
 
-![](pics_assembly/v01/a3motion-buttons-schematic.jpg)
+![The schematic of the pcb v1 button matrix](pics_assembly/v01/a3motion-buttons-schematic.jpg)
 
-![](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
+![PCB layout of the pcb v1 button matrix](pics_assembly/v01/a3motion-buttons-pcb-design.jpg)
 
 ## Housing V02
 The housing was build with Blender (*.obj) and is ready to print on a 3d-printer (*.stl).

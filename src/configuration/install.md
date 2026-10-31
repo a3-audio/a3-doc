@@ -1,6 +1,6 @@
 (install)=
 
-# Installing the system
+# A³ Installation
 
 [a3-system](https://github.com/a3-audio/a3-system) carries every part as a
 submodule; `install` sets a machine up as one or more parts, or updates it,

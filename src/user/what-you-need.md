@@ -129,7 +129,7 @@ about 100 Mbit/s to the Core, without a pause, for the whole set.
 ## Effort
 
 - **Installing**: one installer run per machine
-  ({doc}`Installing the system <../configuration/install>`). Packages by
+  ({doc}`A³ Installation <../configuration/install>`). Packages by
   default, nothing to compile.
 - **Setting up a room**: cables, speakers, level, once per room
   ([Setting up a room](#audio-engine-setup)). After that a3-core starts
@@ -145,7 +145,7 @@ Motion, deck host, desk) install only for the user **`aaa`**, with the
 checkout in **`/home/aaa/a3-system`**: their services name that path.
 Anywhere else the installer only shows what it would do (`--dry-run`). The
 new **laptop** role, the whole rig on one machine, runs as any user; it is
-still being tested ({ref}`Installing the system <install>`).
+still being tested ({ref}`A³ Installation <install>`).
 ```
 
 ## Next

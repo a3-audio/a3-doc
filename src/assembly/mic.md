@@ -2,20 +2,28 @@
 ## V02
 ![](pics_assembly/v02/a3mix_v02_displays.jpg)
 
-## PCB V02
+## Mainboard PCB, rev v0.2
 
 The mainboard of the A³ Mixer V02 is **rev v0.2**, as printed on the board. Every board
-revision has a folder of its own in `a3-mixer/hardware/pcb/`: `v0_2/` holds the built board
-(KiCad files and PDFs, restored from the repository's history) and `v3_1/` the next board, the
-V03 draft (rev v3.1, title block 3.0.0). The part library they share is `pcb/library/`.
+revision has a folder of its own in `a3-mixer/hardware/pcb/`:
 
-![The A³ Mixer mainboard, rev v0.2](pics_assembly/v01/a3mix-pcb-v02.jpg)
+| Folder | Board | Rev |
+| :--- | :--- | :--- |
+| [`v0_2/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/pcb/v0_2) | the built mainboard of the V02 (KiCad files and PDFs, restored from the repository's history) | v0.2 |
+| [`v3_1/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/pcb/v3_1) | the V03 draft, in development (title block 3.0.0) | v3.1 |
 
-![a3mix-schematic](pics_assembly/v01/a3mix-schematic.jpg)
+The part library they share is `pcb/library/`.
 
-![a3mix-pcb-design](pics_assembly/v01/a3mix-pcb-design.jpg)
+![The A³ Mixer V02 mainboard, rev v0.2, populated](pics_assembly/v01/a3mix-pcb-v02.jpg)
 
-## Housing V02
+![The schematic of the rev v0.2 mainboard](pics_assembly/v01/a3mix-schematic.jpg)
+
+![The PCB layout of the rev v0.2 mainboard](pics_assembly/v01/a3mix-pcb-design.jpg)
+
+## Housing (rev v03.2)
+
+The housing files are in [`hardware/housing/`](https://github.com/a3-audio/a3-mixer/tree/main/hardware/housing), rev v03.2; the pictures show the V02 print.
+
 | draft                                           | print                                           |
 | ----------------------------------------------- | ----------------------------------------------- |
 | ![](pics_assembly/v02/a3mix_v02_housing_01.jpg) | ![](pics_assembly/v02/a3mix_v02_housing_02.jpg) |

@@ -19,7 +19,7 @@ binary poll-frame protocol (`firmware/host.py` in
 | Mainboard PCB | V03 | V02 |
 
 The KiCad files of both generations are in `hardware/pcb/`, one folder per revision: `v3_1/`
-(V03, the current board) and `v0_1/` (V02, mainboard and button matrix).
+(V03, the current board) and `v1/` (the V02 controller's pcb v1: mainboard and button matrix).
 
 Power estimate and pictures: {doc}`../assembly/moc`.
 

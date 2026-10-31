@@ -90,7 +90,7 @@ so a four-bar figure stays four bars when the tempo changes.
 | **User** | the way in ([above](#welcome-start)), then the devices, control by control |
 | [**Repository**](https://github.com/a3-audio/a3-system) | the umbrella repository that carries all the others |
 | **Assembly** | prototype pictures and how the boxes go together |
-| **Configuration** | {doc}`installing the system <../configuration/install>`, each device's hardware, and the files each device reads at startup |
+| **Configuration** | {doc}`A³ Installation <../configuration/install>`, each device's hardware, and the files each device reads at startup |
 | **Development** | building and hacking on the software |
 | [**History**](https://a3-audio.github.io/a3-doc/ressources/history.html) | project impressions |
 | [**OSC reference**](https://a3-audio.github.io/a3-doc/ressources/osc.html) | every address the system speaks |

@@ -13,8 +13,8 @@ For how the system got here, the reasoning and the wrong turns included, see
 On `main` since `v03.2`, not tagged yet.
 
 - Every board revision of the Mixer and Motion has a folder of its own under `hardware/pcb/`,
-  side by side: a3-mixer `v0_2` (the built mainboard) and `v3_1` (the V03 draft); a3-motion `v0_1`
-  (the V02 controller: mainboard and button matrix) and `v3_1` (the current board). The old boards
+  side by side: a3-mixer `v0_2` (the built mainboard) and `v3_1` (the V03 draft); a3-motion `v1`
+  (the first boards: mainboard and button matrix) and `v3_1` (the current board). The old boards
   are restored from the repositories' history; `pcbs/` in a3-motion is now `pcb/`.
 - The ABOUT tree shows `pcb` as a node with one row per revision folder.
 
