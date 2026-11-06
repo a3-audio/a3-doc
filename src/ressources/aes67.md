@@ -27,9 +27,9 @@ All streams: 44.1 kHz, 24 bit, multicast, port 5004.
   deck's group is the base address plus one per deck slot (A = `.244`, B =
   `.245`, and so on).
 - **A zone stream** (`A3 Core MAIN`, `A3 Core BOOTH`) carries the zone's
-  loudspeakers plus the sub: `n + 1` channels, **sub first**, then T1..Tn. The
-  packaged default layout is 4.1, so 5 channels. `REC` and `PHONES` carry two
-  channels, L R.
+  `n` loudspeakers and its sub, if it has one: `n + 1` channels with a sub
+  (**sub first**: SUB, T1..Tn), `n` without (T1..Tn). The packaged default
+  layout is 4.1, so 5 channels. `REC` and `PHONES` carry two channels, L R.
 - **A deck stream** has 41 channels: MAIN1-16, AUX1-16, CUE1-9.
 - A packet must fit an MTU of 1500: at most 22 channels at 0.5 ms, 44 at
   0.25 ms.
@@ -37,8 +37,23 @@ All streams: 44.1 kHz, 24 bit, multicast, port 5004.
 ## Finding a stream
 
 Streams are announced with SAP/SDP on `239.255.255.255`, port 9875. PipeWire's
-`module-rtp-sap` both announces and discovers them, so a receiver needs nothing
-but that module loaded. The clock is PTP on the audio network.
+`module-rtp-sap` both announces and discovers them. The clock is PTP on the
+audio network.
+
+Which announced streams a receiver turns into sources depends on its
+`module-rtp-sap` config:
+
+- **No explicit `stream.rules`**: PipeWire creates a source for every announced
+  stream.
+- **Explicit rules**: only the sessions they match. The A3 rig's own configs
+  list rules (they match `~^AES67 deck ` and `~ out$`), so they ignore the
+  `A3 Core` streams. A host that should receive them needs one more rule in
+  its `stream.rules`:
+
+```text
+{ matches = [ { rtp.session = "~^A3 Core " } ]
+  actions = { create-stream = { node.virtual = false media.class = Audio/Source device.api = aes67 } } }
+```
 
 ## Where a receiver patches it
 
