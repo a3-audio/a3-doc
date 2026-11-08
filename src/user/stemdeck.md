@@ -257,7 +257,7 @@ lane, in the stem's colour.
    the beat where the movement starts (the next bar; with SHIFT, now).
 3. Press **REC** again to stop.
 
-Only a press that **starts or arms** a movement is recorded. Pressing a running pad to stop it, or cancelling an armed press, is not.
+Only a press that **starts or arms** a movement is recorded. Pressing a running pad to stop it, cancelling an armed press, or pressing **SHIFT** on a pad that is still returning home (it restarts at once, live) is not recorded.
 
 The movement still plays live while you record, and events already there keep
 firing, so you hear the context. A place that already holds an event of that stem
@@ -699,7 +699,7 @@ causes xruns: clicks on everything the Core plays.
 | `JACK-Server wurde beendet` | JACK went away. Restart StemDeck after JACK |
 | A stem does not move | Stems only move while an action runs: tap ORBIT, PING, RISE or SCAT and wait for the next bar. Is the deck on a desk channel (INPUT on its letter) with the fader up? |
 | A³ Motion ignores MASTER | Wait for the BPM; deck playing, top bar `LINK master`? Motion on **PIO**? |
-| Downbeat on the wrong beat | Play to the real first beat of a bar, then **GRID**, **SET 1** (the bar's one where the playhead is). With QUANTIZE on, a cue snaps to the grid first, so **SNAP** could then only move the downbeat by whole beats: switch QUANTIZE off first if you use it |
+| Downbeat on the wrong beat | Play to the real first beat of a bar, then **GRID**, **SET 1** (the bar's one goes exactly where the playhead is, QUANTIZE or not). If you use **SNAP** instead, switch QUANTIZE off before you set the cue: with QUANTIZE on the cue is rounded to a beat of the old grid, so **SNAP** could only shift the downbeat by whole beats |
 | SYNC and MASTER greyed out | No Pro DJ Link ports: no truth found, or an old one. It looks in `$A3_OSC_TRUTH`, `~/.cache/a3/a3-osc.json` (filled by Core's announcement) or `/usr/share/a3/a3-osc.json` (from a3-core) |
 | `LINK –` while a master plays | Its packets don't arrive: same network? Is the master's deck playing? |
 
