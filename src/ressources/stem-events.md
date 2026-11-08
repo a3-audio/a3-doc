@@ -52,10 +52,10 @@ Per event, **all eight fields are required**:
 
 | Field | Type | Meaning |
 | :--- | :--- | :--- |
-| `stem` | integer, 0 to 3 | the stem, in the set's order (the first stem file is 0). The app ignores an event with another number when it would fire |
+| `stem` | integer, 0 to 3 | the stem, in the set's order (the first stem file is 0). An event with another number is skipped when the file loads (that event only) |
 | `beat` | number | where the event starts, in beats of the deck's grid counted from the grid's first beat (the track's *one*); a decimal, negative before the one. There is **no time in the file**: a grid corrected by hand moves the events with the music |
 | `shape` | string | `orbit`, `ping`, `rise` or `scat` |
-| `bars` | number | how long the movement runs, in bars: `0.5`, `1`, `2`, `4` or `8`. Any other value plays as `4` (the reader does not check it) |
+| `bars` | number | how long the movement runs, in bars: `0.5`, `1`, `2`, `4` or `8`. Any other value, and anything that is not a finite positive number, plays as `4` |
 | `reversed` | boolean | `true`: ORBIT runs the other way round. `ping`, `rise` and `scat` ignore it in this version |
 | `seed` | **string** of decimal digits | decides the random course of `scat`, so a prepared track scatters the same way every time. Other shapes keep it but do not use it |
 | `active` | boolean | `false`: the event is kept but does not fire (shown dimmed) |
@@ -78,7 +78,7 @@ the file is read. Events are kept sorted by beat, then stem.
 
 ## Limits
 
-- At most **512 events** per set. Further events in a file are dropped.
+- At most **512 events** per set. Further events in a file are dropped. When the list is full, recording refuses a new event (`LIST FULL`).
 - A set **without a beat grid has no events**: the app neither records nor
   fires any.
 
@@ -89,9 +89,9 @@ the file is read. Events are kept sorted by beat, then stem.
 | File | What StemDeck does |
 | :--- | :--- |
 | missing | the track has no events |
-| valid, version 1 | loads it; an event with an unknown `shape` or `origin`, a missing field or a bad `seed` is skipped, the rest are kept |
+| valid, version 1 | loads it; an event with an unknown `shape` or `origin`, a missing field, a bad `seed` or a `stem` outside 0 to 3 is skipped, the rest are kept |
 | not valid JSON, no `version` or `events`, wrong types | **damaged**: plays the track plain, writes nothing |
-| `version` higher than the app knows | **newer**: plays the track plain, writes nothing |
+| `version` above 1, however large | **newer**: plays the track plain, writes nothing |
 
 A damaged or newer file is **never overwritten**, not even after the DJ places
 or records something: that change then lives in memory only, and the strip says

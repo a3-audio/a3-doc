@@ -259,9 +259,9 @@ lane, in the stem's colour.
 
 The movement still plays live while you record, and events already there keep
 firing, so you hear the context. A place that already holds an event of that stem
-refuses a new one (`SLOT TAKEN`): delete first.
+refuses a new one (`SLOT TAKEN`): delete first. A full list (512 events) refuses too (`LIST FULL`).
 
-Touch a marker to select it (a tap close to a marker selects it instead of jumping the playhead; the reach is about a fingertip, wider in a crowded lane), then:
+Touch a marker to select it (a tap close to a marker selects it instead of jumping the playhead; the reach is about a fingertip, wider in a crowded lane). A press that starts on a marker and slides off it selects nothing: your finger must still be on that marker when you lift it, then:
 
 | Key | What it does |
 | :--- | :--- |
