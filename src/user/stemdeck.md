@@ -261,21 +261,22 @@ The movement still plays live while you record, and events already there keep
 firing, so you hear the context. A place that already holds an event of that stem
 refuses a new one (`SLOT TAKEN`): delete first.
 
-Touch a marker to select it, then:
+Touch a marker to select it (a tap close to a marker selects it instead of jumping the playhead; the reach is about a fingertip, wider in a crowded lane), then:
 
 | Key | What it does |
 | :--- | :--- |
 | **‹ 1 BAR**, **‹ 1 BEAT**, **1 BEAT ›**, **1 BAR ›** | move the selected marker |
 | **ACTIVE** | on: it fires. Off: it stays but is dimmed and stays silent |
-| **DELETE** | **press twice** to delete; the first press only arms it, and selecting something else disarms it |
+| **DELETE** | **press twice** to delete: the first press lights the key, press again **within two seconds**. A slower second press only arms it again; selecting something else disarms it |
 
 ### Playing events
 
 - An event fires when the playing deck reaches it, at its own beat.
-- In a **loop** an event fires **on every pass**.
+- In a **loop** an event fires **on every pass**. An event at the loop-in fires on each pass; one exactly at the loop-out never fires.
+- Events fire on **forward play only**: not in reverse, not while you scratch.
 - An event **takes over**: if its stem is already moving, the event restarts the
   stem with its own movement.
-- Jumping (a cue, a click on the overview) never fires the events you skipped.
+- Jumping (a cue, a click on the overview) never fires the events you skipped. Switching **EVENTS** on again past an event does not fire it late.
 - **EVENTS** switches all of the deck's events off and on (lit = on). Off, the
   track plays plain. Use it when the room is wrong for movement.
 - A damaged or newer events file plays the track plain and is never overwritten.
@@ -286,11 +287,16 @@ Touch a marker to select it, then:
 
 - a jump on the overview waveform,
 - the cue point,
-- loop **IN** and **OUT**,
-- event markers (a SHIFT press while recording; markers move by whole beats).
+- loop **IN** and **OUT**.
 
-It snaps when the point is set; a running loop is not touched. Without a grid
-the key is off.
+It snaps when the point is set; a running loop is not touched. Dragging the
+waveform, the jog and a restored session never snap: a restored cue and loop do
+not move. Without a grid the key is off.
+
+For events: a normal press while recording always lands on the next bar's first
+beat, QUANTIZE or not. Only a **SHIFT** press with QUANTIZE on is rounded to the
+nearest beat (off, it is saved at the raw beat). Moving a marker always goes by
+whole beats and snaps nothing.
 
 ### ORBIT, the other way
 
@@ -305,22 +311,35 @@ direction in this version.
 
 ### Preparing a whole library
 
-`stemdeck-prepare-events <library folder>` writes events for every set in the
-library. It reads each set's grid from StemDeck's analysis, so **load a set in
-StemDeck once** first; a set without a grid is skipped and listed.
+`stemdeck-prepare-events` writes events for every set in a library. It is not
+installed as a command: it lives in the a3-stemdeck checkout, and you run it
+from there.
 
 ```sh
-stemdeck-prepare-events --dry-run ~/Music/stems    # only say what it would do
-stemdeck-prepare-events ~/Music/stems              # write the files
-stemdeck-prepare-events --only "Song" ~/Music/stems
+python3 tools/stemdeck-prepare-events --dry-run ~/Music/stems   # only say what it would do
+python3 tools/stemdeck-prepare-events ~/Music/stems             # write the files
+python3 tools/stemdeck-prepare-events --only "Song" ~/Music/stems
 ```
 
+| Flag | What it does |
+| :--- | :--- |
+| `--dry-run` | writes nothing, says what it would do |
+| `--only SET` | only the set with this name |
+| `--rules v1` | the rule set (only `v1` exists) |
+| `--cache FILE` | StemDeck's analysis cache (default `~/.config/StemDeck/analysis.xml`) |
+
+- A set shows **no grid** (and is skipped and listed) when StemDeck has not
+  analysed it yet, or the file changed since. A changed or re-encoded file loses
+  its grid until you load it in StemDeck again.
 - It **never overwrites your hand events**: it replaces only the events it
   wrote itself (`prepared`) and leaves a place alone where you have one.
-- It **never touches a damaged or newer file**; it says so and moves on.
+- It **never touches a damaged or newer file**. It is **stricter than the
+  app**: if a single event in a file is invalid it calls the whole file damaged
+  and leaves it alone, where the app drops only the bad event.
 - Running it again gives the same result.
-- Its musical rules are a **first placeholder**: sparse, two events a phrase, an
-  ORBIT on the phrase start and a PING before it. They will be tuned.
+- Its musical rules are a **first placeholder**: sparse, from the second phrase
+  on an ORBIT on each phrase start, and a PING on beat 3 of a phrase's last bar.
+  They will be tuned.
 
 (stemdeck-stem-creator)=
 

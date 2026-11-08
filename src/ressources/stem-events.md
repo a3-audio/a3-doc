@@ -52,10 +52,10 @@ Per event, **all eight fields are required**:
 
 | Field | Type | Meaning |
 | :--- | :--- | :--- |
-| `stem` | integer, 0 to 3 | the stem, in the set's order (the first stem file is 0) |
+| `stem` | integer, 0 to 3 | the stem, in the set's order (the first stem file is 0). The app ignores an event with another number when it would fire |
 | `beat` | number | where the event starts, in beats of the deck's grid counted from the grid's first beat (the track's *one*); a decimal, negative before the one. There is **no time in the file**: a grid corrected by hand moves the events with the music |
 | `shape` | string | `orbit`, `ping`, `rise` or `scat` |
-| `bars` | number | how long the movement runs, in bars: `0.5`, `1`, `2`, `4` or `8`. Another value is played as the nearest of these |
+| `bars` | number | how long the movement runs, in bars: `0.5`, `1`, `2`, `4` or `8`. Any other value plays as `4` (the reader does not check it) |
 | `reversed` | boolean | `true`: ORBIT runs the other way round. `ping`, `rise` and `scat` ignore it in this version |
 | `seed` | **string** of decimal digits | decides the random course of `scat`, so a prepared track scatters the same way every time. Other shapes keep it but do not use it |
 | `active` | boolean | `false`: the event is kept but does not fire (shown dimmed) |
@@ -95,7 +95,7 @@ the file is read. Events are kept sorted by beat, then stem.
 
 A damaged or newer file is **never overwritten**, not even after the DJ places
 or records something: that change then lives in memory only, and the strip says
-`FILE DAMAGED` or `NEWER FILE` (and `NOT SAVED`). Move the file away to start a
+`FILE DAMAGED` or `NEWER FILE`. (`NOT SAVED` is for a good file whose write failed.) Move the file away to start a
 new one. A valid file is written whole, atomically, so a power cut leaves the
 old file or the new one.
 
