@@ -257,6 +257,8 @@ lane, in the stem's colour.
    the beat where the movement starts (the next bar; with SHIFT, now).
 3. Press **REC** again to stop.
 
+Only a press that **starts or arms** a movement is recorded. Pressing a running pad to stop it, or cancelling an armed press, is not.
+
 The movement still plays live while you record, and events already there keep
 firing, so you hear the context. A place that already holds an event of that stem
 refuses a new one (`SLOT TAKEN`): delete first. A full list (512 events) refuses too (`LIST FULL`).
@@ -280,18 +282,20 @@ Touch a marker to select it (a tap close to a marker selects it instead of jumpi
 - **EVENTS** switches all of the deck's events off and on (lit = on). Off, the
   track plays plain. Use it when the room is wrong for movement.
 - A damaged or newer events file plays the track plain and is never overwritten.
+- Editing a prepared event here (a nudge, **ACTIVE**) makes it one of your own.
+- If you edit the file by hand, keep a copy: a bad event in it is skipped when StemDeck loads the track, and the next save of that track writes the file without it.
 
 ### QUANTIZE
 
 **QUANTIZE** (lit = on) puts what you set onto the nearest beat of the grid:
 
 - a jump on the overview waveform,
-- the cue point,
+- the cue point (the playhead moves onto it, as on a CDJ: press CUE again to preview from it),
 - loop **IN** and **OUT**.
 
 It snaps when the point is set; a running loop is not touched. Dragging the
 waveform, the jog and a restored session never snap: a restored cue and loop do
-not move. Without a grid the key is off.
+not move. Without a grid the key is off. QUANTIZE and EVENTS are remembered across restarts, even with no set loaded.
 
 For events: a normal press while recording always lands on the next bar's first
 beat, QUANTIZE or not. Only a **SHIFT** press with QUANTIZE on is rounded to the
@@ -324,6 +328,7 @@ python3 tools/stemdeck-prepare-events --only "Song" ~/Music/stems
 | Flag | What it does |
 | :--- | :--- |
 | `--dry-run` | writes nothing, says what it would do |
+| `--replace` | redo the prepared events in files that already have events (yours are kept) |
 | `--only SET` | only the set with this name |
 | `--rules v1` | the rule set (only `v1` exists) |
 | `--cache FILE` | StemDeck's analysis cache (default `~/.config/StemDeck/analysis.xml`) |
@@ -331,12 +336,11 @@ python3 tools/stemdeck-prepare-events --only "Song" ~/Music/stems
 - A set shows **no grid** (and is skipped and listed) when StemDeck has not
   analysed it yet, or the file changed since. A changed or re-encoded file loses
   its grid until you load it in StemDeck again.
-- It **never overwrites your hand events**: it replaces only the events it
-  wrote itself (`prepared`) and leaves a place alone where you have one.
+- A file that **already has events** is left as it is, and the tool says `kept`. With **`--replace`** it redoes only its own (`prepared`) events and keeps yours, never putting one on a place you hold. A prepared event you deleted comes back only with `--replace`.
 - It **never touches a damaged or newer file**. It is **stricter than the
   app**: if a single event in a file is invalid it calls the whole file damaged
   and leaves it alone, where the app drops only the bad event.
-- Running it again gives the same result.
+- Running it again gives the same result. A WAV that was streamed is measured by its file size.
 - Its musical rules are a **first placeholder**: sparse, from the second phrase
   on an ORBIT on each phrase start, and a PING on beat 3 of a phrase's last bar.
   They will be tuned.
@@ -695,7 +699,7 @@ causes xruns: clicks on everything the Core plays.
 | `JACK-Server wurde beendet` | JACK went away. Restart StemDeck after JACK |
 | A stem does not move | Stems only move while an action runs: tap ORBIT, PING, RISE or SCAT and wait for the next bar. Is the deck on a desk channel (INPUT on its letter) with the fader up? |
 | A³ Motion ignores MASTER | Wait for the BPM; deck playing, top bar `LINK master`? Motion on **PIO**? |
-| Downbeat on the wrong beat | CUE on the real first beat of a bar, **GRID**, **SNAP** |
+| Downbeat on the wrong beat | Play to the real first beat of a bar, then **GRID**, **SET 1** (the bar's one where the playhead is). With QUANTIZE on, a cue snaps to the grid first, so **SNAP** could then only move the downbeat by whole beats: switch QUANTIZE off first if you use it |
 | SYNC and MASTER greyed out | No Pro DJ Link ports: no truth found, or an old one. It looks in `$A3_OSC_TRUTH`, `~/.cache/a3/a3-osc.json` (filled by Core's announcement) or `/usr/share/a3/a3-osc.json` (from a3-core) |
 | `LINK –` while a master plays | Its packets don't arrive: same network? Is the master's deck playing? |
 

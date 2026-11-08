@@ -96,7 +96,7 @@ the file is read. Events are kept sorted by beat, then stem.
 A damaged or newer file is **never overwritten**, not even after the DJ places
 or records something: that change then lives in memory only, and the strip says
 `FILE DAMAGED` or `NEWER FILE`. (`NOT SAVED` is for a good file whose write failed.) Move the file away to start a
-new one. A valid file is written whole, atomically, so a power cut leaves the
+new one. If you edit the file by hand, keep a copy: an event that is invalid is skipped when the app loads the track, and the next save of that track writes the file **without** it. A valid file is written whole, atomically, so a power cut leaves the
 old file or the new one.
 
 ## `origin`: hand and prepared
@@ -104,4 +104,4 @@ old file or the new one.
 `hand` marks what the DJ made. `prepared` marks what a tool wrote.
 `stemdeck-prepare-events` replaces its own `prepared` events when it runs again,
 keeps every `hand` event as it is and does not put a prepared event on a slot a
-hand event holds. StemDeck itself writes `hand`.
+hand event holds. StemDeck itself writes `hand`, and a DJ's edit in the app (a nudge, ACTIVE) turns a `prepared` event into a `hand` one. Without `--replace` the tool leaves a file that already has events untouched.
