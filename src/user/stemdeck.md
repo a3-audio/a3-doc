@@ -235,6 +235,93 @@ pitch follows the tempo fader as on a turntable. On, the tempo changes and the
 - It costs CPU while it is on. Leave it off on decks that run at their own
   tempo.
 
+(stemdeck-events)=
+
+## Events: movement you prepare
+
+An **event** is a movement planned for one stem at one place in the track:
+ORBIT, PING, RISE or SCAT, how many bars it runs, and (for ORBIT) which way. The
+deck fires it by itself when the music gets there, so a track can move the way
+you composed it. Events belong to the **set**, not to your session: they are
+kept in a small file beside the stems and travel with the library (the
+[format](#stem-events-file)). A set needs a beat grid; without one there are no
+events, and the strip says `NO GRID`.
+
+The strip under the overview waveform has the keys; markers sit in each stem's
+lane, in the stem's colour.
+
+### Recording and placing
+
+1. Press **REC** (lit = recording).
+2. Play and press the pads as you do live. Each press also becomes an event, at
+   the beat where the movement starts (the next bar; with SHIFT, now).
+3. Press **REC** again to stop.
+
+The movement still plays live while you record, and events already there keep
+firing, so you hear the context. A place that already holds an event of that stem
+refuses a new one (`SLOT TAKEN`): delete first.
+
+Touch a marker to select it, then:
+
+| Key | What it does |
+| :--- | :--- |
+| **‹ 1 BAR**, **‹ 1 BEAT**, **1 BEAT ›**, **1 BAR ›** | move the selected marker |
+| **ACTIVE** | on: it fires. Off: it stays but is dimmed and stays silent |
+| **DELETE** | **press twice** to delete; the first press only arms it, and selecting something else disarms it |
+
+### Playing events
+
+- An event fires when the playing deck reaches it, at its own beat.
+- In a **loop** an event fires **on every pass**.
+- An event **takes over**: if its stem is already moving, the event restarts the
+  stem with its own movement.
+- Jumping (a cue, a click on the overview) never fires the events you skipped.
+- **EVENTS** switches all of the deck's events off and on (lit = on). Off, the
+  track plays plain. Use it when the room is wrong for movement.
+- A damaged or newer events file plays the track plain and is never overwritten.
+
+### QUANTIZE
+
+**QUANTIZE** (lit = on) puts what you set onto the nearest beat of the grid:
+
+- a jump on the overview waveform,
+- the cue point,
+- loop **IN** and **OUT**,
+- event markers (a SHIFT press while recording; markers move by whole beats).
+
+It snaps when the point is set; a running loop is not touched. Without a grid
+the key is off.
+
+### ORBIT, the other way
+
+**Hold the ORBIT pad, then swipe left or right.** Left makes the stem circle the
+other way round, right makes it circle forward again. The pad shows it:
+`◄ ORBIT` is reversed, `ORBIT ►` is forward. A plain tap still starts ORBIT, and
+holding without moving does too. The direction is kept in the session. An event
+carries the direction it was recorded with. PING, RISE and SCAT ignore the
+direction in this version.
+
+(stemdeck-prepare-events)=
+
+### Preparing a whole library
+
+`stemdeck-prepare-events <library folder>` writes events for every set in the
+library. It reads each set's grid from StemDeck's analysis, so **load a set in
+StemDeck once** first; a set without a grid is skipped and listed.
+
+```sh
+stemdeck-prepare-events --dry-run ~/Music/stems    # only say what it would do
+stemdeck-prepare-events ~/Music/stems              # write the files
+stemdeck-prepare-events --only "Song" ~/Music/stems
+```
+
+- It **never overwrites your hand events**: it replaces only the events it
+  wrote itself (`prepared`) and leaves a place alone where you have one.
+- It **never touches a damaged or newer file**; it says so and moves on.
+- Running it again gives the same result.
+- Its musical rules are a **first placeholder**: sparse, two events a phrase, an
+  ORBIT on the phrase start and a PING before it. They will be tuned.
+
 (stemdeck-stem-creator)=
 
 ## Making stems from a stereo track
