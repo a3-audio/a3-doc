@@ -32,7 +32,11 @@ release = '2021'
 # ones.
 extensions = [
     'myst_parser',
+    'sphinxcontrib.mermaid',
 ]
+
+# A plain ```mermaid fence is a diagram here and on GitHub alike.
+myst_fence_as_directive = ['mermaid']
 
 # The DJ-knowledge pages link to headings in other pages (page.md#heading).
 myst_heading_anchors = 3
