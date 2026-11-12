@@ -267,11 +267,26 @@ controllers and `radla`. **It is the beat clock only**: it sends no `/vu`
 `a3-screencast` runs ffmpeg on the CPU (never VAAPI, which hung in a GPU reset
 on the rig) niced and on one core the audio units leave free, writing MPEG-TS to
 `a3-core --role screencast-fanout`, which copies it to every viewer; the encoder
-starts with the first viewer and stops 10 s after the last. No sound (OBS takes it from
-AES67). The port is the truth's, from `~/.config/a3/osc.env`; encoder settings
-(`A3_SCREENCAST_CPUS`, `_FPS`, `_CRF`) in the optional
+starts with the first viewer and stops 10 s after the last. The port is the
+truth's, from `~/.config/a3/osc.env`; settings in the optional
 `~/.config/a3/screencast.env`. The package does not enable it: each machine
 opts in.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `A3_SCREENCAST_CPUS` | 0 | core(s) for the encoder |
+| `A3_SCREENCAST_FPS` | 30 | frame rate |
+| `A3_SCREENCAST_CRF` | 23 | quality, lower is better |
+| `A3_SCREENCAST_PUSH` | unset | send to `udp://<host>:<port>` instead of listening; the script waits for a route to the host before starting the encoder |
+| `A3_SCREENCAST_AUDIO` | 0 | `1` adds Core's REC bus (`a3-engine:rec_L`/`rec_R`) to the same stream |
+| `A3_SCREENCAST_DELAY_MS` | 20 | delay of the picture against the sound; an untested start value, set by a click test |
+
+The sound goes through a JACK client `a3-screencast` (pipewire-jack) in the same
+ffmpeg as the picture, AAC 128 kbit/s in the same MPEG-TS. Both inputs are
+stamped by the wall clock and the sound is resampled to follow it, so a stall
+or an encoder restart does not shift them. The script links the two input ports
+to the REC bus itself; the engine leaves those links alone. Only a machine
+with the engine has the REC bus, so keep the setting off elsewhere.
 
 (core-aes67)=
 
