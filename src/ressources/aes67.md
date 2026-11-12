@@ -65,7 +65,6 @@ for you: patch them by hand in qjackctl or Helvum.
 | `deck X B-format` | `deckX_1` ... `deckX_16` |
 | `deck X return B-format` | `deckX_aux_1` ... `deckX_aux_16` (these feed the delay) |
 | `analog 1-2`, `analog 3-4`, ... | `analog_N`, `analog_N+1` for a pair N, N+1 |
-| `return stereo` | `analog_11`, `analog_12` |
 
 ```{warning}
 The `analog_N` ports are **shared with the sound card's capture ports**. A

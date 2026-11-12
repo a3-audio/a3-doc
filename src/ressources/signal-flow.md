@@ -428,17 +428,16 @@ Sources: truth `a3-osc.json` (`listeners`, `routes`, `addresses`: `channel.*`, `
    out 1-5 main, 9-10 phones, 11 rec, 12 round-trip loop), but the PA, headphones, analog recorder and
    analog sources behind them are not.
 4. **Booth**: no analog output is linked (`booth_*` only to `AES67 Core BOOTH`), and neither deck host
-   receives any `AES67 Core *` stream (their SAP rules match only `~^AES67 deck ` / `~ out$`). Who
-   plays the booth, and who receives `AES67 Core REC` / `PHONES` / `MAIN`, was not found.
+   receives any `AES67 Core *` stream. The booth zone is sent as a stream; which receiver plays it is up
+   to the installation.
 5. **Deck internals**: whether a one-deck instance applies a deck fader, and whether MUTE also acts on
    the AUX and cue buses (the cue is pre-mute by design), was not checked in code.
 6. **Core's tempo follower**: which inputs it uses for `/delay/bpm` (`/beat` from the analyzer, deck
    tempo, or both) was not read.
-7. **analog_9..12**: the engine has 12 analog inputs, only 1-8 are linked. `a3-doc/.../aes67.md` still
-   lists "return stereo → analog_11, analog_12", which contradicts `PROGRAM.md` ("no analog return input
-   and no return source any more"); the doc row looks stale.
+7. **analog_9..12**: the engine has 12 analog inputs, only 1-8 are linked. The stale `return stereo`
+   row was removed from `aes67.md`.
 8. **rec on one output**: `rec_L` and `rec_R` both go to Scarlett out 11 (L+R summed), verified live
-   and in `engine.json`; whether that is intended was not asked.
+   and in `engine.json`; the maintainer corrects this in the engine configuration.
 9. **Small source drifts**: the live round-trip loop is channel 12/12 (`PROGRAM.md` names 11 as the
    default); `PROGRAM.md`'s 7.3 ms deck-to-Core calculation assumes a 3 ms sender while the shipped and
    live sender is 1 ms; `PROGRAM.md` puts MASTER after the decoder, `Engine.h` before (linear gain, no
