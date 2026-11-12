@@ -71,3 +71,29 @@ The `analog_N` ports are **shared with the sound card's capture ports**. A
 stream patched onto them adds to whatever the card delivers on the same
 channel; it does not replace it.
 ```
+
+(aes67-stereo-deck)=
+
+## A deck in stereo mode
+
+A deck set to **Output: Stereo** ({ref}`StemDeck settings <stemdeck-output-mode>`)
+does not send the 41-channel stream. It sends **one stereo master pair** as
+a **2-channel** stream, named like the full one (`AES67 deck <X>`), with its
+channels called `MASTER_L` and `MASTER_R`. A receiver sees them as
+`receive_MASTER_L` and `receive_MASTER_R`.
+
+The pair is meant for the Core's analog inputs. Deck A to D use the pairs
+1-2, 3-4, 5-6 and 7-8: channel *n* goes to `analog_(2n-1)` and `analog_(2n)`.
+
+| Deck | Left | Right | Core input |
+| :--- | :--- | :--- | :--- |
+| A (on the Core's machine) | `StemDeck-A:master_L` | `StemDeck-A:master_R` | `analog_1`, `analog_2` |
+| B | `AES67 deck B:receive_MASTER_L` | `AES67 deck B:receive_MASTER_R` | `analog_3`, `analog_4` |
+| C | `AES67 deck C:receive_MASTER_L` | `AES67 deck C:receive_MASTER_R` | `analog_5`, `analog_6` |
+| D | `AES67 deck D:receive_MASTER_L` | `AES67 deck D:receive_MASTER_R` | `analog_7`, `analog_8` |
+
+The packaged default link map lists these peers beside the card's capture
+ports, so they link as soon as the deck is in stereo mode and are skipped while
+the ports do not exist. As with any stream on `analog_N` (see the warning
+above), the pair is **added** to what the sound card delivers on that channel.
+Switching the desk to the analog input of that channel plays the deck.

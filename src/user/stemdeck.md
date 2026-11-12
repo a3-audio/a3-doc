@@ -111,6 +111,19 @@ the **SYNC** status (see [Sync](#stemdeck-sync)), the audio status,
 The **stem library** folder, picked with **Choose…** (the touch screen has no
 keyboard).
 
+(stemdeck-output-mode)=
+
+**Output** is **B-Format** (the default) or **Stereo**:
+
+- **B-Format**: the deck sends its full stream to Core: the 16 main channels,
+  the AUX return and the cue stream.
+- **Stereo**: the deck sends one stereo master pair and nothing else. There is
+  no cue stream and no AUX return. Phones and REC stay local to the deck's
+  machine. Core takes the pair in on its analog inputs, see
+  {ref}`the AES67 page <aes67-stereo-deck>`.
+
+Changing it restarts StemDeck.
+
 (stemdeck-decks)=
 
 ### Decks
