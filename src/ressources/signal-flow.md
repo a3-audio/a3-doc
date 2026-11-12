@@ -428,7 +428,8 @@ Sources: truth `a3-osc.json` (`listeners`, `routes`, `addresses`: `channel.*`, `
    out 1-5 main, 9-10 phones, 11 rec, 12 round-trip loop), but the PA, headphones, analog recorder and
    analog sources behind them are not.
 4. **Booth**: no analog output is linked (`booth_*` only to `AES67 Core BOOTH`), and neither deck host
-   receives any `AES67 Core *` stream. Accepted for now: the booth is not used in the home setup.
+   receives any `AES67 Core *` stream. The booth zone is sent as a stream; which receiver plays it is up
+   to the installation.
 5. **Deck internals**: whether a one-deck instance applies a deck fader, and whether MUTE also acts on
    the AUX and cue buses (the cue is pre-mute by design), was not checked in code.
 6. **Core's tempo follower**: which inputs it uses for `/delay/bpm` (`/beat` from the analyzer, deck
