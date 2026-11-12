@@ -169,6 +169,15 @@ program, `a3-core --role screencast-fanout`. It is off until a machine opts in
 (`systemctl --user enable --now a3-screencast`); its settings (cores, frame rate
 and quality for the encoder) are in `~/.config/a3/screencast.env`.
 
+By default the stream carries the picture only. On a machine that runs Core's
+engine it can carry the sound too: `A3_SCREENCAST_AUDIO=1` takes Core's stereo
+REC bus into the same encoder and the same stream (AAC), so a restart of the
+encoder cannot move picture and sound against each other. The picture can be
+delayed to match the sound's path (`A3_SCREENCAST_DELAY_MS`, default 20 ms; the
+right value is found with a click test). With `A3_SCREENCAST_PUSH` set, the
+stream is sent to a viewer that listens, and the encoder waits until the
+network route to it exists before it starts.
+
 ```{toctree}
 :titlesonly:
 
