@@ -188,6 +188,10 @@ D, and **ST**, the stereo input. Arrow: the cursor. Bracket: what plays.*
 - On a deck channel, **A³ Motion shows DECK A** (or B, C, D) and moves
   nothing: the deck moves its own stems
   ({doc}`StemDeck × A³ Motion <stemdeck-with-motion>`).
+- **A deck in stereo mode** ({ref}`StemDeck's Output: Stereo
+  <stemdeck-output-mode>`) is picked the same way. It plays through the
+  channel's strip as ST does: TRIM, EQ, filter, 3D band and VOLUME. Its bar
+  shows the middle of its pair. See {ref}`the AES67 page <aes67-stereo-deck>`.
 
 (a3mix-fx-return)=
 

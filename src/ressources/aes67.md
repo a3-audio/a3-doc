@@ -82,18 +82,38 @@ a **2-channel** stream, named like the full one (`AES67 deck <X>`), with its
 channels called `MASTER_L` and `MASTER_R`. A receiver sees them as
 `receive_MASTER_L` and `receive_MASTER_R`.
 
-The pair is meant for the Core's analog inputs. Deck A to D use the pairs
-1-2, 3-4, 5-6 and 7-8: channel *n* goes to `analog_(2n-1)` and `analog_(2n)`.
+Every deck slot of the Core has its own pair of inputs for it,
+`deckX_stereo_L` and `deckX_stereo_R`, beside its B-format inputs. The link
+map links them from the slot's source, the same source as its B-format: the
+local StemDeck's `master_L`/`master_R`, or the stream's
+`receive_MASTER_L`/`receive_MASTER_R`.
 
 | Deck | Left | Right | Core input |
 | :--- | :--- | :--- | :--- |
-| A (on the Core's machine) | `StemDeck-A:master_L` | `StemDeck-A:master_R` | `analog_1`, `analog_2` |
-| B | `AES67 deck B:receive_MASTER_L` | `AES67 deck B:receive_MASTER_R` | `analog_3`, `analog_4` |
-| C | `AES67 deck C:receive_MASTER_L` | `AES67 deck C:receive_MASTER_R` | `analog_5`, `analog_6` |
-| D | `AES67 deck D:receive_MASTER_L` | `AES67 deck D:receive_MASTER_R` | `analog_7`, `analog_8` |
+| A (local StemDeck) | `StemDeck-A:master_L` | `StemDeck-A:master_R` | `deckA_stereo_L`, `deckA_stereo_R` |
+| B (AES67 stream) | `AES67 deck B:receive_MASTER_L` | `AES67 deck B:receive_MASTER_R` | `deckB_stereo_L`, `deckB_stereo_R` |
+| C, D, ... | the slot's source, as for A or B | | `deckX_stereo_L`, `deckX_stereo_R` |
 
-The packaged default link map lists these peers beside the card's capture
-ports, so they link as soon as the deck is in stereo mode and are skipped while
-the ports do not exist. As with any stream on `analog_N` (see the warning
-above), the pair is **added** to what the sound card delivers on that channel.
-Switching the desk to the analog input of that channel plays the deck.
+No patching is needed. The links are made as soon as the deck is in stereo
+mode and skipped while its ports do not exist. A link map saved before these
+inputs existed gets them when it is loaded, from each slot's source. The pair
+does not touch `analog_N`, so it never adds to the sound card's capture.
+
+**How Core tells the modes apart:** by the links, not by the signal. A slot
+whose stereo pair is linked and whose B-format inputs are not is in stereo
+mode. A slot with both linked, or neither, is treated as B-format.
+
+**On the desk** the deck keeps its letter on the channels'
+{ref}`input selectors <a3mix-displays>`, as in B-format mode, and is picked
+the same way. On a channel, its pair runs through that channel's strip
+like an analog input: TRIM, the 3-band EQ, the DJ filter, the 3D band and
+VOLUME, encoded at the channel's position. CUE and AUX-Send act on it as on
+any analog input. A change of source, or of the deck's mode while it plays, is
+smoothed over 10 ms. The deck's bar shows the middle of its pair.
+
+```{note}
+Core and A³ Motion still treat a channel playing a deck as a deck channel:
+the channel's 3D, FREQ, Q and position are not sent while it plays a stereo
+deck, so they stay where they were when the channel last played its own
+analog input.
+```
