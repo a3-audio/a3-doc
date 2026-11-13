@@ -207,7 +207,8 @@ flowchart LR
 Sources: `a3-core/PROGRAM.md` (Plan 4a: Channels, Buses, FX Return, delay page, Orders), `src/a3-engine/Engine.h`
 (graph comment), `ChannelStrip.h`, `DeckStrip.h`, `AmbiEncoderBus.h`; live `engine.json` (`channels 4`,
 `analogPairs [1,2,3,4]`, `analogInputs 12`, `filterKind svf`); live `pw-link -l` (only `analog_1..8` linked).
-A deck channel ignores positions, 3D, FREQ and Q (PROGRAM.md). The dashed taps into `enc_phones` are
+A deck channel ignores positions, 3D, FREQ and Q (PROGRAM.md), except one on a deck in stereo mode, which
+plays through the analog strip and takes them as an analog channel does. The dashed taps into `enc_phones` are
 audio drawn dashed only to keep this block readable; block 6 draws them solid.
 
 ---

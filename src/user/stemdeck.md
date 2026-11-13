@@ -121,8 +121,9 @@ keyboard).
   no cue stream and no AUX return. Phones and REC stay local to the deck's
   machine. On the desk's input selectors the deck keeps its letter: picked on a channel, its
   pair runs through that channel's strip like an analog input (TRIM, EQ,
-  filter, 3D, VOLUME). Core links it to inputs of its own, so nothing needs
-  patching and the sound card's capture is untouched, see
+  filter, 3D, VOLUME). A³ Motion moves it as it moves ST: position, clips,
+  **3d**, **FREQ** and **Q**. Core links it to inputs of its own, so nothing
+  needs patching and the sound card's capture is untouched, see
   {ref}`the AES67 page <aes67-stereo-deck>`.
 
 Changing it restarts StemDeck.

@@ -210,6 +210,14 @@ started by the installer, not by `a3-engine`.
   positions, 3d, FREQ or Q for it. The desk's 3d of the channel that holds deck k
   is relayed by Core to that StemDeck (`/stemdeck/{deck}/3d`); the engine applies
   no 3d to a deck channel.
+- **A deck in stereo mode** is the exception: its pair plays through the
+  channel's analog strip, so the channel is an analog channel. The engine reports
+  each slot's mode (`/engine/deck/{deck}/stereo`), Core passes it on
+  (`/stemdeck/{deck}/stereo`) and sends the channel's position, 3d, FREQ and Q to
+  the engine; A³ Motion still shows the deck and sends them as for an analog
+  channel. The values are the channel's: when it turns analog again (a pick, or
+  the deck's mode changing while it plays) Core first gives the engine the
+  channel's current ones.
 - **Aux is per stem and goes straight into the delay.** Only the stems you send
   in StemDeck (their AUX knobs) are on the deck's aux bus, at their positions.
   The bus goes through the channel's input-select fade and VOLUME and then
