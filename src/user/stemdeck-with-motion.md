@@ -23,7 +23,9 @@ clock.
   deck.
 - **A³ Motion does not move a deck.** On a deck channel its screen says
   **DECK A** (or B, C, D) and it sends no movement for that channel. The
-  stems move by StemDeck's actions.
+  stems move by StemDeck's actions. A deck in
+  {ref}`Output: Stereo <stemdeck-output-mode>` has no stems in the room: its
+  channel is moved by A³ Motion like ST.
 - **One clock** for both: see [Who is the clock](#first-set-clock).
 
 <!-- GIF: the room view on A³ Motion with a CDJ on ST moving, beside StemDeck's deck A with RISE running on the vocal -->

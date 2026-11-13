@@ -111,9 +111,14 @@ VOLUME, encoded at the channel's position. CUE and AUX-Send act on it as on
 any analog input. A change of source, or of the deck's mode while it plays, is
 smoothed over 10 ms. The deck's bar shows the middle of its pair.
 
-```{note}
-Core and A³ Motion still treat a channel playing a deck as a deck channel:
-the channel's 3D, FREQ, Q and position are not sent while it plays a stereo
-deck, so they stay where they were when the channel last played its own
-analog input.
-```
+**With A³ Motion** a channel playing a stereo deck is an analog channel. The
+engine tells Core each slot's mode (`/engine/deck/{deck}/stereo`), and Core
+tells the desk and A³ Motion (`/stemdeck/{deck}/stereo`). A³ Motion still
+shows **DECK A** (or B, C, D) on the channel, and moves it as it moves ST:
+the position, the clips and their trajectories, actions, **3d**, **FREQ** and
+**Q**. The position, 3D, FREQ and Q belong to the channel, not to its source.
+The channel keeps them when it changes between its analog input, a stereo
+deck and a B-format deck. While a B-format deck plays, StemDeck places it and
+the channel's values only wait. When the channel turns analog again, by a
+pick or by the deck changing to stereo while it plays, Core gives the engine
+the channel's current values first.
