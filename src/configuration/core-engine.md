@@ -165,9 +165,9 @@ from the map; more decks give each new slot the default links to its local
 `StemDeck-<letter>`, and leave the other slots as they are. **Save** restarts the
 engine session, as for the channel count.
 
-The Core's map names the Core's own AES67 sender (`AES67 <hostname> out`), so
-another host copies the file to `~/.config/a3/engine/engine.json` and edits the
-host name.
+The Core's own AES67 senders (`AES67 Core MAIN`, `BOOTH`, `REC`, `PHONES`) are
+named after their role, not the host, so another host can copy the file to
+`~/.config/a3/engine/engine.json` as it is.
 
 ## Calibration and the gate
 

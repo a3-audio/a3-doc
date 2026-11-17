@@ -17,7 +17,7 @@ exactly as PipeWire/JACK show them.
 
 Three machines carry audio: a3nuc1 (Core engine, deck A, the Scarlett), a3motionV02 (deck B) and
 a3nuc2 (deck C). Decks B and C reach the Core as AES67 streams on the audio network (192.168.9.0/24);
-the Core sends one stream back (`AES67 a3nuc1 out`, carrying REC) that the deck hosts receive for
+the Core sends one stream back for them (`AES67 Core REC`) that the deck hosts receive for
 their recorders. Controllers only send OSC.
 
 ```mermaid
@@ -29,18 +29,17 @@ flowchart LR
     BAN["beat-analyzer"]
     RXB["AES67 deck B (receiver)"]
     RXC["AES67 deck C (receiver)"]
-    TXO["AES67 a3nuc1 out (sender, 12 ch)"]
     TXZ["AES67 Core MAIN / BOOTH / REC / PHONES (senders)"]
   end
   subgraph N3["a3motionV02 · deck B · 192.168.9.23"]
     SDB["StemDeck-B (?) stopped at read time"]
     TXB["aes67-deck-b (sender, 41 ch)"]
-    RXO3["AES67 a3nuc1 out (receiver)"]
+    RXO3["AES67 Core REC (receiver)"]
   end
   subgraph N2["a3nuc2 · deck C · 192.168.9.20"]
     SDC["StemDeck-C"]
     TXC["aes67-deck-c (sender, 41 ch)"]
-    RXO2["AES67 a3nuc1 out (receiver)"]
+    RXO2["AES67 Core REC (receiver)"]
   end
   SCAR["Scarlett 18i20 3rd Gen (USB on a3nuc1)"]
   SRC["Analog sources (?)"]
@@ -65,11 +64,10 @@ flowchart LR
   SCAR --> ARC
   ENG --> SDA
   ENG --> BAN
-  ENG --> TXO
   ENG --> TXZ
   TXZ -.->|"AES67 Core BOOTH"| BTH
-  TXO -->|"RTP multicast"| RXO2
-  TXO -->|"RTP multicast"| RXO3
+  TXZ -->|"AES67 Core REC, RTP multicast"| RXO2
+  TXZ -->|"AES67 Core REC, RTP multicast"| RXO3
   RXO2 -->|"rec_L/R"| SDC
   RXO3 -.->|"(?) deck B stopped"| SDB
   CTL -.->|"OSC :9000"| CORE
@@ -292,8 +290,9 @@ phones → `system:playback_9/10`); live `pw-link -l` (`phones_L/R` → `playbac
 ## 7. REC path
 
 `rec_L/R` (the binaural rec decoder, block 5) fans out to five places: the Scarlett, StemDeck-A's
-recorder, the beat-analyzer's tempo input (left only), the legacy 12-channel `AES67 a3nuc1 out`
-stream (CH1/CH2, the one the deck hosts receive for their recorders) and the `AES67 Core REC` stream.
+recorder, the beat-analyzer's tempo input (left only) and the `AES67 Core REC` stream (the one the deck
+hosts receive for their recorders). The legacy 12-channel stream `AES67 <host> out` that used to carry REC is
+gone; `rec_L/R` reach the REC sender like every other Core stream, through the stream table.
 
 ```mermaid
 flowchart LR
@@ -302,24 +301,22 @@ flowchart LR
   SCAR --> ARC["Analog recorder (?)"]
   PREC --> SDA["StemDeck-A rec_L/R → FLAC"]
   PREC -->|"rec_L only"| BAN["beat-analyzer:bpm_1"]
-  PREC -->|"built-in link → CH1/CH2"| TXO["rtp-sink 'AES67 a3nuc1 out' · 12 ch · 239.69.150.243 · sess.latency 3 ms"]
-  PREC --> TXR["rtp-sink-core-rec 'AES67 Core REC' · 2 ch · 239.69.200.3"]
-  TXR -.-> NOR["receiver (?) none found"]
+  PREC --> TXR["rtp-sink-core-rec 'AES67 Core REC' · 2 ch · 239.69.200.3 · sess.latency 3 ms"]
   subgraph HC["a3nuc2"]
-    RXC["AES67 a3nuc1 out · receive_CH1/2 · sess.latency 12 ms"] --> SDC["StemDeck-C rec_L/R → FLAC"]
+    RXC["AES67 Core REC · receive_L/R · sess.latency 12 ms"] --> SDC["StemDeck-C rec_L/R → FLAC"]
   end
   subgraph HB["a3motionV02"]
-    RXB["AES67 a3nuc1 out (receiver)"] -.->|"(?) StemDeck-B stopped"| SDB["StemDeck-B rec_L/R"]
+    RXB["AES67 Core REC (receiver)"] -.->|"(?) StemDeck-B stopped"| SDB["StemDeck-B rec_L/R"]
   end
-  TXO -->|"RTP multicast"| RXC
-  TXO -->|"RTP multicast"| RXB
+  TXR -->|"RTP multicast"| RXC
+  TXR -->|"RTP multicast"| RXB
 ```
 
-Sources: live `pw-link -l` on a3nuc1 (`rec_L/R` → `StemDeck-A:rec_L/R`, `playback_AUX10`, `beat-analyzer:bpm_1`,
-`rtp-sink:send_CH1/2`, `rtp-sink-core-rec:send_L/R`) and on a3nuc2 (`AES67 a3nuc1 out:receive_CH1/2` →
-`StemDeck-C:rec_L/R`); live `pw-top` on a3motionV02 (`AES67 a3nuc1 out` node present, nothing linked);
-`PROGRAM.md` (built-in links P40/P46, beat-analyzer link, P39); live `engine.json` (`rec_L`, `rec_R` →
-`system:playback_11`); `a3-stemdeck/tools/pipewire-stemdeck-aes67.conf.in` (rule `~ out$`, 12 ms);
+Sources: `pw-link -l` on a3nuc1 as read on 2026-11-17 (`rec_L/R` → `StemDeck-A:rec_L/R`, `playback_AUX10`,
+`beat-analyzer:bpm_1`, `rtp-sink-core-rec:send_L/R`); the deck hosts' links as `a3-stemdeck/data/links-aes67.json`
+now names them (`AES67 Core REC:receive_L/R` → `StemDeck:rec_L/R`; not yet read live after the change);
+`PROGRAM.md` (beat-analyzer link, P39); live `engine.json` (`rec_L`, `rec_R` → `system:playback_11`);
+`a3-stemdeck/tools/pipewire-stemdeck-aes67.conf.in` (rule `~^AES67 Core `, 12 ms);
 `a3-stemdeck/Source/Recorder.h`.
 
 ---
@@ -347,7 +344,7 @@ flowchart LR
   subgraph N2["a3nuc2 / a3motionV02"]
     PTPS["ptp4l@enp5s0 / ptp4l@eth0"]
     PTPD["PTP0-Driver · clock.system.ptp0 · resync 1.5 ms · quantum 64 @ 44100"]
-    DECK["aes67-deck-c / -b, StemDeck-C, AES67 a3nuc1 out receiver"]
+    DECK["aes67-deck-c / -b, StemDeck-C, AES67 Core REC receiver"]
     SDT["StemDeck: Pro DJ Link (tempo master option)"]
   end
   RECL["a3-engine rec_L"] -->|"bpm_1 (audio)"| BAN
@@ -413,7 +410,7 @@ Sources: truth `a3-osc.json` (`listeners`, `routes`, `addresses`: `channel.*`, `
 | Core deck receiver | `sess.latency.msec` 4 ms (2 and 3 ms crackled at Block 64) | configured | live a3nuc1 conf, `PROGRAM.md` |
 | Deck → Core, calculated | 7.3 ms | calculated, assumes a 3 ms sender | `PROGRAM.md` STATUS row |
 | Core senders (MAIN/BOOTH/REC/PHONES, `out`) | `sess.latency.msec` 3 ms, packet 0.5 ms | configured | live a3nuc1 conf |
-| Deck host receive of `AES67 a3nuc1 out` | `sess.latency.msec` 12 ms | configured | live a3nuc2 / a3motionV02 conf |
+| Deck host receive of `AES67 Core REC` | `sess.latency.msec` 12 ms | configured | live a3nuc2 / a3motionV02 conf |
 | Deck → Core end to end, Core → booth | — | not measured | — |
 
 ---
@@ -421,7 +418,7 @@ Sources: truth `a3-osc.json` (`listeners`, `routes`, `addresses`: `channel.*`, `
 ## Open points
 
 1. **Deck B audio**: `stemdeck@B` was inactive on a3motionV02 at read time (sender `a3-aes67-deck@B` and
-   `stemdeck-aes67` active). Its links into `aes67-deck-b` and from `AES67 a3nuc1 out` are assumed to
+   `stemdeck-aes67` active). Its links into `aes67-deck-b` and from `AES67 Core REC` are assumed to
    match deck C's.
 2. **Deck D**: `engine.json` maps `deckD_*` to a local `StemDeck-D` on a3nuc1; no such client ran, and
    which host would play deck D was not checked.

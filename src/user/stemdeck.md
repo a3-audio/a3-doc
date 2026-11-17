@@ -529,10 +529,10 @@ names stands for the letter, so one file serves every deck. The package ships `/
 only used where `STEMDECK_LINK_MAP` points at it, which the role does. If the
 variable names a missing or unreadable file, StemDeck logs "no links" and
 links nothing. The shipped map links the 41 outputs to the instance's AES67
-sender, and the REC bus (the Core's stream, channels 1 and 2) to `rec_L/R`. A
-port name the instance does not have is refused. The map names the Core's
-sender (`AES67 a3nuc1 out`): if the Core has another host name, edit it there
-too, together with the engine's map.
+sender, and the REC bus (the Core's stream `AES67 Core REC`, channels L and R)
+to `rec_L/R`. A port name the instance does not have is refused. The stream's
+name does not carry a host name, so the map needs no edit when the Core has
+another one.
 
 The sender renders its PipeWire file from the host's own audio socket
 (`STEMDECK_AUDIO_PORT`, set by the role) rather than the Core's truth, which

@@ -15,7 +15,6 @@ All streams: 44.1 kHz, 24 bit, multicast, port 5004.
 <!-- a3-osc:aes67 -->
 | Stream | Group:port | Packet time (ms) | Channels |
 | --- | --- | --- | --- |
-| `AES67 {host} out` | 239.69.150.243:5004 | 0.5 | 12 |
 | `AES67 deck {deck}` | 239.69.150.244 + slot:5004 | 0.25 | 41 |
 | `AES67 Core MAIN` | 239.69.200.1:5004 | 0.5 | n + 1 |
 | `AES67 Core BOOTH` | 239.69.200.2:5004 | 0.5 | n + 1 |
@@ -23,7 +22,7 @@ All streams: 44.1 kHz, 24 bit, multicast, port 5004.
 | `AES67 Core PHONES` | 239.69.200.4:5004 | 0.5 | 2 |
 <!-- /a3-osc:aes67 -->
 
-- `{host}` is the sending machine's hostname, `{deck}` the deck letter. A
+- `{deck}` is the deck letter. A
   deck's group is the base address plus one per deck slot (A = `.244`, B =
   `.245`, and so on).
 - **A zone stream** (`AES67 Core MAIN`, `AES67 Core BOOTH`) carries the zone's
@@ -46,9 +45,9 @@ Which announced streams a receiver turns into sources depends on its
 - **No explicit `stream.rules`**: PipeWire creates a source for every announced
   stream.
 - **Explicit rules**: only the sessions they match. The A3 rig's own configs
-  list rules (they match `~^AES67 deck ` and `~ out$`), so they ignore the
-  `AES67 Core` streams. A host that should receive them needs one more rule in
-  its `stream.rules`:
+  list rules (a deck host matches `~^AES67 Core `, the Core matches
+  `~^AES67 deck `), so each ignores the other's streams. A host that should
+  receive more needs one more rule in its `stream.rules`:
 
 ```text
 { matches = [ { rtp.session = "~^AES67 Core " } ]

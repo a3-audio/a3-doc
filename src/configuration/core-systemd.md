@@ -300,9 +300,10 @@ Only on a Core with a second socket ({ref}`install <core-postinst>`,
   clock is on the network.
 - `a3-aes67.service` (user unit): a second PipeWire instance running
   `~/.config/pipewire/pipewire-aes67.conf`, rendered by `a3-core --render-truth` from
-  the truth's `network.audio_port`. It sends the Core's 12 channels as the
-  multicast stream `AES67 <hostname> out` (44.1 kHz, 24 bit, packet time
-  0.5 ms), announces it by SAP and receives the streams of other machines.
+  the truth's `network.audio_port`. It sends the Core's outputs as the
+  multicast streams `AES67 Core MAIN`, `BOOTH`, `REC` and `PHONES` (44.1 kHz,
+  24 bit, packet time 0.5 ms), announces them by SAP and receives the streams
+  of other machines.
   The Scarlett drives it, not the PTP clock, so the samples go out
   unconverted. Restarts 2 s after any exit.
 
