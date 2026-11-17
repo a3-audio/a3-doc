@@ -45,7 +45,7 @@ Audio between machines runs on the second socket, apart from OSC:
 | :--- | :--- |
 | Socket, subnet | the second socket, `192.168.9.0/24`, Core `192.168.9.10/24` |
 | Clock | PTP: `ptp4l` on the second socket, the Core as master unless a better clock is on the network |
-| Core sends | **12 channels**, stream `AES67 <hostname> out`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.150.243`, port 5004) |
+| Core sends | the streams `AES67 Core MAIN`, `BOOTH`, `REC` and `PHONES`, 44.1 kHz, 24 bit, packet time 0.5 ms, **multicast** (`239.69.200.1` to `.4`, port 5004) |
 | Announcement | SAP on `239.255.255.255`, port 9875; receivers find the stream by its name |
 | Who drives the stream | the audio interface: the samples leave unconverted and the engine is never pulled onto the PTP clock |
 | Deck streams | one per deck, sent by the machine that runs the deck: **41 channels** (MAIN1–16, AUX1–16, CUE1–9), stream `AES67 deck <X>`, 44.1 kHz, 24 bit, packet time **0.25 ms** (1393 bytes on the wire, so every packet fits a 1500-byte frame), **multicast**, one group per deck (`239.69.150.244` deck A, `.245` deck B), port 5004 |
@@ -95,7 +95,6 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
 | prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
-| aes67 | stream | aes67-core (239.69.150.243) | 5004 | the Core's 12 channels as AES67 (RTP, L24, 44.1 kHz, 0.5 ms packets), multicast on the audio socket; not OSC |
 | aes67 | deck | aes67-deck-{deck} (239.69.150.244, 239.69.150.245) | 5004 | one deck's 41 channels: MAIN1-16, AUX1-16, CUE1-9 (L24, 44.1 kHz, ptime 0.25 ms), sess.name "AES67 deck <X>"; the receiver needs net.mtu = 1500 (the default 1280 truncates the 1365-byte RTP packet); not OSC |
 | aes67 | sap | sap (239.255.255.255) | 9875 | AES67 stream announcements (SAP/SDP), multicast on the audio socket, every sender and receiver; not OSC |
 | ptp4l | event | ptp (224.0.1.129) | 319 | PTP event messages; the Core is master on the audio socket; not OSC |
