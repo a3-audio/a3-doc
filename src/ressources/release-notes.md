@@ -20,9 +20,8 @@ streams, named by role: `AES67 Core MAIN`, `AES67 Core BOOTH`, `AES67 Core REC` 
 own SAP session id. **a3-core and StemDeck have to be updated together:** without the new
 a3-core there is no `AES67 Core REC`, and the deck hosts' recorder has no source. Beside this,
 a **stereo deck** plays through its channel's analog strip and is moved by A³ Motion like an
-analog channel, StemDeck plays **NI Stems** straight from the library, its events (scripted
-moves) can be prepared from the stems' content and edited at the playhead, and the audio path
-runs faster: Block 64, FFTW and a 4 ms deck buffer.
+analog channel, StemDeck's events (scripted moves) can be prepared from the stems' content and
+edited at the playhead, and the audio path runs faster: Block 64, FFTW and a 4 ms deck buffer.
 
 ### The whole system
 
@@ -40,7 +39,7 @@ runs faster: Block 64, FFTW and a 4 ms deck buffer.
 ### a3-core (`a3-core`)
 
 - **Core streams by role:** `AES67 Core MAIN`, `BOOTH`, `REC` and `PHONES`, each with its own
-  SAP session id (`c4ac82c4`); the stream table is validated, a bad row or a stream above the
+  SAP session id; the stream table is validated, a bad row or a stream above the
   packet limit is refused alone and said, and the REC bus reaches `AES67 Core REC`.
 - **The legacy stream is retired** from the truth and from the receive rule; an unknown AES67
   source is refused.
@@ -63,10 +62,8 @@ runs faster: Block 64, FFTW and a 4 ms deck buffer.
 
 ### a3-stemdeck (`a3-stemdeck`)
 
-- **Records from `AES67 Core REC`**, not the legacy stream (`0962fef`); deck hosts take their
+- **Records from `AES67 Core REC`**, not the legacy stream; deck hosts take their
   sender from the stream table, and a malformed deck entry falls back instead of crashing.
-- **NI Stems:** a `.stem.mp4` plays straight from the library (tracks 1–4 on slots 1–4),
-  decoded natively with FFmpeg's libraries, no cache. StemDeck builds against them.
 - **Output Stereo / B-Format** for a one-deck instance, set in Settings (a change restarts the
   unit); the stereo stream goes out as a 2-channel deck sender.
 - **Events:** a set's events (one-shot moves) load, save and record per track and fire in the
@@ -110,8 +107,7 @@ runs faster: Block 64, FFTW and a 4 ms deck buffer.
 
 ### a3-system (`a3-system`)
 
-- StemDeck's packages build against FFmpeg's libraries (NI Stems), and the packages are built
-  with JUCE's FFT patched for FFTW.
+- The packages are built with JUCE's FFT patched for FFTW.
 - The archive build files arch-all packages per suite and creates the shared pool before
   scanning it.
 - The README shows every repository, part and third-party work in one aligned tree, `pcb` as a
