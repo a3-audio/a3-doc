@@ -10,13 +10,122 @@ For how the system got here, the reasoning and the wrong turns included, see
 
 ## Unreleased
 
-On `main` since `v03.2`, not tagged yet.
+On `main` since `v03.3`, not tagged yet.
 
-- Every board revision of the Mixer and Motion has a folder of its own under `hardware/pcb/`,
-  side by side: a3-mixer `v0_2` (the built mainboard) and `v3_1` (the V03 draft); a3-motion `v1`
-  (the first boards: mainboard and button matrix) and `v3_1` (the current board). The old boards
-  are restored from the repositories' history; `pcbs/` in a3-motion is now `pcb/`.
-- The ABOUT tree shows `pcb` as a node with one row per revision folder.
+## v03.3 (2026-11-17)
+
+v03.3 retires the legacy 12-channel AES67 stream `AES67 <host> out`. The Core now sends four
+streams, named by role: `AES67 Core MAIN`, `AES67 Core BOOTH`, `AES67 Core REC` and
+`AES67 Core PHONES`, and a deck host records from `AES67 Core REC`. Every Core stream has its
+own SAP session id. **a3-core and StemDeck have to be updated together:** without the new
+a3-core there is no `AES67 Core REC`, and the deck hosts' recorder has no source. Beside this,
+a **stereo deck** plays through its channel's analog strip and is moved by A³ Motion like an
+analog channel, StemDeck's events (scripted moves) can be prepared from the stems' content and
+edited at the playhead, and the audio path runs faster: Block 64, FFTW and a 4 ms deck buffer.
+
+### The whole system
+
+- **The legacy AES67 stream is gone.** The streams are listed in a stream table in
+  `a3-osc.json`; the Core sends exactly its own rows (MAIN, BOOTH, REC, PHONES) and re-announces
+  them when a layout is saved. The stream reference in a3-doc is rendered from that table.
+- **A stereo deck** is a channel's analog input: StemDeck's *Output Stereo* mode sends one
+  master pair, a3-core plays it through the channel's analog strip, and A³ Motion moves the
+  channel like an analog one.
+- **Lower latency:** Block 64 shipped, the headphone decoders and the delay at 2nd order, JUCE's
+  FFT on FFTW, and the deck receive buffer at 4 ms (2 and 3 ms gave artifacts at Block 64).
+- The hardware repositories carry one folder per board revision under `hardware/pcb/`, and the
+  housings are revision v03.2.
+
+### a3-core (`a3-core`)
+
+- **Core streams by role:** `AES67 Core MAIN`, `BOOTH`, `REC` and `PHONES`, each with its own
+  SAP session id; the stream table is validated, a bad row or a stream above the
+  packet limit is refused alone and said, and the REC bus reaches `AES67 Core REC`.
+- **The legacy stream is retired** from the truth and from the receive rule; an unknown AES67
+  source is refused.
+- **Stereo decks:** each deck slot has its own stereo inputs, told by its links and passed to
+  Core with the hello; the deck runs through the channel's analog strip and is controlled as an
+  analog channel. The engine crossfades between analog, stereo deck and B-format in 10 ms.
+- **A deck always moves fully;** the channel's pot is its AUX-Send, not its 3D.
+- **Screencast** can carry the REC bus, with a picture delay and a wait for the push route;
+  `A3_SCREENCAST_PUSH` sends the picture to a target instead of listening.
+- **Latency:** shipped Block 64, JUCE FFT on FFTW without allocation in the audio callback,
+  headphone decoders and delay at 2nd order. A live block change forces its value. The
+  configure step refuses a JUCE without the FFT patch.
+- **Clock and links:** the clock brakes in time far from the lock instead of a limit cycle;
+  a peer that pipewire-jack renamed to `<client>-<id>` is linked, and of a name and its
+  renames the newest port is linked.
+- Every A³ app opens full screen, StemDeck's decks too; the Core's DNS is the uplink router.
+- **STATUS:** the AES67 row says it is the calculated deck-to-Core delay.
+- **ABOUT:** `pcb` is a node with one row per board revision folder; only named third parties
+  are listed, with versions from REUSE.
+
+### a3-stemdeck (`a3-stemdeck`)
+
+- **Records from `AES67 Core REC`**, not the legacy stream; deck hosts take their
+  sender from the stream table, and a malformed deck entry falls back instead of crashing.
+- **Output Stereo / B-Format** for a one-deck instance, set in Settings (a change restarts the
+  unit); the stereo stream goes out as a 2-channel deck sender.
+- **Events:** a set's events (one-shot moves) load, save and record per track and fire in the
+  audio path. The **event strip** sits under the rolling waveform, markers show on the overview,
+  and pads place an event at the playhead (3D REC) also while the deck stands. A DJ's edit makes
+  a prepared event a hand one. Events are edited at the playhead in the one-deck clip settings
+  and the two-deck stem popup.
+- **`stemdeck-prepare-events`** writes event files for the library from the stems' content:
+  grooves, breaks, builds, solos, drum gaps, hats-alone passages; v3 is the default rule set,
+  `--explain` and a dry run report what it did, files with events are kept unless `--replace`.
+  `compare-events` sets two event files side by side.
+- **Motion shapes:** ORBIT is reversible, shown as `>` and `<`; a swipe on a shape pad sets
+  direction (sideways) or tempo (up and down); PING jumps as a cross between the speakers and
+  reads CROSS; RISE narrows the width as it climbs; one-shots can be a quarter bar long, with a
+  beat-related tempo step per stem.
+- **QUANTIZE** switch for playhead, cue and loop; a quantized cue takes the playhead with it,
+  and a restored cue and loop never move.
+- **One-deck screen:** on-screen keyboard (KEYS), space is PLAY, the deck title wraps at the
+  playhead in the running waveform.
+- A deck host's PipeWire runs 64 samples and its sender asks for 1 ms.
+
+### a3-mixer (`a3-mixer`)
+
+- Hardware: every board revision has a folder of its own under `hardware/pcb/`; the built
+  mainboard is rev v0.2, as printed on it (KiCad holds the V03 draft), the shared parts come
+  from the `a3-kicad-lib` submodule, and the housing is revision v03.2, unchanged and compatible.
+
+### a3-motion (`a3-motion`)
+
+- Hardware: `pcbs/` is now `pcb/`, one folder per board revision: `v1` (the first boards) and
+  `v3_1` (the current board); the old boards are restored from history. Shared parts come from
+  `a3-kicad-lib`; the housing is revision v03.2, unchanged and compatible.
+
+### a3-motion-ui (`a3-motion-ui`)
+
+- A channel on a stereo deck is moved like an analog one.
+
+### a3-stem-separator (`a3-stem-separator`)
+
+- No change beyond the README's picture of the A³ setup.
+
+### a3-system (`a3-system`)
+
+- The packages are built with JUCE's FFT patched for FFTW.
+- The archive build files arch-all packages per suite and creates the shared pool before
+  scanning it.
+- The README shows every repository, part and third-party work in one aligned tree, `pcb` as a
+  node with one row per board revision.
+
+### a3-doc (`a3-doc`)
+
+- **The AES67 reference** is generated from the truth: the Core's streams by role, who sees
+  them, a zone without a sub; the ports table is rendered without the retired stream.
+- **The audio signal flow in nine diagrams** (Mermaid in the Sphinx build).
+- The stereo deck, StemDeck's Stereo output and how it patches onto `analog_N`, screencast with
+  the REC bus.
+- StemDeck: prepared events, QUANTIZE, the event file, cue and REC.
+- Assembly pages by board revision, the A³ Assembly tree, **Playing A³: DJ knowledge** (from
+  a3-pro-dj), Stem Separator, Beat Analyzer and Speaker Setup pages, current pictures of the
+  a3-core window.
+- Open points settled, the retired return stereo row removed, the booth stream described as a
+  possibility, not a home setup.
 
 ## v03.2 (2026-10-31)
 
