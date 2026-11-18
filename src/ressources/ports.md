@@ -95,7 +95,7 @@ Rendered: edit `a3-osc.json`, not this. `core.web` also serves
 | prolink | announce | any (0.0.0.0) | 50000 | Pro DJ Link keep-alives (broadcast, not OSC) |
 | prolink | beat | any (0.0.0.0) | 50001 | Pro DJ Link beat packets (broadcast, not OSC) |
 | prolink | status | any (0.0.0.0) | 50002 | Pro DJ Link status packets (broadcast, not OSC) |
-| aes67 | deck | aes67-deck-{deck} (239.69.150.244, 239.69.150.245) | 5004 | one deck's 41 channels: MAIN1-16, AUX1-16, CUE1-9 (L24, 44.1 kHz, ptime 0.25 ms), sess.name "AES67 deck <X>"; the receiver needs net.mtu = 1500 (the default 1280 truncates the 1365-byte RTP packet); not OSC |
+| aes67 | deck | aes67-deck-{deck} (239.69.150.244, 239.69.150.245) | 5004 | one deck's three streams (aes67_streams: deck-main 16, deck-aux 16, deck-cue 9 channels; L24, 44.1 kHz, ptime 0.25 ms), sess.name "AES67 deck <X> MAIN\|AUX\|CUE"; the receiver needs net.mtu = 1500; not OSC |
 | aes67 | sap | sap (239.255.255.255) | 9875 | AES67 stream announcements (SAP/SDP), multicast on the audio socket, every sender and receiver; not OSC |
 | ptp4l | event | ptp (224.0.1.129) | 319 | PTP event messages; the Core is master on the audio socket; not OSC |
 | ptp4l | general | ptp (224.0.1.129) | 320 | PTP general messages (announce, follow-up); not OSC |
