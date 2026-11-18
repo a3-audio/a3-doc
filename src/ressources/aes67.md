@@ -18,6 +18,7 @@ All streams: 44.1 kHz, 24 bit, multicast, port 5004.
 | `AES67 deck {deck} MAIN` | 239.69.160.0 + slot:5004 | 0.25 | 16 |
 | `AES67 deck {deck} AUX` | 239.69.164.0 + slot:5004 | 0.25 | 16 |
 | `AES67 deck {deck} CUE` | 239.69.168.0 + slot:5004 | 0.25 | 9 |
+| `AES67 deck {deck} STEREO` | 239.69.172.0 + slot:5004 | 0.25 | 2 |
 | `AES67 Core MAIN` | 239.69.200.1:5004 | 0.5 | n + 1 |
 | `AES67 Core BOOTH` | 239.69.200.2:5004 | 0.5 | n + 1 |
 | `AES67 Core REC` | 239.69.200.3:5004 | 0.5 | 2 |
